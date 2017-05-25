@@ -7,7 +7,9 @@ Depends:
     R (>= 3.1.2)
 Imports:
     dplyr,
-    tidyr
+    tidyr,
+    purrr,
+    tibble
 Suggests:
     testthat
 License: What license is it under?
