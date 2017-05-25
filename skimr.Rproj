@@ -11,3 +11,7 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
+
+BuildType: Package
+PackageUseDevtools: Yes
+PackageInstallArgs: --no-multiarch --with-keep.source
