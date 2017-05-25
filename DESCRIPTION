@@ -7,12 +7,15 @@ Depends:
     R (>= 3.1.2)
 Imports:
     dplyr,
-    tidyr
+    tidyr,
+    purrr,
+    tibble
 Suggests:
     testthat
 License: What license is it under?
 Encoding: UTF-8
-LazyData: TRUE
+LazyData: true
+Suggests: testthat
 URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
