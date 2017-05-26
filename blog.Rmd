@@ -11,7 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Motivation 
 
-in words, what we wanted from a summary function and why
+The motivation of this project was to create a frictionless approach to quickly viewing summary statistics as part of a pipeline. There are many existing summary functions, but we found them lacking in one way or another because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. 
+
+So at [rOpenSci #unconf17](http://unconf17.ropensci.org/), we created a new package that would let you quickly skim useful, tidy summary statistics directly from a pipe. 
+
+And so we created [`skimr`](https://github.com/ropenscilabs/skimr#skimr). 
+
+In a nutshell, `skimr` will create a `skimr` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. 
 
 ## Dev process
 
@@ -54,17 +60,14 @@ Project Contributions: Documentation
 
 ### Step-by-step thought process
 
-We started off by brainstorming what we liked about existing summary packages and what other features we wanted. 
+We started off by brainstorming what we liked about existing summary packages and what other features we wanted. We started looking at example data, `mtcars`. 
 
-We started looking at example data, `mtcars`. 
-
-```{r}
+```{r, eval=FALSE}
 str(mtcars)
 summary(mtcars)
 ```
 
-
-### What we like and dislike, in Amelia's words
+#### What we like and dislike, in Amelia's words
 
 ```{r summary}
 # "I like what we get here because mpg is numeric so these stats make sense:" 
