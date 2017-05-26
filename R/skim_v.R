@@ -105,6 +105,7 @@ skim_v.default <- function(x, FUNS = numeric_funs) {
 skim_v_ <- function(x, FUNS) {
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(FUNS, ~.x(x))
+  values_out <- purrr::flatten_dbl(values)
   
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)
@@ -116,5 +117,5 @@ skim_v_ <- function(x, FUNS) {
   tibble::tibble(type = class(x), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
-    value = unlist(values))
+    value = unname(values_out))
 }
