@@ -34,5 +34,6 @@ Collate:
     'stats.R'
     'functions.R'
     'skim.R'
+    'skim_print.R'
     'skim_v.R'
     'skimr-package.R'

@@ -4,7 +4,7 @@
 \alias{skim}
 \title{Get useful summary statistic from a data frame}
 \usage{
-skim(.data, ...)
+skim(.data)
 }
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}

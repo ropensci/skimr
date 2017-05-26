@@ -91,13 +91,13 @@ context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",   "missing",     ".all",  1,
-  "factor",  "complete",     ".all",  4,
-  "factor",         "n",     ".all",  5,
-  "factor",       "min",     ".all",  0,
-  "factor",       "max",     ".all",  4,
-  "factor",     "empty",     ".all",  1,
-  "factor",  "n_unique",     ".all",  5)
+  "character",   "missing",     ".all",  1,
+  "character",  "complete",     ".all",  4,
+  "character",         "n",     ".all",  5,
+  "character",       "min",     ".all",  0,
+  "character",       "max",     ".all",  4,
+  "character",     "empty",     ".all",  1,
+  "character",  "n_unique",     ".all",  5)
 
 test_that("skim_v returns expected response for chr vectors", {
   dat <- c("AAAB","ABc","acb",NA,"")
@@ -105,7 +105,7 @@ test_that("skim_v returns expected response for chr vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for chickwt column string detecting 'ea' ---------------------------
+## Expected response for chickwt logical ---------------------------
 
 context("Skim a logical within a data frame")
 
@@ -117,7 +117,7 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         36,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          0,
-  "logical",     "mean",    ".all",         35/71
+  "logical",     "mean",    ".all",       35/71
   )
 
 test_that("skim_v returns expected response for logical vectors", {
@@ -126,7 +126,7 @@ test_that("skim_v returns expected response for logical vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for iris Species ----------------------------------------
+## Expected response for chickwt logical with NA ----------------------------------------
 
 context("Skim a logical within a data frame when NAs are present")
 
@@ -138,12 +138,56 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         32,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          4,
-  "logical",     "mean",    ".all",   35/67
+  "logical",     "mean",    ".all",      35/67
 )
+
 
 test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
   dat$log_col[15:18] <- NA 
   input <- skim_v(dat$log_col)
+  expect_identical(input, correct)
+})
+
+
+
+## Expected response for iris Species with NA----------------------------------------
+
+context("Skim a complex within a data frame when NAs are present")
+
+correct <- tibble::tribble(
+  ~type,       ~stat,    ~level,     ~value,
+  "complex",  "missing",    ".all",          3,
+  "complex", "complete",    ".all",         68,
+  "complex",        "n",    ".all",         71
+)
+
+
+test_that("skim_v returns expected response for complex vectors", {
+  dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
+  dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
+  #dat$test_complex[3:5] <- NA
+  input <- skim_v(dat$test_complex)
+})
+  
+## Expected response for Date  ----------------------------------------
+
+context("Skim a Date within a data frame")
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "Date",  "missing",    ".all",               1,
+  "Date", "complete",    ".all",               9,
+  "Date",        "n",    ".all",              10,
+  "Date",      "min",    ".all",           15156,
+  "Date",      "max",    ".all",           15165,
+  "Date",   "median",    ".all",           15161,
+  "Date", "n_unique",    ".all",               10
+)
+
+test_that("skim_v returns expected response for Date vectors", {
+  dat <- seq( as.Date("2011-07-01"), by=1, len=10)
+  dat[2] <- NA
+  input <- skim_v(dat)
   expect_identical(input, correct)
 })

@@ -5,7 +5,7 @@
 #'   tbl in most instances.
 #' @export
 
-skim <- function(.data, ...) {
+skim <- function(.data) {
   UseMethod("skim")
 }
 
