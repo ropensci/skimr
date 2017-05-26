@@ -111,7 +111,7 @@ skim_v_ <- function(x, FUNS) {
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(FUNS), lens, rep)
   nms <- purrr::map(values, ~names(.x))
-  level <- purrr::map_if(nms, is.null, ~NA)
+  level <- purrr::map_if(nms, is.null, ~".all")
   
   # Produce output
   tibble::tibble(type = class(x), 
