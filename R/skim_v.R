@@ -64,11 +64,12 @@ character_funs <- list (
   missing  = n_missing,
   complete = complete,
   n = length,
-  min = purrr::compose(min, nchar),
-  max = purrr::compose(max, nchar),
+  min = min_char,
+  max = max_char,
   empty = n_empty,
   n_unique = purrr::compose(length, unique)
 )
+
 
 #' @describeIn skim_v Calculate summary statistics for integer vectors
 #' @export
@@ -78,6 +79,7 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 }
 
 integer_funs <- numeric_funs
+
 
 #' @describeIn skim_v Calculate summary statistics for logical vectors
 #' @export
@@ -93,6 +95,8 @@ logical_funs <- list(
   mean = purrr::partial(mean, na.rm = TRUE)
 )
 
+
+#' @describeIn skim_v Default method for calculating summary statistics
 #' @export
 
 skim_v.default <- function(x, FUNS = numeric_funs) {
@@ -101,6 +105,7 @@ skim_v.default <- function(x, FUNS = numeric_funs) {
   warning(msg, call. = FALSE)
   skim_v(as.numeric(x), FUNS)
 }
+
 
 # Internal implementation of skim_v_. Should work regardless of type.
 #

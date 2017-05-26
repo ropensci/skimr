@@ -33,3 +33,27 @@ complete <- function(x) {
 n_empty <- function(x) {
   sum(x == "")
 }
+
+
+#' Calculate the minimum number of characters within a character vector
+#' 
+#' @param x A vector
+#' @return The min of calling nchar(x).
+#' @export
+
+min_char <- function(x) {
+  characters <- nchar(x)
+  min(characters, na.rm = TRUE)
+}
+
+
+#' Calculate the minimum number of characters within a character vector
+#' 
+#' @param x A vector
+#' @return The min of calling nchar(x).
+#' @export
+
+max_char <- function(x) {
+  characters <- nchar(x)
+  max(characters, na.rm = TRUE)
+}
