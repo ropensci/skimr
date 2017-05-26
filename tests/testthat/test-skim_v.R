@@ -70,11 +70,11 @@ correct_pathological_numeric <- tibble::tribble(
   "numeric", "complete", ".all",  2,
   "numeric",        "n", ".all",  3,
   "numeric",     "mean", ".all",  0,
-  "numeric",       "sd", ".all",  1.27381e+16,
+  "numeric",       "sd", ".all",  sd(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), na.rm=T),
   "numeric",      "min", ".all",  -(2^.Machine$double.digits),
   "numeric",   "median", ".all",  0,
-  "numeric", "quantile",  "25%",  -4.5036e+15,
-  "numeric",  "quantile", "75%",  4.5036e+15,
+  "numeric", "quantile",  "25%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .25, names = F, na.rm=T),
+  "numeric",  "quantile", "75%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .75, names = F, na.rm=T),
   "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
   "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
 )
