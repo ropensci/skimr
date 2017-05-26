@@ -66,22 +66,23 @@ test_that("skim_v returns expected response for factor vectors when NAs are pres
 
 correct_pathological_numeric <- tibble::tribble(
   ~type,          ~stat, ~level,  ~value,
-  "numeric",  "missing",     NA,  1,
-  "numeric", "complete",     NA,  2,
-  "numeric",        "n",     NA,  3,
-  "numeric",     "mean",     NA,  0,
-  "numeric",       "sd",     NA,  1.27381e+16,
-  "numeric",      "min",     NA,  -(2^.Machine$double.digits),
-  "numeric",   "median",     NA,  0,
+  "numeric",  "missing", ".all",  1,
+  "numeric", "complete", ".all",  2,
+  "numeric",        "n", ".all",  3,
+  "numeric",     "mean", ".all",  0,
+  "numeric",       "sd", ".all",  1.27381e+16,
+  "numeric",      "min", ".all",  -(2^.Machine$double.digits),
+  "numeric",   "median", ".all",  0,
   "numeric", "quantile",  "25%",  -4.5036e+15,
   "numeric",  "quantile", "75%",  4.5036e+15,
-  "numeric",      "max",     NA,  +(2^.Machine$double.digits)
+  "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
+  "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
 )
 
 
 test_that("skim_v returns expected response for numeric vectors with NAs and extreme numbers", {
   input <- skim_v(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)))
-  expect_equal(input, correct_pathological_numeric, tolerance=1)
+  expect_equal(input, correct_pathological_numeric, tolerance=1e-3)
 })
 
 ## Expected response for chr input ----------------------------------------
