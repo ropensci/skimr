@@ -21,3 +21,15 @@ n_missing <- function(x) {
 complete <- function(x) {
   length(x) - n_missing(x)
 }
+
+
+#' Calculate the number of blank values in a character vector
+#' 
+#' A "blank" is equal to "".
+#' @param x A vector
+#' @return The number of values in the vector equal to ""
+#' @export
+
+n_empty <- function(x) {
+  sum(x == "")
+}
