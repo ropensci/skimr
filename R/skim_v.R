@@ -25,7 +25,7 @@ skim_v.numeric <- function(x, FUNS = numeric_funs) {
 }
 
 numeric_funs <- list(
-  missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   mean = purrr::partial(mean, na.rm = TRUE),
@@ -45,7 +45,7 @@ skim_v.factor <- function(x, FUNS = factor_funs) {
 }
 
 factor_funs <- list(
-  missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
@@ -61,11 +61,12 @@ skim_v.character <- function(x, FUNS = character_funs) {
 }
 
 character_funs <- list (
+  missing  = n_missing,
+  complete = complete,
   n = length,
-  max = purrr::compose(max, nchar),
   min = purrr::compose(min, nchar),
-  #blank    = ,
-  missing  = purrr::compose(sum, is.na),
+  max = purrr::compose(max, nchar),
+  empty = n_empty,
   n_unique = purrr::compose(length, unique)
 )
 
@@ -78,6 +79,28 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 
 integer_funs <- numeric_funs
 
+#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @export
+function(x, FUNS = logical_funs) {
+  skim_v_(x, FUNS)
+}
+
+logical_funs <- list(
+  n_missing = missing,
+  complete = complete,
+  n = length,
+  count = purrr::partial(table, useNA = "always"),
+  mean = purrr::partial(mean, na.rm = TRUE)
+)
+
+#' @export
+
+skim_v.default <- function(x, FUNS = numeric_funs) {
+  msg <- paste0("Skim does not know how to summarize of vector of class: ",
+    class(x), ". Coercing to numeric")
+  warning(msg, call. = FALSE)
+  skim_v(as.numeric(x), FUNS)
+}
 
 # Internal implementation of skim_v_. Should work regardless of type.
 #
@@ -95,16 +118,17 @@ integer_funs <- numeric_funs
 skim_v_ <- function(x, FUNS) {
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(FUNS, ~.x(x))
+  values_out <- purrr::flatten_dbl(values)
   
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(FUNS), lens, rep)
   nms <- purrr::map(values, ~names(.x))
-  level <- purrr::map_if(nms, is.null, ~NA)
+  level <- purrr::map_if(nms, is.null, ~".all")
   
   # Produce output
   tibble::tibble(type = class(x), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
-    value = purrr::flatten_dbl(values))
+    value = unname(values_out))
 }
