@@ -45,7 +45,7 @@ inline_hist <- function(x) {
 
 n_empty <- function(x) {
   sum(x == "")
-
+}
 
 
 #' Calculate the minimum number of characters within a character vector
