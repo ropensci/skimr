@@ -15,7 +15,7 @@
 #' @keywords internal
 #' @export
 
-skim_v_ <- function(x, FUNS = class(x)) {
+skim_v <- function(x, FUNS = class(x)) {
   funs <- get_funs(FUNS)
 
   if (is.null(funs)) {
@@ -32,7 +32,7 @@ skim_v_ <- function(x, FUNS = class(x)) {
   
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)
-  stats <- purrr::map2(names(FUNS), lens, rep)
+  stats <- purrr::map2(names(funs), lens, rep)
   nms <- purrr::map(values, ~names(.x))
   level <- purrr::map_if(nms, is.null, ~".all")
   

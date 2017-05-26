@@ -2,54 +2,27 @@
 % Please edit documentation in R/skim_v.R
 \name{skim_v}
 \alias{skim_v}
-\alias{skim_v.numeric}
-\alias{skim_v.factor}
-\alias{skim_v.character}
-\alias{skim_v.integer}
-\alias{skim_v.logical}
-\alias{skim_v.default}
-\title{Extract summary statistics for vector}
+\title{Extract summary statistics for vector. Should work regardless of type.}
 \usage{
-skim_v(x, FUNS)
-
-\method{skim_v}{numeric}(x, FUNS = numeric_funs)
-
-\method{skim_v}{factor}(x, FUNS = factor_funs)
-
-\method{skim_v}{character}(x, FUNS = character_funs)
-
-\method{skim_v}{integer}(x, FUNS = integer_funs)
-
-\method{skim_v}{logical}(x, FUNS = logical_funs)
-
-\method{skim_v}{default}(x, FUNS = numeric_funs)
+skim_v(x, FUNS = class(x))
 }
 \arguments{
 \item{x}{A vector}
 
-\item{FUNS}{A list of functions to apply to x to compute summary statistics.
-Each function should return a numeric value.}
+\item{FUNS}{A length-one character vector that specifies which group of funs
+to grab for summarizing.}
 }
 \value{
 A tall tbl, containing the vector's name, type, potential levels
   and a series of summary statistics.
 }
 \description{
-Extract summary statistics for vector
+This enables consistent returns for a variety of functions that generate
+summary statistics. The only difference between the different skim_v methods
+is the functions that they access.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{numeric}: Calculate summary statistics for numeric vectors
-
-\item \code{factor}: Calculate summary statistics for factors
-
-\item \code{character}: Calculate summary statistics for character vectors
-
-\item \code{integer}: Calculate summary statistics for integer vectors
-
-\item \code{logical}: Calculate summary statistics for logical vectors
-
-\item \code{default}: Default method for calculating summary statistics
-}}
-
+\details{
+We can't use the typical S3 dispatch because we cannot enumerate all possible
+input types in advance.
+}
 \keyword{internal}
