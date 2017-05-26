@@ -47,7 +47,7 @@ inline_hist <- function(x) {
 
 n_empty <- function(x) {
   empty.strings=c("")
-  x %in% empty.strings.strings %>% sum()
+  x %in% empty.strings %>% sum()
 }
 
 

@@ -132,13 +132,13 @@ context("Skim a logical within a data frame when NAs are present")
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "Date",  "missing",    ".all",          4,
-  "Date", "complete",    ".all",         67,
-  "Date",        "n",    ".all",         71,
-  "Date",    "count",     FALSE,         32,
-  "Date",    "count",      TRUE,         35,
-  "Date",    "count",        NA,          4,
-  "Date",     "mean",    ".all",      35/67
+  "logical",  "missing",    ".all",          4,
+  "logical", "complete",    ".all",         67,
+  "logical",        "n",    ".all",         71,
+  "logical",    "count",     FALSE,         32,
+  "logical",    "count",      TRUE,         35,
+  "logical",    "count",        NA,          4,
+  "logical",     "mean",    ".all",      35/67
 )
 
 
@@ -179,11 +179,10 @@ correct <- tibble::tribble(
   "Date",  "missing",    ".all",               1,
   "Date", "complete",    ".all",               9,
   "Date",        "n",    ".all",              10,
-  "Date",      "min",    ".all",    "2011-07-01",
-  "Date",      "max",    ".all",    "2011-07-10",
-  "Date",   "median",    ".all",    "2011-07-06",
-  "Date",    "empty",    ".all",               0,
-  "Date",   "unique",    ".all",               9
+  "Date",      "min",    ".all",           15156,
+  "Date",      "max",    ".all",           15165,
+  "Date",   "median",    ".all",           15161,
+  "Date", "n_unique",    ".all",               9
 )
 
 test_that("skim_v returns expected response for Date vectors", {
