@@ -79,6 +79,19 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 
 integer_funs <- numeric_funs
 
+#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @export
+function(x, FUNS = logical_funs) {
+  skim_v_(x, FUNS)
+}
+
+logical_funs <- list(
+  n_missing = missing,
+  complete = complete,
+  n = length,
+  count = purrr::partial(table, useNA = "always"),
+  mean = purrr::partial(mean, na.rm = TRUE)
+)
 
 #' @export
 
