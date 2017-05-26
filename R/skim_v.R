@@ -61,11 +61,12 @@ skim_v.character <- function(x, FUNS = character_funs) {
 }
 
 character_funs <- list (
+  missing  = missing,
+  complete = complete,
   n = length,
-  max = purrr::compose(max, nchar),
   min = purrr::compose(min, nchar),
+  max = purrr::compose(max, nchar),
   #blank    = ,
-  missing  = purrr::compose(sum, is.na),
   n_unique = purrr::compose(length, unique)
 )
 
