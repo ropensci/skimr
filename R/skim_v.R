@@ -25,7 +25,7 @@ skim_v.numeric <- function(x, FUNS = numeric_funs) {
 }
 
 numeric_funs <- list(
-  missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   mean = purrr::partial(mean, na.rm = TRUE),
@@ -45,7 +45,7 @@ skim_v.factor <- function(x, FUNS = factor_funs) {
 }
 
 factor_funs <- list(
-  missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
@@ -61,7 +61,7 @@ skim_v.character <- function(x, FUNS = character_funs) {
 }
 
 character_funs <- list (
-  missing  = missing,
+  missing  = n_missing,
   complete = complete,
   n = length,
   min = purrr::compose(min, nchar),
