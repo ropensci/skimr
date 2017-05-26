@@ -70,11 +70,11 @@ correct_pathological_numeric <- tibble::tribble(
   "numeric", "complete", ".all",  2,
   "numeric",        "n", ".all",  3,
   "numeric",     "mean", ".all",  0,
-  "numeric",       "sd", ".all",  1.27381e+16,
+  "numeric",       "sd", ".all",  sd(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), na.rm=T),
   "numeric",      "min", ".all",  -(2^.Machine$double.digits),
   "numeric",   "median", ".all",  0,
-  "numeric", "quantile",  "25%",  -4.5036e+15,
-  "numeric",  "quantile", "75%",  4.5036e+15,
+  "numeric", "quantile",  "25%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .25, names = F, na.rm=T),
+  "numeric",  "quantile", "75%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .75, names = F, na.rm=T),
   "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
   "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
 )
@@ -155,14 +155,14 @@ context("Skim a Date within a data frame")
 
 correct <- tibble::tribble(
   ~type,       ~stat,       ~level,        ~value,
-  "logical",  "missing",    ".all",               1,
-  "logical", "complete",    ".all",               9,
-  "logical",        "n",    ".all",              10,
-  "logical",      "min",    ".all",    "2011-07-01",
-  "logical",      "max",    ".all",    "2011-07-10",
-  "logical",   "median",    ".all",    "2011-07-06",
-  "logical",    "empty",    ".all",               0,
-  "logical",   "unique",    ".all",               9
+  "Date",  "missing",    ".all",               1,
+  "Date", "complete",    ".all",               9,
+  "Date",        "n",    ".all",              10,
+  "Date",      "min",    ".all",    "2011-07-01",
+  "Date",      "max",    ".all",    "2011-07-10",
+  "Date",   "median",    ".all",    "2011-07-06",
+  "Date",    "empty",    ".all",               0,
+  "Date",   "unique",    ".all",               9
 )
 
 test_that("skim_v returns expected response for Date vectors", {
