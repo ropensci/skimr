@@ -1,7 +1,6 @@
+## Expected response for mtcars mpg ----------------------------------------
+
 context("Skim a vector within a data frame")
-
-
-# Expected response for mtcars mpg ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,          ~stat, ~level,     ~value,
@@ -21,10 +20,10 @@ test_that("skim_v returns expected response for numeric vectors", {
   expect_identical(input, correct)
 })
 
+
+## Expected response for iris Species ----------------------------------------
+
 context("Skim a factor within a data frame")
-
-
-# Expected response for iris Species ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
@@ -42,10 +41,9 @@ test_that("skim_v returns expected response for factor vectors", {
   expect_identical(input, correct)
 })
 
+## Expected response for iris Species ----------------------------------------
+
 context("Skim a factor within a data frame that has NAs")
-
-
-# Expected response for iris Species ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
@@ -64,10 +62,9 @@ test_that("skim_v returns expected response for factor vectors when NAs are pres
   expect_identical(input, correct)
 })
 
+## Expected response for chr input ----------------------------------------
+
 context("Skim a character within a data frame")
-
-
-# Expected response for chr input ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
@@ -85,10 +82,9 @@ test_that("skim_v returns expected response for chr vectors", {
   expect_identical(input, correct)
 })
 
+## Expected response for chickwt column string detecting 'ea' ---------------------------
+
 context("Skim a logical within a data frame")
-
-
-# Expected response for chickwt column string detecting 'ea' ----------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
@@ -106,10 +102,9 @@ test_that("skim_v returns expected response for logical vectors", {
   expect_identical(input, correct)
 })
 
+## Expected response for iris Species ----------------------------------------
+
 context("Skim a logical within a data frame when NAs are present")
-
-
-# Expected response for iris Species ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
