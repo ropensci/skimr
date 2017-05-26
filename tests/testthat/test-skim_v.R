@@ -88,7 +88,7 @@ test_that("skim_v returns expected response for chr vectors", {
 context("Skim a logical within a data frame")
 
 
-# Expected response for iris Species ----------------------------------------
+# Expected response for chickwt column string detecting 'ea' ----------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
@@ -102,6 +102,28 @@ correct <- tibble::tribble(
 
 test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea'))
-  input <- skim_v(dat)
+  input <- skim_v(dat$log_col)
+  expect_identical(input, correct)
+})
+
+context("Skim a logical within a data frame when NAs are present")
+
+
+# Expected response for iris Species ----------------------------------------
+
+correct <- tibble::tribble(
+  ~type,       ~stat,    ~level,     ~value,
+  "logi",  "missing",    ".all",          0,
+  "logi", "complete",    ".all",         71,
+  "logi",        "n",    ".all",         71,
+  "logi",    "count",      TRUE,         35,
+  "logi",    "count",     FALSE,         32,
+  "logi",     "mean",    ".all",  0.5223881
+)
+
+test_that("skim_v returns expected response for logical vectors", {
+  dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
+  dat$log_col[15:18] <- NA 
+  input <- skim_v(dat$log_col)
   expect_identical(input, correct)
 })
