@@ -32,7 +32,7 @@ character_funs <- list (
   min = min_char,
   max = max_char,
   empty = n_empty,
-  n_unique = purrr::compose(length, unique)
+  n_unique = purrr::compose(length, n_unique)
 )
 
 logical_funs <- list(
@@ -60,7 +60,7 @@ date_funs <- list(
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
   median = purrr::partial(median, na.rm = TRUE),
-  n_unique = purrr::compose(length, unique)
+  n_unique = purrr::compose(length, n_unique)
 )
 
 .summary_functions_default <- list(

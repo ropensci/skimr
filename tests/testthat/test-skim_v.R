@@ -97,7 +97,7 @@ correct <- tibble::tribble(
   "character",       "min",     ".all",  0,
   "character",       "max",     ".all",  4,
   "character",     "empty",     ".all",  1,
-  "character",  "n_unique",     ".all",  5)
+  "character",  "n_unique",     ".all",  4)
 
 test_that("skim_v returns expected response for chr vectors", {
   dat <- c("AAAB","ABc","acb",NA,"")
@@ -182,7 +182,7 @@ correct <- tibble::tribble(
   "Date",      "min",    ".all",           15156,
   "Date",      "max",    ".all",           15165,
   "Date",   "median",    ".all",           15161,
-  "Date", "n_unique",    ".all",               10
+  "Date", "n_unique",    ".all",               9
 )
 
 test_that("skim_v returns expected response for Date vectors", {

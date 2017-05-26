@@ -73,3 +73,14 @@ max_char <- function(x) {
   characters <- nchar(x)
   max(characters, na.rm = TRUE)
 }
+
+#' Calculate the number of unique elements but remove NA
+#' 
+#' @param x A vector
+#' @return unique without NA.
+#' @export
+
+n_unique <- function(x) {
+  un <- unique(dat)
+  un[!is.na(x)]
+}
