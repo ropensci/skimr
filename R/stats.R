@@ -21,3 +21,14 @@ n_missing <- function(x) {
 complete <- function(x) {
   length(x) - n_missing(x)
 }
+
+#' Generate inline histgram
+#' @export
+inline_hist <- function(x) {
+  x <- x[!is.na(x)]
+  hist_dt <- table(cut(x, 10))
+  hist_dt <- hist_dt / max(hist_dt)
+  out <- 0
+  names(out) <- colformat::spark_bar(hist_dt)
+  return(out)
+}

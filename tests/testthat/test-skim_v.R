@@ -14,7 +14,9 @@ correct <- tibble::tribble(
   "numeric",   "median",     NA,     median(mtcars$mpg),
   "numeric", "quantile",     "25%",  quantile(mtcars$mpg, probs = .25, names = F),
   "numeric", "quantile",     "75%",  quantile(mtcars$mpg, probs = .75, names = F),
-  "numeric",      "max",     NA,     max(mtcars$mpg))
+  "numeric",      "max",     NA,     max(mtcars$mpg),
+  "numeric",     "hist","▂▅▇▇▇▃▁▁▂▂", 0
+  )
 
 test_that("skim_v returns expected response for numeric vectors", {
   input <- skim_v(mtcars$mpg)

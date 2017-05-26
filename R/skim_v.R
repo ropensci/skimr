@@ -33,7 +33,8 @@ numeric_funs <- list(
   min = purrr::partial(min, na.rm = TRUE),
   median = purrr::partial(median, na.rm = TRUE),
   quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE)
+  max = purrr::partial(max, na.rm = TRUE),
+  hist = inline_hist
 )
 
 
