@@ -91,8 +91,8 @@ context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",   "missing",     ".all",  2,
-  "factor",  "complete",     ".all",  3,
+  "factor",   "missing",     ".all",  1,
+  "factor",  "complete",     ".all",  4,
   "factor",         "n",     ".all",  5,
   "factor",       "min",     ".all",  0,
   "factor",       "max",     ".all",  4,
