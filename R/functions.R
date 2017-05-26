@@ -63,7 +63,7 @@ date_funs <- list(
   n_unique = purrr::compose(length, unique)
 )
 
-.summary_functions_default <- list(
+.summary_functions_default <- as.environment(list(
   numeric = numeric_funs,
   integer = integer_funs,
   factor = factor_funs,
@@ -73,10 +73,10 @@ date_funs <- list(
   complex = complex_funs,
   date = date_funs,
   Date = date_funs
-)
+))
 
 .summary_functions <- .summary_functions_default
-
+lockEnvironment(.summary_functions_default)
 
 #' Set or add the summary functions for a particular type of data
 #' 
@@ -91,15 +91,21 @@ skim_with <- function(..., append = TRUE, reset = FALSE) {
   if (reset) {
     .summary_functions <- .summary_functions_default
   } else {
-    funs < - list(...)
+    funs <- list(...)
+    nms <- purrr::map(funs, names)
+    has_null <- purrr::map_lgl(nms, ~any(is.null(.x)))
+    if (any(has_null)) {
+      msg <- paste(names(funs)[has_null], collapse = ", ")
+      stop("A function is missing a name within this type: ", msg)
+    }
     all <- purrr::map2(names(funs), funs, set_functions, append)
   }
 }
 
 set_functions <- function(type, functions, append) {
-  new <- type %in% names(.summary_functions)
+  exists <- type %in% names(.summary_functions)
   
-  if (new) {
+  if (!exists) {
     message("Adding new summary functions for type:", type)
   } else if (append) {
     old <- .summary_functions[[type]]
@@ -116,7 +122,7 @@ set_functions <- function(type, functions, append) {
 #' @export
 
 show_skimmers <- function() {
-  purrr::map(.summary_functions, names)
+  eapply(.summary_functions, names)
 }
 
 
