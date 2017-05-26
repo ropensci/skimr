@@ -10,7 +10,7 @@ skim_print <- function(x){
     nums <- formatnum(nums_dt)
   }
   if (nrow(fcts_dt) > 0) {
-    fcts <- formatnum(fcts_dt)
+    fcts <- formatfct(fcts_dt)
   }
   return(list(numeric = nums, factors = fcts))
 }
@@ -44,7 +44,7 @@ formatfct <- function(x){
     tmp2$stat <- paste0(tmp2$level, ": ", tmp2$value)
     wide <- rbind(wide, data_frame(var = i, 
                                    type = "factor", 
-                                   stat = paste0(tmp2$stat, collapse = "\n")))
+                                   stat = paste0(tmp2$stat, collapse = " ")))
   }
   tmp <- left_join(tmp, wide, by = c("var", "type"))
   
