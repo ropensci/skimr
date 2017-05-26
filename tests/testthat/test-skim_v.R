@@ -63,3 +63,24 @@ test_that("skim_v returns expected response for factor vectors when NAs are avai
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
+
+correct_pathological_numeric <- tibble::tribble(
+  ~type,          ~stat, ~level,  ~value,
+  "numeric",  "missing",     NA,  1,
+  "numeric", "complete",     NA,  2,
+  "numeric",        "n",     NA,  3,
+  "numeric",     "mean",     NA,  0,
+  "numeric",       "sd",     NA,  1.27381e+16,
+  "numeric",      "min",     NA,  -(2^.Machine$double.digits),
+  "numeric",   "median",     NA,  0,
+  "numeric", "quantile",  "25%",  -4.5036e+15,
+  "numeric",  "quantile", "75%",  4.5036e+15,
+  "numeric",      "max",     NA,  +(2^.Machine$double.digits)
+)
+
+
+test_that("skim_v returns expected response for numeric vectors with NAs and extreme numbers", {
+  input <- skim_v(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)))
+  expect_equal(input, correct_pathological_numeric, tolerance=1)
+})
+
