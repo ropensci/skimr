@@ -6,7 +6,7 @@ NULL
 #' 
 #' @param x A vector
 #' @param FUNS A list of functions to apply to x to compute summary statistics.
-#'   each function should return a numeric value.
+#'   Each function should return a numeric value.
 #' @return A tall tbl, containing the vector's name, type, potential levels
 #'   and a series of summary statistics.
 #' @keywords internal
@@ -80,6 +80,17 @@ integer_funs <- numeric_funs
 
 
 # Internal implementation of skim_v_. Should work regardless of type.
+#
+# This enables consistent returns for a variety of functions that generate
+# summary statistics. The only difference between the different skim_v methods
+# is the functions that they access.
+#
+# @param x A vector
+# @param FUNS A list of functions to apply to x to compute summary statistics.
+#   Each function should return a numeric value.
+# @return A tall tbl, containing the vector's name, type, potential levels
+#   and a series of summary statistics.
+# @keywords internal
 
 skim_v_ <- function(x, FUNS) {
   # Compute the summary statistic; allow for variable length
