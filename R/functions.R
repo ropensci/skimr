@@ -45,13 +45,34 @@ logical_funs <- list(
 
 integer_funs <- numeric_funs
 
+
+complex_funs <- list(
+  missing = n_missing,
+  complete = complete,
+  n = length
+)
+
+
+date_funs <- list(
+  missing = n_missing,
+  complete = complete,
+  n = length,
+  min = purrr::partial(min, na.rm = TRUE),
+  max = purrr::partial(max, na.rm = TRUE),
+  median = purrr::partial(median, na.rm = TRUE),
+  n_unique = purrr::compose(length, unique)
+)
+
 .summary_functions_default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
   factor = factor_funs,
   ordered = factor_funs,
   character = character_funs,
-  logical = logical_funs
+  logical = logical_funs,
+  complex = complex_funx,
+  date = date_funs,
+  Date = date_funs
 )
 
 .summary_functions <- .summary_functions_default
