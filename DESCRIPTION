@@ -9,13 +9,14 @@ Imports:
     dplyr (>= 0.5),
     tidyr,
     purrr,
+    magrittr,
     tibble (>= 0.6)
 Suggests:
-    testthat
+    testthat,
+    knitr
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
 URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr

@@ -12,7 +12,6 @@ skim_v <- function (x, FUNS) {
   UseMethod("skim_v")
 }
 
-
 #' @export
 
 skim_v.numeric <- function(x, FUNS = numeric_funs) {
@@ -37,3 +36,5 @@ numeric_funs <- list(
   q3 = purrr::partial(quantile, probs = .75),
   max = purrr::partial(max, na.rm = TRUE)
 )
+
+skim_v.integer <- skim_v.numeric

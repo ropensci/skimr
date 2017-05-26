@@ -6,5 +6,6 @@
 #' @keywords package
 NULL
 
+#' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
