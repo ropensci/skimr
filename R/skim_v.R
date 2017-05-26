@@ -96,6 +96,19 @@ logical_funs <- list(
   mean = purrr::partial(mean, na.rm = TRUE)
 )
 
+#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @export
+skim_v.complex <- function(x, FUNS = complex_funs) {
+  skim_v_(x, FUNS)
+}
+
+complex_funs <- list(
+  missing = n_missing,
+  complete = complete,
+  n = length,
+  mean = purrr::partial(mean, na.rm = TRUE)
+)
+
 
 #' @describeIn skim_v Default method for calculating summary statistics
 #' @export
