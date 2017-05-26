@@ -1,3 +1,7 @@
+#' @include stats.R
+NULL
+
+
 #' Extract summary statistics for vector
 #' 
 #' @param x A vector
@@ -12,52 +16,48 @@ skim_v <- function (x, FUNS) {
   UseMethod("skim_v")
 }
 
+
+#' @describeIn skim_v Calculate summary statistics for numeric vectors
 #' @export
 
 skim_v.numeric <- function(x, FUNS = numeric_funs) {
-  stats <- names(FUNS)
-  values <- purrr::map_dbl(FUNS, ~.x(x))
-  out <- tibble::tibble(type = class(x), 
-    stat = stats,
-    level = NA, 
-    value = values)
-  return(out)
+  skim_v_(x, FUNS)
 }
 
-
-
 numeric_funs <- list(
-  missing = purrr::compose(sum, is.na),
-  complete = purrr::compose(sum, `!`, is.na),
+  missing = missing,
+  complete = complete,
   n = length,
   mean = purrr::partial(mean, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
   min = purrr::partial(min, na.rm = TRUE),
-  q1 = purrr::partial(quantile, probs = .25),
   median = purrr::partial(median, na.rm = TRUE),
-  q3 = purrr::partial(quantile, probs = .75),
+  quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE)
 )
 
 
-skim_v.factor <- function(x) {
-  t<-table(x, useNA = "always")
-  t<-tibble::as.tibble(t)
-  colnames(t)<-c("level", "value")
-  t$type <- "factor"
-  t$stat <- "count"
-  out <- t[c("type", "stat", "level", "value")]
-  return(out)
+#' @describeIn skim_v Calculate summary statistics for factors
+#' @export
+
+skim_v.factor <- function(x, FUNS = factor_funs) {
+  skim_v_(x, FUNS)
 }
 
+factor_funs <- list(
+  missing = missing,
+  complete = complete,
+  n = length,
+  count = purrr::partial(table, useNA = "always"),
+  n_unique = purrr::compose(length, levels)
+)
+
+
+#' @describeIn skim_v Calculate summary statistics for character vectors
+#' @export
+
 skim_v.character <- function(x, FUNS = character_funs) {
-  stats <- names(FUNS)
-  value <- purrr::map_dbl(FUNS, ~.x(x))
-  out <- tibble::tibble(type = class(x), 
-                        stat = stats,
-                        level = NA, 
-                        value = value)
-  return(out)
+  skim_v_(x, FUNS)
 }
 
 character_funs <- list (
@@ -69,5 +69,31 @@ character_funs <- list (
   n_unique = purrr::compose(length, unique)
 )
 
-=======
-skim_v.integer <- skim_v.numeric
+#' @describeIn skim_v Calculate summary statistics for integer vectors
+#' @export
+
+skim_v.integer <- function(x, FUNS = integer_funs) {
+  skim_v_(x, FUNS)
+}
+
+integer_funs <- numeric_funs
+
+
+# Internal implementation of skim_v_. Should work regardless of type.
+
+skim_v_ <- function(x, FUNS) {
+  # Compute the summary statistic; allow for variable length
+  values <- purrr::map(FUNS, ~.x(x))
+  
+  # Get the name of the computed statistic and a corresponding level
+  lens <- purrr::map_int(values, length)
+  stats <- purrr::map2(names(FUNS), lens, rep)
+  nms <- purrr::map(values, ~names(.x))
+  level <- purrr::map_if(nms, is.null, ~NA)
+  
+  # Produce output
+  tibble::tibble(type = class(x), 
+    stat = purrr::flatten_chr(stats),
+    level = purrr::flatten_chr(level), 
+    value = purrr::flatten_dbl(values))
+}
