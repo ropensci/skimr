@@ -108,6 +108,22 @@ complex_funs <- list(
   n = length
 )
 
+#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @export
+skim_v.Date <- function(x, FUNS = date_funs) {
+  skim_v_(x, FUNS)
+}
+
+date_funs <- list(
+  missing = n_missing,
+  complete = complete,
+  n = length,
+  min = purrr::partial(min, na.rm = TRUE),
+  max = purrr::partial(max, na.rm = TRUE),
+  median = purrr::partial(median, na.rm = TRUE),
+  n_unique = purrr::compose(length, unique)
+)
+
 
 #' @describeIn skim_v Default method for calculating summary statistics
 #' @export
