@@ -1,157 +1,33 @@
-#' @include stats.R
-NULL
-
-
-#' Extract summary statistics for vector
+#' Extract summary statistics for vector. Should work regardless of type.
+#'
+#' This enables consistent returns for a variety of functions that generate
+#' summary statistics. The only difference between the different skim_v methods
+#' is the functions that they access.
 #' 
+#' We can't use the typical S3 dispatch because we cannot enumerate all possible
+#' input types in advance.
+#'
 #' @param x A vector
-#' @param FUNS A list of functions to apply to x to compute summary statistics.
-#'   Each function should return a numeric value.
+#' @param FUNS A length-one character vector that specifies which group of funs
+#'   to grab for summarizing.
 #' @return A tall tbl, containing the vector's name, type, potential levels
 #'   and a series of summary statistics.
 #' @keywords internal
 #' @export
 
-skim_v <- function (x, FUNS) {
-  UseMethod("skim_v")
-}
+skim_v_ <- function(x, FUNS = class(x)) {
+  funs <- get_funs(FUNS)
 
-
-#' @describeIn skim_v Calculate summary statistics for numeric vectors
-#' @export
-
-skim_v.numeric <- function(x, FUNS = numeric_funs) {
-  skim_v_(x, FUNS)
-}
-
-numeric_funs <- list(
-  missing = n_missing,
-  complete = complete,
-  n = length,
-  mean = purrr::partial(mean, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
-  min = purrr::partial(min, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  hist = inline_hist
-)
-
-
-#' @describeIn skim_v Calculate summary statistics for factors
-#' @export
-
-skim_v.factor <- function(x, FUNS = factor_funs) {
-  skim_v_(x, FUNS)
-}
-
-factor_funs <- list(
-  missing = n_missing,
-  complete = complete,
-  n = length,
-  count = purrr::partial(table, useNA = "always"),
-  n_unique = purrr::compose(length, levels)
-)
-
-
-#' @describeIn skim_v Calculate summary statistics for character vectors
-#' @export
-
-skim_v.character <- function(x, FUNS = character_funs) {
-  skim_v_(x, FUNS)
-}
-
-character_funs <- list (
-  missing  = n_missing,
-  complete = complete,
-  n = length,
-  min = min_char,
-  max = max_char,
-  empty = n_empty,
-  n_unique = purrr::compose(length, unique)
-)
-
-
-#' @describeIn skim_v Calculate summary statistics for integer vectors
-#' @export
-
-skim_v.integer <- function(x, FUNS = integer_funs) {
-  skim_v_(x, FUNS)
-}
-
-integer_funs <- numeric_funs
-
-
-#' @describeIn skim_v Calculate summary statistics for logical vectors
-#' @export
-skim_v.logical <- function(x, FUNS = logical_funs) {
-  skim_v_(x, FUNS)
-}
-
-logical_funs <- list(
-  missing = n_missing,
-  complete = complete,
-  n = length,
-  count = purrr::partial(table, useNA = "always"),
-  mean = purrr::partial(mean, na.rm = TRUE)
-)
-
-#' @describeIn skim_v Calculate summary statistics for complex vectors
-#' @export
-skim_v.complex <- function(x, FUNS = complex_funs) {
-  skim_v_(x, FUNS)
-}
-
-complex_funs <- list(
-  missing = n_missing,
-  complete = complete,
-  n = length
-)
-
-#' @describeIn skim_v Calculate summary statistics for Date vectors
-#' @export
-skim_v.Date <- function(x, FUNS = date_funs) {
-  skim_v_(x, FUNS)
-}
-
-date_funs <- list(
-  missing = n_missing,
-  complete = complete,
-  n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  n_unique = purrr::compose(length, unique)
-)
-
-
-#' @describeIn skim_v Default method for calculating summary statistics
-#' @export
-
-skim_v.default <- function(x, FUNS = numeric_funs) {
-  msg <- paste0("Skim does not know how to summarize of vector of class: ",
-    class(x), ". Coercing to numeric")
-  warning(msg, call. = FALSE)
-  skim_v(as.numeric(x), FUNS)
-}
-
-
-# Internal implementation of skim_v_. Should work regardless of type.
-#
-# This enables consistent returns for a variety of functions that generate
-# summary statistics. The only difference between the different skim_v methods
-# is the functions that they access.
-#
-# @param x A vector
-# @param FUNS A list of functions to apply to x to compute summary statistics.
-#   Each function should return a numeric value.
-# @return A tall tbl, containing the vector's name, type, potential levels
-#   and a series of summary statistics.
-# @keywords internal
-
-skim_v_ <- function(x, FUNS) {
+  if (is.null(funs)) {
+    msg <- paste0("Skim does not know how to summarize of vector of class: ",
+      class(x), ". Coercing to numeric")
+    warning(msg, call. = FALSE)
+    funs <- get_funs("numeric")
+    x <- as.numeric(x)
+  }
+  
   # Compute the summary statistic; allow for variable length
-  values <- purrr::map(FUNS, ~.x(x))
+  values <- purrr::map(funs, ~.x(x))
   values_out <- purrr::flatten_dbl(values)
   
   # Get the name of the computed statistic and a corresponding level
@@ -161,7 +37,7 @@ skim_v_ <- function(x, FUNS) {
   level <- purrr::map_if(nms, is.null, ~".all")
   
   # Produce output
-  tibble::tibble(type = class(x), 
+  tibble::tibble(type = class(x)[1], 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
     value = unname(values_out))
