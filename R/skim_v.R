@@ -81,7 +81,7 @@ integer_funs <- numeric_funs
 
 #' @describeIn skim_v Calculate summary statistics for logical vectors
 #' @export
-function(x, FUNS = logical_funs) {
+skim_v.logical <- function(x, FUNS = logical_funs) {
   skim_v_(x, FUNS)
 }
 
