@@ -2,15 +2,27 @@
 % Please edit documentation in R/skim_v.R
 \name{skim_v}
 \alias{skim_v}
+\alias{skim_v.numeric}
+\alias{skim_v.factor}
+\alias{skim_v.character}
+\alias{skim_v.integer}
 \title{Extract summary statistics for vector}
 \usage{
 skim_v(x, FUNS)
+
+\method{skim_v}{numeric}(x, FUNS = numeric_funs)
+
+\method{skim_v}{factor}(x, FUNS = factor_funs)
+
+\method{skim_v}{character}(x, FUNS = character_funs)
+
+\method{skim_v}{integer}(x, FUNS = integer_funs)
 }
 \arguments{
 \item{x}{A vector}
 
 \item{FUNS}{A list of functions to apply to x to compute summary statistics.
-each function should return a numeric value.}
+Each function should return a numeric value.}
 }
 \value{
 A tall tbl, containing the vector's name, type, potential levels
@@ -19,4 +31,15 @@ A tall tbl, containing the vector's name, type, potential levels
 \description{
 Extract summary statistics for vector
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{numeric}: Calculate summary statistics for numeric vectors
+
+\item \code{factor}: Calculate summary statistics for factors
+
+\item \code{character}: Calculate summary statistics for character vectors
+
+\item \code{integer}: Calculate summary statistics for integer vectors
+}}
+
 \keyword{internal}
