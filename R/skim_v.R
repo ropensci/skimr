@@ -79,6 +79,15 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 integer_funs <- numeric_funs
 
 
+#' @export
+
+skim_v.default <- function(x, FUNS = numeric_funs) {
+  msg <- paste0("Skim does not know how to summarize of vector of class: ",
+    class(x), ". Coercing to numeric")
+  warning(msg, call. = FALSE)
+  skim_v(as.numeric(x), FUNS)
+}
+
 # Internal implementation of skim_v_. Should work regardless of type.
 #
 # This enables consistent returns for a variety of functions that generate
@@ -106,5 +115,5 @@ skim_v_ <- function(x, FUNS) {
   tibble::tibble(type = class(x), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
-    value = purrr::flatten_dbl(values))
+    value = unlist(values))
 }
