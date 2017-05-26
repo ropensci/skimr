@@ -12,7 +12,6 @@ skim_v <- function (x, FUNS) {
   UseMethod("skim_v")
 }
 
-
 #' @export
 
 skim_v.numeric <- function(x, FUNS = numeric_funs) {
@@ -31,13 +30,13 @@ numeric_funs <- list(
   missing = purrr::compose(sum, is.na),
   complete = purrr::compose(sum, `!`, is.na),
   n = length,
-  mean = mean,
+  mean = purrr::partial(mean, na.rm = TRUE),
+  sd = purrr::partial(sd, na.rm = TRUE),
+  min = purrr::partial(min, na.rm = TRUE),
   q1 = purrr::partial(quantile, probs = .25),
+  median = purrr::partial(median, na.rm = TRUE),
   q3 = purrr::partial(quantile, probs = .75),
-  sd = sd,
-  median = median,
-  max = max,
-  min = min
+  max = purrr::partial(max, na.rm = TRUE)
 )
 
 
@@ -70,3 +69,5 @@ character_funs <- list (
   n_unique = purrr::compose(length, unique)
 )
 
+=======
+skim_v.integer <- skim_v.numeric
