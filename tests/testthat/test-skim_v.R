@@ -4,16 +4,18 @@ context("Skim a vector within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat, ~level,     ~value,
-  "numeric",  "missing",     NA,     0,
-  "numeric", "complete",     NA,     32,
-  "numeric",        "n",     NA,     32,
-  "numeric",     "mean",     NA,     mean(mtcars$mpg),
-  "numeric",       "sd",     NA,     sd(mtcars$mpg),
-  "numeric",      "min",     NA,     min(mtcars$mpg),
-  "numeric",   "median",     NA,     median(mtcars$mpg),
-  "numeric", "quantile",     "25%",  quantile(mtcars$mpg, probs = .25, names = F),
-  "numeric", "quantile",     "75%",  quantile(mtcars$mpg, probs = .75, names = F),
-  "numeric",      "max",     NA,     max(mtcars$mpg))
+  "numeric",  "missing",   ".all",     0,
+  "numeric", "complete",   ".all",     32,
+  "numeric",        "n",   ".all",     32,
+  "numeric",     "mean",   ".all",     mean(mtcars$mpg),
+  "numeric",       "sd",   ".all",     sd(mtcars$mpg),
+  "numeric",      "min",   ".all",     min(mtcars$mpg),
+  "numeric",   "median",   ".all",     median(mtcars$mpg),
+  "numeric", "quantile",    "25%",  quantile(mtcars$mpg, probs = .25, names = F),
+  "numeric", "quantile",    "75%",  quantile(mtcars$mpg, probs = .75, names = F),
+  "numeric",      "max",   ".all",     max(mtcars$mpg),
+  "numeric",     "hist","▂▅▇▇▇▃▁▁▂▂", 0
+  )
 
 test_that("skim_v returns expected response for numeric vectors", {
   input <- skim_v(mtcars$mpg)
@@ -62,18 +64,39 @@ test_that("skim_v returns expected response for factor vectors when NAs are pres
   expect_identical(input, correct)
 })
 
+correct_pathological_numeric <- tibble::tribble(
+  ~type,          ~stat, ~level,  ~value,
+  "numeric",  "missing", ".all",  1,
+  "numeric", "complete", ".all",  2,
+  "numeric",        "n", ".all",  3,
+  "numeric",     "mean", ".all",  0,
+  "numeric",       "sd", ".all",  sd(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), na.rm=T),
+  "numeric",      "min", ".all",  -(2^.Machine$double.digits),
+  "numeric",   "median", ".all",  0,
+  "numeric", "quantile",  "25%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .25, names = F, na.rm=T),
+  "numeric",  "quantile", "75%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .75, names = F, na.rm=T),
+  "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
+  "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
+)
+
+
+test_that("skim_v returns expected response for numeric vectors with NAs and extreme numbers", {
+  input <- skim_v(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)))
+  expect_equal(input, correct_pathological_numeric, tolerance=1e-3)
+})
+
 ## Expected response for chr input ----------------------------------------
 
 context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",   "missing",     ".all",  2,
-  "factor",  "complete",     ".all",  3,
-  "factor",     "empty",     ".all",  1,
+  "factor",   "missing",     ".all",  1,
+  "factor",  "complete",     ".all",  4,
   "factor",         "n",     ".all",  5,
   "factor",       "min",     ".all",  0,
   "factor",       "max",     ".all",  4,
+  "factor",     "empty",     ".all",  1,
   "factor",  "n_unique",     ".all",  5)
 
 test_that("skim_v returns expected response for chr vectors", {
@@ -88,12 +111,13 @@ context("Skim a logical within a data frame")
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "logi",  "missing",    ".all",          0,
-  "logi", "complete",    ".all",         71,
-  "logi",        "n",    ".all",         71,
-  "logi",    "count",      TRUE,         35,
-  "logi",    "count",     FALSE,         36,
-  "logi",     "mean",    ".all",  0.4929577
+  "logical",  "missing",    ".all",          0,
+  "logical", "complete",    ".all",         71,
+  "logical",        "n",    ".all",         71,
+  "logical",    "count",     FALSE,         36,
+  "logical",    "count",      TRUE,         35,
+  "logical",    "count",        NA,          0,
+  "logical",     "mean",    ".all",         35/71
   )
 
 test_that("skim_v returns expected response for logical vectors", {
@@ -108,12 +132,13 @@ context("Skim a logical within a data frame when NAs are present")
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "logi",  "missing",    ".all",          0,
-  "logi", "complete",    ".all",         71,
-  "logi",        "n",    ".all",         71,
-  "logi",    "count",      TRUE,         35,
-  "logi",    "count",     FALSE,         32,
-  "logi",     "mean",    ".all",  0.5223881
+  "logical",  "missing",    ".all",          4,
+  "logical", "complete",    ".all",         67,
+  "logical",        "n",    ".all",         71,
+  "logical",    "count",     FALSE,         32,
+  "logical",    "count",      TRUE,         35,
+  "logical",    "count",        NA,          4,
+  "logical",     "mean",    ".all",   35/67
 )
 
 test_that("skim_v returns expected response for logical vectors", {

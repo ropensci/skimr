@@ -33,7 +33,8 @@ numeric_funs <- list(
   min = purrr::partial(min, na.rm = TRUE),
   median = purrr::partial(median, na.rm = TRUE),
   quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE)
+  max = purrr::partial(max, na.rm = TRUE),
+  hist = inline_hist
 )
 
 
@@ -83,12 +84,12 @@ integer_funs <- numeric_funs
 
 #' @describeIn skim_v Calculate summary statistics for logical vectors
 #' @export
-function(x, FUNS = logical_funs) {
+skim_v.logical <- function(x, FUNS = logical_funs) {
   skim_v_(x, FUNS)
 }
 
 logical_funs <- list(
-  n_missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),

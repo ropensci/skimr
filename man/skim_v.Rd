@@ -6,6 +6,8 @@
 \alias{skim_v.factor}
 \alias{skim_v.character}
 \alias{skim_v.integer}
+\alias{skim_v.logical}
+\alias{skim_v.default}
 \title{Extract summary statistics for vector}
 \usage{
 skim_v(x, FUNS)
@@ -17,6 +19,10 @@ skim_v(x, FUNS)
 \method{skim_v}{character}(x, FUNS = character_funs)
 
 \method{skim_v}{integer}(x, FUNS = integer_funs)
+
+\method{skim_v}{logical}(x, FUNS = logical_funs)
+
+\method{skim_v}{default}(x, FUNS = numeric_funs)
 }
 \arguments{
 \item{x}{A vector}
@@ -40,6 +46,10 @@ Extract summary statistics for vector
 \item \code{character}: Calculate summary statistics for character vectors
 
 \item \code{integer}: Calculate summary statistics for integer vectors
+
+\item \code{logical}: Calculate summary statistics for logical vectors
+
+\item \code{default}: Default method for calculating summary statistics
 }}
 
 \keyword{internal}

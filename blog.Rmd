@@ -21,8 +21,40 @@ In a nutshell, `skimr` will create a `skimr` object that can be further operated
 
 ## Dev process
 
-- our team members/background in terms of coding
-- what we each worked on/collaborated
+### About Team Members
+
+**Amelia McNamara**  
+Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College  
+Project Contributions: Coder
+
+**Eduardo Arino de la Rubia**  
+Job Title: Chief Data Scientist at Domino Data Lab    
+Project Contributions: Coder
+
+**Hao Zhu**  
+Job Title: Programmer Analyst at the Institute for Aging Research  
+Project Contributions: Coder
+
+**Julia Lowndes**  
+Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis   
+Project Contributions: Documention and test scripts
+
+**Shannon Ellis**  
+Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health  
+Project Contributions: Test Scripts
+
+**Elin Waring**  
+Job Title: Professor at Lehman College Sociology Department, City University of New York  
+Project Contributions: Coder
+
+**Michael Quinn**  
+Job Title: Quantitative Analyst at Google  
+Project Contributions: Coder
+
+**Hope McLeod**  
+Job Title: Data Engineer at Kobalt Music  
+Project Contributions: Documentation
+
 - how we pulled it all together
 - next steps/future (issues for later)
 
