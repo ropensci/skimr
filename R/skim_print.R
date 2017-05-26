@@ -61,7 +61,7 @@ print.skim_df <- function(skim_obj) {
   }
   
   if (! is.null(wide_values$factors)) {
-    cat("Factor Variables\n")
+    cat("\nFactor Variables\n")
     print(wide_values$factors)
   }
 }
