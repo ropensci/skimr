@@ -19,6 +19,10 @@ formatnum <- function(x) {
   tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "quantile", 
                                paste(level, stat), stat))
   tmp1 <- dplyr::select(dplyr::filter(tmp1, stat != "hist"), -level)
+  tmp1 <- dplyr::mutate(tmp1, stat = factor(stat, levels = c(
+    "missing", "complete", "n", "mean", "sd", "min", "25% quantile", "median",
+    "75% quantile", "max", "hist"
+  )))
   tmp1 <- tidyr::spread(tmp1, stat, value)
   
   tmp2 <- dplyr::mutate(dplyr::filter(x, stat == "hist"), value = level)
