@@ -182,7 +182,7 @@ correct <- tibble::tribble(
   "Date",      "min",    ".all",           15156,
   "Date",      "max",    ".all",           15165,
   "Date",   "median",    ".all",           15161,
-  "Date", "n_unique",    ".all",               9
+  "Date", "n_unique",    ".all",               10
 )
 
 test_that("skim_v returns expected response for Date vectors", {
