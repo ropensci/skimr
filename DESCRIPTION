@@ -18,7 +18,8 @@ Imports:
     tidyr,
     purrr,
     magrittr,
-    tibble (>= 0.6)
+    tibble (>= 0.6),
+    colformat
 Suggests:
     testthat,
     knitr
@@ -30,9 +31,9 @@ BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Collate: 
+    'stats.R'
     'functions.R'
     'skim.R'
     'skim_print.R'
-    'stats.R'
     'skim_v.R'
     'skimr-package.R'
