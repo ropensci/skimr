@@ -117,7 +117,7 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         36,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          0,
-  "logical",     "mean",    ".all",  0.4929577
+  "logical",     "mean",    ".all",         35/71
   )
 
 test_that("skim_v returns expected response for logical vectors", {
@@ -138,7 +138,7 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         32,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          4,
-  "logical",     "mean",    ".all",   0.5223881
+  "logical",     "mean",    ".all",   35/67
 )
 
 test_that("skim_v returns expected response for logical vectors", {
