@@ -62,7 +62,7 @@ character_funs <- list (
   min = purrr::compose(min, nchar),
   #blank    = ,
   missing  = purrr::compose(sum, is.na),
-  n_unique = purrr::compose(length, unique)
+  count = purrr::partial(table, useNA = "always")
 )
 
 #' @describeIn skim_v Calculate summary statistics for integer vectors
@@ -73,6 +73,18 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 }
 
 integer_funs <- numeric_funs
+
+skim_v.logical(
+  skim_v_(x, FUNS)
+)
+
+logical_funs <- list (
+  n = length,
+  missing  = purrr::compose(sum, is.na),
+  true = purrr::compose(sum, is.na),
+  false = purrr::compose(sum, `!`)
+  
+)
 
 
 # Internal implementation of skim_v_. Should work regardless of type.
