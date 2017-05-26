@@ -73,10 +73,10 @@ correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
   "factor",   "missing",     ".all",  2,
   "factor",  "complete",     ".all",  3,
-  "factor",     "empty",     ".all",  1,
   "factor",         "n",     ".all",  5,
   "factor",       "min",     ".all",  0,
   "factor",       "max",     ".all",  4,
+  "factor",     "empty",     ".all",  1,
   "factor",  "n_unique",     ".all",  5)
 
 test_that("skim_v returns expected response for chr vectors", {
