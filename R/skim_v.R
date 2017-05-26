@@ -105,8 +105,7 @@ skim_v.complex <- function(x, FUNS = complex_funs) {
 complex_funs <- list(
   missing = n_missing,
   complete = complete,
-  n = length,
-  mean = purrr::partial(mean, na.rm = TRUE)
+  n = length
 )
 
 
