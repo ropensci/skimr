@@ -4,16 +4,16 @@ context("Skim a vector within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat, ~level,     ~value,
-  "numeric",  "missing",     NA,     0,
-  "numeric", "complete",     NA,     32,
-  "numeric",        "n",     NA,     32,
-  "numeric",     "mean",     NA,     mean(mtcars$mpg),
-  "numeric",       "sd",     NA,     sd(mtcars$mpg),
-  "numeric",      "min",     NA,     min(mtcars$mpg),
-  "numeric",   "median",     NA,     median(mtcars$mpg),
-  "numeric", "quantile",     "25%",  quantile(mtcars$mpg, probs = .25, names = F),
-  "numeric", "quantile",     "75%",  quantile(mtcars$mpg, probs = .75, names = F),
-  "numeric",      "max",     NA,     max(mtcars$mpg),
+  "numeric",  "missing",   ".all",     0,
+  "numeric", "complete",   ".all",     32,
+  "numeric",        "n",   ".all",     32,
+  "numeric",     "mean",   ".all",     mean(mtcars$mpg),
+  "numeric",       "sd",   ".all",     sd(mtcars$mpg),
+  "numeric",      "min",   ".all",     min(mtcars$mpg),
+  "numeric",   "median",   ".all",     median(mtcars$mpg),
+  "numeric", "quantile",    "25%",  quantile(mtcars$mpg, probs = .25, names = F),
+  "numeric", "quantile",    "75%",  quantile(mtcars$mpg, probs = .75, names = F),
+  "numeric",      "max",   ".all",     max(mtcars$mpg),
   "numeric",     "hist","▂▅▇▇▇▃▁▁▂▂", 0
   )
 
