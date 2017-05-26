@@ -1,8 +1,19 @@
 Package: skimr
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: skimr
+Version: 1.0
+Authors@R: c(
+  person("Amelia", "McNamara", "amcnamara@smith.edu"),
+  person("Eduardo", "Rubia", ""),
+  person("Hao", "Zhu", "haozhu233@gmail.com"),
+  person("Julia", "Lowndes", "lowndes at nceas.ucsb.edu"),
+  person("Shannon", "Ellis", "sellis18@jhmi.edu"),
+  person("Elin", "Waring", ""),
+  person("Michael", "Quinn", "msquinn2@illinois.edu"),
+  person("Hope", "McLeod", "hmgit2@gmail.com"))
+  
+Description: skimr is a re-implementation of the summary function. It provides functionality to deal 
+with summary statistics iteratively and interactively as part of a pipeline. The returned skimr object 
+is subsettable and offers a human readable output.
 Depends:
     R (>= 3.1.2)
 Imports:
@@ -21,3 +32,9 @@ URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
+Collate: 
+    'functions.R'
+    'skim.R'
+    'stats.R'
+    'skim_v.R'
+    'skimr-package.R'

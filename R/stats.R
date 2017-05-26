@@ -19,5 +19,5 @@ missing <- function(x) {
 #' @export
 
 complete <- function(x) {
-  sum(!missing(x))
+  length(x) - missing(x)
 }

@@ -9,10 +9,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Overview
+## Motivation 
 
+in words, what we wanted from a summary function and why
 
-## Step-by-step thought process
+## Dev process
+
+- our team members/background in terms of coding
+- what we each worked on/collaborated
+- how we pulled it all together
+- next steps/future (issues for later)
+
+### Step-by-step thought process
 
 We started off by brainstorming what we liked about existing summary packages and what other features we wanted. 
 
@@ -24,35 +32,29 @@ summary(mtcars)
 ```
 
 
-In Amelia's words: 
-
-> "I like what we get here:" 
+### What we like and dislike, in Amelia's words
 
 ```{r summary}
+# "I like what we get here because mpg is numeric so these stats make sense:" 
 summary(mtcars$mpg) 
-```
-> "But I don’t like this:"
 
-```{r cars}
+# "But I don’t like this because cyl should really be a factor and shouldn't have these stats:"
 summary(mtcars$cyl)
-```
 
-> "This is OK:"
-
-```{r}
+# "This is OK, but not descriptive enough. It could be clearer what I'm looking at."
 mosaic::tally(~cyl, data=mtcars) # install.packages('mosaic')
-```
 
-> "But this output isn't labeled, not ideal". 
-
-```{r}
+# "But this output isn't labeled, not ideal." 
 table(mtcars$cyl, mtcars$vs)
-```
 
-> "I like that this returns 'sd', 'n' and 'missing'"
-
-```{r}
+# "I like this because it returns 'sd', 'n' and 'missing'":
 mosaic::favstats(~mpg, data=mtcars) 
 ```
 
+## Introducing `skimr`
+
+
+
+- what we've implemented to overcome those dislikes
+- examples of skimr features
 
