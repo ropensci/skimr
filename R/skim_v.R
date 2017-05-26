@@ -66,7 +66,7 @@ character_funs <- list (
   n = length,
   min = purrr::compose(min, nchar),
   max = purrr::compose(max, nchar),
-  #blank    = ,
+  empty = n_empty,
   n_unique = purrr::compose(length, unique)
 )
 
