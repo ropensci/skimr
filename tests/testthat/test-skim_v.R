@@ -39,7 +39,7 @@ correct <- tibble::tribble(
 
 test_that("skim_v returns expected response for factor vectors", {
   input <- skim_v(iris$Species)
-  expect_equal(input, correct)
+  expect_identical(input, correct)
 })
 
 context("Skim a factor within a data frame that has NAs")
@@ -61,5 +61,5 @@ correct <- tibble::tribble(
 test_that("skim_v returns expected response for factor vectors when NAs are available", {
   iris$Species[15:18] <- NA 
   input <- skim_v(iris$Species)
-  expect_equal(input, correct)
+  expect_identical(input, correct)
 })
