@@ -1,3 +1,7 @@
+#' @include stats.R
+NULL
+
+
 #' Extract summary statistics for vector
 #' 
 #' @param x A vector
