@@ -78,15 +78,19 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 
 integer_funs <- numeric_funs
 
-skim_v.logical(
+#' @describeIn skim_v Calculate summary statistics for integer vectors
+#' @export
+
+skim_v.logical <- function(x, FUNS = logical_funs) {
   skim_v_(x, FUNS)
-)
+}
+
 
 logical_funs <- list (
   n = length,
   missing  = purrr::compose(sum, is.na),
-  true = purrr::compose(sum, is.na),
-  false = purrr::compose(sum, `!`)
+  count = purrr::partial(table, useNA = "always"),
+  mean = purr::partial(mean, na.rm = TRUE)
   
 )
 
