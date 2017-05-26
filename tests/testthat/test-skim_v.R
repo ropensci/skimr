@@ -117,7 +117,7 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         36,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          0,
-  "logical",     "mean",    ".all",         35/71
+  "logical",     "mean",    ".all",       35/71
   )
 
 test_that("skim_v returns expected response for logical vectors", {
@@ -132,14 +132,15 @@ context("Skim a logical within a data frame when NAs are present")
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "logical",  "missing",    ".all",          4,
-  "logical", "complete",    ".all",         67,
-  "logical",        "n",    ".all",         71,
-  "logical",    "count",     FALSE,         32,
-  "logical",    "count",      TRUE,         35,
-  "logical",    "count",        NA,          4,
-  "logical",     "mean",    ".all",   35/67
+  "Date",  "missing",    ".all",          4,
+  "Date", "complete",    ".all",         67,
+  "Date",        "n",    ".all",         71,
+  "Date",    "count",     FALSE,         32,
+  "Date",    "count",      TRUE,         35,
+  "Date",    "count",        NA,          4,
+  "Date",     "mean",    ".all",      35/67
 )
+
 
 test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
