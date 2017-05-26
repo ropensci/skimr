@@ -83,3 +83,24 @@ test_that("skim_v returns expected response for chr vectors", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+
+context("Skim a logical within a data frame")
+
+
+# Expected response for iris Species ----------------------------------------
+
+correct <- tibble::tribble(
+  ~type,       ~stat,    ~level,     ~value,
+  "logi",  "missing",    ".all",          0,
+  "logi", "complete",    ".all",         71,
+  "logi",        "n",    ".all",         71,
+  "logi",    "count",      TRUE,         35,
+  "logi",    "count",     FALSE,         36,
+  "logi",     "mean",    ".all",  0.4929577
+  )
+
+test_that("skim_v returns expected response for logical vectors", {
+  dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea'))
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
