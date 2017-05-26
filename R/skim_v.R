@@ -69,5 +69,4 @@ character_funs <- list (
   n_unique = purrr::compose(length, unique)
 )
 
-=======
 skim_v.integer <- skim_v.numeric
