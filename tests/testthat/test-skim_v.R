@@ -91,13 +91,13 @@ context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",   "missing",     ".all",  1,
-  "factor",  "complete",     ".all",  4,
-  "factor",         "n",     ".all",  5,
-  "factor",       "min",     ".all",  0,
-  "factor",       "max",     ".all",  4,
-  "factor",     "empty",     ".all",  1,
-  "factor",  "n_unique",     ".all",  5)
+  "character",   "missing",     ".all",  1,
+  "character",  "complete",     ".all",  4,
+  "character",         "n",     ".all",  5,
+  "character",       "min",     ".all",  0,
+  "character",       "max",     ".all",  4,
+  "character",     "empty",     ".all",  1,
+  "character",  "n_unique",     ".all",  5)
 
 test_that("skim_v returns expected response for chr vectors", {
   dat <- c("AAAB","ABc","acb",NA,"")
