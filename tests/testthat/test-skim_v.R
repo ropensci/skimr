@@ -105,7 +105,7 @@ test_that("skim_v returns expected response for chr vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for chickwt column string detecting 'ea' ---------------------------
+## Expected response for chickwt logical ---------------------------
 
 context("Skim a logical within a data frame")
 
@@ -126,7 +126,7 @@ test_that("skim_v returns expected response for logical vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for iris Species ----------------------------------------
+## Expected response for chickwt logical with NA ----------------------------------------
 
 context("Skim a logical within a data frame when NAs are present")
 
@@ -145,5 +145,27 @@ test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
   dat$log_col[15:18] <- NA 
   input <- skim_v(dat$log_col)
+  expect_identical(input, correct)
+})
+
+
+
+## Expected response for iris Species with NA----------------------------------------
+
+context("Skim a complex within a data frame when NAs are present")
+
+correct <- tibble::tribble(
+  ~type,       ~stat,    ~level,     ~value,
+  "complex",  "missing",    ".all",          3,
+  "complex", "complete",    ".all",         68,
+  "complex",        "n",    ".all",         71
+)
+
+
+test_that("skim_v returns expected response for complex vectors", {
+  dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
+  dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
+  #dat$test_complex[3:5] <- NA
+  input <- skim_v(dat$test_complex)
   expect_identical(input, correct)
 })
