@@ -1,36 +1,48 @@
+#' @importFrom dplyr select mutate filter data_frame left_join
+#' @importFrom tidyr gather spread
+#' @export
 skim_print <- function(x){
-  nums <- formatnum(x[x$type %in% c("numeric", "double", "integer"),])
-  fcts <- formatfct(x[x$type=="factor",])
-  return(list(numeric=nums, factors=fcts))
+  nums_dt <- x[x$type %in% c("numeric", "double", "integer"),]
+  fcts_dt <- x[x$type == "factor",]
+  nums <- NULL
+  fcts <- NULL
+  if (nrow(nums_dt) > 0) {
+    nums <- formatnum(nums_dt)
+  }
+  if (nrow(fcts_dt) > 0) {
+    fcts <- formatnum(fcts_dt)
+  }
+  return(list(numeric = nums, factors = fcts))
 }
 
-formatnum <- function(x){
-  tmp <- x[x$level==".all",]
-  tmp <- tmp %>% select(-level) %>% spread(key=stat, value=value)
-  tmp1 <- x[x$stat=="quantile",]
-  tmp1$stat <- paste(tmp1$level, tmp1$stat)
-  tmp1 <- tmp1 %>% select(-level) %>% spread(key=stat, value=value)
-  tmp <- left_join(tmp, tmp1, by=c("var", "type"))
-  tmp2 <- x[x$stat=="hist",]
-  tmp2$value <- tmp2$level
-  tmp2 <- tmp2 %>% select(-level) %>% spread(key=stat, value=value)
-  tmp <- left_join(tmp, tmp2, by=c("var", "type"))
+formatnum <- function(x) {
+  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "quantile", 
+                               paste(level, stat), stat))
+  tmp1 <- dplyr::select(dplyr::filter(tmp1, stat != "hist"), -level)
+  tmp1 <- tidyr::spread(tmp1, stat, value)
+  
+  tmp2 <- dplyr::mutate(dplyr::filter(x, stat == "hist"), value = level)
+  tmp2 <- tidyr::spread(dplyr::select(tmp2, -level), stat, value)
+  
+  tmp <- dplyr::left_join(tmp1, tmp2, by = c("var", "type"))
   return(tmp)
 }
 
 formatfct <- function(x){
-  tmp <- x[x$level==".all",]
+  tmp <- x[x$level == ".all",]
   tmp <- tmp[complete.cases(tmp),]
-  tmp <- tmp %>% select(-level) %>% spread(key=stat, value=value)
-  tmp1 <- x[x$stat=="count",]
+  tmp <- spread(select(tmp, -level), stat, value)
+  tmp1 <- x[x$stat == "count",]
 
   wide <- data_frame()
-  for (i in unique(x$var)){
-    tmp2 <- tmp1[tmp1$var==i,]
+  for (i in unique(x$var)) {
+    tmp2 <- tmp1[tmp1$var == i,]
     tmp2$stat <- paste0(tmp2$level, ": ", tmp2$value)
-    wide <- rbind(wide, data_frame(var=i, type="factor", stat=paste0(tmp2$stat, collapse="\n")))
+    wide <- rbind(wide, data_frame(var = i, 
+                                   type = "factor", 
+                                   stat = paste0(tmp2$stat, collapse = "\n")))
   }
-  tmp <- left_join(tmp, wide, by=c("var", "type"))
+  tmp <- left_join(tmp, wide, by = c("var", "type"))
   
   return(tmp)
 }
