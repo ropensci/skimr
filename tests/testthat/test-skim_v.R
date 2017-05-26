@@ -28,14 +28,14 @@ context("Skim a factor within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",  "missing",          NA,  0,
-  "factor", "complete",          NA,  150,
-  "factor",        "n",          NA,  150,
+  "factor",  "missing",      ".all",  0,
+  "factor", "complete",      ".all",  150,
+  "factor",        "n",      ".all",  150,
   "factor",    "count",    "setosa",  50,
   "factor",    "count","versicolor",  50,
   "factor",    "count", "virginica",  50,
   "factor",    "count",          NA,  0,
-  "factor",   "n_unique",        NA,  3)
+  "factor",   "n_unique",    ".all",  3)
 
 test_that("skim_v returns expected response for factor vectors", {
   input <- skim_v(iris$Species)
@@ -49,14 +49,14 @@ context("Skim a factor within a data frame that has NAs")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",  "missing",          NA,  4,
-  "factor", "complete",          NA,  146,
-  "factor",        "n",          NA,  150,
+  "factor",  "missing",      ".all",  4,
+  "factor", "complete",      ".all",  146,
+  "factor",        "n",      ".all",  150,
   "factor",    "count",    "setosa",  46,
   "factor",    "count","versicolor",  50,
   "factor",    "count", "virginica",  50,
   "factor",    "count",          NA,  4,
-  "factor",   "n_unique",        NA,  3)
+  "factor",   "n_unique",    ".all",  3)
 
 test_that("skim_v returns expected response for factor vectors when NAs are present", {
   iris$Species[15:18] <- NA 
@@ -71,12 +71,13 @@ context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",   "missing",          NA,  2,
-  "factor",  "complete",          NA,  3,
-  "factor",         "n",          NA,  5,
-  "factor",       "min",          NA,  0,
-  "factor",       "max",          NA,  4,
-  "factor",  "n_unique",          NA,  5)
+  "factor",   "missing",     ".all",  2,
+  "factor",  "complete",     ".all",  3,
+  "factor",     "empty",     ".all",  1,
+  "factor",         "n",     ".all",  5,
+  "factor",       "min",     ".all",  0,
+  "factor",       "max",     ".all",  4,
+  "factor",  "n_unique",     ".all",  5)
 
 test_that("skim_v returns expected response for chr vectors", {
   dat <- c("AAAB","ABc","acb",NA,"")
