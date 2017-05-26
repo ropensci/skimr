@@ -18,7 +18,7 @@ n_missing <- function(x) {
 #' @return The sum of non-NULL and non-NA values
 #' @export
 
-complete <- function(x) {
+n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
@@ -27,6 +27,7 @@ complete <- function(x) {
 #' @param x A vector
 #' @return A character string of histogram.
 #' @export
+
 inline_hist <- function(x) {
   x <- x[!is.na(x)]
   hist_dt <- table(cut(x, 10))
@@ -35,6 +36,7 @@ inline_hist <- function(x) {
   names(out) <- colformat::spark_bar(hist_dt)
   return(out)
 }
+
 
 #' Calculate the number of blank values in a character vector
 #' 

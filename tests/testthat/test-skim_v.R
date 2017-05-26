@@ -117,7 +117,7 @@ correct <- tibble::tribble(
   "logical",    "count",     FALSE,         36,
   "logical",    "count",      TRUE,         35,
   "logical",    "count",        NA,          0,
-  "logical",     "mean",    ".all",         35/71
+  "logical",     "mean",    ".all",       35/71
   )
 
 test_that("skim_v returns expected response for logical vectors", {
@@ -132,14 +132,15 @@ context("Skim a logical within a data frame when NAs are present")
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "logical",  "missing",    ".all",          4,
-  "logical", "complete",    ".all",         67,
-  "logical",        "n",    ".all",         71,
-  "logical",    "count",     FALSE,         32,
-  "logical",    "count",      TRUE,         35,
-  "logical",    "count",        NA,          4,
-  "logical",     "mean",    ".all",   35/67
+  "Date",  "missing",    ".all",          4,
+  "Date", "complete",    ".all",         67,
+  "Date",        "n",    ".all",         71,
+  "Date",    "count",     FALSE,         32,
+  "Date",    "count",      TRUE,         35,
+  "Date",    "count",        NA,          4,
+  "Date",     "mean",    ".all",      35/67
 )
+
 
 test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
@@ -167,5 +168,27 @@ test_that("skim_v returns expected response for complex vectors", {
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
   #dat$test_complex[3:5] <- NA
   input <- skim_v(dat$test_complex)
+})
+  
+## Expected response for Date  ----------------------------------------
+
+context("Skim a Date within a data frame")
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "Date",  "missing",    ".all",               1,
+  "Date", "complete",    ".all",               9,
+  "Date",        "n",    ".all",              10,
+  "Date",      "min",    ".all",    "2011-07-01",
+  "Date",      "max",    ".all",    "2011-07-10",
+  "Date",   "median",    ".all",    "2011-07-06",
+  "Date",    "empty",    ".all",               0,
+  "Date",   "unique",    ".all",               9
+)
+
+test_that("skim_v returns expected response for Date vectors", {
+  dat <- seq( as.Date("2011-07-01"), by=1, len=10)
+  dat[2] <- NA
+  input <- skim_v(dat)
   expect_identical(input, correct)
 })
