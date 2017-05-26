@@ -86,7 +86,7 @@ function(x, FUNS = logical_funs) {
 }
 
 logical_funs <- list(
-  missing = missing,
+  n_missing = missing,
   complete = complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
