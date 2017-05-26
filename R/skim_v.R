@@ -96,7 +96,7 @@ logical_funs <- list(
   mean = purrr::partial(mean, na.rm = TRUE)
 )
 
-#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @describeIn skim_v Calculate summary statistics for complex vectors
 #' @export
 skim_v.complex <- function(x, FUNS = complex_funs) {
   skim_v_(x, FUNS)
@@ -108,7 +108,7 @@ complex_funs <- list(
   n = length
 )
 
-#' @describeIn skim_v Calculate summary statistics for logical vectors
+#' @describeIn skim_v Calculate summary statistics for Date vectors
 #' @export
 skim_v.Date <- function(x, FUNS = date_funs) {
   skim_v_(x, FUNS)
