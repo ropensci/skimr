@@ -2,10 +2,16 @@
 % Please edit documentation in R/stats.R
 \name{inline_hist}
 \alias{inline_hist}
-\title{Generate inline histgram}
+\title{Generate inline histgram for numeric variables}
 \usage{
 inline_hist(x)
 }
+\arguments{
+\item{x}{A vector}
+}
+\value{
+A character string of histogram.
+}
 \description{
-Generate inline histgram
+Generate inline histgram for numeric variables
 }
