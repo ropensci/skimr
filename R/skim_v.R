@@ -61,12 +61,13 @@ skim_v.character <- function(x, FUNS = character_funs) {
 }
 
 character_funs <- list (
+  missing  = missing,
+  complete = complete,
   n = length,
-  max = purrr::compose(max, nchar),
   min = purrr::compose(min, nchar),
+  max = purrr::compose(max, nchar),
   #blank    = ,
-  missing  = purrr::compose(sum, is.na),
-  count = purrr::partial(table, useNA = "always")
+  n_unique = purrr::compose(length, unique)
 )
 
 #' @describeIn skim_v Calculate summary statistics for integer vectors
@@ -78,22 +79,15 @@ skim_v.integer <- function(x, FUNS = integer_funs) {
 
 integer_funs <- numeric_funs
 
-#' @describeIn skim_v Calculate summary statistics for integer vectors
+
 #' @export
 
-skim_v.logical <- function(x, FUNS = logical_funs) {
-  skim_v_(x, FUNS)
+skim_v.default <- function(x, FUNS = numeric_funs) {
+  msg <- paste0("Skim does not know how to summarize of vector of class: ",
+    class(x), ". Coercing to numeric")
+  warning(msg, call. = FALSE)
+  skim_v(as.numeric(x), FUNS)
 }
-
-
-logical_funs <- list (
-  n = length,
-  missing  = purrr::compose(sum, is.na),
-  count = purrr::partial(table, useNA = "always"),
-  mean = purr::partial(mean, na.rm = TRUE)
-  
-)
-
 
 # Internal implementation of skim_v_. Should work regardless of type.
 #
@@ -122,5 +116,5 @@ skim_v_ <- function(x, FUNS) {
   tibble::tibble(type = class(x), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
-    value = purrr::flatten_dbl(values))
+    value = unlist(values))
 }
