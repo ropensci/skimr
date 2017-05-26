@@ -104,7 +104,8 @@ skim_v.default <- function(x, FUNS = numeric_funs) {
 
 skim_v_ <- function(x, FUNS) {
   # Compute the summary statistic; allow for variable length
-  values <- purrr::map(FUNS, ~.x(x))
+  summ_stats <- purrr::map(FUNS, ~.x(x))
+  values <- purrr::flatten_dbl(summ_stats)
   
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)

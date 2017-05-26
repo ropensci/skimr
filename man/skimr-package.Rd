@@ -4,8 +4,10 @@
 \name{skimr-package}
 \alias{skimr-package}
 \alias{skimr}
-\title{skimr}
+\title{skimr
+ It provides functionality to deal with summary statistics iteratively and interactively as part of a pipeline. The #'returned skimr object is subsettable and offers a human readable output.}
 \description{
 skimr
+ It provides functionality to deal with summary statistics iteratively and interactively as part of a pipeline. The #'returned skimr object is subsettable and offers a human readable output.
 }
 \keyword{package}
