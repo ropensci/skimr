@@ -147,3 +147,26 @@ test_that("skim_v returns expected response for logical vectors", {
   input <- skim_v(dat$log_col)
   expect_identical(input, correct)
 })
+
+## Expected response for Date  ----------------------------------------
+
+context("Skim a Date within a data frame")
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "Date",  "missing",    ".all",               1,
+  "Date", "complete",    ".all",               9,
+  "Date",        "n",    ".all",              10,
+  "Date",      "min",    ".all",    "2011-07-01",
+  "Date",      "max",    ".all",    "2011-07-10",
+  "Date",   "median",    ".all",    "2011-07-06",
+  "Date",    "empty",    ".all",               0,
+  "Date",   "unique",    ".all",               9
+)
+
+test_that("skim_v returns expected response for Date vectors", {
+  dat <- seq( as.Date("2011-07-01"), by=1, len=10)
+  dat[2] <- NA
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
