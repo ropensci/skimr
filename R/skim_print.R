@@ -50,3 +50,18 @@ formatfct <- function(x){
   
   return(tmp)
 }
+
+#' @export
+print.skim_df <- function(skim_obj) {
+  wide_values <- skim_print(skim_obj)
+  
+  if (! is.null(wide_values$numeric)) {
+    cat("Numeric Variables\n")
+    print(wide_values$numeric)
+  }
+  
+  if (! is.null(wide_values$factors)) {
+    cat("Factor Variables\n")
+    print(wide_values$factors)
+  }
+}
