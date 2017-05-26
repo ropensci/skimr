@@ -1,0 +1,58 @@
+---
+title: "Creating `skimr`"
+author: "Team skimr"
+date: "5/26/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+
+## Step-by-step thought process
+
+We started off by brainstorming what we liked about existing summary packages and what other features we wanted. 
+
+We started looking at example data, `mtcars`. 
+
+```{r}
+str(mtcars)
+summary(mtcars)
+```
+
+
+In Amelia's words: 
+
+> "I like what we get here:" 
+
+```{r summary}
+summary(mtcars$mpg) 
+```
+> "But I don’t like this:"
+
+```{r cars}
+summary(mtcars$cyl)
+```
+
+> "This is OK:"
+
+```{r}
+mosaic::tally(~cyl, data=mtcars) # install.packages('mosaic')
+```
+
+> "But this output isn't labeled, not ideal". 
+
+```{r}
+table(mtcars$cyl, mtcars$vs)
+```
+
+> "I like that this returns 'sd', 'n' and 'missing'"
+
+```{r}
+mosaic::favstats(~mpg, data=mtcars) 
+```
+
+
