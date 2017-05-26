@@ -6,7 +6,7 @@ NULL
 
 numeric_funs <- list(
   missing = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length,
   mean = purrr::partial(mean, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
@@ -19,7 +19,7 @@ numeric_funs <- list(
 
 factor_funs <- list(
   missing = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
   n_unique = purrr::compose(length, levels)
@@ -27,7 +27,7 @@ factor_funs <- list(
 
 character_funs <- list (
   missing  = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length,
   min = min_char,
   max = max_char,
@@ -37,7 +37,7 @@ character_funs <- list (
 
 logical_funs <- list(
   missing = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
   mean = purrr::partial(mean, na.rm = TRUE)
@@ -48,14 +48,14 @@ integer_funs <- numeric_funs
 
 complex_funs <- list(
   missing = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length
 )
 
 
 date_funs <- list(
   missing = n_missing,
-  complete = complete,
+  complete = n_complete,
   n = length,
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
@@ -70,7 +70,7 @@ date_funs <- list(
   ordered = factor_funs,
   character = character_funs,
   logical = logical_funs,
-  complex = complex_funx,
+  complex = complex_funs,
   date = date_funs,
   Date = date_funs
 )
