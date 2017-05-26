@@ -44,7 +44,8 @@ factor_funs <- list(
   missing = missing,
   complete = complete,
   n = length,
-  count = purrr::partial(table, useNA = "always")
+  count = purrr::partial(table, useNA = "always"),
+  n_unique = purrr::compose(length, levels)
 )
 
 
