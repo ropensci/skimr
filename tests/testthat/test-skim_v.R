@@ -34,7 +34,8 @@ correct <- tibble::tribble(
   "factor",    "count",    "setosa",  50,
   "factor",    "count","versicolor",  50,
   "factor",    "count", "virginica",  50,
-  "factor",   "n_unique",          NA,  3)
+  "factor",    "count",          NA,  0,
+  "factor",   "n_unique",        NA,  3)
 
 test_that("skim_v returns expected response for factor vectors", {
   input <- skim_v(iris$Species)
@@ -48,13 +49,14 @@ context("Skim a factor within a data frame that has NAs")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
-  "factor",  "missing",          NA,  3,
-  "factor", "complete",          NA,  150,
+  "factor",  "missing",          NA,  4,
+  "factor", "complete",          NA,  146,
   "factor",        "n",          NA,  150,
   "factor",    "count",    "setosa",  46,
   "factor",    "count","versicolor",  50,
   "factor",    "count", "virginica",  50,
-  "factor",   "n_unique",          NA,  3)
+  "factor",    "count",          NA,  4,
+  "factor",   "n_unique",        NA,  3)
 
 test_that("skim_v returns expected response for factor vectors when NAs are available", {
   iris$Species[15:18] <- NA 
