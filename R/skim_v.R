@@ -89,7 +89,7 @@ skim_v.logical <- function(x, FUNS = logical_funs) {
 }
 
 logical_funs <- list(
-  n_missing = missing,
+  missing = n_missing,
   complete = complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
