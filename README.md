@@ -50,7 +50,7 @@ dim(a)
 View(a)
 ```
 
-<center><img src="man/figures/skim_chickwts_df.png" width="450px"></center>
+<img src="man/figures/skim_chickwts_df.png" width="450px">
 
 
 ## Compute on the full skim_df object
@@ -73,4 +73,25 @@ View(a)
 11  carb numeric  hist ▆▇▂▁▇▁▁▁▁▁     0
 ```
 
+## Works with strings!
+
+
+![](man/figures/skim_babynames.png)
+
 ## Specify your own statistics
+
+
+```r
+
+ funs <- list(iqr = IQR,
+    quantile = purrr::partial(quantile, probs = .99))
+  skim_with(numeric = funs, append = FALSE)
+  skim_v(iris$Sepal.Length)
+  
+#  A tibble: 2 × 4
+#      type     stat level value
+#     <chr>    <chr> <chr> <dbl>
+# 1 numeric      iqr  .all   1.3
+# 2 numeric quantile   99%   7.7
+
+```
