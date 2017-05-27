@@ -82,5 +82,5 @@ max_char <- function(x) {
 
 n_unique <- function(x) {
   un <- unique(x)
-  un[!is.na(x)]
+  un[!is.na(un)]
 }
