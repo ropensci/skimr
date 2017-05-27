@@ -134,5 +134,5 @@ show_skimmers <- function() {
 # @export
 
 get_funs <- function(type) {
-  .summary_functions[[type]]
+  .summary_functions[[type[1]]]
 }
