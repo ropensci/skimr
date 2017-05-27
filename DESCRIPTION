@@ -23,7 +23,7 @@ Imports:
 Suggests:
     testthat,
     knitr
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ropenscilabs/skimr
