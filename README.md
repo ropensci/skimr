@@ -12,6 +12,7 @@ See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/blog.html)
 
 ``` r
 # install.packages("devtools")
+devtools::install_github("hadley/colformat")
 devtools::install_github("ropenscilabs/skimr")
 ```
 
