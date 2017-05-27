@@ -1,73 +1,71 @@
-skimr
-=====
+# skimr
+
 
 The goal of skimr is to provide a frictionless approach to dealing with summary statistics iteratively and interactively as part of a pipeline, and that conforms to the principle of least surprise. 
 
+`skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
+
 See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/blog.html).
 
-Installation
-------------
+## Installation
+
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/skimr")
 ```
 
-## Features
+
+## Skim statistics in the console
+
+**Nicely separates numeric and factor variables:**  
+
+![](man/figures/skim_chickwts.png)  
+<br>
+
+**Many numeric variables:**  
+
+![](man/figures/skim_mtcars.png)  
+<br>
+ 
+**Another example:**  
 
 
-`library(skimr)` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
+![](man/figures/skim_iris.png)  
+<br>
 
-### printed skim object
-For quick viewing in the console:
+## skim_df object (long format)
 
-![](man/figures/skim_chickwts.png)
-![](man/figures/skim_mtcars.png)
-![](man/figures/skim_iris.png)
+By default `skim` prints beautifully in the console, but it also produces a long tidy-format df that can be computed on. 
 
-### skim_df object (long format)
-
-``` r
-library(skimr)
-   
-## full data frame   
-skim(chickwts)   
-# A tibble: 22 × 5
-#       var    type     stat level    value
-# *   <chr>   <chr>    <chr> <chr>    <dbl>
-# 1  weight numeric  missing  .all   0.0000
-# 2  weight numeric complete  .all  71.0000
-# 3  weight numeric        n  .all  71.0000
-# 4  weight numeric     mean  .all 261.3099
-# 5  weight numeric       sd  .all  78.0737
-# 6  weight numeric      min  .all 108.0000
-# 7  weight numeric   median  .all 258.0000
-# 8  weight numeric quantile   25% 204.5000
-# 9  weight numeric quantile   75% 323.5000
-# 10 weight numeric      max  .all 423.0000
-# ... with 12 more rows
-
-## factor vector
-chickwts %>% 
-  dplyr::select(feed) %>%
-  skim()
-   
-# A tibble: 11 × 5
-#      var   type     stat     level value
-# *  <chr>  <chr>    <chr>     <chr> <dbl>
-# 1   feed factor  missing      .all     0
-# 2   feed factor complete      .all    71
-# 3   feed factor        n      .all    71
-# 4   feed factor    count    casein    12
-# 5   feed factor    count horsebean    10
-# 6   feed factor    count   linseed    12
-# 7   feed factor    count  meatmeal    11
-# 8   feed factor    count   soybean    14
-# 9   feed factor    count sunflower    12
-# 10  feed factor    count      <NA>     0
-# 11  feed factor n_unique      .all     6 
-   
+```r
+a <-  skim(chickwts)
+dim(a)
+# [1] 22  5
+View(a)
 ```
 
+<center><img src="man/figures/skim_chickwts_df.png" width="450px"></center>
 
-### specify your own statistics
+
+## Compute on the full skim_df object
+
+```r
+> skim(mtcars) %>% filter(stat=="hist")
+# A tibble: 11 × 5
+     var    type  stat      level value
+   <chr>   <chr> <chr>      <chr> <dbl>
+1    mpg numeric  hist ▂▅▇▇▇▃▁▁▂▂     0
+2    cyl numeric  hist ▆▁▁▁▃▁▁▁▁▇     0
+3   disp numeric  hist ▇▇▅▁▁▇▃▂▁▃     0
+4     hp numeric  hist ▆▆▇▂▇▂▃▁▁▁     0
+5   drat numeric  hist ▃▇▂▂▃▆▅▁▁▁     0
+6     wt numeric  hist ▂▂▂▂▇▆▁▁▁▂     0
+7   qsec numeric  hist ▂▃▇▇▇▅▅▁▁▁     0
+8     vs numeric  hist ▇▁▁▁▁▁▁▁▁▆     0
+9     am numeric  hist ▇▁▁▁▁▁▁▁▁▆     0
+10  gear numeric  hist ▇▁▁▁▆▁▁▁▁▂     0
+11  carb numeric  hist ▆▇▂▁▇▁▁▁▁▁     0
+```
+
+## Specify your own statistics
