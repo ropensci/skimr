@@ -18,6 +18,11 @@ devtools::install_github("ropenscilabs/skimr")
 
 ## Skim statistics in the console
 
+- added missing, complete, n, sd
+- reports numeric/int/double separately from factor/chr
+- handles dates, logicals
+- uses [Hadley's colformats](https://github.com/hadley/colformat), specifically `colformats::spark-bar()`
+
 **Nicely separates numeric and factor variables:**  
 
 ![](man/figures/skim_chickwts.png)  
@@ -36,7 +41,7 @@ devtools::install_github("ropenscilabs/skimr")
 
 ## skim_df object (long format)
 
-By default `skim` prints beautifully in the console, but it also produces a long tidy-format df that can be computed on. 
+By default `skim` prints beautifully in the console, but it also produces a long, tidy-format skim_df object that can be computed on. 
 
 ```r
 a <-  skim(chickwts)
