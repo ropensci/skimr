@@ -45,6 +45,7 @@ logical_funs <- list(
 
 integer_funs <- numeric_funs
 
+ordered_funs <- factor_funs
 
 complex_funs <- list(
   missing = n_missing,
@@ -72,7 +73,8 @@ date_funs <- list(
   logical = logical_funs,
   complex = complex_funs,
   date = date_funs,
-  Date = date_funs
+  Date = date_funs,
+  ordered = ordered_funs
 ))
 
 .summary_functions <- .summary_functions_default
