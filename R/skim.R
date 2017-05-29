@@ -3,6 +3,7 @@
 #' @param .data A tbl, or an object that can be coerced into a tbl.
 #' @return A \code{skim_df} object, which can be treated like a
 #'   tbl in most instances.
+#' @importFrom dplyr %>%
 #' @export
 
 skim <- function(.data) {
@@ -16,7 +17,7 @@ skim.data.frame <- function(.data) {
     nested_df <- .data %>% 
       tidyr::nest() 
     groups <-  as.character(dplyr::groups(.data))
-    group_values <- by_row(nested_df[, groups], ~combine(.))
+    group_values <- purrr::by_row(nested_df[, groups], ~dplyr::combine(.))
     
     skim_df <- nested_df %>% 
       dplyr::mutate(stats = purrr::map(data, skim)) %>% 
