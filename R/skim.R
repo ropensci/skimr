@@ -16,12 +16,12 @@ skim.data.frame <- function(.data) {
     nested_df <- .data %>% 
       tidyr::nest() 
     groups <-  as.character(dplyr::groups(.data))
-    group_values <- apply(nested_df[, groups], 1,  function(x)combine(x))
+    group_values <- by_row(nested_df[, groups], ~combine(.))
     
     skim_df <- nested_df %>% 
       dplyr::mutate(stats = purrr::map(data, skim)) %>% 
       dplyr::mutate(stats = purrr::map2(stats, 
-                                        group_values,
+                                        group_values$.out,
                                        ~append_group_vars(.x, .y, groups = groups)))
     
     combined <- dplyr::bind_rows(skim_df$stats)
