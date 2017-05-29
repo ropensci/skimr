@@ -13,12 +13,17 @@ skim <- function(.data) {
 
 skim.data.frame <- function(.data) {
   if (dplyr::is.grouped_df(.data)) {
-    skim_df <- .data %>% 
-      tidyr::nest() %>% 
+    nested_df <- .data %>% 
+      tidyr::nest() 
+    groups <-  as.character(dplyr::groups(.data))
+    group_values <- apply(nested_df[, groups], 1,  function(x)combine(x))
+    
+    skim_df <- nested_df %>% 
       dplyr::mutate(stats = purrr::map(data, skim)) %>% 
-      dplyr::mutate(stats = purrr::map(stats, 
-                                       append_group_vars, 
-                                       groups = dplyr::groups(.data)))
+      dplyr::mutate(stats = purrr::map2(stats, 
+                                        group_values,
+                                       ~append_group_vars(.x, .y, groups = groups)))
+    
     combined <- dplyr::bind_rows(skim_df$stats)
   } else {
     rows <- purrr::map(.data, skim_v)
@@ -40,11 +45,11 @@ skim.data.frame <- function(.data) {
 #' "group_var_2" etc. 
 #'
 #' @examples
-append_group_vars <- function(df, groups){
-  group_char <- dplyr::data_frame(x = as.character(groups)) %>% 
+append_group_vars <- function(df, val, groups){
+  group_char <- dplyr::data_frame(x = val) %>% 
     t() %>% 
     dplyr::as_data_frame()
   group_var_df <- purrr::map(1:nrow(df), ~group_char) %>% dplyr::bind_rows()
-  names(group_var_df) <- paste0("group_var_", seq_along(groups))
+  names(group_var_df) <- paste0("group_var_", groups)
   dplyr::bind_cols(df, group_var_df)
 }
