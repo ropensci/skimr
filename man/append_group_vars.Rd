@@ -12,8 +12,7 @@ append_group_vars(df, val, groups)
 \item{groups}{The grouping variables of the data frame to be summarized}
 }
 \value{
-A data frame with the grouping variables in new columns, labeled by "group_var_1", 
-"group_var_2" etc.
+A data frame with the grouping variables in new columns
 }
 \description{
 Append Grouping Variables
