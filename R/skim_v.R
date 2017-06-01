@@ -37,7 +37,7 @@ skim_v <- function(x, FUNS = class(x)) {
   level <- purrr::map_if(nms, is.null, ~".all")
   
   # Produce output
-  tibble::tibble(type = class(x)[1], 
+  tibble::tibble(type = get_fun_names(FUNS), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
     value = unname(values_out))

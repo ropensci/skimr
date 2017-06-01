@@ -2,7 +2,7 @@
 NULL
 
 
-# Default summarizing functions for each type
+# Default summarizing functions for each type -----------------------------
 
 numeric_funs <- list(
   missing = n_missing,
@@ -52,7 +52,6 @@ complex_funs <- list(
   n = length
 )
 
-
 date_funs <- list(
   missing = n_missing,
   complete = n_complete,
@@ -63,7 +62,7 @@ date_funs <- list(
   n_unique = purrr::compose(length, n_unique)
 )
 
-.summary_functions_default <- as.environment(list(
+.default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
   factor = factor_funs,
@@ -73,10 +72,14 @@ date_funs <- list(
   complex = complex_funs,
   date = date_funs,
   Date = date_funs
-))
+)
 
-.summary_functions <- .summary_functions_default
-lockEnvironment(.summary_functions_default)
+
+# Build environment for storing functions ---------------------------------
+
+functions <- new.env()
+functions$default <- .default
+functions$current <- .default
 
 #' Set or add the summary functions for a particular type of data
 #' 
@@ -84,35 +87,38 @@ lockEnvironment(.summary_functions_default)
 #'   particular data type.
 #' @param append Whether the provided functions should be in addition to the
 #'   defaults already in skim.
-#' @param reset Whether to revert to the original defaults.
 #' @export
 
-skim_with <- function(..., append = TRUE, reset = FALSE) {
-  if (reset) {
-    .summary_functions <- .summary_functions_default
-  } else {
-    funs <- list(...)
-    nms <- purrr::map(funs, names)
-    has_null <- purrr::map_lgl(nms, ~any(is.null(.x)))
-    if (any(has_null)) {
-      msg <- paste(names(funs)[has_null], collapse = ", ")
-      stop("A function is missing a name within this type: ", msg)
-    }
-    all <- purrr::map2(names(funs), funs, set_functions, append)
+skim_with <- function(..., append = TRUE) {
+  funs <- list(...)
+  nms <- purrr::map(funs, names)
+  has_null <- purrr::map_lgl(nms, ~any(is.null(.x)))
+  if (any(has_null)) {
+    msg <- paste(names(funs)[has_null], collapse = ", ")
+    stop("A function is missing a name within this type: ", msg)
   }
+  all <- purrr::map2(names(funs), funs, set_functions, append)
 }
 
-set_functions <- function(type, functions, append) {
-  exists <- type %in% names(.summary_functions)
+set_functions <- function(type, newfuns, append) {
+  exists <- type %in% names(functions$current)
   
   if (!exists) {
-    message("Adding new summary functions for type:", type)
+    message("Adding new summary functions for type: ", type)
   } else if (append) {
-    old <- .summary_functions[[type]]
-    .summary_functions[[type]] <- c(old, functions)
-  } else {
-    .summary_functions[[type]] <- functions
+    old <- functions$current[[type]]
+    newfuns <- c(old, newfuns)
   }
+  
+  functions$current[[type]] <- newfuns
+}
+
+
+#' @describeIn skim_with Use the default functions within skim
+#' @export
+
+skim_with_defaults <- function() {
+  assign("current", .default, envir = functions)
 }
 
 
@@ -122,7 +128,7 @@ set_functions <- function(type, functions, append) {
 #' @export
 
 show_skimmers <- function() {
-  eapply(.summary_functions, names)
+  lapply(functions$current, names)
 }
 
 
@@ -134,5 +140,19 @@ show_skimmers <- function() {
 # @export
 
 get_funs <- function(type) {
-  .summary_functions[[type]]
+  all <- functions$current[type]
+  purrr::detect(all, purrr::compose(`!`, is.null))
+}
+
+# A method for getting the name of set of summary functions, by type
+#
+# @param type The type of summary functions to extract
+# @return A list of summary functions
+# @keywords internal
+# @export
+
+get_fun_names <- function(type) {
+  all <- functions$current[type]
+  id <- purrr::detect_index(all, purrr::compose(`!`, is.null))
+  names(all)[id]
 }
