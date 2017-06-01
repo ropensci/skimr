@@ -3,17 +3,17 @@
 context("Skim a vector within a data frame")
 
 correct <- tibble::tribble(
-  ~type,          ~stat, ~level,     ~value,
-  "numeric",  "missing",   ".all",     0,
-  "numeric", "complete",   ".all",     32,
-  "numeric",        "n",   ".all",     32,
-  "numeric",     "mean",   ".all",     mean(mtcars$mpg),
-  "numeric",       "sd",   ".all",     sd(mtcars$mpg),
-  "numeric",      "min",   ".all",     min(mtcars$mpg),
-  "numeric",   "median",   ".all",     median(mtcars$mpg),
-  "numeric", "quantile",    "25%",  quantile(mtcars$mpg, probs = .25, names = F),
-  "numeric", "quantile",    "75%",  quantile(mtcars$mpg, probs = .75, names = F),
-  "numeric",      "max",   ".all",     max(mtcars$mpg),
+  ~type,          ~stat, ~level,   ~value,
+  "numeric",  "missing",   ".all", 0,
+  "numeric", "complete",   ".all", 32,
+  "numeric",        "n",   ".all", 32,
+  "numeric",     "mean",   ".all", mean(mtcars$mpg),
+  "numeric",       "sd",   ".all", sd(mtcars$mpg),
+  "numeric",      "min",   ".all", min(mtcars$mpg),
+  "numeric",   "median",   ".all", median(mtcars$mpg),
+  "numeric", "quantile",    "25%", quantile(mtcars$mpg, probs = .25, names = F),
+  "numeric", "quantile",    "75%", quantile(mtcars$mpg, probs = .75, names = F),
+  "numeric",      "max",   ".all", max(mtcars$mpg),
   "numeric",     "hist","▂▅▇▇▇▃▁▁▂▂", 0
   )
 
@@ -58,11 +58,14 @@ correct <- tibble::tribble(
   "factor",    "count",          NA,  4,
   "factor",   "n_unique",    ".all",  3)
 
-test_that("skim_v returns expected response for factor vectors when NAs are present", {
+test_that("skim_v handles factors when NAs are present", {
   iris$Species[15:18] <- NA 
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
+
+pathological < - c((2 ^ .Machine$double.digits), NA, 
+    -(2 ^ .Machine$double.digits))
 
 correct_pathological_numeric <- tibble::tribble(
   ~type,          ~stat, ~level,  ~value,
@@ -70,19 +73,19 @@ correct_pathological_numeric <- tibble::tribble(
   "numeric", "complete", ".all",  2,
   "numeric",        "n", ".all",  3,
   "numeric",     "mean", ".all",  0,
-  "numeric",       "sd", ".all",  sd(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), na.rm=T),
+  "numeric",       "sd", ".all",  sd(pathological, na.rm = TRUE),
   "numeric",      "min", ".all",  -(2^.Machine$double.digits),
   "numeric",   "median", ".all",  0,
-  "numeric", "quantile",  "25%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .25, names = F, na.rm=T),
-  "numeric",  "quantile", "75%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .75, names = F, na.rm=T),
+  "numeric", "quantile",  "25%",  quantile(pathological, na.rm = TRUE),
+  "numeric",  "quantile", "75%",  quantile(pathological, na.rm = TRUE),
   "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
   "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
 )
 
 
-test_that("skim_v returns expected response for numeric vectors with NAs and extreme numbers", {
-  input <- skim_v(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)))
-  expect_equal(input, correct_pathological_numeric, tolerance=1e-3)
+test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
+  input <- skim_v(pathological)
+  expect_equal(input, correct_pathological_numeric, tolerance = 1e-3)
 })
 
 ## Expected response for chr input ----------------------------------------
@@ -126,7 +129,8 @@ test_that("skim_v returns expected response for logical vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for chickwt logical with NA ----------------------------------------
+
+# Expected response for chickwt logical with NA ---------------------------
 
 context("Skim a logical within a data frame when NAs are present")
 
@@ -150,8 +154,7 @@ test_that("skim_v returns expected response for logical vectors", {
 })
 
 
-
-## Expected response for iris Species with NA----------------------------------------
+# Expected response for iris Species with NA ------------------------------
 
 context("Skim a complex within a data frame when NAs are present")
 
