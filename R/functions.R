@@ -63,7 +63,7 @@ date_funs <- list(
   n_unique = purrr::compose(length, n_unique)
 )
 
-.summary_functions_default <- as.environment(list(
+.default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
   factor = factor_funs,
@@ -73,10 +73,8 @@ date_funs <- list(
   complex = complex_funs,
   date = date_funs,
   Date = date_funs
-))
+)
 
-.summary_functions <- .summary_functions_default
-lockEnvironment(.summary_functions_default)
 
 #' Set or add the summary functions for a particular type of data
 #' 
@@ -89,7 +87,7 @@ lockEnvironment(.summary_functions_default)
 
 skim_with <- function(..., append = TRUE, reset = FALSE) {
   if (reset) {
-    .summary_functions <- .summary_functions_default
+    assign("current", .default, envir = functions)
   } else {
     funs <- list(...)
     nms <- purrr::map(funs, names)
@@ -102,16 +100,16 @@ skim_with <- function(..., append = TRUE, reset = FALSE) {
   }
 }
 
-set_functions <- function(type, functions, append) {
-  exists <- type %in% names(.summary_functions)
+set_functions <- function(type, newfuns, append) {
+  exists <- type %in% names(functions$current)
   
   if (!exists) {
-    message("Adding new summary functions for type:", type)
+    message("Adding new summary functions for type: ", type)
   } else if (append) {
-    old <- .summary_functions[[type]]
-    .summary_functions[[type]] <- c(old, functions)
+    old <- functions$current[[type]]
+    functions$current[[type]] <- c(old, newfuns)
   } else {
-    .summary_functions[[type]] <- functions
+    functions$current[[type]] <- newfuns
   }
 }
 
@@ -122,7 +120,7 @@ set_functions <- function(type, functions, append) {
 #' @export
 
 show_skimmers <- function() {
-  eapply(.summary_functions, names)
+  lapply(functions$current, names)
 }
 
 
@@ -134,5 +132,5 @@ show_skimmers <- function() {
 # @export
 
 get_funs <- function(type) {
-  .summary_functions[[type]]
+  functions$current[[type]]
 }

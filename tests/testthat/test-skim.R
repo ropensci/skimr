@@ -14,6 +14,7 @@ correct <- tibble::tribble(
   "weight", "numeric", "quantile",  "25%",       204.500,
   "weight", "numeric", "quantile",  "75%",       323.500,
   "weight", "numeric", "max",      ".all",       423.000,
+  "weight", "numeric", "hist", "▂▇▂▇▇▃▇▆▂▂", 0.000,
   "feed",   "factor",  "missing",   ".all",      0.0000,
   "feed",   "factor",  "complete",  ".all",      71.0000,
   "feed",   "factor",  "n",         ".all",      71.0000,
@@ -35,4 +36,3 @@ test_that("Skimming a data frame works as expected", {
   input <- skim(chickwts)
   expect_identical(input, correct)
 })
-
