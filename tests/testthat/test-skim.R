@@ -1,4 +1,4 @@
-context("Skimming a data.frame")
+context("Skim a data.frame")
 
 # Target output -----------------------------------------------------------
 

@@ -2,9 +2,12 @@
 % Please edit documentation in R/functions.R
 \name{skim_with}
 \alias{skim_with}
+\alias{skim_with_defaults}
 \title{Set or add the summary functions for a particular type of data}
 \usage{
-skim_with(..., append = TRUE, reset = FALSE)
+skim_with(..., append = TRUE)
+
+skim_with_defaults()
 }
 \arguments{
 \item{...}{A list of functions, with an argument name that matches a
@@ -12,9 +15,12 @@ particular data type.}
 
 \item{append}{Whether the provided functions should be in addition to the
 defaults already in skim.}
-
-\item{reset}{Whether to revert to the original defaults.}
 }
 \description{
 Set or add the summary functions for a particular type of data
 }
+\section{Functions}{
+\itemize{
+\item \code{skim_with_defaults}: Use the default functions within skim
+}}
+

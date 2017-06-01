@@ -16,7 +16,7 @@
 #' @export
 
 skim_v <- function(x, FUNS = class(x)) {
-  funs <- get_funs(FUNS[1])
+  funs <- get_funs(FUNS)
 
   if (is.null(funs)) {
     msg <- paste0("Skim does not know how to summarize of vector of class: ",
@@ -37,7 +37,7 @@ skim_v <- function(x, FUNS = class(x)) {
   level <- purrr::map_if(nms, is.null, ~".all")
   
   # Produce output
-  tibble::tibble(type = class(x)[1], 
+  tibble::tibble(type = get_fun_names(FUNS), 
     stat = purrr::flatten_chr(stats),
     level = purrr::flatten_chr(level), 
     value = unname(values_out))
