@@ -4,15 +4,22 @@
 skim_print <- function(x){
   nums_dt <- x[x$type %in% c("numeric", "double", "integer"),]
   fcts_dt <- x[x$type == "factor",]
+  chars_dt <- x[x$type == "character",]
+  
   nums <- NULL
   fcts <- NULL
+  chars <- NULL
+  
   if (nrow(nums_dt) > 0) {
     nums <- formatnum(nums_dt)
   }
   if (nrow(fcts_dt) > 0) {
     fcts <- formatfct(fcts_dt)
   }
-  return(list(numeric = nums, factors = fcts))
+  if (nrow(chars_dt) > 0) {
+    chars <- formatchars(chars_dt)
+  }
+  return(list(numeric = nums, factors = fcts, characters=chars))
 }
 
 formatnum <- function(x) {
@@ -32,7 +39,7 @@ formatnum <- function(x) {
   return(tmp)
 }
 
-formatfct <- function(x){
+formatfct <- function(x) {
   tmp <- x[x$level == ".all",]
   tmp <- tmp[complete.cases(tmp),]
   tmp <- spread(select(tmp, -level), stat, value)
@@ -51,6 +58,18 @@ formatfct <- function(x){
   return(tmp)
 }
 
+formatchars <- function(x) {
+  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "quantile", 
+                                         paste(level, stat), stat))
+  tmp1 <- dplyr::select(dplyr::filter(tmp1, stat != "hist"), -level)
+  tmp1 <- dplyr::mutate(tmp1, stat = factor(stat, levels = c(
+    "complete","missing", "empty", "n", "min","max", "n_unique" 
+  )))
+  tmp1 <- tidyr::spread(tmp1, stat, value)
+  
+  return(tmp1)
+}
+
 #' @export
 print.skim_df <- function(skim_obj) {
   wide_values <- skim_print(skim_obj)
@@ -58,6 +77,11 @@ print.skim_df <- function(skim_obj) {
   if (! is.null(wide_values$numeric)) {
     cat("Numeric Variables\n")
     print(wide_values$numeric)
+  }
+  
+  if (! is.null(wide_values$characters)) {
+    cat("\nCharacter Variables\n")
+    print(wide_values$characters)
   }
   
   if (! is.null(wide_values$factors)) {
