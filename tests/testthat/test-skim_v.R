@@ -118,6 +118,7 @@ correct <- tibble::tribble(
   )
 
 test_that("skim_v returns expected response for logical vectors", {
+  data("chickwts")
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea'))
   input <- skim_v(dat$log_col)
   expect_identical(input, correct)
@@ -186,5 +187,27 @@ test_that("skim_v handles objects with multiple classes", {
   dat[2] <- NA
   class(dat) <- c("strange_type", "Date")
   input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "numeric",   "missing",   ".all",        0,
+  "numeric",   "complete",  ".all",       71,
+  "numeric",   "n",         ".all",       71,
+  "numeric",   "mean",      ".all",       mean(as.numeric(chickwts$feed)),
+  "numeric",   "sd",        ".all",       sd(as.numeric(chickwts$feed)),
+  "numeric",   "min",       ".all",        1,
+  "numeric",   "median",     ".all",       4,
+  "numeric",   "quantile",   "25%",        2,
+  "numeric",   "quantile",   "75%",        5,
+  "numeric",   "max",        ".all",       6,
+  "numeric",   "hist",  "▇▆▁▇▁▆▁▇▁▇",0
+)
+
+test_that("skim_v handles objects with two unknown classes", {
+  data("chickwts")
+  class(chickwts$feed) <- c("strange", "stranger")
+  input<-skim_v(chickwts$feed)
   expect_identical(input, correct)
 })

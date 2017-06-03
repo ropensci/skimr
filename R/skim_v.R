@@ -24,18 +24,19 @@ skim_v <- function(x, FUNS = class(x)) {
     warning(msg, call. = FALSE)
     funs <- get_funs("numeric")
     x <- as.numeric(x)
+    FUNS <- "numeric"
   }
-  
+
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(funs, ~.x(x))
   values_out <- purrr::flatten_dbl(values)
-  
+
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(funs), lens, rep)
   nms <- purrr::map(values, ~names(.x))
   level <- purrr::map_if(nms, is.null, ~".all")
-  
+
   # Produce output
   tibble::tibble(type = get_fun_names(FUNS), 
     stat = purrr::flatten_chr(stats),
