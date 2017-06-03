@@ -3,7 +3,7 @@
 #' @export
 skim_print <- function(x){
   nums_dt <- x[x$type %in% c("numeric", "double", "integer"),]
-  fcts_dt <- x[x$type == "factor",]
+  fcts_dt <- x[x$type == "factor" | x$type == "ordered",]
   chars_dt <- x[x$type == "character",]
   
   nums <- NULL
@@ -42,7 +42,7 @@ formatnum <- function(x) {
 formatfct <- function(x) {
   tmp <- x[x$level == ".all",]
   tmp <- tmp[complete.cases(tmp),]
-  tmp <- spread(select(tmp, -level), stat, value)
+  tmp <- tidyr::spread(select(tmp, -level), stat, value)
   tmp1 <- x[x$stat == "count",]
 
   wide <- data_frame()
