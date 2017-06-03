@@ -188,3 +188,21 @@ test_that("skim_v handles objects with multiple classes", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "POSIXct",  "missing",    ".all",               1,
+  "POSIXct", "complete",    ".all",               9,
+  "POSIXct",        "n",    ".all",              10,
+  "POSIXct",      "min",    ".all",         1309478400,
+  "POSIXct",      "max",    ".all",         1309478409,
+  "POSIXct",   "median",    ".all",         1309478405,
+  "POSIXct", "n_unique",    ".all",               9
+)
+
+test_that("skim_v returns expected response for POSIXct vectors", {
+  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
+  dat[2] <- NA
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})

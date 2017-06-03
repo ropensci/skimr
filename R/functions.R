@@ -62,6 +62,16 @@ date_funs <- list(
   n_unique = purrr::compose(length, n_unique)
 )
 
+posixct_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  min = purrr::partial(min, na.rm = TRUE),
+  max = purrr::partial(max, na.rm = TRUE),
+  median = purrr::partial(median, na.rm = TRUE),
+  n_unique = purrr::compose(length, n_unique)  
+)
+
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -70,8 +80,8 @@ date_funs <- list(
   character = character_funs,
   logical = logical_funs,
   complex = complex_funs,
-  date = date_funs,
-  Date = date_funs
+  Date = date_funs,
+  POSIXct = posixct_funs
 )
 
 
