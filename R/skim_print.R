@@ -49,9 +49,16 @@ formatfct <- function(x) {
   for (i in unique(x$var)) {
     tmp2 <- tmp1[tmp1$var == i,]
     tmp2$stat <- paste0(tmp2$level, ": ", tmp2$value)
-    wide <- rbind(wide, data_frame(var = i, 
+    if (tmp2$type[1] == "factor"){
+    wide <-  rbind(wide, data_frame(var = i, 
                                    type = "factor", 
                                    stat = paste0(tmp2$stat, collapse = " ")))
+    } else if (tmp2$type[1] == "ordered"){
+      wide <-  rbind(wide, data_frame(var = i, 
+                                      type = "ordered", 
+                                      stat = paste0(tmp2$stat, collapse = " ")))
+      
+    }
   }
   tmp <- left_join(tmp, wide, by = c("var", "type"))
   
