@@ -2,7 +2,7 @@
 % Please edit documentation in R/skim.R
 \name{skim_tee}
 \alias{skim_tee}
-\title{Get useful summary statistic from a data frame and return the object}
+\title{Get useful summary statistic from a data frame, print it, and return it}
 \usage{
 skim_tee(.data)
 }
@@ -14,5 +14,5 @@ A \code{skim_df} object, which can be treated like a
   tbl in most instances.
 }
 \description{
-Get useful summary statistic from a data frame and return the object
+Get useful summary statistic from a data frame, print it, and return it
 }
