@@ -18,7 +18,7 @@ skim <- function(.data) {
 skim_tee <- function(.data) {
   t <- skim(.data)
   print(t)
-  invisible(t)
+  invisible(.data)
 }
 
 #'@export
