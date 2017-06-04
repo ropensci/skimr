@@ -84,3 +84,25 @@ n_unique <- function(x) {
   un <- unique(x)
   un[!is.na(un)]
 }
+
+#' Get the start for a time series without the frequency
+#' 
+#' @param x A vector of ts data
+#' @return Finish time.
+#' @export
+
+ts_start <- function(x) {
+  s <- start(x)
+  s <- s[1]
+}
+
+#' Get the finish for a time series without the frequency
+#' 
+#' @param x A vector of ts data
+#' @return Finish time.
+#' @export
+
+ts_end <- function(x) {
+  e <- end(x)
+  e <- e[1]
+}

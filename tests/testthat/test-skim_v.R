@@ -191,6 +191,30 @@ test_that("skim_v handles objects with multiple classes", {
   expect_identical(input, correct)
 })
 
+# Expected response for ts  ---------------------------------------    
+correct <- tibble::tribble(
+  ~type,  ~stat,      ~level,   ~value,
+  "ts",  "missing",   ".all",    0,
+  "ts",  "complete",  ".all",    39,
+  "ts",  "n",         ".all",    39,
+  "ts",  "start",     ".all",    1962,
+  "ts",  "end",       ".all",    1971,
+  "ts",  "frequency", ".all",    4,
+  "ts",  "deltat",    ".all",    0.25,
+  "ts",  "mean",      ".all",    mean(freeny$y),
+  "ts",  "sd",        ".all",    sd(freeny$y),
+  "ts",  "min",       ".all",    8.79137,
+  "ts",  "max",       ".all",    9.79424,
+  "ts",  "median",    ".all",  9.31378
+)
+
+test_that("skim_v returns expected response for ts vectors", {
+  data(freeny)
+  input <- skim_v(freeny$y)
+  expect_identical(input, correct)
+})
+
+
 correct <- tibble::tribble(
   ~type,       ~stat,       ~level,        ~value,
   "POSIXct",  "missing",    ".all",               1,
