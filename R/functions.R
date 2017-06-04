@@ -77,6 +77,16 @@ ts_funs <- list(
   median = purrr::partial(median, na.rm = TRUE)
 )
 
+posixct_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  min = purrr::partial(min, na.rm = TRUE),
+  max = purrr::partial(max, na.rm = TRUE),
+  median = purrr::partial(median, na.rm = TRUE),
+  n_unique = purrr::compose(length, n_unique)  
+)
+
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -87,7 +97,8 @@ ts_funs <- list(
   complex = complex_funs,
   date = date_funs,
   Date = date_funs,
-  ts = ts_funs
+  ts = ts_funs,
+  POSIXct = posixct_funs
 )
 
 
