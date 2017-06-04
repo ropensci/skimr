@@ -149,17 +149,19 @@ test_that("skim_v returns expected response for logical vectors", {
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "complex",  "missing",    ".all",          3,
-  "complex", "complete",    ".all",         68,
+  "complex",  "missing",    ".all",          4,
+  "complex", "complete",    ".all",         67,
   "complex",        "n",    ".all",         71
 )
 
 test_that("skim_v returns expected response for complex vectors", {
+  data("chickwts")
   dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
+  dat$test_complex[15:18] <- NA 
   input <- skim_v(dat$test_complex)
+  expect_identical(input, correct)
 })
-  
 
 # Expected response for Date  ----------------------------------------
 
