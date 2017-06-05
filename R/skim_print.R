@@ -42,18 +42,18 @@ formatnum <- function(x) {
 formatfct <- function(x) {
   tmp <- x[x$level == ".all",]
   tmp <- tmp[complete.cases(tmp),]
-  tmp <- spread(select(tmp, -level), stat, value)
+  tmp <- tidyr::spread(dplyr::select(tmp, -level), stat, value)
   tmp1 <- x[x$stat == "count",]
 
-  wide <- data_frame()
+  wide <- tibble::data_frame()
   for (i in unique(x$var)) {
     tmp2 <- tmp1[tmp1$var == i,]
     tmp2$stat <- paste0(tmp2$level, ": ", tmp2$value)
-    wide <- rbind(wide, data_frame(var = i, 
+    wide <- rbind(wide, tibble::data_frame(var = i, 
                                    type = "factor", 
                                    stat = paste0(tmp2$stat, collapse = " ")))
   }
-  tmp <- left_join(tmp, wide, by = c("var", "type"))
+  tmp <- dplyr::left_join(tmp, wide, by = c("var", "type"))
   
   return(tmp)
 }
