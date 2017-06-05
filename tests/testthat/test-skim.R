@@ -52,9 +52,8 @@ test_that("Skimming a data frame works as expected", {
 })
 
 test_that("Using skim_tee returns the object", {
-  reference <- skim(chickwts)
   printed_output <- capture.output({ skim_object <- skim_tee(chickwts) })
-  expect_identical(reference, skim_object)
+  expect_identical(chickwts, skim_object)
 })
 
 test_that("Using skim_tee prints out the object", {
