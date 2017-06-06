@@ -1,19 +1,19 @@
-## Expected response for mtcars mpg ----------------------------------------
-
 context("Skim a vector within a data frame")
 
+# Expected response for mtcars mpg ----------------------------------------
+
 correct <- tibble::tribble(
-  ~type,          ~stat, ~level,     ~value,
-  "numeric",  "missing",   ".all",     0,
-  "numeric", "complete",   ".all",     32,
-  "numeric",        "n",   ".all",     32,
-  "numeric",     "mean",   ".all",     mean(mtcars$mpg),
-  "numeric",       "sd",   ".all",     sd(mtcars$mpg),
-  "numeric",      "min",   ".all",     min(mtcars$mpg),
-  "numeric",   "median",   ".all",     median(mtcars$mpg),
-  "numeric", "quantile",    "25%",  quantile(mtcars$mpg, probs = .25, names = F),
-  "numeric", "quantile",    "75%",  quantile(mtcars$mpg, probs = .75, names = F),
-  "numeric",      "max",   ".all",     max(mtcars$mpg),
+  ~type,          ~stat, ~level,   ~value,
+  "numeric",  "missing",   ".all", 0,
+  "numeric", "complete",   ".all", 32,
+  "numeric",        "n",   ".all", 32,
+  "numeric",     "mean",   ".all", mean(mtcars$mpg),
+  "numeric",       "sd",   ".all", sd(mtcars$mpg),
+  "numeric",      "min",   ".all", min(mtcars$mpg),
+  "numeric",   "median",   ".all", median(mtcars$mpg),
+  "numeric", "quantile",    "25%", quantile(mtcars$mpg, probs = .25, names = F),
+  "numeric", "quantile",    "75%", quantile(mtcars$mpg, probs = .75, names = F),
+  "numeric",      "max",   ".all", max(mtcars$mpg),
   "numeric",     "hist","▂▅▇▇▇▃▁▁▂▂", 0
   )
 
@@ -24,8 +24,6 @@ test_that("skim_v returns expected response for numeric vectors", {
 
 
 ## Expected response for iris Species ----------------------------------------
-
-context("Skim a factor within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
@@ -45,8 +43,6 @@ test_that("skim_v returns expected response for factor vectors", {
 
 ## Expected response for iris Species ----------------------------------------
 
-context("Skim a factor within a data frame that has NAs")
-
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
   "factor",  "missing",      ".all",  4,
@@ -58,11 +54,16 @@ correct <- tibble::tribble(
   "factor",    "count",          NA,  4,
   "factor",   "n_unique",    ".all",  3)
 
-test_that("skim_v returns expected response for factor vectors when NAs are present", {
+test_that("skim_v handles factors when NAs are present", {
   iris$Species[15:18] <- NA 
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
+
+pathological <- c((2 ^ .Machine$double.digits), NA, 
+    -(2 ^ .Machine$double.digits))
+path_quantiles <- quantile(pathological, probs = c(.25, .75), na.rm = TRUE,
+    names = FALSE)
 
 correct_pathological_numeric <- tibble::tribble(
   ~type,          ~stat, ~level,  ~value,
@@ -70,24 +71,21 @@ correct_pathological_numeric <- tibble::tribble(
   "numeric", "complete", ".all",  2,
   "numeric",        "n", ".all",  3,
   "numeric",     "mean", ".all",  0,
-  "numeric",       "sd", ".all",  sd(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), na.rm=T),
+  "numeric",       "sd", ".all",  sd(pathological, na.rm = TRUE),
   "numeric",      "min", ".all",  -(2^.Machine$double.digits),
   "numeric",   "median", ".all",  0,
-  "numeric", "quantile",  "25%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .25, names = F, na.rm=T),
-  "numeric",  "quantile", "75%",  quantile(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)), probs = .75, names = F, na.rm=T),
+  "numeric", "quantile",  "25%",  path_quantiles[1],
+  "numeric",  "quantile", "75%",  path_quantiles[2],
   "numeric",      "max",  ".all",  +(2^.Machine$double.digits),
-  "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0
+  "numeric",     "hist", "▇▁▁▁▁▁▁▁▁▇", 0.0
 )
 
-
-test_that("skim_v returns expected response for numeric vectors with NAs and extreme numbers", {
-  input <- skim_v(c(+(2^.Machine$double.digits), NA, -(2^.Machine$double.digits)))
-  expect_equal(input, correct_pathological_numeric, tolerance=1e-3)
+test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
+  input <- skim_v(pathological)
+  expect_identical(input, correct_pathological_numeric)
 })
 
 ## Expected response for chr input ----------------------------------------
-
-context("Skim a character within a data frame")
 
 correct <- tibble::tribble(
   ~type,          ~stat,     ~level,  ~value,
@@ -105,9 +103,8 @@ test_that("skim_v returns expected response for chr vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for chickwt logical ---------------------------
 
-context("Skim a logical within a data frame")
+# Expected response for chickwt logical ---------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
@@ -126,9 +123,8 @@ test_that("skim_v returns expected response for logical vectors", {
   expect_identical(input, correct)
 })
 
-## Expected response for chickwt logical with NA ----------------------------------------
 
-context("Skim a logical within a data frame when NAs are present")
+# Expected response for chickwt logical with NA ---------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
@@ -141,7 +137,6 @@ correct <- tibble::tribble(
   "logical",     "mean",    ".all",      35/67
 )
 
-
 test_that("skim_v returns expected response for logical vectors", {
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
   dat$log_col[15:18] <- NA 
@@ -150,29 +145,25 @@ test_that("skim_v returns expected response for logical vectors", {
 })
 
 
-
-## Expected response for iris Species with NA----------------------------------------
-
-context("Skim a complex within a data frame when NAs are present")
+# Expected response for iris Species with NA ------------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "complex",  "missing",    ".all",          3,
-  "complex", "complete",    ".all",         68,
+  "complex",  "missing",    ".all",          4,
+  "complex", "complete",    ".all",         67,
   "complex",        "n",    ".all",         71
 )
 
-
 test_that("skim_v returns expected response for complex vectors", {
+  data("chickwts")
   dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
-  #dat$test_complex[3:5] <- NA
+  dat$test_complex[15:18] <- NA 
   input <- skim_v(dat$test_complex)
+  expect_identical(input, correct)
 })
-  
-## Expected response for Date  ----------------------------------------
 
-context("Skim a Date within a data frame")
+# Expected response for Date  ----------------------------------------
 
 correct <- tibble::tribble(
   ~type,       ~stat,       ~level,        ~value,
@@ -186,7 +177,57 @@ correct <- tibble::tribble(
 )
 
 test_that("skim_v returns expected response for Date vectors", {
-  dat <- seq( as.Date("2011-07-01"), by=1, len=10)
+  dat <- seq(as.Date("2011-07-01"), by=1, len=10)
+  dat[2] <- NA
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
+test_that("skim_v handles objects with multiple classes", {
+  dat <- seq(as.Date("2011-07-01"), by=1, len=10)
+  dat[2] <- NA
+  class(dat) <- c("strange_type", "Date")
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
+# Expected response for ts  ---------------------------------------    
+correct <- tibble::tribble(
+  ~type,  ~stat,      ~level,   ~value,
+  "ts",  "missing",   ".all",    0,
+  "ts",  "complete",  ".all",    39,
+  "ts",  "n",         ".all",    39,
+  "ts",  "start",     ".all",    1962,
+  "ts",  "end",       ".all",    1971,
+  "ts",  "frequency", ".all",    4,
+  "ts",  "deltat",    ".all",    0.25,
+  "ts",  "mean",      ".all",    mean(freeny$y),
+  "ts",  "sd",        ".all",    sd(freeny$y),
+  "ts",  "min",       ".all",    8.79137,
+  "ts",  "max",       ".all",    9.79424,
+  "ts",  "median",    ".all",  9.31378
+)
+
+test_that("skim_v returns expected response for ts vectors", {
+  data(freeny)
+  input <- skim_v(freeny$y)
+  expect_identical(input, correct)
+})
+
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "POSIXct",  "missing",    ".all",               1,
+  "POSIXct", "complete",    ".all",               9,
+  "POSIXct",        "n",    ".all",              10,
+  "POSIXct",      "min",    ".all",         1309478400,
+  "POSIXct",      "max",    ".all",         1309478409,
+  "POSIXct",   "median",    ".all",         1309478405,
+  "POSIXct", "n_unique",    ".all",               9
+)
+
+test_that("skim_v returns expected response for POSIXct vectors", {
+  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
   dat[2] <- NA
   input <- skim_v(dat)
   expect_identical(input, correct)

@@ -10,6 +10,18 @@ skim <- function(.data) {
   UseMethod("skim")
 }
 
+#' Get useful summary statistic from a data frame, print it, and return it
+#' 
+#' @param .data A tbl, or an object that can be coerced into a tbl.
+#' @return A \code{skim_df} object, which can be treated like a
+#'   tbl in most instances.
+#' @export
+skim_tee <- function(.data) {
+  t <- skim(.data)
+  print(t)
+  invisible(.data)
+}
+
 #'@export
 
 skim.data.frame <- function(.data) {
