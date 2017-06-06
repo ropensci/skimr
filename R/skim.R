@@ -36,7 +36,6 @@ skim.grouped_df <- function(.data){
   
   l <- split(nested_df[, groups], factor(1:nrow(nested_df))) 
   l <- purrr::map( l, ~dplyr::combine(.))
-  
   skim_df <- nested_df %>% 
     dplyr::mutate(stats = purrr::map(data, skim)) %>% 
     dplyr::mutate(stats = purrr::map2(stats, 

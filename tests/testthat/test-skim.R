@@ -36,3 +36,11 @@ test_that("Skimming a data frame works as expected", {
   expect_identical(input, correct)
 })
 
+
+test_that("Skimming a grouped data frame works as expected", {
+  correct <- readRDS("skim_output/group_df.RDS")
+  input <- mtcars %>% 
+    dplyr::group_by(cyl, gear) %>% 
+    skim()
+  expect_identical(input, correct)
+})
