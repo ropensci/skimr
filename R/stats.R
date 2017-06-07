@@ -30,10 +30,12 @@ n_complete <- function(x) {
 
 inline_hist <- function(x) {
   x <- x[!is.na(x)]
-  hist_dt <- table(cut(x, 10))
-  hist_dt <- hist_dt / max(hist_dt)
   out <- 0
-  names(out) <- colformat::spark_bar(hist_dt)
+  if ( !all(x == 0)) {
+    hist_dt <- table(cut(x, 10))
+    hist_dt <- hist_dt / max(hist_dt)
+    names(out) <- colformat::spark_bar(hist_dt)
+  }
   return(out)
 }
 
@@ -83,4 +85,26 @@ max_char <- function(x) {
 n_unique <- function(x) {
   un <- unique(x)
   un[!is.na(un)]
+}
+
+#' Get the start for a time series without the frequency
+#' 
+#' @param x A vector of ts data
+#' @return Finish time.
+#' @export
+
+ts_start <- function(x) {
+  s <- start(x)
+  s <- s[1]
+}
+
+#' Get the finish for a time series without the frequency
+#' 
+#' @param x A vector of ts data
+#' @return Finish time.
+#' @export
+
+ts_end <- function(x) {
+  e <- end(x)
+  e <- e[1]
 }
