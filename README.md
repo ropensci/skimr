@@ -82,7 +82,6 @@ View(a)
 
 ## Specify your own statistics
 
-
 ```r
 
  funs <- list(iqr = IQR,
@@ -97,6 +96,7 @@ View(a)
 # 2 numeric quantile   99%   7.7
 
 ```
+
 ## Limitations of current version
 
 Currently the print methods are still in early stages of development. Printing is limited to numeric, character,
@@ -118,7 +118,6 @@ the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-d
 for printing dataframes. These values do show up when printing a data-frame created by 
 `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
 
-
 ## Contributing
 
-We wecome issue reports and pull requests including adding support for different variable classes. 
+We welcome issue reports and pull requests including adding support for different variable classes.
