@@ -172,17 +172,19 @@ test_that("skim_v returns expected response for logical vectors", {
 
 correct <- tibble::tribble(
   ~type,       ~stat,    ~level,     ~value,
-  "complex",  "missing",    ".all",          3,
-  "complex", "complete",    ".all",         68,
+  "complex",  "missing",    ".all",          4,
+  "complex", "complete",    ".all",         67,
   "complex",        "n",    ".all",         71
 )
 
 test_that("skim_v returns expected response for complex vectors", {
+  data("chickwts")
   dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
+  dat$test_complex[15:18] <- NA 
   input <- skim_v(dat$test_complex)
+  expect_identical(input, correct)
 })
-  
 
 # Expected response for Date  ----------------------------------------
 
@@ -208,6 +210,48 @@ test_that("skim_v handles objects with multiple classes", {
   dat <- seq(as.Date("2011-07-01"), by=1, len=10)
   dat[2] <- NA
   class(dat) <- c("strange_type", "Date")
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
+# Expected response for ts  ---------------------------------------    
+correct <- tibble::tribble(
+  ~type,  ~stat,      ~level,   ~value,
+  "ts",  "missing",   ".all",    0,
+  "ts",  "complete",  ".all",    39,
+  "ts",  "n",         ".all",    39,
+  "ts",  "start",     ".all",    1962,
+  "ts",  "end",       ".all",    1971,
+  "ts",  "frequency", ".all",    4,
+  "ts",  "deltat",    ".all",    0.25,
+  "ts",  "mean",      ".all",    mean(freeny$y),
+  "ts",  "sd",        ".all",    sd(freeny$y),
+  "ts",  "min",       ".all",    8.79137,
+  "ts",  "max",       ".all",    9.79424,
+  "ts",  "median",    ".all",  9.31378
+)
+
+test_that("skim_v returns expected response for ts vectors", {
+  data(freeny)
+  input <- skim_v(freeny$y)
+  expect_identical(input, correct)
+})
+
+
+correct <- tibble::tribble(
+  ~type,       ~stat,       ~level,        ~value,
+  "POSIXct",  "missing",    ".all",               1,
+  "POSIXct", "complete",    ".all",               9,
+  "POSIXct",        "n",    ".all",              10,
+  "POSIXct",      "min",    ".all",         1309478400,
+  "POSIXct",      "max",    ".all",         1309478409,
+  "POSIXct",   "median",    ".all",         1309478405,
+  "POSIXct", "n_unique",    ".all",               9
+)
+
+test_that("skim_v returns expected response for POSIXct vectors", {
+  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
+  dat[2] <- NA
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
