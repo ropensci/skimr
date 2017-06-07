@@ -110,6 +110,15 @@ are supported with skim_v methods and the results are in the skim object.
 We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
 significant digits incorrectly.  
 
+### Windows support for spark histograms
+
+Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
+`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
+the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
+for printing dataframes. These values do show up when printing a data-frame created by 
+`skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+
+
 ## Contributing
 
 We wecome issue reports and pull requests including adding support for different variable classes. 
