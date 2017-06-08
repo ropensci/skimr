@@ -1,3 +1,7 @@
+#' Manages print for skim objects.
+#' 
+#' Currently, numeric, factor and character data are handled.
+#' 
 #' @importFrom dplyr select mutate filter data_frame left_join
 #' @importFrom tidyr gather spread
 #' @export
@@ -71,7 +75,7 @@ formatchars <- function(x) {
 }
 
 #' @export
-print.skim_df <- function(skim_obj) {
+print.skim_df <- function(skim_obj, ...) {
   wide_values <- skim_print(skim_obj)
   
   if (! is.null(wide_values$numeric)) {
