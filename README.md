@@ -82,7 +82,6 @@ View(a)
 
 ## Specify your own statistics
 
-
 ```r
 
  funs <- list(iqr = IQR,
@@ -97,3 +96,28 @@ View(a)
 # 2 numeric quantile   99%   7.7
 
 ```
+
+## Limitations of current version
+
+Currently the print methods are still in early stages of development. Printing is limited to numeric, character,
+and factor data types. Therefore although additional types that are supported by skim() 
+and skim_v() will not display with the default printing.  To view these you may view and manipulate the 
+skim object.
+
+At the moment in addition to the three types with print support complex, logical, Date, POSIXct, and ts classes
+are supported with skim_v methods and the results are in the skim object.
+
+We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
+significant digits incorrectly.  
+
+### Windows support for spark histograms
+
+Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
+`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
+the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
+for printing dataframes. These values do show up when printing a data-frame created by 
+`skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+
+## Contributing
+
+We welcome issue reports and pull requests including adding support for different variable classes.
