@@ -108,3 +108,23 @@ ts_end <- function(x) {
   e <- end(x)
   e <- e[1]
 }
+
+#' Get the length of the shortest list in a vector of lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
+list_min_length <- function(x){
+  l <- lengths(x)
+  min(l)
+}
+
+#' Get the length of the longest list in a vector of lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
+list_max_length <- function(x){
+  l <- lengths(x)
+  max(l)
+}

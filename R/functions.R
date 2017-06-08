@@ -87,6 +87,14 @@ posixct_funs<-list(
   n_unique = purrr::compose(length, n_unique)  
 )
 
+asis_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  min_length= list_min_length,
+  max_length = list_max_length
+)
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,

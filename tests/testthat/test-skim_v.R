@@ -232,3 +232,19 @@ test_that("skim_v returns expected response for POSIXct vectors", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+
+correct <- tibble::tribble(
+  ~type,  ~stat,        ~level,  ~value,
+  "AsIs",  "missing",   ".all",  1,
+  "AsIs",  "complete",  ".all",  3,
+  "AsIs",  "n",         ".all",  4,
+  "AsIs",  "n_unique",  ".all",  3,
+  "AsIs",  "min_length",".all",  1,
+  "AsIs",  "max_length",".all",  6
+)
+
+test_that("skim_v returns expected response for asis vectors", {
+  dat <- l <- I(list(5, 5:6,5:10, NA))
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
