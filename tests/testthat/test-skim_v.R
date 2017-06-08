@@ -244,7 +244,7 @@ correct <- tibble::tribble(
 )
 
 test_that("skim_v returns expected response for asis vectors", {
-  dat <- l <- I(list(5, 5:6,5:10, NA))
+  dat <- I(list(5, 5:6,5:10, NA))
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
