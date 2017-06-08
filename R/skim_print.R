@@ -1,3 +1,7 @@
+#' Manages print for skim objects.
+#' 
+#' Currently, numeric, factor and character data are handled.
+#' 
 #' @importFrom dplyr select mutate filter data_frame left_join
 #' @importFrom tidyr gather spread
 #' @export
