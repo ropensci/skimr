@@ -2,8 +2,10 @@
 #' 
 #' Currently, numeric, factor and character data are handled.
 #' 
+#' @param x A \code{skim_df} object
 #' @importFrom dplyr select mutate filter data_frame left_join
 #' @importFrom tidyr gather spread
+#' @return A \code{skim_df} object
 #' @export
 skim_print <- function(x){
   nums_dt <- x[x$type %in% c("numeric", "double", "integer"),]
