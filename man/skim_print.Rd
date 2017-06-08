@@ -6,6 +6,12 @@
 \usage{
 skim_print(x)
 }
+\arguments{
+\item{x}{A \code{skim_df} object}
+}
+\value{
+A \code{skim_df} object
+}
 \description{
 Currently, numeric, factor and character data are handled.
 }
