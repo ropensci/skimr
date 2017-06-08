@@ -87,6 +87,15 @@ posixct_funs<-list(
   n_unique = purrr::compose(length, n_unique)  
 )
 
+list_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique)
+)
+
+listv_funs <- list_funs
+
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -98,8 +107,11 @@ posixct_funs<-list(
   date = date_funs,
   Date = date_funs,
   ts = ts_funs,
-  POSIXct = posixct_funs
+  POSIXct = posixct_funs,
+  list = list_funs,
+  listv = listv_funs
 )
+
 
 
 # Build environment for storing functions ---------------------------------
