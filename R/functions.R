@@ -106,7 +106,8 @@ asis_funs<-list(
   date = date_funs,
   Date = date_funs,
   ts = ts_funs,
-  POSIXct = posixct_funs
+  POSIXct = posixct_funs,
+  AsIs = asis_funs
 )
 
 
