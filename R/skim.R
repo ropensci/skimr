@@ -3,7 +3,7 @@
 #' @param .data A tbl, or an object that can be coerced into a tbl.
 #' @return A \code{skim_df} object, which can be treated like a
 #'   tbl in most instances.
-#' @importFrom dplyr %>%
+#' @importFrom magrittr %>%
 #' @export
 
 skim <- function(.data) {
