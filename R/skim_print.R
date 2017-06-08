@@ -75,7 +75,7 @@ formatchars <- function(x) {
 }
 
 #' @export
-print.skim_df <- function(skim_obj) {
+print.skim_df <- function(skim_obj, ...) {
   wide_values <- skim_print(skim_obj)
   
   if (! is.null(wide_values$numeric)) {
