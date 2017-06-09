@@ -108,3 +108,41 @@ ts_end <- function(x) {
   e <- end(x)
   e <- e[1]
 }
+
+#' Get the minimum length of the lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
+
+list_lengths_min <- function(x) {
+    x <- x[!is.na(x)]
+    l <- lengths(x)
+    ifelse(length(l) != 0, return(min(l)), return(NA))
+}
+
+#' Get the median length of the lists
+#' 
+#' @param x A vector of list data
+#' @return Median length.
+#' @export
+
+list_lengths_median <- function(x) {
+  x <- x[!is.na(x)]
+  l <- lengths(x)
+  return(median(l))
+
+}
+
+#' Get the maximum length of the lists
+#' 
+#' @param x A vector of list data
+#' @return Maximum length.
+#' @export
+
+list_lengths_max <- function(x) {
+  x <- x[!is.na(x)]
+  l <- lengths(x)
+  ifelse(length(l) != 0, return(max(l)), return(NA))
+}
+

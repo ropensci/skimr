@@ -91,10 +91,13 @@ list_funs<-list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  n_unique = purrr::compose(length, n_unique)
+  n_unique = purrr::compose(length, n_unique),
+  min_length = list_lengths_min,
+  median_length = list_lengths_median,
+  max_length = list_lengths_max
 )
 
-listv_funs <- list_funs
+#listv_funs <- list_funs
 
 .default <- list(
   numeric = numeric_funs,
@@ -108,8 +111,7 @@ listv_funs <- list_funs
   Date = date_funs,
   ts = ts_funs,
   POSIXct = posixct_funs,
-  list = list_funs,
-  listv = listv_funs
+  list = list_funs
 )
 
 
