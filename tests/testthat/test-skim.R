@@ -64,7 +64,7 @@ test_that("Using skim_tee prints out the object", {
 })
 
 test_that("Skimming a grouped data frame works as expected", {
-  correct <- readRDS("skim_output/group_df.RDS")
+  correct <- readRDS("tests/testthat/skim_output/group_df.RDS")
   input <- mtcars %>% 
     dplyr::group_by(cyl, gear) %>% 
     skim()
