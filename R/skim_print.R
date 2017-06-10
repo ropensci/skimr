@@ -9,61 +9,35 @@
 #' @export
 skim_print <- function(x){
  
-  x$stat <- ifelse(x$level %in% c(".all") | x$stat == "hist" | x$stat == "count", x$stat,  paste(x$stat, x$level))
+  x$stat <- ifelse(x$level == ".all" | x$stat == "hist" | x$stat == "count", x$stat,  paste(x$stat, x$level))
   return_list <- list()
   types <- unique(x$type)
-  types_custom <- c("numeric", "double", "integer", "factor", "character")
+  types_custom <- c("numeric", "double", "integer", "factor", "character", "ordered")
   types_other <- subset(types, !types %in% types_custom)
   
-  y <- x %>% filter(type %in%  c("numeric", "double", "integer")) 
-  if  (nrow(y) > 0){
-    order<-unique(y$stat)
-    type <- "Numeric"
-    histograms <- y %>% dplyr::filter(stat == "hist")
-    y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
-    calculated <- c("max",  "mean", "median", "min", "quantile 25%", "quantile 75%", "sd")
-    # Not a real solution
-    y[calculated] <- round(y[calculated], digits = 2)
-    y$hist <- histograms$level
-    
-    y <- y[c("var", order)]
-    return_list[[type]] <- y
-    attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
-  }
-
-  y <- x %>% filter(type == "factor")
-  if  (nrow(y) > 0){
-    type = "Factor"
-    counts <- y %>% dplyr::filter (stat == "count") 
-    counts <- paste(paste(counts$var, counts$level, counts$value, sep = ":"), collapse = " ")
-    
-    y <- y %>% dplyr::filter(stat != "count") %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
-    y <- tibble::add_column(y, counts)
-    return_list[[type]] <- y
-    attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
-  }
-
-  y <- x %>% filter(type == "character")
-  if  (nrow(y) > 0){
-    type = "Character"
-    order<-unique(y$stat)
-    y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
-    y <- y[c("var", order)]
-    return_list[[type]] <- y
-    attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
-  }
-  
-  y <- x %>% filter(type %in% types_other)
-  if (nrow(y) > 0) {
-    for (i in 1:length(types_other)){
-      z <- x %>% filter(type == types_other[i])
-        order<-unique(z$stat)
-        z <- z %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
-        z <- z[c("var", order)]
-        return_list[[types_other[i]]] <- z 
-        attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
+   x_custom <- x %>% filter(type %in%  types_custom)
+   if (nrow(x_custom) > 0){
+    for (i in 1:length(types_custom)){
+        x_custom_type <- x_custom %>% filter(type == types_custom[i])
+        if (nrow(x_custom_type) > 0){
+          p<-print_handling[[types_custom[i]]](x_custom_type)
+          return_list[[types_custom[i]]] <- p
+          attr(return_list[[types_custom[i]]], "subtibble_title") <- paste(types_custom[i], "Variables\n")
+          return_list
+        }
     }
-  }
+   }
+
+   x_other <- x %>% filter(type %in%  types_other)
+   if (nrow(x_other) > 0){
+     for (i in 1:length(types_other)){
+       y <- x_other %>% filter(type == types_other[i])
+       p<-print_handling[["default"]](y)
+       return_list[[types_other[i]]] <- p
+       attr(return_list[[types_other[i]]], "subtibble_title") <- paste(types_other[i], "Variables\n")
+       return_list
+     }
+   }
 
   return(return_list)   
 }
@@ -75,5 +49,55 @@ print.skim_df <- function(x, ...) {
 
 print_results<-function(subtibble){
   cat(attr(subtibble, "subtibble_title"))
-  print(subtibble)
+  print(lucid::lucid(subtibble))
 }
+
+
+# Define the print functions for different classes.
+print_handling <- list(
+
+  numeric = numeric <- function(y){
+  
+    order<-unique(y$stat)
+    type <- "Numeric"
+    histograms <- y %>% dplyr::filter(stat == "hist")
+    y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+    
+    y$hist <- histograms$level
+    
+    y[c("var", order)]
+    # return_list[[type]] <- y
+    # attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
+    # return_list
+  },
+
+  double = double <- numeric,
+  
+  integer = integer <- numeric,
+
+  factor = factor <- function(y){
+  
+      type = "Factor"
+      counts <- y %>% dplyr::filter (stat == "count") 
+      counts <- paste(paste(counts$level, counts$value, sep = ":"), collapse = " ")
+      
+      y <- y %>% dplyr::filter(stat != "count") %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      y <- tibble::add_column(y, counts)
+      y
+  },
+
+  ordered = ordered <- factor,
+
+  character = character<-function(y){
+      type = "Character"
+      order<-unique(y$stat)
+      y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      y[c("var", order)]
+  },
+
+  default = default<-function(y){
+      order<-unique(y$stat)
+      z <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      z[c("var", order)]
+  }
+)
