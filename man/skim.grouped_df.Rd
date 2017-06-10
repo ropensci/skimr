@@ -2,20 +2,20 @@
 % Please edit documentation in R/skim.R
 \name{skim.grouped_df}
 \alias{skim.grouped_df}
-\title{Title}
+\title{Skim function for grouped date}
 \usage{
 \method{skim}{grouped_df}(.data)
 }
 \arguments{
-\item{.data}{}
+\item{.data}{A grouped tbl, or an object that can be coerced into a tbl.}
 }
 \value{
-A grouped data frame
+A grouped skim_df data frame
 }
 \description{
-Title
+Skim function for grouped date
 }
 \examples{
-mtcars \%>\% group_by(cyl, gear) \%>\% skim()
+mtcars \%>\% dplyr::group_by(cyl, gear) \%>\% skim()
 
 }
