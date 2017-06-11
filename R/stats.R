@@ -25,17 +25,19 @@ n_complete <- function(x) {
 #' Generate inline histgram for numeric variables
 #' 
 #' @param x A vector
-#' @return A character string of histogram.
+#' @return A A numeric value of 0 with a name that is a character string of histogram.
 #' @export
 
 inline_hist <- function(x) {
   x <- x[!is.na(x)]
   out <- 0
-  if ( !all(x == 0)) {
+  if ( !all(x == 0) & length(x) != 0) {
     hist_dt <- table(cut(x, 10))
     hist_dt <- hist_dt / max(hist_dt)
     names(out) <- colformat::spark_bar(hist_dt)
+    return(out)
   }
+  names(out) <- ""
   return(out)
 }
 
@@ -107,4 +109,23 @@ ts_start <- function(x) {
 ts_end <- function(x) {
   e <- end(x)
   e <- e[1]
+}
+
+#' Generate inline line graph for time series variables
+#' 
+#' @param x A vector
+#' @return A numeric value of 0 with a name that is a character string of histogram.
+#' @export
+
+inline_linegraph <- function(x) {
+  x <- x[!is.na(x)]
+  out <- 0 
+  if ( length(x) != 0) {
+      # Values must be between 0 and 1.
+      x <- (x - min(x))/(max(x) - min(x))
+      names(out) <- suppressWarnings(colformat::spark_line(x))
+      return(out)
+    }  
+  names(out) <- ""
+  return(out)
 }

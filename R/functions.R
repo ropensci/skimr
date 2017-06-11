@@ -74,7 +74,8 @@ ts_funs <- list(
   sd = purrr::partial(sd, na.rm = TRUE),
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE)
+  median = purrr::partial(median, na.rm = TRUE),
+  line_graph  = inline_linegraph
 )
 
 posixct_funs<-list(
