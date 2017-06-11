@@ -2,7 +2,7 @@
 % Please edit documentation in R/stats.R
 \name{max_char}
 \alias{max_char}
-\title{Calculate the minimum number of characters within a character vector}
+\title{Calculate the maximum number of characters within a character vector}
 \usage{
 max_char(x)
 }
@@ -13,5 +13,5 @@ max_char(x)
 The min of calling nchar(x).
 }
 \description{
-Calculate the minimum number of characters within a character vector
+Calculate the maximum number of characters within a character vector
 }

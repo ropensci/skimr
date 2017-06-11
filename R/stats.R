@@ -22,7 +22,7 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
-#' Generate inline histgram for numeric variables
+#' Generate inline histogram for numeric variables
 #' 
 #' @param x A vector
 #' @return A character string of histogram.
@@ -65,7 +65,7 @@ min_char <- function(x) {
 }
 
 
-#' Calculate the minimum number of characters within a character vector
+#' Calculate the maximum number of characters within a character vector
 #' 
 #' @param x A vector
 #' @return The min of calling nchar(x).
