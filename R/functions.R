@@ -181,5 +181,5 @@ get_funs <- function(type) {
 get_fun_names <- function(type) {
   all <- functions$current[type]
   id <- purrr::detect_index(all, purrr::compose(`!`, is.null))
-  names(all)
+  names(all)[id]
 }

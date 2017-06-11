@@ -211,6 +211,7 @@ test_that("skim_v handles objects with two unknown classes", {
   data("chickwts")
   class(chickwts$feed) <- c("strange", "stranger")
   input<-skim_v(chickwts$feed)
+  expect_identical(input, correct)
 })
 
 # Expected response for ts  ---------------------------------------    
