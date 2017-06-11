@@ -94,7 +94,7 @@ n_unique <- function(x) {
 #' @export
 
 ts_start <- function(x) {
-  s <- start(x)
+  s <- stats::start(x)
   s <- s[1]
 }
 
@@ -105,6 +105,6 @@ ts_start <- function(x) {
 #' @export
 
 ts_end <- function(x) {
-  e <- end(x)
+  e <- stats::end(x)
   e <- e[1]
 }
