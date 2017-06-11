@@ -15,7 +15,7 @@ skim_print <- function(x){
   types_custom <- c("numeric", "double", "integer", "factor", "character", "ordered")
 
   for (i in 1:length(types)){
-    one_type <- x %>% filter(type == types[i])
+    one_type <- x %>% dplyr::filter_(~type == types[i])
     if (nrow(one_type) > 0){
       if (types[i] %in% types_custom){
         p <- print_handling[[types[i]]](one_type)
@@ -50,9 +50,9 @@ print_handling <- list(
   numeric = numeric <- function(y){
   
     order<-unique(y$stat)
-    type <- "Numeric"
-    histograms <- y %>% dplyr::filter(stat == "hist")
-    y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+    histograms <- y %>% dplyr::filter_(~stat == "hist")
+    y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
+            tidyr::spread_( key_col = 'stat', value_col = 'value')
     y$hist <- histograms$level
 
     y[c("var", order)]
@@ -64,11 +64,12 @@ print_handling <- list(
 
   factor = factor <- function(y){
   
-      type = "Factor"
-      counts <- y %>% dplyr::filter (stat == "count") 
+      counts <- y %>% dplyr::filter_ (~stat == "count") 
       counts <- paste(paste(counts$level, counts$value, sep = ":"), collapse = " ")
       
-      y <- y %>% dplyr::filter(stat != "count") %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      y <- y %>% dplyr::filter_(~stat != "count") %>% 
+            dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
+            tidyr::spread_( key_col = 'stat', value_col = 'value')
       y <- tibble::add_column(y, counts)
       y
   },
@@ -76,15 +77,17 @@ print_handling <- list(
   ordered = ordered <- factor,
 
   character = character<-function(y){
-      type = "Character"
       order<-unique(y$stat)
-      y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
+        tidyr::spread_( key_col = 'stat', value_col = 'value')
+
       y[c("var", order)]
   },
 
   default = default<-function(y){
       order<-unique(y$stat)
-      z <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+      z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
+            tidyr::spread_( key_col = 'stat', value_col = 'value')
 
       z[c("var", order)]
   }
