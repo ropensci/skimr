@@ -24,7 +24,8 @@ skim_print <- function(x){
       }
       
       return_list[[types[i]]] <- p
-      attr(return_list[[types[i]]], "subtibble_title") <- paste(types[i], "Variables\n")
+      attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables\n")
+      return_list
     }
   }  
   
@@ -52,13 +53,9 @@ print_handling <- list(
     type <- "Numeric"
     histograms <- y %>% dplyr::filter(stat == "hist")
     y <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
-    
     y$hist <- histograms$level
-    
+
     y[c("var", order)]
-    # return_list[[type]] <- y
-    # attr(return_list[[type]], "subtibble_title") <- paste(type, "Variables\n")
-    # return_list
   },
 
   double = double <- numeric,
@@ -86,8 +83,10 @@ print_handling <- list(
   },
 
   default = default<-function(y){
+      type <- stringr::str_to_title(y$type[1])
       order<-unique(y$stat)
       z <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
+
       z[c("var", order)]
   }
 )
