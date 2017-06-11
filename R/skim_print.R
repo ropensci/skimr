@@ -83,7 +83,6 @@ print_handling <- list(
   },
 
   default = default<-function(y){
-      type <- stringr::str_to_title(y$type[1])
       order<-unique(y$stat)
       z <- y %>% dplyr::select(var, stat, value) %>% tidyr::spread( stat, value)
 

@@ -20,7 +20,8 @@ Imports:
     magrittr,
     tibble (>= 0.6),
     colformat,
-    lucid
+    lucid,
+    stringr
 Remotes:
     hadley/colformat
 Suggests:
