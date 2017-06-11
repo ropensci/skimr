@@ -19,7 +19,8 @@ Imports:
     purrr,
     magrittr,
     tibble (>= 0.6),
-    colformat
+    colformat,
+    lucid
 Remotes:
     hadley/colformat
 Suggests:

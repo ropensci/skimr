@@ -13,32 +13,21 @@ skim_print <- function(x){
   return_list <- list()
   types <- unique(x$type)
   types_custom <- c("numeric", "double", "integer", "factor", "character", "ordered")
-  types_other <- subset(types, !types %in% types_custom)
-  
-   x_custom <- x %>% filter(type %in%  types_custom)
-   if (nrow(x_custom) > 0){
-    for (i in 1:length(types_custom)){
-        x_custom_type <- x_custom %>% filter(type == types_custom[i])
-        if (nrow(x_custom_type) > 0){
-          p<-print_handling[[types_custom[i]]](x_custom_type)
-          return_list[[types_custom[i]]] <- p
-          attr(return_list[[types_custom[i]]], "subtibble_title") <- paste(types_custom[i], "Variables\n")
-          return_list
-        }
+
+  for (i in 1:length(types)){
+    one_type <- x %>% filter(type == types[i])
+    if (nrow(one_type) > 0){
+      if (types[i] %in% types_custom){
+        p <- print_handling[[types[i]]](one_type)
+      } else {
+        p <- print_handling[["default"]](one_type)
+      }
+      
+      return_list[[types[i]]] <- p
+      attr(return_list[[types[i]]], "subtibble_title") <- paste(types[i], "Variables\n")
     }
-   }
-
-   x_other <- x %>% filter(type %in%  types_other)
-   if (nrow(x_other) > 0){
-     for (i in 1:length(types_other)){
-       y <- x_other %>% filter(type == types_other[i])
-       p<-print_handling[["default"]](y)
-       return_list[[types_other[i]]] <- p
-       attr(return_list[[types_other[i]]], "subtibble_title") <- paste(types_other[i], "Variables\n")
-       return_list
-     }
-   }
-
+  }  
+  
   return(return_list)   
 }
 
@@ -49,6 +38,7 @@ print.skim_df <- function(x, ...) {
 
 print_results<-function(subtibble){
   cat(attr(subtibble, "subtibble_title"))
+  
   print(lucid::lucid(subtibble))
 }
 
