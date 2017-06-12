@@ -21,7 +21,8 @@ Imports:
     tibble (>= 0.6),
     colformat,
     lucid,
-    stringr
+    stringr,
+    stats
 Remotes:
     hadley/colformat
 Suggests:
