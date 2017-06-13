@@ -83,6 +83,7 @@ correct <- tibble::tribble(
 ~var,   ~missing, ~complete,  ~n,  ~mean,  ~sd,              ~min,  ~median,  ~`quantile 25%`,~`quantile 75%`,~max, ~hist,
 "conc",  0,        84,        84,    435,  sd(CO2$conc), 95,     350,     175,            675,            1000, "▇▃▃▁▃▁▃▁▁▃"
 )
+correct_integer <- correct
 test_that("print_handling() returns expected response for integer vectors", {
   input <- print_handling$integer(skim_object[skim_object$type == "integer",])
   expect_identical(input, correct)
@@ -91,6 +92,18 @@ attr(correct, "subtibble_title") <- "Integer Variables\n"
 test_that("print_handling() returns expected response for integer vectors", {
   input <- sk_print_object[["integer"]]
   expect_identical(input, correct)
+})
+
+CO2$conc <- as.numeric(CO2$conc)
+test_df <- CO2[c("conc", "Plant")]
+skim_object3 <- skim(test_df)
+# We need to this modification that happens in skim_print() to successfully run print_handling(). 
+skim_object3$stat <- ifelse(skim_object3$level == ".all" | skim_object3$stat == "hist" | skim_object3$stat == "count",  skim_object3$stat,  paste(skim_object3$stat, skim_object3$level))
+skim_print_object3 <- skim_print(skim_object3)
+
+test_that("print_handling() returns the same tibble response for integer and numeric vectors", {
+  input <- print_handling$integer(skim_object3[skim_object3$type == "numeric",])
+  expect_identical(input, correct_integer)
 })
 
 #---- Ts (example of a type with no custom method)
