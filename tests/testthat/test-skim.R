@@ -66,12 +66,12 @@ test_that("Using skim_tee prints out the object", {
 test_that("Skimming a grouped data frame works as expected", {
   sysfile <- system.file("test/testthat/skim_output/","group_df.RDS",  package="skimr")
   if (sysfile == ""){
-    correct <- readRDS(paste0(getwd(),"/tests/testthat/skim_output/group_df.RDS"))
+    correct <- readRDS(paste0(getwd(),"/skim_output/group_df.RDS"))
   } else {
     correct <- readRDS(sysfile)
   }
   input <- mtcars %>% 
     dplyr::group_by(cyl, gear) %>% 
     skim()
-  expect_identical(input, correct)
+  expect_equal(input, correct)
 })

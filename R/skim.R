@@ -70,7 +70,6 @@ skim.grouped_df <- function(.data){
 #' @return
 #' A data frame with the grouping variables in new columns
 #'
-#' @examples
 append_group_vars <- function(df, val, groups){
   group_val <- dplyr::data_frame(x = val) %>% 
     t() %>% 
