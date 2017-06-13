@@ -9,7 +9,9 @@ append_group_vars(df, val, groups)
 \arguments{
 \item{df}{A \code{skim_df}}
 
-\item{groups}{The grouping variables of the data frame to be summarized}
+\item{val}{The group value}
+
+\item{groups}{The grouping variables of the data frame to be modified}
 }
 \value{
 A data frame with the grouping variables in new columns

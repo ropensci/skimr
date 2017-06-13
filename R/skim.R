@@ -30,16 +30,16 @@ skim.data.frame <- function(.data) {
   return(structure(combined, class = c("skim_df", class(combined))))
 }
 
-#' Title
+#' Skim function for grouped date
 #'
-#' @param .data 
+#' @param .data A grouped tbl, or an object that can be coerced into a tbl. 
 #'
 #' @return
-#' A grouped data frame
+#' A grouped skim_df data frame
 #' @export
 #'
 #' @examples
-#' mtcars %>% group_by(cyl, gear) %>% skim()
+#' mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
 #' 
 skim.grouped_df <- function(.data){
   nested_df <- .data %>%   
@@ -62,8 +62,10 @@ skim.grouped_df <- function(.data){
 #'
 #' @param df 
 #' A \code{skim_df}
+#' @param val
+#' The group value
 #' @param groups 
-#' The grouping variables of the data frame to be summarized
+#' The grouping variables of the data frame to be modified
 #'
 #' @return
 #' A data frame with the grouping variables in new columns
