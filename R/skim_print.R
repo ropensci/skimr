@@ -43,7 +43,7 @@ print_results<-function(subtibble){
   print(lucid::lucid(subtibble))
 }
 
-# nocov start
+
 # Define the print functions for different classes.
 print_handling <- list(
 
@@ -93,4 +93,4 @@ print_handling <- list(
   }
 
 )
-# nocov end
+
