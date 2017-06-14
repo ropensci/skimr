@@ -18,9 +18,9 @@ skim_print <- function(x){
     one_type <- x %>% dplyr::filter_(~type == types[i])
     if (nrow(one_type) > 0){
       if (types[i] %in% types_custom){
-        p <- print_handling[[types[i]]](one_type)
+        p <- print_handling[[paste0("sk_print_",types[i])]](one_type)
       } else {
-        p <- print_handling[["default"]](one_type)
+        p <- print_handling[["sk_print_default"]](one_type)
       }
       
       return_list[[types[i]]] <- p
@@ -46,8 +46,8 @@ print_results<-function(subtibble){
 
 # Define the print functions for different classes.
 print_handling <- list(
-
-  numeric = numeric <- function(y){
+  # nocov start
+  sk_print_numeric = sk_print_numeric <- function(y){
   
     order<-unique(y$stat)
     histograms <- y %>% dplyr::filter_(~stat == "hist")
@@ -58,11 +58,11 @@ print_handling <- list(
     y[c("var", order)]
   },
 
-  double = double <- numeric,
+  sk_print_double = sk_print_double <- sk_print_numeric,
   
-  integer = integer <- numeric,
+  sk_print_integer = sk_print_integer <- sk_print_numeric,
 
-  factor = factor <- function(y){
+  sk_print_factor = sk_print_factor <- function(y){
   
       counts <- y %>% dplyr::filter_ (~stat == "count") 
       counts <- paste(paste(counts$level, counts$value, sep = ":"), collapse = " ")
@@ -74,9 +74,9 @@ print_handling <- list(
       y
   },
 
-  ordered = ordered <- factor,
+  sk_print_ordered = sk_print_ordered <- sk_print_factor,
 
-  character = character<-function(y){
+  sk_print_character = sk_print_character<-function(y){
       order<-unique(y$stat)
       y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
         tidyr::spread_( key_col = 'stat', value_col = 'value')
@@ -84,11 +84,13 @@ print_handling <- list(
       y[c("var", order)]
   },
 
-  default = default<-function(y){
+  sk_print_default = sk_print_default<-function(y){
       order<-unique(y$stat)
-      z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
+      z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>%
             tidyr::spread_( key_col = 'stat', value_col = 'value')
 
       z[c("var", order)]
   }
+  # nocov end
 )
+
