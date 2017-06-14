@@ -43,10 +43,10 @@ print_results<-function(subtibble){
   print(lucid::lucid(subtibble))
 }
 
-
+# nocov start
 # Define the print functions for different classes.
 print_handling <- list(
-  # nocov start
+
   sk_print_numeric = sk_print_numeric <- function(y){
   
     order<-unique(y$stat)
@@ -91,6 +91,6 @@ print_handling <- list(
 
       z[c("var", order)]
   }
-  # nocov end
-)
 
+)
+# nocov end
