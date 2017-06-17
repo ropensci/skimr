@@ -37,6 +37,7 @@ correct <- tibble::tribble(
   "factor",   "n_unique",    ".all",  3)
 
 test_that("skim_v returns expected response for factor vectors", {
+  data(iris)
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
@@ -55,7 +56,29 @@ correct <- tibble::tribble(
   "factor",   "n_unique",    ".all",  3)
 
 test_that("skim_v handles factors when NAs are present", {
+  data(iris)
   iris$Species[15:18] <- NA 
+  input <- skim_v(iris$Species)
+  expect_identical(input, correct)
+})
+
+## Expected response for iris Species with ordered factor ----------------------------------------
+
+correct <- tibble::tribble(
+  ~type,          ~stat,     ~level,  ~value,
+  "ordered",  "missing",      ".all",  0,
+  "ordered", "complete",      ".all",  150,
+  "ordered",        "n",      ".all",  150,
+  "ordered",    "count",    "setosa",  50,
+  "ordered",    "count","versicolor",  50,
+  "ordered",    "count", "virginica",  50,
+  "ordered",    "count",          NA,  0,
+  "ordered",   "n_unique",    ".all",  3)
+
+
+test_that("skim_v handles ordered  factors", {
+  data(iris)
+  iris$Species <- ordered(iris$Species, levels=c("setosa", "versicolor", "virginica"))
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
