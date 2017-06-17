@@ -1,6 +1,8 @@
-#' Manages print for skim objects.
+#' @include print_handlers.R
+
+#' @title skim_print
 #' 
-#' Currently, numeric, factor and character data are handled.
+#' @description Manages print for skim objects.
 #' 
 #' @param x A \code{skim_df} object
 #' @importFrom dplyr select mutate filter data_frame left_join
@@ -47,50 +49,19 @@ print_results<-function(subtibble){
 # Define the print functions for different classes.
 print_handling <- list(
 
-  sk_print_numeric = sk_print_numeric <- function(y){
-  
-    order<-unique(y$stat)
-    histograms <- y %>% dplyr::filter_(~stat == "hist")
-    y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-            tidyr::spread_( key_col = 'stat', value_col = 'value')
-    y$hist <- histograms$level
-
-    y[c("var", order)]
-  },
+  sk_print_numeric = sk_print_numeric,
 
   sk_print_double = sk_print_double <- sk_print_numeric,
   
   sk_print_integer = sk_print_integer <- sk_print_numeric,
 
-  sk_print_factor = sk_print_factor <- function(y){
-  
-      counts <- y %>% dplyr::filter_ (~stat == "count") 
-      counts <- paste(paste(counts$level, counts$value, sep = ":"), collapse = " ")
-      
-      y <- y %>% dplyr::filter_(~stat != "count") %>% 
-            dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-            tidyr::spread_( key_col = 'stat', value_col = 'value')
-      y <- tibble::add_column(y, counts)
-      y
-  },
+  sk_print_factor = sk_print_factor,
 
-  sk_print_ordered = sk_print_ordered <- sk_print_factor,
+  sk_print_ordered = sk_print_factor,
 
-  sk_print_character = sk_print_character<-function(y){
-      order<-unique(y$stat)
-      y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-        tidyr::spread_( key_col = 'stat', value_col = 'value')
+  sk_print_character = sk_print_character,
 
-      y[c("var", order)]
-  },
-
-  sk_print_default = sk_print_default<-function(y){
-      order<-unique(y$stat)
-      z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>%
-            tidyr::spread_( key_col = 'stat', value_col = 'value')
-
-      z[c("var", order)]
-  }
+  sk_print_default = sk_print_default
 
 )
 

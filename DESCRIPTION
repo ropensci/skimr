@@ -38,6 +38,7 @@ RoxygenNote: 6.0.1
 Collate: 
     'stats.R'
     'functions.R'
+    'print_handlers.R'
     'skim.R'
     'skim_print.R'
     'skim_v.R'

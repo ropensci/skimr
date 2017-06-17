@@ -12,7 +12,6 @@ skim_object$stat <- ifelse(skim_object$level == ".all" | skim_object$stat == "hi
 correct <- tibble::tribble(
   ~var,   ~complete, ~missing, ~n,  ~n_unique, ~counts,
   "Plant", 84,        0,       84,  12,        "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0"
-  
 )
 
 test_that("print_handling() returns expected response for ordered factor vectors", {
@@ -34,7 +33,7 @@ correct <- tibble::tribble(
 )
 
 test_that("print_handling() returns expected response for factor vectors", {
-  input <- print_handling$sk_print_factor(skim_object[skim_object$type == "factor",])
+  input <- sk_print_factor(skim_object[skim_object$type == "factor",])
   expect_identical(input, correct)
 })
 
@@ -53,7 +52,7 @@ correct <- tibble::tribble(
 )
 
 test_that("print_handling() returns expected response for numeric vectors", {
-  input <- print_handling$sk_print_numeric(skim_object[skim_object$type == "numeric",])
+  input <- sk_print_numeric(skim_object[skim_object$type == "numeric",])
   expect_identical(input, correct)
 })
 
@@ -69,7 +68,7 @@ correct <- tibble::tribble(
   "Type",  0,        84,         84,  6,    11,    0,       2
 )
 test_that("print_handling() returns expected response for character vectors", {
-  input <- print_handling$sk_print_character(skim_object[skim_object$type == "character",])
+  input <- sk_print_character(skim_object[skim_object$type == "character",])
   expect_identical(input, correct)
 })
 attr(correct, "subtibble_title") <- "Character Variables\n"
@@ -85,7 +84,7 @@ correct <- tibble::tribble(
 )
 correct_integer <- correct
 test_that("print_handling() returns expected response for integer vectors", {
-  input <- print_handling$sk_print_integer(skim_object[skim_object$type == "integer",])
+  input <- sk_print_integer(skim_object[skim_object$type == "integer",])
   expect_identical(input, correct)
 })
 attr(correct, "subtibble_title") <- "Integer Variables\n"
