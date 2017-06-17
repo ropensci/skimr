@@ -22,7 +22,7 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
-#' Generate inline histgram for numeric variables
+#' Generate inline histogram for numeric variables
 #' 
 #' @param x A vector
 #' @return A character string of histogram.
@@ -65,7 +65,7 @@ min_char <- function(x) {
 }
 
 
-#' Calculate the minimum number of characters within a character vector
+#' Calculate the maximum number of characters within a character vector
 #' 
 #' @param x A vector
 #' @return The min of calling nchar(x).
@@ -94,7 +94,7 @@ n_unique <- function(x) {
 #' @export
 
 ts_start <- function(x) {
-  s <- start(x)
+  s <- stats::start(x)
   s <- s[1]
 }
 
@@ -105,11 +105,11 @@ ts_start <- function(x) {
 #' @export
 
 ts_end <- function(x) {
-  e <- end(x)
+  e <- stats::end(x)
   e <- e[1]
 }
 
-#' Get the minimum length of the lists
+#' Get the length of the shortest list in a vector of lists
 #' 
 #' @param x A vector of list data
 #' @return Minimum length.
@@ -144,5 +144,25 @@ list_lengths_max <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
   ifelse(length(l) != 0, return(max(l)), return(NA))
+}
+
+#' Get the length of the shortest list in a vector of lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
+list_min_length <- function(x){
+  l <- lengths(x)
+  min(l)
+}
+
+#' Get the length of the longest list in a vector of lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
+list_max_length <- function(x){
+  l <- lengths(x)
+  max(l)
 }
 
