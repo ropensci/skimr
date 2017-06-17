@@ -117,7 +117,7 @@ correct <- tibble::tribble(
   "y",    0,         39,        39,   1962,    1971,  4,           0.25,     mean(freeny$y), sd(freeny$y), 8.79137, 9.79424, 9.31378
 )
 test_that("print_handling() returns expected response for ts vectors", {
-  input <- print_handling$sk_print_default(skim_object2[skim_object2$type == "ts",])
+  input <- sk_print_default(skim_object2[skim_object2$type == "ts",])
   expect_identical(input, correct)
 })
 attr(correct, "subtibble_title") <- "Ts Variables\n"
