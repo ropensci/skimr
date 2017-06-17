@@ -83,8 +83,8 @@ max_char <- function(x) {
 #' @export
 
 n_unique <- function(x) {
-  un <- unique(x)
-  un[!is.na(un)]
+  un <- x[!is.na(x)]
+  un <- unique(un)
   length(un)
 }
 
