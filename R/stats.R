@@ -25,17 +25,19 @@ n_complete <- function(x) {
 #' Generate inline histogram for numeric variables
 #' 
 #' @param x A vector
-#' @return A character string of histogram.
+#' @return A A numeric value of 0 with a name that is a character string of histogram.
 #' @export
 
 inline_hist <- function(x) {
   x <- x[!is.na(x)]
   out <- 0
-  if ( !all(x == 0)) {
+  if ( !all(x == 0) & length(x) != 0) {
     hist_dt <- table(cut(x, 10))
     hist_dt <- hist_dt / max(hist_dt)
     names(out) <- colformat::spark_bar(hist_dt)
+    return(out)
   }
+  names(out) <- ""
   return(out)
 }
 
@@ -107,6 +109,32 @@ ts_start <- function(x) {
 ts_end <- function(x) {
   e <- stats::end(x)
   e <- e[1]
+}
+
+
+#' Generate inline line graph for time series variables
+#' 
+#' @param x A vector
+#' @return A numeric value of 0 with a name that is a character string of histogram.
+#' @export
+
+inline_linegraph <- function(x) {
+  t <- x[!is.na(x)]
+  out <- 0 
+  if (length(t) == 0 ){
+    names(out) <- ""
+    return(out)    
+  }
+  if (length(t) > 39){
+    shrink_factor <-ceiling(length(t)/40)
+    t <- t[seq(1, length(t), shrink_factor) ]
+  }
+
+  # Values must be between 0 and 1.
+  t <- (t - min(t))/(max(t) - min(t))
+  names(out) <- suppressWarnings(colformat::spark_line(t))
+  return(out)
+
 }
 
 #' Get the length of the shortest list in a vector of lists

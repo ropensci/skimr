@@ -10,7 +10,7 @@ inline_hist(x)
 \item{x}{A vector}
 }
 \value{
-A character string of histogram.
+A A numeric value of 0 with a name that is a character string of histogram.
 }
 \description{
 Generate inline histogram for numeric variables
