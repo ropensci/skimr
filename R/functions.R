@@ -68,8 +68,8 @@ ts_funs <- list(
   n = length,
   start = ts_start,
   end = ts_end,
-  frequency = frequency,
-  deltat = deltat,
+  frequency = stats::frequency,
+  deltat = stats::deltat,
   mean = purrr::partial(mean, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
   min = purrr::partial(min, na.rm = TRUE),
@@ -88,6 +88,14 @@ posixct_funs<-list(
   n_unique = purrr::compose(length, n_unique)  
 )
 
+asis_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  min_length= list_min_length,
+  max_length = list_max_length
+)
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -99,7 +107,8 @@ posixct_funs<-list(
   date = date_funs,
   Date = date_funs,
   ts = ts_funs,
-  POSIXct = posixct_funs
+  POSIXct = posixct_funs,
+  AsIs = asis_funs
 )
 
 

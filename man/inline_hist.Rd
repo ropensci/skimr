@@ -2,7 +2,7 @@
 % Please edit documentation in R/stats.R
 \name{inline_hist}
 \alias{inline_hist}
-\title{Generate inline histgram for numeric variables}
+\title{Generate inline histogram for numeric variables}
 \usage{
 inline_hist(x)
 }
@@ -13,5 +13,5 @@ inline_hist(x)
 A A numeric value of 0 with a name that is a character string of histogram.
 }
 \description{
-Generate inline histgram for numeric variables
+Generate inline histogram for numeric variables
 }
