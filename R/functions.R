@@ -87,6 +87,7 @@ posixct_funs<-list(
   n_unique = purrr::compose(length, n_unique)  
 )
 
+
 asis_funs<-list(
   missing = n_missing,
   complete = n_complete,
@@ -95,6 +96,17 @@ asis_funs<-list(
   min_length= list_min_length,
   max_length = list_max_length
 )
+
+list_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  min_length = list_lengths_min,
+  median_length = list_lengths_median,
+  max_length = list_lengths_max
+)
+
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -107,8 +119,10 @@ asis_funs<-list(
   Date = date_funs,
   ts = ts_funs,
   POSIXct = posixct_funs,
+  list = list_funs,
   AsIs = asis_funs
 )
+
 
 
 # Build environment for storing functions ---------------------------------
