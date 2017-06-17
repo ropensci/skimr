@@ -256,6 +256,41 @@ test_that("skim_v returns expected response for POSIXct vectors", {
   expect_identical(input, correct)
 })
 
+correct <- tibble::tribble (
+  ~type,    ~stat,           ~level,  ~value,
+  "list",   "missing",        ".all",  1,
+  "list",   "complete",       ".all",  5,
+  "list",   "n",              ".all",  6,
+  "list",   "n_unique",       ".all",  5,
+  "list",   "min_length",     ".all",  1,
+  "list",   "median_length",  ".all",  3,
+  "list",   "max_length",     ".all",  4
+)
+
+test_that("skim_v returns expected response for list (not AsIs) vectors", {
+  dat <- list( list("a", "b", "c"), list("d", "b", "d"), list("e", "f", "g"), d <- list("h"), 
+               e <- list("i", "j", "k", "l"), f <- NA)
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
+correct <- tibble::tribble (
+  ~type,    ~stat,           ~level,  ~value,
+  "list",   "missing",       ".all",   3,
+  "list",   "complete",      ".all",   0,
+  "list",   "n",             ".all",   3,
+  "list",   "n_unique",      ".all",   0,
+  "list",   "min_length",    ".all",   NA,
+  "list",   "median_length", ".all",   NA,
+  "list",   "max_length",    ".all",   NA
+)
+
+test_that("skim_v returns expected response for list (not AsIs) vectors that is all NA", {
+  dat <- c(list(NA), list(NA), list(NA))
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+
 correct <- tibble::tribble(
   ~type,  ~stat,        ~level,  ~value,
   "AsIs",  "missing",   ".all",  1,
@@ -271,3 +306,4 @@ test_that("skim_v returns expected response for asis vectors", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+

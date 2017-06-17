@@ -136,6 +136,43 @@ inline_linegraph <- function(x) {
 #' @param x A vector of list data
 #' @return Minimum length.
 #' @export
+
+list_lengths_min <- function(x) {
+    x <- x[!is.na(x)]
+    l <- lengths(x)
+    ifelse(length(l) != 0, return(min(l)), return(NA))
+}
+
+#' Get the median length of the lists
+#' 
+#' @param x A vector of list data
+#' @return Median length.
+#' @export
+
+list_lengths_median <- function(x) {
+  x <- x[!is.na(x)]
+  l <- lengths(x)
+  return(median(l))
+
+}
+
+#' Get the maximum length of the lists
+#' 
+#' @param x A vector of list data
+#' @return Maximum length.
+#' @export
+
+list_lengths_max <- function(x) {
+  x <- x[!is.na(x)]
+  l <- lengths(x)
+  ifelse(length(l) != 0, return(max(l)), return(NA))
+}
+
+#' Get the length of the shortest list in a vector of lists
+#' 
+#' @param x A vector of list data
+#' @return Minimum length.
+#' @export
 list_min_length <- function(x){
   l <- lengths(x)
   min(l)
@@ -150,3 +187,4 @@ list_max_length <- function(x){
   l <- lengths(x)
   max(l)
 }
+
