@@ -85,6 +85,7 @@ max_char <- function(x) {
 n_unique <- function(x) {
   un <- unique(x)
   un[!is.na(un)]
+  length(un)
 }
 
 #' Get the start for a time series without the frequency
