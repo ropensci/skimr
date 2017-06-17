@@ -119,16 +119,22 @@ ts_end <- function(x) {
 #' @export
 
 inline_linegraph <- function(x) {
-  x <- x[!is.na(x)]
+  t <- x[!is.na(x)]
   out <- 0 
-  if ( length(x) != 0) {
-      # Values must be between 0 and 1.
-      x <- (x - min(x))/(max(x) - min(x))
-      names(out) <- suppressWarnings(colformat::spark_line(x))
-      return(out)
-    }  
-  names(out) <- ""
+  if (length(t) == 0 ){
+    names(out) <- ""
+    return(out)    
+  }
+  if (length(t) > 39){
+    shrink_factor <-ceiling(length(t)/40)
+    t <- t[seq(1, length(t), shrink_factor) ]
+  }
+
+  # Values must be between 0 and 1.
+  t <- (t - min(t))/(max(t) - min(t))
+  names(out) <- suppressWarnings(colformat::spark_line(t))
   return(out)
+
 }
 
 #' Get the length of the shortest list in a vector of lists

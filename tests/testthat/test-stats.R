@@ -11,6 +11,17 @@ test_that("inline_linegraph returns expected response for a ts vector", {
   expect_identical(input, correct)
 })
 
+# Expected response for AirPassengers y inline_linegraph ----------------------------------------
+
+correct <- 0
+names(correct) <- "⣀⣀⣀⣀⣀⣀⡠⢄⠤⠤⠢⠒⠒⠒⠒⠊⠉⠉"
+
+test_that("inline_linegraph returns expected response for a ts vector of length > 30. Should be shortened.", {
+  data("freeny")
+  input <- inline_linegraph(AirPassengers)
+  expect_identical(input, correct)
+})
+
 # Expected response for freeny y inline_linegraph where values are all NA--------------------------
 correct <- 0
 names(correct) <- ""
