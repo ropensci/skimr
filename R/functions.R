@@ -22,7 +22,7 @@ factor_funs <- list(
   complete = n_complete,
   n = length,
   count = purrr::partial(table, useNA = "always"),
-  n_unique = purrr::compose(length, levels)
+  n_unique = n_unique
 )
 
 character_funs <- list (
@@ -32,7 +32,7 @@ character_funs <- list (
   min = min_char,
   max = max_char,
   empty = n_empty,
-  n_unique = purrr::compose(length, n_unique)
+  n_unique = n_unique
 )
 
 logical_funs <- list(
@@ -59,7 +59,7 @@ date_funs <- list(
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
   median = purrr::partial(median, na.rm = TRUE),
-  n_unique = purrr::compose(length, n_unique)
+  n_unique = n_unique
 )
 
 ts_funs <- list(
@@ -85,7 +85,7 @@ posixct_funs<-list(
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
   median = purrr::partial(median, na.rm = TRUE),
-  n_unique = purrr::compose(length, n_unique)  
+  n_unique = n_unique 
 )
 
 
@@ -93,7 +93,7 @@ asis_funs<-list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  n_unique = purrr::compose(length, n_unique),
+  n_unique = n_unique,
   min_length= list_min_length,
   max_length = list_max_length
 )
@@ -102,7 +102,7 @@ list_funs<-list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  n_unique = purrr::compose(length, n_unique),
+  n_unique = n_unique,
   min_length = list_lengths_min,
   median_length = list_lengths_median,
   max_length = list_lengths_max
