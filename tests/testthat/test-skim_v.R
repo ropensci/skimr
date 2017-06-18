@@ -256,6 +256,25 @@ test_that("skim_v returns expected response for POSIXct vectors", {
   expect_identical(input, correct)
 })
 
+
+correct <- tibble::tribble(
+  ~type,        ~stat,        ~level,  ~value,
+  "character",  "missing",   ".all",    0,
+  "character",  "complete",  ".all",    71,
+  "character",  "n",         ".all",    71,
+  "character",  "min",       ".all",    3,
+  "character",  "max",       ".all",    3,
+  "character",  "empty",     ".all",    0,
+  "character",  "n_unique",  ".all",    66
+)
+
+test_that("skim_v returns expected character response for vectors of unknown class", {
+  data("chickwts")
+  class(chickwts$weight) <- "strange"
+  input <- skim_v(chickwts$weight)
+  expect_identical(input, correct)
+})
+
 correct <- tibble::tribble (
   ~type,    ~stat,           ~level,  ~value,
   "list",   "missing",        ".all",  1,
