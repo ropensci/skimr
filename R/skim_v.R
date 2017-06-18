@@ -18,13 +18,16 @@
 skim_v <- function(x, FUNS = class(x)) {
   funs <- get_funs(FUNS)
 
+  funs <- get_funs(FUNS)
+  
   if (is.null(funs)) {
     msg <- paste0("Skim does not know how to summarize of vector of class: ",
-      class(x), ". Coercing to numeric")
+                  class(x), ". Coercing to character")
     warning(msg, call. = FALSE)
-    funs <- get_funs("numeric")
-    x <- as.numeric(x)
-    FUNS <- "numeric"
+    
+    funs <- get_funs("character")
+    FUNS <- "character"
+    x <- as.character(x)
   }
 
   # Compute the summary statistic; allow for variable length
