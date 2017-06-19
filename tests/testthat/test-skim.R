@@ -349,7 +349,7 @@ correct <- tibble::tribble(
   6,3,"am","numeric","quantile","25%",0,
   6,3,"am","numeric","quantile","75%",0,
   6,3,"am","numeric","max",".all",0,
-  6,3,"am","numeric","hist",".all",0,
+  6,3,"am","numeric","hist","",0,
   6,3,"carb","numeric","missing",".all",0,
   6,3,"carb","numeric","complete",".all",2,
   6,3,"carb","numeric","n",".all",2,
@@ -437,7 +437,7 @@ correct <- tibble::tribble(
   8,3,"vs","numeric","quantile","25%",0,
   8,3,"vs","numeric","quantile","75%",0,
   8,3,"vs","numeric","max",".all",0,
-  8,3,"vs","numeric","hist",".all",0,
+  8,3,"vs","numeric","hist","",0,
   8,3,"am","numeric","missing",".all",0,
   8,3,"am","numeric","complete",".all",12,
   8,3,"am","numeric","n",".all",12,
@@ -448,7 +448,7 @@ correct <- tibble::tribble(
   8,3,"am","numeric","quantile","25%",0,
   8,3,"am","numeric","quantile","75%",0,
   8,3,"am","numeric","max",".all",0,
-  8,3,"am","numeric","hist",".all",0,
+  8,3,"am","numeric","hist","",0,
   8,3,"carb","numeric","missing",".all",0,
   8,3,"carb","numeric","complete",".all",12,
   8,3,"carb","numeric","n",".all",12,
@@ -547,7 +547,7 @@ correct <- tibble::tribble(
   4,3,"am","numeric","quantile","25%",0,
   4,3,"am","numeric","quantile","75%",0,
   4,3,"am","numeric","max",".all",0,
-  4,3,"am","numeric","hist",".all",0,
+  4,3,"am","numeric","hist","",0,
   4,3,"carb","numeric","missing",".all",0,
   4,3,"carb","numeric","complete",".all",1,
   4,3,"carb","numeric","n",".all",1,
@@ -734,7 +734,7 @@ correct <- tibble::tribble(
   8,5,"vs","numeric","quantile","25%",0,
   8,5,"vs","numeric","quantile","75%",0,
   8,5,"vs","numeric","max",".all",0,
-  8,5,"vs","numeric","hist",".all",0,
+  8,5,"vs","numeric","hist","",0,
   8,5,"am","numeric","missing",".all",0,
   8,5,"am","numeric","complete",".all",2,
   8,5,"am","numeric","n",".all",2,
@@ -833,7 +833,7 @@ correct <- tibble::tribble(
   6,5,"vs","numeric","quantile","25%",0,
   6,5,"vs","numeric","quantile","75%",0,
   6,5,"vs","numeric","max",".all",0,
-  6,5,"vs","numeric","hist",".all",0,
+  6,5,"vs","numeric","hist","",0,
   6,5,"am","numeric","missing",".all",0,
   6,5,"am","numeric","complete",".all",1,
   6,5,"am","numeric","n",".all",1,
@@ -856,7 +856,7 @@ correct <- tibble::tribble(
   6,5,"carb","numeric","quantile","75%",6,
   6,5,"carb","numeric","max",".all",6,
   6,5,"carb","numeric","hist","▁▁▁▁▇▁▁▁▁▁",0
-)
+  )
 
 input <- mtcars %>%  dplyr::group_by(cyl, gear) %>% skim()
 
