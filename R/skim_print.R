@@ -42,7 +42,7 @@ print.skim_df <- function(x, ...) {
 print_results<-function(subtibble){
   cat(attr(subtibble, "subtibble_title"))
   
-  print(lucid::lucid(subtibble))
+  print(subtibble)
 }
 
 
