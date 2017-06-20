@@ -82,16 +82,16 @@ print.skim_df <- function(x, ...) {
   
   if (! is.null(wide_values$numeric)) {
     cat("Numeric Variables\n")
-    print(wide_values$numeric)
+    print(wide_values$numeric, ...)
   }
   
   if (! is.null(wide_values$characters)) {
     cat("\nCharacter Variables\n")
-    print(wide_values$characters)
+    print(wide_values$characters, ...)
   }
   
   if (! is.null(wide_values$factors)) {
     cat("\nFactor Variables\n")
-    print(wide_values$factors)
+    print(wide_values$factors, ...)
   }
 }
