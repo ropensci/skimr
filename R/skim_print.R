@@ -46,22 +46,5 @@ print_results<-function(subtibble){
 }
 
 
-# Define the print functions for different classes.
-print_handling <- list(
 
-  sk_print_numeric = sk_print_numeric,
-
-  sk_print_double = sk_print_double <- sk_print_numeric,
-  
-  sk_print_integer = sk_print_integer <- sk_print_numeric,
-
-  sk_print_factor = sk_print_factor,
-
-  sk_print_ordered = sk_print_factor,
-
-  sk_print_character = sk_print_character,
-
-  sk_print_default = sk_print_default
-
-)
 
