@@ -29,12 +29,12 @@ skim_print <- function(x){
 }
 
 formatnum <- function(x) {
-  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "quantile", 
+  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "q", 
                                paste(level, stat), stat))
   tmp1 <- dplyr::select(dplyr::filter(tmp1, stat != "hist"), -level)
   tmp1 <- dplyr::mutate(tmp1, stat = factor(stat, levels = c(
-    "missing", "complete", "n", "mean", "sd", "min", "25% quantile", "median",
-    "75% quantile", "max", "hist"
+    "NA.", "comp", "n", "mean", "sd", "min", "25% q", "med",
+    "75% q", "max", "hist"
   )))
   tmp1 <- tidyr::spread(tmp1, stat, value)
   
@@ -65,11 +65,11 @@ formatfct <- function(x) {
 }
 
 formatchars <- function(x) {
-  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "quantile", 
+  tmp1 <- dplyr::mutate(x, stat = ifelse(stat == "q", 
                                          paste(level, stat), stat))
   tmp1 <- dplyr::select(dplyr::filter(tmp1, stat != "hist"), -level)
   tmp1 <- dplyr::mutate(tmp1, stat = factor(stat, levels = c(
-    "complete","missing", "empty", "n", "min","max", "n_unique" 
+    "comp","NA.", "empty", "n", "min","max", "unique" 
   )))
   tmp1 <- tidyr::spread(tmp1, stat, value)
   
