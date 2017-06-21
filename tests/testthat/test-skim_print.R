@@ -15,7 +15,7 @@ correct <- tibble::tribble(
 )
 
 test_that("print_handling() returns expected response for ordered factor vectors", {
-  input <- print_handling$sk_print_ordered(skim_object[skim_object$type == "ordered",])
+  input <- sk_print_factor(skim_object[skim_object$type == "ordered",])
   expect_identical(input, correct)
 })
 attr(correct, "subtibble_title") <- "Ordered Variables\n"
@@ -84,7 +84,7 @@ correct <- tibble::tribble(
 )
 correct_integer <- correct
 test_that("print_handling() returns expected response for integer vectors", {
-  input <- sk_print_integer(skim_object[skim_object$type == "integer",])
+  input <- sk_print_numeric(skim_object[skim_object$type == "integer",])
   expect_identical(input, correct)
 })
 attr(correct, "subtibble_title") <- "Integer Variables\n"
@@ -112,19 +112,28 @@ sk_print_object2<-skim_print(skim_object2)
 # We need to this modification that happens in skim_print() to successfully run print_handling(). 
 skim_object2$stat <- ifelse(skim_object2$level == ".all" | skim_object2$stat == "hist" | skim_object2$stat == "count",  skim_object2$stat,  paste(skim_object2$stat, skim_object2$level))
 
+# This shows that default will run but not necessarily be pretty at this point.
 correct <- tibble::tribble(
-  ~var,  ~missing,  ~complete,  ~n,  ~start,  ~end,  ~frequency,  ~deltat,  ~mean,           ~sd,         ~min,     ~max,   ~median,
-  "y",    0,         39,        39,   1962,    1971,  4,           0.25,     mean(freeny$y), sd(freeny$y), 8.79137, 9.79424, 9.31378
+  ~var,~missing,~complete,~n,~start,~end,~frequency,~deltat,~mean,~sd,~min,~max,~median,~`line_graph ⣀⣀⣀⣀⣀⠤⠤⠤⠤⠔⠒⠒⠒⠒⠉⠉⠉⠉⠉⢁`,
+  "y",0,39,39,1962,1971,4,0.25,mean(freeny$y),sd(freeny$y),8.79137,9.79424,9.31378,0
 )
+
 test_that("print_handling() returns expected response for ts vectors", {
   input <- sk_print_default(skim_object2[skim_object2$type == "ts",])
-  expect_identical(input, correct)
+  expect_equal(input[,1:13], correct[,1:13])
+  expect_equal(names(input), names(correct))
+  expect_equal(names(input[1,14]), names(correct[1,14]))
 })
-attr(correct, "subtibble_title") <- "Ts Variables\n"
-test_that("skim_print() returns expected response for ts vectors", {
+
+test_that("skim_print() returns expected title for ts vectors", {
   input <- sk_print_object2[["ts"]]
+
+  
   expect_identical(input, correct)
+  expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
 })
+
+
 
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,

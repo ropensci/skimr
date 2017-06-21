@@ -32,9 +32,30 @@ sk_print_character<-function(y){
 }
 
 sk_print_default<-function(y){
+#  print(as.data.frame(y))
+#  y$stat <- ifelse(y$level == ".all", y$stat, )
   order<-unique(y$stat)
   z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>%
     tidyr::spread_( key_col = 'stat', value_col = 'value')
   
   z[c("var", order)]
 }
+
+# Define the print functions for different classes.
+print_handling <- list(
+  
+  sk_print_numeric = sk_print_numeric,
+  
+  sk_print_double =  sk_print_numeric,
+  
+  sk_print_integer = sk_print_numeric,
+  
+  sk_print_factor = sk_print_factor,
+  
+  sk_print_ordered = sk_print_factor,
+  
+  sk_print_character = sk_print_character,
+  
+  sk_print_default = sk_print_default
+  
+)
