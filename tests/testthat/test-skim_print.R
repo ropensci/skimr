@@ -137,12 +137,13 @@ test_that("skim_print() returns expected title for ts vectors", {
   expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
 })
 
+
+                   
 data(CO2)
 test_df <- CO2[c("Treatment", "Type")]
 test_df$Treatment <- as.factor(test_df$Treatment)
 test_df$Type <- as.factor(test_df$Type)
-skim_object4 <- skim(test_df)
-
+withr::with_locale(c(LC_COLLATE = "C"), code = '
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
   "Treatment",  84,        0,       84,   2,           "nonchilled:42 chilled:42 NA:0",
@@ -154,3 +155,5 @@ test_that("print handling returns correct response when there are multiple facto
           expect_identical(dim(input), dim(correct))
           expect_identical(input$counts, correct$counts)
 } )
+'
+)
