@@ -26,7 +26,8 @@ Remotes:
     hadley/colformat
 Suggests:
     testthat,
-    knitr
+    knitr,
+    withr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
