@@ -151,7 +151,6 @@ correct <- tibble::tribble(
 test_that("print handling returns correct response when there are multiple factor variables", {
  
           input<-sk_print_factor(skim_object4)
-         # expect_identical(input, correct)
           expect_identical(dim(input), dim(correct))
           expect_identical(input$counts, correct$counts)
 } )
