@@ -1,5 +1,26 @@
 #' @include print_handlers.R
 
+#' 
+# Define the print functions for different classes.
+print_handling <- list(
+  
+  sk_print_numeric = sk_print_numeric,
+  
+  sk_print_double = sk_print_double <- sk_print_numeric,
+  
+  sk_print_integer = sk_print_integer <- sk_print_numeric,
+  
+  sk_print_factor = sk_print_factor,
+  
+  sk_print_ordered = sk_print_factor,
+  
+  sk_print_character = sk_print_character,
+  
+  sk_print_default = sk_print_default
+  
+)
+
+
 #' @title skim_print
 #' 
 #' @description Manages print for skim objects.
@@ -16,6 +37,14 @@ skim_print <- function(x){
   types <- unique(x$type)
   types_custom <- c("numeric", "double", "integer", "factor", "character", "ordered")
 
+  if ("grouped_df" %in% class(x)){
+    group_by_vars <- as.character(attr(x, "vars"))
+    group_by_vars_title <- paste(group_by_vars, collapse = ", ")
+    x <- tidyr::unite_(x, "var", c("var", group_by_vars), sep = "__")
+    attr(x, "group_by_vars") <- group_by_vars_title
+    
+  }
+  
   for (i in 1:length(types)){
     one_type <- x %>% dplyr::filter_(~type == types[i])
     if (nrow(one_type) > 0){
@@ -26,11 +55,16 @@ skim_print <- function(x){
       }
       
       return_list[[types[i]]] <- p
+      if (!is.null(attr(x, "group_by_vars"))){
+        attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables", 
+                                                                  "grouped by", group_by_vars_title, "\n")
+      } else {
       attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables\n")
+    }
       return_list
     }
   }  
-  
+    
   return(return_list)   
 }
 
@@ -46,22 +80,5 @@ print_results<-function(subtibble){
 }
 
 
-# Define the print functions for different classes.
-print_handling <- list(
 
-  sk_print_numeric = sk_print_numeric,
-
-  sk_print_double = sk_print_double <- sk_print_numeric,
-  
-  sk_print_integer = sk_print_integer <- sk_print_numeric,
-
-  sk_print_factor = sk_print_factor,
-
-  sk_print_ordered = sk_print_factor,
-
-  sk_print_character = sk_print_character,
-
-  sk_print_default = sk_print_default
-
-)
 
