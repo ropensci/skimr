@@ -1,8 +1,8 @@
 sk_print_factor <- function(y){
   
-  counts <- y %>% dplyr::filter_ (~stat == "count") %>% dplyr::group_by(var) 
+  counts <- y %>% dplyr::filter_ (~stat == "count") %>% dplyr::group_by_(~var) 
   counts$level <- ifelse(is.na(counts$level), "NA", counts$level)
-  counts <- dplyr::summarise(counts, count_sum = paste(paste(~level, ~value, sep = ":"), collapse = " "))
+  counts <- dplyr::summarise(counts,  count_sum = paste(paste(level, value, sep = ":"), collapse = " "))
 
   y <- y %>% dplyr::filter_(~stat != "count") %>% 
     dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
