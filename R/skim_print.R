@@ -20,9 +20,9 @@ skim_print <- function(x){
     one_type <- x %>% dplyr::filter_(~type == types[i])
     if (nrow(one_type) > 0){
       if (types[i] %in% types_custom){
-        p <- print_handling[[paste0("sk_print_",types[i])]](one_type)
+        p <- print_handling[[types[i]]](one_type)
       } else {
-        p <- print_handling[["sk_print_default"]](one_type)
+        p <- print_handling[["default"]](one_type)
       }
       
       return_list[[types[i]]] <- p

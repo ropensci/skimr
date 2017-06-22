@@ -5,7 +5,7 @@ CO2$conc <- as.integer(CO2$conc)
 CO2$Type <- as.character(CO2$Type)
 skim_object <- skim(CO2)
 sk_print_object<-skim_print(skim(CO2))
-# We need to this modification bthat happens in skim_print() to successfully run print_handling(). 
+# We need to this modification that happens in skim_print() to successfully run print_handling(). 
 skim_object$stat <- ifelse(skim_object$level == ".all" | skim_object$stat == "hist" | skim_object$stat == "count",  skim_object$stat,  paste(skim_object$stat, skim_object$level))
 #---- Ordered Factor
 
@@ -93,6 +93,7 @@ test_that("print_handling() returns expected response for integer vectors", {
   expect_identical(input, correct)
 })
 
+data(CO2)
 CO2$conc <- as.numeric(CO2$conc)
 test_df <- CO2[c("conc", "Plant")]
 skim_object3 <- skim(test_df)
@@ -101,7 +102,7 @@ skim_object3$stat <- ifelse(skim_object3$level == ".all" | skim_object3$stat == 
 skim_print_object3 <- skim_print(skim_object3)
 
 test_that("print_handling() returns the same tibble response for integer and numeric vectors", {
-  input <- print_handling[["sk_print_numeric"]](skim_object3[skim_object3$type == "numeric",])
+  input <- print_handling[["numeric"]](skim_object3[skim_object3$type == "numeric",])
   expect_identical(input, correct_integer)
 })
 
@@ -130,6 +131,13 @@ test_that("skim_print() returns expected title for ts vectors", {
   expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
 })
 
+
+data(CO2)
+test_df <- CO2[c("Treatment", "Type")]
+test_df$Treatment <- as.factor(test_df$Treatment)
+test_df$Type <- as.factor(test_df$Type)
+
+withr::with_locale(c(LC_COLLATE = "C"), code = '
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
   "Treatment",  84,        0,       84,   2,           "nonchilled:42 chilled:42 NA:0",
@@ -140,4 +148,4 @@ test_that("print handling returns correct response when there are multiple facto
           test_df <- CO2[c("Treatment", "Type")]
           input<-sk_print_factor(skim(test_df))
           expect_identical(input, correct)
-} )
+} )')
