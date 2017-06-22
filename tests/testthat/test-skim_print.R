@@ -129,3 +129,15 @@ test_that("skim_print() returns expected title for ts vectors", {
   input <- sk_print_object2[["ts"]]
   expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
 })
+
+correct <- tibble::tribble(
+  ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
+  "Treatment",  84,        0,       84,   2,           "nonchilled:42 chilled:42 NA:0",
+  "Type",       84,        0,       84,   2,          "Quebec:42 Mississippi:42 NA:0"
+)
+test_that("print handling returns correct response when there are multiple factor variables", {
+          data(CO2)
+          test_df <- CO2[c("Treatment", "Type")]
+          input<-sk_print_factor(skim(test_df))
+          expect_identical(input, correct)
+} )

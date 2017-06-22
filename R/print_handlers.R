@@ -1,11 +1,13 @@
 sk_print_factor <- function(y){
   
-  counts <- y %>% dplyr::filter_ (~stat == "count") 
-  counts <- paste(paste(counts$level, counts$value, sep = ":"), collapse = " ")
-  
+  counts <- y %>% dplyr::filter_ (~stat == "count") %>% dplyr::group_by(var) 
+  counts$level <- ifelse(is.na(counts$level), "NA", counts$level)
+  counts <- dplyr::summarise(counts, count_sum = paste(paste(~level, ~value, sep = ":"), collapse = " "))
+
   y <- y %>% dplyr::filter_(~stat != "count") %>% 
     dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
     tidyr::spread_( key_col = 'stat', value_col = 'value')
+  counts<-counts$count_sum
   y <- tibble::add_column(y, counts)
   y
 }
