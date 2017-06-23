@@ -49,13 +49,13 @@ skim.grouped_df <- function(.data){
   l <- split(nested_df[, groups], factor(1:nrow(nested_df))) 
   l <- purrr::map( l, ~dplyr::combine(.))
   skim_df <- nested_df %>% 
-    dplyr::mutate(stats = purrr::map(data, skim)) %>% 
-    dplyr::mutate(stats = purrr::map2(stats, 
+    dplyr::mutate(stats = purrr::map(nested_df$data, skim)) 
+  skim_df <- skim_df %>% dplyr::mutate(stats = purrr::map2(skim_df$stats, 
                                       l,
                                       ~append_group_vars(.x, .y, groups = groups)))
   combined <- dplyr::bind_rows(skim_df$stats) %>% 
     dplyr::group_by_(.dots = groups)
-  attr(combined, "groups") <- groups
+
   return(structure(combined, class = c("skim_df", class(combined))))
 }
 
