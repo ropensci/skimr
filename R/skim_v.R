@@ -18,8 +18,6 @@
 skim_v <- function(x, FUNS = class(x)) {
   funs <- get_funs(FUNS)
 
-  funs <- get_funs(FUNS)
-  
   if (is.null(funs)) {
     msg <- paste0("Skim does not know how to summarize of vector of class: ",
                   class(x), ". Coercing to character")
