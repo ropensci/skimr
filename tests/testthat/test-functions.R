@@ -1,4 +1,5 @@
 context("Change functions used by skim")
+skim_with_defaults()
 
 correct <- tibble::tribble(
   ~type,          ~stat,  ~level,   ~value,
@@ -7,14 +8,26 @@ correct <- tibble::tribble(
 )
 
 test_that("Skimming functions can be changed for different types", {
-  funs <- list(iqr = IQR,
+  newfuns <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = funs, append = FALSE)
+  skim_with(numeric = newfuns, append = FALSE)
   input <- skim_v(iris$Sepal.Length)
   # Restore defaults
   skim_with_defaults()
   expect_identical(input, correct)
 })
+
+test_that("Skimmer list is updated correctly when changing functions", {
+  funs <- list(iqr = IQR,
+               quantile = purrr::partial(quantile, probs = .99))
+  correct <- names(funs)
+  skim_with(numeric = funs, append = FALSE)
+  input <- show_skimmers()["numeric"]
+  expect_identical(unname(unlist(input)), names(funs))
+  # Restore defaults
+  skim_with_defaults()
+})
+
 
 correct <- tibble::tribble(
   ~type,          ~stat,    ~level,   ~value,
@@ -95,7 +108,7 @@ test_that("show_skimmers() has a correct list of functions for a type", {
   identical(input, correct)
 })
 
-test_that("show_skimmers() has a correct list types", {
+test_that("show_skimmers() has a correct list of types", {
   correct <- c("numeric",   "integer",  "factor" ,   "ordered",   "character", "logical",   "complex",
                "date",      "Date",      "ts", "POSIXct" )
   skimmers <- show_skimmers()
