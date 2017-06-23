@@ -101,7 +101,7 @@ skim_object3$stat <- ifelse(skim_object3$level == ".all" | skim_object3$stat == 
 skim_print_object3 <- skim_print(skim_object3)
 
 test_that("print_handling() returns the same tibble response for integer and numeric vectors", {
-  input <- print_handling[["sk_print_numeric"]](skim_object3[skim_object3$type == "numeric",])
+  input <- print_handling[["numeric"]](skim_object3[skim_object3$type == "numeric",])
   expect_identical(input, correct_integer)
 })
 
