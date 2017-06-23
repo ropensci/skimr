@@ -157,3 +157,29 @@ test_that("print handling returns correct response when there are multiple facto
 } )
 '
 )
+
+# --- Grouped data
+correct <- tibble::tribble(
+  ~var,      ~missing, ~complete,~n,~mean,~sd,~min,~median,~`quantile 25%`,~`quantile 75%`,~max,~hist,
+  "am__4__3",0,       1,         1,  0,    NA,0,   0,       0,             0,               0,"▃▁▁▁▃▁▁▁▁▇",
+  "am__4__4",0,       8,         8,  0.75, 0.462910049886276,0,1,0.75,     1,               1,"▇▁▁▁▁▁▁▁▁▇",
+  "am__4__5",0,       2,         2,  1,    0,1,   1,       1,              1,               1,"▇▁▁▁▁▁▁▁▁▇",
+  "am__6__3",0,       2,         2,  0,    0,0,   0,       0,              0,               0,"▇▁▁▁▁▁▁▁▁▇",
+  "am__6__4",0,       4,         4,  0.5,  0.577350269189626,0,0.5,0,      1,               1,"▃▁▁▃▁▁▁▁▁▇",
+  "am__6__5",0,       1,         1,  1,    NA,1,  1,       1,              1,               1,"▇▁▇▁▁▁▁▇▁▇",
+  "am__8__3",0,       12,       12,  0,    0,0,   0,       0,              0,               0,"▇▁▁▁▁▁▁▁▁▇",
+  "am__8__5",0,       2,         2,  1,    0,1,   1,       1,              1,               1,"▇▁▁▁▁▁▁▁▁▇",
+  "carb__4__3",0,     1,         1,  1,    NA,1,  1,       1,              1,               1,"▁▁▁▁▇▁▁▁▁▁",
+  "carb__4__4",0,     8,         8,  1.5,  0.534522483824849,1,1.5,1,      2,               2,"▃▇▃▁▃▁▁▃▃▃",
+  "carb__4__5",0,     2,         2,  2,    0,2,   2,       2,              2,               2,"▇▇▁▁▃▁▃▁▁▇",
+  "carb__6__3",0,     2,         2,  1,    0,1,   1,       1,              1,               1,"▂▂▇▁▁▁▁▅▁▂"
+  
+)
+test_that("print handling returns correct response with grouped data.", {
+  correct$sd <- round(correct$sd)
+  mtcars_grouped<-dplyr::group_by(mtcars, cyl, gear)
+  input <- skim_print(skim(mtcars_grouped))[[1]][1:12,]
+  input$sd <- round(input$sd) 
+  expect_identical(input$var, correct$var)
+  expect_equal(input, correct, tolerance =.01)
+})
