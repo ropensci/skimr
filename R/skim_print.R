@@ -32,6 +32,11 @@ skim_print <- function(x){
       } else {
         p <- print_handling[["default"]](one_type)
       }
+
+      if (!is.null(group_by_vars_title)){
+        p <- tidyr::separate(p, var, into = c("var", attr(x, "groups")), sep = "__")
+
+      }
       
       return_list[[types[i]]] <- p
       if (!is.null(attr(x, "group_by_vars"))){
