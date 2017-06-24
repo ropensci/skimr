@@ -55,7 +55,6 @@ skim.grouped_df <- function(.data){
                                       ~append_group_vars(.x, .y, groups = groups)))
   combined <- dplyr::bind_rows(skim_df$stats) %>% 
     dplyr::group_by_(.dots = groups)
-  attr(combined, "groups") <- groups
 
   return(structure(combined, class = c("skim_df", class(combined))))
 }
