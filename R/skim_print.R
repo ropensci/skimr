@@ -34,7 +34,7 @@ skim_print <- function(x){
       }
 
       if (!is.null(group_by_vars_title)){
-        p <- tidyr::separate(p, var, into = c("var", group_by_vars),  sep = "__")
+        p <- tidyr::separate_(p, "var", into = c("var", group_by_vars),  sep = "__")
 
       }
       
