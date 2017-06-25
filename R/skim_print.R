@@ -15,6 +15,7 @@ skim_print <- function(x){
   return_list <- list()
   types <- unique(x$type)
   types_custom <- names(print_handling)
+  group_by_vars_title <- NULL
   
   if ("grouped_df" %in% class(x)){
     group_by_vars <- as.character(attr(x, "vars"))
