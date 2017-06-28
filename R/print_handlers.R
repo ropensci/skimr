@@ -25,19 +25,7 @@ sk_print_default<-function(y){
 
 # Define the print functions for different classes.
 print_handling <- list(
-  
-  numeric = sk_print_default,
-  
-  double =  sk_print_default,
-  
-  integer = sk_print_default,
-  
   factor = sk_print_factor,
-  
   ordered = sk_print_factor,
-  
-  character = sk_print_default,
-  
   default = sk_print_default
-  
 )

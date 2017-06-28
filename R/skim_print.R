@@ -15,7 +15,7 @@ skim_print <- function(x){
   return_list <- list()
   types <- unique(x$type)
   types_custom <- names(print_handling)
-  
+  group_by_vars_title <- NULL
   if ("grouped_df" %in% class(x)){
     group_by_vars <- as.character(attr(x, "vars"))
     group_by_vars_title <- paste(group_by_vars, collapse = ", ")
@@ -32,7 +32,10 @@ skim_print <- function(x){
       } else {
         p <- print_handling[["default"]](one_type)
       }
-      
+      if (!is.null(group_by_vars_title)){
+        p <- tidyr::separate_(p, "var", into = c("var", group_by_vars),  sep = "__")
+        
+      }     
       return_list[[types[i]]] <- p
       if (!is.null(attr(x, "group_by_vars"))){
         attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables", 

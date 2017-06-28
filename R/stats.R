@@ -29,15 +29,17 @@ n_complete <- function(x) {
 #' @export
 
 inline_hist <- function(x) {
-  x <- x[!is.na(x)]
+  x <- x[!is.na(x) == TRUE]
   out <- 0
-  if ( !all(x == 0) & length(x) != 0) {
+  if (length(x) == 0 | all(x == 0)){
+    attr(out, "formatted_value") <- ""
+    return(out)
+  }
     hist_dt <- table(cut(x, 10))
     hist_dt <- hist_dt / max(hist_dt)
     attr(out, "formatted_value") <- colformat::spark_bar(hist_dt)
     return(out)
-  }
-  attr(out, "formatted_value") <- ""
+
 }
 
 
@@ -226,7 +228,7 @@ date_min <- function(x){
 #' @return Maximum date.
 #' @export
 date_median <- function(x){
-  d <- median(x, na.rm = TRUE)
+  d <- stats::median(x, na.rm = TRUE)
   d_char <- as.character(d)
   attr(d, "formatted_value") <- d_char
   d
@@ -262,7 +264,7 @@ posixct_min <- function(x){
 #' @return Maximum date.
 #' @export
 posixct_median <- function(x){
-  d <- median(x, na.rm = TRUE)
+  d <- stats::median(x, na.rm = TRUE)
   d_char <- as.character(d)
   attr(d, "formatted_value") <- d_char
   d
