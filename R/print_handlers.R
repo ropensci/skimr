@@ -14,49 +14,29 @@ sk_print_factor <- function(y){
   y
 }
 
-sk_print_numeric <- function(y){
-  
-  order<-unique(y$stat)
-  histograms <- y %>% dplyr::filter_(~stat == "hist")
-  y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-    tidyr::spread_( key_col = 'stat', value_col = 'value')
-  y$hist <- histograms$level
-  
-  y[c("var", order)]
-}
-
-sk_print_character<-function(y){
-  order<-unique(y$stat)
-  y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-    tidyr::spread_( key_col = 'stat', value_col = 'value')
-  
-  y[c("var", order)]
-}
-
 sk_print_default<-function(y){
-#  print(as.data.frame(y))
-#  y$stat <- ifelse(y$level == ".all", y$stat, )
+
   order<-unique(y$stat)
-  z <- y %>% dplyr::select_(.dots = c('var', 'stat', 'value')) %>%
-    tidyr::spread_( key_col = 'stat', value_col = 'value')
-  
-  z[c("var", order)]
+  y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'formatted_value')) %>% 
+    tidyr::spread_( key_col = 'stat', value_col = 'formatted_value')
+
+  y[c("var", order)]
 }
 
 # Define the print functions for different classes.
 print_handling <- list(
   
-  numeric = sk_print_numeric,
+  numeric = sk_print_default,
   
-  double =  sk_print_numeric,
+  double =  sk_print_default,
   
-  integer = sk_print_numeric,
+  integer = sk_print_default,
   
   factor = sk_print_factor,
   
   ordered = sk_print_factor,
   
-  character = sk_print_character,
+  character = sk_print_default,
   
   default = sk_print_default
   
