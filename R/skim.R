@@ -79,3 +79,10 @@ append_group_vars <- function(df, val, groups){
   names(group_var_df) <-  groups
   dplyr::bind_cols(group_var_df, df)
 }
+
+# Temporarily borrow this from purrr.
+get_attr <- function (x) 
+{
+  stopifnot(is.character(x))
+  structure(x, class = "attr")
+}
