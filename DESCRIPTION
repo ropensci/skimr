@@ -16,7 +16,7 @@ Depends:
 Imports:
     dplyr (>= 0.5),
     tidyr,
-    purrr,
+    purrr (>= 0.2.2.9000),
     magrittr,
     tibble (>= 0.6),
     colformat,
@@ -24,6 +24,7 @@ Imports:
     stats
 Remotes:
     hadley/colformat
+    tidyverse/purrr
 Suggests:
     testthat,
     knitr,
