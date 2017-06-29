@@ -198,7 +198,7 @@ test_that("date_median is calculated correctly.", {
 
 test_that("posixct_max is calculated correctly.", {
   dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
-  input <- date_max(dat)
+  input <- posixct_max(dat)
   correct<-as.POSIXct("2011-07-01 00:00:09 UTC", tz = "UTC", origin = "1970-01-01 00:00:00 UTC")
   attr(correct, "formatted_value") <- as.character(correct)
   expect_equal(input, correct)
@@ -208,7 +208,7 @@ test_that("posixct_max is calculated correctly.", {
 
 test_that("posixct_min is calculated correctly.", {
   dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
-  input <- date_min(dat)
+  input <- posixct_min(dat)
   correct<-as.POSIXct("2011-07-01 00:00:00 UTC", tz = "UTC", origin = "1970-01-01 00:00:00 UTC")
   attr(correct, "formatted_value") <- as.character(correct)
   expect_equal(input, correct)
@@ -219,10 +219,11 @@ test_that("posixct_min is calculated correctly.", {
 
 test_that("posixct_median is calculated correctly.", {
   dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
-  input <- posixct_min(dat)
-  correct<-as.POSIXct("2011-07-01 00:00:00 UTC", tz = "UTC", origin = "1970-01-01 00:00:00 UTC")
+  input <- posixct_median(dat)
+  correct<-as.POSIXct(median(dat), origin = "1970-01-01 00:00:00 UTC")
   attr(correct, "formatted_value") <- as.character(correct)
   expect_equal(input, correct)
   expect_equal(attr(input, "formatted_value"), attr(correct, "formatted_value"))
+  expect_equal(as.numeric(median(dat)), 1309478404)
   
 })

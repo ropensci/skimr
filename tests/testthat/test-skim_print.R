@@ -156,10 +156,14 @@ correct <- tibble::tribble(
   "carb","6",  "3",  "0",    "2",        "2",  "1",    "0","1",  "1",      "1",           "1","1","▁▁▁▁▇▁▁▁▁▁"
 )
 test_that("print handling returns correct response with grouped data.", {
-
   mtcars_groups <- dplyr::group_by(mtcars, cyl, gear)
   input<-skim_print(skim(mtcars_groups))
   input<- input[["numeric"]][1:12]
   expect_identical(input, correct, tolerance =.01)
 })
+test_that("skim_print() returns expected title for grouped data", {
+  input <- sk_print_object2[["Numeric Variables grouped by cyl, gear\n"]]
+expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
+})
+
 ')
