@@ -31,7 +31,7 @@ skim_v <- function(x, FUNS = class(x)) {
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(funs ,~.x(x)) 
 
-  formatted_value <- purrr::map(values, purrr::get_attr("formatted_value"))
+  formatted_value <- purrr::map(values, purrr::get-attr("formatted_value"))
   values_out <- purrr::flatten_dbl(values)
   formatted_values <- unlist(formatted_value)
 
