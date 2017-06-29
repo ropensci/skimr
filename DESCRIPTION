@@ -23,7 +23,7 @@ Imports:
     stringr,
     stats
 Remotes:
-    hadley/colformat
+    hadley/colformat,
     tidyverse/purrr
 Suggests:
     testthat,
