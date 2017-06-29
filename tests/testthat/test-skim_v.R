@@ -17,6 +17,7 @@ correct <- tibble::tribble(
   "numeric","hist",".all",0,"▂▅▇▇▇▃▁▁▂▂"
   )
 
+skim_with_defaults()
 test_that("skim_v returns expected response for numeric vectors", {
   input <- skim_v(mtcars$mpg)
   expect_equal(input, correct)
@@ -62,6 +63,7 @@ test_that("skim_v handles factors when NAs are present", {
   expect_identical(input, correct)
 })
 
+skim_with_defaults()
 pathological <- c((2 ^ .Machine$double.digits), NA, 
     -(2 ^ .Machine$double.digits))
 path_quantiles <- quantile(pathological, probs = c(.25, .75), na.rm = TRUE,
