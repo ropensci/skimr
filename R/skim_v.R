@@ -39,7 +39,7 @@ skim_v <- function(x, FUNS = class(x)) {
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(funs), lens, rep)
   nms <- purrr::map(values, ~names(.x))
-  level <- purrr::modify_if(nms, is.null, ~".all")
+  level <- purrr::map_if(nms, is.null, ~".all")
   display <- as.character(values_out)
 
   stats <- purrr::flatten_chr(stats)
