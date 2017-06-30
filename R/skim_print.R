@@ -11,12 +11,14 @@
 #' @export
 skim_print <- function(x){
  
-  x$stat <- ifelse(x$level == ".all" | x$stat == "hist" | x$stat == "count", x$stat,  paste(x$stat, x$level))
+  x$stat <- ifelse(x$level == ".all" | x$stat == "hist" | x$stat == "linegraph" | x$stat == "count", x$stat,  paste(x$stat, x$level))
   return_list <- list()
   types <- unique(x$type)
   types_custom <- names(print_handling)
   group_by_vars_title <- NULL
+
   if ("grouped_df" %in% class(x)){
+
     group_by_vars <- as.character(attr(x, "vars"))
     group_by_vars_title <- paste(group_by_vars, collapse = ", ")
     x <- tidyr::unite_(x, "var", c("var", group_by_vars), sep = "__")
@@ -37,7 +39,7 @@ skim_print <- function(x){
         
       }     
       return_list[[types[i]]] <- p
-      if (!is.null(attr(x, "group_by_vars_title"))){
+      if (!is.null(group_by_vars_title)){
         attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables", 
                                                                   "grouped by", group_by_vars_title, "\n")
       } else {
@@ -60,7 +62,3 @@ print_results<-function(subtibble){
   
   print(subtibble)
 }
-
-
-
-

@@ -7,8 +7,8 @@ sk_print_factor <- function(y){
     dplyr::summarise_( count_sum= ~paste(col_sum, collapse = " "))
   
   y <- y %>% dplyr::filter_(~stat != "count") %>% 
-    dplyr::select_(.dots = c('var', 'stat', 'value')) %>% 
-    tidyr::spread_( key_col = 'stat', value_col = 'value')
+    dplyr::select_(.dots = c('var', 'stat', 'formatted_value')) %>% 
+    tidyr::spread_( key_col = 'stat', value_col = 'formatted_value')
   counts<-united$count_sum
   y <- tibble::add_column(y, counts)
   y

@@ -6,12 +6,13 @@ CO2$Type <- as.character(CO2$Type)
 skim_object <- skim(CO2)
 sk_print_object<-skim_print(skim_object)
 # We need to this modification bthat happens in skim_print() to successfully run print_handling(). 
-skim_object$stat <- ifelse(skim_object$level == ".all" |  skim_object$stat == "count",  skim_object$stat,  paste(skim_object$stat, skim_object$level))
+skim_object$stat <- ifelse(skim_object$level == ".all" | skim_object$stat =="hist" | skim_object$stat == "linegraph" | 
+                             skim_object$stat == "count",  skim_object$stat,  paste(skim_object$stat, skim_object$level))
 #---- Ordered Factor
 
 correct <- tibble::tribble(
   ~var,   ~complete, ~missing, ~n,  ~n_unique, ~counts,
-  "Plant", 84,        0,       84,  12,        "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0"
+  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0"
 )
 
 test_that("print_handling() returns expected response for ordered factor vectors", {
@@ -28,7 +29,7 @@ test_that("skim_print returns expected response (adds subtibble_title attribute)
 #--- Factor
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
-  "Treatment",  84,        0,       84,   2,           "nonchilled:42 chilled:42 NA:0"
+  "Treatment",  "84",        "0", "84",   "2",           "nonchilled:42 chilled:42 NA:0"
   
 )
 
@@ -101,7 +102,8 @@ data("freeny")
 skim_object2 <- skim(freeny)
 sk_print_object2<-skim_print(skim_object2)
 # We need to this modification that happens in skim_print() to successfully run print_handling(). 
-skim_object2$stat <- ifelse(skim_object2$level == ".all" | skim_object2$stat == "hist" | skim_object2$stat == "count",  skim_object2$stat,  paste(skim_object2$stat, skim_object2$level))
+skim_object2$stat <- ifelse(skim_object2$level == ".all" | skim_object2$stat == "hist" | skim_object2$stat == "linegraph" | 
+                              skim_object2$stat == "count",  skim_object2$stat,  paste(skim_object2$stat, skim_object2$level))
 
 correct <- tibble::tribble(
   ~var,~missing,~complete,~n,~start,~end,~frequency,~deltat,~mean,~sd,~min,~max,~median,~line_graph, 
@@ -117,8 +119,6 @@ test_that("skim_print() returns expected title for ts vectors", {
   expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
 })
 
-
-                   
 data(CO2)
 test_df <- CO2[c("Treatment", "Type")]
 test_df$Treatment <- as.factor(test_df$Treatment)
