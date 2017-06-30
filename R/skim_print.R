@@ -37,7 +37,7 @@ skim_print <- function(x){
         
       }     
       return_list[[types[i]]] <- p
-      if (!is.null(attr(x, "group_by_vars"))){
+      if (!is.null(attr(x, "group_by_vars_title"))){
         attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables", 
                                                                   "grouped by", group_by_vars_title, "\n")
       } else {

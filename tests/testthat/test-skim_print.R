@@ -4,7 +4,7 @@ data("CO2")
 CO2$conc <- as.integer(CO2$conc)
 CO2$Type <- as.character(CO2$Type)
 skim_object <- skim(CO2)
-sk_print_object<-skim_print(skim(CO2))
+sk_print_object<-skim_print(skim_object)
 # We need to this modification bthat happens in skim_print() to successfully run print_handling(). 
 skim_object$stat <- ifelse(skim_object$level == ".all" |  skim_object$stat == "count",  skim_object$stat,  paste(skim_object$stat, skim_object$level))
 #---- Ordered Factor
@@ -157,13 +157,14 @@ correct <- tibble::tribble(
 )
 test_that("print handling returns correct response with grouped data.", {
   mtcars_groups <- dplyr::group_by(mtcars, cyl, gear)
-  input<-skim_print(skim(mtcars_groups))
-  input<- input[["numeric"]][1:12]
+  skim_object5 <- skim(mtcars_groups)
+  skim_print_object5<-skim_print(skim_object5)
+  input<- skim_object5[["numeric"]][1:12]
   expect_identical(input, correct, tolerance =.01)
 })
 test_that("skim_print() returns expected title for grouped data", {
-  input <- sk_print_object2[["Numeric Variables grouped by cyl, gear\n"]]
-expect_equal(attr(input, "subtibble_title"), "Ts Variables\n")
+  input <- skim_print_object5[["Numeric Variables grouped by cyl, gear\n"]]
+expect_equal(attr(input, "subtibble_title"), "\n")
 })
 
 ')

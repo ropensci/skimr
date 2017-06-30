@@ -94,14 +94,12 @@ test_that("Set multiple sets of skimming functions", {
 })
 
 test_that("Skimming functions without a name return a message.", {
-  funs <- list( iqr = IQR,
-               purrr::partial(quantile, probs = .99))
-  
-  input <- skim_with(numeric = funs, append = FALSE)
-  # Restore defaults
-  skim_with_defaults()
-  expect_message(message("Error: A function is missing a name within this type: iqr,"))
+  funs <- list( IQR)
+
+  expect_error(skim_with(numeric = funs), "A function is missing a name within this type: numeric")
 })
+
+skim_with_defaults()
 
 test_that("show_skimmers() has a correct list of functions for a type", {
   skim_with_defaults()
