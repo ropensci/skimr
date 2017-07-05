@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci #unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropenscilabs/skimr#skimr). 
 
-In a nutshell, `skimr` will create a `skimr` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
+In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
 ## Backstory // Behind the scenes
 
