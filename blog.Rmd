@@ -147,46 +147,49 @@ Another possibility is specifying your own statistics to display with `skimr`:
 # 2 numeric quantile   99%   7.7
 ```
 
-Check out [`skimr`](https://github.com/ropenscilabs/skimr) for the latest features and improvements!
-
 ## Our awesome team
 
 We had a really fantastic team with diverse backgrounds, and it was really cool how organically everyone found a role for themselves during the development of `skimr`. Between brainstorming sessions, experienced coders began to iteratively develop the code while others worked on documentation and tests, and got more involved. Everyone asked questions and brainstormed together; it was a really welcoming environment. We knew that by the end of the second day of the unconf, we would present our work using only the repo's [README](https://github.com/ropenscilabs/skimr#skimr) file. So we focused on communication throughout the entire development process. 
 
 A lot of the heavy lifting at the unconf was done by Michael, Elin, and Eduardo, and Elin has continued leading development in the month since! 
 
-This was the original team, although we have also had many virtual contributors as well. See the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
-
-**Amelia McNamara**  
-Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College  
-Project Contributions: Coder
+This was the original team in alphabetical order. We have also had many virtual contributors as well: see the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
 
 **Eduardo Arino de la Rubia**  
 Job Title: Chief Data Scientist at Domino Data Lab    
 Project Contributions: Coder
 
-**Hao Zhu**  
-Job Title: Programmer Analyst at the Institute for Aging Research  
-Project Contributions: Coder
+**Shannon Ellis**  
+Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health   
+Project Contributions: Test Scripts
 
-**Julia Lowndes**  
+**Julia Stewart Lowndes**  
 Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis   
 Project Contributions: Documentation and test scripts
 
-**Shannon Ellis**  
-Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health  
-Project Contributions: Test Scripts
+**Hope McLeod**  
+Job Title: Data Engineer at Kobalt Music  
+Project Contributions: Documentation
 
-**Elin Waring**  
-Job Title: Professor at Lehman College Sociology Department, City University of New York  
+**Amelia McNamara**  
+Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College   
 Project Contributions: Coder
 
 **Michael Quinn**  
 Job Title: Quantitative Analyst at Google  
 Project Contributions: Coder
 
-**Hope McLeod**  
-Job Title: Data Engineer at Kobalt Music  
-Project Contributions: Documentation
+**Elin Waring**  
+Job Title: Professor at Lehman College Sociology Department, City University of New York   
+Project Contributions: Coder
 
+**Hao Zhu**  
+Job Title: Programmer Analyst at the Institute for Aging Research  
+Project Contributions: Coder
+
+## In summary (ha...)
+
+The work we did together was only possible because of rOpenSci's incredible community and culture. For us to be able to dream up something we wanted to build and have the time and space to actually do it together was really exciting. So thank you rOpenSci and everyone in the greater community!
+
+There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropenscilabs/skimr) repo for the latest features and improvements!
 

@@ -1,6 +1,6 @@
 Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci \#unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropenscilabs/skimr#skimr).
 
-In a nutshell, `skimr` will create a `skimr` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
+In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
 Backstory // Behind the scenes
 ------------------------------
@@ -132,8 +132,6 @@ Another possibility is specifying your own statistics to display with `skimr`:
 # 2 numeric quantile   99%   7.7
 ```
 
-Check out [`skimr`](https://github.com/ropenscilabs/skimr) for the latest features and improvements!
-
 Our awesome team
 ----------------
 
@@ -141,36 +139,43 @@ We had a really fantastic team with diverse backgrounds, and it was really cool 
 
 A lot of the heavy lifting at the unconf was done by Michael, Elin, and Eduardo, and Elin has continued leading development in the month since!
 
-This was the original team, although we have also had many virtual contributors as well. See the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
-
-**Amelia McNamara**
-Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College
-Project Contributions: Coder
+This was the original team in alphabetical order. We have also had many virtual contributors as well: see the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
 
 **Eduardo Arino de la Rubia**
 Job Title: Chief Data Scientist at Domino Data Lab
 Project Contributions: Coder
 
-**Hao Zhu**
-Job Title: Programmer Analyst at the Institute for Aging Research
-Project Contributions: Coder
-
-**Julia Lowndes**
-Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis
-Project Contributions: Documentation and test scripts
-
 **Shannon Ellis**
 Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health
 Project Contributions: Test Scripts
 
-**Elin Waring**
-Job Title: Professor at Lehman College Sociology Department, City University of New York
+**Julia Stewart Lowndes**
+Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis
+Project Contributions: Documentation and test scripts
+
+**Hope McLeod**
+Job Title: Data Engineer at Kobalt Music
+Project Contributions: Documentation
+
+**Amelia McNamara**
+Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College
 Project Contributions: Coder
 
 **Michael Quinn**
 Job Title: Quantitative Analyst at Google
 Project Contributions: Coder
 
-**Hope McLeod**
-Job Title: Data Engineer at Kobalt Music
-Project Contributions: Documentation
+**Elin Waring**
+Job Title: Professor at Lehman College Sociology Department, City University of New York
+Project Contributions: Coder
+
+**Hao Zhu**
+Job Title: Programmer Analyst at the Institute for Aging Research
+Project Contributions: Coder
+
+In summary (ha...)
+------------------
+
+The work we did together was only possible because of rOpenSci's incredible community and culture. For us to be able to dream up something we wanted to build and have the time and space to actually do it together was really exciting. So thank you rOpenSci and everyone in the greater community!
+
+There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropenscilabs/skimr) repo for the latest features and improvements!
