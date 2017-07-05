@@ -2,8 +2,8 @@ Like every R user who uses summary statistics (so, everyone), our team has to re
 
 In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
-Backstory // Behind the scenes
-------------------------------
+Backstory
+---------
 
 The idea for skimr as a project for the \#unconf17 [was proposed by Amelia McNamara](https://github.com/ropensci/unconf17/issues/50) following [discussions on Twitter](https://twitter.com/AmeliaMN/status/774348524653834241) and an [initial package Hadley Wickham](https://github.com/hadley/precis).
 
@@ -68,17 +68,15 @@ Here are examples of `skimr` in action:
 
 **Nicely separates numeric and factor variables:**
 
-![](man/figures/skim_iris.png)
-<br>
+![](https://github.com/ropenscilabs/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png) <br>
 
 **Clearly displays many numeric variables:**
 
-![](man/figures/skim_mtcars.png)
-<br>
+![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png) <br>
 
 **Also works with strings:**
 
-![](man/figures/skim_babynames.png) <br>
+![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_babynames.png) <br>
 
 ### Exploring a skim\_df object
 
@@ -91,7 +89,7 @@ dim(a)
 View(a)
 ```
 
-<img src="man/figures/skim_chickwts_df.png" width="450px">
+<img src="https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_chickwts_df.png" width="450px">
 
 ### Computing with the skim\_df object
 

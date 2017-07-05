@@ -1,10 +1,36 @@
 ---
-title: "Creating `skimr`"
-author: "Team skimr"
-date: "5/26/2017"
+title: "`skimr` for useful and tidy summary statistics"
+authors:
+  - name: Eduardo Arino de la Rubia
+    url: http://github.com/earino
+  - name: Shannon Ellis
+    url: http://github.com/ShanEllis
+  - name: Julia Stewart Lowndes
+    url: http://github.com/jules32
+  - name: Hope McLeod
+    url: http://github.com/homcl
+  - name: Amelia McNamara
+    url: http://github.com/AmeliaMN
+  - name: Michael Quinn
+    url: https://github.com/michaelquinn32
+  - name: Elin Waring
+    url: https://github.com/elinw
+  - name: Hao Zhu
+    url: https://github.com/haozhu233
+date: "07/11/2017"
 output:
   md_document:
     variant: markdown_github
+categories:
+  - blog
+tags:
+  - unconf
+  - testing
+  - review
+  - packages
+  - software
+  - community
+  - meetings
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +41,7 @@ Like every R user who uses summary statistics (so, everyone), our team has to re
 
 In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
-## Backstory // Behind the scenes
+## Backstory
 
 The idea for skimr as a project for the #unconf17 [was proposed by Amelia McNamara](https://github.com/ropensci/unconf17/issues/50) following [discussions on Twitter](https://twitter.com/AmeliaMN/status/774348524653834241) and an [initial package Hadley Wickham](https://github.com/hadley/precis). 
 
@@ -77,33 +103,32 @@ Here are examples of `skimr` in action:
 
 ### Quick skim in the console: 
 
-**Nicely separates numeric and factor variables:**  
+**Nicely separates numeric and factor variables:**
 
-![](man/figures/skim_iris.png)  
+![](https://github.com/ropenscilabs/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png)
 <br>
 
-**Clearly displays many numeric variables:**  
+**Clearly displays many numeric variables:**
 
-![](man/figures/skim_mtcars.png)  
+![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png)
 <br>
 
 **Also works with strings:**
 
-![](man/figures/skim_babynames.png)
-<br> 
- 
-### Exploring a skim_df object
+![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_babynames.png) <br>
 
-By default `skim` prints beautifully in the console, but it also produces a long, tidy-format `skim_df` object that can be computed on. 
+### Exploring a skim\_df object
 
-```r
+By default `skim` prints beautifully in the console, but it also produces a long, tidy-format `skim_df` object that can be computed on.
+
+``` r
 a <-  skim(chickwts)
 dim(a)
 # [1] 22  5
 View(a)
 ```
 
-<img src="man/figures/skim_chickwts_df.png" width="450px">
+<img src="https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_chickwts_df.png" width="450px">
 
 
 ### Computing with the skim_df object
