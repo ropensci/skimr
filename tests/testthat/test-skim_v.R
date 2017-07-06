@@ -193,24 +193,39 @@ test_that("skim_v handles objects with multiple classes", {
 })
 
 correct <- tibble::tribble(
-  ~type,       ~stat,       ~level,        ~value,
-  "numeric",   "missing",   ".all",        0,
-  "numeric",   "complete",  ".all",       71,
-  "numeric",   "n",         ".all",       71,
-  "numeric",   "mean",      ".all",       mean(as.numeric(chickwts$feed)),
-  "numeric",   "sd",        ".all",       sd(as.numeric(chickwts$feed)),
-  "numeric",   "min",       ".all",        1,
-  "numeric",   "median",     ".all",       4,
-  "numeric",   "quantile",   "25%",        2,
-  "numeric",   "quantile",   "75%",        5,
-  "numeric",   "max",        ".all",       6,
-  "numeric",   "hist",  "▇▆▁▇▁▆▁▇▁▇",0
+  ~type,       ~stat,       ~level,     ~value,
+  "character",  "missing",   ".all",     0,
+  "character",  "complete",  ".all",    71,
+  "character",  "n",         ".all",    71,
+  "character",  "min",       ".all",     1,
+  "character",  "max",       ".all",     1,
+  "character",  "empty",     ".all",     0,
+  "character",  "n_unique",  ".all",     6
 )
-
-test_that("skim_v handles objects with two unknown classes", {
+# Notice that the statistics refer to the underlying integers
+test_that("skim_v handles objects with two unknown classes when variable is like a factor", {
   data("chickwts")
   class(chickwts$feed) <- c("strange", "stranger")
   input<-skim_v(chickwts$feed)
+  expect_identical(input, correct)
+})
+
+correct <- tibble::tribble(
+  ~type,        ~stat,       ~level,     ~value,
+  "character",  "missing",   ".all",       0,
+  "character",  "complete",  ".all",      71,
+  "character",  "n",         ".all",      71,
+  "character",  "min",       ".all",        3,
+  "character",  "max",       ".all",        3,
+  "character",  "empty",     ".all",        0,
+  "character",  "n_unique",   ".all",      66
+)
+
+test_that("skim_v handles objects with two unknown classes when variable is like a numeric", {
+  data("chickwts")
+  class(chickwts$weight) <- c("strange", "stranger")
+  input<-skim_v(chickwts$weight)
+  expect_identical(input, correct)
 })
 
 # Expected response for ts  ---------------------------------------    
