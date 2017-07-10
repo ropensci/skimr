@@ -5,9 +5,9 @@ CO2$conc <- as.integer(CO2$conc)
 CO2$Type <- as.character(CO2$Type)
 skim_object <- skim(CO2)
 sk_print_object<-skim_print(skim_object)
-# We need to this modification bthat happens in skim_print() to successfully run print_handling(). 
-skim_object$stat <- ifelse(skim_object$level == ".all" | skim_object$stat =="hist" | skim_object$stat == "linegraph" | 
-                             skim_object$stat == "count",  skim_object$stat,  paste(skim_object$stat, skim_object$level))
+# We need to this modification that happens in skim_print() to successfully run print_handling().
+skim_object$stat <- ifelse(skim_object$level == ".all" |  skim_object$stat == "count",
+                              skim_object$stat,  paste(skim_object$stat, skim_object$level))
 #---- Ordered Factor
 
 correct <- tibble::tribble(
@@ -139,7 +139,7 @@ test_that("print handling returns correct response when there are multiple facto
 )
 
 # --- Grouped data
-withr::with_locale(c(LC_COLLATE = "C"), code = '
+
 correct <- tibble::tribble(
   ~var,~cyl,~gear,~missing, ~complete,  ~n,  ~mean,  ~sd,~min,~median,~`quantile 25%`,~`quantile 75%`,~max,~hist,
   "am",  "4",  "3",  "0",    "1",        "1",  "0",    NA,"0",  "0",      "0",           "0","0","",

@@ -174,7 +174,7 @@ correct_grouped <- tibble::tribble(
   4,3,"carb","numeric","min",".all",1,"1",
   4,3,"carb","numeric","max",".all",1,"1",
   4,3,"carb","numeric","complete",".all",1,"1"
-  
+
    )
 
 mtcars_test <- dplyr::filter(mtcars, cyl < 8, gear   < 5)
@@ -187,21 +187,22 @@ test_that("Skimming a grouped data frame works as expected (value)", {
 })
 
 test_that("Skimming a grouped data frame works as expected (cyl)", {
-  expect_identical(input$cyl, correct_grouped$cyl) 
+  expect_identical(input$cyl, correct_grouped$cyl)
 })
 
 test_that("Skimming a grouped data frame works as expected (gear)", {
-  expect_identical(input$gear, correct_grouped$gear) 
+  expect_identical(input$gear, correct_grouped$gear)
 })
 test_that("Skimming a grouped data frame works as expected (var)", {
-  expect_identical(input$var, correct_grouped$var) 
+  expect_identical(input$var, correct_grouped$var)
 })
 test_that("Skimming a grouped data frame works as expected (stat)", {
-  expect_identical(input$stat, correct_grouped$stat) 
+  expect_identical(input$stat, correct_grouped$stat)
 })
 test_that("Skimming a grouped data frame works as expected (level)", {
-  expect_identical(input$level, correct_grouped$level) 
+  expect_identical(input$level, correct_grouped$level)
 })
 test_that("Grouped data get the correct class",{
   expect_identical(class(input), c("skim_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
 })
+skim_with_defaults()
