@@ -17,7 +17,7 @@
 
 skim_v <- function(x, FUNS = class(x)) {
   funs <- get_funs(FUNS)
-
+ 
   if (is.null(funs)) {
     msg <- paste0("Skim does not know how to summarize of vector of class: ",
                   class(x), ". Coercing to character")
@@ -39,7 +39,8 @@ skim_v <- function(x, FUNS = class(x)) {
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(funs), lens, rep)
   nms <- purrr::map(values, ~names(.x))
-  level <- purrr::map_if(nms, is.null, ~".all")
+ 
+  level <- purrr::modify_if(nms, is.null, ~".all")
   display <- as.character(values_out)
 
   stats <- purrr::flatten_chr(stats)
