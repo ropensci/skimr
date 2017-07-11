@@ -25,8 +25,10 @@ skim_tee <- function(.data) {
 #'@export
 
 skim.data.frame <- function(.data) {
+
   rows <- purrr::map(.data, skim_v)
   combined <- dplyr::bind_rows(rows, .id = "var")
+
   return(structure(combined, class = c("skim_df", class(combined))))
 }
 
@@ -42,19 +44,19 @@ skim.data.frame <- function(.data) {
 #' mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
 #' 
 skim.grouped_df <- function(.data){
-  nested_df <- .data %>%   
-    tidyr::nest() 
-  groups <-  as.character(dplyr::groups(.data))
-  
-  l <- split(nested_df[, groups], factor(1:nrow(nested_df))) 
+  nested_df <- .data %>%
+               tidyr::nest() 
+    groups <-  as.character(dplyr::groups(.data))
+  l <- split(nested_df[, groups], factor(1:nrow(nested_df)))
   l <- purrr::map( l, ~dplyr::combine(.))
-  skim_df <- nested_df %>% 
-    dplyr::mutate(stats = purrr::map(nested_df$data, skim)) 
+  
+  skim_df <- dplyr::mutate(nested_df, stats = purrr::map(nested_df$data, skim)) 
   skim_df <- skim_df %>% dplyr::mutate(stats = purrr::map2(skim_df$stats, 
                                       l,
                                       ~append_group_vars(.x, .y, groups = groups)))
+    
   combined <- dplyr::bind_rows(skim_df$stats) %>% 
-    dplyr::group_by_(.dots = groups)
+              dplyr::group_by_(.dots = groups)
 
   return(structure(combined, class = c("skim_df", class(combined))))
 }

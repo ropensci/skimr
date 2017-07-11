@@ -30,7 +30,7 @@ test_that("skim_print returns expected response (adds subtibble_title attribute)
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
   "Treatment",  "84",        "0", "84",   "2",           "nonchilled:42 chilled:42 NA:0"
-  
+
 )
 
 test_that("print_handling() returns expected response for factor vectors", {
@@ -101,12 +101,12 @@ test_that("print_handling() returns expected response for integer vectors", {
 data("freeny")
 skim_object2 <- skim(freeny)
 sk_print_object2<-skim_print(skim_object2)
-# We need to this modification that happens in skim_print() to successfully run print_handling(). 
-skim_object2$stat <- ifelse(skim_object2$level == ".all" | skim_object2$stat == "hist" | skim_object2$stat == "linegraph" | 
-                              skim_object2$stat == "count",  skim_object2$stat,  paste(skim_object2$stat, skim_object2$level))
+# We need to this modification that happens in skim_print() to successfully run print_handling().
+skim_object2$stat <- ifelse(skim_object2$level == ".all" |  skim_object2$stat == "count",  
+                            skim_object2$stat,  paste(skim_object2$stat, skim_object2$level))
 
 correct <- tibble::tribble(
-  ~var,~missing,~complete,~n,~start,~end,~frequency,~deltat,~mean,~sd,~min,~max,~median,~line_graph, 
+  ~var,~missing,~complete,~n,~start,~end,~frequency,~deltat,~mean,~sd,~min,~max,~median,~line_graph,
   "y","0","39","39","1962","1971","4","0.25",as.character(mean(freeny$y)),as.character(sd(freeny$y)),"8.79137","9.79424","9.31378","⣀⣀⣀⣀⣀⠤⠤⠤⠤⠔⠒⠒⠒⠒⠉⠉⠉⠉⠉⢁"
 )
 test_that("print_handling() returns expected response for 1:13 ts vectors", {
@@ -130,7 +130,7 @@ correct <- tibble::tribble(
   "Type",       "84",        "0",       "84",   "2",          "Mississippi:42 Quebec:42 NA:0"
 )
 test_that("print handling returns correct response when there are multiple factor variables", {
- 
+
           input<-sk_print_factor(skim_object4)
           expect_identical(dim(input), dim(correct))
           expect_identical(input$counts, correct$counts)
@@ -155,16 +155,22 @@ correct <- tibble::tribble(
   "carb","4",  "5",  "0",    "2",        "2",  "2",    "0","2",  "2",      "2",           "2","2","▁▁▁▁▇▁▁▁▁▁",
   "carb","6",  "3",  "0",    "2",        "2",  "1",    "0","1",  "1",      "1",           "1","1","▁▁▁▁▇▁▁▁▁▁"
 )
+
+data(mtcars)
+skim_with_defaults()
+skim_object5 <- mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
+skim_print_object5<-print(skim_object5)
+
 test_that("print handling returns correct response with grouped data.", {
-  mtcars_groups <- dplyr::group_by(mtcars, cyl, gear)
-  skim_object5 <- skim(mtcars_groups)
-  skim_print_object5<-skim_print(skim_object5)
-  input<- skim_object5[["numeric"]][1:12]
-  expect_identical(input, correct, tolerance =.01)
-})
-test_that("skim_print() returns expected title for grouped data", {
-  input <- skim_print_object5[["Numeric Variables grouped by cyl, gear\n"]]
-expect_equal(attr(input, "subtibble_title"), "\n")
+   input <- skim_print_object5$numeric
+   input <- input[1:12,]
+   
+  expect_equal(input, correct, tolerance =.01)
 })
 
-')
+test_that("skim_print() returns expected title for grouped data", {
+
+  input <- skim_print_object5$numeric
+   expect_equal(attr(input, "subtibble_title"), "Numeric Variables grouped by cyl, gear \n")
+})
+
