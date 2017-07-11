@@ -1,57 +1,19 @@
----
-title: "`skimr` for useful and tidy summary statistics"
-authors:
-  - name: Eduardo Arino de la Rubia
-    url: http://github.com/earino
-  - name: Shannon Ellis
-    url: http://github.com/ShanEllis
-  - name: Julia Stewart Lowndes
-    url: http://github.com/jules32
-  - name: Hope McLeod
-    url: http://github.com/homcl
-  - name: Amelia McNamara
-    url: http://github.com/AmeliaMN
-  - name: Michael Quinn
-    url: https://github.com/michaelquinn32
-  - name: Elin Waring
-    url: https://github.com/elinw
-  - name: Hao Zhu
-    url: https://github.com/haozhu233
-date: "07/11/2017"
-output:
-  md_document:
-    variant: markdown_github
-categories:
-  - blog
-tags:
-  - unconf
-  - testing
-  - review
-  - packages
-  - software
-  - community
-  - meetings
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci #unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropenscilabs/skimr#skimr). 
+Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci \#unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropenscilabs/skimr#skimr).
 
 In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
-## Backstory
+Backstory
+---------
 
-The idea for skimr as a project for the #unconf17 [was proposed by Amelia McNamara](https://github.com/ropensci/unconf17/issues/50) following [discussions on Twitter](https://twitter.com/AmeliaMN/status/774348524653834241) and an [initial package Hadley Wickham](https://github.com/hadley/precis). 
+The idea for skimr as a project for the \#unconf17 [was proposed by Amelia McNamara](https://github.com/ropensci/unconf17/issues/50) following [discussions on Twitter](https://twitter.com/AmeliaMN/status/774348524653834241) and an [initial package Hadley Wickham](https://github.com/hadley/precis).
 
-Once we were together in Los Angeles, we formed a solid team, set up a Google Doc, a Slack channel, the `ropensci/skimr` repo, and grabbed a whiteboard.  
+Once we were together in Los Angeles, we formed a solid team, set up a Google Doc, a Slack channel, the `ropensci/skimr` repo, and grabbed a whiteboard.
 
 We started off by brainstorming what we liked about existing summary packages and what other features we wanted. We started looking at example data, `mtcars`.
 
 Here's what we liked and disliked, in Amelia's words:
 
-```{r summary, eval=FALSE}
+``` r
 ### "I like what we get here because mpg is numeric so these stats make sense:" 
 summary(mtcars$mpg) 
 #   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -86,32 +48,31 @@ mosaic::favstats(~mpg, data=mtcars)
 # 10.4 15.425   19.2 22.8 33.9 20.09062 6.026948 32       0
 ```
 
-Once we had an idea of what we thought would be useful, we did a bit of market research (i.e. we made a short [presentation](https://docs.google.com/presentation/d/13Ky3-Y70STzufLJtCm6GXN8SMj2Y11riDef8b9cBgAQ/edit#slide=id.p) and ran it by other unconfers at lunch. 
+Once we had an idea of what we thought would be useful, we did a bit of market research (i.e. we made a short [presentation](https://docs.google.com/presentation/d/13Ky3-Y70STzufLJtCm6GXN8SMj2Y11riDef8b9cBgAQ/edit#slide=id.p) and ran it by other unconfers at lunch.
 
-## Introducing `skimr`
+Introducing `skimr`
+-------------------
 
 So what does `skimr` actually do? It allows you to skim useful summary statistics in the console, or use those statistics in a pipeable workflow.
 
-Some features of output in the console: 
+Some features of output in the console:
 
-- reports missing, complete, n, sd, and quantiles
-- reports numeric/int/double separately from factor/chr, and identifies class
-- handles dates, logicals
-- uses [Hadley's colformats](https://github.com/hadley/colformat), specifically `colformats::spark-bar()`
+-   reports missing, complete, n, sd, and quantiles
+-   reports numeric/int/double separately from factor/chr, and identifies class
+-   handles dates, logicals
+-   uses [Hadley's colformats](https://github.com/hadley/colformat), specifically `colformats::spark-bar()`
 
-Here are examples of `skimr` in action: 
+Here are examples of `skimr` in action:
 
-### Quick skim in the console: 
+### Quick skim in the console:
 
 **Nicely separates numeric and factor variables:**
 
-![](https://github.com/ropenscilabs/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png)
-<br>
+![](https://github.com/ropenscilabs/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png) <br>
 
 **Clearly displays many numeric variables:**
 
-![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png)
-<br>
+![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png) <br>
 
 **Also works with strings:**
 
@@ -130,12 +91,11 @@ View(a)
 
 <img src="https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_chickwts_df.png" width="450px">
 
-
-### Computing with the skim_df object
+### Computing with the skim\_df object
 
 Maybe you just want to skim a specific portion of your data frame. Use skimr with a pipe!
 
-```r
+``` r
 > skim(mtcars) %>% filter(stat=="hist")
 # A tibble: 11 × 5
      var    type  stat      level value
@@ -153,13 +113,11 @@ Maybe you just want to skim a specific portion of your data frame. Use skimr wit
 11  carb numeric  hist ▆▇▂▁▇▁▁▁▁▁     0
 ```
 
-
-
 ### Specifying your own statistics
 
 Another possibility is specifying your own statistics to display with `skimr`:
 
-```r
+``` r
  funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, append = FALSE)
@@ -172,49 +130,50 @@ Another possibility is specifying your own statistics to display with `skimr`:
 # 2 numeric quantile   99%   7.7
 ```
 
-## Our awesome team
+Our awesome team
+----------------
 
-We had a really fantastic team with diverse backgrounds, and it was really cool how organically everyone found a role for themselves during the development of `skimr`. Between brainstorming sessions, experienced coders began to iteratively develop the code while others worked on documentation and tests, and got more involved. Everyone asked questions and brainstormed together; it was a really welcoming environment. We knew that by the end of the second day of the unconf, we would present our work using only the repo's [README](https://github.com/ropenscilabs/skimr#skimr) file. So we focused on communication throughout the entire development process. 
+We had a really fantastic team with diverse backgrounds, and it was really cool how organically everyone found a role for themselves during the development of `skimr`. Between brainstorming sessions, experienced coders began to iteratively develop the code while others worked on documentation and tests, and got more involved. Everyone asked questions and brainstormed together; it was a really welcoming environment. We knew that by the end of the second day of the unconf, we would present our work using only the repo's [README](https://github.com/ropenscilabs/skimr#skimr) file. So we focused on communication throughout the entire development process.
 
-A lot of the heavy lifting at the unconf was done by Michael, Elin, and Eduardo, and Elin has continued leading development in the month since! 
+A lot of the heavy lifting at the unconf was done by Michael, Elin, and Eduardo, and Elin has continued leading development in the month since!
 
 This was the original team in alphabetical order. We have also had many virtual contributors as well: see the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
 
-**Eduardo Arino de la Rubia**  
-Job Title: Chief Data Scientist at Domino Data Lab    
+**Eduardo Arino de la Rubia**
+Job Title: Chief Data Scientist at Domino Data Lab
 Project Contributions: Coder
 
-**Shannon Ellis**  
-Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health   
+**Shannon Ellis**
+Job Title: Postdoctoral fellow in the Biostatistics Department at the Johns Hopkins Bloomberg School of Public Health
 Project Contributions: Test Scripts
 
-**Julia Stewart Lowndes**  
-Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis   
+**Julia Stewart Lowndes**
+Job Title: Marine Data Scientist at the National Center for Ecological Analysis and Synthesis
 Project Contributions: Documentation and test scripts
 
-**Hope McLeod**  
-Job Title: Data Engineer at Kobalt Music  
+**Hope McLeod**
+Job Title: Data Engineer at Kobalt Music
 Project Contributions: Documentation
 
-**Amelia McNamara**  
-Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College   
+**Amelia McNamara**
+Job Title: Visiting Assistant Professor of Statistical & Data Sciences at Smith College
 Project Contributions: Coder
 
-**Michael Quinn**  
-Job Title: Quantitative Analyst at Google  
+**Michael Quinn**
+Job Title: Quantitative Analyst at Google
 Project Contributions: Coder
 
-**Elin Waring**  
-Job Title: Professor at Lehman College Sociology Department, City University of New York   
+**Elin Waring**
+Job Title: Professor at Lehman College Sociology Department, City University of New York
 Project Contributions: Coder
 
-**Hao Zhu**  
-Job Title: Programmer Analyst at the Institute for Aging Research  
+**Hao Zhu**
+Job Title: Programmer Analyst at the Institute for Aging Research
 Project Contributions: Coder
 
-## In summary (ha...)
+In summary (ha...)
+------------------
 
 The work we did together was only possible because of rOpenSci's incredible community and culture. For us to be able to dream up something we wanted to build and have the time and space to actually do it together was really exciting. So thank you rOpenSci and everyone in the greater community!
 
 There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropenscilabs/skimr) repo for the latest features and improvements!
-
