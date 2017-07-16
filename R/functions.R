@@ -29,6 +29,7 @@ functions$current <- .default
 #' @return Nothing. \code{invisible(NULL)}
 #' @export
 #' @examples
+#' \dontrun{
 #' # Use new functions for numeric functions
 #' skim_with(numeric = list(median = median, mad = mad), append = FALSE)
 #' skim(faithful)
@@ -36,6 +37,7 @@ functions$current <- .default
 #' # Go back to defaults
 #' skim_with_defaults()
 #' skim(faithful)
+#' }
 
 skim_with <- function(..., append = TRUE) {
   # Argument assertions
@@ -62,7 +64,10 @@ set_functions <- function(type, newfuns, append) {
     message("Adding new summary functions for type: ", type)
   } else if (append) {
     old <- functions$current[[type]]
-    newfuns <- c(old, newfuns)
+    for (fn in names(newfuns)) {
+      old[[fn]] <- newfuns[[fn]]
+    }
+    newfuns <- old
   }
   
   functions$current[[type]] <- newfuns
