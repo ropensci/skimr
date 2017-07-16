@@ -85,18 +85,39 @@ correct <- tibble::tribble(
   "numeric",      "max",      ".all",       7.9,
   "numeric",      "hist",     "▂▇▅▇▆▆▅▂▂▂", 0,
   "numeric",      "iqr",      ".all",       IQR(iris$Sepal.Length),
-  "numeric",      "quantile", "99%",        7.7
+  "numeric",      "mad",      ".all",       mad(iris$Sepal.Length)
 )
 
-test_that("Skimming functions can be appended.", {
-  funs <- list(iqr = IQR,
-               quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = funs, append = TRUE)
+test_that("Skimming functions can be appended", {
+  funs <- list(iqr = IQR, mad = mad)
+  skim_with(numeric = funs)
   input <- skim_v(iris$Sepal.Length)
 
   # Restore defaults
   skim_with_defaults()
   expect_identical(input, correct)
+})
+
+correct <- tibble::tribble(
+  ~type,          ~stat,      ~level,       ~value,
+  "numeric",      "missing",  ".all",       0,
+  "numeric",      "complete", ".all",       150,
+  "numeric",      "n",        ".all",       150,
+  "numeric",      "mean",     ".all",       mean(iris$Sepal.Length),
+  "numeric",      "sd",       ".all",       sd(iris$Sepal.Length),
+  "numeric",      "min",      ".all",       4.3,
+  "numeric",      "median",   ".all",       5.8,
+  "numeric",      "quantile", "99%",        7.7,
+  "numeric",      "max",      ".all",       7.9,
+  "numeric",      "hist",     "▂▇▅▇▆▆▅▂▂▂", 0,
+  "numeric",      "iqr",      ".all",       IQR(iris$Sepal.Length)
+)
+
+test_that("When append = FALSE, skimmers are replaced", {
+  newfuns <- list(iqr = IQR,
+                  quantile = purrr::partial(quantile, probs = .99))
+  skim_with(numeric = newfuns, append = TRUE)
+  input <- skim_v(iris$Sepal.Length)
 })
 
 correct <- tibble::tribble(
@@ -118,13 +139,13 @@ test_that("Skimming functions for new types can be added", {
 })
 
 correct <- tibble::tribble(
-  ~type,          ~stat,      ~level,   ~value,
-  "new_type",     "iqr",      ".all",   IQR(iris$Sepal.Length),
+  ~type,          ~stat,      ~level,  ~value,
+  "new_type",     "iqr",      ".all",  IQR(iris$Sepal.Length),
   "new_type",     "quantile", "99%",   7.7,
   "new_type",     "q2",       "99%",   7.7
 )
 
-test_that("Set multiple sets of skimming functions", {
+test_that("Set skimming functions for multiple types", {
   funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99),
     q2 = purrr::partial(quantile, probs = .99))
