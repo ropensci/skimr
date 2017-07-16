@@ -35,6 +35,7 @@ VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Collate: 
     'stats.R'
+    'defaults.R'
     'functions.R'
     'skim.R'
     'skim_print.R'
