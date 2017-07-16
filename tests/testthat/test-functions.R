@@ -1,6 +1,31 @@
 context("Change functions used by skim")
 skim_with_defaults()
 
+test_that("show_skimmers() has a correct list of functions for a type", {
+  correct <- names(get_funs("numeric"))
+  skimmers <- show_skimmers()
+  input <- names(skimmers[["numeric"]])
+  identical(input, correct)
+})
+
+test_that("show_skimmers() has a correct list of types", {
+  correct <- c("numeric",   "integer",  "factor" ,   "ordered",   "character", "logical",   "complex",
+               "date",      "Date",      "ts", "POSIXct" )
+  skimmers <- show_skimmers()
+  input <- names(skimmers)
+  identical(input, correct)
+})
+
+test_that("Skimmer list is updated correctly when changing functions", {
+  funs <- list(median = median, mad = mad)
+  skim_with(numeric = funs, append = FALSE)
+  input <- show_skimmers()
+  expect_identical(input$numeric, names(funs))
+
+  # Restore defaults
+  skim_with_defaults()
+})
+
 correct <- tibble::tribble(
   ~type,          ~stat,  ~level,   ~value,
   "numeric",      "iqr",  ".all",   IQR(iris$Sepal.Length),
@@ -12,22 +37,11 @@ test_that("Skimming functions can be changed for different types", {
     quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = newfuns, append = FALSE)
   input <- skim_v(iris$Sepal.Length)
-  # Restore defaults
-  skim_with_defaults()
   expect_identical(input, correct)
-})
 
-test_that("Skimmer list is updated correctly when changing functions", {
-  funs <- list(iqr = IQR,
-               quantile = purrr::partial(quantile, probs = .99))
-  correct <- names(funs)
-  skim_with(numeric = funs, append = FALSE)
-  input <- show_skimmers()["numeric"]
-  expect_identical(unname(unlist(input)), names(funs))
   # Restore defaults
   skim_with_defaults()
 })
-
 
 correct <- tibble::tribble(
   ~type,          ~stat,    ~level,   ~value,
@@ -51,6 +65,7 @@ test_that("Skimming functions can be appended.", {
                quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, append = TRUE)
   input <- skim_v(iris$Sepal.Length)
+
   # Restore defaults
   skim_with_defaults()
   expect_identical(input, correct)
@@ -68,9 +83,10 @@ test_that("Skimming functions for new types can be added", {
   skim_with(new_type = funs)
   vector <- structure(iris$Sepal.Length, class = "new_type")
   input <- skim_v(vector)
+  expect_identical(input, correct)
+
   # Restore defaults
   skim_with_defaults()
-  expect_identical(input, correct)
 })
 
 correct <- tibble::tribble(
@@ -87,34 +103,20 @@ test_that("Set multiple sets of skimming functions", {
   skim_with(numeric = funs, new_type = funs, append = FALSE)
   vector <- structure(iris$Sepal.Length, class = "new_type")
   input <- skim_v(vector)
-  skim_with_defaults()
   expect_identical(input, correct)
-})
 
-test_that("Skimming functions without a name return a message.", {
-  funs <- list( iqr = IQR,
-               purrr::partial(quantile, probs = .99))
-  
-  input <- skim_with(numeric = funs, append = FALSE)
   # Restore defaults
   skim_with_defaults()
-  expect_message(message("Error: A function is missing a name within this type: iqr,"))
 })
 
-test_that("show_skimmers() has a correct list of functions for a type", {
-  correct <- names(get_funs("numeric"))
-  skimmers <- show_skimmers()
-  input <- names(skimmers[["numeric"]])
-  identical(input, correct)
-})
+test_that("Throw errors when arguments are incorrect", {
+  funs <- list(iqr = IQR, mad)
+  msg <- "A function is missing a name"
+  expect_error(skim_with(numeric = funs, append = FALSE), msg)
+  expect_error(skim_with(funs, append = FALSE), "named arguments")
 
-test_that("show_skimmers() has a correct list of types", {
-  correct <- c("numeric",   "integer",  "factor" ,   "ordered",   "character", "logical",   "complex",
-               "date",      "Date",      "ts", "POSIXct" )
-  skimmers <- show_skimmers()
-  input <- names(skimmers)
-  identical(input, correct)
+  # Restore defaults
+  skim_with_defaults()
 })
-
 
 skim_with_defaults()
