@@ -10,7 +10,7 @@ inline_linegraph(x)
 \item{x}{A vector}
 }
 \value{
-A numeric value of 0 with a name that is a character string of histogram.
+A numeric value of 0 with a name that is a character string of line gragh.
 }
 \description{
 Generate inline line graph for time series variables

@@ -29,16 +29,17 @@ n_complete <- function(x) {
 #' @export
 
 inline_hist <- function(x) {
-  x <- x[!is.na(x)]
+  x <- x[!is.na(x) == TRUE]
   out <- 0
-  if ( !all(x == 0) & length(x) != 0) {
-    hist_dt <- table(cut(x, 10))
-    hist_dt <- hist_dt / max(hist_dt)
-    names(out) <- colformat::spark_bar(hist_dt)
+  if (length(x) == 0 | all(x == 0)){
+    attr(out, "formatted_value") <- ""
     return(out)
   }
-  names(out) <- ""
-  return(out)
+    hist_dt <- table(cut(x, 10))
+    hist_dt <- hist_dt / max(hist_dt)
+    attr(out, "formatted_value") <- colformat::spark_bar(hist_dt)
+    return(out)
+
 }
 
 
@@ -116,14 +117,14 @@ ts_end <- function(x) {
 #' Generate inline line graph for time series variables
 #' 
 #' @param x A vector
-#' @return A numeric value of 0 with a name that is a character string of histogram.
+#' @return A numeric value of 0 with a name that is a character string of line gragh.
 #' @export
 
 inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
   out <- 0 
   if (length(t) == 0 ){
-    names(out) <- ""
+    attr(out, "formatted_value") <- ""
     return(out)    
   }
   if (length(t) > 39){
@@ -133,7 +134,8 @@ inline_linegraph <- function(x) {
 
   # Values must be between 0 and 1.
   t <- (t - min(t))/(max(t) - min(t))
-  names(out) <- suppressWarnings(colformat::spark_line(t))
+  attr(out, "formatted_value") <- suppressWarnings(colformat::spark_line(t))
+
   return(out)
 
 }
@@ -195,3 +197,75 @@ list_max_length <- function(x){
   max(l)
 }
 
+#' Get the maximum in a vector of dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+date_max <- function(x){
+  d <- max(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  
+  d
+}
+
+#' Get the minimum in a vector of dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+date_min <- function(x){
+  d <- min(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  d
+}
+
+#' Get the median in a vector of dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+date_median <- function(x){
+  d <- stats::median(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  d
+}
+
+#' Get the maximum in a vector of POSIXct dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+posixct_max <- function(x){
+  d <- max(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  d
+}
+
+#' Get the minimum in a vector of POSIXct dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+posixct_min <- function(x){
+  d <- min(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  d
+}
+
+#' Get the median in a vector of POSIXct dates
+#' 
+#' @param x A vector of date data
+#' @return Maximum date.
+#' @export
+posixct_median <- function(x){
+  d <- stats::median(x, na.rm = TRUE)
+  d_char <- as.character(d)
+  attr(d, "formatted_value") <- d_char
+  d
+}

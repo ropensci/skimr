@@ -16,16 +16,19 @@ Depends:
 Imports:
     dplyr (>= 0.5),
     tidyr,
-    purrr,
+    purrr (>= 0.2.2.9000),
     magrittr,
     tibble (>= 0.6),
     colformat,
+    stringr,
     stats
 Remotes:
-    hadley/colformat
+    hadley/colformat,
+    tidyverse/purrr
 Suggests:
     testthat,
-    knitr
+    knitr,
+    withr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -36,6 +39,7 @@ RoxygenNote: 6.0.1
 Collate: 
     'stats.R'
     'functions.R'
+    'print_handlers.R'
     'skim.R'
     'skim_print.R'
     'skim_v.R'

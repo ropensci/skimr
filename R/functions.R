@@ -56,9 +56,9 @@ date_funs <- list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
+  min = date_min,
+  max = date_max,
+  median = date_median,
   n_unique = n_unique
 )
 
@@ -78,16 +78,15 @@ ts_funs <- list(
   line_graph  = inline_linegraph
 )
 
-posixct_funs<-list(
+POSIXct_funs<-list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
+  min = posixct_min,
+  max = posixct_max,
+  median = posixct_median,
   n_unique = n_unique 
 )
-
 
 asis_funs<-list(
   missing = n_missing,
@@ -119,7 +118,7 @@ list_funs<-list(
   date = date_funs,
   Date = date_funs,
   ts = ts_funs,
-  POSIXct = posixct_funs,
+  POSIXct = POSIXct_funs,
   list = list_funs,
   AsIs = asis_funs
 )
