@@ -16,11 +16,34 @@ particular data type.}
 \item{append}{Whether the provided functions should be in addition to the
 defaults already in skim.}
 }
+\value{
+Nothing. \code{invisible(NULL)}
+}
 \description{
-Set or add the summary functions for a particular type of data
+While skim is designed around having an opinionated set of defaults, you
+can use this function to change the summary statistics that it returns.
+To do that, provide type you wish to change as an argument to this function,
+along with a list of named functions that you want to use instead of the
+defaults. The \code{append} argument lets you decide whether you want to
+replace the defaults or add to them.
+}
+\details{
+This function is not pure. It sets values in within the package environment.
+This is an intentional design choice, with effects similar to setting
+options in base R. By setting options here for your entire session, you
+can continue to summarize using skim on its own.
 }
 \section{Functions}{
 \itemize{
 \item \code{skim_with_defaults}: Use the default functions within skim
 }}
 
+\examples{
+# Use new functions for numeric functions
+skim_with(numeric = list(median = median, mad = mad), append = FALSE)
+skim(faithful)
+
+# Go back to defaults
+skim_with_defaults()
+skim(faithful)
+}
