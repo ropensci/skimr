@@ -12,7 +12,7 @@ numeric_funs <- list(
   sd = sd_num,
   min = purrr::partial(min, na.rm = TRUE),
   median = median_num,
-  quantile = quantiles_num,
+  quantile = quantile_num,
   max = purrr::partial(max, na.rm = TRUE),
   hist = inline_hist
 )
