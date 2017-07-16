@@ -8,11 +8,11 @@ numeric_funs <- list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  mean = purrr::partial(mean, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
+  mean = mean_num,
+  sd = sd_num,
   min = purrr::partial(min, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
+  median = median_num,
+  quantile = quantiles_num,
   max = purrr::partial(max, na.rm = TRUE),
   hist = inline_hist
 )
@@ -70,11 +70,11 @@ ts_funs <- list(
   end = ts_end,
   frequency = stats::frequency,
   deltat = stats::deltat,
-  mean = purrr::partial(mean, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
+  mean = mean_num,
+  sd = sd_num,
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
+  median = median_num,
   line_graph  = inline_linegraph
 )
 

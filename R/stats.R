@@ -22,6 +22,60 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
+
+#' Calculate mean and create formatted value
+#' 
+#' Always excludes missings
+#' @param x A numeric vector
+#' @return The mean and the formatted value
+#' @export
+mean_num<- function(x){
+  mean <- mean(x, na.rm = TRUE)
+  attr(mean, "formatted_value") <- formatC(mean, width = 5, digits = 1,  format = "f", flag ="#")
+
+  mean
+}
+
+#' Calculate standard deviation and create formatted value
+#' 
+#' Always excludes missings
+#' @param x A numeric vector
+#' @return The mean and the formatted value
+#' @export
+sd_num<- function(x){
+  sd <- sd(x, na.rm = TRUE)
+  attr(sd, "formatted_value") <- formatC(sd,  width = 5, digits = 1,  format = "f", flag ="#")
+
+  sd
+}
+
+#' Calculate median and create formatted value
+#' 
+#' Always excludes missings
+#' @param x A numeric vector
+#' @return The mean and the formatted value
+#' @export
+median_num<- function(x){
+  med <- median(x, na.rm = TRUE)
+  attr(med, "formatted_value") <- formatC(med,  width = 5, digits = 1,  format = "f", flag ="#")
+
+  med
+}
+
+#' Calculate 25th and 75th quantiles and create formatted value
+#' 
+#' Always excludes missings
+#' @param x A numeric vector
+#' @return The 25th and 75th and formatted values
+#' @export
+quantiles_num<- function(x){
+  quantiles <- quantile(x, probs = c(.25, .75), na.rm = TRUE)
+  attr(quantiles, "formatted_value") <- c(formatC(quantiles[1],  width = 5, digits = 1,  format = "f", flag ="#"),
+                                    formatC(quantiles[2],  width = 5, digits = 1,  format = "f", flag ="#"))
+  quantiles
+}
+
+
 #' Generate inline histogram for numeric variables
 #' 
 #' @param x A vector
@@ -35,11 +89,12 @@ inline_hist <- function(x) {
     attr(out, "formatted_value") <- ""
     return(out)
   }
-    hist_dt <- table(cut(x, 10))
-    hist_dt <- hist_dt / max(hist_dt)
-    attr(out, "formatted_value") <- colformat::spark_bar(hist_dt)
-    return(out)
+  hist_dt <- table(cut(x, 10))
+  hist_dt <- hist_dt / max(hist_dt)
+  attr(out, "formatted_value") <- colformat::spark_bar(hist_dt)
 
+  return(out)
+  
 }
 
 
