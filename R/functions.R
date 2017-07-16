@@ -29,6 +29,7 @@ functions$current <- .default
 #' @return Nothing. \code{invisible(NULL)}
 #' @export
 #' @examples
+#' \dontrun{
 #' # Use new functions for numeric functions
 #' skim_with(numeric = list(median = median, mad = mad), append = FALSE)
 #' skim(faithful)
@@ -36,6 +37,7 @@ functions$current <- .default
 #' # Go back to defaults
 #' skim_with_defaults()
 #' skim(faithful)
+#' }
 
 skim_with <- function(..., append = TRUE) {
   # Argument assertions
@@ -62,7 +64,10 @@ set_functions <- function(type, newfuns, append) {
     message("Adding new summary functions for type: ", type)
   } else if (append) {
     old <- functions$current[[type]]
-    newfuns <- c(old, newfuns)
+    for (fn in names(newfuns)) {
+      old[[fn]] <- newfuns[[fn]]
+    }
+    newfuns <- old
   }
   
   functions$current[[type]] <- newfuns
@@ -83,12 +88,26 @@ skim_with_defaults <- function() {
 #' a list. The names of the values in the list match the names of the classes
 #' that have assigned sets of summary functions.
 #' 
+#' @param which A character vector. One or more of the classes whose summary
+#'  functions you wish to display.
 #' @return A list. The names of the list match the classes that have assigned
 #'  summary functions.
 #' @export
 
-show_skimmers <- function() {
-  lapply(functions$current, names)
+show_skimmers <- function(which = NULL) {
+  stopifnot(is.null(which) || is.character(which))
+  skimmers <- lapply(functions$current, names)
+  if (is.null(which)) {
+    skimmers
+  } else {
+    out <- skimmers[which]
+    missed <- is.na(names(out))
+    if (any(missed)) {
+      warning("Skim functions aren't defined for type(s): ",
+              paste(which[missed], collapse = ", "))
+    }
+    out[!missed]
+  }
 }
 
 
