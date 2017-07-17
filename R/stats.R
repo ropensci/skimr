@@ -43,7 +43,7 @@ mean_num<- function(x){
 #' @return The mean and the formatted value
 #' @export
 sd_num<- function(x){
-  sd <- sd(x, na.rm = TRUE)
+  sd <- stats::sd(x, na.rm = TRUE)
   attr(sd, "formatted_value") <- formatC(sd,  width = 5, digits = 1,  format = "f", flag ="#")
 
   sd
@@ -56,7 +56,7 @@ sd_num<- function(x){
 #' @return The mean and the formatted value
 #' @export
 median_num<- function(x){
-  med <- median(x, na.rm = TRUE)
+  med <- stats::median(x, na.rm = TRUE)
   attr(med, "formatted_value") <- formatC(med,  width = 5, digits = 1,  format = "f", flag ="#")
 
   med
@@ -69,7 +69,7 @@ median_num<- function(x){
 #' @return The 25th and 75th and formatted values
 #' @export
 quantile_num<- function(x){
-  quantiles <- quantile(x, probs = c(.25, .75), na.rm = TRUE)
+  quantiles <- stats::quantile(x, probs = c(.25, .75), na.rm = TRUE)
   attr(quantiles, "formatted_value") <- c(formatC(quantiles[1],  width = 5, digits = 1,  format = "f", flag ="#"),
                                     formatC(quantiles[2],  width = 5, digits = 1,  format = "f", flag ="#"))
   quantiles
