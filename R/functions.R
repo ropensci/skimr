@@ -37,6 +37,11 @@ functions$current <- .default
 #' # Go back to defaults
 #' skim_with_defaults()
 #' skim(faithful)
+#' 
+#' # If you want to remove a particular skimmer, set it to NULL
+#' # This removes the inline histogram
+#' skim_with(numeric = list(hist = NULL))
+#' skim(faithful)
 #' }
 
 skim_with <- function(..., append = TRUE) {

@@ -54,6 +54,14 @@ test_that("Skimmer list is updated correctly when changing functions", {
   skim_with_defaults()
 })
 
+test_that("Skim functions can be removed by setting them to NULL", {
+  skim_with(numeric = list(hist = NULL))
+  correct <- list(numeric = c("missing", "complete", "n", "mean",  "sd", "min",
+                              "median", "quantile", "max"))
+  input <- show_skimmers("numeric")
+  expect_identical(correct, input)
+})
+
 correct <- tibble::tribble(
   ~type,     ~stat,      ~level,  ~value,
   "numeric", "iqr",      ".all",  IQR(iris$Sepal.Length),
