@@ -41,7 +41,8 @@ formatnum <- function(x) {
   tmp2 <- dplyr::mutate(dplyr::filter(x, stat == "hist"), value = level)
   tmp2 <- tidyr::spread(dplyr::select(tmp2, -level), stat, value)
   
-  tmp <- dplyr::left_join(tmp1, tmp2, by = c("var", "type"))
+  var_names <- setdiff(names(tmp2), "hist")
+  tmp <- dplyr::left_join(tmp1, tmp2, by = var_names)
   return(tmp)
 }
 

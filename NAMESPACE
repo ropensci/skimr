@@ -2,6 +2,7 @@
 
 S3method(print,skim_df)
 S3method(skim,data.frame)
+S3method(skim,grouped_df)
 export("%>%")
 export(inline_hist)
 export(inline_linegraph)
