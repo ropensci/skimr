@@ -35,12 +35,12 @@ correct <- tibble::tribble(
   "numeric",      "missing",".all",0,"0",
   "numeric",      "complete",".all",150,"150",
   "numeric",      "n",".all",150,"150",
-  "numeric",      "mean",".all",mean(iris$Sepal.Length),as.character(mean(iris$Sepal.Length)),
-  "numeric",      "sd",".all",sd(iris$Sepal.Length),as.character(sd(iris$Sepal.Length)),
+  "numeric",      "mean",".all", mean(iris$Sepal.Length),"  5.8",
+  "numeric",      "sd",".all", sd(iris$Sepal.Length), "  0.8",
   "numeric",      "min",".all",4.3,"4.3",
-  "numeric",      "median",".all",5.8,"5.8",
-  "numeric",      "quantile","25%",5.1,"5.1",
-  "numeric",      "quantile","75%",6.4,"6.4",
+  "numeric",      "median",".all",5.8,"  5.8",
+  "numeric",      "quantile","25%",5.1,"  5.1",
+  "numeric",      "quantile","75%",6.4,"  6.4",
   "numeric",      "max",".all",7.9,"7.9",
   "numeric",      "hist",".all",0,"▂▇▅▇▆▆▅▂▂▂",
   "numeric",      "iqr",".all",IQR(iris$Sepal.Length),"1.3",
@@ -51,8 +51,10 @@ test_that("Skimming functions can be appended.", {
   skim_with_defaults()
   funs <- list(iqr = IQR,
                quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = funs, append = TRUE)
+  skim_with(numeric = funs)
   input <- skim_v(iris$Sepal.Length)
+  print(correct)
+  print(input)
   # Restore defaults
   skim_with_defaults()
   expect_identical(input, correct)
@@ -101,11 +103,11 @@ test_that("Skimming functions without a name return a message.", {
 
 skim_with_defaults()
 
-test_that("show_skimmers() has a correct list of functions for a type", {
+test_that("show_skimmers() has a correct list of functions for a type (default)", {
   skim_with_defaults()
   correct <- names(get_funs("numeric"))
   skimmers <- show_skimmers()
-  input <- names(skimmers[["numeric"]])
+  input <- skimmers[["numeric"]]
   identical(input, correct)
 })
 

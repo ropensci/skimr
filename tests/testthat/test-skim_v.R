@@ -7,12 +7,12 @@ correct <- tibble::tribble(
   "numeric","missing",".all",0,"0",
   "numeric","complete",".all",32,"32",
   "numeric","n",".all",32,"32",
-  "numeric","mean",".all",mean(mtcars$mpg),as.character(mean(mtcars$mpg)),
-  "numeric","sd",".all",sd(mtcars$mpg),as.character(sd(mtcars$mpg)),
+  "numeric","mean",".all",mean(mtcars$mpg)," 20.1",
+  "numeric","sd",".all",sd(mtcars$mpg),"  6.0",
   "numeric","min",".all",10.4,"10.4",
-  "numeric","median",".all",19.2,"19.2",
-  "numeric","quantile","25%",15.425,"15.425",
-  "numeric","quantile","75%",22.8,"22.8",
+  "numeric","median",".all",19.2," 19.2",
+  "numeric","quantile","25%",15.425," 15.4",
+  "numeric","quantile","75%",22.8," 22.8",
   "numeric","max",".all",33.9,"33.9",
   "numeric","hist",".all",0,"▂▅▇▇▇▃▁▁▂▂"
   )
@@ -74,12 +74,12 @@ correct_pathological_numeric <- tibble::tribble(
     "numeric","missing",".all",1,"1",
   "numeric","complete",".all",2,"2",
   "numeric","n",".all",3,"3",
-  "numeric","mean",".all",0,"0",
-  "numeric","sd",".all",sd(pathological, na.rm = TRUE),as.character(sd(pathological, na.rm = TRUE)),
-  "numeric","min",".all", -(2^.Machine$double.digits),as.character( -(2^.Machine$double.digits)),
-  "numeric","median",".all",0,"0",
-  "numeric","quantile","25%",path_quantiles[1],as.character(path_quantiles[1]),
-  "numeric","quantile","75%",path_quantiles[2],as.character(path_quantiles[2]),
+  "numeric","mean",".all",0,"  0.0",
+  "numeric","sd",".all",sd(pathological, na.rm = TRUE),"12738103345051546.0",
+  "numeric","min",".all", -(2^.Machine$double.digits),"-9007199254740992",
+  "numeric","median",".all",0,"  0.0",
+  "numeric","quantile","25%",path_quantiles[1],"-4503599627370496.0",
+  "numeric","quantile","75%",path_quantiles[2],"4503599627370496.0",
   "numeric","max",".all",+(2^.Machine$double.digits), as.character(+(2^.Machine$double.digits)),
   "numeric","hist",".all",0,"▇▁▁▁▁▁▁▁▁▇"
   )
@@ -245,11 +245,11 @@ correct <- tibble::tribble(
   "ts","end",".all",1971,"1971",
   "ts","frequency",".all",4,"4",
   "ts","deltat",".all",0.25,"0.25",
-  "ts","mean",".all",mean(freeny$y),as.character(mean(freeny$y)),
-  "ts","sd",".all",sd(freeny$y),as.character(sd(freeny$y)),
+  "ts","mean",".all",mean(freeny$y),"  9.3",
+  "ts","sd",".all",sd(freeny$y),"  0.3",
   "ts","min",".all",8.79137,"8.79137",
   "ts","max",".all",9.79424,"9.79424",
-  "ts","median",".all",9.31378,"9.31378",
+  "ts","median",".all",9.31378,"  9.3",
   "ts","line_graph",".all",0,"⣀⣀⣀⣀⣀⠤⠤⠤⠤⠔⠒⠒⠒⠒⠉⠉⠉⠉⠉⢁"
   
 )

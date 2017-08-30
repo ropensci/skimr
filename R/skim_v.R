@@ -30,26 +30,30 @@ skim_v <- function(x, FUNS = class(x)) {
 
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(funs ,~.x(x)) 
+  values_out <- purrr::flatten_dbl(values)
 
   formatted_value <- purrr::map(values, purrr::get_attr("formatted_value"))
-  values_out <- purrr::flatten_dbl(values)
-  formatted_values <- unlist(formatted_value)
+
+  for (i in 1:length(formatted_value)){
+    if (is.null(formatted_value[[i]])){
+      formatted_value[[i]] <- as.character(values[[i]])
+    }
+  }
+
+  formatted_value <- purrr::flatten_chr(formatted_value)
 
   # Get the name of the computed statistic and a corresponding level
   lens <- purrr::map_int(values, length)
   stats <- purrr::map2(names(funs), lens, rep)
-  nms <- purrr::map(values, ~names(.x))
- 
-  level <- purrr::modify_if(nms, is.null, ~".all")
-  display <- as.character(values_out)
-
   stats <- purrr::flatten_chr(stats)
-  display <- ifelse(stats %in% names(formatted_values), formatted_values, display)
+  nms <- purrr::map(values, ~names(.x))
+
+  level <- purrr::modify_if(nms, is.null, ~".all")
 
   # Produce output
   tibble::tibble(type = get_fun_names(FUNS), 
     stat = stats,
     level = purrr::flatten_chr(level), 
     value = unname(values_out),
-    formatted_value = display)
+    formatted_value = unname(unlist(formatted_value)))
 }
