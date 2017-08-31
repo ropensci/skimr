@@ -32,7 +32,7 @@ skim_v <- function(x, FUNS = class(x)) {
   values <- purrr::map(funs ,~.x(x)) 
   values_out <- purrr::flatten_dbl(values)
 
-  formatted_value <- purrr::map(values, purrr::get_attr("formatted_value"))
+  formatted_value <- purrr::map(values, purrr::attr_getter("formatted_value"))
 
   for (i in 1:length(formatted_value)){
     if (is.null(formatted_value[[i]])){
