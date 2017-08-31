@@ -227,3 +227,43 @@ test_that("posixct_median is calculated correctly.", {
   expect_equal(as.numeric(median(dat)), 1309478404)
   
 })
+
+test_that("mean_num is calculated correctly.", {
+  data<-c(1, 2, 3, NA)
+  correct <- 2
+  attr(correct, "formatted_value") <- "  2.0"
+  input <- mean_num(data)
+  expect_identical(input, correct)
+})
+
+test_that("median_num is calculated correctly.", {
+  data<-c(1, 2.1, 3, NA)
+  correct <- 2.1
+  attr(correct, "formatted_value") <- "  2.1"
+  input <- median_num(data)
+  expect_identical(input, correct)
+})
+
+test_that("median_num is calculated correctly.", {
+  data<-c(1, 2.1, 3, NA)
+  correct <- 2.1
+  attr(correct, "formatted_value") <- "  2.1"
+  input <- median_num(data)
+  expect_identical(input, correct)
+})
+
+test_that("sd_num is calculated correctly.", {
+  data<-c(1, 2.1, 3, NA)
+  correct <- sd(data, na.rm = TRUE)
+  attr(correct, "formatted_value") <- "  1.0"
+  input <- sd_num(data)
+  expect_identical(input, correct)
+})
+
+test_that("quantile_num is calculated correctly.", {
+  data<-seq_along(1:100)
+  correct <- quantile(data, probs=c(.25, .75),  na.rm = TRUE)
+  attr(correct, "formatted_value") <- c("25%" = " 25.8", "75%" = " 75.2")
+  input <- quantile_num(data)
+  expect_identical(input, correct)
+})
