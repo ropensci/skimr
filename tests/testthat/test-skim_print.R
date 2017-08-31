@@ -16,27 +16,17 @@ correct <- tibble::tribble(
 )
 
 test_that("print_handling() returns expected response for ordered factor vectors", {
-  input <- sk_print_factor(skim_object[skim_object$type == "ordered",])
-  expect_identical(input, correct)
-})
-attr(correct, "subtibble_title") <- "Ordered Variables\n"
-
-test_that("skim_print returns expected response (adds subtibble_title attribute) for ordered factor vectors", {
-  input <- sk_print_object[["ordered"]]
-  expect_identical(input, correct)
+  input <- sk_print_object[[ "factor"]]
+  expect_identical(input[1,], correct)
 })
 
 #--- Factor
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
+  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0",
   "Treatment",  "84",        "0", "84",   "2",           "nonchilled:42 chilled:42 NA:0"
 
 )
-
-test_that("print_handling() returns expected response for factor vectors", {
-  input <- sk_print_factor(skim_object[skim_object$type == "factor",])
-  expect_identical(input, correct)
-})
 
 attr(correct, "subtibble_title") <- "Factor Variables\n"
 
@@ -70,10 +60,7 @@ correct <- tibble::tribble(
   ~var,   ~missing, ~complete, ~n,   ~min, ~max, ~empty, ~n_unique,
   "Type",  "0",        "84",   "84",  "6",    "11",    "0",       "2"
 )
-test_that("print_handling() returns expected response for character vectors", {
-  input <- sk_print_default(skim_object[skim_object$type == "character",])
-  expect_identical(input, correct)
-})
+
 attr(correct, "subtibble_title") <- "Character Variables\n"
 test_that("skim_print() returns expected response for character vectors", {
   input <- sk_print_object[["character"]]
@@ -82,14 +69,11 @@ test_that("skim_print() returns expected response for character vectors", {
 
 #--- Integer
 correct <- tibble::tribble(
-~var,   ~missing, ~complete,  ~n,  ~mean,  ~sd,                        ~min,  ~median,  ~`quantile 25%`,~`quantile 75%`,~max, ~hist,
+~var,   ~missing, ~complete,  ~n,  ~mean,  ~sd,    ~min,  ~median,  ~`quantile 25%`,~`quantile 75%`,~max, ~hist,
 "conc",  "0",        "84",    "84", "435.0", "295.9", "95",     "350.0",     "175.0",       "675.0",      "1000", "▇▃▃▁▃▁▃▁▁▃"
 )
 correct_integer <- correct
-test_that("print_handling() returns expected response for integer vectors", {
-  input <- sk_print_default(skim_object[skim_object$type == "integer",])
-  expect_identical(input, correct)
-})
+
 attr(correct, "subtibble_title") <- "Integer Variables\n"
 test_that("print_handling() returns expected response for integer vectors", {
   input <- sk_print_object[["integer"]]
@@ -109,10 +93,6 @@ correct <- tibble::tribble(
   ~var,~missing,~complete,~n,~start,~end,~frequency,~deltat,~mean,~sd,~min,~max,~median,~line_graph,
   "y","0","39","39","1962","1971","4","0.25","  9.3","  0.3","8.79137","9.79424","  9.3","⣀⣀⣀⣀⣀⠤⠤⠤⠤⠔⠒⠒⠒⠒⠉⠉⠉⠉⠉⢁"
 )
-test_that("print_handling() returns expected response for 1:13 ts vectors", {
-  input <- sk_print_default(skim_object2[skim_object2$type == "ts",])
-  expect_equal(input, correct)
-})
 
 test_that("skim_print() returns expected title for ts vectors", {
   input <- sk_print_object2[["ts"]]
@@ -123,6 +103,11 @@ data(CO2)
 test_df <- CO2[c("Treatment", "Type")]
 test_df$Treatment <- as.factor(test_df$Treatment)
 test_df$Type <- as.factor(test_df$Type)
+skim_object4 <-skim(test_df)
+skim_object4$stat <- ifelse(skim_object4$level == ".all" |  skim_object4$stat == "count",
+                           skim_object4$stat,  paste(skim_object4$stat, skim_object4$level))
+
+# We need to do this because different OSes will sort the factor labels differently.
 withr::with_locale(c(LC_COLLATE = "C"), code = '
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
@@ -131,9 +116,9 @@ correct <- tibble::tribble(
 )
 test_that("print handling returns correct response when there are multiple factor variables", {
 
-          input<-sk_print_factor(skim_object4)
-          expect_identical(dim(input), dim(correct))
-          expect_identical(input$counts, correct$counts)
+    input<-skim_print(skim_object4)[["factor"]]
+    expect_identical(dim(input), dim(correct))
+    expect_identical(input$counts, correct$counts)
 } )
 '
 )
@@ -159,7 +144,7 @@ correct <- tibble::tribble(
 data(mtcars)
 skim_with_defaults()
 skim_object5 <- mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
-skim_print_object5<-print(skim_object5)
+skim_print_object5<-skim_print(skim_object5)
 
 test_that("print handling returns correct response with grouped data.", {
    input <- skim_print_object5$numeric

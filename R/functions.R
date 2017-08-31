@@ -48,16 +48,12 @@ skim_with <- function(..., append = TRUE) {
   # Argument assertions
   stopifnot(is.logical(append), length(append) == 1)
   funs <- list(...)
+
   if (any(is.null(names(funs))) || any(names(funs) == "")) {
     stop("Please used named arguments as follows: <type> = <list of functions>")
   }
   nms <- purrr::map(funs, names)
-  has_null <- purrr::map_lgl(nms, ~any(.x == ""))
-  if (any(has_null)) {
-    msg <- paste(names(funs)[has_null], collapse = ", ")
-    stop("A function is missing a name within this type: ", msg)
-  }
-  
+
   purrr::map2(names(funs), funs, set_functions, append)
   invisible(NULL)
 }
