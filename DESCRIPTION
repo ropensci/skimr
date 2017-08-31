@@ -1,6 +1,6 @@
 Package: skimr
 Title: skimr
-Version: 1.0
+Version: 0.9000
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "cre"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -38,6 +38,7 @@ VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Collate: 
     'stats.R'
+    'defaults.R'
     'functions.R'
     'print_handlers.R'
     'skim.R'

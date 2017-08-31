@@ -24,7 +24,7 @@ devtools::install_github("ropenscilabs/skimr")
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
 - handles dates, logicals
-- uses [Hadley's colformats](https://github.com/hadley/colformat), specifically `colformats::spark-bar()`
+- uses [Hadley Wickham's colformat package](https://github.com/hadley/colformat), specifically `colformat::spark-bar()`
 
 **Nicely separates numeric and factor variables:**  
 

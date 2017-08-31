@@ -1,129 +1,5 @@
-#' @include stats.R
+#' @include defaults.R
 NULL
-
-
-# Default summarizing functions for each type -----------------------------
-
-numeric_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  mean = purrr::partial(mean, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
-  min = purrr::partial(min, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  quantile = purrr::partial(quantile, probs = c(.25, .75), na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  hist = inline_hist
-)
-
-factor_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  count = purrr::partial(table, useNA = "always"),
-  n_unique = n_unique
-)
-
-character_funs <- list (
-  missing  = n_missing,
-  complete = n_complete,
-  n = length,
-  min = min_char,
-  max = max_char,
-  empty = n_empty,
-  n_unique = n_unique
-)
-
-logical_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  count = purrr::partial(table, useNA = "always"),
-  mean = purrr::partial(mean, na.rm = TRUE)
-)
-
-integer_funs <- numeric_funs
-
-
-complex_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length
-)
-
-date_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  min = date_min,
-  max = date_max,
-  median = date_median,
-  n_unique = n_unique
-)
-
-ts_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  start = ts_start,
-  end = ts_end,
-  frequency = stats::frequency,
-  deltat = stats::deltat,
-  mean = purrr::partial(mean, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  line_graph  = inline_linegraph
-)
-
-POSIXct_funs<-list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  min = posixct_min,
-  max = posixct_max,
-  median = posixct_median,
-  n_unique = n_unique 
-)
-
-asis_funs<-list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  n_unique = n_unique,
-  min_length= list_min_length,
-  max_length = list_max_length
-)
-
-list_funs<-list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  n_unique = n_unique,
-  min_length = list_lengths_min,
-  median_length = list_lengths_median,
-  max_length = list_lengths_max
-)
-
-.default <- list(
-  numeric = numeric_funs,
-  integer = integer_funs,
-  factor = factor_funs,
-  ordered = factor_funs,
-  character = character_funs,
-  logical = logical_funs,
-  complex = complex_funs,
-  date = date_funs,
-  Date = date_funs,
-  ts = ts_funs,
-  POSIXct = POSIXct_funs,
-  list = list_funs,
-  AsIs = asis_funs
-)
-
-
 
 # Build environment for storing functions ---------------------------------
 
@@ -131,23 +7,59 @@ functions <- new.env()
 functions$default <- .default
 functions$current <- .default
 
+
 #' Set or add the summary functions for a particular type of data
+#' 
+#' While skim is designed around having an opinionated set of defaults, you
+#' can use this function to change the summary statistics that it returns.
+#' To do that, provide type you wish to change as an argument to this function,
+#' along with a list of named functions that you want to use instead of the
+#' defaults. The \code{append} argument lets you decide whether you want to
+#' replace the defaults or add to them.
+#' 
+#' This function is not pure. It sets values in within the package environment.
+#' This is an intentional design choice, with effects similar to setting
+#' options in base R. By setting options here for your entire session, you
+#' can continue to summarize using skim on its own.
 #' 
 #' @param ... A list of functions, with an argument name that matches a
 #'   particular data type.
 #' @param append Whether the provided functions should be in addition to the
 #'   defaults already in skim.
+#' @return Nothing. \code{invisible(NULL)}
 #' @export
+#' @examples
+#' \dontrun{
+#' # Use new functions for numeric functions
+#' skim_with(numeric = list(median = median, mad = mad), append = FALSE)
+#' skim(faithful)
+#' 
+#' # Go back to defaults
+#' skim_with_defaults()
+#' skim(faithful)
+#' 
+#' # If you want to remove a particular skimmer, set it to NULL
+#' # This removes the inline histogram
+#' skim_with(numeric = list(hist = NULL))
+#' skim(faithful)
+#' }
 
 skim_with <- function(..., append = TRUE) {
+  # Argument assertions
+  stopifnot(is.logical(append), length(append) == 1)
   funs <- list(...)
+  if (any(is.null(names(funs))) || any(names(funs) == "")) {
+    stop("Please used named arguments as follows: <type> = <list of functions>")
+  }
   nms <- purrr::map(funs, names)
-  has_null <- purrr::map_lgl(nms, ~any(is.null(.x)))
+  has_null <- purrr::map_lgl(nms, ~any(.x == ""))
   if (any(has_null)) {
     msg <- paste(names(funs)[has_null], collapse = ", ")
     stop("A function is missing a name within this type: ", msg)
   }
-  all <- purrr::map2(names(funs), funs, set_functions, append)
+  
+  purrr::map2(names(funs), funs, set_functions, append)
+  invisible(NULL)
 }
 
 set_functions <- function(type, newfuns, append) {
@@ -157,7 +69,10 @@ set_functions <- function(type, newfuns, append) {
     message("Adding new summary functions for type: ", type)
   } else if (append) {
     old <- functions$current[[type]]
-    newfuns <- c(old, newfuns)
+    for (fn in names(newfuns)) {
+      old[[fn]] <- newfuns[[fn]]
+    }
+    newfuns <- old
   }
   
   functions$current[[type]] <- newfuns
@@ -174,15 +89,40 @@ skim_with_defaults <- function() {
 
 #' Show summary functions currently used, by column type
 #' 
-#' @return Nothing. \code{invisible()}
+#' The names of the summary functions are stored as a character vector within
+#' a list. The names of the values in the list match the names of the classes
+#' that have assigned sets of summary functions.
+#' 
+#' @param which A character vector. One or more of the classes whose summary
+#'  functions you wish to display.
+#' @return A list. The names of the list match the classes that have assigned
+#'  summary functions.
 #' @export
 
-show_skimmers <- function() {
-  lapply(functions$current, names)
+show_skimmers <- function(which = NULL) {
+  stopifnot(is.null(which) || is.character(which))
+  skimmers <- lapply(functions$current, names)
+  if (is.null(which)) {
+    skimmers
+  } else {
+    out <- skimmers[which]
+    missed <- is.na(names(out))
+    if (any(missed)) {
+      warning("Skim functions aren't defined for type(s): ",
+              paste(which[missed], collapse = ", "))
+    }
+    out[!missed]
+  }
 }
 
 
-# A method for getting a set of summary functions, by type
+# An internal method for getting a set of summary functions, by type. We use
+# this approach instead of method dispatch because we want to be able to
+# dynamically add or remove the summary functions for each type.
+#
+# The call to purrr::detect returns the first appropriate match for objects
+# that have more than one class. Doing it this way saves us from having
+# to define methods for multiple classes.
 #
 # @param type The type of summary functions to extract
 # @return A list of summary functions
@@ -194,10 +134,16 @@ get_funs <- function(type) {
   purrr::detect(all, purrr::compose(`!`, is.null))
 }
 
-# A method for getting the name of set of summary functions, by type
+
+# A method for getting the name of set of summary functions names, by type.
+# This function is similar to get_funs, in that it applies a type of dispatch
+# for the type of object provided. This function gets the name of the
+# group of summary functions for the type. This lets the user know what set of
+# functions are used in producing the skim_df.
 #
 # @param type The type of summary functions to extract
-# @return A list of summary functions
+# @return A length-one character vector that shows the class that was matched
+#  by skimr.
 # @keywords internal
 # @export
 

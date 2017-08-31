@@ -4,11 +4,18 @@
 \alias{show_skimmers}
 \title{Show summary functions currently used, by column type}
 \usage{
-show_skimmers()
+show_skimmers(which = NULL)
+}
+\arguments{
+\item{which}{A character vector. One or more of the classes whose summary
+functions you wish to display.}
 }
 \value{
-Nothing. \code{invisible()}
+A list. The names of the list match the classes that have assigned
+ summary functions.
 }
 \description{
-Show summary functions currently used, by column type
+The names of the summary functions are stored as a character vector within
+a list. The names of the values in the list match the names of the classes
+that have assigned sets of summary functions.
 }
