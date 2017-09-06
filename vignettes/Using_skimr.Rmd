@@ -1,0 +1,124 @@
+---
+title: "Using Skimr"
+author: "Elin Waring"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using Skimr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The skimr package is designed to provide summary statistics about variables in base R the
+most similar functions are summary() for vectors and data frames and fivenum() for numeric 
+vectors. It is opinionated in its defaults but easy to modify.
+
+For comparison purposes here are examples of the similar functions.
+
+```{r}
+summary(iris)
+```
+```{r}
+summary(iris$Sepal.Length)
+```
+```{r}
+fivenum(iris$Sepal.Length)
+```
+```{r}
+summary(iris$Species)
+
+```
+
+
+# The skim function
+
+The core function of skimr is skim().  Skim is a generic function, but the skim package only 
+includes support for data frames and grouped data frames. Like summary for data frames, skim
+presents results for all of the columns and the statistics depend on the class of the variable.
+
+However, unlike summary.data.frame(), the printed results (those displayed in the console
+or in a knitted markdown file) are shown horizontally with one row per variable
+and separated into separate tibbles for each class of variables.  The actual results are 
+stored in a `skim_df` object that is also a tibble 
+In `summary.data.frame()` the statistics are stored in a `table` with
+one column for each variable and the standard table printing is used to display the results. 
+
+```{r}
+library(skimr)
+skim(iris)
+```
+
+This distinction is important because the skim_df object is easy to use for additional manipulation
+if desired and is pipeable. For example all of the results for a particular statistic or for one 
+variable could be selected or an alternative printing method sould be developed.  
+
+The skim_df object always contains 6 columns: 
+
+ - `var` the name of the original variable
+ - `type` the class of the variable
+ - `stat` the statistic calculated with the name becoming the column name when the object is printed.
+ - `level` is used when a statistic is referenced multiple times in the skim_df, such as for counts of levels for factor variables or the specific quantiles included.
+ - `value` is the actual calculated value of the statistic and should be used for further calculations. This is always numeric.
+ - `formatted_value` is a formatted version of value that attempts to use reasonable number of digits and put items such as dates into human readable formats. It is a character variable.
+ 
+
+```{r}
+s <- skim(iris)
+head(as.data.frame(s), 15)
+```
+
+
+# The skim_v() function
+
+The `skim_v()` function is the actual workhorse of `skimr` in that it processes each of the columns 
+as a vector.  If you have data that is not a data frame one simple solution is to use `skim_v()` 
+on individual vectors. For example the lynx data set is class `ts`.
+
+```{r}
+skim_v(datasets::lynx)
+```
+
+
+If you attempt to use `skim_v()` on a class that does not have support, it will coerce it to 
+character (with a warning) and report number NA, number complete (non missing), number of rows, the 
+number empty (i.e. ""), minimum length of non empty strings, maximum length of non empty strings,
+and number of unique values.
+```{r}
+lynx <- datasets::lynx
+class(lynx) <- "unkown_class"
+skim_v(lynx)
+```
+
+# The skim_with() function
+
+Skimr is opinionated in its choice of defaults, but users can easily add too, replace, or remove
+the statistics for a class.   
+
+To add a statistic use the a named list for each class using the format 
+```
+classname = list(mad_name = mad)
+```
+```{r}
+skim_with(numeric = list(mad_name = mad))
+skim(datasets::chickwts)
+```
+
+The `skim_with_defaults()` function resets the list to the defaults.   By default `skim_with()`
+appends the new statstics, but setting append=FALSE replaces the defaults. 
+
+
+```{r}
+skim_with_defaults()
+skim_with(numeric = list(mad_name = mad), append = FALSE)
+skim(datasets::chickwts)
+skim_with_defaults() # Reset to defaults
+```
+You can also use `skim_witn()` to remove specific statistics by setting them to NULL.
+
+```{r}
+skim_with(numeric = list(hist = NULL))
+skim(datasets::chickwts)
+skim_with_defaults() #
+```
+
+
