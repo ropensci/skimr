@@ -68,6 +68,15 @@ head(as.data.frame(s), 15)
 ```
 
 
+`skim()` also supports grouped data.  
+
+```{r}
+mtcars %>% dplyr::group_by(gear) %>% skim()
+
+```
+
+
+
 # The skim_v() function
 
 The `skim_v()` function is the actual workhorse of `skimr` in that it processes each of the columns 
