@@ -203,6 +203,6 @@ test_that("Skimming a grouped data frame works as expected (level)", {
   expect_identical(input$level, correct_grouped$level)
 })
 test_that("Grouped data get the correct class",{
-  expect_identical(class(input), c("skim_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
+  expect_identical(class(input), c("skim_df", "skim_grouped_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
 })
 skim_with_defaults()

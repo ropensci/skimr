@@ -17,7 +17,7 @@ skim_print <- function(x){
   types_custom <- names(print_handling)
   group_by_vars_title <- NULL
 
-  if ("grouped_df" %in% class(x)){
+  if ("skim_grouped_df" %in% class(x)){
 
     group_by_vars <- as.character(attr(x, "vars"))
     group_by_vars_title <- paste(group_by_vars, collapse = ", ")
