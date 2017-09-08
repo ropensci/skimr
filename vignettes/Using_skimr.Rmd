@@ -9,9 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The skimr package is designed to provide summary statistics about variables in base R the
-most similar functions are summary() for vectors and data frames and fivenum() for numeric 
-vectors. It is opinionated in its defaults but easy to modify.
+The skimr package is designed to provide summary statistics about variables. In base R the
+most similar functions are `summary()` for vectors and data frames and `fivenum()` for numeric 
+vectors. Skimr is opinionated in its defaults but easy to modify.
 
 For comparison purposes here are examples of the similar functions.
 
@@ -32,7 +32,7 @@ summary(iris$Species)
 
 # The skim function
 
-The core function of skimr is skim().  Skim is a generic function, but the skim package only 
+The core function of skimr is skim().  Skim is a S3 generic function; the skim package 
 includes support for data frames and grouped data frames. Like summary for data frames, skim
 presents results for all of the columns and the statistics depend on the class of the variable.
 
@@ -68,16 +68,15 @@ head(as.data.frame(s), 15)
 ```
 
 
-`skim()` also supports grouped data.  
+`skim()` also supports grouped data.  For grouped data one additional column for each grouping 
+variable is added to the skim object.
 
 ```{r}
 mtcars %>% dplyr::group_by(gear) %>% skim()
 
 ```
 
-
-
-# The skim_v() function
+# The skim_v function
 
 The `skim_v()` function is the actual workhorse of `skimr` in that it processes each of the columns 
 as a vector.  If you have data that is not a data frame one simple solution is to use `skim_v()` 
@@ -86,7 +85,6 @@ on individual vectors. For example the lynx data set is class `ts`.
 ```{r}
 skim_v(datasets::lynx)
 ```
-
 
 If you attempt to use `skim_v()` on a class that does not have support, it will coerce it to 
 character (with a warning) and report number NA, number complete (non missing), number of rows, the 
@@ -98,7 +96,7 @@ class(lynx) <- "unkown_class"
 skim_v(lynx)
 ```
 
-# The skim_with() function
+# The skim_with function
 
 Skimr is opinionated in its choice of defaults, but users can easily add too, replace, or remove
 the statistics for a class.   
@@ -115,14 +113,13 @@ skim(datasets::chickwts)
 The `skim_with_defaults()` function resets the list to the defaults.   By default `skim_with()`
 appends the new statstics, but setting append=FALSE replaces the defaults. 
 
-
 ```{r}
 skim_with_defaults()
 skim_with(numeric = list(mad_name = mad), append = FALSE)
 skim(datasets::chickwts)
 skim_with_defaults() # Reset to defaults
 ```
-You can also use `skim_witn()` to remove specific statistics by setting them to NULL.
+You can also use `skim_with()` to remove specific statistics by setting them to NULL.
 
 ```{r}
 skim_with(numeric = list(hist = NULL))
