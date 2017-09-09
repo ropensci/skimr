@@ -17,7 +17,7 @@ functions$current <- .default
 #' defaults. The \code{append} argument lets you decide whether you want to
 #' replace the defaults or add to them.
 #' 
-#' This function is not pure. It sets values in within the package environment.
+#' This function is not pure. It sets values within the package environment.
 #' This is an intentional design choice, with effects similar to setting
 #' options in base R. By setting options here for your entire session, you
 #' can continue to summarize using skim on its own.
