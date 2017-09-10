@@ -190,7 +190,7 @@ test_that("skim_v returns expected response for Date vectors", {
   expect_identical(input, correct)
 })
 
-# Not this test relies on the immediately prior correct definition
+# Note this test relies on the immediately prior correct definition
 test_that("skim_v handles objects with multiple classes", {
   dat <- seq(as.Date("2011-07-01"), by=1, len=10)
   dat[2] <- NA

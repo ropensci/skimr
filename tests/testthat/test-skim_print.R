@@ -144,7 +144,7 @@ correct <- tibble::tribble(
 data(mtcars)
 skim_with_defaults()
 skim_object5 <- mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
-skim_print_object5<-skim_print(skim_object5)
+skim_print_object5<-skim_grouped_print(skim_object5)
 
 test_that("print handling returns correct response with grouped data.", {
    input <- skim_print_object5$numeric
