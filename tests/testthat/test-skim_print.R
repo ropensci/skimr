@@ -12,7 +12,7 @@ skim_object$stat <- ifelse(skim_object$level == ".all" |  skim_object$stat == "c
 
 correct <- tibble::tribble(
   ~var,   ~complete, ~missing, ~n,  ~n_unique, ~counts,
-  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0"
+  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2..."
 )
 
 test_that("print_handling() returns expected response for ordered factor vectors", {
@@ -23,7 +23,7 @@ test_that("print_handling() returns expected response for ordered factor vectors
 #--- Factor
 correct <- tibble::tribble(
   ~var,         ~complete,~missing, ~n,  ~n_unique,   ~counts,
-  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2:7 Mn1:7 Mc2:7 Mc3:7 Mc1:7 NA:0",
+  "Plant", "84",        "0",       "84",  "12", "Qn1:7 Qn2:7 Qn3:7 Qc1:7 Qc3:7 Qc2:7 Mn3:7 Mn2...",
   "Treatment",  "84",        "0", "84",   "2",           "nonchilled:42 chilled:42 NA:0"
 
 )
@@ -145,6 +145,14 @@ data(mtcars)
 skim_with_defaults()
 skim_object5 <- mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
 skim_print_object5<-skim_grouped_print(skim_object5)
+
+test_that("print returns the same thing as skim_grouped_print",{
+  input<-print.skim_grouped_df(skim_object5)
+  correct <- skim_grouped_print(skim_object5)
+  expect_equal(input, correct)
+
+})
+
 
 test_that("print handling returns correct response with grouped data.", {
    input <- skim_print_object5$numeric
