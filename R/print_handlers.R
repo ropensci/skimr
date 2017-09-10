@@ -12,13 +12,16 @@ sk_print_factor <- function(one_type){
        tidyr::spread_( key_col = 'stat', value_col = 'formatted_value')
   counts<-united$count_sum
 
+  # Limit the length of counts formatted value.
+  counts <-ifelse (nchar(counts) > 45, paste0(substr(counts, 1,45), "..."), counts)
+   
   one_type <- tibble::add_column(one_type, counts)
 
   one_type
 }
 
 sk_print_default<-function(y){
-  y$stat <- ifelse(y$level == ".all" | y$stat == "count" , y$stat,  paste(y$stat, y$level))
+  y$stat <- ifelse(y$level == ".all", y$stat,  paste(y$stat, y$level))
   stat_order<-unique(y$stat)
   y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'formatted_value')) %>% 
     tidyr::spread_( key_col = 'stat', value_col = 'formatted_value')
