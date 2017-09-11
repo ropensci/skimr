@@ -26,8 +26,41 @@ sk_print_default<-function(y){
   y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'formatted_value')) %>% 
     tidyr::spread_( key_col = 'stat', value_col = 'formatted_value')
   y <- y[c("var", stat_order)]
+  
+  if (length(y) > 1 ){
+    y[2:ncol(y)] <-lapply(y[2:ncol(y)], number_align)
+  }
+
   y
 }
+
+number_align <- function(x){
+  number_test <- sum(grepl("^[-]{0,1}[0-9]+(\\.[0-9]+)?$", trimws(x)))
+  if (number_test < length(x)){
+    return(x)
+  }
+ 
+  num_split <- stringr::str_split(x, "\\.", simplify = TRUE)
+  
+  if (ncol(num_split) == 1 ){
+ 
+    return(x)
+  }
+
+  max_whole_digits <- max(nchar(num_split[,1]))
+  max_decimal_digits <- max(nchar(num_split[,2]))
+  num_split[,1] <- stringr::str_pad(num_split[,1], max_whole_digits, side = "left")
+  
+  num_split_2 <- num_split[,2]
+  num_split[,2] <- stringr::str_pad(num_split[,2], max_decimal_digits, side = "right")
+      
+  x <- ifelse(num_split_2 != "", paste0(num_split[,1], ".", num_split[,2]), 
+              paste0(num_split[,1], " ", num_split[,2])
+              )
+  x
+}
+
+
 
 # Define the print functions for different classes.
 print_handling <- list(
