@@ -37,14 +37,14 @@ test_that("skim_print() returns expected response for factor vectors", {
 
 
 #---- Numeric
-withr::with_locale(c(LC_COLLATE = "C"), code = '
+
 correct <- tibble::tribble(
-  ~var,    ~missing, ~complete, ~n,             ~mean,                  ~sd,                         ~min,  ~median,   ~`quantile 25%`, ~`quantile 75%`,~max, ~hist,
-  "uptake", "0",        "84",   "84",  "27.2130952380952", "10.8144122908108", "7.7", "28.3",       "17.9",       "37.125",       "45.5", "▅▇▆▅▂▅▇▆▇▅"
+  ~var,    ~missing, ~complete, ~n,   ~mean,   ~sd,        ~min,  ~`quantile 25%`, ~`quantile 50%`, ~`quantile 75%`,~max, ~hist,
+  "uptake", "0",        "84",   "84", " 27.2", " 10.8",     "7.7", " 17.9",           " 28.3",         " 37.1",       "45.5", "▅▇▆▅▂▅▇▆▇▅"
 )
 
 test_that("print_handling() returns expected response for numeric vectors", {
-  input <- sk_print_default(skim_object[skim_object$type == "numeric",])
+  input <- sk_print_object[["numeric"]]
   expect_equal(input[,1:4], correct[,1:4])
 })
 
@@ -53,7 +53,7 @@ test_that("skim_print() returns expected response for numeric vectors", {
   input <- sk_print_object[["numeric"]]
   expect_identical(input, correct)
 })
-')
+
 
 #---- Character
 correct <- tibble::tribble(
@@ -69,8 +69,8 @@ test_that("skim_print() returns expected response for character vectors", {
 
 #--- Integer
 correct <- tibble::tribble(
-~var,   ~missing, ~complete,  ~n,  ~mean,  ~sd,    ~min,  ~median,  ~`quantile 25%`,~`quantile 75%`,~max, ~hist,
-"conc",  "0",        "84",    "84", "435.0", "295.9", "95",     "350.0",     "175.0",       "675.0",      "1000", "▇▃▃▁▃▁▃▁▁▃"
+~var,   ~missing, ~complete,  ~n,  ~mean,     ~sd,    ~min,  ~`quantile 25%`,   ~`quantile 50%`,     ~`quantile 75%`,~max, ~hist,
+"conc",  "0",        "84",    "84", "435.0", "295.9", "95",          "175.0",   "350.0",    "675.0",      "1000", "▇▃▃▁▃▁▃▁▁▃"
 )
 correct_integer <- correct
 
@@ -126,21 +126,21 @@ test_that("print handling returns correct response when there are multiple facto
 # --- Grouped data
 
 correct <- tibble::tribble(
-  ~var,~cyl,~gear,~missing, ~complete,  ~n,  ~mean,       ~sd,~min,~median,~`quantile 25%`,~`quantile 75%`,~max,~hist,
-  "am",  "4",  "3",  "0",    "1",        "1",  "  0.0", "   NA", "  0    ",  "  0.0",      "  0.0",  "  0.0",     "  0    ","",
-  "am",  "4",  "4",  "0",    "8",        "8",  "  0.8", "  0.5", "  0    ",  "  1.0",      "  0.8",  "  1.0",    "  1    ","▂▁▁▁▁▁▁▁▁▇",
-  "am",  "4",  "5",  "0",    "2",        "2",  "  1.0", "  0.0", "  1    ",  "  1.0",      "  1.0",  "  1.0",    "  1    ","▁▁▁▁▇▁▁▁▁▁",
-  "am",  "6",  "3"  ,"0",    "2",        "2",  "  0.0", "  0.0", "  0    ",  "  0.0",      "  0.0",  "  0.0",    "  0    ","",
-  "am",  "6",  "4",  "0",    "4",        "4",  "  0.5", "  0.6", "  0    ",  "  0.5",      "  0.0",  "  1.0",    "  1    ","▇▁▁▁▁▁▁▁▁▇",
-  "am",  "6",  "5",  "0",    "1",        "1",  "  1.0", "   NA", "  1    ",  "  1.0",       "  1.0",  "  1.0",    "  1    ","▁▁▁▁▇▁▁▁▁▁",
-  "am",  "8",  "3",  "0",    "12",      "12",  "  0.0", "  0.0", "  0    ",  "  0.0",       "  0.0",  "  0.0",    "  0    ","",
-  "am",  "8",  "5",  "0",    "2",        "2",  "  1.0", "  0.0", "  1    ",  "  1.0",       "  1.0",  "  1.0",    "  1    ","▁▁▁▁▇▁▁▁▁▁",
-  "carb","4",  "3",  "0",    "1",        "1",  "  1.0", "   NA", "  1    ",  "  1.0",       "  1.0",  "  1.0",    "  1    ","▁▁▁▁▇▁▁▁▁▁",
-  "carb","4",  "4",  "0",    "8",        "8",  "  1.5", "  0.5", "  1    ",  "  1.5",       "  1.0",  "  2.0",    "  2    ","▇▁▁▁▁▁▁▁▁▇",
-  "carb","4",  "5",  "0",    "2",        "2",  "  2.0", "  0.0", "  2    ",  "  2.0",       "  2.0",  "  2.0",    "  2    ","▁▁▁▁▇▁▁▁▁▁",
-  "carb","6",  "3",  "0",    "2",        "2",  "  1.0", "  0.0", "  1    ",  "  1.0",       "  1.0",  "  1.0",    "  1    ","▁▁▁▁▇▁▁▁▁▁"
+  ~var,~cyl,~gear,~missing, ~complete,  ~n,  ~mean,   ~sd,~min,~`quantile 25%`,~`quantile 50%`,~`quantile 75%`,~max,~hist,
+  "am","4","3","0","1","1","  0.0","   NA","  0    ","  0.0","  0.0","  0.0","  0    ","",
+  "am","4","4","0","8","8","  0.8","  0.5","  0    ","  0.8","  1.0","  1.0","  1    ","▂▁▁▁▁▁▁▁▁▇",
+  "am","4","5","0","2","2","  1.0","  0.0","  1    ","  1.0","  1.0","  1.0","  1    ","▁▁▁▁▇▁▁▁▁▁",
+  "am","6","3","0","2","2","  0.0","  0.0","  0    ","  0.0","  0.0","  0.0","  0    ","",
+  "am","6","4","0","4","4","  0.5","  0.6","  0    ","  0.0","  0.5","  1.0","  1    ","▇▁▁▁▁▁▁▁▁▇",
+  "am","6","5","0","1","1","  1.0","   NA","  1    ","  1.0","  1.0","  1.0","  1    ","▁▁▁▁▇▁▁▁▁▁",
+  "am","8","3","0","12","12","  0.0","  0.0","  0    ","  0.0","  0.0","  0.0","  0    ","",
+  "am","8","5","0","2","2","  1.0","  0.0","  1    ","  1.0","  1.0","  1.0","  1    ","▁▁▁▁▇▁▁▁▁▁",
+  "carb","4","3","0","1","1","  1.0","   NA","  1    ","  1.0","  1.0","  1.0","  1    ","▁▁▁▁▇▁▁▁▁▁",
+  "carb","4","4","0","8","8","  1.5","  0.5","  1    ","  1.0","  1.5","  2.0","  2    ","▇▁▁▁▁▁▁▁▁▇",
+  "carb","4","5","0","2","2","  2.0","  0.0","  2    ","  2.0","  2.0","  2.0","  2    ","▁▁▁▁▇▁▁▁▁▁",
+  "carb","6","3","0","2","2","  1.0","  0.0","  1    ","  1.0","  1.0","  1.0","  1    ","▁▁▁▁▇▁▁▁▁▁"
+  
 )
-
 data(mtcars)
 skim_with_defaults()
 skim_object5 <- mtcars %>% dplyr::group_by(cyl, gear) %>% skim()

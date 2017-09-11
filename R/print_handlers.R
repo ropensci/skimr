@@ -54,7 +54,8 @@ number_align <- function(x){
   num_split_2 <- num_split[,2]
   num_split[,2] <- stringr::str_pad(num_split[,2], max_decimal_digits, side = "right")
       
-  x <- ifelse(num_split_2 != "", paste0(num_split[,1], ".", num_split[,2]), 
+  x <- ifelse(num_split_2 != "", 
+              paste0(num_split[,1], ".", num_split[,2]), 
               paste0(num_split[,1], " ", num_split[,2])
               )
   x

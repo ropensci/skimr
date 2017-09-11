@@ -69,9 +69,10 @@ median_num<- function(x){
 #' @return The 25th and 75th and formatted values
 #' @export
 quantile_num<- function(x){
-  quantiles <- stats::quantile(x, probs = c(.25, .75), na.rm = TRUE)
+  quantiles <- stats::quantile(x, probs = c(.25, .50, .75), na.rm = TRUE)
   attr(quantiles, "formatted_value") <- c(formatC(quantiles[1],  width = 5, digits = 1,  format = "f", flag ="#"),
-                                    formatC(quantiles[2],  width = 5, digits = 1,  format = "f", flag ="#"))
+                                    formatC(quantiles[2],  width = 5, digits = 1,  format = "f", flag ="#"),
+                                    formatC(quantiles[3],  width = 5, digits = 1,  format = "f", flag ="#"))
   quantiles
 }
 
