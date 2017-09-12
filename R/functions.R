@@ -89,23 +89,23 @@ skim_with_defaults <- function() {
 #' a list. The names of the values in the list match the names of the classes
 #' that have assigned sets of summary functions.
 #' 
-#' @param which A character vector. One or more of the classes whose summary
+#' @param selected_classes A character vector. One or more of the classes whose summary
 #'  functions you wish to display.
 #' @return A list. The names of the list match the classes that have assigned
 #'  summary functions.
 #' @export
 
-show_skimmers <- function(which = NULL) {
-  stopifnot(is.null(which) || is.character(which))
+show_skimmers <- function(selected_classes = NULL) {
+  stopifnot(is.null(selected_classes) || is.character(selected_classes))
   skimmers <- lapply(functions$current, names)
-  if (is.null(which)) {
+  if (is.null(selected_classes)) {
     skimmers
   } else {
-    out <- skimmers[which]
+    out <- skimmers[selected_classes]
     missed <- is.na(names(out))
     if (any(missed)) {
       warning("Skim functions aren't defined for type(s): ",
-              paste(which[missed], collapse = ", "))
+             paste(selected_classes[missed], collapse = ", "))
     }
     out[!missed]
   }
