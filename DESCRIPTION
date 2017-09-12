@@ -19,11 +19,11 @@ Imports:
     purrr (>= 0.2.2.9000),
     magrittr,
     tibble (>= 0.6),
-    colformat,
+    pillar,
     stringr,
     stats
 Remotes:
-    hadley/colformat,
+    hadley/pillar,
     tidyverse/purrr
 Suggests:
     testthat,

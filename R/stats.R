@@ -84,6 +84,7 @@ quantile_num<- function(x){
 #' @export
 
 inline_hist <- function(x) {
+ 
   x <- x[!is.na(x) == TRUE]
   out <- 0
   if (length(x) == 0 | all(x == 0)){
@@ -92,7 +93,7 @@ inline_hist <- function(x) {
   }
   hist_dt <- table(cut(x, 10))
   hist_dt <- hist_dt / max(hist_dt)
-  attr(out, "formatted_value") <- colformat::spark_bar(hist_dt)
+  attr(out, "formatted_value") <- pillar::spark_bar(hist_dt)
 
   return(out)
   
@@ -190,7 +191,8 @@ inline_linegraph <- function(x) {
 
   # Values must be between 0 and 1.
   t <- (t - min(t))/(max(t) - min(t))
-  attr(out, "formatted_value") <- suppressWarnings(colformat::spark_line(t))
+
+  attr(out, "formatted_value") <- suppressWarnings(pillar::spark_line(t))
 
   return(out)
 
