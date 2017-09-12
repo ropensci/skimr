@@ -1,4 +1,5 @@
 context("Handling of printing a skim_df objects of various types")
+#' @include print_handlers.R
 
 test_that("Number align does not change character vectors", {
   correct <- c("A", "B", "Z")
@@ -30,3 +31,25 @@ test_that("Number align aligns a mix of integers and doubles", {
   expect_identical(input,correct)
 })
 
+correct <- tibble::tribble(
+  ~var,     ~complete, ~missing,   ~n, ~n_unique,                                    ~counts,
+  "Species",  "150",   "0",       "150",  "3", "setosa:50 versicolor:50 virginica:50 NA:0"
+  )
+test_that("sk_print_factor returns correct results", {
+  iris_species <- iris["Species"]
+  x <- skim(iris_species)
+  x_print <- sk_print_factor(x)
+
+  expect_equal(correct, x_print)
+})
+
+correct <- tibble::tribble(
+  ~var,    ~missing, ~complete, ~n,   ~mean,   ~sd,        ~min,  ~`quantile 25%`, ~`quantile 50%`, ~`quantile 75%`,~max, ~hist,
+  "uptake", "0",        "84",   "84", " 27.2", " 10.8",     "7.7", " 17.9",           " 28.3",         " 37.1",       "45.5", "▅▇▆▅▂▅▇▆▇▅"
+)
+test_that("sk_print_default returns correct results", {
+  co2_uptake <- CO2["uptake"]
+  u <- skim(co2_uptake)
+  u_print <- sk_print_default(u)
+  expect_equal(correct, u_print)
+})
