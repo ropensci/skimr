@@ -34,7 +34,7 @@ inline_hist <- function(x) {
   if ( !all(x == 0) & length(x) != 0) {
     hist_dt <- table(cut(x, 10))
     hist_dt <- hist_dt / max(hist_dt)
-    names(out) <- colformat::spark_bar(hist_dt)
+    names(out) <- pillar::spark_bar(hist_dt)
     return(out)
   }
   names(out) <- ""
@@ -133,7 +133,7 @@ inline_linegraph <- function(x) {
 
   # Values must be between 0 and 1.
   t <- (t - min(t))/(max(t) - min(t))
-  names(out) <- suppressWarnings(colformat::spark_line(t))
+  names(out) <- suppressWarnings(pillar::spark_line(t))
   return(out)
 
 }

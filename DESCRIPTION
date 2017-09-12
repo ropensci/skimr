@@ -19,10 +19,10 @@ Imports:
     purrr,
     magrittr,
     tibble (>= 0.6),
-    colformat,
+    pillar,
     stats
 Remotes:
-    hadley/colformat
+    hadley/pillar
 Suggests:
     testthat,
     knitr

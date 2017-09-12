@@ -14,7 +14,7 @@ See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/blog.html)
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("hadley/colformat")
+devtools::install_github("hadley/pillar")
 devtools::install_github("ropenscilabs/skimr")
 ```
 
@@ -24,7 +24,7 @@ devtools::install_github("ropenscilabs/skimr")
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
 - handles dates, logicals
-- uses [Hadley Wickham's colformat package](https://github.com/hadley/colformat), specifically `colformat::spark-bar()`
+- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
 
 **Nicely separates numeric and factor variables:**  
 

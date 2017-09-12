@@ -97,7 +97,7 @@ Some features of output in the console:
 - reports missing, complete, n, sd, and quantiles
 - reports numeric/int/double separately from factor/chr, and identifies class
 - handles dates, logicals
-- uses [Hadley's colformats](https://github.com/hadley/colformat), specifically `colformats::spark-bar()`
+- uses [Hadley's pillars](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
 
 Here are examples of `skimr` in action: 
 
