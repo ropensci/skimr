@@ -103,6 +103,15 @@ test_that("show_skimmers() has a correct list of functions for a type (default)"
   identical(input, correct)
 })
 
+test_that("show_skimmers() has a correct list of functions for a type using which", {
+  skim_with_defaults()
+  input <- show_skimmers(selected_classes = "numeric")
+  skimmers <- show_skimmers()
+  correct <- skimmers[["numeric"]]
+  identical(input, correct)
+  skim_with_defaults()
+})
+
 test_that("show_skimmers() has a correct list of types", {
   correct <- c("numeric",   "integer",  "factor" ,  "character", "logical",   "complex",
                "date",      "Date",      "ts", "POSIXct" )

@@ -10,8 +10,8 @@ correct <- tibble::tribble(
   "numeric","mean",".all",mean(mtcars$mpg)," 20.1",
   "numeric","sd",".all",sd(mtcars$mpg),"  6.0",
   "numeric","min",".all",10.4,"10.4",
-  "numeric","median",".all",19.2," 19.2",
   "numeric","quantile","25%",15.425," 15.4",
+  "numeric", "quantile",   "50%", 19.2, " 19.2",
   "numeric","quantile","75%",22.8," 22.8",
   "numeric","max",".all",33.9,"33.9",
   "numeric","hist",".all",0,"▂▅▇▇▇▃▁▁▂▂"
@@ -77,8 +77,8 @@ correct_pathological_numeric <- tibble::tribble(
   "numeric","mean",".all",0,"  0.0",
   "numeric","sd",".all",sd(pathological, na.rm = TRUE),"12738103345051546.0",
   "numeric","min",".all", -(2^.Machine$double.digits),"-9007199254740992",
-  "numeric","median",".all",0,"  0.0",
   "numeric","quantile","25%",path_quantiles[1],"-4503599627370496.0",
+  "numeric","quantile","50%",0,"  0.0",
   "numeric","quantile","75%",path_quantiles[2],"4503599627370496.0",
   "numeric","max",".all",+(2^.Machine$double.digits), as.character(+(2^.Machine$double.digits)),
   "numeric","hist",".all",0,"▇▁▁▁▁▁▁▁▁▇"
@@ -190,7 +190,7 @@ test_that("skim_v returns expected response for Date vectors", {
   expect_identical(input, correct)
 })
 
-# Not this test relies on the immediately prior correct definition
+# Note this test relies on the immediately prior correct definition
 test_that("skim_v handles objects with multiple classes", {
   dat <- seq(as.Date("2011-07-01"), by=1, len=10)
   dat[2] <- NA

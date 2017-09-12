@@ -4,10 +4,10 @@
 \alias{show_skimmers}
 \title{Show summary functions currently used, by column type}
 \usage{
-show_skimmers(which = NULL)
+show_skimmers(selected_classes = NULL)
 }
 \arguments{
-\item{which}{A character vector. One or more of the classes whose summary
+\item{selected_classes}{A character vector. One or more of the classes whose summary
 functions you wish to display.}
 }
 \value{

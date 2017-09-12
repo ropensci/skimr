@@ -262,8 +262,8 @@ test_that("sd_num is calculated correctly.", {
 
 test_that("quantile_num is calculated correctly.", {
   data<-seq_along(1:100)
-  correct <- quantile(data, probs=c(.25, .75),  na.rm = TRUE)
-  attr(correct, "formatted_value") <- c("25%" = " 25.8", "75%" = " 75.2")
+  correct <- quantile(data, probs=c(.25, .50, .75),  na.rm = TRUE)
+  attr(correct, "formatted_value") <- c("25%" = " 25.8", "50%" = " 50.5", "75%" = " 75.2")
   input <- quantile_num(data)
   expect_identical(input, correct)
 })

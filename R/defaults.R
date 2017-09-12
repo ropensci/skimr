@@ -11,7 +11,6 @@ numeric_funs <- list(
   mean = mean_num,
   sd = sd_num,
   min = purrr::partial(min, na.rm = TRUE),
-  median = median_num,
   quantile = quantile_num,
   max = purrr::partial(max, na.rm = TRUE),
   hist = inline_hist

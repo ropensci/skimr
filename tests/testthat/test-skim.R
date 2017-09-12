@@ -8,10 +8,10 @@ correct <- tibble::tribble(
   "weight", "numeric",  "complete",  ".all",       71,    "71",
   "weight", "numeric",  "n",         ".all",       71,    "71",
   "weight", "numeric",  "mean",      ".all",    mean(chickwts$weight), "261.3",
-  "weight", "numeric",  "sd",        ".all",     sd(chickwts$weight), " 78.1",
+  "weight", "numeric",  "sd",        ".all",    sd(chickwts$weight), " 78.1",
   "weight", "numeric",  "min",       ".all",       108,   "108",
-  "weight", "numeric",  "median",    ".all",      258,    "258.0",
-  "weight","numeric",  "quantile",  "25%",       quantile(chickwts$weight, probs=c(.25)),  "204.5",
+  "weight","numeric",   "quantile",  "25%",      quantile(chickwts$weight, probs=c(.25)),  "204.5",
+  "weight", "numeric",  "quantile",  "50%",     quantile(chickwts$weight, probs=c(.50)),    "258.0",
   "weight", "numeric",  "quantile",  "75%",      quantile(chickwts$weight, probs=c(.75)),  "323.5",
   "weight", "numeric",  "max",       ".all",    423,      "423",
   "weight", "numeric",  "hist",      ".all",        0,     "▂▇▂▇▇▃▇▆▂▂",
@@ -203,6 +203,6 @@ test_that("Skimming a grouped data frame works as expected (level)", {
   expect_identical(input$level, correct_grouped$level)
 })
 test_that("Grouped data get the correct class",{
-  expect_identical(class(input), c("skim_df", "skim_grouped_df", "grouped_df", "tbl_df", "tbl", "data.frame"))
+  expect_identical(class(input), c("skim_grouped_df", "skim_df",  "grouped_df", "tbl_df", "tbl", "data.frame"))
 })
 skim_with_defaults()
