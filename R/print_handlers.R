@@ -21,6 +21,7 @@ sk_print_factor <- function(one_type){
 }
 
 sk_print_default<-function(y){
+
   y$stat <- ifelse(y$level == ".all", y$stat,  paste(y$stat, y$level))
   stat_order<-unique(y$stat)
   y <- y %>% dplyr::select_(.dots = c('var', 'stat', 'formatted_value')) %>% 
