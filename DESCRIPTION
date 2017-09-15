@@ -19,7 +19,7 @@ Imports:
     magrittr,
     tidyr,
     tibble (>= 0.6),
-    colformat,
+    pillar,
     stats
 Remotes:
     hadley/pillar
