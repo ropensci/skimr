@@ -17,6 +17,7 @@ Imports:
     dplyr (>= 0.5),
     purrr,
     magrittr,
+    tidyr,
     tibble (>= 0.6),
     colformat,
     stats
