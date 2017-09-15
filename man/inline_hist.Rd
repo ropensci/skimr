@@ -7,11 +7,12 @@
 inline_hist(x)
 }
 \arguments{
-\item{x}{A numeric vector}
+\item{x}{A numeric vector.}
 }
 \value{
 A length-one character vector containing the histogram.
 }
 \description{
-Generate inline histogram for numeric variables
+The character length of the histogram is controlled by the formatting
+options for character vectors.
 }
