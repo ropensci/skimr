@@ -10,8 +10,9 @@ inline_linegraph(x)
 \item{x}{A vector}
 }
 \value{
-A numeric value of 0 with a name that is a character string of histogram.
+A length-one character vector containing a line graph.
 }
 \description{
-Generate inline line graph for time series variables
+Sets all data to a standard length, to match character formatting. This is
+twice the number of characters set in the histogram.
 }

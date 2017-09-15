@@ -11,7 +11,7 @@ skim_tee(.data)
 }
 \value{
 A \code{skim_df} object, which can be treated like a
-  tbl in most instances.
+ tbl in most instances.
 }
 \description{
 Get useful summary statistic from a data frame, print it, and return it

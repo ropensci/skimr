@@ -11,8 +11,14 @@ skim(.data)
 }
 \value{
 A \code{skim_df} object, which can be treated like a
-  tbl in most instances.
+ tbl in most instances.
 }
 \description{
-Get useful summary statistic from a data frame
+\code{skim} handles data of all types, dispatching a different set of
+summary functions based on the types of columns in the data frame.
+It is an intentionally simple function. See \code{\link{skim_with}} and
+\code{\link{skim_format}} for how \code{skim} can be customized.
+}
+\examples{
+skim(iris)
 }
