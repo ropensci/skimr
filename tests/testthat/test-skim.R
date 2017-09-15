@@ -4,7 +4,7 @@ context("Skim a data.frame")
 
 correct <- tibble::tribble(
   ~var,     ~type,     ~stat,      ~level,       ~value, ~formatted_value,
-  "weight", "numeric",  "missing",   ".all",      0,        "0",
+  "weight", "numeric",  "missing",   ".all",      0,      "0",
   "weight", "numeric",  "complete",  ".all",       71,    "71",
   "weight", "numeric",  "n",         ".all",       71,    "71",
   "weight", "numeric",  "mean",      ".all",    mean(chickwts$weight), "261.3",
@@ -13,8 +13,8 @@ correct <- tibble::tribble(
   "weight","numeric",   "quantile",  "25%",      quantile(chickwts$weight, probs=c(.25)),  "204.5",
   "weight", "numeric",  "quantile",  "50%",     quantile(chickwts$weight, probs=c(.50)),    "258.0",
   "weight", "numeric",  "quantile",  "75%",      quantile(chickwts$weight, probs=c(.75)),  "323.5",
-  "weight", "numeric",  "max",       ".all",    423,      "423",
-  "weight", "numeric",  "hist",      ".all",        0,     "▂▇▂▇▇▃▇▆▂▂",
+  "weight", "numeric",  "max",       ".all",      423,    "423",
+  "weight", "numeric",  "hist",      ".all",        0,    "▂▇▂▇▇▃▇▆▂▂",
   "feed",   "factor",   "missing",   ".all",        0,    "0",
   "feed",   "factor",   "complete",  ".all",       71,    "71",
   "feed",   "factor",   "n",         ".all",       71,    "71",

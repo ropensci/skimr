@@ -81,7 +81,7 @@ print.skim_grouped_df <- function(x, ...) {
 }
 
 print_type <- function(x, type_name){
-    one_type <- x %>% dplyr::filter(type == type_name)
+    one_type <- x %>% dplyr::filter_(~type == type_name)
     types_custom <- names(print_handling)
 
     if (nrow(one_type) > 0){
