@@ -22,7 +22,7 @@ Imports:
     colformat,
     stats
 Remotes:
-    hadley/colformat
+    hadley/pillar
 Suggests:
     testthat,
     knitr
