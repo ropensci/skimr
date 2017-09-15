@@ -36,8 +36,11 @@ sorted_count <- function(x) {
 }
 
 #' Generate inline histogram for numeric variables
-#' 
-#' @param x A numeric vector
+#'
+#' The character length of the histogram is controlled by the formatting
+#' options for character vectors.
+#'  
+#' @param x A numeric vector.
 #' @return A length-one character vector containing the histogram.
 #' @export
 
@@ -47,7 +50,7 @@ inline_hist <- function(x) {
   
   # Addresses a known bug in cut()
   if (all(x == 0)) x <- x + 1
-  hist_dt <- table(cut(x, 10))
+  hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
   structure(colformat::spark_bar(hist_dt), class = c("spark", "character"))
 }
@@ -130,13 +133,16 @@ ts_end <- function(x) {
 #' Sets all data to a standard length, to match character formatting. This is
 #' twice the number of characters set in the histogram.
 #' 
+#' The character length of the linegraph is controlled by the formatting
+#' options for character vectors.
+#' 
 #' @param x A vector
 #' @return A length-one character vector containing a line graph.
 #' @export
 
 inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
-  id <- seq(1, length(t), length.out = 20)
+  id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
   normalized <- normalize01(t[floor(id)])
   structure(colformat::spark_line(normalized), class = c("spark", "character"))
 }
