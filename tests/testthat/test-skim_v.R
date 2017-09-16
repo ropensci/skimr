@@ -147,6 +147,7 @@ test_that("skim_v returns expected response for Date vectors", {
   expect_identical(input, correct)
 })
 
+# Note this test relies on the immediately prior correct definition
 test_that("skim_v handles objects with multiple classes", {
   correct <- tibble::tribble(
     ~type,       ~stat,       ~level, ~value, ~formatted,

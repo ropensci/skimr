@@ -4,7 +4,7 @@
 #' type. See \code{\link{skim_with}} and
 #' \code{\link{skim_format}} for how \code{skim_v} can be customized.
 #'
-#' @param x A vector
+#' @param x A vector.
 #' @param vector_type A character vector that specifies which group of funs
 #'  to grab for summarizing.
 #' @return A tall tbl, containing the vector's name, type, potential levels
