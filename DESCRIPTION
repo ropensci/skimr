@@ -15,27 +15,15 @@ Depends:
     R (>= 3.1.2)
 Imports:
     dplyr (>= 0.5),
-<<<<<<< HEAD
     purrr,
-=======
     tidyr,
-    purrr (>= 0.2.2.9000),
->>>>>>> develop
     magrittr,
     tidyr,
     tibble (>= 0.6),
     pillar,
-<<<<<<< HEAD
     stats
 Remotes:
     hadley/pillar
-=======
-    stringr,
-    stats
-Remotes:
-    hadley/pillar,
-    tidyverse/purrr
->>>>>>> develop
 Suggests:
     testthat,
     knitr,
@@ -48,20 +36,12 @@ URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
-<<<<<<< HEAD
 Collate: 
     'skimr-package.R'
     'formats.R'
-=======
-Collate:
->>>>>>> develop
     'stats.R'
     'functions.R'
-<<<<<<< HEAD
     'options.R'
-=======
-    'print_handlers.R'
->>>>>>> develop
     'skim.R'
     'skim_print.R'
     'skim_v.R'

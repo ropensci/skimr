@@ -102,29 +102,24 @@ test_that("Skimming functions without a class name return a message.", {
   skim_with_defaults()
   funs_no_class <- list( IQR)
   
-  expect_error(skim_with(funs_no_class),
-               "Please used named arguments as follows: <type> = <list of functions>"
-               )
+  expect_error(skim_with(funs_no_class), "Please used named arguments")
 })
 
 test_that("Throw errors when arguments are incorrect", {
   skim_with_defaults()
   new_funs <- list(iqr = IQR, mad)
-  msg <- "A function is missing a name"
-  expect_error(skim_with(numeric = new_funs, append = FALSE), msg)
-#  expect_error(skim_with(new_funs, append = FALSE), "named arguments")
+  expect_error(skim_with(numeric = new_funs, append = FALSE), "missing a name")
   
   # Restore defaults
   skim_with_defaults()
 })
 
-correct <- tibble::tribble(
-  ~type,     ~stat,      ~level,  ~value, ~formatted_value,
-  "numeric", "iqr",      ".all",  IQR(iris$Sepal.Length), "1.3",
-  "numeric", "quantile", "99%",   7.7, "7.7"
-)
-
 test_that("Skimming functions can be changed.", {
+  correct <- tibble::tribble(
+    ~type,     ~stat,      ~level,  ~value,                 ~formatted,
+    "numeric", "iqr",      ".all",  IQR(iris$Sepal.Length), "1.30",
+    "numeric", "quantile", "99%",   7.7,                    "7.70")
+
   newfuns <- list(iqr = IQR,
                   quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = newfuns, append = FALSE)
@@ -133,19 +128,6 @@ test_that("Skimming functions can be changed.", {
   
   # Restore defaults
   skim_with_defaults()
-})
-
-
-
-# show_skimmers() tests
-skim_with_defaults()
-
-test_that("show_skimmers() has a correct list of functions for a type (default)", {
-  skim_with_defaults()
-  correct <- names(get_funs("numeric"))
-  skimmers <- show_skimmers()
-  input <- skimmers[["numeric"]]
-  identical(input, correct)
 })
 
 test_that("show_skimmers() has a correct list of default types", {
@@ -217,7 +199,6 @@ test_that("Skimming functions can be changed for different types", {
   skim_with_defaults()
 })
 
-
 test_that("Skimming functions can be appended", {
   correct <- tibble::tribble(
     ~type,          ~stat,      ~level, ~value,                  ~formatted,
@@ -243,22 +224,26 @@ test_that("Skimming functions can be appended", {
   skim_with_defaults()
 })
 
-correct <- tibble::tribble(
-  ~type,          ~stat,      ~level,       ~value,
-  "numeric",      "missing",  ".all",       0,
-  "numeric",      "complete", ".all",       150,
-  "numeric",      "n",        ".all",       150,
-  "numeric",      "mean",     ".all",       mean(iris$Sepal.Length),
-  "numeric",      "sd",       ".all",       sd(iris$Sepal.Length),
-  "numeric",      "min",      ".all",       4.3,
-  "numeric",      "median",   ".all",       5.8,
-  "numeric",      "quantile", "99%",        7.7,
-  "numeric",      "max",      ".all",       7.9,
-  "numeric",      "hist",     "▂▇▅▇▆▆▅▂▂▂", 0,
-  "numeric",      "iqr",      ".all",       IQR(iris$Sepal.Length)
-)
-
 test_that("When append = FALSE, skimmers are replaced", {
+  imean <- mean(iris$Sepal.Length)
+  isd <- sd(iris$Sepal.Length)
+  iiqr <- IQR(iris$Sepal.Length)
+  correct <- tibble::tribble(
+    ~type,     ~stat,      ~level, ~value, ~formatted,
+    "numeric", "missing",  ".all", 0,      "0",
+    "numeric", "complete", ".all", 150,    "150",
+    "numeric", "n",        ".all", 150,    "150",
+    "numeric", "mean",     ".all", imean,  "5.84",
+    "numeric", "sd",       ".all", isd,    "0.83",
+    "numeric", "min",      ".all", 4.3,    "4.30",
+    "numeric", "p25",      ".all", 5.1,    "5.10",
+    "numeric", "median",   ".all", 5.8,    "5.80",
+    "numeric", "p75",      ".all", 6.4,    "6.40",
+    "numeric", "max",      ".all", 7.9,    "7.90",
+    "numeric", "hist",     ".all", NA,      "▂▇▅▇▆▆▅▂▂▂",
+    "numeric", "iqr",      ".all", iiqr,   "1.30",
+    "numeric", "quantile", "99%",  7.7,    "7.70")
+
   newfuns <- list(iqr = IQR,
                   quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = newfuns, append = TRUE)

@@ -7,7 +7,7 @@
 skim_v(x, vector_type = class(x))
 }
 \arguments{
-\item{x}{A vector}
+\item{x}{A vector.}
 
 \item{vector_type}{A character vector that specifies which group of funs
 to grab for summarizing.}
