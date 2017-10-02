@@ -21,4 +21,7 @@ It is an intentionally simple function. See \code{\link{skim_with}} and
 }
 \examples{
 skim(iris)
+
+# Skim also works groupwise
+dplyr::group_by(iris) \%>\% skim()
 }

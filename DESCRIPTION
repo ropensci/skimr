@@ -14,21 +14,21 @@ Description: skimr is a frictionless summary function that can be piped.
 Depends:
     R (>= 3.1.2)
 Imports:
-    dplyr (>= 0.5),
-    purrr,
-    tidyr,
+    dplyr (>= 0.7),
     magrittr,
-    tidyr,
-    tibble (>= 0.6),
     pillar,
-    stats
+    purrr,
+    rlang,
+    stats,
+    tibble (>= 0.6),
+    tidyr (>= 0.7)
 Remotes:
     hadley/pillar
 Suggests:
-    testthat,
     knitr,
-    withr,
-    rmarkdown
+    rmarkdown,
+    testthat,
+    withr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
