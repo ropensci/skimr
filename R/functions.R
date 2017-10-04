@@ -19,7 +19,7 @@ NULL
 #'  particular data type.
 #' @param append Whether the provided options should be in addition to the
 #'  defaults already in skim for the given types specified by the named
-#'  arugments in \code{...}.
+#'  arugments in \code{...}. Default is \code{TRUE}.
 #' @return Nothing. \code{invisible(NULL)}
 #' @examples
 #' # Use new functions for numeric functions

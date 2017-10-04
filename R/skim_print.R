@@ -30,11 +30,16 @@ print.skim_df <- function(x, ...) {
 skim_print <- function(.data, groups) {
   skim_type <- .data$type[1]
   funs_used <- get_funs(skim_type)
+  fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
   wide <- tidyr::spread(collapsed, "stat", "formatted")
+  if (options$formats$.align_decimal) {
+    wide[fun_names] <- lapply(wide[fun_names], align_decimal)
+  }
+  
   cat("\nVariable type:", skim_type, "\n")
-  print(structure(wide[c(as.character(groups), "var", names(funs_used))],
-                  class = "data.frame"))
+  var_order <- c(as.character(groups), "var", fun_names)
+  print(structure(wide[var_order], class = "data.frame"))
 }
 
 collapse_levels <- function(.data, groups) {
@@ -46,4 +51,15 @@ collapse_levels <- function(.data, groups) {
 collapse_one <- function(vec) {
   len <- min(length(vec), options$formats$.levels$max_levels)
   paste(vec[seq_len(len)], collapse = ", ")
+}
+
+align_decimal <- function(x){
+  split <- stringr::str_split(x, "\\.", simplify = TRUE)
+  if (ncol(split) < 2) return(x)
+  max_whole <- max(nchar(split[,1]))
+  max_decimal <- max(nchar(split[,2]))
+  left <- stringr::str_pad(split[,1], max_whole, side = "left")
+  right <- stringr::str_pad(split[,2], max_decimal, side = "right")
+  dec <- ifelse (split[, 2] == "", " ", ".") 
+  sprintf("%s%s%s", left, dec, right)
 }

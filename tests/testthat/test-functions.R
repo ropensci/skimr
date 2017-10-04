@@ -2,12 +2,11 @@ context("Change functions used by skim")
 skim_with_defaults()
 
 test_that("Skimmer list is updated correctly when changing functions", {
-  funs <- list(iqr = IQR,
-               q99 = purrr::partial(quantile, probs = .99))
-  correct <- names(funs)
+  funs <- list(median = median, mad = mad)
   skim_with(numeric = funs, append = FALSE)
-  input <- show_skimmers()["numeric"]
-  expect_identical(unname(unlist(input)), names(funs))
+  input <- show_skimmers()
+  expect_identical(input$numeric, names(funs))
+
   # Restore defaults
   skim_with_defaults()
 })
@@ -97,7 +96,6 @@ test_that("Set multiple sets of skimming functions", {
   skim_with_defaults()
 })
 
-
 test_that("Skimming functions without a class name return a message.", {
   skim_with_defaults()
   funs_no_class <- list( IQR)
@@ -115,16 +113,15 @@ test_that("Throw errors when arguments are incorrect", {
 })
 
 test_that("Skimming functions can be changed.", {
-  correct <- tibble::tribble(
-    ~type,     ~stat,      ~level,  ~value,                 ~formatted,
-    "numeric", "iqr",      ".all",  IQR(iris$Sepal.Length), "1.30",
-    "numeric", "quantile", "99%",   7.7,                    "7.70")
-
   newfuns <- list(iqr = IQR,
                   quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = newfuns, append = FALSE)
   input <- skim_v(iris$Sepal.Length)
-  expect_identical(input, correct)
+  expect_identical(input$type, c("numeric", "numeric"))
+  expect_identical(input$stat, c("iqr", "quantile"))
+  expect_identical(input$level, c(".all", "99%"))
+  expect_identical(input$value, c(IQR(iris$Sepal.Length), 7.7))
+  expect_identical(input$formatted, c("1.3", "7.7"))
   
   # Restore defaults
   skim_with_defaults()
@@ -166,36 +163,12 @@ test_that("show_skimmers() returns something if given an unassigned type", {
   expect_identical(skimmers, correct)
 })
 
-test_that("Skimmer list is updated correctly when changing functions", {
-  funs <- list(median = median, mad = mad)
-  skim_with(numeric = funs, append = FALSE)
-  input <- show_skimmers()
-  expect_identical(input$numeric, names(funs))
-
-  # Restore defaults
-  skim_with_defaults()
-})
-
 test_that("Skim functions can be removed by setting them to NULL", {
   skim_with(numeric = list(hist = NULL))
   correct <- list(numeric = c("missing", "complete", "n", "mean",  "sd", "min",
                               "p25", "median", "p75", "max"))
   input <- show_skimmers("numeric")
   expect_identical(correct, input)
-})
-
-test_that("Skimming functions can be changed for different types", {
-  correct <- tibble::tribble(
-    ~type,     ~stat,      ~level,  ~value,                 ~formatted,
-    "numeric", "iqr",      ".all",  IQR(iris$Sepal.Length), "1.30",
-    "numeric", "quantile", "99%",   7.7,                    "7.70")
-  newfuns <- list(iqr = IQR,
-    quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = newfuns, append = FALSE)
-  input <- skim_v(iris$Sepal.Length)
-  expect_identical(input, correct)
-
-  # Restore defaults
   skim_with_defaults()
 })
 
@@ -207,13 +180,13 @@ test_that("Skimming functions can be appended", {
     "numeric",      "n",        ".all", 150,                      "150",
     "numeric",      "mean",     ".all", mean(iris$Sepal.Length),  "5.84",
     "numeric",      "sd",       ".all", sd(iris$Sepal.Length),    "0.83",
-    "numeric",      "min",      ".all", 4.3,                      "4.30",
-    "numeric",      "p25",      ".all",  5.1,                     "5.10",
-    "numeric",      "median",   ".all", 5.8,                      "5.80",
-    "numeric",      "p75",      ".all",  6.4,                     "6.40",
-    "numeric",      "max",      ".all", 7.9,                      "7.90",
-    "numeric",      "hist",     ".all", NA,                "▂▇▅▇▆▆▅▂▂▂",
-    "numeric",      "iqr",      ".all", IQR(iris$Sepal.Length),   "1.30",
+    "numeric",      "min",      ".all", 4.3,                      "4.3",
+    "numeric",      "p25",      ".all",  5.1,                     "5.1",
+    "numeric",      "median",   ".all", 5.8,                      "5.8",
+    "numeric",      "p75",      ".all",  6.4,                     "6.4",
+    "numeric",      "max",      ".all", 7.9,                      "7.9",
+    "numeric",      "hist",     ".all", NA,                "▂▇▅▇▆▅▂▂",
+    "numeric",      "iqr",      ".all", IQR(iris$Sepal.Length),   "1.3",
     "numeric",      "mad",      ".all", mad(iris$Sepal.Length),   "1.04")
   funs <- list(iqr = IQR, mad = mad)
   skim_with(numeric = funs)
@@ -224,40 +197,11 @@ test_that("Skimming functions can be appended", {
   skim_with_defaults()
 })
 
-test_that("When append = FALSE, skimmers are replaced", {
-  imean <- mean(iris$Sepal.Length)
-  isd <- sd(iris$Sepal.Length)
-  iiqr <- IQR(iris$Sepal.Length)
-  correct <- tibble::tribble(
-    ~type,     ~stat,      ~level, ~value, ~formatted,
-    "numeric", "missing",  ".all", 0,      "0",
-    "numeric", "complete", ".all", 150,    "150",
-    "numeric", "n",        ".all", 150,    "150",
-    "numeric", "mean",     ".all", imean,  "5.84",
-    "numeric", "sd",       ".all", isd,    "0.83",
-    "numeric", "min",      ".all", 4.3,    "4.30",
-    "numeric", "p25",      ".all", 5.1,    "5.10",
-    "numeric", "median",   ".all", 5.8,    "5.80",
-    "numeric", "p75",      ".all", 6.4,    "6.40",
-    "numeric", "max",      ".all", 7.9,    "7.90",
-    "numeric", "hist",     ".all", NA,      "▂▇▅▇▆▆▅▂▂▂",
-    "numeric", "iqr",      ".all", iiqr,   "1.30",
-    "numeric", "quantile", "99%",  7.7,    "7.70")
-
-  newfuns <- list(iqr = IQR,
-                  quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = newfuns, append = TRUE)
-  input <- skim_v(iris$Sepal.Length)
-  expect_identical(input, correct)
-  skim_with_defaults()
-})
-
-
 test_that("Skimming functions for new types can be added", {
   correct <- tibble::tribble(
     ~type,          ~stat,  ~level,   ~value,                 ~formatted,
-    "new_type",      "iqr", ".all",   IQR(iris$Sepal.Length), "1.30",
-    "new_type", "quantile",  "99%",   7.7,                    "7.70"
+    "new_type",      "iqr", ".all",   IQR(iris$Sepal.Length), "1.3",
+    "new_type", "quantile",  "99%",   7.7,                    "7.7"
   )
   funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))
@@ -273,9 +217,9 @@ test_that("Skimming functions for new types can be added", {
 test_that("Set skimming functions for multiple types", {
   correct <- tibble::tribble(
     ~type,          ~stat,      ~level,  ~value,                 ~formatted,
-    "new_type",     "iqr",      ".all",  IQR(iris$Sepal.Length), "1.30",
-    "new_type",     "quantile", "99%",   7.7,                    "7.70",
-    "new_type",     "q2",       "99%",   7.7,                    "7.70")
+    "new_type",     "iqr",      ".all",  IQR(iris$Sepal.Length), "1.3",
+    "new_type",     "quantile", "99%",   7.7,                    "7.7",
+    "new_type",     "q2",       "99%",   7.7,                    "7.7")
   funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99),
     q2 = purrr::partial(quantile, probs = .99))

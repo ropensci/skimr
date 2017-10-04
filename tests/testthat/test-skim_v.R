@@ -9,12 +9,12 @@ test_that("skim_v returns expected response for numeric vectors", {
     "numeric",        "n",   ".all", 32,                   "32",
     "numeric",     "mean",   ".all", mean(mtcars$mpg),     "20.09",
     "numeric",       "sd",   ".all", sd(mtcars$mpg),       "6.03", 
-    "numeric",      "min",   ".all", min(mtcars$mpg),      "10.40",
+    "numeric",      "min",   ".all", min(mtcars$mpg),      "10.4",
     "numeric",      "p25",   ".all", quantiles[1],         "15.43",
-    "numeric",   "median",   ".all", median(mtcars$mpg),   "19.20",
-    "numeric",      "p75",   ".all", quantiles[2],         "22.80",
-    "numeric",      "max",   ".all", max(mtcars$mpg),      "33.90",
-    "numeric",     "hist",   ".all", NA,                   "▂▅▇▇▇▃▁▁▂▂")
+    "numeric",   "median",   ".all", median(mtcars$mpg),   "19.2",
+    "numeric",      "p75",   ".all", quantiles[2],         "22.8",
+    "numeric",      "max",   ".all", max(mtcars$mpg),      "33.9",
+    "numeric",     "hist",   ".all", NA,                   "▃▇▇▇▃▂▂▂")
   input <- skim_v(mtcars$mpg)
   expect_identical(input, correct)
 })
@@ -59,14 +59,14 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
     "numeric",  "missing", ".all",  1,                              "1",
     "numeric", "complete", ".all",  2,                              "2",
     "numeric",        "n", ".all",  3,                              "3",
-    "numeric",     "mean", ".all",  0,                              "0.00", 
+    "numeric",     "mean", ".all",  0,                              "0", 
     "numeric",       "sd", ".all",  sd(patho, na.rm = TRUE),        "1.3e+16",
     "numeric",      "min", ".all",  -(2^.Machine$double.digits),    "-9e+15",
     "numeric",      "p25", ".all",  pqs[1],                     "-4.5e+15",
-    "numeric",   "median", ".all",  0,                              "0.00",
+    "numeric",   "median", ".all",  0,                              "0",
     "numeric",      "p75", ".all",  pqs[2],                     "4.5e+15", 
     "numeric",      "max", ".all",  +(2^.Machine$double.digits),   "9e+15",
-    "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▁▁▇")
+    "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▇")
   input <- skim_v(patho)
   expect_identical(input, correct_patho)
 })
@@ -203,16 +203,16 @@ test_that("skim_v returns expected response for ts vectors", {
     "ts",   "missing",    ".all",   0,              "0",
     "ts",   "complete",   ".all",   39,             "39",
     "ts",   "n",          ".all",   39,             "39",
-    "ts",   "start",      ".all",   1962,           "1962.00",
-    "ts",   "end",        ".all",   1971,           "1971.00",
-    "ts",   "frequency",  ".all",   4,              "4.00",
+    "ts",   "start",      ".all",   1962,           "1962",
+    "ts",   "end",        ".all",   1971,           "1971",
+    "ts",   "frequency",  ".all",   4,              "4",
     "ts",   "deltat",     ".all",   0.25,           "0.25",
     "ts",   "mean",       ".all",   mean(freeny$y), "9.31",
     "ts",   "sd",         ".all",   sd(freeny$y),   "0.32",
     "ts",   "min",        ".all",   8.79137,        "8.79",
     "ts",   "max",        ".all",   9.79424,        "9.79",
     "ts",   "median",     ".all",   9.31378,        "9.31",
-    "ts",   "line_graph", ".all", NA,               "⣀⣀⡠⠤⠤⠒⠒⠉⠉⠉")
+    "ts",   "line_graph", ".all", NA,               "⣀⣀⠤⠤⠒⠒⠉⠉")
   data(freeny)
   input <- skim_v(freeny$y)
   expect_identical(input, correct)

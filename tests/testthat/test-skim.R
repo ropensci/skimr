@@ -24,7 +24,7 @@ test_that("Skimming a data frame works as expected", {
   expect_equal(head(input$value), c(0, 71, 71, 261.3, 78.1, 108), tol = .01)
   expect_equal(tail(input$value), c(12, 12, 12, 11, 10, 0))
   expect_identical(head(input$formatted),
-                   c("0", "71", "71", "261.31", "78.07", "108.00"))
+                   c("0", "71", "71", "261.31", "78.07", "108"))
   expect_identical(tail(input$formatted),
                    c("cas: 12", "lin: 12", "sun: 12", "mea: 11", "hor: 10",
                      "NA: 0"))
@@ -69,5 +69,5 @@ test_that("Skimming a grouped data frame works as expected", {
                                      "hist"), 88))
   expect_identical(input$level, rep(".all", 968))
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
-  expect_identical(input$formatted[1:5], c("0", "1", "1", "21.50", "NA"))
+  expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })

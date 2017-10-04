@@ -2,13 +2,13 @@ context("Use individual statistics functions on a vector")
 
 test_that("inline_linegraph returns expected response for a ts vector", {
   input <- inline_linegraph(freeny$y)
-  correct <- structure("⣀⣀⡠⠤⠤⠒⠒⠉⠉⠉", class = c("spark", "character"))
+  correct <- structure("⣀⣀⠤⠤⠒⠒⠉⠉", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
 test_that("inline_linegraph returns expected response for a long ts vector.", {
   input <- inline_linegraph(AirPassengers)
-  correct <- structure("⣀⣀⣀⡠⡠⠤⠢⠒⠊⠑", class = c("spark", "character"))
+  correct <- structure("⣀⣀⣀⠔⠤⠊⠑⠊", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
@@ -42,14 +42,14 @@ test_that("n_complete is calculated correctly.", {
 
 test_that("inline histogram is calculated correctly.", {
   input <- inline_hist(iris$Sepal.Length)
-  correct <- structure("▂▇▅▇▆▆▅▂▂▂", class = c("spark", "character"))
+  correct <- structure("▂▇▅▇▆▅▂▂", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
 test_that("inline histogram is calculated correctly when x is all zeros.", {
   all0s <- c(0, 0, 0, 0)
   input <- inline_hist(all0s)
-  correct <- structure("▁▁▁▁▇▁▁▁▁▁", class = c("spark", "character"))
+  correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 

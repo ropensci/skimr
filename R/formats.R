@@ -21,9 +21,6 @@ NULL
 #' 
 #' @param ... Named arguments that contain named lists specifying formats
 #'  to apply.
-#' @param append Whether the provided options should be in addition to the
-#'  defaults already in skim for the given types specified by the named
-#'  arugments in \code{...}.
 #' @return Nothing. \code{invisible(NULL)}
 #' @examples
 #' # Format numbers to have more digits
@@ -36,8 +33,8 @@ NULL
 #' skim_format_defaults()
 #' @export
 
-skim_format <- function(..., append = TRUE) {
-  skim_options(..., env = "formats", append = append)
+skim_format <- function(...) {
+  skim_options(..., env = "formats", append = FALSE)
 }
 
 
@@ -62,9 +59,10 @@ show_formats <- function(which = NULL) {
 
 .formats <- list(
   .levels = list(max_char = 3, max_levels = 4),
-  numeric = list(digits = 2, nsmall = 2),
+  .align_decimal = TRUE,
+  numeric = list(digits = 2, nsmall = 2, drop0trailing = TRUE),
   integer = list(drop0trailing = TRUE),
-  character = list(width = 10),
+  character = list(width = 8),
   date = list(format = "%Y-%m-%d"),
   posixct = list(format = "%Y-%m-%d"),
   logical = list(),
