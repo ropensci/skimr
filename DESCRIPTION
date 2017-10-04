@@ -20,6 +20,7 @@ Imports:
     purrr,
     rlang,
     stats,
+    stringr,
     tibble (>= 0.6),
     tidyr (>= 0.7)
 Remotes:

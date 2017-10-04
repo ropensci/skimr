@@ -5,17 +5,13 @@
 \alias{skim_format_defaults}
 \title{Change the formatting options for printed skim objects}
 \usage{
-skim_format(..., append = TRUE)
+skim_format(...)
 
 skim_format_defaults()
 }
 \arguments{
 \item{...}{Named arguments that contain named lists specifying formats
 to apply.}
-
-\item{append}{Whether the provided options should be in addition to the
-defaults already in skim for the given types specified by the named
-arugments in \code{...}.}
 }
 \value{
 Nothing. \code{invisible(NULL)}

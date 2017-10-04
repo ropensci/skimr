@@ -15,7 +15,7 @@ particular data type.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in skim for the given types specified by the named
-arugments in \code{...}.}
+arugments in \code{...}. Default is \code{TRUE}.}
 }
 \value{
 Nothing. \code{invisible(NULL)}
