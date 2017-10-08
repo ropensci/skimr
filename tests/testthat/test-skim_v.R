@@ -29,7 +29,8 @@ test_that("skim_v returns expected response for factor vectors", {
     "factor", "top_counts",    "setosa",  50L,     "set: 50",
     "factor", "top_counts","versicolor",  50L,     "ver: 50",
     "factor", "top_counts", "virginica",  50L,     "vir: 50",
-    "factor", "top_counts",          NA,  0L,      "NA: 0")
+    "factor", "top_counts",          NA,  0L,      "NA: 0",
+    "factor",    "ordered",      ".all",  0L,      "FALSE")
   input <- skim_v(iris$Species)
   expect_identical(input, correct)
 })
@@ -44,7 +45,8 @@ test_that("skim_v handles factors when NAs are present", {
     "factor", "top_counts","versicolor",  50L,      "ver: 50",
     "factor", "top_counts", "virginica",  50L,      "vir: 50",
     "factor", "top_counts",    "setosa",  46L,      "set: 46",
-    "factor", "top_counts",          NA,  4L,       "NA: 4")
+    "factor", "top_counts",          NA,  4L,       "NA: 4",
+    "factor",    "ordered",      ".all",  0L,       "FALSE")
   dat <- iris
   dat$Species[15:18] <- NA 
   input <- skim_v(dat$Species)

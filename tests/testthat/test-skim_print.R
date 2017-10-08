@@ -3,7 +3,7 @@ context("Print a skim_df object")
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_output(print(input), "Skim summary statistics")
-  expect_output(print(input), "n obs: 52")
+  expect_output(print(input), "n obs: 53")
   expect_output(print(input), "n variables: 6")
   expect_output(print(input), "Variable type: factor")
   expect_output(print(input), "Variable type: numeric")
