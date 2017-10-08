@@ -47,7 +47,7 @@ test_that("Skimming a grouped data frame works as expected", {
   
   # dimensions
   expect_length(input, 8)
-  expect_equal(nrow(input), 968)
+  expect_equal(nrow(input), 792)
   
   # classes
   expect_is(input, "skim_df")
@@ -57,17 +57,17 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_is(input, "data.frame")
   
   # values
-  expect_identical(input$cyl, rep(c(4, 6, 8), c(363, 363, 242)))
+  expect_identical(input$cyl, rep(c(4, 6, 8), c(297, 297, 198)))
   expect_true(all(c(3, 4, 5) %in% input$gear))
-  expect_equal(as.numeric(table(input$gear)), c(363, 242, 363))
-  expect_identical(input$var, rep(c("mpg", "cyl", "disp", "hp", "drat",
-                                    "wt", "qsec", "vs", "am", "gear",
+  expect_equal(as.numeric(table(input$gear)), c(297, 198, 297))
+  expect_identical(input$var, rep(c("mpg", "disp", "hp", "drat",
+                                    "wt", "qsec", "vs", "am",
                                     "carb"), 8, each = 11))
-  expect_identical(input$type, rep("numeric", 968))
+  expect_identical(input$type, rep("numeric", 792))
   expect_identical(input$stat, rep(c("missing", "complete", "n", "mean", "sd",
                                      "min", "p25", "median", "p75", "max",
-                                     "hist"), 88))
-  expect_identical(input$level, rep(".all", 968))
+                                     "hist"), 72))
+  expect_identical(input$level, rep(".all", 792))
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
