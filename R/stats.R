@@ -25,6 +25,9 @@ n_complete <- function(x) {
 
 #' Create a contingency table and arrange its levels in descending order
 #' 
+#' In case of ties, the ordering of results is alphabetical and depends upon the locale. 
+#' NA is treated as a ordinary value for sorting.
+#' 
 #' @param x An object that can be interpreted as a factor (including logical)
 #' @return A "table" object, which will be treated as a named numeric vector
 #' @export

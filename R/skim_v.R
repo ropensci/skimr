@@ -29,12 +29,12 @@ skim_v <- function(x, vector_type = class(x)) {
 
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(funs, ~.x(x))
-  
+
   # Assert that the values calculated above can be used in output, i.e. the
   # functions don't create anything list-like
   check <- purrr::map_lgl(values, ~is.recursive(.x))
   if (any(check)) {
-    collapsed <- paste(names(funs)[check], collpase = ", ")
+    collapsed <- paste(names(funs)[check], collapse = ", ")
     stop("Functions for class ", get_vector_type_used(vector_type),
          " did not return atomic vectors: ", collapsed)
   }
@@ -43,9 +43,9 @@ skim_v <- function(x, vector_type = class(x)) {
   # use these names to get levels
   nms <- purrr::map(values, ~names(.x))
   check <- purrr::map2_lgl(values, nms, check_levels)
-  if (any(check)) {
-    collapsed <- paste(names(funs)[check], collapse = ", ")
-    stop("Levels missing from the following functions: ", collapsed)
+  if (length(check) > 0) {
+    collapsed <- paste(names(check), collapse = ", ")
+    stop(paste("Names missing from the following functions: ", collapsed))
   }
   level <- purrr::map_if(nms, is.null, ~".all")
   

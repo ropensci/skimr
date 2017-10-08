@@ -241,3 +241,29 @@ test_that("Throw errors when arguments are incorrect", {
   # Restore defaults
   skim_with_defaults()
 })
+
+test_that("Throw error when a function producing a list is used", {
+  funs <- list(list_fun = as.list)
+  collapsed <- paste("list_fun", collapse = ", ")
+  msg <- paste0("Functions for class ", "numeric",
+       " did not return atomic vectors: ", collapsed)
+  skim_with(numeric = funs, append = FALSE)
+  expect_error(skim_v(mtcars$mpg), msg)
+
+  # Restore defaults
+  skim_with_defaults()
+})
+
+test_that("Throw error when a function producing an unnamed vector is used", {
+  test_fun <- function(x){
+    unname(summary(lynx))
+  }
+  funs <- list(test_fun_unname = test_fun)
+  collapsed <- paste("test_fun_unname", collapse = ", ")
+  msg <- paste0("Names missing from the following functions:  ", collapsed)
+  skim_with(ts = funs, append = FALSE)
+  expect_error(skim_v(lynx), msg)
+  
+  # Restore defaults
+  skim_with_defaults()
+})
