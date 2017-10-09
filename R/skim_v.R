@@ -80,7 +80,7 @@ check_levels <- function(values, names) {
     null <- is.null(names)
 
     # Allow 1 NA to accomodate functions that themselves return a count of NAs
-    any(null)|any(empty)|sum(!complete) > 1
+    null | any(empty) | sum(!complete) > 1
   } else {
     FALSE
   }
