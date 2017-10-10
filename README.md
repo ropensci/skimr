@@ -21,12 +21,15 @@ devtools::install_github("ropenscilabs/skimr")
 
 ## Skim statistics in the console
 
+Compared to other `summary()` type functions skimr
+
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
-- handles dates, logicals
-- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
+- handles dates, logicals and other classes
+- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar
+- can be extended to new data classes within data frames and new object types
 
-**Nicely separates numeric and factor variables:**  
+**Nicely separates numeric and factor variables:** 
 
 ![](man/figures/skim_chickwts.png)  
 <br>
@@ -109,7 +112,12 @@ At the moment in addition to the three types with print support complex, logical
 are supported with skim_v methods and the results are in the skim object.
 
 We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
-significant digits incorrectly.  
+significant digits correctly. 
+
+The develop branch currently addresses some of these issues. To install the develop branch:
+```r
+install_github("ropenscilabs/skimr", ref = "develop")
+```
 
 ### Windows support for spark histograms
 
@@ -117,6 +125,17 @@ Windows cannot print the spark-histogram characters when printing a data-frame. 
 `"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
 the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
 for printing dataframes. One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+
+### Printing spark histograms and line graphs in knitted documents
+
+Spark-bar and spark-line work in the console but may not work when you knit them to a specific document format.
+The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, 
+for example. This issue can generally be addressed by changing fonts to one with good building block (for
+histogtams) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
+the `extra font` package supports these.  You may also want to try wrapping your results in `knitr::kable()`.
+
+Displays in documents of different types will vary. For example, one user found that the font 
+"Yu Gothic UI Semilight"  produced consistent results for Microsoft Word and Libre Office Write.
 
 ## Contributing
 
