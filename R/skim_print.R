@@ -18,7 +18,7 @@ print.skim_df <- function(x, ...) {
     cat(" group variables:", flat, "\n")
   }
   
-  grouped <- dplyr::group_by(x, type)
+  grouped <- dplyr::group_by_(x, ~type)
   dplyr::do(grouped, skim_print(., grps))
   x
 }
@@ -45,7 +45,7 @@ skim_print <- function(.data, groups) {
 collapse_levels <- function(.data, groups) {
   all_groups <- c(groups, rlang::sym("var"), rlang::sym("stat"))
   grouped <- dplyr::group_by(.data, !!!all_groups)
-  dplyr::summarize(grouped, formatted = collapse_one(formatted))
+  dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }
 
 collapse_one <- function(vec) {
