@@ -241,3 +241,77 @@ test_that("Throw errors when arguments are incorrect", {
   # Restore defaults
   skim_with_defaults()
 })
+
+test_that("Throw error when a function producing a list is used", {
+  funs <- list(list_fun = as.list)
+  collapsed <- paste("list_fun", collapse = ", ")
+  msg <- paste0("Functions for class ", "numeric",
+       " did not return atomic vectors: ", collapsed)
+  skim_with(numeric = funs, append = FALSE)
+  expect_error(skim_v(mtcars$mpg), msg)
+
+  # Restore defaults
+  skim_with_defaults()
+})
+
+test_that("Throw error when a function producing an unnamed vector is used", {
+  test_fun <- function(x){
+    unname(summary(x))
+  }
+  funs <- list(test_fun_unname = test_fun)
+  collapsed <- paste("test_fun_unname", collapse = ", ")
+  msg <- paste0("Names missing from the following functions:  ", collapsed)
+  skim_with(ts = funs, append = FALSE)
+  expect_error(skim_v(lynx), msg)
+  
+  # Restore defaults
+  skim_with_defaults()
+})
+
+test_that("Throw error when a function producing a vector with empty names is used", {
+  test_fun2 <- function(x){
+    r<-unname(summary(x))
+    names(r)<- ""
+    r
+  }
+  skim_format_defaults()
+  funs <- list(test_fun_unname = test_fun2)
+  collapsed <- paste("test_fun_unname", collapse = ", ")
+  msg <- paste0("Names missing from the following functions:  ", collapsed)
+  
+  skim_with(ts = funs, append = FALSE)
+  expect_error(skim_v(lynx), msg)
+
+  # Restore defaults
+  skim_with_defaults()  
+  
+})
+
+test_that("Throw error when a function producing a vector with some empty names is used", {
+  test_fun3 <- function(x){
+    r<-unname(summary(x))
+    names(r)<- ""
+    names(r)[1]<- "name1"
+    r
+  }
+  skim_format_defaults()
+  funs <- list(test_fun_unname = test_fun3)
+  collapsed <- paste("test_fun_unname", collapse = ", ")
+  msg <- paste0("Names missing from the following functions:  ", collapsed)
+  
+  skim_with(ts = funs, append = FALSE)
+  expect_error(skim_v(lynx), msg)
+  
+  # Restore defaults
+  skim_with_defaults()  
+  
+})
+
+test_that("Skim_v works when a function generates top_count (which includes <NA> as a name", {
+  expected <- tibble::tribble(
+    ~type,          ~stat,      ~level,  ~value,   ~formatted,
+    "factor", "top_counts", "virginica",  50L,     "vir: 50",
+    "factor", "top_counts",          NA,  0L,      "NA: 0"
+  )
+  expect_identical(skim_v(iris$Species)[7:8,], expected)
+})
