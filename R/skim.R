@@ -24,6 +24,8 @@ skim <- function(.data) {
 skim.data.frame <- function(.data) {
   rows <- purrr::map(.data, skim_v)
   combined <- dplyr::bind_rows(rows, .id = "var")
+  attr(combined, "data_rows") <- nrow(.data)
+  attr(combined, "data_cols") <- ncol(.data)
   structure(combined, class = c("skim_df", class(combined)))
 }
 

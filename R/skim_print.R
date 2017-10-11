@@ -8,10 +8,14 @@
 #' @export
 
 print.skim_df <- function(x, ...) {
+  cat("Skim summary statistics\n")
+  cat(" n obs:", attr(x, "data_rows"), "\n")
+  cat(" n variables:", attr(x, "data_cols"), "\n")
+
   grps <- dplyr::groups(x) 
   if (!is.null(grps)) {
     flat <- paste(grps, collapse = ", ")
-    cat(" Group variables:", flat, "\n")
+    cat(" group variables:", flat, "\n")
   }
   
   grouped <- dplyr::group_by(x, type)

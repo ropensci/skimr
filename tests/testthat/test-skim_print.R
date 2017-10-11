@@ -2,16 +2,16 @@ context("Print a skim_df object")
 
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
-  #expect_output(print(input), "Skim summary statistics")
-  #expect_output(print(input), "n obs: 52")
-  #expect_output(print(input), "n variables: 6")
+  expect_output(print(input), "Skim summary statistics")
+  expect_output(print(input), "n obs: 150")
+  expect_output(print(input), "n variables: 5 \n")
   expect_output(print(input), "Variable type: factor")
   expect_output(print(input), "Variable type: numeric")
 })
 
 test_that("Skim prints a special header for grouped data frames", {
   input <- skim(dplyr::group_by(iris, Species))
-  expect_output(print(input), "Group variables: Species")
+  expect_output(print(input), " group variables: Species")
 })
 
 test_that("Skim collapses counts and other multivalue stats into one cell", {
