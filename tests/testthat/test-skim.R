@@ -5,29 +5,28 @@ test_that("Skimming a data frame works as expected", {
   
   # dimensions
   expect_length(input, 6)
-  expect_equal(nrow(input), 22)
+  expect_equal(nrow(input), 23)
   
   # classes
   expect_is(input, "skim_df")
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_identical(input$var, rep(c("weight", "feed"), each = 11))
-  expect_identical(input$type, rep(c("numeric", "factor"), each = 11))
+  expect_identical(input$var, c(rep(c("weight"), each = 11), rep("feed", each = 12)))
+  expect_identical(input$type, c(rep("numeric", each = 11), rep("factor", each = 12)))
   expect_identical(head(input$stat),
                    c("missing", "complete", "n", "mean", "sd", "min"))
-  expect_identical(tail(input$stat), rep("top_counts", 6))
+  expect_identical(tail(input$stat), c(rep("top_counts", 5), rep("ordered", 1)))
   expect_identical(head(input$level), rep(".all", 6))
   expect_identical(tail(input$level),
-                   c("casein", "linseed", "sunflower", "meatmeal", "horsebean",
-                     NA))
+                   c("linseed", "sunflower", "meatmeal", "horsebean", NA, ".all"  ))
   expect_equal(head(input$value), c(0, 71, 71, 261.3, 78.1, 108), tol = .01)
-  expect_equal(tail(input$value), c(12, 12, 12, 11, 10, 0))
+  expect_equal(tail(input$value), c( 12, 12, 11, 10, 0, 0))
   expect_identical(head(input$formatted),
                    c("0", "71", "71", "261.31", "78.07", "108"))
   expect_identical(tail(input$formatted),
-                   c("cas: 12", "lin: 12", "sun: 12", "mea: 11", "hor: 10",
-                     "NA: 0"))
+                   c("lin: 12", "sun: 12", "mea: 11", "hor: 10",
+                     "NA: 0", "FALSE"))
 })
 
 test_that("Using skim_tee returns the object", {

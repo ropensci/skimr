@@ -13,5 +13,6 @@ sorted_count(x)
 A "table" object, which will be treated as a named numeric vector
 }
 \description{
-Create a contingency table and arrange its levels in descending order
+In case of ties, the ordering of results is alphabetical and depends upon the locale. 
+NA is treated as a ordinary value for sorting.
 }

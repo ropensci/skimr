@@ -125,7 +125,8 @@ factor_funs <- list(
   complete = n_complete,
   n = length,
   n_unique = n_unique,
-  top_counts = sorted_count
+  top_counts = sorted_count,
+  ordered = is.ordered
 )
 
 character_funs <- list (

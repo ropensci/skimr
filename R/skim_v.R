@@ -29,12 +29,13 @@ skim_v <- function(x, vector_type = class(x)) {
 
   # Compute the summary statistic; allow for variable length
   values <- purrr::map(funs, ~.x(x))
-  
+
   # Assert that the values calculated above can be used in output, i.e. the
   # functions don't create anything list-like
   check <- purrr::map_lgl(values, ~is.recursive(.x))
+
   if (any(check)) {
-    collapsed <- paste(names(funs)[check], collpase = ", ")
+    collapsed <- paste(names(funs)[check], collapse = ", ")
     stop("Functions for class ", get_vector_type_used(vector_type),
          " did not return atomic vectors: ", collapsed)
   }
@@ -43,9 +44,10 @@ skim_v <- function(x, vector_type = class(x)) {
   # use these names to get levels
   nms <- purrr::map(values, ~names(.x))
   check <- purrr::map2_lgl(values, nms, check_levels)
+
   if (any(check)) {
     collapsed <- paste(names(funs)[check], collapse = ", ")
-    stop("Levels missing from the following functions: ", collapsed)
+    stop(paste("Names missing from the following functions: ", collapsed))
   }
   level <- purrr::map_if(nms, is.null, ~".all")
   
@@ -68,10 +70,17 @@ skim_v <- function(x, vector_type = class(x)) {
 
 check_levels <- function(values, names) {
   if (length(values) > 1) {
-    complete <- !is.na(names)
-    empty <- names[complete] == ""
-    null <- purrr::map_lgl(names[complete], is.null)
-    any(empty | null)
+     if (!is.null(names)){
+       complete <- !is.na(names)
+     } else {
+       complete <- logical()
+     }
+
+    empty <- ifelse(is.null(names), logical(), names[complete] == "")
+    null <- is.null(names)
+
+    # Allow 1 NA to accomodate functions that themselves return a count of NAs
+    null | any(empty) | sum(!complete) > 1
   } else {
     FALSE
   }

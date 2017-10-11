@@ -136,3 +136,18 @@ test_that("list_max_length is calculated correctly.", {
   dat <- I(list(5, 5:6,5:10, NA))
   expect_identical(list_max_length(dat), 6L)
 })
+
+test_that("sorted count is calculated correctly." , {
+  dat<-c("A", "A", "A", "B", "C","C")
+  expect_equal(sorted_count(dat)[1:3], c("A" = 3, "C" = 2, "B" = 1))
+  expect_equal(names(sorted_count(dat)), c("A", "C", "B", NA))
+})
+
+test_that("sorted count is calculated correctly with a NA." , {
+  # NA should be sorted as if it is a regular value
+  dat<-c("A", "A", "A","A", "B", NA, NA, "C","C", "C")
+  expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1))
+  expect_equal(names(sorted_count(dat)), c("A", "C", NA, "B"))
+})
+
+
