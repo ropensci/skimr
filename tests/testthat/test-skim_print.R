@@ -12,6 +12,8 @@ test_that("Skim prints a header for the entire output and each type", {
 test_that("Skim prints a special header for grouped data frames", {
   input <- skim(dplyr::group_by(iris, Species))
   expect_output(print(input), " group variables: Species")
+  expect_output(print(input), "n obs: 150")
+  expect_output(print(input), "n variables: 5 \n")
 })
 
 test_that("Skim collapses counts and other multivalue stats into one cell", {

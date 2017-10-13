@@ -26,9 +26,8 @@ skim <- function(.data) {
 skim.data.frame <- function(.data) {
   rows <- purrr::map(.data, skim_v)
   combined <- dplyr::bind_rows(rows, .id = "var")
-  attr(combined, "data_rows") <- nrow(.data)
-  attr(combined, "data_cols") <- ncol(.data)
-  structure(combined, class = c("skim_df", class(combined)))
+  structure(combined, class = c("skim_df", class(combined)),
+            data_rows = nrow(.data), data_cols = ncol(.data))
 }
 
 #' @export
@@ -36,7 +35,8 @@ skim.data.frame <- function(.data) {
 skim.grouped_df <- function(.data) {
   skimmed <- dplyr::do(.data, skim(.))
   skimmed <- dplyr::filter(skimmed, !(var %in% dplyr::groups(skimmed)))
-  structure(skimmed, class = c("skim_df", class(skimmed)))
+  structure(skimmed, class = c("skim_df", class(skimmed)),
+            data_rows = nrow(.data), data_cols = ncol(.data))
 }
 
 #' Get useful summary statistic from a data frame, print it, and return it
