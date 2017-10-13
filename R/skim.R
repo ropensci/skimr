@@ -1,3 +1,5 @@
+globalVariables(".")
+
 #' Get useful summary statistic from a data frame
 #' 
 #' \code{skim} handles data of all types, dispatching a different set of
