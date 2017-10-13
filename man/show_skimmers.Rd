@@ -2,12 +2,12 @@
 % Please edit documentation in R/functions.R
 \name{show_skimmers}
 \alias{show_skimmers}
-\title{Show summary functions currently used, by column type}
+\title{Show summary functions currently used, by data type}
 \usage{
-show_skimmers(selected_classes = NULL)
+show_skimmers(which = NULL)
 }
 \arguments{
-\item{selected_classes}{A character vector. One or more of the classes whose summary
+\item{which}{A character vector. One or more of the classes whose summary
 functions you wish to display.}
 }
 \value{

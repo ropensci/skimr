@@ -1,96 +1,65 @@
-#' @include print_handlers.R
-
-#' @title skim_print
-#'
-#' @description Manages print for skim objects.
-#'
-#' @param x A \code{skim_df} object
-#' @importFrom dplyr select mutate filter data_frame left_join
-#' @importFrom tidyr gather spread
-#' @return A \code{skim_df} object
+#' Manages print for skim objects.
+#' 
+#' Currently, numeric, factor and character data are handled.
+#' 
+#' @param x A \code{skim_df} object.
+#' @param ... Further arguments passed to or from other methods.
+#' @return The original \code{skim_df} object.
 #' @export
-skim_print <- function(x){
 
-  types <- unique(x$type)
-  types_custom <- names(print_handling)
-  return_list <- list()
+print.skim_df <- function(x, ...) {
+  cat("Skim summary statistics\n")
+  cat(" n obs:", attr(x, "data_rows"), "\n")
+  cat(" n variables:", attr(x, "data_cols"), "\n")
 
-  for (i in 1:length(types)){
-
-    return_list[[types[i]]] <- print_type(x, types[i])
-    attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables\n")
-
-    return_list
+  grps <- dplyr::groups(x) 
+  if (!is.null(grps)) {
+    flat <- paste(grps, collapse = ", ")
+    cat(" group variables:", flat, "\n")
   }
   
-  return(return_list)
+  grouped <- dplyr::group_by_(x, ~type)
+  dplyr::do(grouped, skim_print(., grps))
+  x
 }
 
-#' @export
-print.skim_df <- function(x, ...) {
-  lapply(skim_print(x),print_results)
-}
+#' Print the set of statistics for each typ
+#' @keywords internal
+#' @noRd
 
-print_results<-function(subtibble){
-  cat(attr(subtibble, "subtibble_title"))
-  print(subtibble)
-}
-
-
-#' @title skim_print
-#'
-#' @description Manages print for grouped skim objects.
-#'
-#' @param x A \code{skim_grouped_df} object
-#' @importFrom dplyr select mutate filter data_frame left_join
-#' @importFrom tidyr gather spread
-#' @return A \code{skim_df} object
-#' @export
-skim_grouped_print <- function(x){
-
-  # Manage groups
-  group_by_vars <- as.character(attr(x, "vars"))
-  group_by_vars_title <- paste(group_by_vars, collapse = ", ")
-
-  # Give each combination of variables and groups a unique name.
-  x <- tidyr::unite_(x, "var", c("var", group_by_vars), sep = "__")
-  attr(x, "group_by_vars") <- group_by_vars_title
-
-  types <- unique(x$type)
-  types_custom <- names(print_handling)
-  return_list <- list()
- 
-  for (i in 1:length(types)){
-
-    return_list[[types[i]]] <- print_type(x, types[i])
-
-    # Separate the unique group-variable names back into distinct columns 
-    return_list[[types[i]]] <- tidyr::separate_(return_list[[types[i]]], "var", into = c("var", group_by_vars),  sep = "__")
-    attr(return_list[[types[i]]], "subtibble_title") <- paste(stringr::str_to_title(types[i]), "Variables",
-                                                              "grouped by", group_by_vars_title, "\n")
-    
+skim_print <- function(.data, groups) {
+  skim_type <- .data$type[1]
+  funs_used <- get_funs(skim_type)
+  fun_names <- names(funs_used)
+  collapsed <- collapse_levels(.data, groups)
+  wide <- tidyr::spread(collapsed, "stat", "formatted")
+  if (options$formats$.align_decimal) {
+    wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
-
-  return(return_list)
+  
+  cat("\nVariable type:", skim_type, "\n")
+  var_order <- c(as.character(groups), "var", fun_names)
+  print(structure(wide[var_order], class = "data.frame"))
 }
 
-#' @export
-print.skim_grouped_df <- function(x, ...) {
-
-  lapply(skim_grouped_print(x),print_results)
+collapse_levels <- function(.data, groups) {
+  all_groups <- c(groups, rlang::sym("var"), rlang::sym("stat"))
+  grouped <- dplyr::group_by(.data, !!!all_groups)
+  dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }
 
-print_type <- function(x, type_name){
-    one_type <- x %>% dplyr::filter_(~type == type_name)
-    types_custom <- names(print_handling)
+collapse_one <- function(vec) {
+  len <- min(length(vec), options$formats$.levels$max_levels)
+  paste(vec[seq_len(len)], collapse = ", ")
+}
 
-    if (nrow(one_type) > 0){
-      if (type_name %in% types_custom){
-        p <- print_handling[[type_name]](one_type)
-      } else {
-        p <- print_handling[["default"]](one_type)
-      }
- 
-      p
-    }
+align_decimal <- function(x){
+  split <- stringr::str_split(x, "\\.", simplify = TRUE)
+  if (ncol(split) < 2) return(x)
+  max_whole <- max(nchar(split[,1]))
+  max_decimal <- max(nchar(split[,2]))
+  left <- stringr::str_pad(split[,1], max_whole, side = "left")
+  right <- stringr::str_pad(split[,2], max_decimal, side = "right")
+  dec <- ifelse (split[, 2] == "", " ", ".") 
+  sprintf("%s%s%s", left, dec, right)
 }

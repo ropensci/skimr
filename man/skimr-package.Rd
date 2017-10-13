@@ -4,9 +4,16 @@
 \name{skimr-package}
 \alias{skimr-package}
 \alias{skimr}
-\title{skimr}
+\title{Skim a data frame}
 \description{
-It provides functionality to deal with summary statistics iteratively and interactively as part of a pipeline. The 
- returned skimr object is subsettable and offers a human readable output.
+This package provides an alternative to the default summary functions
+within R. The package's API is tidy, functions take data frames, return
+data frames and can work as part of a pipeline. The returned \code{skimr}
+object is subsettable and offers a human readable output.
 }
-\keyword{package}
+\details{
+\code{skimr} is opinionated, providing a strong set of summary statistics
+that are generated for a variety of differnt data types. It is also
+provides an API for customization. Users can change both the functions
+dispatched and the way the results are formatted.
+}

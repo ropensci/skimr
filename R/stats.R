@@ -23,80 +23,39 @@ n_complete <- function(x) {
 }
 
 
-#' Calculate mean and create formatted value
+#' Create a contingency table and arrange its levels in descending order
 #' 
-#' Always excludes missings
-#' @param x A numeric vector
-#' @return The mean and the formatted value
-#' @export
-mean_num<- function(x){
-  mean <- mean(x, na.rm = TRUE)
-  attr(mean, "formatted_value") <- formatC(mean, width = 5, digits = 1,  format = "f", flag ="#")
-
-  mean
-}
-
-#' Calculate standard deviation and create formatted value
+#' In case of ties, the ordering of results is alphabetical and depends upon the locale. 
+#' NA is treated as a ordinary value for sorting.
 #' 
-#' Always excludes missings
-#' @param x A numeric vector
-#' @return The mean and the formatted value
+#' @param x An object that can be interpreted as a factor (including logical)
+#' @return A "table" object, which will be treated as a named numeric vector
 #' @export
-sd_num<- function(x){
-  sd <- stats::sd(x, na.rm = TRUE)
-  attr(sd, "formatted_value") <- formatC(sd,  width = 5, digits = 1,  format = "f", flag ="#")
 
-  sd
+sorted_count <- function(x) {
+  tab <- table(x, useNA = "always")
+  out <- setNames(as.integer(tab), names(tab))
+  sort(out, decreasing = TRUE)
 }
-
-#' Calculate median and create formatted value
-#' 
-#' Always excludes missings
-#' @param x A numeric vector
-#' @return The mean and the formatted value
-#' @export
-median_num<- function(x){
-  med <- stats::median(x, na.rm = TRUE)
-  attr(med, "formatted_value") <- formatC(med,  width = 5, digits = 1,  format = "f", flag ="#")
-
-  med
-}
-
-#' Calculate 25th and 75th quantiles and create formatted value
-#' 
-#' Always excludes missings
-#' @param x A numeric vector
-#' @return The 25th and 75th and formatted values
-#' @export
-quantile_num<- function(x){
-  quantiles <- stats::quantile(x, probs = c(.25, .50, .75), na.rm = TRUE)
-  attr(quantiles, "formatted_value") <- c(formatC(quantiles[1],  width = 5, digits = 1,  format = "f", flag ="#"),
-                                    formatC(quantiles[2],  width = 5, digits = 1,  format = "f", flag ="#"),
-                                    formatC(quantiles[3],  width = 5, digits = 1,  format = "f", flag ="#"))
-  quantiles
-}
-
 
 #' Generate inline histogram for numeric variables
-#' 
-#' @param x A vector
-#' @return A A numeric value of 0 with a name that is a character string of histogram.
+#'
+#' The character length of the histogram is controlled by the formatting
+#' options for character vectors.
+#'  
+#' @param x A numeric vector.
+#' @return A length-one character vector containing the histogram.
 #' @export
 
 inline_hist <- function(x) {
- 
-  x <- x[!is.na(x) == TRUE]
-  out <- 0
-  if (length(x) == 0 | all(x == 0)){
-    attr(out, "formatted_value") <- ""
-    return(out)
-  }
-  hist_dt <- table(cut(x, 10))
-  hist_dt <- hist_dt / max(hist_dt)
-  attr(out, "formatted_value") <- pillar::spark_bar(hist_dt)
-
-  return(out)
+  # Handle empty vectors
+  if (length(x) < 1) return(structure(" ", class = "spark"))
   
+  # Addresses a known bug in cut()
+  if (all(x == 0)) x <- x + 1
+  hist_dt <- table(cut(x, options$formats$character$width))
+  hist_dt <- hist_dt / max(hist_dt)
+  structure(pillar::spark_bar(hist_dt), class = c("spark", "character"))
 }
 
 
@@ -109,7 +68,7 @@ inline_hist <- function(x) {
 
 n_empty <- function(x) {
   empty.strings=c("")
-  x %in% empty.strings %>% sum()
+  sum(x %in% empty.strings)
 }
 
 
@@ -136,6 +95,7 @@ max_char <- function(x) {
   max(characters, na.rm = TRUE)
 }
 
+
 #' Calculate the number of unique elements but remove NA
 #' 
 #' @param x A vector
@@ -148,6 +108,7 @@ n_unique <- function(x) {
   length(un)
 }
 
+
 #' Get the start for a time series without the frequency
 #' 
 #' @param x A vector of ts data
@@ -155,9 +116,9 @@ n_unique <- function(x) {
 #' @export
 
 ts_start <- function(x) {
-  s <- stats::start(x)
-  s <- s[1]
+  start(x)[1]
 }
+
 
 #' Get the finish for a time series without the frequency
 #' 
@@ -166,37 +127,34 @@ ts_start <- function(x) {
 #' @export
 
 ts_end <- function(x) {
-  e <- stats::end(x)
-  e <- e[1]
+  end(x)[1]
 }
 
 
 #' Generate inline line graph for time series variables
 #' 
+#' Sets all data to a standard length, to match character formatting. This is
+#' twice the number of characters set in the histogram.
+#' 
+#' The character length of the linegraph is controlled by the formatting
+#' options for character vectors.
+#' 
 #' @param x A vector
-#' @return A numeric value of 0 with a name that is a character string of line gragh.
+#' @return A length-one character vector containing a line graph.
 #' @export
 
 inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
-  out <- 0 
-  if (length(t) == 0 ){
-    attr(out, "formatted_value") <- ""
-    return(out)    
-  }
-  if (length(t) > 39){
-    shrink_factor <-ceiling(length(t)/40)
-    t <- t[seq(1, length(t), shrink_factor) ]
-  }
-
-  # Values must be between 0 and 1.
-  t <- (t - min(t))/(max(t) - min(t))
-
-  attr(out, "formatted_value") <- suppressWarnings(pillar::spark_line(t))
-
-  return(out)
-
+  id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
+  normalized <- normalize01(t[floor(id)])
+  structure(pillar::spark_line(normalized), class = c("spark", "character"))
 }
+
+# Rescale data to be between 0 and 1
+normalize01 <- function(x) {
+  (x - min(x)) / (max(x) - min(x))
+}
+
 
 #' Get the length of the shortest list in a vector of lists
 #' 
@@ -205,10 +163,11 @@ inline_linegraph <- function(x) {
 #' @export
 
 list_lengths_min <- function(x) {
-    x <- x[!is.na(x)]
-    l <- lengths(x)
-    ifelse(length(l) != 0, return(min(l)), return(NA))
+  x <- x[!is.na(x)]
+  l <- lengths(x)
+  ifelse(length(l) != 0, return(min(l)), return(NA))
 }
+
 
 #' Get the median length of the lists
 #' 
@@ -220,8 +179,8 @@ list_lengths_median <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
   return(stats::median(l))
-
 }
+
 
 #' Get the maximum length of the lists
 #' 
@@ -232,98 +191,29 @@ list_lengths_median <- function(x) {
 list_lengths_max <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
-  ifelse(length(l) != 0, return(max(l)), return(NA))
+  ifelse(length(l) != 0, max(l), NA)
 }
+
 
 #' Get the length of the shortest list in a vector of lists
 #' 
 #' @param x A vector of list data
 #' @return Minimum length.
 #' @export
+
 list_min_length <- function(x){
   l <- lengths(x)
   min(l)
 }
+
 
 #' Get the length of the longest list in a vector of lists
 #' 
 #' @param x A vector of list data
 #' @return Minimum length.
 #' @export
+
 list_max_length <- function(x){
   l <- lengths(x)
   max(l)
-}
-
-#' Get the maximum in a vector of dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-date_max <- function(x){
-  d <- max(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  
-  d
-}
-
-#' Get the minimum in a vector of dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-date_min <- function(x){
-  d <- min(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  d
-}
-
-#' Get the median in a vector of dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-date_median <- function(x){
-  d <- stats::median(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  d
-}
-
-#' Get the maximum in a vector of POSIXct dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-posixct_max <- function(x){
-  d <- max(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  d
-}
-
-#' Get the minimum in a vector of POSIXct dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-posixct_min <- function(x){
-  d <- min(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  d
-}
-
-#' Get the median in a vector of POSIXct dates
-#' 
-#' @param x A vector of date data
-#' @return Maximum date.
-#' @export
-posixct_median <- function(x){
-  d <- stats::median(x, na.rm = TRUE)
-  d_char <- as.character(d)
-  attr(d, "formatted_value") <- d_char
-  d
 }

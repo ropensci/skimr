@@ -2,27 +2,23 @@
 % Please edit documentation in R/skim_v.R
 \name{skim_v}
 \alias{skim_v}
-\title{Extract summary statistics for vector. Should work regardless of type.}
+\title{Extract summary statistics for vector.}
 \usage{
-skim_v(x, FUNS = class(x))
+skim_v(x, vector_type = class(x))
 }
 \arguments{
-\item{x}{A vector}
+\item{x}{A vector.}
 
-\item{FUNS}{A length-one character vector that specifies which group of funs
+\item{vector_type}{A character vector that specifies which group of funs
 to grab for summarizing.}
 }
 \value{
 A tall tbl, containing the vector's name, type, potential levels
-  and a series of summary statistics.
+ and a series of summary statistics.
 }
 \description{
-This enables consistent returns for a variety of functions that generate
-summary statistics. The only difference between the different skim_v methods
-is the functions that they access.
-}
-\details{
-We can't use the typical S3 dispatch because we cannot enumerate all possible
-input types in advance.
+The set of functions used to summarize the vector depends on the vectors
+type. See \code{\link{skim_with}} and
+\code{\link{skim_format}} for how \code{skim_v} can be customized.
 }
 \keyword{internal}

@@ -1,83 +1,52 @@
+globalVariables(".")
+
 #' Get useful summary statistic from a data frame
+#' 
+#' \code{skim} handles data of all types, dispatching a different set of
+#' summary functions based on the types of columns in the data frame.
+#' It is an intentionally simple function. See \code{\link{skim_with}} and
+#' \code{\link{skim_format}} for how \code{skim} can be customized.
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
 #' @return A \code{skim_df} object, which can be treated like a
-#'   tbl in most instances.
-#' @importFrom magrittr %>%
+#'  tbl in most instances.
+#' @examples
+#' skim(iris)
+#' 
+#' # Skim also works groupwise
+#' dplyr::group_by(iris) %>% skim()
 #' @export
 
 skim <- function(.data) {
   UseMethod("skim")
 }
 
+#'@export
+
+skim.data.frame <- function(.data) {
+  rows <- purrr::map(.data, skim_v)
+  combined <- dplyr::bind_rows(rows, .id = "var")
+  structure(combined, class = c("skim_df", class(combined)),
+            data_rows = nrow(.data), data_cols = ncol(.data))
+}
+
+#' @export
+
+skim.grouped_df <- function(.data) {
+  skimmed <- dplyr::do(.data, skim(.))
+  skimmed <- dplyr::filter(skimmed, !(var %in% dplyr::groups(skimmed)))
+  structure(skimmed, class = c("skim_df", class(skimmed)),
+            data_rows = nrow(.data), data_cols = ncol(.data))
+}
+
 #' Get useful summary statistic from a data frame, print it, and return it
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
 #' @return A \code{skim_df} object, which can be treated like a
-#'   tbl in most instances.
+#'  tbl in most instances.
 #' @export
+
 skim_tee <- function(.data) {
-  t <- skim(.data)
-  print(t)
+  print(skim(.data))
   invisible(.data)
-}
-
-#'@export
-
-skim.data.frame <- function(.data) {
-
-  rows <- purrr::map(.data, skim_v)
-  combined <- dplyr::bind_rows(rows, .id = "var")
-
-  return(structure(combined, class = c("skim_df", class(combined))))
-}
-
-#' Skim function for grouped date
-#'
-#' @param .data A grouped tbl, or an object that can be coerced into a tbl. 
-#'
-#' @return
-#' A grouped skim_df data frame
-#' @export
-#'
-#' @examples
-#' mtcars %>% dplyr::group_by(cyl, gear) %>% skim()
-#' 
-skim.grouped_df <- function(.data){
-  nested_df <- .data %>%
-               tidyr::nest() 
-    groups <-  as.character(dplyr::groups(.data))
-  l <- split(nested_df[, groups], factor(1:nrow(nested_df)))
-  l <- purrr::map( l, ~dplyr::combine(.))
-  
-  skim_df <- dplyr::mutate(nested_df, stats = purrr::map(nested_df$data, skim)) 
-  skim_df <- skim_df %>% dplyr::mutate(stats = purrr::map2(skim_df$stats, 
-                                      l,
-                                      ~append_group_vars(.x, .y, groups = groups)))
-    
-  combined <- dplyr::bind_rows(skim_df$stats) %>% 
-              dplyr::group_by_(.dots = groups)
-
-  return(structure(combined, class = c("skim_grouped_df", "skim_df",  class(combined))))
-}
-
-#' Append Grouping Variables
-#'
-#' @param df 
-#' A \code{skim_df}
-#' @param val
-#' The group value
-#' @param groups 
-#' The grouping variables of the data frame to be modified
-#'
-#' @return
-#' A data frame with the grouping variables in new columns
-#'
-append_group_vars <- function(df, val, groups){
-  group_val <- dplyr::data_frame(x = val) %>% 
-    t() %>% 
-    dplyr::as_data_frame()
-  group_var_df <- purrr::map(1:nrow(df), ~group_val) %>% dplyr::bind_rows()
-  names(group_var_df) <-  groups
-  dplyr::bind_cols(group_var_df, df)
 }
