@@ -9,9 +9,9 @@
 
 print.skim_df <- function(x, ...) {
   cat("Skim summary statistics\n")
-  cat(" n obs:", nrow(x), "\n")
-  cat(" n variables:", ncol(x), "\n")
-  
+  cat(" n obs:", attr(x, "data_rows"), "\n")
+  cat(" n variables:", attr(x, "data_cols"), "\n")
+
   grps <- dplyr::groups(x) 
   if (!is.null(grps)) {
     flat <- paste(grps, collapse = ", ")

@@ -36,8 +36,8 @@ test_that("Using skim_tee returns the object", {
 
 test_that("Using skim_tee prints out the object", {
   expect_output(skim_tee(chickwts), "Skim summary statistics")
-  expect_output(skim_tee(chickwts), "n obs: 23")
-  expect_output(skim_tee(chickwts), "n variables: 6")
+  expect_output(skim_tee(chickwts), "n obs: 71")
+  expect_output(skim_tee(chickwts), "n variables: 2")
   expect_output(skim_tee(chickwts), "Variable type: factor")
 })
 
