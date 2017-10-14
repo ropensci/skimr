@@ -1,17 +1,7 @@
 # skimr
 
-```r
-devtools::dev_mode()
-```
-
 ```
 ## Dev mode: OFF
-```
-
-```r
-library(skimr)
-skim_with_defaults()
-options(tibble.width = Inf) 
 ```
 
 [![Build Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
@@ -52,16 +42,12 @@ skim(chickwts)
 ##  n variables: 2 
 ## 
 ## Variable type: factor 
-##    var missing complete  n n_unique                         top_counts
-## 1 feed       0       71 71        6 soy: 14, cas: 12, lin: 12, sun: 12
-##   ordered
-## 1   FALSE
+##    var missing complete  n n_unique                         top_counts ordered
+## 1 feed       0       71 71        6 soy: 14, cas: 12, lin: 12, sun: 12   FALSE
 ## 
 ## Variable type: numeric 
-##      var missing complete  n   mean    sd min   p25 median   p75 max
-## 1 weight       0       71 71 261.31 78.07 108 204.5    258 323.5 423
-##       hist
-## 1 ▃▅▅▇▃▇▂▂
+##      var missing complete  n   mean    sd min   p25 median   p75 max     hist
+## 1 weight       0       71 71 261.31 78.07 108 204.5    258 323.5 423 ▃▅▅▇▃▇▂▂
 ```
 
 **Many numeric variables:**  
@@ -76,30 +62,18 @@ skim(mtcars)
 ##  n variables: 11 
 ## 
 ## Variable type: numeric 
-##     var missing complete  n   mean     sd   min    p25 median    p75
-## 1    am       0       32 32   0.41   0.5   0      0      0      1   
-## 2  carb       0       32 32   2.81   1.62  1      2      2      4   
-## 3   cyl       0       32 32   6.19   1.79  4      4      6      8   
-## 4  disp       0       32 32 230.72 123.94 71.1  120.83 196.3  326   
-## 5  drat       0       32 32   3.6    0.53  2.76   3.08   3.7    3.92
-## 6  gear       0       32 32   3.69   0.74  3      3      4      4   
-## 7    hp       0       32 32 146.69  68.56 52     96.5  123    180   
-## 8   mpg       0       32 32  20.09   6.03 10.4   15.43  19.2   22.8 
-## 9  qsec       0       32 32  17.85   1.79 14.5   16.89  17.71  18.9 
-## 10   vs       0       32 32   0.44   0.5   0      0      0      1   
-## 11   wt       0       32 32   3.22   0.98  1.51   2.58   3.33   3.61
-##       max     hist
-## 1    1    ▇▁▁▁▁▁▁▆
-## 2    8    ▆▇▂▇▁▁▁▁
-## 3    8    ▆▁▁▃▁▁▁▇
-## 4  472    ▇▆▁▂▅▃▁▂
-## 5    4.93 ▃▇▁▅▇▂▁▁
-## 6    5    ▇▁▁▆▁▁▁▂
-## 7  335    ▃▇▃▅▂▃▁▁
-## 8   33.9  ▃▇▇▇▃▂▂▂
-## 9   22.9  ▃▂▇▆▃▃▁▁
-## 10   1    ▇▁▁▁▁▁▁▆
-## 11   5.42 ▃▃▃▇▆▁▁▂
+##     var missing complete  n   mean     sd   min    p25 median    p75    max     hist
+## 1    am       0       32 32   0.41   0.5   0      0      0      1      1    ▇▁▁▁▁▁▁▆
+## 2  carb       0       32 32   2.81   1.62  1      2      2      4      8    ▆▇▂▇▁▁▁▁
+## 3   cyl       0       32 32   6.19   1.79  4      4      6      8      8    ▆▁▁▃▁▁▁▇
+## 4  disp       0       32 32 230.72 123.94 71.1  120.83 196.3  326    472    ▇▆▁▂▅▃▁▂
+## 5  drat       0       32 32   3.6    0.53  2.76   3.08   3.7    3.92   4.93 ▃▇▁▅▇▂▁▁
+## 6  gear       0       32 32   3.69   0.74  3      3      4      4      5    ▇▁▁▆▁▁▁▂
+## 7    hp       0       32 32 146.69  68.56 52     96.5  123    180    335    ▃▇▃▅▂▃▁▁
+## 8   mpg       0       32 32  20.09   6.03 10.4   15.43  19.2   22.8   33.9  ▃▇▇▇▃▂▂▂
+## 9  qsec       0       32 32  17.85   1.79 14.5   16.89  17.71  18.9   22.9  ▃▂▇▆▃▃▁▁
+## 10   vs       0       32 32   0.44   0.5   0      0      0      1      1    ▇▁▁▁▁▁▁▆
+## 11   wt       0       32 32   3.22   0.98  1.51   2.58   3.33   3.61   5.42 ▃▃▃▇▆▁▁▂
 ```
 
  
@@ -115,22 +89,15 @@ skim(iris)
 ##  n variables: 5 
 ## 
 ## Variable type: factor 
-##       var missing complete   n n_unique                       top_counts
-## 1 Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0
-##   ordered
-## 1   FALSE
+##       var missing complete   n n_unique                       top_counts ordered
+## 1 Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
 ## 
 ## Variable type: numeric 
-##            var missing complete   n mean   sd min p25 median p75 max
-## 1 Petal.Length       0      150 150 3.76 1.77 1   1.6   4.35 5.1 6.9
-## 2  Petal.Width       0      150 150 1.2  0.76 0.1 0.3   1.3  1.8 2.5
-## 3 Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4 7.9
-## 4  Sepal.Width       0      150 150 3.06 0.44 2   2.8   3    3.3 4.4
-##       hist
-## 1 ▇▁▁▂▅▅▃▁
-## 2 ▇▁▁▅▃▃▂▂
-## 3 ▂▇▅▇▆▅▂▂
-## 4 ▁▂▅▇▃▂▁▁
+##            var missing complete   n mean   sd min p25 median p75 max     hist
+## 1 Petal.Length       0      150 150 3.76 1.77 1   1.6   4.35 5.1 6.9 ▇▁▁▂▅▅▃▁
+## 2  Petal.Width       0      150 150 1.2  0.76 0.1 0.3   1.3  1.8 2.5 ▇▁▁▅▃▃▂▂
+## 3 Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4 7.9 ▂▇▅▇▆▅▂▂
+## 4  Sepal.Width       0      150 150 3.06 0.44 2   2.8   3    3.3 4.4 ▁▂▅▇▃▂▁▁
 ```
 
 ## Handles grouped data
@@ -149,32 +116,19 @@ iris %>% dplyr::group_by(Species) %>% skim()
 ##  group variables: Species 
 ## 
 ## Variable type: numeric 
-##       Species          var missing complete  n mean   sd min  p25 median
-## 1      setosa Petal.Length       0       50 50 1.46 0.17 1   1.4    1.5 
-## 2      setosa  Petal.Width       0       50 50 0.25 0.11 0.1 0.2    0.2 
-## 3      setosa Sepal.Length       0       50 50 5.01 0.35 4.3 4.8    5   
-## 4      setosa  Sepal.Width       0       50 50 3.43 0.38 2.3 3.2    3.4 
-## 5  versicolor Petal.Length       0       50 50 4.26 0.47 3   4      4.35
-## 6  versicolor  Petal.Width       0       50 50 1.33 0.2  1   1.2    1.3 
-## 7  versicolor Sepal.Length       0       50 50 5.94 0.52 4.9 5.6    5.9 
-## 8  versicolor  Sepal.Width       0       50 50 2.77 0.31 2   2.52   2.8 
-## 9   virginica Petal.Length       0       50 50 5.55 0.55 4.5 5.1    5.55
-## 10  virginica  Petal.Width       0       50 50 2.03 0.27 1.4 1.8    2   
-## 11  virginica Sepal.Length       0       50 50 6.59 0.64 4.9 6.23   6.5 
-## 12  virginica  Sepal.Width       0       50 50 2.97 0.32 2.2 2.8    3   
-##     p75 max     hist
-## 1  1.58 1.9 ▁▁▅▇▇▅▂▁
-## 2  0.3  0.6 ▂▇▁▂▂▁▁▁
-## 3  5.2  5.8 ▂▃▅▇▇▃▁▂
-## 4  3.68 4.4 ▁▁▃▅▇▃▂▁
-## 5  4.6  5.1 ▁▃▂▆▆▇▇▃
-## 6  1.5  1.8 ▆▃▇▅▆▂▁▁
-## 7  6.3  7   ▃▂▇▇▇▃▅▂
-## 8  3    3.4 ▁▂▃▅▃▇▃▁
-## 9  5.88 6.9 ▂▇▃▇▅▂▁▂
-## 10 2.3  2.5 ▂▁▇▃▃▆▅▃
-## 11 6.9  7.9 ▁▁▃▇▅▃▂▃
-## 12 3.18 3.8 ▁▃▇▇▅▃▁▂
+##       Species          var missing complete  n mean   sd min  p25 median  p75 max     hist
+## 1      setosa Petal.Length       0       50 50 1.46 0.17 1   1.4    1.5  1.58 1.9 ▁▁▅▇▇▅▂▁
+## 2      setosa  Petal.Width       0       50 50 0.25 0.11 0.1 0.2    0.2  0.3  0.6 ▂▇▁▂▂▁▁▁
+## 3      setosa Sepal.Length       0       50 50 5.01 0.35 4.3 4.8    5    5.2  5.8 ▂▃▅▇▇▃▁▂
+## 4      setosa  Sepal.Width       0       50 50 3.43 0.38 2.3 3.2    3.4  3.68 4.4 ▁▁▃▅▇▃▂▁
+## 5  versicolor Petal.Length       0       50 50 4.26 0.47 3   4      4.35 4.6  5.1 ▁▃▂▆▆▇▇▃
+## 6  versicolor  Petal.Width       0       50 50 1.33 0.2  1   1.2    1.3  1.5  1.8 ▆▃▇▅▆▂▁▁
+## 7  versicolor Sepal.Length       0       50 50 5.94 0.52 4.9 5.6    5.9  6.3  7   ▃▂▇▇▇▃▅▂
+## 8  versicolor  Sepal.Width       0       50 50 2.77 0.31 2   2.52   2.8  3    3.4 ▁▂▃▅▃▇▃▁
+## 9   virginica Petal.Length       0       50 50 5.55 0.55 4.5 5.1    5.55 5.88 6.9 ▂▇▃▇▅▂▁▂
+## 10  virginica  Petal.Width       0       50 50 2.03 0.27 1.4 1.8    2    2.3  2.5 ▂▁▇▃▃▆▅▃
+## 11  virginica Sepal.Length       0       50 50 6.59 0.64 4.9 6.23   6.5  6.9  7.9 ▁▁▃▇▅▃▂▃
+## 12  virginica  Sepal.Width       0       50 50 2.97 0.32 2.2 2.8    3    3.18 3.8 ▁▃▇▇▅▃▁▂
 ```
 
 ## skim_df object (long format)
@@ -275,22 +229,15 @@ skim(dplyr::starwars)
 ## 1 height       6       81 87 174.36 34.77  66 167    180 191 264 ▁▁▁▂▇▃▁▁
 ## 
 ## Variable type: list 
-##         var missing complete  n n_unique min_length median_length
-## 1     films       0       87 87       24          1             1
-## 2 starships       0       87 87       17          0             0
-## 3  vehicles       0       87 87       11          0             0
-##   max_length
-## 1          7
-## 2          5
-## 3          2
+##         var missing complete  n n_unique min_length median_length max_length
+## 1     films       0       87 87       24          1             1          7
+## 2 starships       0       87 87       17          0             0          5
+## 3  vehicles       0       87 87       11          0             0          2
 ## 
 ## Variable type: numeric 
-##          var missing complete  n  mean     sd min  p25 median  p75  max
-## 1 birth_year      44       43 87 87.57 154.69   8 35       52 72    896
-## 2       mass      28       59 87 97.31 169.46  15 55.6     79 84.5 1358
-##       hist
-## 1 ▇▁▁▁▁▁▁▁
-## 2 ▇▁▁▁▁▁▁▁
+##          var missing complete  n  mean     sd min  p25 median  p75  max     hist
+## 1 birth_year      44       43 87 87.57 154.69   8 35       52 72    896 ▇▁▁▁▁▁▁▁
+## 2       mass      28       59 87 97.31 169.46  15 55.6     79 84.5 1358 ▇▁▁▁▁▁▁▁
 ```
 
 

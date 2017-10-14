@@ -1,9 +1,10 @@
 # skimr
-```{r}
+```{r set-options, echo=FALSE}
 devtools::dev_mode()
 library(skimr)
 skim_with_defaults()
-options(tibble.width = Inf) 
+options(tibble.width = Inf)
+options(width = 120)
 ```
 
 [![Build Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
