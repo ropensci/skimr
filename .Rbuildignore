@@ -3,3 +3,5 @@
 ^\.travis\.yml$
 ^blog\.html$
 ^blog\.Rmd$
+^CONTRIBUTING.md
+^CONDUCT.md
