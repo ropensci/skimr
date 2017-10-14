@@ -4,3 +4,5 @@
 ^blog\.html$
 ^blog\.Rmd$
 ^readme\.rmd
+^CONTRIBUTING.md
+^CONDUCT.md

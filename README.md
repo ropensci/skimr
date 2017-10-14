@@ -24,12 +24,15 @@ devtools::install_github("ropenscilabs/skimr")
 
 ## Skim statistics in the console
 
+Compared to other `summary()` type functions skimr
+
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
-- handles dates, logicals
-- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
+- handles dates, logicals and other classes
+- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar
+- can be extended to new data classes within data frames and new object types
 
-**Nicely separates numeric and factor variables:**  
+**Nicely separates numeric and factor variables:** 
 
 
 ```r
@@ -297,7 +300,12 @@ At the moment in addition to the three types with print support complex, logical
 are supported with skim_v methods and the results are in the skim object.
 
 We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
-significant digits incorrectly.  
+significant digits correctly. 
+
+The develop branch currently addresses some of these issues. To install the develop branch:
+```r
+install_github("ropenscilabs/skimr", ref = "develop")
+```
 
 ### Windows support for spark histograms
 
