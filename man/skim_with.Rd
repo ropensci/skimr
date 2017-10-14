@@ -13,8 +13,9 @@ skim_with_defaults()
 \item{...}{A list of functions, with an argument name that matches a
 particular data type.}
 
-\item{append}{Whether the provided functions should be in addition to the
-defaults already in skim.}
+\item{append}{Whether the provided options should be in addition to the
+defaults already in skim for the given types specified by the named
+arugments in \code{...}. Default is \code{TRUE}.}
 }
 \value{
 Nothing. \code{invisible(NULL)}
@@ -39,18 +40,16 @@ can continue to summarize using skim on its own.
 }}
 
 \examples{
-\dontrun{
 # Use new functions for numeric functions
 skim_with(numeric = list(median = median, mad = mad), append = FALSE)
-skim(faithful)
-
-# Go back to defaults
-skim_with_defaults()
 skim(faithful)
 
 # If you want to remove a particular skimmer, set it to NULL
 # This removes the inline histogram
 skim_with(numeric = list(hist = NULL))
 skim(faithful)
-}
+
+# Go back to defaults
+skim_with_defaults()
+skim(faithful)
 }

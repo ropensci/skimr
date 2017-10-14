@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{show_skimmers}
 \alias{show_skimmers}
-\title{Show summary functions currently used, by column type}
+\title{Show summary functions currently used, by data type}
 \usage{
 show_skimmers(which = NULL)
 }

@@ -1,64 +1,72 @@
 context("Skim a data.frame")
 
-# Target output -----------------------------------------------------------
-
-correct <- tibble::tribble(
-  ~var,     ~type,     ~stat,      ~level,       ~value,
-  "weight", "numeric", "missing",  ".all",       0,
-  "weight", "numeric", "complete", ".all",       71,
-  "weight", "numeric", "n",        ".all",       71,
-  "weight", "numeric", "mean",     ".all",       mean(chickwts$weight),
-  "weight", "numeric", "sd",       ".all",       sd(chickwts$weight),
-  "weight", "numeric", "min",      ".all",       108.000,
-  "weight", "numeric", "median",   ".all",       258.000,
-  "weight", "numeric", "quantile",  "25%",       204.500,
-  "weight", "numeric", "quantile",  "75%",       323.500,
-  "weight", "numeric", "max",      ".all",       423.000,
-  "weight", "numeric", "hist", "▂▇▂▇▇▃▇▆▂▂", 0.000,
-  "feed",   "factor",  "missing",   ".all",      0.0000,
-  "feed",   "factor",  "complete",  ".all",      71.0000,
-  "feed",   "factor",  "n",         ".all",      71.0000,
-  "feed",   "factor",  "count",     "casein",    12.0000,
-  "feed",   "factor",  "count",     "horsebean", 10.0000,
-  "feed",   "factor",  "count",     "linseed",   12.0000,
-  "feed",   "factor",  "count",     "meatmeal",  11.0000,
-  "feed",   "factor",  "count",     "soybean",   14.0000,
-  "feed",   "factor",  "count",     "sunflower", 12.0000,
-  "feed",   "factor",  "count",     NA,      0.0000,
-  "feed",   "factor",  "n_unique",  ".all",   6.0000
-)
-  
-class(correct) <- c("skim_df", class(correct))
-
-reference_printed_output <- c("Numeric Variables",
-                              "# A tibble: 1 × 13",
-                              "     var    type missing complete     n     mean      sd   min `25% quantile` median",
-                              "   <chr>   <chr>   <dbl>    <dbl> <dbl>    <dbl>   <dbl> <dbl>          <dbl>  <dbl>",
-                              "1 weight numeric       0       71    71 261.3099 78.0737   108          204.5    258",
-                              "# ... with 3 more variables: `75% quantile` <dbl>, max <dbl>, hist <chr>",
-                              "",
-                              "Factor Variables",
-                              "# A tibble: 1 × 7",
-                              "    var   type complete missing     n n_unique",
-                              "  <chr>  <chr>    <dbl>   <dbl> <dbl>    <dbl>",
-                              "1  feed factor       71       0    71        6",
-                              "# ... with 1 more variables: stat <chr>")
-
-# Begin tests -------------------------------------------------------------
-
 test_that("Skimming a data frame works as expected", {
   input <- skim(chickwts)
-  expect_identical(input, correct)
+  
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 23)
+  
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_identical(input$var, c(rep(c("weight"), each = 11), rep("feed", each = 12)))
+  expect_identical(input$type, c(rep("numeric", each = 11), rep("factor", each = 12)))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "min"))
+  expect_identical(tail(input$stat), c(rep("top_counts", 5), rep("ordered", 1)))
+  expect_identical(head(input$level), rep(".all", 6))
+  expect_identical(tail(input$level),
+                   c("linseed", "sunflower", "meatmeal", "horsebean", NA, ".all"  ))
+  expect_equal(head(input$value), c(0, 71, 71, 261.3, 78.1, 108), tol = .01)
+  expect_equal(tail(input$value), c( 12, 12, 11, 10, 0, 0))
+  expect_identical(head(input$formatted),
+                   c("0", "71", "71", "261.31", "78.07", "108"))
+  expect_identical(tail(input$formatted),
+                   c("lin: 12", "sun: 12", "mea: 11", "hor: 10",
+                     "NA: 0", "FALSE"))
 })
 
 test_that("Using skim_tee returns the object", {
-  printed_output <- capture.output({ skim_object <- skim_tee(chickwts) })
+  capture.output(skim_object <- skim_tee(chickwts))
   expect_identical(chickwts, skim_object)
 })
 
 test_that("Using skim_tee prints out the object", {
-  printed_output <- capture.output({ skim_object <- skim_tee(chickwts) })
+  expect_output(skim_tee(chickwts), "Skim summary statistics")
+  expect_output(skim_tee(chickwts), "n obs: 71")
+  expect_output(skim_tee(chickwts), "n variables: 2")
+  expect_output(skim_tee(chickwts), "Variable type: factor")
+})
+
+test_that("Skimming a grouped data frame works as expected", {
+  input <- dplyr::group_by(mtcars, cyl, gear) %>% skim()
   
-  expect_identical(reference_printed_output[1], printed_output[1])
+  # dimensions
+  expect_length(input, 8)
+  expect_equal(nrow(input), 792)
   
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "grouped_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  
+  # values
+  expect_identical(input$cyl, rep(c(4, 6, 8), c(297, 297, 198)))
+  expect_true(all(c(3, 4, 5) %in% input$gear))
+  expect_equal(as.numeric(table(input$gear)), c(297, 198, 297))
+  expect_identical(input$var, rep(c("mpg", "disp", "hp", "drat",
+                                    "wt", "qsec", "vs", "am",
+                                    "carb"), 8, each = 11))
+  expect_identical(input$type, rep("numeric", 792))
+  expect_identical(input$stat, rep(c("missing", "complete", "n", "mean", "sd",
+                                     "min", "p25", "median", "p75", "max",
+                                     "hist"), 72))
+  expect_identical(input$level, rep(".all", 792))
+  expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
+  expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })

@@ -1,0 +1,144 @@
+# skimr
+```{r set-options, echo=FALSE}
+devtools::dev_mode()
+library(skimr)
+skim_with_defaults()
+options(tibble.width = Inf)
+options(width = 120)
+```
+
+[![Build Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
+[![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+
+The goal of skimr is to provide a frictionless approach to dealing with summary statistics iteratively and interactively as part of a pipeline, and that conforms to the principle of least surprise. 
+
+`skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
+
+See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/blog.html).
+
+## Installation
+
+
+``` r
+# install.packages("devtools")
+devtools::install_github("hadley/pillar")
+devtools::install_github("ropenscilabs/skimr")
+```
+
+## Skim statistics in the console
+
+- added missing, complete, n, sd
+- reports numeric/int/double separately from factor/chr
+- handles dates, logicals
+- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
+
+**Nicely separates numeric and factor variables:**  
+
+```{r}
+skim(chickwts)
+```
+
+**Many numeric variables:**  
+```{r}
+skim(mtcars)
+```
+
+ 
+**Another example:**  
+```{r}
+skim(iris)
+```
+
+## Handles grouped data
+
+Skim() can handle data that has been grouped using `dplyr::group_by`.
+
+```{r}
+iris %>% dplyr::group_by(Species) %>% skim()
+```
+
+## skim_df object (long format)
+
+By default `skim` prints beautifully in the console, but it also produces a long, tidy-format skim_df object that can be computed on. 
+
+```{r}
+a <-  skim(chickwts)
+dim(a)
+
+```
+
+
+```{r}
+print.data.frame(skim(chickwts))
+```
+
+
+## Compute on the full skim_df object
+```{r}
+skim(mtcars) %>% dplyr::filter(stat=="hist")
+```
+
+## Works with strings, lists and other column classes!
+
+```{r}
+skim(dplyr::starwars)
+```
+
+
+## Specify your own statistics
+
+```{r}
+funs <- list(iqr = IQR,
+    quantile = purrr::partial(quantile, probs = .99))
+  skim_with(numeric = funs, append = FALSE)
+  skim_v(iris$Sepal.Length)
+# Restore defaults
+  skim_with_defaults()
+```
+
+
+```{r}
+
+ funs <- list(iqr = IQR,
+    quantile = purrr::partial(quantile, probs = .99))
+  skim_with(numeric = funs, append = FALSE)
+  skim_v(iris$Sepal.Length)
+# Restore defaults
+  skim_with_defaults()
+
+```
+
+## Limitations of current version
+
+Currently the print methods are still in early stages of development. Printing is limited to numeric, character,
+and factor data types. Therefore although additional types that are supported by skim() 
+and skim_v() will not display with the default printing.  To view these you may view and manipulate the 
+skim object.
+
+At the moment in addition to the three types with print support complex, logical, Date, POSIXct, and ts classes
+are supported with skim_v methods and the results are in the skim object.
+
+We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
+significant digits incorrectly.  
+
+### Windows support for spark histograms
+
+Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
+`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
+the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
+for printing dataframes. One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+
+### Printing spark histograms and line graphs in knitted documents
+
+Spark-bar and spark-line work in the console but may not work when you knit them to a specific document format.
+The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, 
+for example. This issue can generally be addressed by changing fonts to one with good building block (for
+histogtams) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
+the `extra font` package supports these.  You may also want to try wrapping your results in `knitr::kable()`.
+
+Displays in documents of different types will vary. For example, one user found that the font 
+"Yu Gothic UI Semilight"  produced consistent results for Microsoft Word and Libre Office Write.
+
+## Contributing
+
+We welcome issue reports and pull requests including adding support for different variable classes.

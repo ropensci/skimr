@@ -1,0 +1,315 @@
+---
+title: "Supporting additional objects"
+author: "Elin Waring"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Supporting additional objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Please note that this is based on the skimr 0.9 master branch and it is likely
+it  will have minor modifications.
+
+Skimr's `skim()` function supports the skimming of data frames through
+`skim.data.frame()`. The `skim()` function is a generic which means that, as
+with `print()` or `summary()` it is possible to create support for additional
+object types. Package authors can add support for skim to their packages or
+users can create their own `skim.object_name` functions.
+
+This example will illustrate this by creating support for the `sf` object
+produced by the  "sf: Simple Features for R" package. For any object this
+involves two required elements and one optional element. 
+
+- create the skim function, in this case `skim.sf()`
+- create the list of functions to be calculated
+- if needed, define any custom statistics.
+
+If you are adding skim support to a package you will also need to add `skimr`
+to the list of imports and to the list of remotes (since it is currently only
+available at github). The code in this vignette is focused on what to do if you
+are a package user who wants to use `skim` rather than incorporating into a
+package.
+
+Note that in this vignette  the actual analysis will not be run because that
+would require importing the `sf` package just for this example.  However to run
+it on your own you can install `sf` and then run
+
+```
+library(sf)
+nc <- st_read(system.file("shape/nc.shp", package="sf"))
+```
+
+# Create the skim function
+
+The `skim.sf()` function simply replicates the `skim.data.frame()` function
+but adds the reference to the functions_sf file.  The returned object is a
+`skim_df` because it is a tibble containing the standard skim_df data. However,
+if desired, especially for printing purposes, a different class could be used.
+
+```{r}
+#' @include functions_sfc.R
+skim.sf <- function(.data) {
+  rows <- purrr::map(.data, skim_v)
+  combined <- dplyr::bind_rows(rows, .id = "var")
+  return(structure(combined, class = c("skim_df", class(combined))))
+}
+```
+
+
+# Create the list of functions to be calculated
+
+Skimr works by having an opinionated list of functions for each class (e.g.
+numeric, factor)  of data. The core package supports many commonly used classes,
+but there are many others. The list and the functions themselves are stored in
+an environment. Collectively these are called skimmers. The `show_skimmers()`
+function returns the class names and the names of the functions to be calculated
+and returned.  
+
+In this example we are assuming you have extracted the nc,shp data using
+`st_read` as  described earlier. The same structure as used here can be used
+for other sf data and any other data.
+
+In the case of the nc object there many specific classes of data.  The example
+here will build  support for sfc_LINESTRING, sfc_POLYGON, sfc_MULTIPOINT,
+sfc_MULTILINESTRING, sfc_MULTIPOLYGON, and sfc_GEOMETRY. Below is the complete
+file. There are several parts to this file which we'll look at separately, with
+the complete file at that end of the section. The order of the code
+matters so in this case we are going to go through the sections of the complete
+file starting at the bottom.
+
+For each class we create a list of functions that will be used when that class
+is skimmed. Each of those will have a name. Note that in our example we will
+create a name but putting the class name in lower case and appending "_funs" to
+the end.  
+
+The `skim_with()` function is used to update the list of default skimmers. In
+this case we are going to append the new skimmers to the existing default
+skimmers. 
+
+(This  code is not ready to run yet because we have not created the lists.)
+
+```{}
+skim_with(
+  sfc_POINT = sfc_point_funs,
+  sfc_LINESTRING = sfc_linestring_funs,
+  sfc_POLYGON = sfc_polygon_funs,
+  sfc_MULTIPOINT = sfc_multipoint_funs,
+  sfc_MULTILINESTRING = sfc_multilinestring_funs,
+  sfc_MULTIPOLYGON= sfc_multipolygon_funs,
+  sfc_GEOMETRY = sfc_geometry_funs
+)
+```
+
+
+Each of these named elements is a list of functions to be used for data of that
+class.  Each element in the list has a name (which will become a column name in
+the results data frame so should be a valid column name) and the name of a
+function. These can be:
+
+- exisitng functions from base, stats, or other packages, 
+- composition of existing functions using `purrr::compose()`
+- custom functions that have been definted in the skimr package
+- custom functions that you have defined.
+ 
+In the example `sfc_point_funs` there are examples of all four types with
+`funny` representing a self define custom function.
+
+```{}
+sfc_point_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid),
+  funny = funny_sf
+)
+
+sfc_linestring_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_polygon_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multipoint_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multilinestring_funs <-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multipolygon_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid),
+  funny = funny_sf
+)
+
+sfc_geometry_funs <- list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+```
+
+Finally if custom functions are created you need to include the file that
+contains them, in this case stats_sfc.R.
+
+```{}
+#' @include stats_sfc.R
+NULL
+
+```
+
+Below is the complete file in the correct order.
+
+```{}
+#' @include stats_sfc.R
+NULL
+
+sfc_point_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid),
+  funny = funny_sf
+)
+
+sfc_linestring_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_polygon_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multipoint_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multilinestring_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+sfc_multipolygon_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid),
+  funny = funny_sf
+)
+
+sfc_geometry_funs<-list(
+  missing = n_missing,
+  complete = n_complete,
+  n = length,
+  n_unique = purrr::compose(length, n_unique),
+  valid = purrr::compose(sum, sf::st_is_valid)
+)
+
+
+skim_with(
+  sfc_POINT = sfc_point_funs,
+  sfc_LINESTRING = sfc_linestring_funs,
+  sfc_POLYGON = sfc_polygon_funs,
+  sfc_MULTIPOINT = sfc_multipoint_funs,
+  sfc_MULTILINESTRING = sfc_multilinestring_funs,
+  sfc_MULTIPOLYGON = sfc_multipolygon_funs,
+  sfc_GEOMETRY = sfc_geometry_funs
+)
+
+```
+
+
+# Define custom statistics
+
+The last, optional, step is to support custom statistics. You would want to do
+this if you wish to have customization of an existing statistic, a 
+user-defined statistic or custom formatting (if using the develop branch). 
+
+In this case we create a file (called stats_sfc.R) that is the same name as the
+file imported in the functions file. This creates the statistic funny which is
+referenced in  the list of statistics for sfc_points.  For some statistics
+creation of a customized formatted value will also be handled here.
+
+```{}
+# Summary statistic functions for sfc
+
+#' Funny_sf
+#' 
+#' @param x A vector
+#' @return Length + 1
+#' @export
+funny_sf <- function(x) {
+  length(x) + 1
+}
+```
+
+# Testing
+
+At this point using `skim(nc)` should produce your output that includes
+skimming of the classes in your object. 
+
+In our example the last tibble will be
+
+```
+Sfc_multipolygon Variables
+# A tibble: 1 x 7
+       var missing complete     n n_unique valid funny
+     <chr>   <chr>    <chr> <chr>    <chr> <chr> <chr>
+1 geometry       0      100   100        1   100   101
+```
+
+while the other tibbles will be standard skimr results.
+
+# Conclusion
+
+This is a very simple example. For a package such as sf the custom statistics
+will likely  be much more complex. The flexibility of skimr allows you to
+manage that.
+
+Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma, and Michael Sumner for
+inspiring and  helping with the development of this code. 

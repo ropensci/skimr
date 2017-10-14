@@ -1,6 +1,6 @@
 Package: skimr
 Title: skimr
-Version: 0.9000
+Version: 0.9100
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "cre"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -10,22 +10,26 @@ Authors@R: c(
   person("Elin", "Waring", email="elin.waring@gmail.com", role = "aut"),
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'))
-Description: skimr is a frictionless summary function that can be piped.
+Description: A frictionless summary function that can be piped.
 Depends:
     R (>= 3.1.2)
 Imports:
-    dplyr (>= 0.5),
-    tidyr,
-    purrr,
+    dplyr (>= 0.7),
     magrittr,
-    tibble (>= 0.6),
     pillar,
-    stats
+    purrr,
+    rlang,
+    stats,
+    stringr,
+    tibble (>= 0.6),
+    tidyr (>= 0.7)
 Remotes:
     hadley/pillar
 Suggests:
+    knitr,
+    rmarkdown,
     testthat,
-    knitr
+    withr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -34,10 +38,11 @@ BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Collate: 
+    'skimr-package.R'
+    'formats.R'
     'stats.R'
-    'defaults.R'
     'functions.R'
+    'options.R'
     'skim.R'
     'skim_print.R'
     'skim_v.R'
-    'skimr-package.R'
