@@ -153,7 +153,7 @@ test_that("show_skimmers() lets you pick which many types you want returned", {
 
 test_that("show_skimmers() throws a warning when given an unassigned type", {
   expect_warning(skimmers <- show_skimmers("banana"), "aren't defined")
-  expect_identical(skimmers, setNames(list(), character(0)))
+  expect_identical(skimmers, stats::setNames(list(), character(0)))
 })
 
 test_that("show_skimmers() returns something if given an unassigned type", {
@@ -268,7 +268,8 @@ test_that("Throw error when a function producing an unnamed vector is used", {
   skim_with_defaults()
 })
 
-test_that("Throw error when a function producing a vector with empty names is used", {
+test_that("Throw error when a function producing a 
+          vector with empty names is used", {
   test_fun2 <- function(x){
     r<-unname(summary(x))
     names(r)<- ""
@@ -287,7 +288,8 @@ test_that("Throw error when a function producing a vector with empty names is us
   
 })
 
-test_that("Throw error when a function producing a vector with some empty names is used", {
+test_that("Throw error when a function producing a 
+          vector with some empty names is used", {
   test_fun3 <- function(x){
     r<-unname(summary(x))
     names(r)<- ""
@@ -307,7 +309,8 @@ test_that("Throw error when a function producing a vector with some empty names 
   
 })
 
-test_that("Skim_v works when a function generates top_count (which includes <NA> as a name", {
+test_that("Skim_v works when a function generates top_count 
+          (which includes <NA> as a name)", {
   expected <- tibble::tribble(
     ~type,          ~stat,      ~level,  ~value,   ~formatted,
     "factor", "top_counts", "virginica",  50L,     "vir: 50",

@@ -34,7 +34,7 @@ skim.data.frame <- function(.data) {
 
 skim.grouped_df <- function(.data) {
   skimmed <- dplyr::do(.data, skim(.))
-  skimmed <- dplyr::filter(skimmed, !(var %in% dplyr::groups(skimmed)))
+  skimmed <- dplyr::filter(skimmed, !(!!quote(var %in% dplyr::groups(skimmed))))
   structure(skimmed, class = c("skim_df", class(skimmed)),
             data_rows = nrow(.data), data_cols = ncol(.data))
 }
