@@ -92,17 +92,6 @@ funs <- list(iqr = IQR,
   skim_with_defaults()
 ```
 
-```{r}
-
- funs <- list(iqr = IQR,
-    quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = funs, append = FALSE)
-  skim_v(iris$Sepal.Length)
-# Restore defaults
-  skim_with_defaults()
-
-```
-
 ## Limitations of current version
 
 We are aware that there are issues with rendering the inline histograms and line charts in various contexts, some of which are 
