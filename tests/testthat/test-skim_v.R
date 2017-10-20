@@ -285,3 +285,13 @@ test_that("skim_v returns expected response for asis vectors", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+
+test_that("Skim_v works when a function generates top_count 
+          (which includes <NA> as a name)", {
+  expected <- tibble::tribble(
+    ~type,          ~stat,      ~level,  ~value,   ~formatted,
+    "factor", "top_counts", "virginica",  50L,     "vir: 50",
+    "factor", "top_counts",          NA,  0L,      "NA: 0"
+  )
+  expect_identical(skim_v(iris$Species)[7:8,], expected)
+})
