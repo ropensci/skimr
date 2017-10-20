@@ -27,6 +27,7 @@ Remotes:
     hadley/pillar
 Suggests:
     knitr,
+    hms,
     rmarkdown,
     testthat,
     withr

@@ -285,3 +285,19 @@ test_that("skim_v returns expected response for asis vectors", {
   input <- skim_v(dat)
   expect_identical(input, correct)
 })
+
+test_that("skim_v returns expected response for hms vectors", {
+  correct <- tibble::tribble(
+    ~type,       ~stat,       ~level, ~value, ~formatted,
+    "hms",  "missing",    ".all",         1, "1",
+    "hms", "complete",    ".all",         9, "9",
+    "hms",        "n",    ".all",        10, "10",
+    "hms",      "min",    ".all",        -5, "-5 secs",
+    "hms",      "max",    ".all",     32944, "32944 secs",
+    "hms",   "median",    ".all",     18300, "05:05:00",
+    "hms", "n_unique",    ".all",         9, "9")
+  dat <- hms::hms(-5:4,0:9,0:9)
+  dat[2] <- NA
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
