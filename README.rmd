@@ -32,7 +32,7 @@ devtools::install_github("ropenscilabs/skimr")
 - handles dates, logicals
 - uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
 
-**Nicely separates numeric and factor variables:**  
+**Nicely separates variables by class:**  
 
 ```{r}
 skim(chickwts)
@@ -64,14 +64,11 @@ By default `skim` prints beautifully in the console, but it also produces a long
 ```{r}
 a <-  skim(chickwts)
 dim(a)
-
 ```
-
 
 ```{r}
 print.data.frame(skim(chickwts))
 ```
-
 
 ## Compute on the full skim_df object
 ```{r}
@@ -83,7 +80,6 @@ skim(mtcars) %>% dplyr::filter(stat=="hist")
 ```{r}
 skim(dplyr::starwars)
 ```
-
 
 ## Specify your own statistics
 
@@ -98,16 +94,8 @@ funs <- list(iqr = IQR,
 
 ## Limitations of current version
 
-Currently the print methods are still in early stages of development. Printing is limited to numeric, character,
-and factor data types. Therefore although additional types that are supported by skim() 
-and skim_v() will not display with the default printing.  To view these you may view and manipulate the 
-skim object.
-
-At the moment in addition to the three types with print support complex, logical, Date, POSIXct, and ts classes
-are supported with skim_v methods and the results are in the skim object.
-
-We are also aware that both print.skim and print.data.frame (used for the skim object)  do not handle 
-significant digits incorrectly.  
+We are aware that there are issues with rendering the inline histograms and line charts in various contexts, some of which are 
+described below. 
 
 ### Windows support for spark histograms
 
