@@ -61,13 +61,18 @@ set_options <- function(type, newopts, env, append) {
 #' 
 #' @param which A character vector. One or more of the classes whose summary
 #'  functions/ formatting options you wish to display.
+#' @param env An option environment to access. One of "functions" or "formats".
+#' 
 #' @return A list. The names of the list match the classes that have assigned
 #'  summary functions or formatting options.
 #' @noRd
 
-show_options <- function(which = NULL, env) {
-  stopifnot(is.null(which) || is.character(which))
-  if (env == "functions") {
+show_options <- function(which = NULL, env = c("functions", "formats"),
+                         only_names = FALSE) {
+  stopifnot(is.null(which) || is.character(which),
+            is.logical(only_names), length(only_names) == 1)
+  env <- match.arg(env)
+  if (only_names) {
     opts <- lapply(options[[env]], names)
   } else {
     opts <- options[[env]]
