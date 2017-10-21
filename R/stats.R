@@ -34,7 +34,7 @@ n_complete <- function(x) {
 
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
-  out <- setNames(as.integer(tab), names(tab))
+  out <- stats::setNames(as.integer(tab), names(tab))
   sort(out, decreasing = TRUE)
 }
 
@@ -67,7 +67,7 @@ inline_hist <- function(x) {
 #' @export
 
 n_empty <- function(x) {
-  empty.strings=c("")
+  empty.strings <- c("")
   sum(x %in% empty.strings)
 }
 
@@ -116,7 +116,7 @@ n_unique <- function(x) {
 #' @export
 
 ts_start <- function(x) {
-  start(x)[1]
+  stats::start(x)[1]
 }
 
 
@@ -127,7 +127,7 @@ ts_start <- function(x) {
 #' @export
 
 ts_end <- function(x) {
-  end(x)[1]
+  stats::end(x)[1]
 }
 
 

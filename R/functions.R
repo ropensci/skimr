@@ -49,20 +49,40 @@ skim_with_defaults <- function() {
 }
 
 
-#' Show summary functions currently used, by data type
+#' Working with summary functions currently used, by data type
 #' 
-#' The names of the summary functions are stored as a character vector within
-#' a list. The names of the values in the list match the names of the classes
-#' that have assigned sets of summary functions.
+#' \code{show_skimmers} accesses the names of the summary functions for a
+#' class, and \code{get_skimmers} pulls lists of summary functions for a class.
+#' 
+#' All summary functions are stored within a single nested list. The top level
+#' list is named by class, where the inner lists are pairs of function
+#' name (for the skim output) and the functions themselves.
 #' 
 #' @param which A character vector. One or more of the classes whose summary
 #'  functions you wish to display.
 #' @return A list. The names of the list match the classes that have assigned
-#'  summary functions.
+#'  summary functions. When showing the skimmers, each entry in the list is a
+#'  character vector of function names. When getting the skimmers, each entry
+#'  in the list is itself a list of named functions.
+#' @examples
+#' # What are the names of the numeric skimmers?
+#' show_skimmers("numeric")
+#' 
+#' # I want to create a set of skimmers for the hms class, using the date
+#' # skimmers currently available.
+#' funs <- get_skimmers()
+#' skim_with(hms = funs$date)
 #' @export
 
 show_skimmers <- function(which = NULL) {
-  show_options(which, "functions")
+  show_options(which, "functions", only_names = TRUE)
+}
+
+#' @rdname show_skimmers
+#' @export
+
+get_skimmers <- function(which = NULL) {
+  show_options(which, "functions", only_names = FALSE)
 }
 
 

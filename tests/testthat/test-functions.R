@@ -5,7 +5,9 @@ test_that("Skimmer list is updated correctly when changing functions", {
   funs <- list(median = median, mad = mad)
   skim_with(numeric = funs, append = FALSE)
   input <- show_skimmers()
+  input_funs <- get_skimmers()
   expect_identical(input$numeric, names(funs))
+  expect_identical(input_funs$numeric, funs)
 
   # Restore defaults
   skim_with_defaults()
@@ -18,11 +20,18 @@ test_that("Skimming functions can be changed for multiple types separately", {
   newfuns2 <- list(n2 = length)
   skim_with(numeric = newfuns1, append = FALSE)
   skim_with(factor = newfuns2, append = FALSE)
-  input1 <- show_skimmers()[["numeric"]]
-  input2 <- show_skimmers()[["factor"]]
+  input1 <- show_skimmers("numeric")
+  input2 <- show_skimmers("factor")
   
-  expect_identical(input1, names(newfuns1))
-  expect_identical(input2, names(newfuns2))
+  expect_identical(input1$numeric, names(newfuns1))
+  expect_identical(input2$factor, names(newfuns2))
+  
+  input1 <- get_skimmers("numeric")
+  input2 <- get_skimmers("factor")
+  
+  expect_identical(input1$numeric, newfuns1)
+  expect_identical(input2$factor, newfuns2)
+  
   # Restore defaults
   skim_with_defaults()
 })
@@ -35,33 +44,49 @@ test_that("Skimming functions can be changed for multiple types together", {
   skim_with(numeric = newfuns1, factor = newfuns2, append = FALSE)
   input <- show_skimmers()
   
-  expect_identical(input[["numeric"]], names(newfuns1))
-  expect_identical(input[["factor"]], names(newfuns2))
+  expect_identical(input$numeric, names(newfuns1))
+  expect_identical(input$factor, names(newfuns2))
+  
+  input2 <- get_skimmers()
+  
+  expect_identical(input2$numeric, newfuns1)
+  expect_identical(input2$factor, newfuns2)
   # Restore defaults
   skim_with_defaults()
 })
 
 test_that("Skimming functions can be appended.", {
   skim_with_defaults()
-  default_skimmers_numeric <- show_skimmers()[["numeric"]]
-  correct <- c(default_skimmers_numeric, "iqr")
+  default_skimmers_numeric_names <- show_skimmers("numeric")
+  default_skimmers_numeric <- get_skimmers("numeric")
+  correct <- default_skimmers_numeric_names
+  correct$numeric <- c(correct$numeric, "iqr")
+  
   funs <- list(iqr = IQR)
   skim_with(numeric = funs)
-  input <-   show_skimmers()[["numeric"]]
-  expect_identical(input, correct)  
+  input <- show_skimmers("numeric")
   expect_identical(input, correct)
+  
+  correct <- default_skimmers_numeric
+  correct$numeric <- c(correct$numeric, funs)
+  input2 <- get_skimmers("numeric")
   # Restore defaults
   skim_with_defaults()
   
 })
 
 test_that("Setting a statistic to null removes it from the skimmers list.", {
-  skim_with_defaults()
-  numeric_skimmers <- show_skimmers()[["numeric"]]
-  correct <- numeric_skimmers[!numeric_skimmers %in% "hist"]
+  numeric_skimmers <- get_skimmers("numeric")
+  numeric_skimmer_names <- show_skimmers("numeric")
+  
+  correct <- numeric_skimmer_names$numeric[-11]
   skim_with(numeric = list(hist = NULL))
-  input <- show_skimmers()[["numeric"]]
-
+  input <- show_skimmers("numeric")
+  expect_identical(input$numeric, correct)
+  
+  correct <- numeric_skimmers
+  correct$numeric$hist <- NULL
+  input <- get_skimmers("numeric")
   expect_identical(input, correct)
 
   # Restore defaults
@@ -72,39 +97,36 @@ test_that("Skimming functions for new types can be added", {
   funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))
   skim_with(new_type = funs)
-  correct<- c("iqr", "quantile")
-  expect_identical(show_skimmers()[["new_type"]], correct)
+  correct <- list(new_type = c("iqr", "quantile"))
+  expect_identical(show_skimmers("new_type"), correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+
   # Restore defaults
   skim_with_defaults()
-  
 })
 
 test_that("Set multiple sets of skimming functions", {
-  skim_with_defaults()
   skimmers_default<-show_skimmers()
   correct <- c("iqr", "q" )
-  
+
   funs <- list(iqr = IQR,
     q = purrr::partial(quantile, probs = .99))
-  
-  skim_with(numeric = funs, new_type = funs, append = FALSE)
-  input1 <- show_skimmers()[["numeric"]]
-  input2 <- show_skimmers()[["new_type"]]
 
-  expect_identical(input1, correct)
-  expect_identical(input2, correct)
+  skim_with(numeric = funs, new_type = funs, append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
   skim_with_defaults()
 })
 
 test_that("Skimming functions without a class name return a message.", {
-  skim_with_defaults()
   funs_no_class <- list( IQR)
-  
   expect_error(skim_with(funs_no_class), "Please used named arguments")
+  skim_with_defaults()
 })
 
 test_that("Throw errors when arguments are incorrect", {
-  skim_with_defaults()
   new_funs <- list(iqr = IQR, mad)
   expect_error(skim_with(numeric = new_funs, append = FALSE), "missing a name")
   
@@ -153,7 +175,7 @@ test_that("show_skimmers() lets you pick which many types you want returned", {
 
 test_that("show_skimmers() throws a warning when given an unassigned type", {
   expect_warning(skimmers <- show_skimmers("banana"), "aren't defined")
-  expect_identical(skimmers, setNames(list(), character(0)))
+  expect_identical(skimmers, stats::setNames(list(), character(0)))
 })
 
 test_that("show_skimmers() returns something if given an unassigned type", {
@@ -268,7 +290,7 @@ test_that("Throw error when a function producing an unnamed vector is used", {
   skim_with_defaults()
 })
 
-test_that("Throw error when a function producing a vector with empty names is used", {
+test_that("Errors are thrown when a vector with some only names is created", {
   test_fun2 <- function(x){
     r<-unname(summary(x))
     names(r)<- ""
@@ -287,7 +309,7 @@ test_that("Throw error when a function producing a vector with empty names is us
   
 })
 
-test_that("Throw error when a function producing a vector with some empty names is used", {
+test_that("Errors are thrown when a vector with some empty names is created", {
   test_fun3 <- function(x){
     r<-unname(summary(x))
     names(r)<- ""
@@ -304,14 +326,4 @@ test_that("Throw error when a function producing a vector with some empty names 
   
   # Restore defaults
   skim_with_defaults()  
-  
-})
-
-test_that("Skim_v works when a function generates top_count (which includes <NA> as a name", {
-  expected <- tibble::tribble(
-    ~type,          ~stat,      ~level,  ~value,   ~formatted,
-    "factor", "top_counts", "virginica",  50L,     "vir: 50",
-    "factor", "top_counts",          NA,  0L,      "NA: 0"
-  )
-  expect_identical(skim_v(iris$Species)[7:8,], expected)
 })
