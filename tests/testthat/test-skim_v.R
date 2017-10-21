@@ -286,17 +286,18 @@ test_that("skim_v returns expected response for asis vectors", {
   expect_identical(input, correct)
 })
 
-test_that("skim_v returns expected response for hms vectors", {
+test_that("skim_v returns expected response for difftime vectors", {
   correct <- tibble::tribble(
-    ~type,       ~stat,       ~level, ~value, ~formatted,
-    "hms",  "missing",    ".all",         1, "1",
-    "hms", "complete",    ".all",         9, "9",
-    "hms",        "n",    ".all",        10, "10",
-    "hms",      "min",    ".all",        -5, "-5 secs",
-    "hms",      "max",    ".all",     32944, "32944 secs",
-    "hms",   "median",    ".all",     18300, "05:05:00",
-    "hms", "n_unique",    ".all",         9, "9")
-  dat <- hms::hms(-5:4,0:9,0:9)
+    ~type,      ~stat,       ~level,  ~value, ~formatted,
+    "difftime",  "missing",  ".all",    1,     "1",
+    "difftime", "complete",  ".all",    9,     "9",
+    "difftime",        "n",  ".all",   10,     "10",
+    "difftime",      "min",  ".all",  -30,    "-30 secs",
+    "difftime",      "max",  ".all",   60,     "60 secs",
+    "difftime",   "median",  ".all",   20,     "20 secs",
+    "difftime", "n_unique",  ".all",    9,     "9")
+  dat_datetime <- as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
+  dat <- difftime(dat_datetime, (dat_datetime - seq(-30, 60, 10)))
   dat[2] <- NA
   input <- skim_v(dat)
   expect_identical(input, correct)

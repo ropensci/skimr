@@ -210,15 +210,7 @@ list_funs <- list(
   max_length = list_lengths_max
 )
 
-hms_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  n_unique = n_unique
-)
+difftime_funs <- date_funs
 
 .default <- list(
   numeric = numeric_funs,
@@ -233,7 +225,7 @@ hms_funs <- list(
   POSIXct = posixct_funs,
   list = list_funs,
   AsIs = asis_funs,
-  hms = hms_funs
+  difftime = difftime_funs
 )
 # Set the default skimming functions
 options$functions <- .default
