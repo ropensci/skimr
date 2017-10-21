@@ -286,6 +286,23 @@ test_that("skim_v returns expected response for asis vectors", {
   expect_identical(input, correct)
 })
 
+test_that("skim_v returns expected response for difftime vectors", {
+  correct <- tibble::tribble(
+    ~type,      ~stat,       ~level,  ~value, ~formatted,
+    "difftime",  "missing",  ".all",    1,     "1",
+    "difftime", "complete",  ".all",    9,     "9",
+    "difftime",        "n",  ".all",   10,     "10",
+    "difftime",      "min",  ".all",  -30,    "-30 secs",
+    "difftime",      "max",  ".all",   60,     "60 secs",
+    "difftime",   "median",  ".all",   20,     "20 secs",
+    "difftime", "n_unique",  ".all",    9,     "9")
+  dat_datetime <- as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
+  dat <- difftime(dat_datetime, (dat_datetime - seq(-30, 60, 10)))
+  dat[2] <- NA
+  input <- skim_v(dat)
+  expect_identical(input, correct)
+})
+  
 test_that("Skim_v works when a function generates top_count 
           (which includes <NA> as a name)", {
   expected <- tibble::tribble(

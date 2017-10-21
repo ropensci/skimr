@@ -230,6 +230,8 @@ list_funs <- list(
   max_length = list_lengths_max
 )
 
+difftime_funs <- date_funs
+
 .default <- list(
   numeric = numeric_funs,
   integer = integer_funs,
@@ -242,7 +244,8 @@ list_funs <- list(
   ts = ts_funs,
   POSIXct = posixct_funs,
   list = list_funs,
-  AsIs = asis_funs
+  AsIs = asis_funs,
+  difftime = difftime_funs
 )
 # Set the default skimming functions
 options$functions <- .default
