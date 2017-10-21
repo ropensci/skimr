@@ -201,15 +201,7 @@ ts_funs <- list(
   line_graph  = inline_linegraph
 )
 
-posixct_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  n_unique = n_unique 
-)
+posixct_funs <- date_funs
 
 asis_funs <- list(
   missing = n_missing,
