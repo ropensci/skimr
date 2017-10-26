@@ -55,7 +55,7 @@ inline_hist <- function(x) {
   if (all(x == 0)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
-  structure(pillar::spark_bar(hist_dt), class = c("spark", "character"))
+  structure(pillar:::spark_bar(hist_dt), class = c("spark", "character"))
 }
 
 
@@ -147,7 +147,7 @@ inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
   id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
   normalized <- normalize01(t[floor(id)])
-  structure(pillar::spark_line(normalized), class = c("spark", "character"))
+  structure(pillar:::spark_line(normalized), class = c("spark", "character"))
 }
 
 # Rescale data to be between 0 and 1
