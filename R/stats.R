@@ -34,7 +34,7 @@ n_complete <- function(x) {
 
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
-  out <- setNames(as.integer(tab), names(tab))
+  out <- stats::setNames(as.integer(tab), names(tab))
   sort(out, decreasing = TRUE)
 }
 
@@ -55,7 +55,7 @@ inline_hist <- function(x) {
   if (all(x == 0)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
-  structure(pillar::spark_bar(hist_dt), class = c("spark", "character"))
+  structure(pillar:::spark_bar(hist_dt), class = c("spark", "character"))
 }
 
 
@@ -67,7 +67,7 @@ inline_hist <- function(x) {
 #' @export
 
 n_empty <- function(x) {
-  empty.strings=c("")
+  empty.strings <- c("")
   sum(x %in% empty.strings)
 }
 
@@ -116,7 +116,7 @@ n_unique <- function(x) {
 #' @export
 
 ts_start <- function(x) {
-  start(x)[1]
+  stats::start(x)[1]
 }
 
 
@@ -127,7 +127,7 @@ ts_start <- function(x) {
 #' @export
 
 ts_end <- function(x) {
-  end(x)[1]
+  stats::end(x)[1]
 }
 
 
@@ -147,7 +147,7 @@ inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
   id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
   normalized <- normalize01(t[floor(id)])
-  structure(pillar::spark_line(normalized), class = c("spark", "character"))
+  structure(pillar:::spark_line(normalized), class = c("spark", "character"))
 }
 
 # Rescale data to be between 0 and 1

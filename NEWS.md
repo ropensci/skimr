@@ -10,6 +10,8 @@ skimr 0.91 (2017-10-14)
   * Easy dropping of individual functions
   * Vignettes for basic use and use with specialized object types
   * Updated readme and added CONTRIBUTING.md and CONDUCT.md
+  * New public get_skimmers function to access skim functions
+  * Support for difftime class
   
 
 ### MINOR IMPROVEMENTS

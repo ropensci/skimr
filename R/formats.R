@@ -66,7 +66,8 @@ show_formats <- function(which = NULL) {
   date = list(format = "%Y-%m-%d"),
   posixct = list(format = "%Y-%m-%d"),
   logical = list(),
-  asis = list()
+  asis = list(),
+  difftime = list()
 )
 
 # Set the default formatting options

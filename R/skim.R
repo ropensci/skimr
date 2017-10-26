@@ -34,16 +34,15 @@ skim.data.frame <- function(.data) {
 
 skim.grouped_df <- function(.data) {
   skimmed <- dplyr::do(.data, skim(.))
-  skimmed <- dplyr::filter(skimmed, !(var %in% dplyr::groups(skimmed)))
+  skimmed <- dplyr::filter(skimmed, !(!!quote(var %in% dplyr::groups(skimmed))))
   structure(skimmed, class = c("skim_df", class(skimmed)),
             data_rows = nrow(.data), data_cols = ncol(.data))
 }
 
-#' Get useful summary statistic from a data frame, print it, and return it
+#' Print useful summary statistic from a data frame without modification
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
-#' @return A \code{skim_df} object, which can be treated like a
-#'  tbl in most instances.
+#' @return The input data frame.
 #' @export
 
 skim_tee <- function(.data) {

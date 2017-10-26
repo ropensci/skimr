@@ -33,7 +33,8 @@ test_that("Formatting options change printed output", {
   skim_format_defaults()
 })
 
-test_that("Warning message is correctly returned when there is no format for a type", {
+test_that("Warning message is correctly returned when there is 
+          no format for a type", {
   expect_warning(skimr:::get_formats("unknown_type"), 
-                 "Skimr does not know how to format type: unknown_type. Leaving as is.")
+       "Skimr does not know how to format type: unknown_type. Leaving as is.")
 })
