@@ -1,4 +1,7 @@
-#' Print a skimmed data frame.
+
+#' Print skimmed data frame
+#' 
+#' Prints a skimmed data frame (created by skim()).
 #' 
 #' @param x A \code{skim_df} object.
 #' @param ... Further arguments passed to or from other methods.
@@ -33,7 +36,7 @@ print_impl <- function(transformed_df, skim_type, ...) {
 
 #' @export
 
-kable <- function (x, format, digits = getOption("digits"), row.names = NA, 
+kable <- function (x, format = NULL, digits = getOption("digits"), row.names = NA, 
                    col.names = NA, align, caption = NULL, format.args = list(), 
                    escape = TRUE, ...) {
   UseMethod("kable")
@@ -73,7 +76,7 @@ kable.data.frame <- knitr::kable
 #' @return The original \code{skim_df} object.
 #' @export
 
-kable.skim_df <- function(x, format, digits = getOption("digits"), row.names = NA, 
+kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.names = NA, 
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
@@ -84,7 +87,7 @@ kable.skim_df <- function(x, format, digits = getOption("digits"), row.names = N
   invisible(x)
 }
 
-kable_impl <- function(transformed_df, skim_type, format, digits, row.names, 
+kable_impl <- function(transformed_df, skim_type, format , digits, row.names, 
                        col.names, align, caption, format.args, 
                        escape, ...) {
   cat(sprintf("\nVariable type: %s", skim_type))
@@ -93,6 +96,45 @@ kable_impl <- function(transformed_df, skim_type, format, digits, row.names,
         row.names,  col.names, format.args,  escape, ...))
   transformed_df
 }
+
+
+#####
+
+#' @export
+
+pander <- function (x,  ...) {
+  UseMethod("pander")
+}
+
+#' @export
+
+pander.data.frame <- pander:::pander.data.frame
+
+#' Produce \code{pander} output of a skimmed data frame
+#'
+#' @seealso \code{\link[pander]{pander}}
+#' @param x an R object (typically a skimmed data frame)
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
+#' @return The original \code{skim_df} object.
+#' @export
+
+pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
+  grps <- dplyr::groups(x) 
+  grouped <- dplyr::group_by(x, ~type)
+  #types <- dplyr::groups(grouped)
+  dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
+  invisible(x)
+}
+
+pander_impl <- function(transformed_df, skim_type, caption) {
+  cat(sprintf("\nVariable type: %s", skim_type))
+  transformed_df <- dplyr::ungroup(transformed_df) 
+  pander(structure(transformed_df, class = "data.frame"))
+  transformed_df
+}
+
+####
 
 #' Expand a skim_df and call a printing function on it
 #' @keywords internal

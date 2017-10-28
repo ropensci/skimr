@@ -16,6 +16,7 @@ Depends:
 Imports:
     dplyr (>= 0.7),
     magrittr,
+    pander,
     pillar,
     purrr,
     rlang,
@@ -27,7 +28,6 @@ Imports:
 Remotes:
     hadley/pillar
 Suggests:
-    knitr,
     rmarkdown,
     testthat,
     withr
