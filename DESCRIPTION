@@ -10,14 +10,14 @@ Authors@R: c(
   person("Elin", "Waring", email="elin.waring@gmail.com", role = "aut"),
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
-  person("Hadley", "Wickham", , "hadley@rstudio.com", role = "ctb")
+  person("Hadley", "Wickham", , "hadley@rstudio.com", role = 'ctb')
+  )
 Description: A frictionless summary function that can be piped.
 Depends:
     R (>= 3.1.2)
 Imports:
     dplyr (>= 0.7),
     magrittr,
-    pillar,
     purrr,
     rlang,
     stats,
