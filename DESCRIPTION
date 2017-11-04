@@ -29,7 +29,7 @@ Suggests:
     rmarkdown,
     testthat,
     withr
-License: MIT + file LICENSE
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ropenscilabs/skimr

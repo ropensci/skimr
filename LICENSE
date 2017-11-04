@@ -1,4 +1,2 @@
-YEAR: 2017
-COPYRIGHT HOLDER: Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Julia Lowndes, Shannon Ellis, Elin Waring, Michael Quinn, Hope McLeod
-Code for spark.bar(), spark.line(), print.spark and related functions is originally from the 
+Code for spark.bar(), spark.line(), print.spark() and related functions is originally from the 
 Pillar package by Hadley Wickham, copyright holder RStudio, GPL-3.
