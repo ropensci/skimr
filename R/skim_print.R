@@ -33,7 +33,7 @@ print_impl <- function(transformed_df, skim_type, ...) {
 
 #' @export
 
-kable <- function (x, format, digits = getOption("digits"), row.names = NA, 
+kable <- function (x, format = NULL, digits = getOption("digits"), row.names = NA, 
                    col.names = NA, align, caption = NULL, format.args = list(), 
                    escape = TRUE, ...) {
   UseMethod("kable")
