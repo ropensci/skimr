@@ -28,3 +28,9 @@ test_that("Skim aligns numeric vectors at the decimal point by default", {
   expect_output(print(input), "drat       0       32 32   3.6    0.53  2.76")
   expect_output(print(input), "gear       0       32 32   3.69   0.74  3")
 })
+
+test_that("spark.print returns the correct result",{
+  input <- inline_hist(chickwts$weight)
+  expect_output(print(input), "▃▅▅▇▃▇▂▂")
+  
+})
