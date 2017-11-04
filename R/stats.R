@@ -55,7 +55,48 @@ inline_hist <- function(x) {
   if (all(x == 0)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
-  structure(pillar:::spark_bar(hist_dt), class = c("spark", "character"))
+  structure(spark_bar(hist_dt), class = c("spark", "character"))
+}
+
+#' Draw a sparkline bar graph with unicode block characters
+#'
+#' Rendered using [block elements](https://en.wikipedia.org/wiki/Block_Elements).
+#' In most common fixed width fonts these are rendered wider than regular
+#' characters which means they are not suitable if you need precise alignment.
+#'
+#' @param x A numeric vector between 0 and 1
+#' @param safe Nominally there are 8 block elements from 1/8 height to full
+#'   height (8/8). However, the half-height and full-height blocks appear
+#'   to be rendered inconsistently (possibly due to font substitution).
+#' @examples
+#' \dontrun{
+#' x <- seq(0, 1, length = 6)
+#' spark_bar(x)
+#' spark_bar(sample(x))
+#'
+#' # This might work if you're lucky
+#' spark_bar(seq(0, 1, length = 8), safe = FALSE)
+#'
+#' spark_bar(c(0, NA, 0.5, NA, 1))
+#' }
+spark_bar <- function(x, safe = TRUE) {
+  stopifnot(is.numeric(x))
+  
+  bars <- vapply(0x2581:0x2588, intToUtf8, character(1))
+  if (safe) {
+    bars <- bars[-c(4, 8)]
+  }
+  
+  factor <- cut(
+    x,
+    breaks = seq(0, 1, length = length(bars) + 1),
+    labels = bars,
+    include.lowest = TRUE
+  )
+  chars <- as.character(factor)
+  chars[is.na(chars)] <- bars[length(bars)]
+  
+  structure(paste0(chars, collapse = ""), class = "spark")
 }
 
 
@@ -147,7 +188,7 @@ inline_linegraph <- function(x) {
   t <- x[!is.na(x)]
   id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
   normalized <- normalize01(t[floor(id)])
-  structure(pillar:::spark_line(normalized), class = c("spark", "character"))
+  structure(spark_line(normalized), class = c("spark", "character"))
 }
 
 # Rescale data to be between 0 and 1
@@ -155,6 +196,40 @@ normalize01 <- function(x) {
   (x - min(x)) / (max(x) - min(x))
 }
 
+#' Draw a sparkline line graph with Braille characters.
+#'
+#' @inheritParams spark_bar
+#' @examples
+#' \dontrun{
+#' x <- seq(0, 1, length = 10)
+#' spark_line(x)
+#' }
+spark_line <- function(x) {
+  stopifnot(is.numeric(x))
+  
+  y <- findInterval(x, seq(0, 1, length = 5), all.inside = TRUE)
+  
+  ind <- matrix(y, ncol = 2, byrow = TRUE)
+  ind[, 2] <- ind[, 2] + 4
+  
+  chars <- apply(ind, 1, braille)
+  structure(paste0(chars, collapse = ""), class = "spark")
+}
+
+
+# https://en.wikipedia.org/wiki/Braille_Patterns
+braille <- function(x) {
+  # remap to braille sequence
+  x <- c(7L, 3L, 2L, 1L, 8L, 6L, 5L, 4L)[x]
+  
+  raised <- 1:8 %in% x
+  binary <- raised * 2 ^ (0:7)
+  
+  # offset in hex is 2800
+  val <- 10240 + sum(raised * 2 ^ (0:7))
+  
+  intToUtf8(val)
+}
 
 #' Get the length of the shortest list in a vector of lists
 #' 
@@ -217,3 +292,5 @@ list_max_length <- function(x){
   l <- lengths(x)
   max(l)
 }
+
+
