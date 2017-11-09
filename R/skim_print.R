@@ -1,6 +1,7 @@
-#' Manages print for skim objects.
+#' Manages print for skim_df objects.
 #' 
-#' Currently, numeric, factor and character data are handled.
+#' A number of common types of data are handled, with classes without 
+#' handling falling back to character.
 #' 
 #' @param x A \code{skim_df} object.
 #' @param ... Further arguments passed to or from other methods.
@@ -38,12 +39,12 @@ skim_print <- function(.data, groups) {
   }
   
   cat("\nVariable type:", skim_type, "\n")
-  var_order <- c(as.character(groups), "var", fun_names)
+  var_order <- c(as.character(groups), "variable", fun_names)
   print(structure(wide[var_order], class = "data.frame"))
 }
 
 collapse_levels <- function(.data, groups) {
-  all_groups <- c(groups, rlang::sym("var"), rlang::sym("stat"))
+  all_groups <- c(groups, rlang::sym("variable"), rlang::sym("stat"))
   grouped <- dplyr::group_by(.data, !!!all_groups)
   dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }

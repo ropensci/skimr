@@ -17,26 +17,34 @@ globalVariables(".")
 #' dplyr::group_by(iris) %>% skim()
 #' @export
 
-skim <- function(.data) {
+skim <- function(.data, ...) {
   UseMethod("skim")
 }
 
 #'@export
 
-skim.data.frame <- function(.data) {
+skim.data.frame <- function(.data, ...) {
   rows <- purrr::map(.data, skim_v)
-  combined <- dplyr::bind_rows(rows, .id = "var")
+  combined <- dplyr::bind_rows(rows, .id = "variable")
   structure(combined, class = c("skim_df", class(combined)),
             data_rows = nrow(.data), data_cols = ncol(.data))
 }
 
 #' @export
 
-skim.grouped_df <- function(.data) {
+skim.grouped_df <- function(.data, ...) {
   skimmed <- dplyr::do(.data, skim(.))
-  skimmed <- dplyr::filter(skimmed, !(!!quote(var %in% dplyr::groups(skimmed))))
+  skimmed <- dplyr::filter(skimmed, !(!!quote(variable %in% dplyr::groups(skimmed))))
   structure(skimmed, class = c("skim_df", class(skimmed)),
             data_rows = nrow(.data), data_cols = ncol(.data))
+}
+
+#' @export
+
+skim.vector <-function(.data, ...){
+  skimmed <- skim_v(.data)
+  structure(skimmed, class = c("skim_vector", class(skimmed)))
+  
 }
 
 #' Print useful summary statistic from a data frame without modification
@@ -45,7 +53,7 @@ skim.grouped_df <- function(.data) {
 #' @return The input data frame.
 #' @export
 
-skim_tee <- function(.data) {
+skim_tee <- function(.data, ...) {
   print(skim(.data))
   invisible(.data)
 }
