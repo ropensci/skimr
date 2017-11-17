@@ -14,6 +14,7 @@ print.skim_df <- function(x, ...) {
   cat(" n variables:", attr(x, "data_cols"), "\n")
 
   grps <- dplyr::groups(x) 
+
   if (!is.null(grps)) {
     flat <- paste(grps, collapse = ", ")
     cat(" group variables:", flat, "\n")
@@ -24,7 +25,20 @@ print.skim_df <- function(x, ...) {
   x
 }
 
-#' Print the set of statistics for each typ
+#' Manages print for skim_vector objects.
+#' 
+#' @param x A \code{skim_vector} object.
+#' @param ... Further arguments passed to or from other methods.
+#' @return The original \code{skim_df} object.
+#' @export
+
+print.skim_vector <- function(x) {
+  cat("Skim summary statistics\n")
+  skim_print(x, groups = as.null())
+
+}
+
+#' Print the set of statistics for each type
 #' @keywords internal
 #' @noRd
 
@@ -34,7 +48,8 @@ skim_print <- function(.data, groups) {
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
   wide <- tidyr::spread(collapsed, "stat", "formatted")
-  if (options$formats$.align_decimal) {
+
+  if (options$formats$.align_decimal ) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
   

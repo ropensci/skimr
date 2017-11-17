@@ -41,9 +41,13 @@ skim.grouped_df <- function(.data, ...) {
 
 #' @export
 
-skim.vector <-function(.data, ...){
+skim.default <-function(.data, ...){
+  if (!is.atomic(.data) | !is.null(dim(.data))[1]){
+    return(message("No skim method exists for class ", class(.data), "."))
+  }
   skimmed <- skim_v(.data)
-  structure(skimmed, class = c("skim_vector", class(skimmed)))
+  skimmed$variable <- deparse(substitute(.data))
+  structure(skimmed, class = c("skim_vector", class(skimmed)) )
   
 }
 
