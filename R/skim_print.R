@@ -33,7 +33,44 @@ print_impl <- function(transformed_df, skim_type, ...) {
   print(structure(transformed_df, class = "data.frame"), ...)
 }
 
-
+#' Create kable object
+#' 
+#' Generic method for \code{kable} objects based on the method in the knitr package.
+#' @seealso \code{\link[knitr]{kable}}
+#' @param x	an R object (typically a matrix or data frame)
+#'    format	a character string; possible values are latex, html, markdown, pandoc, 
+#'    and rst; this will be automatically determined if the function is called
+#'    within knitr; it can also be set in the global option knitr.table.format; 
+#'    if format is a function, it must return a character string.
+#'    format	a character string; possible values are latex, html, markdown, 
+#'    pandoc, and rst; this will be automatically determined if the function 
+#'    is called within knitr; it can also be set in the global option 
+#'    knitr.table.format; if format is a function, it must return a character 
+#'    string
+#' @param  format a character string; possible values are latex, html, markdown, 
+#'    pandoc, and rst; this will be automatically determined if the function
+#'    is called within knitr; it can also be set in the global option 
+#'    knitr.table.format; if format is a function, it must return a character 
+#'    string.  Defaults to NULL.
+#' @param digits  The maximum number of digits for numeric columns (passed to round()); 
+#'    it can also be a vector of length ncol(x) to set the number of digits for
+#'    individual columns
+#' @param row.names a logical value indicating whether to include row names; by default, 
+#'    row names are included if rownames(x) is neither NULL nor identical to 1:nrow(x)
+#' @param col.names a character vector of column names to be used in the table
+#' @param align  the alignment of columns: a character vector consisting of 
+#'    'l' (left), 'c' (center) and/or 'r' (right); by default, numeric columns are 
+#'    right-aligned, and other columns are left-aligned; if align = NULL, the 
+#'    default alignment is used; alternatively, if length(align) == 1L, the 
+#'    string will be expanded to a vector of individual letters unless the 
+#'    output format is LaTeX; for example, 'clc' will be converted to 
+#'    c('c', 'l', 'c')
+#' @param caption  the table caption
+#' @param format.args a list of arguments to be passed to format() to format table 
+#'    values, e.g. list(big.mark = ',')
+#' @param escape escape special characters when producing HTML or LaTeX tables
+#' @param ... other arguments 
+#' 
 #' @export
 
 kable <- function (x, format = NULL, digits = getOption("digits"), row.names = NA, 
