@@ -8,6 +8,8 @@ globalVariables(".")
 #' \code{\link{skim_format}} for how \code{skim} can be customized.
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
+#' @param ... Further arguments passed to or from other methods.
+#' 
 #' @return A \code{skim_df} object, which can be treated like a
 #'  tbl in most instances.
 #' @examples
@@ -54,6 +56,7 @@ skim.default <-function(.data, ...){
 #' Print useful summary statistic from a data frame without modification
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
+#' @param ... Further arguments passed to or from other methods.
 #' @return The input data frame.
 #' @export
 

@@ -32,7 +32,7 @@ print.skim_df <- function(x, ...) {
 #' @return The original \code{skim_df} object.
 #' @export
 
-print.skim_vector <- function(x) {
+print.skim_vector <- function(x, ...) {
   cat("Skim summary statistics\n")
   skim_print(x, groups = as.null())
 

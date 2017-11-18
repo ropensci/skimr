@@ -4,7 +4,7 @@
 \alias{print.skim_vector}
 \title{Manages print for skim_vector objects.}
 \usage{
-\method{print}{skim_vector}(x)
+\method{print}{skim_vector}(x, ...)
 }
 \arguments{
 \item{x}{A \code{skim_vector} object.}
