@@ -5,7 +5,7 @@
 \title{Produce \code{kable} output of a skimmed data frame}
 \usage{
 \method{kable}{skim_df}(x, format, digits = getOption("digits"),
-  row.names = NA, col.names = NA, align, caption = NULL,
+  row.names = NA, col.names = NA, align = NULL, caption = NULL,
   format.args = list(), escape = TRUE, ...)
 }
 \arguments{
