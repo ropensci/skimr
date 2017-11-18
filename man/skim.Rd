@@ -4,10 +4,12 @@
 \alias{skim}
 \title{Get useful summary statistic from a data frame}
 \usage{
-skim(.data)
+skim(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}
+
+\item{...}{Further arguments passed to or from other methods.}
 }
 \value{
 A \code{skim_df} object, which can be treated like a

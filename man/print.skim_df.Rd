@@ -2,7 +2,7 @@
 % Please edit documentation in R/skim_print.R
 \name{print.skim_df}
 \alias{print.skim_df}
-\title{Manages print for skim objects.}
+\title{Manages print for skim_df objects.}
 \usage{
 \method{print}{skim_df}(x, ...)
 }
@@ -15,5 +15,6 @@
 The original \code{skim_df} object.
 }
 \description{
-Currently, numeric, factor and character data are handled.
+A number of common types of data are handled, with classes without 
+handling falling back to character.
 }
