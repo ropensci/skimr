@@ -175,3 +175,8 @@ align_decimal <- function(x){
   dec <- ifelse (split[, 2] == "", " ", ".") 
   sprintf("%s%s%s", left, dec, right)
 }
+
+#' @export
+print.spark <- function(x, ...) {
+  cat(x, "\n", sep = "")
+}

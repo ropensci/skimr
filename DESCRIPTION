@@ -9,7 +9,9 @@ Authors@R: c(
   person("Shannon", "Ellis", email="sellis18@jhmi.edu", role = "aut"),
   person("Elin", "Waring", email="elin.waring@gmail.com", role = "aut"),
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
-  person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'))
+  person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
+  person("Hadley", "Wickham", , "hadley@rstudio.com", role = 'ctb')
+  )
 Description: A frictionless summary function that can be piped.
 Depends:
     R (>= 3.1.2)
@@ -17,7 +19,6 @@ Imports:
     dplyr (>= 0.7),
     magrittr,
     pander,
-    pillar,
     purrr,
     rlang,
     stats,
@@ -25,13 +26,11 @@ Imports:
     knitr,
     tibble (>= 0.6),
     tidyr (>= 0.7)
-Remotes:
-    hadley/pillar
 Suggests:
     rmarkdown,
     testthat,
     withr
-License: MIT + file LICENSE
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ropenscilabs/skimr
