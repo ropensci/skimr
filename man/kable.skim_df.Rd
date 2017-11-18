@@ -9,7 +9,7 @@
   format.args = list(), escape = TRUE, ...)
 }
 \arguments{
-\item{x}{an R object (typically a matrix or data frame)}
+\item{x}{a skim_df object}
 
 \item{format}{a character string; possible values are latex, html,
 markdown, pandoc, and rst; this will be automatically determined if the

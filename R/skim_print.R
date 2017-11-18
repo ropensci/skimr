@@ -86,7 +86,7 @@ kable.data.frame <- knitr::kable
 #' Produce \code{kable} output of a skimmed data frame
 #'
 #' @seealso \code{\link[knitr]{kable}}
-#' @param x an R object (typically a matrix or data frame)
+#' @param x a skim_df object
 #' @param format a character string; possible values are latex, html,
 #'  markdown, pandoc, and rst; this will be automatically determined if the
 #'  function is called within knitr; it can also be set in the global option
@@ -134,15 +134,24 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
   transformed_df
 }
 
-
-#####
-
+#' Create pander object
+#' 
+#' Generic method for \code{pander} objects based on the method in the pander package.
+#' @seealso \code{\link[pander]{pander}}
+#' @param x an R object (typically a matrix or data frame)
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
 #' @export
 
-pander <- function (x,  ...) {
+pander <- function (x, caption = attr(x, "caption"), ...) {
   UseMethod("pander")
 }
 
+#' Produce \code{pander} output of a data frame
+#' 
+#' @param x a data frame
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
 #' @export
 
 pander.data.frame <- pander:::pander.data.frame
@@ -156,10 +165,9 @@ pander.data.frame <- pander:::pander.data.frame
 #' @return The original \code{skim_df} object.
 #' @export
 
-pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
+pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, ~type)
-  #types <- dplyr::groups(grouped)
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
@@ -170,8 +178,6 @@ pander_impl <- function(transformed_df, skim_type, caption) {
   pander(structure(transformed_df, class = "data.frame"))
   transformed_df
 }
-
-####
 
 #' Expand a skim_df and call a printing function on it
 #' @keywords internal
