@@ -32,8 +32,8 @@ print_impl <- function(transformed_df, skim_type, ...) {
 
 #' Create kable object
 #' 
-#' Generic method for kable objects based on the method in the knitr package.
-#' 
+#' Generic method for \code{kable} objects based on the method in the knitr package.
+#' @seealso \code{\link[knitr]{kable}}
 #' @param x	an R object (typically a matrix or data frame)
 #'    format	a character string; possible values are latex, html, markdown, pandoc, 
 #'    and rst; this will be automatically determined if the function is called
