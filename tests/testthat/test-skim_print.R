@@ -55,7 +55,7 @@ test_that("Skimr kable  prints as expected", {
 test_that("skimr::pander prints as expected", {
   # This assumes the default option for line length (80).
   data(chickwts)
-  input <- testthat::capture_output_lines(skim(chickwts) %>% skimr::pander() )
+  input <- utils::capture.output(skim(chickwts) %>% skimr::pander() )
   expect_equal(length(input), 35)
   expect_equal(input[1], "")
   expect_equal(input[2], "Variable type: factor")
