@@ -18,6 +18,7 @@ Depends:
 Imports:
     dplyr (>= 0.7),
     magrittr,
+    pander,
     purrr,
     rlang,
     stats,

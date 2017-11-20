@@ -1,4 +1,7 @@
-#' Print a skimmed data frame.
+
+#' Print skimmed data frame
+#' 
+#' Prints a skimmed data frame (created by skim()).
 #' 
 #' @param x A \code{skim_df} object.
 #' @param ... Further arguments passed to or from other methods.
@@ -83,7 +86,7 @@ kable.data.frame <- knitr::kable
 #' Produce \code{kable} output of a skimmed data frame
 #'
 #' @seealso \code{\link[knitr]{kable}}
-#' @param x an R object (typically a matrix or data frame)
+#' @param x a skim_df object
 #' @param format a character string; possible values are latex, html,
 #'  markdown, pandoc, and rst; this will be automatically determined if the
 #'  function is called within knitr; it can also be set in the global option
@@ -110,7 +113,7 @@ kable.data.frame <- knitr::kable
 #' @return The original \code{skim_df} object.
 #' @export
 
-kable.skim_df <- function(x, format, digits = getOption("digits"), row.names = NA, 
+kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.names = NA, 
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
@@ -121,13 +124,60 @@ kable.skim_df <- function(x, format, digits = getOption("digits"), row.names = N
   invisible(x)
 }
 
-kable_impl <- function(transformed_df, skim_type, format, digits, row.names, 
+kable_impl <- function(transformed_df, skim_type, format , digits, row.names, 
                        col.names, align, caption, format.args, 
                        escape, ...) {
   cat(sprintf("\nVariable type: %s", skim_type))
   if(is.null(align)) align <- rep("l", length(transformed_df))
   print(kable(transformed_df, caption = NULL, align = align, format, digits,
         row.names,  col.names, format.args,  escape, ...))
+  transformed_df
+}
+
+#' Create pander object
+#' 
+#' Generic method for \code{pander} objects based on the method in the pander package.
+#' Pander asis is not supported although may work in some instances.
+#' 
+#' @seealso \code{\link[pander]{pander}}
+#' @param x an R object (typically a matrix or data frame)
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
+#' @export
+
+pander <- function (x, caption = attr(x, "caption"), ...) {
+  UseMethod("pander")
+}
+
+#' Produce \code{pander} output of a data frame
+#' 
+#' @param x a data frame
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
+#' @export
+
+pander.data.frame <- pander:::pander.data.frame
+
+#' Produce \code{pander} output of a skimmed data frame
+#'
+#' @seealso \code{\link[pander]{pander}}
+#' @param x an R object (typically a skimmed data frame)
+#' @param caption caption(string) to be shown under the table
+#' @param ... other arguments.
+#' @return The original \code{skim_df} object.
+#' @export
+
+pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
+  grps <- dplyr::groups(x) 
+  grouped <- dplyr::group_by(x, type)
+  dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
+  invisible(x)
+}
+
+pander_impl <- function(transformed_df, skim_type, caption) {
+  cat(sprintf("\nVariable type: %s", skim_type))
+  transformed_df <- dplyr::ungroup(transformed_df) 
+  pander(structure(transformed_df, class = "data.frame"))
   transformed_df
 }
 
@@ -145,12 +195,12 @@ skim_render <- function(.data, groups, FUN, ...) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
   
-  var_order <- c(as.character(groups), "var", fun_names)
+  var_order <- c(as.character(groups), "variable", fun_names)
   FUN(wide[var_order], skim_type, ...)
 }
 
 collapse_levels <- function(.data, groups) {
-  all_groups <- c(groups, rlang::sym("var"), rlang::sym("stat"))
+  all_groups <- c(groups, rlang::sym("variable"), rlang::sym("stat"))
   grouped <- dplyr::group_by(.data, !!!all_groups)
   dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }
