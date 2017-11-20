@@ -15,6 +15,7 @@ pander(x, caption = attr(x, "caption"), ...)
 }
 \description{
 Generic method for \code{pander} objects based on the method in the pander package.
+Pander asis is not supported although may work in some instances.
 }
 \seealso{
 \code{\link[pander]{pander}}

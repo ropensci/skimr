@@ -137,6 +137,8 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
 #' Create pander object
 #' 
 #' Generic method for \code{pander} objects based on the method in the pander package.
+#' Pander asis is not supported although may work in some instances.
+#' 
 #' @seealso \code{\link[pander]{pander}}
 #' @param x an R object (typically a matrix or data frame)
 #' @param caption caption(string) to be shown under the table
@@ -167,7 +169,7 @@ pander.data.frame <- pander:::pander.data.frame
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, ~type)
+  grouped <- dplyr::group_by(x, !!all.vars(~type))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
@@ -193,12 +195,12 @@ skim_render <- function(.data, groups, FUN, ...) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
   
-  var_order <- c(as.character(groups), "var", fun_names)
+  var_order <- c(as.character(groups), "variable", fun_names)
   FUN(wide[var_order], skim_type, ...)
 }
 
 collapse_levels <- function(.data, groups) {
-  all_groups <- c(groups, rlang::sym("var"), rlang::sym("stat"))
+  all_groups <- c(groups, rlang::sym("variable"), rlang::sym("stat"))
   grouped <- dplyr::group_by(.data, !!!all_groups)
   dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }
