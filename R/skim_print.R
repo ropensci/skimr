@@ -169,7 +169,7 @@ pander.data.frame <- pander:::pander.data.frame
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, type)
+  grouped <- dplyr::group_by(x, !!!quote(type))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
