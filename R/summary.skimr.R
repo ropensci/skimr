@@ -17,11 +17,11 @@ summary.skim_df <- function(df){
   
   n_rows <- paste0("Number of Rows: ", attr(df, "data_rows"), "\n")
   n_cols <- paste0("Number of Columns: ", attr(df, "data_cols"), "\n")
-  df_name <- paste0("Name: ", substitute(df), "\n")
+  df_name <- paste0("Name: ", attr(df, "df_name"), "\n")
   
-  types <- purrr::map_chr(df, typeof)
+  types <- unique(df$type)
   
-  type_frequency <- table(types)
+  type_frequency <- table(df$type)
   type_frequency_string <- paste0(names(type_frequency), ": ", type_frequency, collapse = "\n")
 
   

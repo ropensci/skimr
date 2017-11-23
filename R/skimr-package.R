@@ -13,7 +13,6 @@
 #' @name skimr-package
 #' @aliases skimr
 #' @docType package
-#' @import stats
 
 NULL
 

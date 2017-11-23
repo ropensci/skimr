@@ -2,9 +2,12 @@
 % Please edit documentation in R/functions.R
 \name{show_skimmers}
 \alias{show_skimmers}
-\title{Show summary functions currently used, by data type}
+\alias{get_skimmers}
+\title{Working with summary functions currently used, by data type}
 \usage{
 show_skimmers(which = NULL)
+
+get_skimmers(which = NULL)
 }
 \arguments{
 \item{which}{A character vector. One or more of the classes whose summary
@@ -12,10 +15,25 @@ functions you wish to display.}
 }
 \value{
 A list. The names of the list match the classes that have assigned
- summary functions.
+ summary functions. When showing the skimmers, each entry in the list is a
+ character vector of function names. When getting the skimmers, each entry
+ in the list is itself a list of named functions.
 }
 \description{
-The names of the summary functions are stored as a character vector within
-a list. The names of the values in the list match the names of the classes
-that have assigned sets of summary functions.
+\code{show_skimmers} accesses the names of the summary functions for a
+class, and \code{get_skimmers} pulls lists of summary functions for a class.
+}
+\details{
+All summary functions are stored within a single nested list. The top level
+list is named by class, where the inner lists are pairs of function
+name (for the skim output) and the functions themselves.
+}
+\examples{
+# What are the names of the numeric skimmers?
+show_skimmers("numeric")
+
+# I want to create a set of skimmers for the hms class, using the date
+# skimmers currently available.
+funs <- get_skimmers()
+skim_with(hms = funs$date)
 }

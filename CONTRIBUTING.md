@@ -31,7 +31,7 @@ requests, note that in your issue comments.
 
 ## Code style
 
-Please use nake case (such as skim_v)  for function names.  Besides that, in general follow the Google code 
+Please use snake case (such as skim_v)  for function names.  Besides that, in general follow the Google code 
 style for R.
 
 
