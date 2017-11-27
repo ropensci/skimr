@@ -12,7 +12,7 @@ test_that("Skimming a data frame works as expected", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_identical(input$var, c(rep(c("weight"), each = 11), 
+  expect_identical(input$variable, c(rep(c("weight"), each = 11), 
                                 rep("feed", each = 12)))
   expect_identical(input$type, c(rep("numeric", each = 11), 
                                  rep("factor", each = 12)))
@@ -62,7 +62,7 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_identical(input$cyl, rep(c(4, 6, 8), c(297, 297, 198)))
   expect_true(all(c(3, 4, 5) %in% input$gear))
   expect_equal(as.numeric(table(input$gear)), c(297, 198, 297))
-  expect_identical(input$var, rep(c("mpg", "disp", "hp", "drat",
+  expect_identical(input$variable, rep(c("mpg", "disp", "hp", "drat",
                                     "wt", "qsec", "vs", "am",
                                     "carb"), 8, each = 11))
   expect_identical(input$type, rep("numeric", 792))

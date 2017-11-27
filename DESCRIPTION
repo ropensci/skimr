@@ -18,14 +18,15 @@ Depends:
 Imports:
     dplyr (>= 0.7),
     magrittr,
+    pander,
     purrr,
     rlang,
     stats,
     stringr,
+    knitr,
     tibble (>= 0.6),
     tidyr (>= 0.7)
 Suggests:
-    knitr,
     rmarkdown,
     testthat,
     withr
