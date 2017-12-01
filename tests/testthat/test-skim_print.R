@@ -37,7 +37,7 @@ test_that("spark.print returns the correct result",{
 
 test_that("Skimr kable  prints as expected", {
   skimmed <- skim(chickwts)
-  input <-skimr::kable(skimmed)
+  capture.output(input <-skimr::kable(skimmed))
 
   expect_output(print(input), "Variable type: factor")
   expect_output(print(input), "|variable |missing |complete |n   |n_unique |top_counts                       |ordered |")
