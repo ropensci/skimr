@@ -133,35 +133,11 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
         row.names,  col.names, format.args,  escape, ...))
   transformed_df
 }
-
-#' Create pander object
-#' 
-#' Generic method for \code{pander} objects based on the method in the pander package.
-#' Pander asis is not supported although may work in some instances.
-#' 
-#' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a matrix or data frame)
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander <- function (x, caption = attr(x, "caption"), ...) {
-  UseMethod("pander")
-}
-
-#' Produce \code{pander} output of a data frame
-#' 
-#' @param x a data frame
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander.data.frame <- pander:::pander.data.frame
-
+ 
 #' Produce \code{pander} output of a skimmed data frame
 #'
 #' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a skimmed data frame)
+#' @param x R object (typically a skimmed data frame)
 #' @param caption caption(string) to be shown under the table
 #' @param ... other arguments.
 #' @return The original \code{skim_df} object.

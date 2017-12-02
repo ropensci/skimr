@@ -7,7 +7,7 @@
 \method{pander}{skim_df}(x, caption = attr(x, "caption"), ...)
 }
 \arguments{
-\item{x}{an R object (typically a skimmed data frame)}
+\item{x}{R object (typically a skimmed data frame)}
 
 \item{caption}{caption(string) to be shown under the table}
 
