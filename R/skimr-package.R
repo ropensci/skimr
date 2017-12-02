@@ -21,5 +21,7 @@ NULL
 
 magrittr::`%>%`
 
+#' @importFrom pander pander
+
 # Create global package options
 options <- new.env()
