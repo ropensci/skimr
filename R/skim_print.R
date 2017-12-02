@@ -19,7 +19,7 @@ print.skim_df <- function(x, ...) {
     cat(" group variables:", flat, "\n")
   }
   
-  grouped <- dplyr::group_by_(x, ~type)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, print_impl, ...))
   invisible(x)
 }
@@ -117,7 +117,7 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by_(x, ~type)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
                                  col.names, align, caption, format.args, 
                                  escape, ...))
@@ -169,7 +169,7 @@ pander.data.frame <- pander:::pander.data.frame
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, !!!quote(type))
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
@@ -190,7 +190,8 @@ skim_render <- function(.data, groups, FUN, ...) {
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, "stat", "formatted")
+  wide <- tidyr::spread(collapsed, !!rlang::sym("stat"),
+                        !!rlang::sym("formatted"))
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
