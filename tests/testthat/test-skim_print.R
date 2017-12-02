@@ -38,59 +38,69 @@ test_that("spark.print returns the correct result",{
 test_that("Skimr kable prints as expected", {
   skimmed <- skim(iris)
   input <- capture.output(skimr::kable(skimmed))
-  
   expect_length(input, 15)
-  expect_equal(input[2], "Variable type: factor")
-  expect_equal(input[4], "|variable |missing |complete |n   |n_unique |top_counts                       |ordered |")
-  expect_equal(input[5], "|:--------|:-------|:--------|:---|:--------|:--------------------------------|:-------|")
-  expect_equal(input[6], "|Species  |0       |150      |150 |3        |set: 50, ver: 50, vir: 50, NA: 0 |FALSE   |")
-  expect_equal(input[8], "Variable type: numeric")
-  expect_equal(input[10], "|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |")
-  expect_equal(input[11], "|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|")
-  expect_equal(input[12], "|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |")
-  expect_equal(input[13], "|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3    |1.8 |2.5 |▇▁▁▅▃▃▂▂ |")
-  expect_equal(input[14], "|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8    |6.4 |7.9 |▂▇▅▇▆▅▂▂ |")
-  expect_equal(input[15], "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |")
+  
+  expected <- character()
+  expected[1] <- ""
+  expected[2] <- "Variable type: factor"
+  expected[3] <- ""
+  expected[4] <- "|variable |missing |complete |n   |n_unique |top_counts                       |ordered |"
+  expected[5] <- "|:--------|:-------|:--------|:---|:--------|:--------------------------------|:-------|"
+  expected[6] <- "|Species  |0       |150      |150 |3        |set: 50, ver: 50, vir: 50, NA: 0 |FALSE   |"
+  expected[7] <- ""
+  expected[8] <- "Variable type: numeric"
+  expected[9] <- ""
+  expected[10] <- "|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
+  expected[11] <- "|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|"
+  expected[12] <- "|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |"
+  expected[13] <- "|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3    |1.8 |2.5 |▇▁▁▅▃▃▂▂ |"
+  expected[14] <- "|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8    |6.4 |7.9 |▂▇▅▇▆▅▂▂ |"
+  expected[15] <- "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |"
+
+  expect_equal(input, expected)  
 })
+
 
 test_that("skimr::pander prints as expected", {
   # This assumes the default option for line length (80).
-
+  
   input <- utils::capture.output(skim(chickwts) %>% pander() )
   expect_equal(length(input), 35)
-  expect_equal(input[1], "")
-  expect_equal(input[2], "Variable type: factor")
-  expect_equal(input[3], "----------------------------------------------------------------------------")
-  expect_equal(input[4], " variable   missing   complete   n    n_unique           top_counts         ")
-  expect_equal(input[5], "---------- --------- ---------- ---- ---------- ----------------------------")
-  expect_equal(input[6], "   feed        0         71      71      6       soy: 14, cas: 12, lin: 12, ")
-  expect_equal(input[7], "                                                          sun: 12           ")
-  expect_equal(input[8], "----------------------------------------------------------------------------")
-  expect_equal(input[9], "")
-  expect_equal(input[10], "Table: Table continues below")
-  expect_equal(input[11], "")
-  expect_equal(input[12], " ")
-  expect_equal(input[13], "---------")
-  expect_equal(input[14], " ordered ")
-  expect_equal(input[15], "---------")
-  expect_equal(input[16], "  FALSE  ")
-  expect_equal(input[17], "---------")
-  expect_equal(input[18], "")
-  expect_equal(input[19], "")
-  expect_equal(input[20], "Variable type: numeric")
-  expect_equal(input[21], "----------------------------------------------------------------------------")
-  expect_equal(input[22], " variable   missing   complete   n     mean     sd     min    p25    median ")
-  expect_equal(input[23], "---------- --------- ---------- ---- -------- ------- ----- ------- --------")
-  expect_equal(input[24], "  weight       0         71      71   261.31   78.07   108   204.5    258   ")
-  expect_equal(input[25], "----------------------------------------------------------------------------")
-  expect_equal(input[26], "")
-  expect_equal(input[27], "Table: Table continues below")
-  expect_equal(input[28], "")
-  expect_equal(input[29], " ")
-  expect_equal(input[30], "------------------------")
-  expect_equal(input[31], "  p75    max     hist   ")
-  expect_equal(input[32], "------- ----- ----------")
-  expect_equal(input[33], " 323.5   423   ▃▅▅▇▃▇▂▂ ")
-  expect_equal(input[34], "------------------------")
-  expect_equal(input[35], "")
+  correct <- character()
+  correct[1] <-  ""
+  correct[2] <-  "Variable type: factor"
+  correct[3] <-  "----------------------------------------------------------------------------"
+  correct[4] <-  " variable   missing   complete   n    n_unique           top_counts         "
+  correct[5] <-  "---------- --------- ---------- ---- ---------- ----------------------------"
+  correct[6] <-  "   feed        0         71      71      6       soy: 14, cas: 12, lin: 12, "
+  correct[7] <-  "                                                          sun: 12           "
+  correct[8] <-  "----------------------------------------------------------------------------"
+  correct[9] <-  ""
+  correct[10] <-  "Table: Table continues below"
+  correct[11] <-  ""
+  correct[12] <-  " "
+  correct[13] <-  "---------"
+  correct[14] <-  " ordered "
+  correct[15] <-  "---------"
+  correct[16] <-  "  FALSE  "
+  correct[17] <-  "---------"
+  correct[18] <-  ""
+  correct[19] <-  ""
+  correct[20] <-  "Variable type: numeric"
+  correct[21] <-  "----------------------------------------------------------------------------"
+  correct[22] <-  " variable   missing   complete   n     mean     sd     min    p25    median "
+  correct[23] <-  "---------- --------- ---------- ---- -------- ------- ----- ------- --------"
+  correct[24] <-  "  weight       0         71      71   261.31   78.07   108   204.5    258   "
+  correct[25] <-  "----------------------------------------------------------------------------"
+  correct[26] <-  ""
+  correct[27] <-  "Table: Table continues below"
+  correct[28] <-  ""
+  correct[29] <-  " "
+  correct[30] <-  "------------------------"
+  correct[31] <-  "  p75    max     hist   "
+  correct[32] <-  "------- ----- ----------"
+  correct[33] <-  " 323.5   423   ▃▅▅▇▃▇▂▂ "
+  correct[34] <-  "------------------------"
+  correct[35] <-  ""
+  expect_equal(input, correct)
 })
