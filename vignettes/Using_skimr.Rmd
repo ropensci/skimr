@@ -56,7 +56,7 @@ an alternative printing method sould be developed.
 
 The `skim_df` object always contains 6 columns: 
 
-- `var` the name of the original variable
+- `variable` the name of the original variable
 - `type` the class of the variable
 - `stat` the statistic calculated with the name becoming the column name when
   the object is printed.
@@ -66,8 +66,8 @@ The `skim_df` object always contains 6 columns:
 - `value` is the actual calculated value of the statistic and should be used
   for further calculations. This is always numeric.
 - `formatted` is a formatted version of value that attempts to use
-  reasonable number of digits and put items such as dates into human readable
-  formats. It is a character variable.
+  reasonable number of digits (decimal aligned) and put items such as dates into 
+  human readable formats. It is a character variable.
  
 
 ```{r}
@@ -143,3 +143,86 @@ skim_with(numeric = list(hist = NULL))
 skim(datasets::chickwts)
 skim_with_defaults() #
 ```
+
+# Rendering the results of skim()
+
+The skim_df object is a long data frame with one row for each combination of 
+variable and statistic (and optionally for group). 
+The horizontal display is created by default using `print.skim_df()`. 
+This can be called explicitly by applying the `print()`
+function to a `skim_df` object which allows passing in of options. In addition
+`kable()` and`pander()`are supported.  These both provide more control over
+the rendered results, particularly when used to render in conjunction with knitr.
+Documentation of these options for these functions is covered in more detail
+in the `knitr` package for `kable()` and the `pander` package for `pander()`.
+Using either of these may require use of document or chunk options and fonts.
+
+* For `kable()` use in a markdown file, use a chunk option of `results=asis`.
+* For `pander()` the asis option is not officially supported although 
+it may work in some cases. To prevent using asis by default use `panderOptons()` to
+set it to false.
+
+```{r }
+library(pander)
+panderOptions('knitr.auto.asis', FALSE)
+skim(iris) %>% pander() 
+
+```
+
+```{r results='asis'}
+
+skim(iris) %>% kable()
+
+```
+
+
+
+## Solutions to common rendering problems
+
+The details of rendering are dependent on the operating system R is running on, 
+the locale of the installation, and the fonts installed. Rendering may also
+differ based on whether it occurs in the console or when knitting to specific
+types of documents such as HTML and PDF. The most commonly reported problems
+involve rendering the spark graphs (inline histogram and line graphs). 
+This section will summarize known issues.  
+
+Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
+`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
+the low-level code]
+(http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
+for printing dataframes. One workaround for showing these characters in Windows is to set the
+CTYPE part of your locale to Chinese/Japanese/Korean with 
+`Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a
+data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+
+In order to render the spark graphs in html or PDF histogram you may need to change
+fonts to one that supports blocks or braille (depending on which you need). 
+For example, the open font "DejaVu Sans" from the `extra font` package supports these.
+Please read the `extra font` documentation for the details of how to install a specific
+font. Installation generally uses the procedure shown below.
+
+```
+library(extrafont)
+fonts() # Lists installed fonts
+# If desired font is not listed
+font_install("DejaVu Sans")
+```
+
+To us a font in a markdown document you will want to modify the YAML in the file
+to something like that below.
+
+```
+---
+title: "Untitled"
+mainfont: DejaVu Sans
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+  word_document: default
+font-family: Times New Roman
+---
+
+```
+
+
