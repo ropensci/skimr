@@ -37,7 +37,7 @@ skim.grouped_df <- function(.data) {
   
   # Drop the grouping variable
   groups <- dplyr::groups(skimmed)
-  to_drop <- rlang::quo(!(variable %in% groups))
+  to_drop <- quote(!(variable %in% groups))
   skimmed <- dplyr::filter(skimmed, !!to_drop)
   structure(skimmed, class = c("skim_df", class(skimmed)),
             data_rows = nrow(.data), data_cols = ncol(.data))
