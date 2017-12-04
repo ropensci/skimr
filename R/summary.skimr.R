@@ -9,27 +9,58 @@
 #'summary(a)
 #' 
 #'
-summary.skim_df <- function(df){
+summary.skim_df <- function(df, ...){
 
   if (is.null(df)) {
     stop("dataframe is null.")
   }
   
-  n_rows <- paste0("Number of Rows: ", attr(df, "data_rows"), "\n")
-  n_cols <- paste0("Number of Columns: ", attr(df, "data_cols"), "\n")
-  df_name <- paste0("Name: ", attr(df, "df_name"), "\n")
+  type_frequencies <- df %>%
+        dplyr::select(var, type) %>%
+        dplyr::distinct() %>%
+        dplyr::group_by(type) %>%
+        dplyr::summarise(type_count = n())
   
-  types <- unique(df$type)
   
-  type_frequency <- table(df$type)
-  type_frequency_string <- paste0(names(type_frequency), ": ", type_frequency, collapse = "\n")
 
+  summary_object <- list(
+    df_name = attr(df, "df_name"),
+    n_rows = attr(df, "data_rows"),
+    n_cols = attr(df, "data_cols"),
+    type_frequencies = type_frequencies
+  )
+  
+  class(summary_object) <- c("summary_skim_df")
+  
+  summary_object
+}
+
+
+
+#' Print method for a summary_skim_df object. This is a method for the generic function \code{print}
+#' 
+#' @param skim_summary a skim_summary object
+#' @export
+#' 
+print.summary_skim_df <- function(skim_summary, ...) {
+  
+  n_rows <- paste0("Number of Rows: ", skim_summary$n_rows, "\n")
+  n_cols <- paste0("Number of Columns: ", skim_summary$n_cols, "\n")
+  df_name <- paste0("Name: ", skim_summary$df_name, "\n")
+  
+  type_frequency_string <- paste0(skim_summary$type_frequencies$type,
+                                  ": ",
+                                  skim_summary$type_frequencies$type_count, 
+                                  collapse = "\n")
+  
   
   cat("A skim object\n\n",
-      df_name, n_rows, 
+      df_name,
+      n_rows, 
       n_cols, 
-      "\nColumn Types\n",
+      "\nColumn type frequency\n",
       type_frequency_string
       ,sep = "")
   
 }
+
