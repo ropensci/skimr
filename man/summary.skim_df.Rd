@@ -4,10 +4,12 @@
 \alias{summary.skim_df}
 \title{Summary function for skim_df. This is a method of the generic function \code{summary}}
 \usage{
-\method{summary}{skim_df}(df)
+\method{summary}{skim_df}(object, ...)
 }
 \arguments{
-\item{df}{a skim dataframe}
+\item{object}{a skim dataframe}
+
+\item{...}{Additional arguments affecting the summary produced. Not used}
 }
 \value{
 A summary of the dataframe \code{df}
@@ -17,8 +19,9 @@ Summary function for skim_df. This is a method of the generic function \code{sum
 }
 \examples{
 
+\dontrun{
 a <- skim(mtcars)
 summary(a)
-
+}
 
 }

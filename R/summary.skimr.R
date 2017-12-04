@@ -1,15 +1,17 @@
 #' Summary function for skim_df. This is a method of the generic function \code{summary}
 #' 
-#' @param df a skim dataframe
+#' @param object a skim dataframe
+#' @param ... Additional arguments affecting the summary produced. Not used
 #' @return A summary of the dataframe \code{df}
 #' @export
 #' @examples
 #' 
-#'a <- skim(mtcars)
-#'summary(a)
-#' 
+#'\dontrun{
+#' a <- skim(mtcars)
+#' summary(a)
+#' }
 #'
-summary.skim_df <- function(df, ...){
+summary.skim_df <- function(object, ...){
 
   if (is.null(df)) {
     stop("dataframe is null.")
@@ -39,10 +41,11 @@ summary.skim_df <- function(df, ...){
 
 #' Print method for a summary_skim_df object. This is a method for the generic function \code{print}
 #' 
-#' @param skim_summary a skim_summary object
+#' @param x a skim_summary object
+#' @param ... Additional arguments affecting the print output produced. Not used
 #' @export
 #' 
-print.summary_skim_df <- function(skim_summary, ...) {
+print.summary_skim_df <- function(x, ...) {
   
   n_rows <- paste0("Number of Rows: ", skim_summary$n_rows, "\n")
   n_cols <- paste0("Number of Columns: ", skim_summary$n_cols, "\n")

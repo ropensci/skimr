@@ -4,10 +4,12 @@
 \alias{print.summary_skim_df}
 \title{Print method for a summary_skim_df object. This is a method for the generic function \code{print}}
 \usage{
-\method{print}{summary_skim_df}(skim_summary)
+\method{print}{summary_skim_df}(x, ...)
 }
 \arguments{
-\item{skim_summary}{a skim_summary object}
+\item{x}{a skim_summary object}
+
+\item{...}{Additional arguments affecting the print output produced. Not used}
 }
 \description{
 Print method for a summary_skim_df object. This is a method for the generic function \code{print}
