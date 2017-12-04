@@ -12,7 +12,7 @@ skim_filter_type <- function(x, type_selected){
   if (!(type_selected %in% unique(x$type))){
     return(message("No variables of type ", type_selected," are present in the skim object"))
   }
-  x <- x %>% dplyr::filter((!!quote((type == type_selected))))
+  x <- x %>% dplyr::filter(!!quote(type == type_selected))
   class(x) <- c( "skim_df",class(x))
   x
 }
@@ -33,8 +33,9 @@ skim_filter_type <- function(x, type_selected){
 #' @export
 skim_wide_formatted <- function(x){
   x <- rename_level_stats(x)
-  x %>% dplyr::select( !!quote(variable), !!quote(formatted), !!quote(stat) ) %>%
-    tidyr::spread(key = !!quote(stat), value = !!quote(formatted))
+  x %>% dplyr::select( !!rlang::sym("variable"), !!rlang::sym("formatted"), 
+                       !!rlang::sym("stat") ) %>%
+    tidyr::spread(key = !!rlang::sym("stat"), value = !!rlang::sym("formatted"))
   
 }
 
@@ -55,14 +56,15 @@ skim_wide_formatted <- function(x){
 #' @export
 skim_wide_value <- function(x){
   x <- rename_level_stats(x)
-  x %>% dplyr::select( !!quote(variable), !!quote(value), !!quote(stat) ) %>% 
-       tidyr::spread(key = !!quote(stat), value = !!quote(value))
+  x %>% dplyr::select( !!rlang::sym("variable"), !!rlang::sym("value"), 
+                       !!rlang::sym("stat") ) %>% 
+       tidyr::spread(key = !!rlang::sym("stat"), value = !!rlang::sym("value"))
   
 }
 
 rename_level_stats <- function(x){
   x <- x  %>%  
-    dplyr::group_by(!!quote(variable), !!quote(stat))  %>% 
+    dplyr::group_by(!!rlang::sym("variable"), !!rlang::sym("stat"))  %>% 
     dplyr::mutate(new_stat = !!quote(paste0(stat, "_", row_number()))) %>% 
     dplyr::ungroup()
   x$stat <- ifelse(x$level != ".all" | is.na(x$level), x$new_stat, x$stat)
