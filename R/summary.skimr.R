@@ -13,11 +13,11 @@
 #'
 summary.skim_df <- function(object, ...){
 
-  if (is.null(df)) {
+  if (is.null(object)) {
     stop("dataframe is null.")
   }
   
-  type_frequencies <- df %>%
+  type_frequencies <- object %>%
         dplyr::select(var, type) %>%
         dplyr::distinct() %>%
         dplyr::group_by(type) %>%
@@ -26,9 +26,9 @@ summary.skim_df <- function(object, ...){
   
 
   summary_object <- list(
-    df_name = attr(df, "df_name"),
-    n_rows = attr(df, "data_rows"),
-    n_cols = attr(df, "data_cols"),
+    df_name = attr(object, "df_name"),
+    n_rows = attr(object, "data_rows"),
+    n_cols = attr(object, "data_cols"),
     type_frequencies = type_frequencies
   )
   
@@ -47,13 +47,13 @@ summary.skim_df <- function(object, ...){
 #' 
 print.summary_skim_df <- function(x, ...) {
   
-  n_rows <- paste0("Number of Rows: ", skim_summary$n_rows, "\n")
-  n_cols <- paste0("Number of Columns: ", skim_summary$n_cols, "\n")
-  df_name <- paste0("Name: ", skim_summary$df_name, "\n")
+  n_rows <- paste0("Number of Rows: ", x$n_rows, "\n")
+  n_cols <- paste0("Number of Columns: ", x$n_cols, "\n")
+  df_name <- paste0("Name: ", x$df_name, "\n")
   
-  type_frequency_string <- paste0(skim_summary$type_frequencies$type,
+  type_frequency_string <- paste0(x$type_frequencies$type,
                                   ": ",
-                                  skim_summary$type_frequencies$type_count, 
+                                  x$type_frequencies$type_count, 
                                   collapse = "\n")
   
   
