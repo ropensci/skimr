@@ -19,7 +19,7 @@ print.skim_df <- function(x, ...) {
     cat(" group variables:", flat, "\n")
   }
   
-  grouped <- dplyr::group_by(x, !!!quote(type))
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, print_impl, ...))
   invisible(x)
 }
@@ -117,7 +117,7 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by_(x, ~type)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
                                  col.names, align, caption, format.args, 
                                  escape, ...))
@@ -133,35 +133,11 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
         row.names,  col.names, format.args,  escape, ...))
   transformed_df
 }
-
-#' Create pander object
-#' 
-#' Generic method for \code{pander} objects based on the method in the pander package.
-#' Pander asis is not supported although may work in some instances.
-#' 
-#' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a matrix or data frame)
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander <- function (x, caption = attr(x, "caption"), ...) {
-  UseMethod("pander")
-}
-
-#' Produce \code{pander} output of a data frame
-#' 
-#' @param x a data frame
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander.data.frame <- pander:::pander.data.frame
-
+ 
 #' Produce \code{pander} output of a skimmed data frame
 #'
 #' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a skimmed data frame)
+#' @param x R object (typically a skimmed data frame)
 #' @param caption caption(string) to be shown under the table
 #' @param ... other arguments.
 #' @return The original \code{skim_df} object.
@@ -169,7 +145,7 @@ pander.data.frame <- pander:::pander.data.frame
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, !!!quote(type))
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
@@ -190,7 +166,8 @@ skim_render <- function(.data, groups, FUN, ...) {
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, "stat", "formatted")
+  wide <- tidyr::spread(collapsed, !!rlang::sym("stat"),
+                        !!rlang::sym("formatted"))
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
