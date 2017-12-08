@@ -20,13 +20,15 @@ Imports:
     dplyr (>= 0.7),
     magrittr,
     pander,
+    pryr,
     purrr,
     rlang,
     stats,
     stringr,
     knitr,
     tibble (>= 0.6),
-    tidyr (>= 0.7)
+    tidyr (>= 0.7),
+    tidyselect
 Suggests:
     rmarkdown,
     testthat,
