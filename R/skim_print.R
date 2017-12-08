@@ -19,7 +19,7 @@ print.skim_df <- function(x, ...) {
     cat(" group variables:", flat, "\n")
   }
   
-  grouped <- dplyr::group_by_(x, ~type)
+  grouped <- dplyr::group_by(x, !!!quote(type))
   dplyr::do(grouped, skim_render(., grps, print_impl, ...))
   invisible(x)
 }
@@ -225,3 +225,13 @@ align_decimal <- function(x){
 print.spark <- function(x, ...) {
   cat(x, "\n", sep = "")
 }
+
+#' Expand skim tables without printing
+#' @keywords internal
+#' @noRd
+
+quiet_impl <- function(transformed_df, skim_type, ...) {
+
+  structure(transformed_df, class = "data.frame")
+}
+

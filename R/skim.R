@@ -49,3 +49,26 @@ skim_tee <- function(.data) {
   print(skim(.data))
   invisible(.data)
 }
+
+#' Print skim result and return a wide data frame of summary statistics
+#' 
+#' Prints a skimmed data frame (created by skim()) and returns a wide data frame with one
+#'  row per variable and NA for statistics not calculated for a given type.
+#' 
+#' @param x A \code{dataframe}.
+#' @param ... Further arguments passed to or from other methods.
+#' @return A wide data frame.
+#' @examples 
+#'   skim_wide(iris)
+#'   iris %>% skim_wide()
+#'   iris %>% skim_wide() %>% dplyr::filter(type == "factor") %>% 
+#'            dplyr::select(top_counts)
+#' @export
+
+skim_wide <- function(x, ...) {
+  x <- skim(x, ...)
+  grps <- dplyr::groups(x)
+  grouped <- dplyr::group_by(x, !!!quote(type))
+  x <- dplyr::do(grouped, skim_render(., grps, quiet_impl, ...))
+  dplyr::ungroup(x)
+}

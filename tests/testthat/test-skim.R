@@ -73,3 +73,14 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
+
+test_that("skim_wide works as expected.", {
+  input <- skim_wide(iris)
+  expect_length(input, 16)
+  expect_equal(nrow(input), 5)
+  expect_identical(input$type, c("factor", rep("numeric", each = 4)))
+  expect_identical(input$variable, 
+    c("Species", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))
+  expect_identical(input$n, rep("150", each = 5))
+  expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0", NA, NA, NA, NA))
+})
