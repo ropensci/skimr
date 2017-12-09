@@ -28,6 +28,7 @@ Imports:
     tibble (>= 0.6),
     tidyr (>= 0.7)
 Suggests:
+    extrafont,
     rmarkdown,
     testthat,
     withr

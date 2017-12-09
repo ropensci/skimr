@@ -1,0 +1,37 @@
+---
+title: "Using Fonts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using Skimr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(extrafont)
+
+```
+
+
+One of the features of skim is the production of spark graphs for numeric data.
+However these graphs may not render properly because of lack of font support or for other
+reasons. In your specific environment this may depend on the fonts installed and the operating
+system and may occur for only specific types of documents such as PDF documents.
+Skimr supports kable() and pander() formatted tables, which used in conjunction with 
+fonts to render the spark graphs.
+
+To produce spark histograms a font that supports building blocks must be used. To
+support the spark line graphs a font with Braille support must be used. 
+
+A further discussion of this (with examples) is available in the "Using fonts" template for
+skimr.  If you are using RStudio you can open that template by opening a new markdown
+file and selecting "From template" and then choosing it.  Alternatively this file 
+is available inside the skimr folder or repository at 
+inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd. 
