@@ -30,6 +30,7 @@ Imports:
     tidyr (>= 0.7),
     tidyselect
 Suggests:
+    extrafont,
     rmarkdown,
     testthat,
     withr

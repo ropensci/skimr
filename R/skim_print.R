@@ -165,10 +165,10 @@ pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
 }
 
 pander_impl <- function(transformed_df, skim_type, caption) {
-
-  # Intentionally commented due to issue in pander
-  # cat(sprintf("   \n    Variable type: %s", skim_type, "   \n    "))
-
+  if (is.null(caption)){
+      # Intentionally commented due to issue in pandoc
+      # caption = cat(sprintf("\nVariable type: %s", skim_type))
+  }
   transformed_df <- dplyr::ungroup(transformed_df) 
   pander(structure(transformed_df, class = "data.frame"), caption)
   transformed_df
