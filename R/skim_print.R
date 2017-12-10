@@ -18,8 +18,8 @@ print.skim_df <- function(x, ...) {
     flat <- paste(grps, collapse = ", ")
     cat(" group variables:", flat, "\n")
   }
-  
-  grouped <- dplyr::group_by(x, !!!quote(type))
+
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, print_impl, ...))
   invisible(x)
 }
@@ -117,7 +117,12 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by_(x, ~type)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
+  # Spaces are markdown new lines
+  cat("Skim summary statistics  \n")
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
+  
   dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
                                  col.names, align, caption, format.args, 
                                  escape, ...))
@@ -127,57 +132,45 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
 kable_impl <- function(transformed_df, skim_type, format , digits, row.names, 
                        col.names, align, caption, format.args, 
                        escape, ...) {
-  cat(sprintf("\nVariable type: %s", skim_type))
+  
+  if (is.null(caption)){
+      caption <- cat(sprintf("\nVariable type: %s", skim_type))
+  }
   if(is.null(align)) align <- rep("l", length(transformed_df))
-  print(kable(transformed_df, caption = NULL, align = align, format, digits,
+  
+  print(kable(transformed_df, caption = caption, align = align, format, digits,
         row.names,  col.names, format.args,  escape, ...))
   transformed_df
 }
-
-#' Create pander object
-#' 
-#' Generic method for \code{pander} objects based on the method in the pander package.
-#' Pander asis is not supported although may work in some instances.
-#' 
-#' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a matrix or data frame)
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander <- function (x, caption = attr(x, "caption"), ...) {
-  UseMethod("pander")
-}
-
-#' Produce \code{pander} output of a data frame
-#' 
-#' @param x a data frame
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @export
-
-pander.data.frame <- pander:::pander.data.frame
-
+ 
 #' Produce \code{pander} output of a skimmed data frame
 #'
 #' @seealso \code{\link[pander]{pander}}
-#' @param x an R object (typically a skimmed data frame)
+#' @param x R object (typically a skimmed data frame)
 #' @param caption caption(string) to be shown under the table
 #' @param ... other arguments.
 #' @return The original \code{skim_df} object.
 #' @export
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
+  cat("Skim summary statistics  \n  ")
+  # Spaces are markdown new lines.
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
+
   grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, !!!quote(type))
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
   invisible(x)
 }
 
 pander_impl <- function(transformed_df, skim_type, caption) {
-  cat(sprintf("\nVariable type: %s", skim_type))
+  if (is.null(caption)){
+      # Intentionally commented due to issue in pandoc
+      # caption = cat(sprintf("\nVariable type: %s", skim_type))
+  }
   transformed_df <- dplyr::ungroup(transformed_df) 
-  pander(structure(transformed_df, class = "data.frame"))
+  pander(structure(transformed_df, class = "data.frame"), caption)
   transformed_df
 }
 
@@ -190,7 +183,8 @@ skim_render <- function(.data, groups, FUN, ...) {
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, "stat", "formatted")
+  wide <- tidyr::spread(collapsed, !!rlang::sym("stat"),
+                        !!rlang::sym("formatted"))
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }

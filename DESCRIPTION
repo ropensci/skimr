@@ -12,6 +12,7 @@ Authors@R: c(
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
   person("Hadley", "Wickham", , "hadley@rstudio.com", role = 'ctb')
   )
+Maintainer: Elin Waring <email=elin.waring@gmail.com>
 Description: A frictionless summary function that can be piped.
 Depends:
     R (>= 3.1.2)
@@ -27,6 +28,7 @@ Imports:
     tibble (>= 0.6),
     tidyr (>= 0.7)
 Suggests:
+    extrafont,
     rmarkdown,
     testthat,
     withr
