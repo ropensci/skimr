@@ -43,6 +43,18 @@ skim.grouped_df <- function(.data) {
             data_rows = nrow(.data), data_cols = ncol(.data))
 }
 
+#' @export
+
+skim.default <-function(.data, ...){
+  if (!is.atomic(.data) | !is.null(dim(.data))[1]){
+    return(message("No skim method exists for class ", class(.data), "."))
+  }
+  skimmed <- skim_v(.data)
+  skimmed$variable <- deparse(substitute(.data))
+  structure(skimmed, class = c("skim_vector", class(skimmed)) )
+  
+}
+
 #' Print useful summary statistic from a data frame without modification
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
