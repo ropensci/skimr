@@ -20,7 +20,6 @@ Imports:
     dplyr (>= 0.7),
     magrittr,
     pander,
-    pryr,
     purrr,
     rlang,
     stats,
