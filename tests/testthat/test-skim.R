@@ -86,8 +86,8 @@ test_that("Skimming a data frame with selected columns works as expected", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_identical(input$variable, c(rep(c("weight"), each = 11)))
-  expect_identical(input$type, c(rep("numeric", each = 11)))
+  expect_identical(input$variable, rep("weight", 11))
+  expect_identical(input$type, rep("numeric", 11))
   expect_identical(head(input$stat),
                    c("missing", "complete", "n", "mean", "sd", "min"))
   expect_identical(head(input$level), rep(".all", 6))
@@ -96,8 +96,57 @@ test_that("Skimming a data frame with selected columns works as expected", {
                    c("0", "71", "71", "261.31", "78.07", "108"))
 })
 
+test_that("You can use tidyselect negation", {
+  input <- skim(chickwts, -weight)
+  
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 12)
+  
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  
+  # Content
+  expect_identical(input$variable, rep("feed", 12))
+  expect_identical(input$type, rep("factor", 12))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "n_unique", "top_counts",
+                     "top_counts"))
+  expect_identical(head(input$level), c(rep(".all", 4), "soybean", "casein"))
+  expect_equal(head(input$value), c(0, 71, 71, 6, 14, 12))
+  expect_identical(head(input$formatted),
+                   c("0", "71", "71", "6", "soy: 14", "cas: 12"))
+})
 
-test_that("Skimming a grouped data frame works as expected selecting two columns", {
+test_that("Tidyselect helpers work as expected", {
+  input <- skim(iris, starts_with("Sepal"))
+  
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 22)
+  
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  
+  # Content
+  expect_identical(input$variable, rep(c("Sepal.Length", "Sepal.Width"),
+                                       each = 11))
+  expect_identical(input$type, rep("numeric", 22))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "min"))
+  expect_identical(head(input$level), rep(".all", 6))
+  expect_equal(head(input$value), c(0, 150, 150, 5.84, 0.82, 4.3), 0.1)
+  expect_identical(head(input$formatted),
+                   c("0", "150", "150", "5.84", "0.83", "4.3"))
+})
+
+test_that("Skimming a grouped df works as expected selecting two columns", {
   input <- dplyr::group_by(mtcars, cyl, gear) %>% skim(mpg, disp)
   
   # dimensions
@@ -124,3 +173,5 @@ test_that("Skimming a grouped data frame works as expected selecting two columns
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
+
+

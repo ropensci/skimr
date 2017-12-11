@@ -25,26 +25,19 @@ skim <- function(.data, ...) {
 #'@export
 
 skim.data.frame <- function(.data, ... ) {
+  .vars <- rlang::quos(...)
+  if (length(.vars) == 0)  selected <- tidyselect::everything(.data)
+  else  selected <- tidyselect::vars_select(names(.data), !!! .vars) 
 
-  .dots <- pryr::dots(...)
-  .vars <- as.character(.dots)
-
-  if (length(.vars) == 0){
-    .vars <- tidyselect::everything(.data)
-  }
-  selected <- tidyselect::vars_select(names(.data), .vars)
-
-  .data <- .data[selected]
-  rows <- purrr::map(.data, skim_v)
+  rows <- purrr::map(.data[selected], skim_v)
   combined <- dplyr::bind_rows(rows, .id = "variable")
   structure(combined, class = c("skim_df", class(combined)),
-            data_rows = nrow(.data), data_cols = ncol(.data))
+            data_rows = nrow(.data), data_cols = length(selected))
 }
 
 #' @export
 
 skim.grouped_df <- function(.data, ...) {
-  
   skimmed <- dplyr::do(.data, skim(., ...))
   
   # Drop the grouping variable
