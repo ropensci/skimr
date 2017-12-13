@@ -16,10 +16,44 @@
 
 NULL
 
-#' @importFrom magrittr %>%
-#' @export
-
-magrittr::`%>%`
 
 # Create global package options
 options <- new.env()
+
+
+# Imports -----------------------------------------------------------------
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
+#' @importFrom pander pander
+
+#' @importFrom tidyselect contains
+#' @aliases select_helpers
+#' @export
+tidyselect::contains
+
+#' @importFrom tidyselect ends_with
+#' @export
+tidyselect::ends_with
+
+#' @importFrom tidyselect everything
+#' @export
+tidyselect::everything
+
+#' @importFrom tidyselect matches
+#' @export
+tidyselect::matches
+
+#' @importFrom tidyselect num_range
+#' @export
+tidyselect::num_range
+
+#' @importFrom tidyselect one_of
+#' @export
+tidyselect::one_of
+
+#' @importFrom tidyselect starts_with
+#' @export
+tidyselect::starts_with
