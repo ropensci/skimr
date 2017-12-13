@@ -74,6 +74,7 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
 
+
 test_that("skim_wide works as expected.", {
   input <- skim_wide(iris)
   expect_length(input, 16)

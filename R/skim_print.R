@@ -116,6 +116,10 @@ kable.data.frame <- knitr::kable
 kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.names = NA, 
                           col.names = NA, align = NULL, caption = NULL,
                           format.args = list(), escape = TRUE, ...) {
+  # Spaces are markdown new lines
+  cat("Skim summary statistics  \n")
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
@@ -144,6 +148,11 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
 #' @export
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
+  cat("Skim summary statistics  \n  ")
+  # Spaces are markdown new lines.
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
+  
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
@@ -151,7 +160,10 @@ pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
 }
 
 pander_impl <- function(transformed_df, skim_type, caption) {
-  cat(sprintf("\nVariable type: %s", skim_type))
+  if (is.null(caption)){
+    # Intentionally commented due to issue in pandoc
+    # caption = cat(sprintf("\nVariable type: %s", skim_type))
+  }
   transformed_df <- dplyr::ungroup(transformed_df) 
   pander(structure(transformed_df, class = "data.frame"))
   transformed_df

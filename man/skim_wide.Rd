@@ -15,8 +15,8 @@ skim_wide(x, ...)
 A wide data frame.
 }
 \description{
-Prints a skimmed data frame (created by skim()) and returns a wide data frame with one
- row per variable and NA for statistics not calculated for a given type.
+Returns a wide data frame with one row per variable and NA for statistics
+ not calculated for a given type.
 }
 \examples{
   skim_wide(iris)
