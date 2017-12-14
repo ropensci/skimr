@@ -61,3 +61,9 @@ test_that("The summary pander method returns the correct object", {
   expect_equal(kable_input[14], "|numeric |          4|")
   expect_equal(kable_input[15], "")
 })
+
+test_that("null object gets expected message", {
+  input <- NULL
+  expect_error(summary.skim_df(input), "dataframe is null.")
+  
+})
