@@ -3,25 +3,22 @@
 #' @param object a skim dataframe
 #' @param ... Additional arguments affecting the summary produced. Not used
 #' @return A summary of the dataframe \code{df}
-#' @export
 #' @examples
-#' 
 #'\dontrun{
 #' a <- skim(mtcars)
 #' summary(a)
 #' }
-#'
+#' @export
+ 
 summary.skim_df <- function(object, ...){
 
   if (is.null(object)) {
     stop("dataframe is null.")
   }
   
-  type_frequencies <- object %>%
-        dplyr::select(!!rlang::sym("variable"), !!rlang::sym("type")) %>%
-        dplyr::distinct() %>%
-        dplyr::group_by(!!rlang::sym("type")) %>%
-        dplyr::summarise(type_count = n())
+  duplicated <- duplicated(object$variable)
+  counts <- table(type = object$type[!duplicated])
+  type_frequencies <- tibble::as_tibble(counts)
   
   summary_object <- list(
     df_name = attr(object, "df_name"),
@@ -30,9 +27,7 @@ summary.skim_df <- function(object, ...){
     type_frequencies = type_frequencies
   )
   
-  class(summary_object) <- c("summary_skim_df", "list")
-  
-  summary_object
+  structure(summary_object, class = c("summary_skim_df", "list"))
 }
 
 
@@ -43,7 +38,7 @@ summary.skim_df <- function(object, ...){
 #' @param x a skim_summary object
 #' @param ... Additional arguments affecting the print output produced. Not used
 #' @export
-#' 
+ 
 print.summary_skim_df <- function(x, ...) {
   
   n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
@@ -52,7 +47,7 @@ print.summary_skim_df <- function(x, ...) {
   
   type_frequency_string <- paste0(x$type_frequencies$type,
                                   ": ",
-                                  x$type_frequencies$type_count, 
+                                  x$type_frequencies$n, 
                                   collapse = "   \n")
   
   
@@ -73,7 +68,7 @@ print.summary_skim_df <- function(x, ...) {
 #' @param x a skim_summary object
 #' @param ... Additional arguments affecting the print output produced. Not used
 #' @export
-#' 
+
 pander.summary_skim_df <- function(x, ...) {
   
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
@@ -91,7 +86,7 @@ pander.summary_skim_df <- function(x, ...) {
 #' @param x a skim_summary object
 #' @param ... Additional arguments affecting the print output produced. Not used
 #' @export
-#' 
+
 kable.summary_skim_df <- function(x, ...) {
   
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
@@ -101,4 +96,3 @@ kable.summary_skim_df <- function(x, ...) {
   kframe <- data.frame(df_name, n_rows, n_cols)
   list( Summary = kable(kframe), `Type counts` = kable(x$type_frequencies))
 }
-

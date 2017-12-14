@@ -4,8 +4,8 @@ test_that("Summary creates the correct summary object", {
   # Test it creates the correct 4 parts
   skim_input <- skim(iris)
   summary_input <- summary(skim_input)
-  expect_named(summary_input, c("df_name", "n_rows", "n_cols", "type_frequencies"))
-  
+  expect_named(summary_input, c("df_name", "n_rows", "n_cols",
+                                "type_frequencies"))
 })
 
 test_that("The summary print method prints the correct object", {
@@ -32,13 +32,13 @@ test_that("The summary pander method returns the correct object", {
   expect_equal(pander_input[5], "  * Number of Columns: 5")
   expect_equal(pander_input[6], "  *")
   expect_equal(pander_input[7], "")
-  expect_equal(pander_input[8], "    ----------------------")
-  expect_equal(pander_input[9], "      type     type_count")
-  expect_equal(pander_input[10], "    --------- ------------")
-  expect_equal(pander_input[11], "     factor        1")
+  expect_equal(pander_input[8], "    -------------")
+  expect_equal(pander_input[9], "      type     n")
+  expect_equal(pander_input[10], "    --------- ---")
+  expect_equal(pander_input[11], "     factor    1")
   expect_equal(pander_input[12], "")
-  expect_equal(pander_input[13], "     numeric       4")
-  expect_equal(pander_input[14], "    ----------------------")
+  expect_equal(pander_input[13], "     numeric   4")
+  expect_equal(pander_input[14], "    -------------")
   expect_equal(pander_input[15], "")
 })
 
@@ -55,10 +55,10 @@ test_that("The summary pander method returns the correct object", {
   expect_equal(kable_input[8], "$`Type counts`")
   expect_equal(kable_input[9], "")
   expect_equal(kable_input[10], "")
-  expect_equal(kable_input[11], "|type    | type_count|")
-  expect_equal(kable_input[12], "|:-------|----------:|" )
-  expect_equal(kable_input[13], "|factor  |          1|")
-  expect_equal(kable_input[14], "|numeric |          4|")
+  expect_equal(kable_input[11], "|type    |  n|")
+  expect_equal(kable_input[12], "|:-------|--:|" )
+  expect_equal(kable_input[13], "|factor  |  1|")
+  expect_equal(kable_input[14], "|numeric |  4|")
   expect_equal(kable_input[15], "")
 })
 
