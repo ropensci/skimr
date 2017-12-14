@@ -2,7 +2,9 @@
 
 S3method(kable,data.frame)
 S3method(kable,skim_df)
+S3method(kable,summary_skim_df)
 S3method(pander,skim_df)
+S3method(pander,summary_skim_df)
 S3method(print,skim_df)
 S3method(print,spark)
 S3method(print,summary_skim_df)
