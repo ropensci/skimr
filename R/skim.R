@@ -32,11 +32,7 @@ skim.data.frame <- function(.data, ... ) {
   rows <- purrr::map(.data[selected], skim_v)
   combined <- dplyr::bind_rows(rows, .id = "variable")
   structure(combined, class = c("skim_df", class(combined)),
-<<<<<<< HEAD
             data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
-=======
-            data_rows = nrow(.data), data_cols = length(selected))
->>>>>>> upstream/develop
 }
 
 #' @export
