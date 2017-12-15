@@ -75,8 +75,8 @@ test_that("Skimming a grouped data frame works as expected", {
 })
 
 
-test_that("skim_wide works as expected.", {
-  input <- skim_wide(iris)
+test_that("skim_to_wide works as expected.", {
+  input <- skim_to_wide(iris)
   expect_length(input, 16)
   expect_equal(nrow(input), 5)
   expect_identical(input$type, c("factor", rep("numeric", each = 4)))
@@ -84,6 +84,18 @@ test_that("skim_wide works as expected.", {
     c("Species", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))
   expect_identical(input$n, rep("150", each = 5))
   expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0", NA, NA, NA, NA))
+})
+
+test_that("skim_to_list works as expected", {
+  input <- skim_to_list(chickwts)
+  expect_length(input, 2)
+  expect_named(input, c("numeric", "factor"))
+  expect_identical(class(input), "list")
+  expect_identical(class(input[["numeric"]]), c("tbl", "tbl_df", "data.frame"))
+  expect_equal(dim(input[["numeric"]]), c(1, 12))
+  expect_identical(names(input[["numeric"]]), 
+                   c("variable", "missing", "complete", "n", "mean",
+                     "sd", "min", "p25", "median", "p75", "max", "hist" ))
 })
 
 test_that("Skimming a data frame with selected columns works as expected", {

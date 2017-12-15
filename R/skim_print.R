@@ -221,6 +221,6 @@ print.spark <- function(x, ...) {
 
 quiet_impl <- function(transformed_df, skim_type, ...) {
 
-  structure(transformed_df, class = "data.frame")
+  structure(transformed_df, class = c( "tbl", "tbl_df", "data.frame"))
 }
 
