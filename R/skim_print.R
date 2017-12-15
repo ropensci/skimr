@@ -178,8 +178,8 @@ skim_render <- function(.data, groups, FUN, ...) {
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, stat,
-                        formatted)
+  wide <- tidyr::spread(collapsed, !!rlang::sym("stat"),
+                        !!rlang::sym("formatted"))
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
