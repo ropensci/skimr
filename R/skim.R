@@ -32,7 +32,7 @@ skim.data.frame <- function(.data, ... ) {
   rows <- purrr::map(.data[selected], skim_v)
   combined <- dplyr::bind_rows(rows, .id = "variable")
   structure(combined, class = c("skim_df", class(combined)),
-            data_rows = nrow(.data), data_cols = length(selected))
+            data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
 }
 
 #' @export
@@ -45,7 +45,7 @@ skim.grouped_df <- function(.data, ...) {
   to_drop <- quote(!(variable %in% groups))
   skimmed <- dplyr::filter(skimmed, !!to_drop)
   structure(skimmed, class = c("skim_df", class(skimmed)),
-            data_rows = nrow(.data), data_cols = ncol(.data))
+            data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
 }
 
 #' Print useful summary statistic from a data frame returning the data frame
