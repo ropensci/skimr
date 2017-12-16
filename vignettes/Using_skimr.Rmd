@@ -103,7 +103,7 @@ The `skim` function also handles individual vectors that are not part of a
 data frame. For example the `lynx` data set is class `ts`.
 
 ```{r}
-skim_v(datasets::lynx)
+skim(datasets::lynx)
 ```
 
 If you attempt to use `skim` on a class that does not have support, it will
@@ -115,7 +115,7 @@ values.
 ```{r}
 lynx <- datasets::lynx
 class(lynx) <- "unkown_class"
-skim_v(lynx)
+skim(lynx)
 ```
 
 # The skim_with function
