@@ -16,6 +16,12 @@ test_that("Skim prints a special header for grouped data frames", {
   expect_output(print(input), "n variables: 5 \n")
 })
 
+test_that("Skim prints a special header for vectors", {
+  input <- skim(lynx)
+  expect_output(print(input), "Skim summary statistics")
+  expect_output(print(input), "Variable type: ts")
+})
+
 test_that("Skim collapses counts and other multivalue stats into one cell", {
   input <- skim(iris)
   expect_output(print(skim, "set: 50, ver: 50, vir: 50, NA: 0"))

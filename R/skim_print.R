@@ -24,6 +24,19 @@ print.skim_df <- function(x, ...) {
   invisible(x)
 }
 
+#' Manages print for skim_vector objects.
+#' 
+#' @param x A \code{skim_vector} object.
+#' @param ... Further arguments passed to or from other methods.
+#' @return The original \code{skim_df} object.
+#' @export
+
+print.skim_vector <- function(x, ...) {
+  cat("Skim summary statistics\n")
+  skim_render(x, groups = as.null(), print_impl, ...)
+  
+}
+
 #' Print expanded skim tables with a simple caption
 #' @keywords internal
 #' @noRd
