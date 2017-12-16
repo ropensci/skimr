@@ -21,8 +21,8 @@ Returns a list of tibbles (also data frames) with one list element
  Note that this is not pipeable.
 }
 \examples{
-  skim_to_list(mtcars)
-  mtcars \%>\% skim_to_list()
-  sl <- mtcars \%>\% skim_to_list() 
-  sl[["numeric"]]
+  # skim_to_list(mtcars)
+  # mtcars \%>\% skim_to_list()
+  # sl <- mtcars \%>\% skim_to_list() 
+  # sl[["numeric"]]
 }
