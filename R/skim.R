@@ -111,8 +111,6 @@ skim_to_list <- function(x, ...){
       result_list[[types[t]]] <- skim_render(dplyr::filter(grouped, !!rlang::sym("type") == types[t]), 
                                                      groups = grps, 
                                                      quiet_impl)
-  #   result_list[[types[t]]] <- dplyr::ungroup(dplyr::do(dplyr::filter(grouped, !!rlang::sym("type") == types[t]), 
-   #                                        skim_render(., grps, quiet_impl, ...)))
     }
   result_list
   
