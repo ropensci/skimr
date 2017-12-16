@@ -10,7 +10,7 @@
 #' @return A tall tbl, containing the vector's name, type, potential levels
 #'  and a series of summary statistics.
 #' @keywords internal
-#' @export
+#' @noRd
 
 skim_v <- function(x, vector_type = class(x)) {
   stopifnot(length(x) > 0,
