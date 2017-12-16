@@ -99,7 +99,7 @@ skim_to_wide <- function(x, ...) {
 
 #' Print skim result and return a list of tibbles
 #' 
-#'  Returns a list of tibbles (also data frames) with one list element 
+#'  Returns a list of tibbles with one list element 
 #'  per data type. Each column contains the formatted values. 
 #'  This facilitates additional processing. 
 #'  Note that this is not pipeable.
@@ -108,10 +108,10 @@ skim_to_wide <- function(x, ...) {
 #' @param ... Further arguments passed to or from other methods.
 #' @return A list of tibbls.
 #' @examples 
-#'   # skim_to_list(mtcars)
-#'   # mtcars %>% skim_to_list()
-#'   # sl <- mtcars %>% skim_to_list() 
-#'   # sl[["numeric"]]
+#'    skim_to_list(mtcars)
+#'    mtcars %>% skim_to_list()
+#'    l <- mtcars %>% skim_to_list() 
+#'    l[["numeric"]]
 #' @export
 
 skim_to_list <- function(x, ...){
@@ -121,7 +121,8 @@ skim_to_list <- function(x, ...){
   types <- unique(grouped$type)
   result_list <- list()
    for (t in 1:length(types)){
-      result_list[[types[t]]] <- skim_render(dplyr::filter(grouped, !!rlang::sym("type") == types[t]), 
+     filtered <- dplyr::filter(grouped, !!rlang::sym("type") == types[t])
+      result_list[[types[t]]] <- skim_render(filtered, 
                                                      groups = grps, 
                                                      quiet_impl)
     }
