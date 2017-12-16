@@ -131,6 +131,11 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
                           format.args = list(), escape = TRUE, ...) {
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
+  # Spaces are markdown new lines
+  cat("Skim summary statistics  \n")
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
+  
   dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
                                  col.names, align, caption, format.args, 
                                  escape, ...))
@@ -140,9 +145,13 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.na
 kable_impl <- function(transformed_df, skim_type, format , digits, row.names, 
                        col.names, align, caption, format.args, 
                        escape, ...) {
-  cat(sprintf("\nVariable type: %s", skim_type))
+  
+  if (is.null(caption)){
+      caption <- cat(sprintf("\nVariable type: %s", skim_type))
+  }
   if(is.null(align)) align <- rep("l", length(transformed_df))
-  print(kable(transformed_df, caption = NULL, align = align, format, digits,
+  
+  print(kable(transformed_df, caption = caption, align = align, format, digits,
         row.names,  col.names, format.args,  escape, ...))
   transformed_df
 }
@@ -157,6 +166,11 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
 #' @export
 
 pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
+  cat("Skim summary statistics  \n  ")
+  # Spaces are markdown new lines.
+  cat(" n obs:", attr(x, "data_rows"), "   \n")
+  cat(" n variables:", attr(x, "data_cols"), "   \n")
+
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
@@ -164,9 +178,12 @@ pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
 }
 
 pander_impl <- function(transformed_df, skim_type, caption) {
-  cat(sprintf("\nVariable type: %s", skim_type))
+  if (is.null(caption)){
+      # Intentionally commented due to issue in pandoc
+      # caption = cat(sprintf("\nVariable type: %s", skim_type))
+  }
   transformed_df <- dplyr::ungroup(transformed_df) 
-  pander(structure(transformed_df, class = "data.frame"))
+  pander(structure(transformed_df, class = "data.frame"), caption)
   transformed_df
 }
 

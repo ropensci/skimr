@@ -26,8 +26,10 @@ Imports:
     stringr,
     knitr,
     tibble (>= 0.6),
-    tidyr (>= 0.7)
+    tidyr (>= 0.7),
+    tidyselect
 Suggests:
+    extrafont,
     rmarkdown,
     testthat,
     withr
@@ -47,3 +49,4 @@ Collate:
     'skim.R'
     'skim_print.R'
     'skim_v.R'
+    'summary.R'
