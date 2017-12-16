@@ -87,20 +87,23 @@ test_that("skim_to_wide works as expected.", {
 
 test_that("skim_to_list works with grouped data", {
   xg <- dplyr::group_by(mtcars, cyl)
-  skim_to_list(xg)
+  input <- skim_to_list(xg)
+  expect_length(input,1)
+  expect_equal(dim(input[["numeric"]]), c(30,13))
+  
 })
 
-# test_that("skim_to_list works as expected", {
-#   input <- skim_to_list(chickwts)
-#   expect_length(input, 2)
-#   expect_named(input, c("numeric", "factor"))
-#   expect_identical(class(input), "list")
-#   expect_identical(class(input[["numeric"]]), c("tbl", "tbl_df", "data.frame"))
-#   expect_equal(dim(input[["numeric"]]), c(1, 12))
-#   expect_identical(names(input[["numeric"]]), 
-#                    c("variable", "missing", "complete", "n", "mean",
-#                      "sd", "min", "p25", "median", "p75", "max", "hist" ))
-# })
+test_that("skim_to_list works as expected", {
+  input <- skim_to_list(chickwts)
+  expect_length(input, 2)
+  expect_named(input, c("numeric", "factor"))
+  expect_identical(class(input), "list")
+  expect_identical(class(input[["numeric"]]), c("tbl", "tbl_df", "data.frame"))
+  expect_equal(dim(input[["numeric"]]), c(1, 12))
+  expect_identical(names(input[["numeric"]]),
+                   c("variable", "missing", "complete", "n", "mean",
+                     "sd", "min", "p25", "median", "p75", "max", "hist" ))
+})
 
 test_that("Skimming a vector works as expected", {
   input <- skim(lynx)
