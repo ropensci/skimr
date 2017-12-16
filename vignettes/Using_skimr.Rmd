@@ -85,19 +85,29 @@ mtcars %>%
   skim()
 ```
 
-# The skim_v function
-
-The `skim_v()` function is the actual workhorse of `skimr` in that it processes
-each of the columns  as a vector.  If you have data that is not a data frame
-one simple solution is to use `skim_v()` on individual vectors. For example the
-`lynx` data set is class `ts`.
+Individual columns from a data frame may be selected using tidyverse style selectors.
 
 ```{r}
-skim_v(datasets::lynx)
+
+skim(iris, Sepal.Length, Species)
+skim(iris, starts_with("Sepal"))
+
 ```
 
-If you attempt to use `skim_v()` on a class that does not have support, it will
-coerce it to  character (with a warning) and report number `NA`, number complete
+If an individual column is of an unsuppported class it is treated as a character variable 
+with a warning.
+
+# Skimming vectors
+
+The `skim` function also handles individual vectors that are not part of a 
+data frame. For example the `lynx` data set is class `ts`.
+
+```{r}
+skim(datasets::lynx)
+```
+
+If you attempt to use `skim` on a class that does not have support, it will
+coerce it to  character (with a warning) and report number of `NA`s, number complete
 (non missing), number of rows, the  number empty (i.e. ""), minimum length of
 non empty strings, maximum length of non empty strings, and number of unique
 values.
@@ -105,7 +115,7 @@ values.
 ```{r}
 lynx <- datasets::lynx
 class(lynx) <- "unkown_class"
-skim_v(lynx)
+skim(lynx)
 ```
 
 # The skim_with function
@@ -158,16 +168,8 @@ in the `knitr` package for `kable()` and the `pander` package for `pander()`.
 Using either of these may require use of document or chunk options and fonts.
 
 * For `kable()` use in a markdown file, use a chunk option of `results=asis`.
-* For `pander()` the asis option is not officially supported although 
-it may work in some cases. To prevent using asis by default use `panderOptons()` to
-set it to false.
-
-```{r }
-library(pander)
-panderOptions('knitr.auto.asis', FALSE)
-skim(iris) %>% pander() 
-
-```
+* For `pander()` use in a markdown file, use a chunk option of `results=asis`. 
+To prevent using asis by default use `panderOptons()` to set it to FALSE.
 
 ```{r results='asis'}
 
@@ -175,6 +177,13 @@ skim(iris) %>% kable()
 
 ```
 
+
+```{r }
+library(pander)
+panderOptions('knitr.auto.asis', FALSE)
+skim(iris) %>% pander() 
+
+```
 
 
 ## Solutions to common rendering problems
@@ -197,32 +206,6 @@ data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matri
 
 In order to render the spark graphs in html or PDF histogram you may need to change
 fonts to one that supports blocks or braille (depending on which you need). 
-For example, the open font "DejaVu Sans" from the `extra font` package supports these.
-Please read the `extra font` documentation for the details of how to install a specific
-font. Installation generally uses the procedure shown below.
-
-```
-library(extrafont)
-fonts() # Lists installed fonts
-# If desired font is not listed
-font_install("DejaVu Sans")
-```
-
-To us a font in a markdown document you will want to modify the YAML in the file
-to something like that below.
-
-```
----
-title: "Untitled"
-mainfont: DejaVu Sans
-output:
-  html_document: default
-  pdf_document:
-    latex_engine: xelatex
-  word_document: default
-font-family: Times New Roman
----
-
-```
+Please review the separate vignette and associated template for details on this.
 
 

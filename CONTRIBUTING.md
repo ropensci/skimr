@@ -11,9 +11,11 @@ Skimr solves a very specific set of problems focused on the compact, flexible an
 in the console.  By itself it is not intended as a replacement for packages that create publication ready tables.
 The basic concept is that of "skimming" a data frame or tibble to get an overview of the data it contains. One
 intended group of users is students in a first semester statistics class.  As such, the package is focused on 
-data types that are widely used.   Fortunately, the `skim()` function is a generic which means that rather than
+data types that are widely used.   One general guideline is that if a data type is not 
+found in the `datasets` package it will not be directly supported in `skimr`.
+Fortunately, the `skim()` function is a generic which means that rather than
 add to the core package you can write your own implementation for specialized classes of data and for objects 
-that are not dataframes.  Please read the vignette "Supporting additional objects" that provides documentation
+that are not data frames.  Please read the vignette "Supporting additional objects" that provides documentation
 of how to do this. 
 
 ##  Tests

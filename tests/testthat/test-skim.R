@@ -74,7 +74,6 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
 
-
 test_that("skim_to_wide works as expected.", {
   input <- skim_to_wide(iris)
   expect_length(input, 16)
@@ -102,6 +101,49 @@ test_that("skim_to_list works with grouped data", {
 #                    c("variable", "missing", "complete", "n", "mean",
 #                      "sd", "min", "p25", "median", "p75", "max", "hist" ))
 # })
+
+test_that("Skimming a vector works as expected", {
+  input <- skim(lynx)
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 13)
+  # classes
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_identical(input$type, c(rep(c("ts"), each = 13)))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "start", "end", "frequency"))
+  expect_identical(input$level, c(rep(c(".all"), each = 13)))
+  expect_identical(input$variable, c(rep(c("lynx"), each = 13)))
+  expect_equal(head(input$value), c(0, 114, 114, 1821, 1934, 1), tol = .01)
+  expect_identical(head(input$formatted),
+                   c("0", "114", "114", "1821", "1934", "1"))  
+})
+
+test_that("Skimming a column of a data frame works as expected", {
+  input <- skim(chickwts$weight)
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 11)
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_identical(input$variable, c(rep(c("chickwts$weight"), each = 11)))
+  expect_identical(input$type, c(rep("numeric", each = 11)))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "min"))
+  expect_identical(head(input$level), rep(".all", 6))
+  expect_equal(head(input$value), c(0, 71, 71, 261.3, 78.1, 108), tol = .01)
+  expect_identical(head(input$formatted),
+                   c("0", "71", "71", "261.31", "78.07", "108"))
+})
+
+test_that("Skimming an object without a method returns the appropriate messsage", {
+  expect_message(skim(volcano), "No skim method exists for class matrix")
+})
 
 test_that("Skimming a data frame with selected columns works as expected", {
   input <- skim(chickwts, weight)
@@ -202,5 +244,4 @@ test_that("Skimming a grouped df works as expected selecting two columns", {
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
-
 

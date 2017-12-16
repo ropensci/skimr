@@ -15,7 +15,7 @@ test_that("skim_v returns expected response for numeric vectors", {
     "numeric",      "p75",   ".all", quantiles[2],         "22.8",
     "numeric",      "max",   ".all", max(mtcars$mpg),      "33.9",
     "numeric",     "hist",   ".all", NA,                   "▃▇▇▇▃▂▂▂")
-  input <- skim_v(mtcars$mpg)
+  input <- skimr:::skim_v(mtcars$mpg)
   expect_identical(input, correct)
 })
 
@@ -31,7 +31,7 @@ test_that("skim_v returns expected response for factor vectors", {
     "factor", "top_counts", "virginica",  50L,     "vir: 50",
     "factor", "top_counts",          NA,  0L,      "NA: 0",
     "factor",    "ordered",      ".all",  0L,      "FALSE")
-  input <- skim_v(iris$Species)
+  input <- skimr:::skim_v(iris$Species)
   expect_identical(input, correct)
 })
 
@@ -49,7 +49,7 @@ test_that("skim_v handles factors when NAs are present", {
     "factor",    "ordered",      ".all",  0L,       "FALSE")
   dat <- iris
   dat$Species[15:18] <- NA 
-  input <- skim_v(dat$Species)
+  input <- skimr:::skim_v(dat$Species)
   expect_identical(input, correct)
 })
 
@@ -69,7 +69,7 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
     "numeric",      "p75", ".all",  pqs[2],                     "4.5e+15", 
     "numeric",      "max", ".all",  +(2^.Machine$double.digits),   "9e+15",
     "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▇")
-  input <- skim_v(patho)
+  input <- skimr:::skim_v(patho)
   expect_identical(input, correct_patho)
 })
 
@@ -84,7 +84,7 @@ test_that("skim_v returns expected response for chr vectors", {
     "character",     "empty",     ".all",  1L, "1",
     "character",  "n_unique",     ".all",  4L, "4")
   dat <- c("AAAB", "ABc", "acb", NA, "")
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -99,7 +99,7 @@ test_that("skim_v returns expected response for logical vectors", {
     "logical",    "count",      TRUE,         35, "TRU: 35",
     "logical",    "count",        NA,          0, "NA: 0")
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea'))
-  input <- skim_v(dat$log_col)
+  input <- skimr:::skim_v(dat$log_col)
   expect_identical(input, correct)
 })
 
@@ -115,7 +115,7 @@ test_that("skim_v returns expected response for logical vectors", {
     "logical",    "count",        NA,       4, "NA: 4")
   dat <-  chickwts %>% dplyr::mutate(log_col = stringr::str_detect(feed, 'ea')) 
   dat$log_col[15:18] <- NA 
-  input <- skim_v(dat$log_col)
+  input <- skimr:::skim_v(dat$log_col)
   expect_identical(input, correct)
 })
 
@@ -129,7 +129,7 @@ test_that("skim_v returns expected response for complex vectors", {
   dat <-  chickwts %>% dplyr::mutate(test_complex = weight) 
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
   dat$test_complex[15:18] <- NA 
-  input <- skim_v(dat$test_complex)
+  input <- skimr:::skim_v(dat$test_complex)
   expect_identical(input, correct)
 })
 
@@ -145,7 +145,7 @@ test_that("skim_v returns expected response for Date vectors", {
     "Date", "n_unique",    ".all",         9, "9")
   dat <- seq(as.Date("2011-07-01"), by=1, len=10)
   dat[2] <- NA
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -163,7 +163,7 @@ test_that("skim_v handles objects with multiple classes", {
   dat <- seq(as.Date("2011-07-01"), by=1, len=10)
   dat[2] <- NA
   class(dat) <- c("strange_type", "Date")
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -179,7 +179,7 @@ test_that("skim_v returns treats unknown classes as character", {
     "character",  "n_unique",  ".all",      66L, "66")
   weight <- chickwts$weight
   class(weight) <- "strange"
-  expect_warning(input <- skim_v(weight))
+  expect_warning(input <- skimr:::skim_v(weight))
   expect_identical(input, correct)
 })
 
@@ -195,7 +195,7 @@ test_that("skim_v handles objects with two unknown classes", {
     "character",  "n_unique",  ".all",      6L, "6")
   feed <- chickwts$feed
   class(feed) <- c("strange", "stranger")
-  expect_warning(input <- skim_v(feed))
+  expect_warning(input <- skimr:::skim_v(feed))
   expect_identical(input, correct)
 })
 
@@ -216,7 +216,7 @@ test_that("skim_v returns expected response for ts vectors", {
     "ts",   "median",     ".all",   9.31378,        "9.31",
     "ts",   "line_graph", ".all", NA,               "⣀⣀⠤⠤⠒⠒⠉⠉")
   data(freeny)
-  input <- skim_v(freeny$y)
+  input <- skimr:::skim_v(freeny$y)
   expect_identical(input, correct)
 })
 
@@ -232,7 +232,7 @@ test_that("skim_v returns expected response for POSIXct vectors", {
     "POSIXct", "n_unique",    ".all", 9,          "9") 
   dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
   dat[2] <- NA
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -253,11 +253,11 @@ test_that("skim_v returns expected response for list (not AsIs) vectors", {
     d = list("h"),
     e = list("i", "j", "k", "l"),
     f = NA)
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
-test_that("skim_v returns expected response for list with all NA's", {
+test_that("skimr:::skim_v returns expected response for list with all NA's", {
   correct <- tibble::tribble (
     ~type,    ~stat,           ~level,  ~value, ~formatted,
     "list",   "missing",       ".all",   3L,     "3",
@@ -268,7 +268,7 @@ test_that("skim_v returns expected response for list with all NA's", {
     "list",   "median_length", ".all",   NA,    "NA",
     "list",   "max_length",    ".all",   NA,    "NA")
   dat <- c(list(NA), list(NA), list(NA))
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -282,7 +282,7 @@ test_that("skim_v returns expected response for asis vectors", {
     "AsIs",  "min_length",".all",  1L,      "1",
     "AsIs",  "max_length",".all",  6L,      "6")
   dat <- I(list(5, 5:6,5:10, NA))
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
 
@@ -299,7 +299,7 @@ test_that("skim_v returns expected response for difftime vectors", {
   dat_datetime <- as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
   dat <- difftime(dat_datetime, (dat_datetime - seq(-30, 60, 10)))
   dat[2] <- NA
-  input <- skim_v(dat)
+  input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
   
@@ -310,5 +310,5 @@ test_that("Skim_v works when a function generates top_count
     "factor", "top_counts", "virginica",  50L,     "vir: 50",
     "factor", "top_counts",          NA,  0L,      "NA: 0"
   )
-  expect_identical(skim_v(iris$Species)[7:8,], expected)
+  expect_identical(skimr:::skim_v(iris$Species)[7:8,], expected)
 })
