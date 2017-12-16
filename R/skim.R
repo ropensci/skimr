@@ -95,9 +95,9 @@ skim_to_wide <- function(x, ...) {
 #' @param ... Further arguments passed to or from other methods.
 #' @return A list of tibbls.
 #' @examples 
-#'   skim_to_list(iris)
-#'   iris %>% skim_to_list()
-#'   sl <- iris %>% skim_to_list() 
+#'   skim_to_list(mtcars)
+#'   mtcars %>% skim_to_list()
+#'   sl <- mtcars %>% skim_to_list() 
 #'   sl[["numeric"]]
 #' @export
 
