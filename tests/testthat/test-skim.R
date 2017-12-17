@@ -74,6 +74,36 @@ test_that("Skimming a grouped data frame works as expected", {
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
 
+test_that("skim_to_wide works as expected.", {
+  input <- skim_to_wide(iris)
+  expect_length(input, 16)
+  expect_equal(nrow(input), 5)
+  expect_identical(input$type, c("factor", rep("numeric", each = 4)))
+  expect_identical(input$variable, 
+    c("Species", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))
+  expect_identical(input$n, rep("150", each = 5))
+  expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0", NA, NA, NA, NA))
+})
+
+test_that("skim_to_list works as expected", {
+  input <- skim_to_list(chickwts)
+  expect_length(input, 2)
+  expect_named(input, c("numeric", "factor"))
+  expect_identical(class(input), "list")
+  expect_identical(class(input[["numeric"]]), c("tbl", "tbl_df", "data.frame"))
+  expect_equal(dim(input[["numeric"]]), c(1, 12))
+  expect_identical(names(input[["numeric"]]), 
+                   c("variable", "missing", "complete", "n", "mean",
+                     "sd", "min", "p25", "median", "p75", "max", "hist" ))
+})
+
+test_that("skim_to_list works with grouped data", {
+  xg <- dplyr::group_by(mtcars, cyl)
+  input <- skim_to_list(xg)
+  expect_length(input,1)
+  expect_equal(dim(input[["numeric"]]), c(30,13))
+})  
+
 test_that("Skimming a vector works as expected", {
   input <- skim(lynx)
   # dimensions

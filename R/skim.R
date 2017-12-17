@@ -48,7 +48,6 @@ skim.grouped_df <- function(.data, ...) {
             data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
 }
 
-
 #' @export
 
 skim.default <-function(.data, ...){
@@ -58,7 +57,6 @@ skim.default <-function(.data, ...){
   skimmed <- skim_v(.data)
   skimmed$variable <- deparse(substitute(.data))
   structure(skimmed, class = c("skim_vector", class(skimmed)) )
-  
 }
 
 #' Print useful summary statistic from a data frame returning the data frame
@@ -72,4 +70,59 @@ skim.default <-function(.data, ...){
 skim_tee <- function(.data, ...) {
   print(skim(.data))
   invisible(.data)
+}
+
+#' Print skim result and return a single wide data frame of summary statistics
+#' 
+#'  Returns a wide data frame with one row per variable and NA for statistics
+#'  not calculated for a given type. This faciliates future processing.
+#' 
+#' @param x A \code{dataframe}.
+#' @param ... Further arguments passed to or from other methods.
+#' @return A wide data frame.
+#' @examples 
+#'   skim_to_wide(iris)
+#'   iris %>% skim_to_wide()
+#'   iris %>% skim_to_wide() %>% dplyr::filter(type == "factor") %>% 
+#'            dplyr::select(top_counts)
+#' @export
+
+skim_to_wide <- function(x, ...) {
+  x <- skim(x)
+  grps <- dplyr::groups(x)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
+  x <- dplyr::do(grouped, skim_render(., grps, quiet_impl, ...))
+  dplyr::ungroup(x)
+}
+
+#' Print skim result and return a list of tibbles
+#' 
+#'  Returns a list of tibbles (also data frames) with one list element 
+#'  per data type. Each column contains the formatted values. 
+#'  This facilitates additional processing. 
+#'  Note that this is not pipeable.
+#' 
+#' @param x A \code{dataframe}.
+#' @param ... Further arguments passed to or from other methods.
+#' @return A list of tibbls.
+#' @examples 
+#'   skim_to_list(iris)
+#'   iris %>% skim_to_list()
+#'   sl <- iris %>% skim_to_list() 
+#'   sl[["numeric"]]
+#' @export
+
+skim_to_list <- function(x, ...){
+  x <- skim(x, ...)
+  grps <- dplyr::groups(x)
+  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
+  types <- unique(grouped$type)
+  result_list <- list()
+  for (t in 1:length(types)){
+      to_keep <- quote(type == types[t])
+      filtered <- dplyr::filter(grouped, !!to_keep)
+      result_list[[types[t]]] <- skim_render(filtered, groups = grps, quiet_impl)
+    }
+  result_list
+  
 }
