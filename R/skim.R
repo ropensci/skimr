@@ -32,7 +32,8 @@ skim.data.frame <- function(.data, ... ) {
   rows <- purrr::map(.data[selected], skim_v)
   combined <- dplyr::bind_rows(rows, .id = "variable")
   structure(combined, class = c("skim_df", class(combined)),
-            data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
+            data_rows = nrow(.data), data_cols = ncol(.data), 
+            df_name = substitute(.data))
 }
 
 #' @export
@@ -45,7 +46,8 @@ skim.grouped_df <- function(.data, ...) {
   to_drop <- quote(!(variable %in% groups))
   skimmed <- dplyr::filter(skimmed, !!to_drop)
   structure(skimmed, class = c("skim_df", class(skimmed)),
-            data_rows = nrow(.data), data_cols = ncol(.data), df_name = substitute(.data))
+            data_rows = nrow(.data), data_cols = ncol(.data), 
+            df_name = substitute(.data))
 }
 
 #' @export
@@ -118,10 +120,11 @@ skim_to_list <- function(x, ...){
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
   types <- unique(grouped$type)
   result_list <- list()
-  for (t in 1:length(types)){
+  for (t in seq_along(types)){
       to_keep <- quote(type == types[t])
       filtered <- dplyr::filter(grouped, !!to_keep)
-      result_list[[types[t]]] <- skim_render(filtered, groups = grps, quiet_impl)
+      result_list[[types[t]]] <- skim_render(filtered, groups = grps, 
+                                             quiet_impl)
     }
   result_list
   

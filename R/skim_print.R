@@ -86,9 +86,9 @@ print_impl <- function(transformed_df, skim_type, ...) {
 #' 
 #' @export
 
-kable <- function (x, format = NULL, digits = getOption("digits"), row.names = NA, 
-                   col.names = NA, align, caption = NULL, format.args = list(), 
-                   escape = TRUE, ...) {
+kable <- function (x, format = NULL, digits = getOption("digits"), 
+                   row.names = NA, col.names = NA, align, caption = NULL,
+                   format.args = list(), escape = TRUE, ...) {
   UseMethod("kable")
 }
 
@@ -126,18 +126,19 @@ kable.data.frame <- knitr::kable
 #' @return The original \code{skim_df} object.
 #' @export
 
-kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), row.names = NA, 
-                          col.names = NA, align = NULL, caption = NULL,
-                          format.args = list(), escape = TRUE, ...) {
+kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), 
+                          row.names = NA, col.names = NA, align = NULL, 
+                          caption = NULL, format.args = list(), 
+                          escape = TRUE, ...) {
   # Spaces are markdown new lines
   cat("Skim summary statistics  \n")
   cat(" n obs:", attr(x, "data_rows"), "   \n")
   cat(" n variables:", attr(x, "data_cols"), "   \n")
   grps <- dplyr::groups(x) 
   grouped <- dplyr::group_by(x, !!rlang::sym("type"))
-  dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, row.names, 
-                                 col.names, align, caption, format.args, 
-                                 escape, ...))
+  dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, 
+                                 row.names, col.names, align, caption, 
+                                 format.args, escape, ...))
   invisible(x)
 }
 
