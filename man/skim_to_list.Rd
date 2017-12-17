@@ -15,14 +15,14 @@ skim_to_list(x, ...)
 A list of tibbls.
 }
 \description{
-Returns a list of tibbles (also data frames) with one list element 
+Returns a list of tibbles with one list element 
  per data type. Each column contains the formatted values. 
  This facilitates additional processing. 
  Note that this is not pipeable.
 }
 \examples{
-  # skim_to_list(mtcars)
-  # mtcars \%>\% skim_to_list()
-  # sl <- mtcars \%>\% skim_to_list() 
-  # sl[["numeric"]]
+   skim_to_list(mtcars)
+   mtcars \%>\% skim_to_list()
+   l <- mtcars \%>\% skim_to_list() 
+   l[["numeric"]]
 }
