@@ -82,7 +82,8 @@ test_that("skim_to_wide works as expected.", {
   expect_identical(input$variable, 
     c("Species", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))
   expect_identical(input$n, rep("150", each = 5))
-  expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0", NA, NA, NA, NA))
+  expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0", 
+                                       NA, NA, NA, NA))
 })
 
 test_that("skim_to_list works as expected", {
@@ -143,7 +144,8 @@ test_that("Skimming a column of a data frame works as expected", {
                    c("0", "71", "71", "261.31", "78.07", "108"))
 })
 
-test_that("Skimming an object without a method returns the appropriate messsage", {
+test_that("Skimming an object without a method returns the appropriate 
+          messsage", {
   expect_message(skim(volcano), "No skim method exists for class matrix")
 })
 

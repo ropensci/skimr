@@ -48,9 +48,12 @@ test_that("The summary pander method returns the correct object", {
   expect_equal(kable_input[1], "$Summary")
   expect_equal(kable_input[2], "")
   expect_equal(kable_input[3], "")
-  expect_equal(kable_input[4], "|df_name    |n_rows              |n_cols               |")
-  expect_equal(kable_input[5], "|:----------|:-------------------|:--------------------|")
-  expect_equal(kable_input[6], "|Name: iris |Number of Rows: 150 |Number of Columns: 5 |")
+  expect_equal(kable_input[4], 
+               "|df_name    |n_rows              |n_cols               |")
+  expect_equal(kable_input[5], 
+               "|:----------|:-------------------|:--------------------|")
+  expect_equal(kable_input[6],
+               "|Name: iris |Number of Rows: 150 |Number of Columns: 5 |")
   expect_equal(kable_input[7], "")
   expect_equal(kable_input[8], "$`Type counts`")
   expect_equal(kable_input[9], "")
