@@ -98,6 +98,14 @@ test_that("skim_to_list works as expected", {
                      "sd", "min", "p25", "median", "p75", "max", "hist" ))
 })
 
+test_that("skim_to_list works with grouped data", {
+  xg <- dplyr::group_by(mtcars, cyl)
+  input <- skim_to_list(xg)
+  expect_length(input,1)
+  expect_equal(dim(input[["numeric"]]), c(30,13))
+  
+})
+
 test_that("Skimming a data frame with selected columns works as expected", {
   input <- skim(chickwts, weight)
   

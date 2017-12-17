@@ -108,10 +108,10 @@ skim_to_list <- function(x, ...){
   types <- unique(grouped$type)
   result_list <- list()
   for (t in 1:length(types)){
-     result_list[[types[t]]] <- skim_render(dplyr::filter(grouped, !!rlang::sym("type") == types[t]), 
-                                                    groups = grps, 
-                                                    quiet_impl)
-  }
+      to_keep <- quote(type == types[t])
+      filtered <- dplyr::filter(grouped, !!to_keep)
+      result_list[[types[t]]] <- skim_render(filtered, groups = grps, quiet_impl)
+    }
   result_list
   
 }
