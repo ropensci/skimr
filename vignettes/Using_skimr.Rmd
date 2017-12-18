@@ -94,8 +94,31 @@ skim(iris, starts_with("Sepal"))
 
 ```
 
-If an individual column is of an unsuppported class it is treated as a character variable 
-with a warning.
+If an individual column is of an unsuppported class it is treated as a 
+character variable with a warning.
+
+# Alternatives to skim
+
+The skim() function for a data frame returns a long, six column data frame.
+This long data frame is printed horizontally as a separate summary for each 
+data type found in the data frame, but the object itself is not transformed 
+during the print. 
+
+Three other functions are available that may prove useful as part of skim 
+work flows.
+
+The `skim_tee()` function produces the same printed version as `skim()` but 
+returns the unmodified data frame. This allows for continued piping of the 
+original data.
+
+The `skim_to_list()` funtion returns of a list of the wide data frames for 
+each data type. The data frames contain the formatted values, meaning that 
+they are character data and  most useful for display. In general users will 
+want to store the results in an object for further handling.
+
+The `skim_to_wide()` function returns a single data frame with each variable 
+in a row. Variables that do not report a given statistic are assigned NA for 
+that statistic. Formatted values are returned and all data are character.
 
 # Skimming vectors
 
@@ -107,10 +130,10 @@ skim(datasets::lynx)
 ```
 
 If you attempt to use `skim` on a class that does not have support, it will
-coerce it to  character (with a warning) and report number of `NA`s, number complete
-(non missing), number of rows, the  number empty (i.e. ""), minimum length of
-non empty strings, maximum length of non empty strings, and number of unique
-values.
+coerce it to  character (with a warning) and report number of `NA`s, number 
+complete (non missing), number of rows, the  number empty (i.e. ""), minimum 
+length of non empty strings, maximum length of non empty strings, and number 
+of unique values.
 
 ```{r}
 lynx <- datasets::lynx
@@ -123,7 +146,7 @@ skim(lynx)
 Skimr is opinionated in its choice of defaults, but users can easily add too,
 replace, or remove the statistics for a class.   
 
-To add a statistic use the a named list for each class using the format 
+To add a statistic use the a named list for each class using the format below. 
 
 ```
 classname = list(mad_name = mad)
@@ -154,6 +177,21 @@ skim(datasets::chickwts)
 skim_with_defaults() #
 ```
 
+# Formatting individual values
+
+Skimr does opinionated formatting of the statistics displayed when printing.
+These values are stored in the `formatted` column of the skim_df object and
+are always character. Skim attempts to use a reasonable number of decimal 
+places for calculated values based on the data type (integer or numeric) 
+and number of stored decimals. For statistics such as `max()` and `min()` 
+the actual stored values are displayed. Decimals in a column
+are aligned.  Date formats are used for date statistics. 
+
+Users override the formats using the `skim_format()` function. Using 
+`show_formats()` will display the current options in use for each data
+type. Using `skim_format_defaults()` will reset the formats to their default
+settings.
+
 # Rendering the results of skim()
 
 The skim_df object is a long data frame with one row for each combination of 
@@ -170,6 +208,8 @@ Using either of these may require use of document or chunk options and fonts.
 * For `kable()` use in a markdown file, use a chunk option of `results=asis`.
 * For `pander()` use in a markdown file, use a chunk option of `results=asis`. 
 To prevent using asis by default use `panderOptons()` to set it to FALSE.
+
+This topic is addressed in more detail in the Using Fonts vignette.
 
 ```{r results='asis'}
 
