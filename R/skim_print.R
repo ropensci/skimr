@@ -43,7 +43,10 @@ print.skim_vector <- function(x, ...) {
 
 print_impl <- function(transformed_df, skim_type, ...) {
   cat("\nVariable type:", skim_type, "\n")
-  print(structure(transformed_df, class = "data.frame"), ...)
+  mat <- as.matrix(transformed_df)
+  dimnames(mat)[[1]] <- rep("", nrow(mat))
+  print(mat, quote = FALSE, right = TRUE)
+  transformed_df
 }
 
 #' Create kable object
@@ -234,7 +237,5 @@ print.spark <- function(x, ...) {
 #' @noRd
 
 quiet_impl <- function(transformed_df, skim_type, ...) {
-
   structure(transformed_df, class = c( "tbl", "tbl_df", "data.frame"))
 }
-
