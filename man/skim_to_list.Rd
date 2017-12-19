@@ -12,7 +12,7 @@ skim_to_list(x, ...)
 \item{...}{Further arguments passed to or from other methods.}
 }
 \value{
-A list of tibbls.
+A list of tibbles.
 }
 \description{
 Returns a list of tibbles (also data frames) with one list element 

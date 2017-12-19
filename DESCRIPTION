@@ -10,7 +10,8 @@ Authors@R: c(
   person("Elin", "Waring", email="elin.waring@gmail.com", role = "cre"),
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
-  person("Hadley", "Wickham", email="hadley@rstudio.com", role = 'ctb')
+  person("Hadley", "Wickham", email="hadley@rstudio.com", role = 'ctb'),
+  person("Connor", "Kirkpatrick", email="hello@connorkirkpatrick.com", role = 'ctb')
   )
 Maintainer: Elin Waring <elin.waring@gmail.com>
 Description: A simple to use summary function that can be used with pipes
