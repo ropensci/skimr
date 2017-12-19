@@ -16,10 +16,7 @@ The goal of skimr is to provide a frictionless approach to dealing with summary 
 
 `skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
 
-See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/inst/docs/blog.html).
-
 ## Installation
-
 
 ``` r
 # install.packages("devtools")

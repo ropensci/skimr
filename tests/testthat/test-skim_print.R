@@ -36,6 +36,8 @@ test_that("Skim aligns numeric vectors at the decimal point by default", {
 })
 
 test_that("spark.print returns the correct result",{
+  skip_on_os("windows")
+  # Windows does not support block characters
   input <- inline_hist(chickwts$weight)
   expect_output(print(input), "▃▅▅▇▃▇▂▂")
   
@@ -64,7 +66,9 @@ test_that("Skimr kable prints as expected", {
   )
   expect_equal(input[10], "")
   expect_equal(input[11], "Variable type: numeric")
-  expect_equal(input[12], "")
+  expect_equal(input[12], "")  
+  # Windows does not support block characters
+  skip_on_os("windows")
   expect_equal(input[13], 
 "|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
   )
@@ -142,6 +146,8 @@ test_that("skimr::pander prints as expected", {
   expect_equal(input[28], "Table: Table continues below")
   expect_equal(input[29], "")
   expect_equal(input[30], " ")
+  # Windows does not support block characters 
+  skip_on_os("windows")
   expect_equal(input[31], "------------------------")
   expect_equal(input[32], "  p75    max     hist   ")
   expect_equal(input[33], "------- ----- ----------")
