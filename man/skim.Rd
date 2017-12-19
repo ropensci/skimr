@@ -4,10 +4,12 @@
 \alias{skim}
 \title{Get useful summary statistic from a data frame}
 \usage{
-skim(.data)
+skim(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}
+
+\item{...}{Additional options, normally used to list individual unquoted column names.}
 }
 \value{
 A \code{skim_df} object, which can be treated like a
@@ -18,6 +20,9 @@ A \code{skim_df} object, which can be treated like a
 summary functions based on the types of columns in the data frame.
 It is an intentionally simple function. See \code{\link{skim_with}} and
 \code{\link{skim_format}} for how \code{skim} can be customized.
+If the rendered examples show unencoded values such as `<U+2587>` you
+will need to change your locale to allow proper rendering. Please 
+review the Using Skimr vignette for more information.
 }
 \examples{
 skim(iris)

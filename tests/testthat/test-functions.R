@@ -138,7 +138,7 @@ test_that("Skimming functions can be changed.", {
   newfuns <- list(iqr = IQR,
                   quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = newfuns, append = FALSE)
-  input <- skim_v(iris$Sepal.Length)
+  input <- skimr:::skim_v(iris$Sepal.Length)
   expect_identical(input$type, c("numeric", "numeric"))
   expect_identical(input$stat, c("iqr", "quantile"))
   expect_identical(input$level, c(".all", "99%"))
@@ -151,7 +151,8 @@ test_that("Skimming functions can be changed.", {
 
 test_that("show_skimmers() has a correct list of default types", {
   correct <- c("numeric", "integer", "factor", "character", "logical",
-               "complex", "date", "Date", "ts", "POSIXct")
+               "complex", "date", "Date", "ts", "POSIXct", "list",
+               "AsIs", "difftime")
   skimmers <- show_skimmers()
   input <- names(skimmers)
   identical(input, correct)
@@ -196,24 +197,23 @@ test_that("Skim functions can be removed by setting them to NULL", {
 
 test_that("Skimming functions can be appended", {
   correct <- tibble::tribble(
-    ~type,          ~stat,      ~level, ~value,                  ~formatted,
-    "numeric",      "missing",  ".all", 0,                        "0",
-    "numeric",      "complete", ".all", 150,                      "150",
-    "numeric",      "n",        ".all", 150,                      "150",
-    "numeric",      "mean",     ".all", mean(iris$Sepal.Length),  "5.84",
-    "numeric",      "sd",       ".all", sd(iris$Sepal.Length),    "0.83",
-    "numeric",      "min",      ".all", 4.3,                      "4.3",
-    "numeric",      "p25",      ".all",  5.1,                     "5.1",
-    "numeric",      "median",   ".all", 5.8,                      "5.8",
-    "numeric",      "p75",      ".all",  6.4,                     "6.4",
-    "numeric",      "max",      ".all", 7.9,                      "7.9",
-    "numeric",      "hist",     ".all", NA,                "▂▇▅▇▆▅▂▂",
-    "numeric",      "iqr",      ".all", IQR(iris$Sepal.Length),   "1.3",
-    "numeric",      "mad",      ".all", mad(iris$Sepal.Length),   "1.04")
-  funs <- list(iqr = IQR, mad = mad)
-  skim_with(numeric = funs)
-  input <- skim_v(iris$Sepal.Length)
-  expect_identical(input, correct)
+    ~type,          ~stat,      ~level,    ~value,              ~formatted,
+    "factor",      "missing",    ".all",        0,                      "0",
+    "factor",      "complete",   ".all",      150,                     "150",
+    "factor",      "n",          ".all",      150,                     "150",
+    "factor",      "n_unique",   ".all",        3,                       "3",
+    "factor",      "top_counts", "setosa",     50,                 "set: 50",
+    "factor",      "top_counts", "versicolor", 50,                 "ver: 50",
+    "factor",      "top_counts", "virginica",  50,                 "vir: 50",
+    "factor",      "top_counts",  NA,           0,                   "NA: 0",
+    "factor",      "ordered",    ".all",    FALSE,                   "FALSE",
+    "factor",      "isfactor",   ".all",     TRUE,                    "TRUE"
+    )
+  class(correct$value) <- "integer"
+  funs <- list(isfactor = is.factor)
+  skim_with(factor = funs)
+  input <- skimr:::skim_v(iris$Species)
+  expect_equal(input, correct)
 
   # Restore defaults
   skim_with_defaults()
@@ -229,7 +229,7 @@ test_that("Skimming functions for new types can be added", {
     quantile = purrr::partial(quantile, probs = .99))
   skim_with(new_type = funs)
   vector <- structure(iris$Sepal.Length, class = "new_type")
-  input <- skim_v(vector)
+  input <- skimr:::skim_v(vector)
   expect_identical(input, correct)
 
   # Restore defaults
@@ -247,7 +247,7 @@ test_that("Set skimming functions for multiple types", {
     q2 = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, new_type = funs, append = FALSE)
   vector <- structure(iris$Sepal.Length, class = "new_type")
-  input <- skim_v(vector)
+  input <- skimr:::skim_v(vector)
   expect_identical(input, correct)
 
   # Restore defaults
@@ -270,7 +270,7 @@ test_that("Throw error when a function producing a list is used", {
   msg <- paste0("Functions for class ", "numeric",
        " did not return atomic vectors: ", collapsed)
   skim_with(numeric = funs, append = FALSE)
-  expect_error(skim_v(mtcars$mpg), msg)
+  expect_error(skimr:::skim_v(mtcars$mpg), msg)
 
   # Restore defaults
   skim_with_defaults()
@@ -284,7 +284,7 @@ test_that("Throw error when a function producing an unnamed vector is used", {
   collapsed <- paste("test_fun_unname", collapse = ", ")
   msg <- paste0("Names missing from the following functions:  ", collapsed)
   skim_with(ts = funs, append = FALSE)
-  expect_error(skim_v(lynx), msg)
+  expect_error(skimr:::skim_v(lynx), msg)
   
   # Restore defaults
   skim_with_defaults()
@@ -302,7 +302,7 @@ test_that("Errors are thrown when a vector with some only names is created", {
   msg <- paste0("Names missing from the following functions:  ", collapsed)
   
   skim_with(ts = funs, append = FALSE)
-  expect_error(skim_v(lynx), msg)
+  expect_error(skimr:::skim_v(lynx), msg)
 
   # Restore defaults
   skim_with_defaults()  
@@ -322,7 +322,7 @@ test_that("Errors are thrown when a vector with some empty names is created", {
   msg <- paste0("Names missing from the following functions:  ", collapsed)
   
   skim_with(ts = funs, append = FALSE)
-  expect_error(skim_v(lynx), msg)
+  expect_error(skimr:::skim_v(lynx), msg)
   
   # Restore defaults
   skim_with_defaults()  

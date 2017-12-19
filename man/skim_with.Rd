@@ -15,7 +15,7 @@ particular data type.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in skim for the given types specified by the named
-arugments in \code{...}. Default is \code{TRUE}.}
+arguments in \code{...}. Default is \code{TRUE}.}
 }
 \value{
 Nothing. \code{invisible(NULL)}
@@ -33,6 +33,10 @@ This function is not pure. It sets values in within the package environment.
 This is an intentional design choice, with effects similar to setting
 options in base R. By setting options here for your entire session, you
 can continue to summarize using skim on its own.
+
+If the rendered examples show unencoded values such as `<U+2587>` you
+will need to change your locale to allow proper rendering. Please 
+review the Using Skimr vignette for more information.
 }
 \section{Functions}{
 \itemize{

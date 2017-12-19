@@ -1,3 +1,19 @@
+skimr 0.92 (2017-12-xx)
+=======================
+
+### MAJOR CHANGES
+  * skim_v() is no longer exported. Vectors are now directly supported by skim()
+    via skim.default().
+  * Change license to GPL 3
+
+### NEW FEATURES
+
+  * Add support for kable() and pander() for skim_df objects. 
+  * Add summary method for skim_df objects.  
+  * Add support for tidy select to skim specific columns of a data frame.
+  * Add support for skimming individual vectors via skim.default(). 
+
+
 skimr 0.91 (2017-10-14)
 =========================
 
