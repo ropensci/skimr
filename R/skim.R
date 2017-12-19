@@ -109,7 +109,7 @@ skim_to_wide <- function(x, ...) {
 #' 
 #' @param x A \code{dataframe}.
 #' @param ... Further arguments passed to or from other methods.
-#' @return A list of tibbls.
+#' @return A list of tibbles.
 #' @examples 
 #'   skim_to_list(iris)
 #'   iris %>% skim_to_list()

@@ -6,7 +6,7 @@ output:
 # skimr
 
 ```
-## Dev mode: OFF
+## Dev mode: ON
 ```
 
 [![Build Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
@@ -14,9 +14,10 @@ output:
 
 The goal of skimr is to provide a frictionless approach to dealing with summary statistics iteratively and interactively as part of a pipeline, and that conforms to the principle of least surprise. 
 
-`skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
+`Skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
 
 ## Installation
+
 
 ``` r
 # install.packages("devtools")
@@ -35,7 +36,8 @@ devtools::install_github("ropenscilabs/skimr", ref = "develop")
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
 - handles dates, logicals
-- suppors spark-bar and spark-line based on [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
+- supports spark-bar and spark-line based on 
+[Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
 **Nicely separates variables by class:**  
 
@@ -91,7 +93,7 @@ skim(iris, Sepal.Length, Petal.Length)
 ```
 ## Skim summary statistics
 ##  n obs: 150 
-##  n variables: 2 
+##  n variables: 5 
 ## 
 ## Variable type: numeric 
 ##       variable missing complete   n mean   sd min p25 median p75 max     hist
@@ -256,7 +258,7 @@ funs <- list(iqr = IQR,
 ```
 ## Skim summary statistics
 ##  n obs: 150 
-##  n variables: 1 
+##  n variables: 5 
 ## 
 ## Variable type: numeric 
 ##       variable iqr quantile
@@ -285,7 +287,7 @@ for printing dataframes. One workaround for showing these characters in Windows 
 Spark-bar and spark-line work in the console but may not work when you knit them to a specific document format.
 The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, 
 for example. This issue can generally be addressed by changing fonts to one with good building block (for
-histogtams) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
+histograms) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
 the `extra font` package supports these.  You may also want to try wrapping your results in `knitr::kable()`.
 Please see the vignette on using fonts for details on this.
 
