@@ -1,3 +1,8 @@
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
 # skimr
 ```{r set-options, echo=FALSE}
 devtools::dev_mode()
@@ -12,17 +17,21 @@ options(width = 120)
 
 The goal of skimr is to provide a frictionless approach to dealing with summary statistics iteratively and interactively as part of a pipeline, and that conforms to the principle of least surprise. 
 
-`skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
-
-See our blog post [here](https://rawgit.com/ropenscilabs/skimr/master/blog.html).
+`Skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
 
 ## Installation
 
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("hadley/pillar")
 devtools::install_github("ropenscilabs/skimr")
+```
+
+To install the version with the most recent changes that have not yet been incorporated in 
+the master branch (and may not be):
+
+``` r
+devtools::install_github("ropenscilabs/skimr", ref = "develop")
 ```
 
 ## Skim statistics in the console
@@ -30,7 +39,8 @@ devtools::install_github("ropenscilabs/skimr")
 - added missing, complete, n, sd
 - reports numeric/int/double separately from factor/chr
 - handles dates, logicals
-- uses [Hadley Wickham's pillar package](https://github.com/hadley/pillar), specifically `pillar::spark-bar()`
+- supports spark-bar and spark-line based on 
+[Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
 **Nicely separates variables by class:**  
 
@@ -38,15 +48,15 @@ devtools::install_github("ropenscilabs/skimr")
 skim(chickwts)
 ```
 
-**Many numeric variables:**  
-```{r}
-skim(mtcars)
-```
-
- 
-**Another example:**  
+**Presentation is in a compact horizontal format:**  
 ```{r}
 skim(iris)
+```
+
+Individual columns of a data frame can be selected using tidyverse style selectors.
+
+```{r}
+skim(iris, Sepal.Length, Petal.Length)
 ```
 
 ## Handles grouped data
@@ -56,6 +66,10 @@ Skim() can handle data that has been grouped using `dplyr::group_by`.
 ```{r}
 iris %>% dplyr::group_by(Species) %>% skim()
 ```
+
+## Options for kable and pander
+
+Enhanced print options are available by piping to kable() or pander(). 
 
 ## skim_df object (long format)
 
@@ -75,11 +89,13 @@ print.data.frame(skim(chickwts))
 skim(mtcars) %>% dplyr::filter(stat=="hist")
 ```
 
-## Works with strings, lists and other column classes!
+## Works with strings, lists and other column classes.
 
 ```{r}
 skim(dplyr::starwars)
 ```
+
+Users can add new classes.
 
 ## Specify your own statistics
 
@@ -87,7 +103,7 @@ skim(dplyr::starwars)
 funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, append = FALSE)
-  skim_v(iris$Sepal.Length)
+  skim(iris, Sepal.Length)
 # Restore defaults
   skim_with_defaults()
 ```
@@ -109,12 +125,13 @@ for printing dataframes. One workaround for showing these characters in Windows 
 Spark-bar and spark-line work in the console but may not work when you knit them to a specific document format.
 The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, 
 for example. This issue can generally be addressed by changing fonts to one with good building block (for
-histogtams) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
+histograms) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
 the `extra font` package supports these.  You may also want to try wrapping your results in `knitr::kable()`.
+Please see the vignette on using fonts for details on this.
 
 Displays in documents of different types will vary. For example, one user found that the font 
 "Yu Gothic UI Semilight"  produced consistent results for Microsoft Word and Libre Office Write.
 
 ## Contributing
 
-We welcome issue reports and pull requests including adding support for different variable classes.
+We welcome issue reports and pull requests including potentially adding support for different variable classes. Please see the contributing.md document.

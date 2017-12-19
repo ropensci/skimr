@@ -1,0 +1,91 @@
+---
+title: "Untitled"
+mainfont: DejaVu Sans
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+  word_document: default
+font-family: Times New Roman
+---
+
+# Getting ready for fonts
+
+Notice that the yaml at the beginning of this file includes a latex_engine which will be used 
+when creating a pdf document.
+
+It also includes a mainfont setting called _DejaVu Sans_.  This is not the only font that will 
+work to produce the spark graphs. However, it is a free font available through the
+`extrafont` package.  If you have not installed extrafont you should do so using the normal
+package installation procedures. You should then make sure that the desired font is installed.
+
+The code below will not run automatically when you knit, instead you should run it in the
+console. 
+
+```
+install.packages(c("extrafont"))
+font_install("DejaVu Sans")
+```
+
+If there are any difficulties please read the extrafont documentation.
+
+ 
+```{r, message=FALSE}
+library(pander)
+library(knitr)
+library(skimr)
+
+```
+
+Try knitting this document to PDF, HTML, doc or any other format you wish to try. You 
+will notice that there are slight differences between them.  To understand the impact
+of the engine and font choices you should experiment with different options.
+
+## Plain printing
+
+The first example shows what printing the basic skim function looks like.  You can try 
+knitting to different formats to see how it changes.
+
+```{r }
+skim(iris)
+```
+
+It is possible that the histograms will not print in all of the formats.
+
+## Kable example
+
+Kable is a function from the knitr package that provides formatting of tables.
+To use kable() you should add `results='asis'` as a code chunk option.
+
+````{r results='asis'}
+
+skim(iris) %>% kable()
+
+````
+
+# Pander example 
+
+Pander is a package that provides advanced formatting for tables. There are two formats for
+pander, `results='asis'` and `results='markdown'`. Markdown will display in the same way 
+as the results show in the console. You may prefer this layout in the console to the default
+layout. 
+
+```{r }
+panderOptions('knitr.auto.asis', FALSE)
+skim(iris) %>% pander()
+```
+
+In this case it may be that the histograms do not print in PDFs or another format 
+(even though the histograms may display in the console when using the same code). 
+This is because the basic font for "as is" in PDf does not includ building blocks
+
+The code chunk options can be changed to use asis (`results='asis'`). 
+However because of an issue in pandoc the subheadings showing the types
+for the separte tables will not display
+
+```{r results='asis'}
+
+skim(iris) %>% pander()
+```
+
+

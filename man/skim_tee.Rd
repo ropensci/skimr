@@ -2,17 +2,20 @@
 % Please edit documentation in R/skim.R
 \name{skim_tee}
 \alias{skim_tee}
-\title{Get useful summary statistic from a data frame, print it, and return it}
+\title{Print useful summary statistic from a data frame returning the data frame
+ without modification}
 \usage{
-skim_tee(.data)
+skim_tee(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}
+
+\item{...}{Additional options, normally used to list individual unquoted column names.}
 }
 \value{
-A \code{skim_df} object, which can be treated like a
- tbl in most instances.
+The input data frame.
 }
 \description{
-Get useful summary statistic from a data frame, print it, and return it
+Print useful summary statistic from a data frame returning the data frame
+ without modification
 }

@@ -15,11 +15,15 @@ NULL
 #' options in base R. By setting options here for your entire session, you
 #' can continue to summarize using skim on its own.
 #' 
+#' If the rendered examples show unencoded values such as `<U+2587>` you
+#' will need to change your locale to allow proper rendering. Please 
+#' review the Using Skimr vignette for more information.
+#' 
 #' @param ... A list of functions, with an argument name that matches a
 #'  particular data type.
 #' @param append Whether the provided options should be in addition to the
 #'  defaults already in skim for the given types specified by the named
-#'  arugments in \code{...}. Default is \code{TRUE}.
+#'  arguments in \code{...}. Default is \code{TRUE}.
 #' @return Nothing. \code{invisible(NULL)}
 #' @examples
 #' # Use new functions for numeric functions
