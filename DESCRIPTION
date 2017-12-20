@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data 
-Version: 0.9.92
+Version: 1.0
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "aut"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -11,6 +11,7 @@ Authors@R: c(
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
   person("Hadley", "Wickham", email="hadley@rstudio.com", role = 'ctb'),
+  person(family = "RStudio, Inc.", role = "cph", comment = "Spark functions"),
   person("Connor", "Kirkpatrick", email="hello@connorkirkpatrick.com", role = 'ctb')
   )
 Maintainer: Elin Waring <elin.waring@gmail.com>
@@ -20,7 +21,7 @@ Description: A simple to use summary function that can be used with pipes
     and vectors is included, and users can implement their own skim methods for
     specific object types as described in a vignette. Default summaries include
     support for inline spark graphs. Instructions for managing these on 
-    specific operating systems are given in the Using skimr vignette and the 
+    specific operating systems are given in the "Using skimr" vignette and the 
     README.
 Depends:
     R (>= 3.1.2)
@@ -41,7 +42,7 @@ Suggests:
     rmarkdown,
     testthat,
     withr
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ropenscilabs/skimr
