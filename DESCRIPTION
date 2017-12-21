@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data 
-Version: 1.0
+Version: 1.0.1
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "aut"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -11,8 +11,10 @@ Authors@R: c(
   person("Michael", "Quinn", email="msquinn2@illinois.edu", role = "aut"),
   person("Hope", "McLeod", email="hmgit2@gmail.com", role = 'ctb'),
   person("Hadley", "Wickham", email="hadley@rstudio.com", role = 'ctb'),
+  person("Kirill", "Müller", email="krlmlr+r@mailbox.org", role = 'ctb'),
   person(family = "RStudio, Inc.", role = "cph", comment = "Spark functions"),
-  person("Connor", "Kirkpatrick", email="hello@connorkirkpatrick.com", role = 'ctb')
+  person("Connor", "Kirkpatrick", email="hello@connorkirkpatrick.com", role = 'ctb'),
+  person("Scott","Brenstuhl", email="brenstsr@miamioh.edu", role = 'ctb')
   )
 Maintainer: Elin Waring <elin.waring@gmail.com>
 Description: A simple to use summary function that can be used with pipes
