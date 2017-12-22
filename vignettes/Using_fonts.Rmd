@@ -2,7 +2,7 @@
 title: "Using Fonts"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using Skimr}
+  %\VignetteIndexEntry{Using Fonts}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
