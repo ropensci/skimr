@@ -35,3 +35,17 @@ skimr.  If you are using RStudio you can open that template by opening a new mar
 file and selecting "From template" and then choosing it.  Alternatively this file 
 is available inside the skimr folder or repository at 
 inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd. 
+
+If you are having difficulties making the spark graphs work, you can opt to turn 
+them off using the code below.
+
+```
+skim_with(numeric = list(hist = NULL), ts = list(line_graph = NULL))
+
+```
+To restore use 
+
+```
+skim_with_defaults()
+
+```
