@@ -1,17 +1,18 @@
-#' Summary function for skim_df. This is a method of the generic function \code{summary}
+#' Summary function for skim_df
+#' 
+#' This is a method of the generic function \code{summary}
 #' 
 #' @param object a skim dataframe
-#' @param ... Additional arguments affecting the summary produced. Not used
+#' @param ... Additional arguments affecting the summary produced. Not used.
 #' @return A summary of the dataframe \code{df}
 #' @examples
-#'\dontrun{
-#' a <- skim(mtcars)
-#' summary(a)
+#' \dontrun{
+#'  a <- skim(mtcars)
+#'  summary(a)
 #' }
 #' @export
  
 summary.skim_df <- function(object, ...){
-
   if (is.null(object)) {
     stop("dataframe is null.")
   }
@@ -31,16 +32,16 @@ summary.skim_df <- function(object, ...){
 }
 
 
-
-#' Print method for a summary_skim_df object. 
+#' Print method for a summary_skim_df object 
+#' 
 #' This is a method for the generic function \code{print}
 #' 
 #' @param x a skim_summary object
-#' @param ... Additional arguments affecting the print output produced. Not used
+#' @param ... Additional arguments affecting the print output produced.
+#'  Not used.
 #' @export
  
 print.summary_skim_df <- function(x, ...) {
-  
   n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
   n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
   df_name <- paste0("Name: ", x$df_name, "   \n")
@@ -49,8 +50,7 @@ print.summary_skim_df <- function(x, ...) {
                                   ": ",
                                   x$type_frequencies$n, 
                                   collapse = "   \n")
-  
-  
+
   cat("A skim object    \n\n",
       df_name,
       n_rows, 
@@ -58,19 +58,19 @@ print.summary_skim_df <- function(x, ...) {
       "    \nColumn type frequency    \n",
       type_frequency_string
       ,sep = "")
-  
 }
 
-#' Pander method for a summary_skim_df object. 
+
+#' Pander method for a summary_skim_df object 
 #' 
 #' This is a method for the generic function \code{pander}
 #' 
 #' @param x a skim_summary object
-#' @param ... Additional arguments affecting the print output produced. Not used
+#' @param ... Additional arguments affecting the print output produced.
+#'  Not used.
 #' @export
 
 pander.summary_skim_df <- function(x, ...) {
-  
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
   n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
   df_name <- paste0("Name: ", x[["df_name"]])
@@ -79,16 +79,17 @@ pander.summary_skim_df <- function(x, ...) {
   pander(plist)
 }
 
-#' Kable method for a summary_skim_df object. 
+
+#' Kable method for a summary_skim_df object
 #' 
-#' This is a method for the generic function \code{kable}
+#' This is a method for the generic function \code{kable}.
 #' 
 #' @param x a skim_summary object
-#' @param ... Additional arguments affecting the print output produced. Not used
+#' @param ... Additional arguments affecting the print output produced.
+#'  Not used.
 #' @export
 
 kable.summary_skim_df <- function(x, ...) {
-  
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
   n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
   df_name <- paste0("Name: ", x[["df_name"]])
