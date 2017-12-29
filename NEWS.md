@@ -1,4 +1,11 @@
-skimr 0.92 (2017-12-xx)
+skimr 1.0.1 (2018-01-xx)
+========================
+
+#### MINOR IMPROVEMENTS
+   * Add minimimum required version for stringr
+   * Improve documentation related to fonts
+
+skimr 0.92 (2017-12-19)
 =======================
 
 ### MAJOR CHANGES
