@@ -34,7 +34,7 @@ Imports:
     purrr,
     rlang,
     stats,
-    stringr,
+    stringr (>= 1.1),
     knitr,
     tibble (>= 0.6),
     tidyr (>= 0.7),
