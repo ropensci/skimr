@@ -259,7 +259,7 @@ list_lengths_min <- function(x) {
 list_lengths_median <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
-  return(stats::median(l))
+  ifelse(length(l) != 0, return(stats::median(l)), return(NA))
 }
 
 
