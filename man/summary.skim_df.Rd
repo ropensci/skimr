@@ -2,24 +2,24 @@
 % Please edit documentation in R/summary.R
 \name{summary.skim_df}
 \alias{summary.skim_df}
-\title{Summary function for skim_df. This is a method of the generic function \code{summary}}
+\title{Summary function for skim_df}
 \usage{
 \method{summary}{skim_df}(object, ...)
 }
 \arguments{
 \item{object}{a skim dataframe}
 
-\item{...}{Additional arguments affecting the summary produced. Not used}
+\item{...}{Additional arguments affecting the summary produced. Not used.}
 }
 \value{
 A summary of the dataframe \code{df}
 }
 \description{
-Summary function for skim_df. This is a method of the generic function \code{summary}
+This is a method of the generic function \code{summary}
 }
 \examples{
 \dontrun{
-a <- skim(mtcars)
-summary(a)
+ a <- skim(mtcars)
+ summary(a)
 }
 }
