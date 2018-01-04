@@ -55,7 +55,19 @@ test_that("inline histogram is calculated correctly when x is all zeros.", {
 
 test_that("inline histogram is calculated correctly when x is all zeros.", {
   input <- inline_hist(numeric(0))
-  correct <- structure(" ", class = "spark")
+  correct <- structure(" ", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is calculated correctly when x is all 1s.", {
+  input <- inline_hist(numeric(1))
+  correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is calculated correctly when x is all NAs.", {
+  input <- inline_hist(as.numeric(c(NA, NA, NA)))
+  correct <- structure(" ", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
