@@ -48,8 +48,8 @@ sorted_count <- function(x) {
 #' @export
 
 inline_hist <- function(x) {
-  # Handle empty vectors
-  if (length(x) < 1) return(structure(" ", class = "spark"))
+  # Handle empty and NA vectors
+  if (length(x) < 1|| all(is.na(x))) return(structure(" ", class = c("spark", "character")))
   
   # Addresses a known bug in cut()
   if (all(x == 0)) x <- x + 1
