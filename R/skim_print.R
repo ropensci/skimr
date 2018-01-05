@@ -44,8 +44,7 @@ print_impl <- function(transformed_df, skim_type, ...) {
   cat("\nVariable type:", skim_type, "\n")
   mat <- as.matrix(transformed_df)
   dimnames(mat)[[1]] <- rep("", nrow(mat))
-  mat_utf8 <- iconv(mat, to = "UTF-8")
-  print(mat_utf8, quote = FALSE, right = TRUE)
+  print(enc2utf8(mat), quote = FALSE, right = TRUE)
   transformed_df
 }
 
