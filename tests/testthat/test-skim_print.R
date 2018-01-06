@@ -42,7 +42,6 @@ test_that("spark.print returns the correct result", {
 })
 
 test_that("Skimr kable prints as expected", {
-  skip_on_os("windows")
   skimmed <- skim(iris)
   input <- capture.output(skimr::kable(skimmed))
   
@@ -66,12 +65,6 @@ test_that("Skimr kable prints as expected", {
   expect_equal(input[10], "")
   expect_equal(input[11], "Variable type: numeric")
   expect_equal(input[12], "")  
-  expect_equal(input[13], 
-"|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
-  )
-  expect_equal(input[14], 
-"|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|"
-  )
   expect_equal(input[15], 
 "|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |"
    )
@@ -84,44 +77,15 @@ test_that("Skimr kable prints as expected", {
   expect_equal(input[18], 
 "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |"
    )
-})
-
-test_that("Skimr kable prints as expected, windows", {
-  skimmed <- skim(iris)
-  input_raw <- capture.output(skimr::kable(skimmed))
-  input <- skimr:::fix_unicode(input_raw)
   
-  expect_length(input, 18)
-  # Intentional long lines in this test
-  expect_equal(input[1], "Skim summary statistics  ")
-  expect_equal(input[2], " n obs: 150    ")
-  expect_equal(input[3], " n variables: 5    ")
-  expect_equal(input[4], "")
-  expect_equal(input[5], "Variable type: factor")
-  expect_equal(input[6], "")
-  expect_equal(input[7], 
-               "|variable |missing |complete |n   |n_unique |top_counts                       |ordered |"
+  # The headers are different on windows
+  # Just ignore them
+  skip_on_os("windows")
+  expect_equal(input[13], 
+"|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
   )
-  expect_equal(input[8], 
-               "|:--------|:-------|:--------|:---|:--------|:--------------------------------|:-------|"
-  )
-  expect_equal(input[9], 
-               "|Species  |0       |150      |150 |3        |set: 50, ver: 50, vir: 50, NA: 0 |FALSE   |"
-  )
-  expect_equal(input[10], "")
-  expect_equal(input[11], "Variable type: numeric")
-  expect_equal(input[12], "")  
-  expect_equal(input[15], 
-               "|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |"
-  )
-  expect_equal(input[16], 
-               "|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3    |1.8 |2.5 |▇▁▁▅▃▃▂▂ |"
-  )
-  expect_equal(input[17], 
-               "|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8    |6.4 |7.9 |▂▇▅▇▆▅▂▂ |"
-  )
-  expect_equal(input[18], 
-               "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |"
+  expect_equal(input[14], 
+"|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|"
   )
 })
 

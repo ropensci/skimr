@@ -186,8 +186,10 @@ pander_impl <- function(transformed_df, skim_type, caption) {
     # Intentionally commented due to issue in pandoc
     # caption = cat(sprintf("\nVariable type: %s", skim_type))
   }
+  if (is_windows()) {
+    transformed_df$hist <- NULL 
+  }
   transformed_df <- dplyr::ungroup(transformed_df)
-  transformed_df$hist <- NULL 
   pander(structure(transformed_df, class = "data.frame"))
   transformed_df
 }
