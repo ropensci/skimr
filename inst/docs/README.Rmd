@@ -119,7 +119,16 @@ described below.
 Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
 `"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
 the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
-for printing dataframes. One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+for printing dataframes.
+
+This means that while `skimr` can render the histograms to the console and in
+kable, it cannot in other circumstances. This includes:
+
+* rendering a `skimr` data frame within pandaer
+* converting a `skimr` data frame to a vanilla R data frame, but tibbles render
+  correctly
+
+In previous versions of One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
 
 ### Printing spark histograms and line graphs in knitted documents
 

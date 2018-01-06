@@ -141,11 +141,20 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
                        escape, ...) {
   cat(sprintf("\nVariable type: %s", skim_type))
   if(is.null(align)) align <- rep("l", length(transformed_df))
-  print(kable(transformed_df, caption = NULL, align = align, format, digits,
-        row.names,  col.names, format.args,  escape, ...))
+  kabled <- kable(transformed_df, caption = NULL, align = align, format, digits,
+        row.names,  col.names, format.args,  escape, ...)
+  if (is_windows()) {
+    kabled[] <- fix_unicode(kabled)
+  }
+  print(kabled)
   transformed_df
 }
+
  
+#' @importFrom pander pander
+#' @export
+pander::pander
+
 #' Produce \code{pander} output of a skimmed data frame
 #'
 #' @seealso \code{\link[pander]{pander}}
@@ -155,7 +164,12 @@ kable_impl <- function(transformed_df, skim_type, format , digits, row.names,
 #' @return The original \code{skim_df} object.
 #' @export
 
-pander.skim_df <- function(x,caption = attr(x, "caption"), ...) {
+pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
+  if (is_windows()) {
+    warning("Skimr's histograms incorrectly render with pander on windows.",
+            " Removing them. Use kable() if you'd like them rendered.",
+            call. = FALSE)
+  }
   cat("Skim summary statistics  \n  ")
   # Spaces are markdown new lines.
   cat(" n obs:", attr(x, "data_rows"), "   \n")
@@ -172,7 +186,8 @@ pander_impl <- function(transformed_df, skim_type, caption) {
     # Intentionally commented due to issue in pandoc
     # caption = cat(sprintf("\nVariable type: %s", skim_type))
   }
-  transformed_df <- dplyr::ungroup(transformed_df) 
+  transformed_df <- dplyr::ungroup(transformed_df)
+  transformed_df$hist <- NULL 
   pander(structure(transformed_df, class = "data.frame"))
   transformed_df
 }
