@@ -57,3 +57,4 @@ Collate:
     'skim_print.R'
     'skim_v.R'
     'summary.R'
+    'utils.R'
