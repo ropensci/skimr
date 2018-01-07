@@ -1,9 +1,14 @@
 skimr 1.0.1 (2018-01-xx)
 ========================
+### NEW FEATURES
+   * Add support for spark plots on Windows
 
 #### MINOR IMPROVEMENTS
    * Add minimimum required version for stringr
    * Improve documentation related to fonts
+
+### BUG FIXES
+  * Fix issue where a histogram for data with all NAs threw an error
 
 skimr 0.92 (2017-12-19)
 =======================
