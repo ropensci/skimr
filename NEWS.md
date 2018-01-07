@@ -3,6 +3,9 @@ skimr 1.0.1 (2018-01-xx)
 ### NEW FEATURES
    * Add support for spark plots on Windows
 
+### MAJOR CHANGES
+   * spark_line() and spark_bar() are no longer exported
+
 #### MINOR IMPROVEMENTS
    * Add minimimum required version for stringr
    * Improve documentation related to fonts
