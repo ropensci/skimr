@@ -35,17 +35,17 @@ test_that("Skim aligns numeric vectors at the decimal point by default", {
   expect_output(print(input), "gear       0       32 32   3.69   0.74  3")
 })
 
-test_that("spark.print returns the correct result",{
-  skip_on_os("windows")
-  # Windows does not support block characters
+test_that("spark.print returns the correct result", {
   input <- inline_hist(chickwts$weight)
-  expect_output(print(input), "▃▅▅▇▃▇▂▂")
-  
+  correct <- structure("▃▅▅▇▃▇▂▂", class = c("spark", "character"))
+  expect_identical(input, correct)
 })
 
-test_that("Skimr kable prints as expected", {
+test_that("Skimr kable prints as expected, 64-bit", {
+  skip_if(R.Version()$arch == "i386")
   skimmed <- skim(iris)
-  input <- capture.output(skimr::kable(skimmed))
+  inputRaw <- capture.output(skimr::kable(skimmed))
+  input <- skimr:::fix_unicode(inputRaw)
   
   expect_length(input, 18)
   # Intentional long lines in this test
@@ -67,14 +67,6 @@ test_that("Skimr kable prints as expected", {
   expect_equal(input[10], "")
   expect_equal(input[11], "Variable type: numeric")
   expect_equal(input[12], "")  
-  # Windows does not support block characters
-  skip_on_os("windows")
-  expect_equal(input[13], 
-"|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
-  )
-  expect_equal(input[14], 
-"|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|"
-  )
   expect_equal(input[15], 
 "|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |"
    )
@@ -87,12 +79,43 @@ test_that("Skimr kable prints as expected", {
   expect_equal(input[18], 
 "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |"
    )
+  
+  # The headers are different on windows
+  # Just ignore them
+  skip_on_os("windows")
+  expect_equal(input[13], 
+"|variable     |missing |complete |n   |mean |sd   |min |p25 |median |p75 |max |hist     |"
+  )
+  expect_equal(input[14], 
+"|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:---|:--------|"
+  )
+})
+
+test_that("Skimr kable prints as expected, 32-bit windows", {
+  skip_if_not(R.Version()$arch == "i386")
+  skimmed <- skim(iris)
+  inputRaw <- capture.output(skimr::kable(skimmed))
+  input <- skimr:::fix_unicode(inputRaw)
+  
+  expect_length(input, 18)
+  expect_equal(input[15], 
+"|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9 |▇▁▁▂▅▅▃▁ |"
+   )
+  expect_equal(input[16], 
+"|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3    |1.8 |2.5 |▇▁▁▃▃▃▂▂ |"
+  )
+  expect_equal(input[17], 
+"|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8    |6.4 |7.9 |▂▇▅▇▆▅▂▂ |"
+   )
+  expect_equal(input[18], 
+"|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4 |▁▂▅▇▃▂▁▁ |"
+   )
 })
 
 test_that("skimr::pander prints as expected", {
   # This assumes the default option for line length (80).
-
-  input <- utils::capture.output(skim(chickwts) %>% pander::pander() )
+  skip_on_os("windows")
+  input <- utils::capture.output(skim(chickwts) %>% pander())
   expect_equal(length(input), 36)
   expect_equal(input[1], "Skim summary statistics  ")
   expect_equal(input[2], "   n obs: 71    ")
@@ -146,12 +169,16 @@ test_that("skimr::pander prints as expected", {
   expect_equal(input[28], "Table: Table continues below")
   expect_equal(input[29], "")
   expect_equal(input[30], " ")
-  # Windows does not support block characters 
-  skip_on_os("windows")
   expect_equal(input[31], "------------------------")
   expect_equal(input[32], "  p75    max     hist   ")
   expect_equal(input[33], "------- ----- ----------")
   expect_equal(input[34], " 323.5   423   ▃▅▅▇▃▇▂▂ ")
   expect_equal(input[35], "------------------------")
   expect_equal(input[36], "")
+})
+
+test_that("make_utf8 produces the correct result ", {
+  input <- make_utf8(c("<U+2585><U+2587>"))
+  correct <- "▅"
+  expect_identical(input, correct)
 })

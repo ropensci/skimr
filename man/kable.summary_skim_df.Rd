@@ -2,15 +2,16 @@
 % Please edit documentation in R/summary.R
 \name{kable.summary_skim_df}
 \alias{kable.summary_skim_df}
-\title{Kable method for a summary_skim_df object.}
+\title{Kable method for a summary_skim_df object}
 \usage{
 \method{kable}{summary_skim_df}(x, ...)
 }
 \arguments{
 \item{x}{a skim_summary object}
 
-\item{...}{Additional arguments affecting the print output produced. Not used}
+\item{...}{Additional arguments affecting the print output produced.
+Not used.}
 }
 \description{
-This is a method for the generic function \code{kable}
+This is a method for the generic function \code{kable}.
 }

@@ -2,17 +2,16 @@
 % Please edit documentation in R/summary.R
 \name{print.summary_skim_df}
 \alias{print.summary_skim_df}
-\title{Print method for a summary_skim_df object. 
-This is a method for the generic function \code{print}}
+\title{Print method for a summary_skim_df object}
 \usage{
 \method{print}{summary_skim_df}(x, ...)
 }
 \arguments{
 \item{x}{a skim_summary object}
 
-\item{...}{Additional arguments affecting the print output produced. Not used}
+\item{...}{Additional arguments affecting the print output produced.
+Not used.}
 }
 \description{
-Print method for a summary_skim_df object. 
 This is a method for the generic function \code{print}
 }

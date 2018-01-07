@@ -7,3 +7,4 @@
 ^\\inst\\docs\\README\.html
 ^CONTRIBUTING.md
 ^CONDUCT.md
+^appveyor\.yml$

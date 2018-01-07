@@ -1,8 +1,6 @@
 context("Skim a vector within a data frame")
 
 test_that("skim_v returns expected response for numeric vectors", {
-  # Windows does not support block characters
-  skip_on_os("windows")
   quantiles <- quantile(mtcars$mpg, probs = c(.25, .75), names = FALSE)
   correct <- tibble::tribble(
     ~type,          ~stat, ~level,   ~value,              ~ formatted,
@@ -56,8 +54,6 @@ test_that("skim_v handles factors when NAs are present", {
 })
 
 test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
-  # Windows does not support block characters
-  skip_on_os("windows")
   patho <- c((2 ^ .Machine$double.digits), NA,  -(2 ^ .Machine$double.digits))
   pqs <- quantile(patho, probs = c(.25, .75), na.rm = TRUE, names = FALSE)
   correct_patho <- tibble::tribble(
@@ -204,8 +200,6 @@ test_that("skim_v handles objects with two unknown classes", {
 })
 
 test_that("skim_v returns expected response for ts vectors", {
-  # Windows does not support braille characters
-  skip_on_os("windows")
   correct <- tibble::tribble(
     ~type,  ~stat,        ~level,   ~value,         ~formatted,
     "ts",   "missing",    ".all",   0,              "0",
