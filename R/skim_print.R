@@ -166,7 +166,7 @@ pander::pander
 
 pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
   if (is_windows()) {
-    warning("Skimr's histograms incorrectly render with pander on windows.",
+    warning("Skimr's histograms incorrectly render with pander on Windows.",
             " Removing them. Use kable() if you'd like them rendered.",
             call. = FALSE)
   }
