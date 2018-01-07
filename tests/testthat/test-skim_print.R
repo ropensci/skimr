@@ -43,7 +43,8 @@ test_that("spark.print returns the correct result", {
 
 test_that("Skimr kable prints as expected", {
   skimmed <- skim(iris)
-  input <- capture.output(skimr::kable(skimmed))
+  inputRaw <- capture.output(skimr::kable(skimmed))
+  input <- skimr:::fix_unicode(inputRaw)
   
   expect_length(input, 18)
   # Intentional long lines in this test
