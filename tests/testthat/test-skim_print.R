@@ -176,3 +176,9 @@ test_that("skimr::pander prints as expected", {
   expect_equal(input[35], "------------------------")
   expect_equal(input[36], "")
 })
+
+test_that("make_utf8 produces the correct result ", {
+  input <- make_utf8(c("<U+2585><U+2587>"))
+  correct <- "▅"
+  expect_identical(input, correct)
+})
