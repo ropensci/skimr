@@ -43,7 +43,7 @@ skim_v <- function(x, vector_type = class(x)) {
   # Assert that any statistic vector longer than 1 has names
   # use these names to get levels
   nms <- purrr::map(values, ~names(.x))
-  check <- purrr::map2_lgl(values, nms, check_levels)
+  check <- purrr::map2_lgl(values, nms, missing_levels)
 
   if (any(check)) {
     collapsed <- paste(names(funs)[check], collapse = ", ")
@@ -68,20 +68,18 @@ skim_v <- function(x, vector_type = class(x)) {
     formatted = purrr::flatten_chr(formats))
 }
 
-check_levels <- function(values, names) {
-  if (length(values) > 1) {
-     if (!is.null(names)){
-       complete <- !is.na(names)
-     } else {
-       complete <- logical()
-     }
-
-    empty <- ifelse(is.null(names), logical(), names[complete] == "")
-    null <- is.null(names)
+missing_levels <- function(values, names) {
+  # We don't care about levels for scalars
+  if (length(values) <= 1) {
+    FALSE
+  # The levels are missing if any of the names are null
+  } else if (any(is.null(names))) {
+    TRUE
+  } else {
+    na_names <- is.na(names)
+    empty <- names[!na_names] == ""
 
     # Allow 1 NA to accomodate functions that themselves return a count of NAs
-    null | any(empty) | sum(!complete) > 1
-  } else {
-    FALSE
+    any(empty) || sum(na_names) > 1
   }
 }

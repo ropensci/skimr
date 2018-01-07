@@ -155,7 +155,7 @@ test_that("show_skimmers() has a correct list of default types", {
                "AsIs", "difftime")
   skimmers <- show_skimmers()
   input <- names(skimmers)
-  identical(input, correct)
+  expect_identical(input, correct)
 })
 
 test_that("show_skimmers() lets you pick which type you want returned", {

@@ -2,14 +2,15 @@
 % Please edit documentation in R/summary.R
 \name{pander.summary_skim_df}
 \alias{pander.summary_skim_df}
-\title{Pander method for a summary_skim_df object.}
+\title{Pander method for a summary_skim_df object}
 \usage{
 \method{pander}{summary_skim_df}(x, ...)
 }
 \arguments{
 \item{x}{a skim_summary object}
 
-\item{...}{Additional arguments affecting the print output produced. Not used}
+\item{...}{Additional arguments affecting the print output produced.
+Not used.}
 }
 \description{
 This is a method for the generic function \code{pander}

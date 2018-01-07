@@ -67,7 +67,8 @@ show_formats <- function(which = NULL) {
   posixct = list(format = "%Y-%m-%d"),
   logical = list(),
   asis = list(),
-  difftime = list()
+  difftime = list(),
+  spark = NULL
 )
 
 # Set the default formatting options
@@ -93,6 +94,8 @@ get_formatted <- function(x) {
     formatted <- purrr::map(x, get_formatted)
     trimmed <- substr(names(x), 1, options$formats$.levels$max_char)
     paste(trimmed, trimws(formatted), sep = ": ")
+  } else if (is.null(formats)) {
+    x
   } else {
     do.call(format, c(x = list(unname(x)), formats))
   }
