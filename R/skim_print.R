@@ -8,6 +8,9 @@
 #' @export
 
 print.skim_df <- function(x, ...) {
+  defaults <- options(dplyr.show_progress = FALSE)
+  on.exit(options(defaults))
+  
   cat("Skim summary statistics\n")
   cat(" n obs:", attr(x, "data_rows"), "\n")
   cat(" n variables:", attr(x, "data_cols"), "\n")
@@ -124,6 +127,9 @@ kable.skim_df <- function(x, format = NULL, digits = getOption("digits"),
                           row.names = NA, col.names = NA, align = NULL, 
                           caption = NULL, format.args = list(), 
                           escape = TRUE, ...) {
+  defaults <- options(dplyr.show_progress = FALSE)
+  on.exit(options(defaults))
+  
   # Spaces are markdown new lines
   cat("Skim summary statistics  \n")
   cat(" n obs:", attr(x, "data_rows"), "   \n")
@@ -165,6 +171,9 @@ pander::pander
 #' @export
 
 pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
+  defaults <- options(dplyr.show_progress = FALSE)
+  on.exit(options(defaults))
+  
   if (is_windows()) {
     warning("Skimr's histograms incorrectly render with pander on Windows.",
             " Removing them. Use kable() if you'd like them rendered.",

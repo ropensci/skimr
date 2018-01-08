@@ -42,6 +42,8 @@ skim.data.frame <- function(.data, ... ) {
 #' @export
 
 skim.grouped_df <- function(.data, ...) {
+  defaults <- options(dplyr.show_progress = FALSE)
+  on.exit(options(defaults))
   skimmed <- dplyr::do(.data, skim(., ...))
   
   # Drop the grouping variable

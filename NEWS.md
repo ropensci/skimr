@@ -12,6 +12,7 @@ skimr 1.0.1 (2018-01-xx)
 
 ### BUG FIXES
   * Fix issue where a histogram for data with all NAs threw an error
+  * Suppress progress bars from dplyr::do
 
 skimr 0.92 (2017-12-19)
 =======================
