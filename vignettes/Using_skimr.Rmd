@@ -205,8 +205,8 @@ Documentation of these options for these functions is covered in more detail
 in the `knitr` package for `kable()` and the `pander` package for `pander()`.
 Using either of these may require use of document or chunk options and fonts.
 
-* For `kable()` use in a markdown file, use a chunk option of `results=asis`.
-* For `pander()` use in a markdown file, use a chunk option of `results=asis`. 
+* For `kable()` use in a markdown file, use a chunk option of `results='asis'`.
+* For `pander()` use in a markdown file, use a chunk option of `results='asis'`. 
 To prevent using asis by default use `panderOptons()` to set it to FALSE.
 
 This topic is addressed in more detail in the Using Fonts vignette.
