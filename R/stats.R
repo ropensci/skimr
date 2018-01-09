@@ -25,7 +25,8 @@ n_complete <- function(x) {
 
 #' Create a contingency table and arrange its levels in descending order
 #' 
-#' In case of ties, the ordering of results is alphabetical and depends upon the locale. 
+#' In case of ties, the ordering of results is alphabetical and depends upon 
+#' the locale. 
 #' NA is treated as a ordinary value for sorting.
 #' 
 #' @param x An object that can be interpreted as a factor (including logical)
@@ -49,8 +50,11 @@ sorted_count <- function(x) {
 
 inline_hist <- function(x) {
   # Handle empty and NA vectors
-  if (length(x) < 1|| all(is.na(x))) return(structure(" ", class = c("spark", "character")))
-  
+  if (length(x) < 1|| all(is.na(x))) 
+  {
+    return(structure(" ", class = c("spark", "character")))
+  }
+
   # Addresses a known bug in cut()
   if (all(x == 0)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
@@ -61,7 +65,8 @@ inline_hist <- function(x) {
 
 #' Draw a sparkline bar graph with unicode block characters
 #'
-#' Rendered using [block elements](https://en.wikipedia.org/wiki/Block_Elements).
+#' Rendered using 
+#' [block elements](https://en.wikipedia.org/wiki/Block_Elements).
 #' In most common fixed width fonts these are rendered wider than regular
 #' characters which means they are not suitable if you need precise alignment.
 #'

@@ -13,6 +13,7 @@ sorted_count(x)
 A "table" object, which will be treated as a named numeric vector
 }
 \description{
-In case of ties, the ordering of results is alphabetical and depends upon the locale. 
+In case of ties, the ordering of results is alphabetical and depends upon 
+the locale. 
 NA is treated as a ordinary value for sorting.
 }
