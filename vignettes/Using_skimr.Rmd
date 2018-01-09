@@ -232,17 +232,11 @@ The details of rendering are dependent on the operating system R is running on,
 the locale of the installation, and the fonts installed. Rendering may also
 differ based on whether it occurs in the console or when knitting to specific
 types of documents such as HTML and PDF. The most commonly reported problems
-involve rendering the spark graphs (inline histogram and line graphs). 
-This section will summarize known issues.  
+involve rendering the spark graphs (inline histogram). 
+This section will summarize known issues. 
 
-Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
-`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
-the low-level code]
-(http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
-for printing dataframes. One workaround for showing these characters in Windows is to set the
-CTYPE part of your locale to Chinese/Japanese/Korean with 
-`Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a
-data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+Currently pander() does not support inline_histograms on Windows. Also, Windows 
+does not support spark line graphs. 
 
 In order to render the spark graphs in html or PDF histogram you may need to change
 fonts to one that supports blocks or braille (depending on which you need). 
