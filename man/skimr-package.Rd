@@ -13,7 +13,7 @@ object is subsettable and offers a human readable output.
 }
 \details{
 \code{skimr} is opinionated, providing a strong set of summary statistics
-that are generated for a variety of differnt data types. It is also
+that are generated for a variety of different data types. It is also
 provides an API for customization. Users can change both the functions
 dispatched and the way the results are formatted.
 }
