@@ -11,7 +11,8 @@ globalVariables(".")
 #' review the Using Skimr vignette for more information.
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
-#' @param ...  Additional options, normally used to list individual unquoted column names.
+#' @param ...  Additional options, normally used to list individual 
+#'  unquoted column names.
 #' @return A \code{skim_df} object, which can be treated like a
 #'  tbl in most instances.
 #' @examples
@@ -70,7 +71,8 @@ skim.default <-function(.data, ...){
 #'  without modification
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
-#' @param ...  Additional options, normally used to list individual unquoted column names.
+#' @param ...  Additional options, normally used to list individual unquoted 
+#'  column names.
 #' @return The input data frame.
 #' @export
 
@@ -82,7 +84,7 @@ skim_tee <- function(.data, ...) {
 #' Print skim result and return a single wide data frame of summary statistics
 #' 
 #'  Returns a wide data frame with one row per variable and NA for statistics
-#'  not calculated for a given type. This faciliates future processing.
+#'  not calculated for a given type. This facilitates future processing.
 #' 
 #' @param x A \code{dataframe}.
 #' @param ... Further arguments passed to or from other methods.

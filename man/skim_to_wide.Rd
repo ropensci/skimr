@@ -16,7 +16,7 @@ A wide data frame.
 }
 \description{
 Returns a wide data frame with one row per variable and NA for statistics
- not calculated for a given type. This faciliates future processing.
+ not calculated for a given type. This facilitates future processing.
 }
 \examples{
   skim_to_wide(iris)

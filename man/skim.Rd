@@ -9,7 +9,8 @@ skim(.data, ...)
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}
 
-\item{...}{Additional options, normally used to list individual unquoted column names.}
+\item{...}{Additional options, normally used to list individual 
+unquoted column names.}
 }
 \value{
 A \code{skim_df} object, which can be treated like a
