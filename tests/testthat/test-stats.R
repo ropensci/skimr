@@ -161,5 +161,3 @@ test_that("sorted count is calculated correctly with a NA." , {
   expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1))
   expect_equal(names(sorted_count(dat)), c("A", "C", NA, "B"))
 })
-
-

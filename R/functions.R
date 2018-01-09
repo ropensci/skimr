@@ -136,11 +136,11 @@ numeric_funs <- list(
   n = length,
   mean = purrr::partial(mean, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
-  min = purrr::partial(min, na.rm = TRUE),
+  p0 = purrr::partial(quantile, probs = 0, na.rm = TRUE, names = FALSE),
   p25 = purrr::partial(quantile, probs = .25, na.rm = TRUE, names = FALSE),
   median = purrr::partial(median, na.rm = TRUE),
   p75 = purrr::partial(quantile, probs = .75, na.rm = TRUE, names = FALSE),
-  max = purrr::partial(max, na.rm = TRUE),
+  p100 = purrr::partial(quantile, probs = 1, na.rm = TRUE, names = FALSE),
   hist = inline_hist
 )
 
