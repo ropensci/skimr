@@ -42,7 +42,7 @@ Imports:
 Suggests:
     extrafont,
     rmarkdown,
-    testthat,
+    testthat (>= 2.0.0),
     withr
 License: GPL-3
 Encoding: UTF-8
