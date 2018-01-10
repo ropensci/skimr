@@ -131,6 +131,7 @@ skim_to_wide <- function(x, ...) {
 #' 
 #' # Or grouped, using magrittr exposition pipe
 #' # see ?magrittr::`%$%`
+#' library(magrittr)
 #' iris %>%
 #'   group_by(Species) %>%
 #'   skim_to_list() %$%
