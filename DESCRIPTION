@@ -16,7 +16,6 @@ Authors@R: c(
   person("Connor", "Kirkpatrick", email="hello@connorkirkpatrick.com", role = 'ctb'),
   person("Scott","Brenstuhl", email="brenstsr@miamioh.edu", role = 'ctb')
   )
-Maintainer: Elin Waring <elin.waring@gmail.com>
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may be 
     modified by the user as can the default formatting. Support for data frames 
@@ -43,7 +42,8 @@ Suggests:
     extrafont,
     rmarkdown,
     testthat (>= 2.0.0),
-    withr
+    withr,
+    covr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
