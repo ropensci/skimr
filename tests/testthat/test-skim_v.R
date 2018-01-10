@@ -9,11 +9,11 @@ test_that("skim_v returns expected response for numeric vectors", {
     "numeric",        "n",   ".all", 32,                   "32",
     "numeric",     "mean",   ".all", mean(mtcars$mpg),     "20.09",
     "numeric",       "sd",   ".all", sd(mtcars$mpg),       "6.03", 
-    "numeric",      "min",   ".all", min(mtcars$mpg),      "10.4",
+    "numeric",      "p0",   ".all", min(mtcars$mpg),      "10.4",
     "numeric",      "p25",   ".all", quantiles[1],         "15.43",
     "numeric",   "median",   ".all", median(mtcars$mpg),   "19.2",
     "numeric",      "p75",   ".all", quantiles[2],         "22.8",
-    "numeric",      "max",   ".all", max(mtcars$mpg),      "33.9",
+    "numeric",      "p100",   ".all", max(mtcars$mpg),      "33.9",
     "numeric",     "hist",   ".all", NA,                   "▃▇▇▇▃▂▂▂")
   input <- skimr:::skim_v(mtcars$mpg)
   expect_identical(input, correct)
@@ -63,11 +63,11 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
     "numeric",        "n", ".all",  3,                              "3",
     "numeric",     "mean", ".all",  0,                              "0", 
     "numeric",       "sd", ".all",  sd(patho, na.rm = TRUE),        "1.3e+16",
-    "numeric",      "min", ".all",  -(2^.Machine$double.digits),    "-9e+15",
+    "numeric",      "p0", ".all",  -(2^.Machine$double.digits),    "-9e+15",
     "numeric",      "p25", ".all",  pqs[1],                     "-4.5e+15",
     "numeric",   "median", ".all",  0,                              "0",
     "numeric",      "p75", ".all",  pqs[2],                     "4.5e+15", 
-    "numeric",      "max", ".all",  +(2^.Machine$double.digits),   "9e+15",
+    "numeric",      "p100", ".all",  +(2^.Machine$double.digits),   "9e+15",
     "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▇")
   input <- skimr:::skim_v(patho)
   expect_identical(input, correct_patho)
@@ -311,4 +311,23 @@ test_that("Skim_v works when a function generates top_count
     "factor", "top_counts",          NA,  0L,      "NA: 0"
   )
   expect_identical(skimr:::skim_v(iris$Species)[7:8,], expected)
+})
+
+test_that("numeric skim is calculated correctly when x is all NAs.", {
+  x <- as.numeric(c(NA, NA, NA))
+  input <- skim(x)
+  correct <- tibble::tribble(
+    ~type,          ~stat, ~level,   ~value,              ~ formatted, ~variable,
+    "numeric",  "missing",   ".all", 3,                    "3",         "x",
+    "numeric", "complete",   ".all", 0,                    "0",         "x",
+    "numeric",        "n",   ".all", 3,                    "3",         "x",
+    "numeric",     "mean",   ".all", NaN,                 "NaN",         "x",
+    "numeric",       "sd",   ".all", NA,                   "NA",         "x", 
+    "numeric",      "p0",   ".all", NA,                    "NA",         "x",
+    "numeric",      "p25",   ".all", NA,                   "NA",         "x",
+    "numeric",   "median",   ".all", NA,                   "NA",         "x",
+    "numeric",      "p75",   ".all", NA,                   "NA",         "x",
+    "numeric",      "p100",  ".all", NA,                    "NA",         "x",
+    "numeric",     "hist",   ".all", NA,                   " ",         "x" )
+  expect_identical(input[1:6], correct[1:6])
 })
