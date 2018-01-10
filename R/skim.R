@@ -67,8 +67,10 @@ skim.default <-function(.data, ...){
   structure(skimmed, class = c("skim_vector", class(skimmed)) )
 }
 
-#' Print useful summary statistic from a data frame returning the data frame
-#'  without modification
+
+#' Skim a data frame without modification
+#' 
+#' This prints useful summary statistics while returning the original data.
 #' 
 #' @param .data A tbl, or an object that can be coerced into a tbl.
 #' @param ...  Additional options, normally used to list individual unquoted 
@@ -81,19 +83,22 @@ skim_tee <- function(.data, ...) {
   invisible(.data)
 }
 
+
 #' Print skim result and return a single wide data frame of summary statistics
 #' 
-#'  Returns a wide data frame with one row per variable and NA for statistics
-#'  not calculated for a given type. This facilitates future processing.
+#' Returns a wide data frame with one row per variable and NA for statistics
+#' not calculated for a given type. This facilitates future processing.
 #' 
 #' @param x A \code{dataframe}.
 #' @param ... Further arguments passed to or from other methods.
 #' @return A wide data frame.
 #' @examples 
-#'   skim_to_wide(iris)
-#'   iris %>% skim_to_wide()
-#'   iris %>% skim_to_wide() %>% dplyr::filter(type == "factor") %>% 
-#'            dplyr::select(top_counts)
+#' skim_to_wide(iris)
+#' iris %>% skim_to_wide()
+#' iris %>%
+#'   skim_to_wide() %>%
+#'   dplyr::filter(type == "factor") %>% 
+#'   dplyr::select(top_counts)
 #' @export
 
 skim_to_wide <- function(x, ...) {
@@ -104,35 +109,37 @@ skim_to_wide <- function(x, ...) {
   dplyr::ungroup(x)
 }
 
-#' Print skim result and return a list of tibbles
+
+#' Create a list of skim tables instead of printing result
 #' 
-#'  Returns a list of tibbles (also data frames) with one list element 
-#'  per data type. Each column contains the formatted values. 
-#'  This facilitates additional processing. 
-#'  Note that this is not pipeable.
+#' Returns a list of tibbles (also data frames) with one list element 
+#' per data type. Each column contains the formatted values. 
+#' This facilitates additional processing. 
+#' Note that this is not pipeable.
 #' 
 #' @param x A \code{dataframe}.
 #' @param ... Further arguments passed to or from other methods.
 #' @return A list of tibbles.
 #' @examples 
-#'   skim_to_list(iris)
-#'   iris %>% skim_to_list()
-#'   sl <- iris %>% skim_to_list() 
-#'   sl[["numeric"]]
+#' skim_to_list(iris)
+#' iris %>% skim_to_list()
+#' 
+#' # Save the result
+#' sl <- iris %>% skim_to_list() 
+#' sl[["numeric"]]
+#' kable(sl$numeric)
+#' 
+#' # Or grouped, using magrittr exposition pipe
+#' # see ?magrittr::`%$%`
+#' iris %>%
+#'   group_by(Species) %>%
+#'   skim_to_list() %$%
+#'   kable(numeric)
 #' @export
 
 skim_to_list <- function(x, ...){
   x <- skim(x, ...)
   grps <- dplyr::groups(x)
-  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
-  types <- unique(grouped$type)
-  result_list <- list()
-  for (t in seq_along(types)){
-      to_keep <- quote(type == types[t])
-      filtered <- dplyr::filter(grouped, !!to_keep)
-      result_list[[types[t]]] <- skim_render(filtered, groups = grps, 
-                                             quiet_impl)
-    }
-  result_list
-  
+  separate <- split(x, x$type)
+  purrr::map(separate, skim_render, grps, quiet_impl)
 }
