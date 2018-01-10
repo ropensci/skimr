@@ -29,10 +29,11 @@ sl <- iris \%>\% skim_to_list()
 sl[["numeric"]]
 kable(sl$numeric)
 
-# Or grouped, using magrittr exposition pipe
+# Or grouped, this uses the magrittr exposition pipe
 # see ?magrittr::`\%$\%`
+library(magrittr)
 iris \%>\%
-  group_by(Species) \%>\%
+  dplyr::group_by(Species) \%>\%
   skim_to_list() \%$\%
   kable(numeric)
 }
