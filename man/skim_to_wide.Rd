@@ -16,11 +16,13 @@ A wide data frame.
 }
 \description{
 Returns a wide data frame with one row per variable and NA for statistics
- not calculated for a given type. This facilitates future processing.
+not calculated for a given type. This facilitates future processing.
 }
 \examples{
-  skim_to_wide(iris)
-  iris \%>\% skim_to_wide()
-  iris \%>\% skim_to_wide() \%>\% dplyr::filter(type == "factor") \%>\% 
-           dplyr::select(top_counts)
+skim_to_wide(iris)
+iris \%>\% skim_to_wide()
+iris \%>\%
+  skim_to_wide() \%>\%
+  dplyr::filter(type == "factor") \%>\% 
+  dplyr::select(top_counts)
 }
