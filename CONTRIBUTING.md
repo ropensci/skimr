@@ -1,8 +1,8 @@
 # Contributing
 
 Contributions to `skimr` whether in the form of bug fixes, issue reports, new code or documentation improvement
-are welcome.  Please use the github issue tracker. For any pull request please like to or open a corresponding issue 
-in the issue tracker.   Please ensure that you have notifications turned and respond to questions, comments or 
+are welcome.  Please use the github issue tracker. For any pull request please link to or open a corresponding issue 
+in the issue tracker.   Please ensure that you have notifications turned on and respond to questions, comments or 
 needed changes promptly.
 
 ## Understanding the scope of skimr
