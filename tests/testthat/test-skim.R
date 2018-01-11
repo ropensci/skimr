@@ -89,7 +89,7 @@ test_that("skim_to_wide works as expected.", {
 test_that("skim_to_list works as expected", {
   input <- skim_to_list(chickwts)
   expect_length(input, 2)
-  expect_named(input, c("numeric", "factor"))
+  expect_named(input, c("numeric", "factor"), ignore.order = TRUE)
   expect_identical(class(input), "list")
   expect_identical(class(input[["numeric"]]), c("tbl", "tbl_df", "data.frame"))
   expect_equal(dim(input[["numeric"]]), c(1, 12))
