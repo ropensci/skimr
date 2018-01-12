@@ -32,11 +32,18 @@ summary(iris$Species)
 # The skim function
 
 The core function of skimr is skim().  Skim is a S3 generic function; the skim
-package  includes support for data frames and grouped data frames. Like summary
+package  includes support for data frames, grouped data frames and vectors 
+(for a number of standard types of data). Like summary
 for data frames, skim presents results for all of the columns and the statistics
 depend on the class of the variable.
 
-However, unlike summary.data.frame(), the printed results (those displayed in
+## Skimming data frames
+
+The main focus of skimr is on data frames. This is by design since it relies 
+extensively on the tidyverse vocabulary and is pipeable and those methods 
+are designed for data frames. 
+
+Unlike summary.data.frame(), the printed results of skim (those displayed in
 the console or in a knitted markdown file) are shown horizontally with one row
 per variable and separated into separate tibbles for each class of variables.
 The actual results are  stored in a `skim_df` object that is also a tibble 
@@ -97,30 +104,7 @@ skim(iris, starts_with("Sepal"))
 If an individual column is of an unsuppported class it is treated as a 
 character variable with a warning.
 
-# Alternatives to skim
-
-The skim() function for a data frame returns a long, six column data frame.
-This long data frame is printed horizontally as a separate summary for each 
-data type found in the data frame, but the object itself is not transformed 
-during the print. 
-
-Three other functions are available that may prove useful as part of skim 
-work flows.
-
-The `skim_tee()` function produces the same printed version as `skim()` but 
-returns the unmodified data frame. This allows for continued piping of the 
-original data.
-
-The `skim_to_list()` funtion returns of a list of the wide data frames for 
-each data type. The data frames contain the formatted values, meaning that 
-they are character data and  most useful for display. In general users will 
-want to store the results in an object for further handling.
-
-The `skim_to_wide()` function returns a single data frame with each variable 
-in a row. Variables that do not report a given statistic are assigned NA for 
-that statistic. Formatted values are returned and all data are character.
-
-# Skimming vectors
+## Skimming vectors
 
 The `skim` function also handles individual vectors that are not part of a 
 data frame. For example the `lynx` data set is class `ts`.
@@ -141,7 +125,59 @@ class(lynx) <- "unkown_class"
 skim(lynx)
 ```
 
-# The skim_with function
+## Skimming matrices
+
+The skimr package does not include a skim.matrix function in order to
+preserve the ability to handle matrices in flexible ways (in contrast to 
+`summary.matrix()`).   
+
+Three possible ways to handle matrices with `skim` parallel the three 
+variations of the mean function for matrices.
+
+```{r}
+m <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), nrow = 4, ncol = 3)
+m
+colMeans(m)
+rowMeans(m)
+mean(m)
+
+skim(as.data.frame(m)) # Similar to summary.matrix and colMeans()
+skim(as.data.frame(t(m))) # Similar to rowMeans()
+skim(c(m)) # Similar to mean()
+```
+
+You can skim a single row or column in the same way as any vector.
+
+```{r}
+skim(m[,1])
+skim(m[1,])
+```
+## Alternatives to skim
+
+The skim() function for a data frame returns a long, six column data frame.
+This long data frame is printed horizontally as a separate summary for each 
+data type found in the data frame, but the object itself is not transformed 
+during the print. 
+
+Three other functions are available that may prove useful as part of skim 
+work flows.
+
+The `skim_tee()` function produces the same printed version as `skim()` but 
+returns the unmodified data frame. This allows for continued piping of the 
+original data.
+
+The `skim_to_list()` function returns of a list of the wide data frames for 
+each data type. The data frames contain the formatted values, meaning that 
+they are character data and  most useful for display. In general users will 
+want to store the results in an object for further handling.
+
+The `skim_to_wide()` function returns a single data frame with each variable 
+in a row. Variables that do not report a given statistic are assigned NA for 
+that statistic. Formatted values are returned and all data are character.
+
+
+
+# The skim_with and skim_with_defaults functions
 
 Skimr is opinionated in its choice of defaults, but users can easily add too,
 replace, or remove the statistics for a class.   
@@ -157,9 +193,13 @@ skim_with(numeric = list(mad_name = mad))
 skim(datasets::chickwts)
 ```
 
-The `skim_with_defaults()` function resets the list to the defaults. By default
-`skim_with()` appends the new statstics, but setting `append = FALSE` replaces
-the defaults. 
+_When `skim_with()` is used to modify the statistics the new list(s) of
+statistics remains in place until they are reset to the defaults._
+
+The `skim_with_defaults()` function resets the list to the defaults. 
+
+By default `skim_with()` appends the new statistics, but setting `append = FALSE` 
+replaces the defaults. 
 
 ```{r}
 skim_with_defaults()
@@ -174,7 +214,7 @@ You can also use `skim_with()` to remove specific statistics by setting them to
 ```{r}
 skim_with(numeric = list(hist = NULL))
 skim(datasets::chickwts)
-skim_with_defaults() #
+skim_with_defaults() 
 ```
 
 # Formatting individual values
