@@ -2,8 +2,7 @@
 % Please edit documentation in R/skim.R
 \name{skim_tee}
 \alias{skim_tee}
-\title{Print useful summary statistic from a data frame returning the data frame
- without modification}
+\title{Skim a data frame without modification}
 \usage{
 skim_tee(.data, ...)
 }
@@ -17,6 +16,5 @@ column names.}
 The input data frame.
 }
 \description{
-Print useful summary statistic from a data frame returning the data frame
- without modification
+This prints useful summary statistics while returning the original data.
 }

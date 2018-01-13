@@ -2,7 +2,7 @@
 % Please edit documentation in R/skim.R
 \name{skim_to_list}
 \alias{skim_to_list}
-\title{Print skim result and return a list of tibbles}
+\title{Create a list of skim tables instead of printing result}
 \usage{
 skim_to_list(x, ...)
 }
@@ -16,13 +16,24 @@ A list of tibbles.
 }
 \description{
 Returns a list of tibbles (also data frames) with one list element 
- per data type. Each column contains the formatted values. 
- This facilitates additional processing. 
- Note that this is not pipeable.
+per data type. Each column contains the formatted values. 
+This facilitates additional processing. 
+Note that this is not pipeable.
 }
 \examples{
-  skim_to_list(iris)
-  iris \%>\% skim_to_list()
-  sl <- iris \%>\% skim_to_list() 
-  sl[["numeric"]]
+skim_to_list(iris)
+iris \%>\% skim_to_list()
+
+# Save the result
+sl <- iris \%>\% skim_to_list() 
+sl[["numeric"]]
+kable(sl$numeric)
+
+# Or grouped, this uses the magrittr exposition pipe
+# see ?magrittr::`\%$\%`
+library(magrittr)
+iris \%>\%
+  dplyr::group_by(Species) \%>\%
+  skim_to_list() \%$\%
+  kable(numeric)
 }
