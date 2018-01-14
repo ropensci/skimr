@@ -38,10 +38,10 @@ globalVariables(".")
 #' *Using Skimr* vignette for more information
 #' (`vignette("Using_skimr" package = "skimr")`).
 #'
-#' @param .data A tbl, or an object that can be coerced into a tbl.
+#' @param .data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Additional options, normally used to list individual unquoted
 #'   column names.
-#' @return A \code{skim_df} object, which can be treated like a tbl in most
+#' @return A `skim_df` object, which can be treated like a tibble in most
 #'   instances.
 #' @examples
 #' skim(iris)
