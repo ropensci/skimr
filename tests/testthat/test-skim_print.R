@@ -116,7 +116,7 @@ test_that("skimr::pander prints as expected", {
   # This assumes the default option for line length (80).
   skip_on_os("windows")
   input <- utils::capture.output(skim(chickwts) %>% pander())
-  expect_equal(length(input), 36)
+  expect_length(input, 36)
   expect_equal(input[1], "Skim summary statistics  ")
   expect_equal(input[2], "   n obs: 71    ")
   expect_equal(input[3], " n variables: 2    ")
@@ -175,6 +175,13 @@ test_that("skimr::pander prints as expected", {
   expect_equal(input[34], " 323.5   423   ▃▅▅▇▃▇▂▂ ")
   expect_equal(input[35], "------------------------")
   expect_equal(input[36], "")
+})
+
+test_that("Pander warns on windows and drops histograms", {
+  skip_on_os(c("mac", "linux", "solaris"))
+  expect_warning(input <- utils::capture.output(skim(chickwts) %>% pander()))
+  expect_length(input, 36)
+  expect_false(grepl("hist", input[32]))
 })
 
 test_that("make_utf8 produces the correct result ", {
