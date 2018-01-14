@@ -43,22 +43,27 @@ Suggests:
     rmarkdown,
     testthat (>= 2.0.0),
     withr,
-    covr
+    covr,
+    knitr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Collate: 
     'skimr-package.R'
     'formats.R'
     'stats.R'
     'functions.R'
+    'kable.R'
     'options.R'
+    'pander.R'
     'skim.R'
     'skim_print.R'
     'skim_v.R'
     'summary.R'
     'utils.R'
+    'wide.R'

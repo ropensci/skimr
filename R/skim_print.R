@@ -1,10 +1,12 @@
-#' Print skimmed data frame
+#' Print `skim` objects
 #' 
-#' Prints a skimmed data frame (created by skim()).
-#' 
-#' @param x A \code{skim_df} object.
+#' @param x Either a `skim_df`, `skim_vector` or `skim_summary` object.
 #' @param ... Further arguments passed to or from other methods.
-#' @return The original \code{skim_df} object.
+#' @name print
+NULL
+
+
+#' @describeIn print Prints a skimmed data frame (`skim_df` from [`skim()`])
 #' @export
 
 print.skim_df <- function(x, ...) {
@@ -26,11 +28,8 @@ print.skim_df <- function(x, ...) {
   invisible(x)
 }
 
-#' Manages print for skim_vector objects.
-#' 
-#' @param x A \code{skim_vector} object.
-#' @param ... Further arguments passed to or from other methods.
-#' @return The original \code{skim_df} object.
+
+#' @describeIn print Manages print for `skim_vector` objects.
 #' @export
 
 print.skim_vector <- function(x, ...) {
@@ -38,6 +37,30 @@ print.skim_vector <- function(x, ...) {
   skim_render(x, groups = as.null(), print_impl, ...)
   
 }
+
+
+#' @describeIn print Print method for a `summary_skim_df` object.
+#' @export
+ 
+print.summary_skim_df <- function(x, ...) {
+  n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
+  n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
+  df_name <- paste0("Name: ", x$df_name, "   \n")
+  
+  type_frequency_string <- paste0(x$type_frequencies$type,
+                                  ": ",
+                                  x$type_frequencies$n, 
+                                  collapse = "   \n")
+
+  cat("A skim object    \n\n",
+      df_name,
+      n_rows, 
+      n_cols, 
+      "    \nColumn type frequency    \n",
+      type_frequency_string
+      ,sep = "")
+}
+
 
 #' Print expanded skim tables with a simple caption
 #' @keywords internal
@@ -51,157 +74,6 @@ print_impl <- function(transformed_df, skim_type, ...) {
   transformed_df
 }
 
-#' Create kable object
-#' 
-#' Generic method for \code{kable} objects based on the method in the knitr
-#' package.
-#' @seealso \code{\link[knitr]{kable}}
-#' @param x An R object (typically a matrix or data frame)
-#' @param format a character string; possible values are latex, html, markdown,
-#'  pandoc, and rst; this will be automatically determined if the function
-#'  is called within knitr; it can also be set in the global option 
-#'  knitr.table.format; if format is a function, it must return a character 
-#'  string.  Defaults to NULL.
-#' @param digits  The maximum number of digits for numeric columns (passed to
-#'  round()); it can also be a vector of length ncol(x) to set the number of
-#'  digits for individual columns
-#' @param row.names a logical value indicating whether to include row names;
-#'  by default, row names are included if rownames(x) is neither NULL nor
-#'  identical to 1:nrow(x)
-#' @param col.names a character vector of column names to be used in the table
-#' @param align  the alignment of columns: a character vector consisting of 
-#'  'l' (left), 'c' (center) and/or 'r' (right); by default, numeric columns
-#'  are right-aligned, and other columns are left-aligned; if align = NULL,
-#'  the default alignment is used; alternatively, if length(align) == 1L, the
-#'  string will be expanded to a vector of individual letters unless the 
-#'  output format is LaTeX; for example, 'clc' will be converted to 
-#'  c('c', 'l', 'c')
-#' @param caption  the table caption
-#' @param format.args a list of arguments to be passed to format() to format
-#'  table values, e.g. list(big.mark = ',')
-#' @param escape escape special characters when producing HTML or LaTeX tables
-#' @param ... other arguments 
-#' @export
-
-kable <- function (x, format = NULL, digits = getOption("digits"), 
-                   row.names = NA, col.names = NA, align, caption = NULL,
-                   format.args = list(), escape = TRUE, ...) {
-  UseMethod("kable")
-}
-
-#' @export
-
-kable.data.frame <- knitr::kable
-
-#' Produce \code{kable} output of a skimmed data frame
-#'
-#' @seealso \code{\link[knitr]{kable}}
-#' @param x a skim_df object
-#' @param format a character string; possible values are latex, html,
-#'  markdown, pandoc, and rst; this will be automatically determined if the
-#'  function is called within knitr; it can also be set in the global option
-#'  knitr.table.format; if format is a function, it must return a character
-#'  string
-#' @param digits the maximum number of digits for numeric columns (passed to
-#'  round()); it can also be a vector of length ncol(x) to set the number of
-#'  digits for individual columns.
-#' @param row.names a logical value indicating whether to include row names;
-#'  by default, row names are included if rownames(x) is neither NULL nor
-#'  identical to 1:nrow(x)
-#' @param col.names a character vector of column names to be used in the table
-#' @param align the alignment of columns: a character vector consisting of
-#'  'l' (left), 'c' (center) and/or 'r' (right); by default, numeric columns
-#'  are right-aligned, and other columns are left-aligned; if align = NULL,
-#'  the default alignment is used; alternatively, if length(align) == 1L, the
-#'  string will be expanded to a vector of individual letters unless the output
-#'  format is LaTeX; for example, 'clc' will be converted to c('c', 'l', 'c')
-#' @param caption the table caption that precedes the variable type
-#' @param format.args a list of arguments to be passed to format() to format
-#'  table values, e.g. list(big.mark = ',')
-#' @param escape escape special characters when producing HTML or LaTeX tables
-#' @param ... other arguments.
-#' @return The original \code{skim_df} object.
-#' @export
-
-kable.skim_df <- function(x, format = NULL, digits = getOption("digits"), 
-                          row.names = NA, col.names = NA, align = NULL, 
-                          caption = NULL, format.args = list(), 
-                          escape = TRUE, ...) {
-  defaults <- options(dplyr.show_progress = FALSE)
-  on.exit(options(defaults))
-  
-  # Spaces are markdown new lines
-  cat("Skim summary statistics  \n")
-  cat(" n obs:", attr(x, "data_rows"), "   \n")
-  cat(" n variables:", attr(x, "data_cols"), "   \n")
-  grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
-  dplyr::do(grouped, skim_render(., grps, kable_impl, format, digits, 
-                                 row.names, col.names, align, caption, 
-                                 format.args, escape, ...))
-  invisible(x)
-}
-
-kable_impl <- function(transformed_df, skim_type, format , digits, row.names, 
-                       col.names, align, caption, format.args, 
-                       escape, ...) {
-  cat(sprintf("\nVariable type: %s", skim_type))
-  if(is.null(align)) align <- rep("l", length(transformed_df))
-  kabled <- kable(transformed_df, caption = NULL, align = align, format, digits,
-        row.names,  col.names, format.args,  escape, ...)
-  if (is_windows()) {
-    kabled[] <- fix_unicode(kabled)
-  }
-  print(kabled)
-  transformed_df
-}
-
- 
-#' @importFrom pander pander
-#' @export
-pander::pander
-
-#' Produce \code{pander} output of a skimmed data frame
-#'
-#' @seealso \code{\link[pander]{pander}}
-#' @param x R object (typically a skimmed data frame)
-#' @param caption caption(string) to be shown under the table
-#' @param ... other arguments.
-#' @return The original \code{skim_df} object.
-#' @export
-
-pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
-  defaults <- options(dplyr.show_progress = FALSE)
-  on.exit(options(defaults))
-  
-  if (is_windows()) {
-    warning("Skimr's histograms incorrectly render with pander on Windows.",
-            " Removing them. Use kable() if you'd like them rendered.",
-            call. = FALSE)
-  }
-  cat("Skim summary statistics  \n  ")
-  # Spaces are markdown new lines.
-  cat(" n obs:", attr(x, "data_rows"), "   \n")
-  cat(" n variables:", attr(x, "data_cols"), "   \n")
-  
-  grps <- dplyr::groups(x) 
-  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
-  dplyr::do(grouped, skim_render(., grps, pander_impl, caption))
-  invisible(x)
-}
-
-pander_impl <- function(transformed_df, skim_type, caption) {
-  if (is.null(caption)){
-    # Intentionally commented due to issue in pandoc
-    # caption = cat(sprintf("\nVariable type: %s", skim_type))
-  }
-  if (is_windows()) {
-    transformed_df$hist <- NULL 
-  }
-  transformed_df <- dplyr::ungroup(transformed_df)
-  pander(structure(transformed_df, class = "data.frame"))
-  transformed_df
-}
 
 #' Expand a skim_df and call a printing function on it
 #' @keywords internal

@@ -2,32 +2,81 @@
 % Please edit documentation in R/skim.R
 \name{skim}
 \alias{skim}
-\title{Get useful summary statistic from a data frame}
+\alias{skim_tee}
+\title{Skim a data frame, getting useful summary statistics}
 \usage{
 skim(.data, ...)
+
+skim_tee(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl, or an object that can be coerced into a tbl.}
 
-\item{...}{Additional options, normally used to list individual 
-unquoted column names.}
+\item{...}{Additional options, normally used to list individual unquoted
+column names.}
 }
 \value{
-A \code{skim_df} object, which can be treated like a
- tbl in most instances.
+A \code{skim_df} object, which can be treated like a tbl in most
+instances.
 }
 \description{
-\code{skim} handles data of all types, dispatching a different set of
-summary functions based on the types of columns in the data frame.
-It is an intentionally simple function. See \code{\link{skim_with}} and
-\code{\link{skim_format}} for how \code{skim} can be customized.
-If the rendered examples show unencoded values such as `<U+2587>` you
-will need to change your locale to allow proper rendering. Please 
-review the Using Skimr vignette for more information.
+\code{skim()} is an alternative to \code{\link[=summary]{summary()}}, quickly providing a broad
+overview of a data frame. It handles data of all types, dispatching a
+different set of summary functions based on the types of columns in the data
+frame.
 }
+\details{
+Each call produces a \code{skim_df}, which is a fundamentally a tibble with a
+special print method. Instead of showing the result in a long format, \code{skim}
+prints a wide version of your data with formatting applied to each column.
+Printing does not change the structure of the \code{skim_df}, which remains a long
+tibble.
+
+If you just want to see the printed output, call \code{skim_tee()} instead.
+This function returns the original data frame. If you want to work with
+a data frame that resembles the printed output, call \code{\link[=skim_to_wide]{skim_to_wide()}} or
+\code{\link[=skim_to_list]{skim_to_list()}}. Note that all of the columns in the data frames produced
+by these functions are character. The intent is that you will be processing
+the \strong{printed} result further, not the original data.
+
+\code{skim()} is designed to operate in pipes and to generally play nicely with
+other \code{tidyverse} functions. This means that you can use \code{tidyselect} helpers
+within \code{skim} to select or drop specific columns for summary. You can also
+further work with a \code{skim_df} using \code{dplyr} functions in a pipeline.
+}
+\section{Customizing skim}{
+
+\code{skim()} is an intentionally simple function, with minimal arguments like
+\code{\link[=summary]{summary()}}. Nonetheless, this package provides two broad approaches to
+how you can customize \code{skim()}'s behavior. You can customize the functions
+that are called to produce summary statistics with \code{\link[=skim_with]{skim_with()}}. You
+can customize how the output is displayed with \code{\link[=skim_format]{skim_format()}}.
+}
+
+\section{Unicode rendering}{
+
+If the rendered examples show unencoded values such as \code{<U+2587>} you will
+need to change your locale to allow proper rendering. Please review the
+\emph{Using Skimr} vignette for more information
+(\code{vignette("Using_skimr" package = "skimr")}).
+}
+
 \examples{
 skim(iris)
 
+# Use tidyselect
+skim(iris, Species)
+skim(iris, starts_with("Sepal"))
+
 # Skim also works groupwise
 dplyr::group_by(iris) \%>\% skim()
+
+# Skim pipelines; now we work with the tall format
+skim(iris) \%>\% as.data.frame()
+skim(iris) \%>\% dplyr::filter(type == "factor")
+
+# Which column as the greatest mean value?
+skim(iris) \%>\%
+  dplyr::filter(stat == "mean") \%>\%
+  dplyr::arrange(dplyr::desc(value))
 }

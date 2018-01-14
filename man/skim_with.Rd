@@ -3,44 +3,56 @@
 \name{skim_with}
 \alias{skim_with}
 \alias{skim_with_defaults}
+\alias{show_skimmers}
+\alias{get_skimmers}
 \title{Set or add the summary functions for a particular type of data}
 \usage{
 skim_with(..., append = TRUE)
 
 skim_with_defaults()
+
+show_skimmers(which = NULL)
+
+get_skimmers(which = NULL)
 }
 \arguments{
 \item{...}{A list of functions, with an argument name that matches a
 particular data type.}
 
 \item{append}{Whether the provided options should be in addition to the
-defaults already in skim for the given types specified by the named
-arguments in \code{...}. Default is \code{TRUE}.}
+defaults already in \code{skim}. Default is \code{TRUE}.}
+
+\item{which}{A character vector. One or more of the classes whose summary
+functions you wish to display.}
 }
 \value{
-Nothing. \code{invisible(NULL)}
+When setting values, \code{invisible(NULL)}. When looking up values a
+list. The names of the list match the classes that have assigned
+summary functions. With \code{\link[=show_skimmers]{show_skimmers()}}, each entry in the list is a
+character vector of function names. With \code{\link[=get_skimmers]{get_skimmers()}}, each entry
+in the list is itself a list of named functions.
 }
 \description{
 While skim is designed around having an opinionated set of defaults, you
-can use this function to change the summary statistics that it returns.
+can use these functions to change the summary statistics that it returns.
 To do that, provide type you wish to change as an argument to this function,
 along with a list of named functions that you want to use instead of the
-defaults. The \code{append} argument lets you decide whether you want to
-replace the defaults or add to them.
+defaults.
 }
 \details{
 This function is not pure. It sets values in within the package environment.
 This is an intentional design choice, with effects similar to setting
 options in base R. By setting options here for your entire session, you
 can continue to summarize using skim on its own.
-
-If the rendered examples show unencoded values such as `<U+2587>` you
-will need to change your locale to allow proper rendering. Please 
-review the Using Skimr vignette for more information.
 }
 \section{Functions}{
 \itemize{
 \item \code{skim_with_defaults}: Use the default functions within skim
+
+\item \code{show_skimmers}: Access the names of the summary functions for a
+class.
+
+\item \code{get_skimmers}: Pull a list of summary functions for a class.
 }}
 
 \examples{
@@ -56,4 +68,12 @@ skim(faithful)
 # Go back to defaults
 skim_with_defaults()
 skim(faithful)
+
+# What are the names of the numeric skimmers?
+show_skimmers("numeric")
+
+# I want to create a set of skimmers for the hms class, using the date
+# skimmers currently available.
+funs <- get_skimmers()
+skim_with(hms = funs$date)
 }

@@ -3,28 +3,34 @@ NULL
 
 #' Change the formatting options for printed skim objects
 #' 
-#' Skim uses \code{\link{format}} to convert the numeric values returned by
-#' the summary functions into displayed values. The default options are a
-#' subset of options available in that function.
-#' 
-#' Generally speaking, formats are dispatched according to the type of value
-#' returned by the "skimmer," i.e. summary function. One special formatting
-#' "type" exists for the names of the returned vector. The names are used
-#' to assign the levels for statistics that have more than one value. Counts
-#' and quantiles are common cases.
+#' Formats are dispatched according to the type of value returned by the
+#' "skimmer," i.e. summary function. One special formatting "type" exists for
+#' the names of the returned vector. The names are used to assign the levels for
+#' statistics that have more than one value. Counts and quantiles are common
+#' cases.
 #' 
 #' When a vector is named, the name and the value are combined into a single
 #' formatted value. To deal with excessively long names for factor levels,
 #' only the first three characters of the name are returned by default. This
-#' can be changed by setting a new value for \code{max_char} within the
-#' \code{.levels} type.
-#' 
-#' @param ... Named arguments that contain named lists specifying formats
-#'  to apply.
-#' @return Nothing. \code{invisible(NULL)}
+#' can be changed by setting a new value for `max_char` within the
+#' `.levels` type.
+#'
+#' Skim uses [`format()`] to convert the numeric values returned by the summary
+#' functions into displayed values. The default options are a subset of options
+#' available in that function.
+#'
+#' @param ... Named arguments that contain named lists specifying formats to
+#'   apply.
+#' @param append Whether the provided options should be in addition to the
+#'  defaults already in `skim`. Default is `TRUE`.
+#' @return When setting formatting options, `invisible(NULL)`. When looking up
+#'   values, a list of option-value pairs.
 #' @examples
 #' # Format numbers to have more digits
 #' skim_format(numeric = list(digits = 3))
+#' 
+#' # Show the values for the formats
+#' show_formats
 #' 
 #' # Show 4-character names in factor levels
 #' skim_format(.levels = list(nchar = 4))
@@ -33,8 +39,8 @@ NULL
 #' skim_format_defaults()
 #' @export
 
-skim_format <- function(...) {
-  skim_options(..., env = "formats", append = FALSE)
+skim_format <- function(..., append = TRUE) {
+  skim_options(..., env = "formats", append = append)
 }
 
 
@@ -46,11 +52,10 @@ skim_format_defaults <- function() {
 }
 
 
-#' Show formatting options currently used, by data type
-#' 
+#' @describeIn skim_format Show formatting options currently used, by data type.
+#'   For each data type, options are returned as a list of option-value pairs.
 #' @param which A character vector. One or more of the classes whose formatting
-#'  options you wish to display.
-#' @return A list of option-value pairs.
+#'   options you wish to display.
 #' @export
 
 show_formats <- function(which = NULL) {
