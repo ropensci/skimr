@@ -1,8 +1,8 @@
 #' Extract summary statistics for vector.
 #' 
 #' The set of functions used to summarize the vector depends on the vectors
-#' type. See \code{\link{skim_with}} and
-#' \code{\link{skim_format}} for how \code{skim_v} can be customized.
+#' type. See [`skim_with()`] and [`skim_format()`] for how `skim_v()` can be
+#' customized.
 #'
 #' @param x A vector.
 #' @param vector_type A character vector that specifies which group of funs

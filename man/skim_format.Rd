@@ -3,45 +3,61 @@
 \name{skim_format}
 \alias{skim_format}
 \alias{skim_format_defaults}
+\alias{show_formats}
 \title{Change the formatting options for printed skim objects}
 \usage{
-skim_format(...)
+skim_format(..., append = TRUE)
 
 skim_format_defaults()
+
+show_formats(which = NULL)
 }
 \arguments{
-\item{...}{Named arguments that contain named lists specifying formats
-to apply.}
+\item{...}{Named arguments that contain named lists specifying formats to
+apply.}
+
+\item{append}{Whether the provided options should be in addition to the
+defaults already in \code{skim}. Default is \code{TRUE}.}
+
+\item{which}{A character vector. One or more of the classes whose formatting
+options you wish to display.}
 }
 \value{
-Nothing. \code{invisible(NULL)}
+When setting formatting options, \code{invisible(NULL)}. When looking up
+values, a list of option-value pairs.
 }
 \description{
-Skim uses \code{\link{format}} to convert the numeric values returned by
-the summary functions into displayed values. The default options are a
-subset of options available in that function.
+Formats are dispatched according to the type of value returned by the
+"skimmer," i.e. summary function. One special formatting "type" exists for
+the names of the returned vector. The names are used to assign the levels for
+statistics that have more than one value. Counts and quantiles are common
+cases.
 }
 \details{
-Generally speaking, formats are dispatched according to the type of value
-returned by the "skimmer," i.e. summary function. One special formatting
-"type" exists for the names of the returned vector. The names are used
-to assign the levels for statistics that have more than one value. Counts
-and quantiles are common cases.
-
 When a vector is named, the name and the value are combined into a single
 formatted value. To deal with excessively long names for factor levels,
 only the first three characters of the name are returned by default. This
 can be changed by setting a new value for \code{max_char} within the
 \code{.levels} type.
+
+Skim uses \code{\link[=format]{format()}} to convert the numeric values returned by the summary
+functions into displayed values. The default options are a subset of options
+available in that function.
 }
 \section{Functions}{
 \itemize{
 \item \code{skim_format_defaults}: Use the default formatting options within skim
+
+\item \code{show_formats}: Show formatting options currently used, by data type.
+For each data type, options are returned as a list of option-value pairs.
 }}
 
 \examples{
 # Format numbers to have more digits
 skim_format(numeric = list(digits = 3))
+
+# Show the values for the formats
+show_formats
 
 # Show 4-character names in factor levels
 skim_format(.levels = list(nchar = 4))
