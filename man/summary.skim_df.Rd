@@ -7,15 +7,15 @@
 \method{summary}{skim_df}(object, ...)
 }
 \arguments{
-\item{object}{a skim dataframe}
+\item{object}{a skim dataframe.}
 
 \item{...}{Additional arguments affecting the summary produced. Not used.}
 }
 \value{
-A summary of the dataframe \code{df}
+A summary of the skim data frame.
 }
 \description{
-This is a method of the generic function \code{summary}
+This is a method of the generic function \code{\link[=summary]{summary()}}.
 }
 \examples{
 \dontrun{

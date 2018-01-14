@@ -9,7 +9,7 @@
 #' Note that in both cases, all columns are character vectors. This gives you
 #' additional control of the printed output, but not the original data.
 #' 
-#' @param x A \code{dataframe}.
+#' @param x A data frame.
 #' @param ... Further arguments passed to or from other methods.
 #' @return A wide data frame or a list of wide data frames.
 #' @examples 

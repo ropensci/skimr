@@ -63,9 +63,9 @@ intended to replace any other R packages for making tables.
 \itemize{
 \item \code{skim_df}: Produce \code{kable} output of a skimmed data frame
 
-\item \code{summary_skim_df}: Kable method for a summary_skim_df object
+\item \code{summary_skim_df}: Kable method for a \code{summary_skim_df} object
 }}
 
 \seealso{
-\code{\link[knitr]{kable}}
+\code{\link[knitr:kable]{knitr::kable()}}
 }

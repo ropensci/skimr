@@ -1,10 +1,10 @@
 #' Summary function for skim_df
 #' 
-#' This is a method of the generic function \code{summary}
+#' This is a method of the generic function [`summary()`].
 #' 
-#' @param object a skim dataframe
+#' @param object a skim dataframe.
 #' @param ... Additional arguments affecting the summary produced. Not used.
-#' @return A summary of the dataframe \code{df}
+#' @return A summary of the skim data frame.
 #' @examples
 #' \dontrun{
 #'  a <- skim(mtcars)

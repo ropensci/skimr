@@ -11,7 +11,7 @@ skim_to_wide(x, ...)
 skim_to_list(x, ...)
 }
 \arguments{
-\item{x}{A \code{dataframe}.}
+\item{x}{A data frame.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }

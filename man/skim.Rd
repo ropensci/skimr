@@ -10,13 +10,13 @@ skim(.data, ...)
 skim_tee(.data, ...)
 }
 \arguments{
-\item{.data}{A tbl, or an object that can be coerced into a tbl.}
+\item{.data}{A tibble, or an object that can be coerced into a tibble.}
 
 \item{...}{Additional options, normally used to list individual unquoted
 column names.}
 }
 \value{
-A \code{skim_df} object, which can be treated like a tbl in most
+A \code{skim_df} object, which can be treated like a tibble in most
 instances.
 }
 \description{
