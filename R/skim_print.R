@@ -105,7 +105,7 @@ collapse_one <- function(vec) {
   paste(vec[seq_len(len)], collapse = ", ")
 }
 
-align_decimal <- function(x){
+align_decimal <- function(x) {
   split <- stringr::str_split(x, "\\.", simplify = TRUE)
   if (ncol(split) < 2) return(x)
   max_whole <- max(nchar(split[,1]))
