@@ -120,11 +120,3 @@ align_decimal <- function(x){
 print.spark <- function(x, ...) {
   cat(x, "\n", sep = "")
 }
-
-#' Expand skim tables without printing
-#' @keywords internal
-#' @noRd
-
-quiet_impl <- function(transformed_df, skim_type, ...) {
-  structure(transformed_df, class = c( "tbl", "tbl_df", "data.frame"))
-}

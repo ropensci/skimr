@@ -62,3 +62,12 @@ skim_to_list <- function(x, ...){
   separate <- split(x, x$type)
   purrr::map(separate, skim_render, grps, quiet_impl)
 }
+
+
+#' Expand skim tables without printing
+#' @keywords internal
+#' @noRd
+
+quiet_impl <- function(transformed_df, skim_type, ...) {
+  structure(transformed_df, class = c( "tbl", "tbl_df", "data.frame"))
+}
