@@ -4,27 +4,25 @@ NULL
 #' Set or add the summary functions for a particular type of data
 #' 
 #' While skim is designed around having an opinionated set of defaults, you
-#' can use this function to change the summary statistics that it returns.
+#' can use these functions to change the summary statistics that it returns.
 #' To do that, provide type you wish to change as an argument to this function,
 #' along with a list of named functions that you want to use instead of the
-#' defaults. The \code{append} argument lets you decide whether you want to
-#' replace the defaults or add to them.
+#' defaults. 
 #' 
 #' This function is not pure. It sets values in within the package environment.
 #' This is an intentional design choice, with effects similar to setting
 #' options in base R. By setting options here for your entire session, you
 #' can continue to summarize using skim on its own.
 #' 
-#' If the rendered examples show unencoded values such as `<U+2587>` you
-#' will need to change your locale to allow proper rendering. Please 
-#' review the Using Skimr vignette for more information.
-#' 
 #' @param ... A list of functions, with an argument name that matches a
 #'  particular data type.
 #' @param append Whether the provided options should be in addition to the
-#'  defaults already in skim for the given types specified by the named
-#'  arguments in \code{...}. Default is \code{TRUE}.
-#' @return Nothing. \code{invisible(NULL)}
+#'  defaults already in `skim`. Default is `TRUE`.
+#' @return When setting values, `invisible(NULL)`. When looking up values a
+#'  list. The names of the list match the classes that have assigned
+#'  summary functions. With [`show_skimmers()`], each entry in the list is a
+#'  character vector of function names. With [`get_skimmers()`], each entry
+#'  in the list is itself a list of named functions.
 #' @examples
 #' # Use new functions for numeric functions
 #' skim_with(numeric = list(median = median, mad = mad), append = FALSE)
@@ -38,6 +36,14 @@ NULL
 #' # Go back to defaults
 #' skim_with_defaults()
 #' skim(faithful)
+#' 
+#' # What are the names of the numeric skimmers?
+#' show_skimmers("numeric")
+#' 
+#' # I want to create a set of skimmers for the hms class, using the date
+#' # skimmers currently available.
+#' funs <- get_skimmers()
+#' skim_with(hms = funs$date)
 #' @export
 
 skim_with <- function(..., append = TRUE) {
@@ -53,36 +59,17 @@ skim_with_defaults <- function() {
 }
 
 
-#' Working with summary functions currently used, by data type
-#' 
-#' \code{show_skimmers} accesses the names of the summary functions for a
-#' class, and \code{get_skimmers} pulls lists of summary functions for a class.
-#' 
-#' All summary functions are stored within a single nested list. The top level
-#' list is named by class, where the inner lists are pairs of function
-#' name (for the skim output) and the functions themselves.
-#' 
+#' @describeIn skim_with Access the names of the summary functions for a
+#'   class.
 #' @param which A character vector. One or more of the classes whose summary
 #'  functions you wish to display.
-#' @return A list. The names of the list match the classes that have assigned
-#'  summary functions. When showing the skimmers, each entry in the list is a
-#'  character vector of function names. When getting the skimmers, each entry
-#'  in the list is itself a list of named functions.
-#' @examples
-#' # What are the names of the numeric skimmers?
-#' show_skimmers("numeric")
-#' 
-#' # I want to create a set of skimmers for the hms class, using the date
-#' # skimmers currently available.
-#' funs <- get_skimmers()
-#' skim_with(hms = funs$date)
 #' @export
 
 show_skimmers <- function(which = NULL) {
   show_options(which, "functions", only_names = TRUE)
 }
 
-#' @rdname show_skimmers
+#' @describeIn skim_with Pull a list of summary functions for a class.
 #' @export
 
 get_skimmers <- function(which = NULL) {
