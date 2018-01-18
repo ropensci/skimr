@@ -52,7 +52,7 @@ inline_hist <- function(x) {
   }
 
   # Addresses a known bug in cut()
-  if (all(x == 0)) x <- x + 1
+  if (all(x == 0, na.rm = TRUE)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
   structure(spark_bar(hist_dt), class = c("spark", "character"))
