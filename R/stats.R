@@ -1,9 +1,17 @@
-# Summary statistic functions
-
-#' Calculate missing values
+#' Summary statistic functions
+#' 
+#' Skimr provides extensions to a variety of functions with R's stats package
+#' to simplify creating summaries of data. All functions are vectorized and take
+#' a single argument. Other parameters for these functions are set in the
+#' [skim_format()] function.
 #' 
 #' @param x A vector
-#' @return The sum of NULL and NA values
+#' @seealso [skim_format()] and [purrr::partial()] for setting arguments of a
+#'   skimmer function.
+#' @name stats
+NULL
+
+#' @describeIn stats Calculate the sum of `NA` and `NULL` (i.e. missing) values.
 #' @export
 
 n_missing <- function(x) {
@@ -11,11 +19,7 @@ n_missing <- function(x) {
 }
 
 
-#' Calculate complete values
-#' 
-#' Complete values are not missing
-#' @param x A vector
-#' @return The sum of non-NULL and non-NA values
+#' @describeIn stats Calculate complete values; complete values are not missing.
 #' @export
 
 n_complete <- function(x) {
@@ -23,29 +27,21 @@ n_complete <- function(x) {
 }
 
 
-#' Create a contingency table and arrange its levels in descending order
-#' 
-#' In case of ties, the ordering of results is alphabetical and depends upon 
-#' the locale. 
-#' NA is treated as a ordinary value for sorting.
-#' 
-#' @param x An object that can be interpreted as a factor (including logical)
-#' @return A "table" object, which will be treated as a named numeric vector
+#' @describeIn stats Create a contingency table and arrange its levels in
+#'   descending order. In case of ties, the ordering of results is alphabetical
+#'   and depends upon the locale. `NA` is treated as a ordinary value for
+#'   sorting.
 #' @export
 
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
-  out <- stats::setNames(as.integer(tab), names(tab))
+  out <- purrr::set_names(as.integer(tab), names(tab))
   sort(out, decreasing = TRUE)
 }
 
-#' Generate inline histogram for numeric variables
-#'
-#' The character length of the histogram is controlled by the formatting
-#' options for character vectors.
-#'  
-#' @param x A numeric vector.
-#' @return A length-one character vector containing the histogram.
+#' @describeIn stats Generate inline histogram for numeric variables. The
+#'   character length of the histogram is controlled by the formatting options
+#'   for character vectors.
 #' @export
 
 inline_hist <- function(x) {
@@ -56,7 +52,7 @@ inline_hist <- function(x) {
   }
 
   # Addresses a known bug in cut()
-  if (all(x == 0)) x <- x + 1
+  if (all(x == 0, na.rm = TRUE)) x <- x + 1
   hist_dt <- table(cut(x, options$formats$character$width))
   hist_dt <- hist_dt / max(hist_dt)
   structure(spark_bar(hist_dt), class = c("spark", "character"))
@@ -108,11 +104,8 @@ spark_bar <- function(x, safe = TRUE) {
 }
 
 
-#' Calculate the number of blank values in a character vector
-#' 
-#' A "blank" is equal to "".
-#' @param x A vector
-#' @return The number of values in the vector equal to ""
+#' @describeIn stats Calculate the number of blank values in a character vector.
+#'   A "blank" is equal to "".
 #' @export
 
 n_empty <- function(x) {
@@ -121,10 +114,8 @@ n_empty <- function(x) {
 }
 
 
-#' Calculate the minimum number of characters within a character vector
-#' 
-#' @param x A vector
-#' @return The min of calling nchar(x).
+#' @describeIn stats Calculate the minimum number of characters within a
+#'   character vector.
 #' @export
 
 min_char <- function(x) {
@@ -133,10 +124,8 @@ min_char <- function(x) {
 }
 
 
-#' Calculate the maximum number of characters within a character vector
-#' 
-#' @param x A vector
-#' @return The min of calling nchar(x).
+#' @describeIn stats Calculate the maximum number of characters within a
+#'   character vector.
 #' @export
 
 max_char <- function(x) {
@@ -145,10 +134,7 @@ max_char <- function(x) {
 }
 
 
-#' Calculate the number of unique elements but remove NA
-#' 
-#' @param x A vector
-#' @return unique without NA.
+#' @describeIn stats Calculate the number of unique elements but remove `NA`.
 #' @export
 
 n_unique <- function(x) {
@@ -158,10 +144,7 @@ n_unique <- function(x) {
 }
 
 
-#' Get the start for a time series without the frequency
-#' 
-#' @param x A vector of ts data
-#' @return Finish time.
+#' @describeIn stats Get the start for a time series without the frequency.
 #' @export
 
 ts_start <- function(x) {
@@ -169,10 +152,7 @@ ts_start <- function(x) {
 }
 
 
-#' Get the finish for a time series without the frequency
-#' 
-#' @param x A vector of ts data
-#' @return Finish time.
+#' @describeIn stats Get the finish for a time series without the frequency.
 #' @export
 
 ts_end <- function(x) {
@@ -180,16 +160,9 @@ ts_end <- function(x) {
 }
 
 
-#' Generate inline line graph for time series variables
-#' 
-#' Sets all data to a standard length, to match character formatting. This is
-#' twice the number of characters set in the histogram.
-#' 
-#' The character length of the linegraph is controlled by the formatting
-#' options for character vectors.
-#' 
-#' @param x A vector
-#' @return A length-one character vector containing a line graph.
+#' @describeIn stats Generate inline line graph for time series variables. The
+#'   character length of the line graph is controlled by the formatting options
+#'   for character vectors.
 #' @export
 
 inline_linegraph <- function(x) {
@@ -242,49 +215,40 @@ braille <- function(x) {
   intToUtf8(val)
 }
 
-#' Get the length of the shortest list in a vector of lists
-#' 
-#' @param x A vector of list data
-#' @return Minimum length.
+#' @describeIn stats Get the length of the shortest list in a vector of lists.
 #' @export
 
 list_lengths_min <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
-  ifelse(length(l) != 0, return(min(l)), return(NA))
+  if (length(l) > 0) min(l)
+  else NA
 }
 
 
-#' Get the median length of the lists
-#' 
-#' @param x A vector of list data
-#' @return Median length.
+#' @describeIn stats Get the median length of the lists.
 #' @export
 
 list_lengths_median <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
-  ifelse(length(l) != 0, return(stats::median(l)), return(NA))
+  if (length(l) > 0) stats::median(l)
+  else NA
 }
 
 
-#' Get the maximum length of the lists
-#' 
-#' @param x A vector of list data
-#' @return Maximum length.
+#' @describeIn stats Get the maximum length of the lists.
 #' @export
 
 list_lengths_max <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
-  ifelse(length(l) != 0, max(l), NA)
+  if (length(l) > 0) max(l)
+  else NA
 }
 
 
-#' Get the length of the shortest list in a vector of lists
-#' 
-#' @param x A vector of list data
-#' @return Minimum length.
+#' @describeIn stats Get the length of the shortest list in a vector of lists.
 #' @export
 
 list_min_length <- function(x){
@@ -293,15 +257,10 @@ list_min_length <- function(x){
 }
 
 
-#' Get the length of the longest list in a vector of lists
-#' 
-#' @param x A vector of list data
-#' @return Minimum length.
+#' @describeIn stats Get the length of the longest list in a vector of lists.
 #' @export
 
 list_max_length <- function(x){
   l <- lengths(x)
   max(l)
 }
-
-

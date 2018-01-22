@@ -10,7 +10,7 @@
 #'  either functions or formats.
 #' @param append Whether the provided options should be in addition to the
 #'   defaults already in skim for the given types specified by the named
-#'   arguments in \code{...}.
+#'   arguments in `...`.
 #' @noRd
 
 skim_options <- function(..., env, append) {
@@ -40,7 +40,7 @@ skim_options <- function(..., env, append) {
 #' @param env The environment to modify, either functions or formats
 #' @param append Whether the provided options should be in addition to the
 #'   defaults already in skim for the given types specified by the named
-#'   arguments in \code{...}.
+#'   arguments in `...`.
 #' @noRd
 
 set_options <- function(type, newopts, env, append) {

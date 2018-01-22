@@ -17,7 +17,8 @@ test_that("Default formats are correct", {
 })
 
 test_that("Formatting options can be changed", {
-  skim_format(numeric = list(digits = 1, nsmall = 1), .align_decimal = FALSE)
+  skim_format(numeric = list(digits = 1, nsmall = 1), .align_decimal = FALSE,
+              append = FALSE)
   formats <- show_formats()
   expect_identical(formats$numeric, list(digits = 1, nsmall = 1))
   expect_false(formats$.align_decimal)
@@ -26,7 +27,8 @@ test_that("Formatting options can be changed", {
 })
 
 test_that("Formatting options change printed output", {
-  skim_format(numeric = list(digits = 2, nsmall = 2), .align_decimal = FALSE)
+  skim_format(numeric = list(digits = 2, nsmall = 2), .align_decimal = FALSE,
+              append = FALSE)
   input <- skim(mtcars)
   expect_output(print(input), "am       0       32 32   0.41   0.50  0.00")
   expect_output(print(input), "carb       0       32 32   2.81   1.62  1.00")
