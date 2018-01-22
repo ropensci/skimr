@@ -2,22 +2,32 @@ context("Skim a vector within a data frame")
 
 test_that("skim_v returns expected response for numeric vectors", {
   quantiles <- quantile(mtcars$mpg, probs = c(.25, .75), names = FALSE)
-  correct <- tibble::tribble(
-    ~type,          ~stat, ~level,   ~value,              ~ formatted,
-    "numeric",  "missing",   ".all", 0,                    "0",
-    "numeric", "complete",   ".all", 32,                   "32",
-    "numeric",        "n",   ".all", 32,                   "32",
-    "numeric",     "mean",   ".all", mean(mtcars$mpg),     "20.09",
-    "numeric",       "sd",   ".all", sd(mtcars$mpg),       "6.03", 
-    "numeric",      "p0",   ".all", min(mtcars$mpg),      "10.4",
-    "numeric",      "p25",   ".all", quantiles[1],         "15.43",
-    "numeric",   "median",   ".all", median(mtcars$mpg),   "19.2",
-    "numeric",      "p75",   ".all", quantiles[2],         "22.8",
-    "numeric",      "p100",   ".all", max(mtcars$mpg),      "33.9",
-    "numeric",     "hist",   ".all", NA,                   "▃▇▇▇▃▂▂▂")
-  input <- skimr:::skim_v(mtcars$mpg)
-  expect_identical(input, correct)
-})
+  input <- skim(mtcars$mpg)
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 11)
+  # classes  
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  # values
+  expect_identical(input$variable, rep("mtcars$mpg", 11))
+  expect_identical(input$type, rep("numeric", 11))
+  expect_identical(head(input$stat, 11),
+                   c("missing", "complete", "n", "mean", "sd", "p0", "p25", 
+                     "median", "p75", "p100", "hist"))
+  expect_identical(input$level, rep(".all", 11))
+  expect_equal(input$value, c(0, 32, 32, mean(mtcars$mpg), sd(mtcars$mpg), 
+                                    min(mtcars$mpg), quantiles[1], 
+                                    median(mtcars$mpg), quantiles[2], 
+                                    max(mtcars$mpg), NA))
+  expect_identical(input$formatted,
+                   c("0", "32", "32", "20.09", "6.03", "10.4", "15.43", "19.2",
+                     "22.8", "33.9", "▃▇▇▇▃▂▂▂"
+                     ))
+})  
+
 
 test_that("skim_v returns expected response for factor vectors", {
   correct <- tibble::tribble(
@@ -237,7 +247,7 @@ test_that("skim_v returns expected response for POSIXct vectors", {
 })
 
 test_that("skim_v returns expected response for list (not AsIs) vectors", {
-  correct <- tibble::tribble (
+  correct <- tibble::tribble(
     ~type,    ~stat,           ~level,  ~value, ~formatted,
     "list",   "missing",        ".all",  1L,     "1",
     "list",   "complete",       ".all",  5L,     "5",
@@ -258,7 +268,7 @@ test_that("skim_v returns expected response for list (not AsIs) vectors", {
 })
 
 test_that("skimr:::skim_v returns expected response for list with all NA's", {
-  correct <- tibble::tribble (
+  correct <- tibble::tribble(
     ~type,    ~stat,           ~level,  ~value, ~formatted,
     "list",   "missing",       ".all",   3L,     "3",
     "list",   "complete",      ".all",   0L,     "0",
@@ -316,18 +326,45 @@ test_that("Skim_v works when a function generates top_count
 test_that("numeric skim is calculated correctly when x is all NAs.", {
   x <- as.numeric(c(NA, NA, NA))
   input <- skim(x)
-  correct <- tibble::tribble(
-    ~variable, ~type,          ~stat, ~level,   ~value,              ~ formatted, 
-    "x",        "numeric",  "missing",   ".all", 3,                    "3",
-    "x",        "numeric", "complete",   ".all", 0,                    "0",
-    "x",        "numeric",        "n",   ".all", 3,                    "3",
-    "x",        "numeric",     "mean",   ".all", NaN,                 "NaN",
-    "x",        "numeric",       "sd",   ".all", NA,                   "NA", 
-    "x",        "numeric",      "p0",   ".all", NA,                    "NA",
-    "x",        "numeric",      "p25",   ".all", NA,                   "NA",
-    "x",        "numeric",   "median",   ".all", NA,                   "NA",
-    "x",        "numeric",      "p75",   ".all", NA,                   "NA",
-    "x",        "numeric",      "p100",  ".all", NA,                   "NA",
-    "x",        "numeric",     "hist",   ".all", NA,                   " " )
-  expect_identical(input[1:6], correct[1:6])
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 11)
+  # classes  
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  # values
+  expect_identical(input$variable, rep("x", 11))
+  expect_identical(input$type, rep("numeric", 11))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "p0"))
+  expect_identical(input$level, rep(".all", 11))
+  expect_equal(input$value, c(3, 0, 3, NaN, NA, NA, NA, NA, NA, NA, NA))
+  expect_identical(input$formatted,
+                   c("3", "0", "3", "NaN", "NA", "NA", "NA", "NA", "NA", "NA", " "))
+})  
+
+test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
+  x <- as.numeric(c(NA, NA, NA, 0))
+  input <- skim(x)
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 11)
+  # classes  
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  # values
+  expect_identical(input$variable, rep("x", 11))
+  expect_identical(input$type, rep("numeric", 11))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "p0"))
+  expect_identical(input$level, rep(".all", 11))
+  expect_equal(input$value, c(3, 1, 4, 0, NA, 0, 0, 0, 0, 0, NA))
+  expect_identical(input$formatted,
+                   c("3", "1", "4", "0", "NA", "0", "0", "0", "0", "0", "▁▁▁▇▁▁▁▁"
+                      ))
 })
+
