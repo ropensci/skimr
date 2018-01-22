@@ -317,17 +317,17 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
   x <- as.numeric(c(NA, NA, NA))
   input <- skim(x)
   correct <- tibble::tribble(
-    ~type,          ~stat, ~level,   ~value,              ~ formatted, ~variable,
-    "numeric",  "missing",   ".all", 3,                    "3",         "x",
-    "numeric", "complete",   ".all", 0,                    "0",         "x",
-    "numeric",        "n",   ".all", 3,                    "3",         "x",
-    "numeric",     "mean",   ".all", NaN,                 "NaN",         "x",
-    "numeric",       "sd",   ".all", NA,                   "NA",         "x", 
-    "numeric",      "p0",   ".all", NA,                    "NA",         "x",
-    "numeric",      "p25",   ".all", NA,                   "NA",         "x",
-    "numeric",   "median",   ".all", NA,                   "NA",         "x",
-    "numeric",      "p75",   ".all", NA,                   "NA",         "x",
-    "numeric",      "p100",  ".all", NA,                    "NA",         "x",
-    "numeric",     "hist",   ".all", NA,                   " ",         "x" )
+    ~variable, ~type,          ~stat, ~level,   ~value,              ~ formatted, 
+    "x",        "numeric",  "missing",   ".all", 3,                    "3",
+    "x",        "numeric", "complete",   ".all", 0,                    "0",
+    "x",        "numeric",        "n",   ".all", 3,                    "3",
+    "x",        "numeric",     "mean",   ".all", NaN,                 "NaN",
+    "x",        "numeric",       "sd",   ".all", NA,                   "NA", 
+    "x",        "numeric",      "p0",   ".all", NA,                    "NA",
+    "x",        "numeric",      "p25",   ".all", NA,                   "NA",
+    "x",        "numeric",   "median",   ".all", NA,                   "NA",
+    "x",        "numeric",      "p75",   ".all", NA,                   "NA",
+    "x",        "numeric",      "p100",  ".all", NA,                   "NA",
+    "x",        "numeric",     "hist",   ".all", NA,                   " " )
   expect_identical(input[1:6], correct[1:6])
 })
