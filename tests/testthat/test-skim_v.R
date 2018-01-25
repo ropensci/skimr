@@ -348,19 +348,23 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
 test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
   x <- as.numeric(c(NA, NA, NA, 0))
   input <- skim(x)
-  correct <- tibble::tribble(
-    ~type,          ~stat, ~level,   ~value,              ~ formatted, ~variable,
-    "numeric",  "missing",   ".all", 3,                   "3",         "x",
-    "numeric", "complete",   ".all", 1,                   "1",         "x",
-    "numeric",        "n",   ".all", 4,                   "4",         "x",
-    "numeric",     "mean",   ".all", 0,                   "0",         "x",
-    "numeric",       "sd",   ".all", NA,                  "NA",         "x", 
-    "numeric",      "p0",   ".all",  0,                   "0",         "x",
-    "numeric",      "p25",   ".all", 0,                   "0",         "x",
-    "numeric",   "median",   ".all", 0,                   "0",         "x",
-    "numeric",      "p75",   ".all", 0,                   "0",         "x",
-    "numeric",      "p100",  ".all", 0,                   "0",         "x",
-    "numeric",     "hist",   ".all", NA,  "▁▁▁▇▁▁▁▁",         "x" )
-  expect_identical(input[1:6], correct[1:6])
+  # dimensions
+  expect_length(input, 6)
+  expect_equal(nrow(input), 11)
+  # classes  
+  expect_is(input, "skim_vector")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  # values
+  expect_identical(input$variable, rep("x", 11))
+  expect_identical(input$type, rep("numeric", 11))
+  expect_identical(head(input$stat),
+                   c("missing", "complete", "n", "mean", "sd", "p0"))
+  expect_identical(input$level, rep(".all", 11))
+  expect_equal(input$value, c(3, 1, 4, 0, NA, 0, 0, 0, 0, 0, NA))
+  expect_identical(input$formatted,
+                   c("3", "1", "4", "0", "NA", "0", "0", "0", "0", "0", "▁▁▁▇▁▁▁▁"
+                      ))
 })
 
