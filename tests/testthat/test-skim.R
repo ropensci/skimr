@@ -112,6 +112,7 @@ test_that("Skimming a vector works as expected", {
   expect_equal(nrow(input), 13)
   # classes
   expect_is(input, "skim_vector")
+  expect_is(input, "skim_df")
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
