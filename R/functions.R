@@ -44,6 +44,9 @@ NULL
 #' # For example, you might want to remove NA values.
 #' skim_with(numeric = list(iqr = purrr::partial(IQR, na.rm = TRUE)))
 #' 
+#' # Or use an rlang-style formula constructor for the function
+#' skim_with(numeric = list(med = ~median(., na.rm = TRUE)))
+#' 
 #' # Go back to defaults
 #' skim_with_defaults()
 #' skim(faithful)
@@ -58,7 +61,9 @@ NULL
 #' @export
 
 skim_with <- function(..., append = TRUE) {
-  skim_options(..., env = "functions", append = append)
+  skimmers <- purrr::modify_depth(rlang::dots_list(...), 1, purrr::map_if,
+                                  Negate(is.null), rlang::as_function)
+  skim_options(skimmers, env = "functions", append = append)
 }
 
 

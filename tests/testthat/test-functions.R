@@ -343,3 +343,15 @@ test_that("Errors are thrown when a vector with some empty names is created", {
   # Restore defaults
   skim_with_defaults()  
 })
+
+test_that("Skimmers can be defined using rlang-style formula lambdas", {
+  funs <- list(median = ~median(., na.rm = TRUE), mad = ~mad(., na.rm = TRUE))
+  skim_with(numeric = funs, append = FALSE)
+  input <- show_skimmers()
+  input_funs <- get_skimmers()
+  expect_identical(input$numeric, names(funs))
+  expect_identical(input_funs$numeric, purrr::map(funs, rlang::as_function))
+  
+  # Restore defaults
+  skim_with_defaults()
+})

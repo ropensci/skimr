@@ -76,6 +76,9 @@ skim_with(numeric = list(mean = mean, sd = sd), append = FALSE)
 # For example, you might want to remove NA values.
 skim_with(numeric = list(iqr = purrr::partial(IQR, na.rm = TRUE)))
 
+# Or use an rlang-style formula constructor for the function
+skim_with(numeric = list(med = ~median(., na.rm = TRUE)))
+
 # Go back to defaults
 skim_with_defaults()
 skim(faithful)

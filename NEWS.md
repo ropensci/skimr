@@ -1,6 +1,8 @@
 skimr 1.0.2 (2018-xx-xx)
 ========================
 ### NEW FEATURES
+  * You can create skimmers with the formula syntax from `rlang`:
+    `skim_with(iqr = ~IQR(.x, na.rm = TRUE))`.
 
 ### MAJOR CHANGES
 
