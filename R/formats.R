@@ -40,7 +40,7 @@ NULL
 #' @export
 
 skim_format <- function(..., append = TRUE) {
-  skim_options(..., env = "formats", append = append)
+  skim_options(list(...), env = "formats", append = append)
 }
 
 

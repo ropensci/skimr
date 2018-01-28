@@ -5,7 +5,7 @@
 #' contains data types, e.g. numeric, character, etc. The internal list either
 #' has named functions (mean =, median =) or option-value pairs.
 #' 
-#' @param ... Named arguments that contain named lists
+#' @param opts A list of lists. All entries must be named.
 #' @param env A length-one character vector. The set of options to modify,
 #'  either functions or formats.
 #' @param append Whether the provided options should be in addition to the
@@ -13,8 +13,7 @@
 #'   arguments in `...`.
 #' @noRd
 
-skim_options <- function(..., env, append) {
-  opts <- list(...)
+skim_options <- function(opts, env, append) {
   if (any(is.null(names(opts))) || any(names(opts) == "")) {
     stop("Please used named arguments as follows: <type> = <named list>")
   }
@@ -44,10 +43,12 @@ skim_options <- function(..., env, append) {
 #' @noRd
 
 set_options <- function(type, newopts, env, append) {
-  if (!(type %in% names(options[[env]]))) message("Adding type: ", type)
-  if (append) {
-    nms <- names(newopts)
-    options[[env]][[type]][nms] <- unlist(newopts)
+  if (!(type %in% names(options[[env]]))) {
+    message("Adding type: ", type)
+    options[[env]][[type]] <- newopts
+  } else if (append) {
+    opts <- options[[env]][[type]]
+    options[[env]][[type]] <- purrr::list_modify(opts, !!!newopts)
   } else {
     options[[env]][[type]] <- newopts
   }
