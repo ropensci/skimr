@@ -28,8 +28,6 @@ skimr 1.0.1 (2018-01-xx)
 ### BUG FIXES
   * Fix issue where a histogram for data with all `NA`s threw an error
   * Suppress progress bars from `dplyr::do()`
-  * You can use `skim_with()` to add and remove skimmers at the same time, i.e.
-    `skim_with(iqr = IQR, hist = NULL)` works as expected.
 
 skimr 0.92 (2017-12-19)
 =======================
