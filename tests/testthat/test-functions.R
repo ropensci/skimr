@@ -93,6 +93,22 @@ test_that("Setting a statistic to null removes it from the skimmers list.", {
   skim_with_defaults()
 })
 
+test_that("Skimmers can be removed and added at the same time", {
+  numeric_skimmers <- get_skimmers("numeric")
+  numeric_skimmer_names <- show_skimmers("numeric")
+  
+  correct_names <- c(numeric_skimmer_names$numeric[-11], "iqr")
+  skim_with(numeric = list(hist = NULL, iqr = IQR))
+  input <- show_skimmers("numeric")
+  expect_identical(input$numeric, correct_names)
+  
+  correct <- numeric_skimmers
+  correct$numeric$hist <- NULL
+  correct$numeric$iqr <- IQR
+  input <- get_skimmers("numeric")
+  expect_identical(input, correct)
+})
+
 test_that("Skimming functions for new types can be added", {
   funs <- list(iqr = IQR,
     quantile = purrr::partial(quantile, probs = .99))

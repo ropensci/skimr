@@ -44,10 +44,12 @@ skim_options <- function(..., env, append) {
 #' @noRd
 
 set_options <- function(type, newopts, env, append) {
-  if (!(type %in% names(options[[env]]))) message("Adding type: ", type)
-  if (append) {
-    nms <- names(newopts)
-    options[[env]][[type]][nms] <- unlist(newopts)
+  if (!(type %in% names(options[[env]]))) {
+    message("Adding type: ", type)
+    options[[env]][[type]] <- newopts
+  } else if (append) {
+    opts <- options[[env]][[type]]
+    options[[env]][[type]] <- purrr::list_modify(opts, !!!newopts)
   } else {
     options[[env]][[type]] <- newopts
   }
