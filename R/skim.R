@@ -105,8 +105,12 @@ skim.default <-function(.data, ...){
   }
   skimmed <- skim_v(.data)
   skimmed$variable <- deparse(substitute(.data))
-  skimmed <- dplyr::select(skimmed, variable, type, stat, level, 
-                           value, formatted)
+  skimmed <- dplyr::select(skimmed, !!rlang::sym("variable"), 
+                           !!rlang::sym("type"), 
+                           !!rlang::sym("stat"), 
+                           !!rlang::sym("level"), 
+                           !!rlang::sym("value"), 
+                           !!rlang::sym("formatted"))
   structure(skimmed, class = c("skim_vector", "skim_df", class(skimmed)),
             df_name = skimmed$variable[1])
 }
