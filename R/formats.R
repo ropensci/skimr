@@ -33,7 +33,7 @@ NULL
 #' show_formats
 #' 
 #' # Show 4-character names in factor levels
-#' skim_format(.levels = list(nchar = 4))
+#' skim_format(.levels = list(max_char = 4))
 #' 
 #' # Reset to the defaults
 #' skim_format_defaults()
