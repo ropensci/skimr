@@ -5,36 +5,45 @@ output:
 ---
 # skimr
 
-```
-## Dev mode: ON
-```
 
 [![Build Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropenscilabs/skimr?branch=master&svg=true)](https://ci.appveyor.com/project/ropenscilabs/skimr)
 [![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
-The goal of skimr is to provide a frictionless approach to dealing with summary statistics iteratively and interactively as part of a pipeline, and that conforms to the principle of least surprise. 
+The goal of skimr is to provide a frictionless approach to dealing with 
+summary statistics iteratively and interactively as part of a pipeline, 
+and that conforms to the principle of least surprise. 
 
-`Skimr` provides summary statistics that you can skim quickly to understand and your data and see what may be missing. It handles different data types (numerics, factors, etc), and returns a skimr object that can be piped or displayed nicely for the human reader. 
+`Skimr` provides summary statistics that you can skim quickly to understand 
+your data and see what may be missing. It handles different data types 
+(numerics, factors, etc), and returns a skimr object that can be piped or 
+displayed nicely for the human reader. 
 
 ## Installation
 
+The current released version of Skimr can be install from CRAN. 
+If you wish to install the current build of the next release you can do so 
+using the following:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/skimr")
 ```
+The APIs for this branch should be considered reasonably stable 
+but still subject to change if an issue is discovered.
 
-To install the version with the most recent changes that have not yet been incorporated in 
-the master branch (and may not be):
+To install the version with the most recent changes that have not yet been 
+incorporated in the master branch (and may not be):
 
 ``` r
 devtools::install_github("ropenscilabs/skimr", ref = "develop")
 ```
+Do not rely on APIs from the develop branch.
 
 ## Skim statistics in the console
 
-- added missing, complete, n, sd
+- Provides a larger set of statistics than `summary()` including missing, 
+complete, n, sd
 - reports numeric/int/double separately from factor/chr
 - handles dates, logicals
 - supports spark-bar and spark-line based on 
@@ -84,7 +93,7 @@ skim(iris)
 ## 4  Sepal.Width       0      150 150 3.06 0.44 2   2.8   3    3.3 4.4 ▁▂▅▇▃▂▁▁
 ```
 
-Individual columns of a data frame can be selected using tidyverse style selectors.
+**Individual columns of a data frame can be selected using tidyverse-style selectors:**
 
 
 ```r
@@ -98,8 +107,7 @@ skim(iris, Sepal.Length, Petal.Length)
 ## 
 ## Variable type: numeric 
 ##       variable missing complete   n mean   sd min p25 median p75 max     hist
-## 1 Petal.Length       0      150 150 3.76 1.77 1   1.6   4.35 5.1 6.9 ▇▁▁▂▅▅▃▁
-## 2 Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4 7.9 ▂▇▅▇▆▅▂▂
+## 1 Petal.Length       0      150 150 3.76 1.77   1 1.6   4.35 5.1 6.9 ▇▁▁▂▅▅▃▁
 ```
 
 ## Handles grouped data
@@ -191,19 +199,19 @@ skim(mtcars) %>% dplyr::filter(stat=="hist")
 
 ```
 ## # A tibble: 11 x 6
-##    variable    type  stat level value formatted
-##       <chr>   <chr> <chr> <chr> <dbl>     <chr>
-##  1      mpg numeric  hist  .all    NA  ▃▇▇▇▃▂▂▂
-##  2      cyl numeric  hist  .all    NA  ▆▁▁▃▁▁▁▇
-##  3     disp numeric  hist  .all    NA  ▇▆▁▂▅▃▁▂
-##  4       hp numeric  hist  .all    NA  ▃▇▃▅▂▃▁▁
-##  5     drat numeric  hist  .all    NA  ▃▇▁▅▇▂▁▁
-##  6       wt numeric  hist  .all    NA  ▃▃▃▇▆▁▁▂
-##  7     qsec numeric  hist  .all    NA  ▃▂▇▆▃▃▁▁
-##  8       vs numeric  hist  .all    NA  ▇▁▁▁▁▁▁▆
-##  9       am numeric  hist  .all    NA  ▇▁▁▁▁▁▁▆
-## 10     gear numeric  hist  .all    NA  ▇▁▁▆▁▁▁▂
-## 11     carb numeric  hist  .all    NA  ▆▇▂▇▁▁▁▁
+##    variable type    stat  level value formatted
+##    <chr>    <chr>   <chr> <chr> <dbl> <chr>    
+##  1 mpg      numeric hist  .all     NA ▃▇▇▇▃▂▂▂ 
+##  2 cyl      numeric hist  .all     NA ▆▁▁▃▁▁▁▇ 
+##  3 disp     numeric hist  .all     NA ▇▆▁▂▅▃▁▂ 
+##  4 hp       numeric hist  .all     NA ▃▇▃▅▂▃▁▁ 
+##  5 drat     numeric hist  .all     NA ▃▇▁▅▇▂▁▁ 
+##  6 wt       numeric hist  .all     NA ▃▃▃▇▆▁▁▂ 
+##  7 qsec     numeric hist  .all     NA ▃▂▇▆▃▃▁▁ 
+##  8 vs       numeric hist  .all     NA ▇▁▁▁▁▁▁▆ 
+##  9 am       numeric hist  .all     NA ▇▁▁▁▁▁▁▆ 
+## 10 gear     numeric hist  .all     NA ▇▁▁▆▁▁▁▂ 
+## 11 carb     numeric hist  .all     NA ▆▇▂▇▁▁▁▁
 ```
 
 ## Works with strings, lists and other column classes.
@@ -261,9 +269,16 @@ funs <- list(iqr = IQR,
 ##  n obs: 150 
 ##  n variables: 5 
 ## 
+## Variable type: factor 
+##   variable missing complete   n n_unique                       top_counts ordered
+## 1  Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
+## 
 ## Variable type: numeric 
 ##       variable iqr quantile
-## 1 Sepal.Length 1.3      7.7
+## 1 Petal.Length 3.5     6.7 
+## 2  Petal.Width 1.5     2.5 
+## 3 Sepal.Length 1.3     7.7 
+## 4  Sepal.Width 0.5     4.15
 ```
 
 ```r
@@ -273,28 +288,49 @@ funs <- list(iqr = IQR,
 
 ## Limitations of current version
 
-We are aware that there are issues with rendering the inline histograms and line charts in various contexts, some of which are 
-described below. 
+We are aware that there are issues with rendering the inline histograms 
+and line charts in various contexts, some of which are described below. 
 
-### Windows support for spark histograms
+### Support for spark histograms
 
-Windows cannot print the spark-histogram characters when printing a data-frame. For example, 
-`"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
+There are known issues with printing the spark-histogram characters when printing a 
+data-frame. For example, `"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. Th
+is longstanding problem [originates in 
 the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
-for printing dataframes. One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+for printing dataframes. For example there are reports of this issue in 
+Emacs ESS.
+
+This means that while `skimr` can render the histograms to the console and in
+kable, it cannot in other circumstances. This includes:
+
+* rendering a `skimr` data frame within pander
+* converting a `skimr` data frame to a vanilla R data frame, but tibbles render
+  correctly
+
+In previous versions of One workaround for showing these characters in Windows
+is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default 
+when printing a data-frame created by `skim()` as a list 
+(`as.list()`) or as a matrix (`as.matrix()`).
 
 ### Printing spark histograms and line graphs in knitted documents
 
-Spark-bar and spark-line work in the console but may not work when you knit them to a specific document format.
-The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, 
-for example. This issue can generally be addressed by changing fonts to one with good building block (for
-histograms) and braille support (for line graphs).  For example, the open font "DejaVu Sans" from 
-the `extra font` package supports these.  You may also want to try wrapping your results in `knitr::kable()`.
+Spark-bar and spark-line work in the console but may not work when you knit 
+them to a specific document format.
+The same session that produces a correctly rendered HTML document may 
+produce an incorrectly rendered PDF, 
+for example. This issue can generally be addressed by changing fonts to one 
+with good building block (for
+histograms) and braille support (for line graphs).  For example, 
+the open font "DejaVu Sans" from the `extra font` package supports these.  
+You may also want to try wrapping your results in `knitr::kable()`.
 Please see the vignette on using fonts for details on this.
 
-Displays in documents of different types will vary. For example, one user found that the font 
-"Yu Gothic UI Semilight"  produced consistent results for Microsoft Word and Libre Office Write.
+Displays in documents of different types will vary. For example, one user 
+found that the font "Yu Gothic UI Semilight"  produced consistent results for
+Microsoft Word and Libre Office Write.
 
 ## Contributing
 
-We welcome issue reports and pull requests including potentially adding support for different variable classes. Please see the contributing.md document.
+We welcome issue reports and pull requests including potentially adding support 
+for different variable classes. Please see the [contributing](contributing.md)
+and [conduct](conduct.md) documents.

@@ -3,8 +3,8 @@
 ^\.travis\.yml$
 ^\\inst\\docs\\blog\.html$
 ^\\inst\\docs\\blog\.Rmd$
-^\\inst\\docs\\README\.Rmd
-^\\inst\\docs\\README\.html
+^README\.Rmd
+^README\.html
 ^CONTRIBUTING.md
 ^CONDUCT.md
 ^appveyor\.yml$

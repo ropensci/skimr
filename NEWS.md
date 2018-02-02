@@ -1,36 +1,50 @@
+skimr 1.0.2 (2018-xx-xx)
+========================
+### NEW FEATURES
+  * You can create skimmers with the formula syntax from `rlang`:
+    `skim_with(iqr = ~IQR(.x, na.rm = TRUE))`.
+
+### MAJOR CHANGES
+
+#### MINOR IMPROVEMENTS
+
+### BUG FIXES
+  * You can use `skim_with()` to add and remove skimmers at the same time, i.e.
+    `skim_with(iqr = IQR, hist = NULL)` works as expected.
+
 skimr 1.0.1 (2018-01-xx)
 ========================
 ### NEW FEATURES
   * Add support for spark plots on Windows
 
 ### MAJOR CHANGES
-  * spark_line() and spark_bar() are no longer exported
-  * Default statistics for numeric changed from min(x) and max(x) to 
-    quantile(x, probs = 0) and quantile(x, probs = 1). These changes
+  * `spark_line()` and `spark_bar()` are no longer exported
+  * Default statistics for numeric changed from `min(x)` and `max(x)` to 
+    `quantile(x, probs = 0)` and `quantile(x, probs = 1)`. These changes
     lead to more predictable behaviors when a column is all NA values.
 
 #### MINOR IMPROVEMENTS
   * Add minimimum required version for stringr
-  * Improve documentation related to fonts
+  * Improve documentation in general, especially those related to fonts
 
 ### BUG FIXES
-  * Fix issue where a histogram for data with all NAs threw an error
-  * Suppress progress bars from dplyr::do
+  * Fix issue where a histogram for data with all `NA`s threw an error
+  * Suppress progress bars from `dplyr::do()`
 
 skimr 0.92 (2017-12-19)
 =======================
 
 ### MAJOR CHANGES
-  * skim_v() is no longer exported. Vectors are now directly supported by skim()
-    via skim.default().
+  * `skim_v()` is no longer exported. Vectors are now directly supported via
+    `skim.default()`.
   * Change license to GPL 3
 
 ### NEW FEATURES
 
-  * Add support for kable() and pander() for skim_df objects. 
-  * Add summary method for skim_df objects.  
+  * Add support for `kable()` and `pander()` for `skim_df` objects. 
+  * Add summary method for `skim_df` objects.  
   * Add support for tidy select to skim specific columns of a data frame.
-  * Add support for skimming individual vectors via skim.default(). 
+  * Add support for skimming individual vectors via `skim.default()`. 
 
 
 skimr 0.91 (2017-10-14)
