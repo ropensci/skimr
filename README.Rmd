@@ -15,27 +15,17 @@ options(width = 120)
 [![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
-The goal of skimr is to provide a frictionless approach to dealing with 
-summary statistics iteratively and interactively as part of a pipeline, 
-and that conforms to the principle of least surprise. 
-
-`Skimr` provides summary statistics that you can skim quickly to understand 
-your data and see what may be missing. It handles different data types 
-(numerics, factors, etc), and returns a skimr object that can be piped or 
-displayed nicely for the human reader. 
+`skimr` provides a frictionless approach to summary statistics which conforms to the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment), displaying summary statistics the user can skim quickly to understand their data. It handles different data types and returns a `skim_df` object which can be included in a pipeline or displayed nicely for the human reader.
 
 ## Installation
 
-The current released version of Skimr can be install from CRAN. 
-If you wish to install the current build of the next release you can do so 
-using the following:
+The current released version of `skimr` can be installed from CRAN. If you wish to install the current build of the next release you can do so using the following:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/skimr")
 ```
-The APIs for this branch should be considered reasonably stable 
-but still subject to change if an issue is discovered.
+The APIs for this branch should be considered reasonably stable but still subject to change if an issue is discovered.
 
 To install the version with the most recent changes that have not yet been 
 incorporated in the master branch (and may not be):
@@ -47,9 +37,11 @@ Do not rely on APIs from the develop branch.
 
 ## Skim statistics in the console
 
-- Provides a larger set of statistics than `summary()` including missing, 
+`skimr`:
+
+- Provides a larger set of statistics than `summary()`, including missing, 
 complete, n, sd
-- reports numeric/int/double separately from factor/chr
+- reports numeric/int/dbl types separately from factor/chr
 - handles dates, logicals
 - supports spark-bar and spark-line based on 
 [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
@@ -71,21 +63,21 @@ skim(iris)
 skim(iris, Sepal.Length, Petal.Length)
 ```
 
-** Handles grouped data: **
+**Handles grouped data: **
 
-Skim() can handle data that has been grouped using `dplyr::group_by`.
+`skim()` can handle data that has been grouped using `dplyr::group_by`.
 
 ```{r}
 iris %>% dplyr::group_by(Species) %>% skim()
 ```
 
-** Options for kable and pander: **
+**Options for kable and pander: **
 
-Enhanced print options are available by piping to kable() or pander(). 
+Enhanced print options are available by piping to `kable()` or `pander()`. 
 
-## skim_df object (long format)
+## `skim_df` object (long format)
 
-By default `skim` prints beautifully in the console, but it also produces a long, tidy-format skim_df object that can be computed on. 
+By default `skim()` prints beautifully in the console, but it also produces a long, tidy-format `skim_df` object that can be computed on. 
 
 ```{r}
 a <-  skim(chickwts)
@@ -96,12 +88,12 @@ dim(a)
 print.data.frame(skim(chickwts))
 ```
 
-## Compute on the full skim_df object
+## Compute on the full `skim_df` object
 ```{r}
 skim(mtcars) %>% dplyr::filter(stat=="hist")
 ```
 
-## Works with strings, lists and other column classes.
+## Works with strings, lists and other column classes
 
 ```{r}
 skim(dplyr::starwars)
@@ -112,61 +104,45 @@ Users can add new classes.
 ## Specify your own statistics
 
 ```{r}
-funs <- list(iqr = IQR,
-    quantile = purrr::partial(quantile, probs = .99))
-  skim_with(numeric = funs, append = FALSE)
-  skim(iris, Sepal.Length)
+funs <- list(
+  iqr = IQR,
+  quantile = purrr::partial(quantile, probs = .99)
+)
+
+skim_with(numeric = funs, append = FALSE)
+skim(iris, Sepal.Length)
+
 # Restore defaults
-  skim_with_defaults()
+skim_with_defaults()
+
 ```
 
 ## Limitations of current version
 
-We are aware that there are issues with rendering the inline histograms 
-and line charts in various contexts, some of which are described below. 
+We are aware that there are issues with rendering the inline histograms and line charts in various contexts, some of which are described below. 
 
 ### Support for spark histograms
 
-There are known issues with printing the spark-histogram characters when printing a 
-data-frame. For example, `"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. Th
-is longstanding problem [originates in 
+There are known issues with printing the spark-histogram characters when printing a data frame. For example, `"▂▅▇"` is printed as `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in 
 the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) 
-for printing dataframes. For example there are reports of this issue in 
-Emacs ESS.
+for printing dataframes; for example, there are reports of this issue in Emacs ESS.
 
 This means that while `skimr` can render the histograms to the console and in
-kable, it cannot in other circumstances. This includes:
+`kable()`, it cannot in other circumstances. This includes:
 
-* rendering a `skimr` data frame within pander
+* rendering a `skimr` data frame within `pander()`
 * converting a `skimr` data frame to a vanilla R data frame, but tibbles render
   correctly
 
-In previous versions of One workaround for showing these characters in Windows
-is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default 
-when printing a data-frame created by `skim()` as a list 
-(`as.list()`) or as a matrix (`as.matrix()`).
+One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by default when printing a data-frame created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
 
 ### Printing spark histograms and line graphs in knitted documents
 
-Spark-bar and spark-line work in the console but may not work when you knit 
-them to a specific document format.
-The same session that produces a correctly rendered HTML document may 
-produce an incorrectly rendered PDF, 
-for example. This issue can generally be addressed by changing fonts to one 
-with good building block (for
-histograms) and braille support (for line graphs).  For example, 
-the open font "DejaVu Sans" from the `extra font` package supports these.  
-You may also want to try wrapping your results in `knitr::kable()`.
-Please see the vignette on using fonts for details on this.
+Spark-bar and spark-line work in the console, but may not work when you knit 
+them to a specific document format. The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, for example. This issue can generally be addressed by changing fonts to one with good building block (for histograms) and Braille support (for line graphs). For example, the open font "DejaVu Sans" from the `extrafont` package supports these. You may also want to try wrapping your results in `knitr::kable()`. Please see the vignette on using fonts for details.
 
-Displays in documents of different types will vary. For example, one user 
-found that the font "Yu Gothic UI Semilight"  produced consistent results for
-Microsoft Word and Libre Office Write.
+Displays in documents of different types will vary. For example, one user found that the font "Yu Gothic UI Semilight" produced consistent results for Microsoft Word and Libre Office Write.
 
 ## Contributing
 
-We welcome issue reports and pull requests including potentially adding support 
-for commonly used variable classes. However in general we encourage users 
-to take advantage of skimr's flexibility to add their own customized classes.
-Please see the [contributing](contributing.md)
-and [conduct](conduct.md) documents.
+We welcome issue reports and pull requests, including potentially adding support for commonly used variable classes. However, in general, we encourage users to take advantage of skimr's flexibility to add their own customized classes. Please see the [contributing](contributing.md) and [conduct](conduct.md) documents.
