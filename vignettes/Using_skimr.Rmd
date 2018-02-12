@@ -9,9 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`skimr` is designed to provide summary statistics about variables. It is opinionated in its defaults, but easy to modify.
+`skimr` is designed to provide summary statistics about variables. It is
+opinionated in its defaults, but easy to modify.
 
-In base R, the most similar functions are `summary()` for vectors and data frames and `fivenum()` for numeric  vectors:
+In base R, the most similar functions are `summary()` for vectors and data
+frames and `fivenum()` for numeric  vectors:
 
 ```{r}
 summary(iris)
@@ -28,20 +30,32 @@ summary(iris$Species)
 
 # The `skim` function
 
-The core function of skimr is `skim()`. `skim()` is a S3 generic function, with methods for data frames, grouped data frames and vectors. Like `summary()`, `skim()`'s method for data frames presents results for every column; the statistics it provides depend on the class of the variable.
+The core function of skimr is `skim()`. `skim()` is a S3 generic function, with
+methods for data frames, grouped data frames and vectors. Like `summary()`,
+`skim()`'s method for data frames presents results for every column; the
+statistics it provides depend on the class of the variable.
 
 ## Skimming data frames
 
-By design, the main focus of `skimr` is on data frames; it is intended to fit well withiin a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which focuses on data frames.
+By design, the main focus of `skimr` is on data frames; it is intended to fit
+well withiin a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
+extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
+focuses on data frames.
 
-Results of `skim()` are *printed* horizontally, with one section per variable type and one row per variable. Results are *returned* from `skim()` as a long [tibble](http://tibble.tidyverse.org/) of class `skim_df`, with one row per variable + summary statistic.
+Results of `skim()` are *printed* horizontally, with one section per variable
+type and one row per variable. Results are *returned* from `skim()` as a long
+[tibble](http://tibble.tidyverse.org/) of class `skim_df`, with one row per
+variable + summary statistic.
 
 ```{r}
 library(skimr)
 skim(iris)
 ```
 
-This is in contrast to `summary.data.frame()`, which stores statistics in a `table`. The distinction is important, because the `skim_df` object is pipeable and easy to use for additional manipulation: for example, the user could select all of the variable means, or all summary statistics for a specific variable.
+This is in contrast to `summary.data.frame()`, which stores statistics in a
+`table`. The distinction is important, because the `skim_df` object is pipeable
+and easy to use for additional manipulation: for example, the user could select
+all of the variable means, or all summary statistics for a specific variable.
 
 ```{r}
 skim(iris) %>%
@@ -53,17 +67,24 @@ The `skim_df` object always contains 6 columns:
 
 - `variable`: name of the original variable
 - `type`: class of the variable
-- `stat`: name of the summary statistic *(becomes the column name when the object is printed)*
-- `level`: used when summary functions returns multiple values when skimming; for example, counts of levels for factor variables, or when setting multiple values to the `probs` argument of the `quantiles` function
-- `value`: actual calculated value of the statistic; always numeric and should be used for further calculations
-- `formatted`: **formatted** character version of `value`; attempts to use a reasonable number of digits (decimal aligned) and puts values like dates into human readable formats
+- `stat`: name of the summary statistic *(becomes the column name when the
+object is printed)*
+- `level`: used when summary functions returns multiple values when skimming;
+for example, counts of levels for factor variables, or when setting multiple
+values to the `probs` argument of the `quantiles` function
+- `value`: actual calculated value of the statistic; always numeric and should
+be used for further calculations
+- `formatted`: **formatted** character version of `value`; attempts to use a
+reasonable number of digits (decimal aligned) and puts values like dates into
+human readable formats
 
 ```{r}
 s <- skim(iris)
 head(s, 15)
 ```
 
-`skim()` also supports grouped data. In this case, one additional column for each grouping variable is added to the `skim_df` object.
+`skim()` also supports grouped data. In this case, one additional column for
+each grouping variable is added to the `skim_df` object.
 
 ```{r}
 mtcars %>%
@@ -71,7 +92,8 @@ mtcars %>%
   skim()
 ```
 
-Individual columns from a data frame may be selected using tidyverse style selectors.
+Individual columns from a data frame may be selected using tidyverse-style
+selectors.
 
 ```{r}
 skim(iris, Sepal.Length, Species)
@@ -79,19 +101,22 @@ skim(iris, starts_with("Sepal"))
 
 ```
 
-If an individual column is of an unsuppported class, it is treated as a character variable with a warning.
+If an individual column is of an unsuppported class, it is treated as a
+character variable with a warning.
 
 ## Skimming vectors
 
-`skim()` also handles individual vectors that are not part of a  data frame. For example, the `lynx` data set is class `ts`.
+`skim()` also handles individual vectors that are not part of a data frame. For
+example, the `lynx` data set is class `ts`.
 
 ```{r}
 skim(datasets::lynx)
 ```
 
 If you attempt to use `skim()` on a class that does not have support, it will
-coerce it to  character (with a warning) and report number of `NA`s; number 
-complete (non-missing); number of rows; number empty strings (i.e. ""); minimum and maximum lengths of non-empty strings; and number of unique values.
+coerce it to  character (with a warning) and report number of `NA`s; number
+complete (non-missing); number of rows; number empty strings (i.e. ""); minimum
+and maximum lengths of non-empty strings; and number of unique values.
 
 ```{r}
 lynx <- datasets::lynx
@@ -102,7 +127,10 @@ skim(lynx)
 
 ## Skimming matrices
 
-`skimr` does not include a `skim.matrix` function in order to preserve the ability to handle matrices in flexible ways (in contrast to `summary.matrix()`). Three possible ways to handle matrices with `skim()` parallel the three  variations of the mean function for matrices.
+`skimr` does not include a `skim.matrix` function in order to preserve the
+ability to handle matrices in flexible ways (in contrast to
+`summary.matrix()`). Three possible ways to handle matrices with `skim()`
+parallel the three  variations of the mean function for matrices.
 
 ```{r}
 m <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), nrow = 4, ncol = 3)
@@ -126,12 +154,16 @@ skim(m[1,])
 ```
 ## Alternatives to `skim()`
 
-`skim()` for a data frame returns a long, six-column data frame. This long data frame is printed horizontally as a separate summary for each data type found in the data frame, but the object itself is not transformed during the print. 
+`skim()` for a data frame returns a long, six-column data frame. This long data
+frame is printed horizontally as a separate summary for each data type found in
+the data frame, but the object itself is not transformed during the print. 
 
-Three other functions are available that may prove useful as part of `skim()` workflows:
+Three other functions are available that may prove useful as part of `skim()`
+workflows:
 
-- The `skim_tee()` function produces the same printed version as `skim()` but 
-returns the original, unmodified data frame. This allows for continued piping of the original data.
+- `skim_tee()` produces the same printed version as `skim()` but returns the
+original, unmodified data frame. This allows for continued piping of the
+original data.
 
 ```{r}
 iris_setosa <- iris %>%
@@ -140,9 +172,14 @@ iris_setosa <- iris %>%
 
 ```
 
-- `skim_to_list()` returns of a list of the wide data frames for each data type. These data frames contain the formatted, character values, meaning that they are most useful for display. In general, users will want to store the results in an object for further handling.
+- `skim_to_list()` returns of a list of the wide data frames for each data
+type. These data frames contain the formatted, character values, meaning that
+they are most useful for display. In general, users will want to store the
+results in an object for further handling.
 
-- `skim_to_wide()` returns a single data frame with each variable in a row, again using formatted, character values. Variables that do not report a given statistic are assigned NA for that statistic.
+- `skim_to_wide()` returns a single data frame with each variable in a row,
+again using formatted, character values. Variables that do not report a given
+statistic are assigned NA for that statistic.
 
 # `skim_with()` and `skim_with_defaults()`
 
@@ -165,7 +202,8 @@ skim(datasets::chickwts)
 _When `skim_with()` is used to modify the statistics, the new list(s) of
 statistics remains in place until they are reset using `skim_with_defaults()`._
 
-By default `skim_with()` appends the new statistics, but setting `append = FALSE` *replaces* the defaults. 
+By default `skim_with()` appends the new statistics, but setting
+`append = FALSE` *replaces* the defaults.
 
 ```{r}
 skim_with_defaults()
@@ -187,16 +225,33 @@ skim_with_defaults()
 
 # Formatting individual values
 
-When printing, `skimr` formats displayed statistics in an opinionated way; these values are stored in the `formatted` column of the `skim_df` object and are always character. `skim()` attempts to use a reasonable number of decimal places for calculated values based on the data type (integer or numeric) and number of stored decimals. For statistics such as `p0` and `p100`, the actual stored values are displayed. Decimals in a column are aligned. Date formats are used for date statistics. 
+When printing, `skimr` formats displayed statistics in an opinionated way;
+these values are stored in the `formatted` column of the `skim_df` object and
+are always character. `skim()` attempts to use a reasonable number of decimal
+places for calculated values based on the data type (integer or numeric) and
+number of stored decimals. For statistics such as `p0` and `p100`, the actual
+stored values are displayed. Decimals in a column are aligned. Date formats are
+used for date statistics. 
 
-Users can override these opinionated formats using `skim_format()`. `show_formats()` will display the current options in use for each data type. Using `skim_format_defaults()` will reset the formats to their default settings.
+Users can override these opinionated formats using `skim_format()`.
+`show_formats()` will display the current options in use for each data type.
+Using `skim_format_defaults()` will reset the formats to their default
+settings.
 
 # Rendering the results of `skim()`
 
-The `skim_df` object is a long data frame with one row for each combination of 
-variable and statistic (and optionally for group). The horizontal display is created by default using `print.skim_df()`; users can specify additional options by explicitly calling `print([skim_df object], ...)`.
+The `skim_df` object is a long data frame with one row for each combination of
+variable and statistic (and optionally for group). The horizontal display is
+created by default using `print.skim_df()`; users can specify additional
+options by explicitly calling `print([skim_df object], ...)`.
 
-`skim_df()` objects can also be rendered using `kable()` and `pander()`.  These both provide more control over the rendered results, particularly when used in conjunction with `knitr`. Documentation of these options for these functions is covered in more detail in the `knitr` package for `kable()` and the `pander` package for `pander()`. Using either of these may require use of document or chunk options and fonts, including a chunk option of `results = 'asis'`. This topic is addressed in more detail in the Using Fonts vignette.
+`skim_df()` objects can also be rendered using `kable()` and `pander()`.  These
+both provide more control over the rendered results, particularly when used in
+conjunction with `knitr`. Documentation of these options is covered in more
+detail in the `knitr` package for `kable()` and the `pander` package for
+`pander()`. Using either of these may require use of document or chunk options
+and fonts, including a chunk option of `results = 'asis'`. This topic is
+addressed in more detail in the Using Fonts vignette.
 
 ```{r results='asis'}
 skim(iris) %>% kable()
@@ -212,11 +267,14 @@ skim(iris) %>% pander()
 
 ## Solutions to common rendering problems
 
-The details of rendering are dependent on the operating system R is running on, 
+The details of rendering are dependent on the operating system R is running on,
 the locale of the installation, and the fonts installed. Rendering may also
 differ based on whether it occurs in the console or when knitting to specific
 types of documents such as HTML and PDF.
 
-The most commonly reported problems involve rendering the spark graphs (inline histogram). Currently `pander()` does not support `inline_histograms` on Windows. Also, Windows does not support `sparkline` graphs.
+The most commonly reported problems involve rendering the spark graphs (inline histogram). Currently `pander()` does not support `inline_histograms` on
+Windows. Also, Windows does not support sparkline graphs.
 
-In order to render the sparkgraphs in html or PDF histogram you may need to change fonts to one that supports blocks or Braille (depending on which you need). Please review the separate vignette and associated template for details.
+In order to render the sparkgraphs in html or PDF histogram you may need to
+change fonts to one that supports blocks or Braille (depending on which you
+need). Please review the separate vignette and associated template for details.
