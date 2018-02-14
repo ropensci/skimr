@@ -1,7 +1,5 @@
 ---
-output: 
-  html_document: 
-    keep_md: yes
+output: github_document
 ---
 # skimr
 ```{r set-options, echo=FALSE}
