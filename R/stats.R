@@ -93,7 +93,7 @@ spark_bar <- function(x, safe = TRUE) {
   
   factor <- cut(
     x,
-    breaks = seq(0, 1, length = length(bars) + 1),
+    breaks = seq(0, 1, length.out = length(bars) + 1),
     labels = bars,
     include.lowest = TRUE
   )
@@ -191,7 +191,7 @@ normalize01 <- function(x) {
 spark_line <- function(x) {
   stopifnot(is.numeric(x))
   
-  y <- findInterval(x, seq(0, 1, length = 5), all.inside = TRUE)
+  y <- findInterval(x, seq(0, 1, length.out = 5), all.inside = TRUE)
   
   ind <- matrix(y, ncol = 2, byrow = TRUE)
   ind[, 2] <- ind[, 2] + 4
