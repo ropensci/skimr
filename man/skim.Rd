@@ -69,7 +69,7 @@ skim(iris, Species)
 skim(iris, starts_with("Sepal"))
 
 # Skim also works groupwise
-dplyr::group_by(iris) \%>\% skim()
+dplyr::group_by(iris, Species) \%>\% skim()
 
 # Skim pipelines; now we work with the tall format
 skim(iris) \%>\% as.data.frame()

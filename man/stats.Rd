@@ -94,6 +94,7 @@ character vector.
 \item \code{inline_linegraph}: Generate inline line graph for time series variables. The
 character length of the line graph is controlled by the formatting options
 for character vectors.
+Based on the function in the pillar package.
 
 \item \code{list_lengths_min}: Get the length of the shortest list in a vector of lists.
 
