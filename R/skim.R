@@ -14,8 +14,10 @@ globalVariables(".")
 #' tibble.
 #' 
 #' If you just want to see the printed output, call `skim_tee()` instead.
-#' This function returns the original data frame. If you want to work with
-#' a data frame that resembles the printed output, call [`skim_to_wide()`] or
+#' This function returns the original data frame. 
+#' 
+#' If you want to work with a data frame that resembles the printed output,
+#' call [`skim_to_wide()`] or for a named list of data frames by type
 #' [`skim_to_list()`]. Note that all of the columns in the data frames produced
 #' by these functions are character. The intent is that you will be processing
 #' the **printed** result further, not the original data.
@@ -61,6 +63,10 @@ globalVariables(".")
 #' skim(iris) %>%
 #'   dplyr::filter(stat == "mean") %>%
 #'   dplyr::arrange(dplyr::desc(value))
+#' 
+#' # Use skim_tee to view the skim results and
+#' # continue using the original data.
+#' chickwts %>% skim_tee() %>% dplyr::filter(feed == "sunflower")
 #' @export
 
 skim <- function(.data, ...) {
