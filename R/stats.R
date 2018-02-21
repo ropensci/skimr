@@ -67,6 +67,7 @@ inline_hist <- function(x) {
 #' [block elements](https://en.wikipedia.org/wiki/Block_Elements).
 #' In most common fixed width fonts these are rendered wider than regular
 #' characters which means they are not suitable if you need precise alignment.
+#' Based on the function in the pillar package.
 #'
 #' @param x A numeric vector between 0 and 1
 #' @param safe Nominally there are 8 block elements from 1/8 height to full
@@ -165,6 +166,7 @@ ts_end <- function(x) {
 #' @describeIn stats Generate inline line graph for time series variables. The
 #'   character length of the line graph is controlled by the formatting options
 #'   for character vectors.
+#'   Based on the function in the pillar package.
 #' @export
 
 inline_linegraph <- function(x) {
