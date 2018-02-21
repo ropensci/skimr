@@ -45,13 +45,15 @@ sorted_count <- function(x) {
 #' @export
 
 inline_hist <- function(x) {
-  # Handle empty and NA vectors (is.finite is FALSE for NA, NaN, and +/-Inf)
-  if (length(x) < 1|| !any(is.finite(x)))
+  # For the purposes of the histogram, treat infinite as NA
+  # (before the test for all NA)
+  x[is.infinite(x)] <- NA
+  
+  # Handle empty and NA vectors (is.na is TRUE for NaN)
+  if (length(x) < 1 || all(is.na(x)))
   {
     return(structure(" ", class = c("spark", "character")))
   }
-  # cut() doesn't handle infinite values well
-  x <- x[is.finite(x)]
 
   # Addresses a known bug in cut()
   if (all(x == 0, na.rm = TRUE)) x <- x + 1
