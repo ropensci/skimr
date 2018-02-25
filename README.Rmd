@@ -50,13 +50,13 @@ Do not rely on APIs from the develop branch.
 `skimr`:
 
 - Provides a larger set of statistics than `summary()`, including missing,
-complete, n, sd
+complete, n, and sd.
 - reports each data types separately
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
 [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
-### Nicely separates variables by class:  
+### Separates variables by class:  
 
 ```{r}
 skim(chickwts)
@@ -66,6 +66,17 @@ skim(chickwts)
 ```{r}
 skim(iris)
 ```
+### Built in support for strings, lists and other column classes
+
+```{r}
+skim(dplyr::starwars)
+```
+
+### Has a useful summary function
+```{r}
+skim(iris) %>% summary()
+```
+
 
 ### Individual columns can be selected using tidyverse-style selectors:
 
@@ -86,13 +97,17 @@ iris %>% dplyr::group_by(Species) %>% skim()
 Enhanced print options are available by piping to `kable()` or `pander()`.
 These build on the [pander package](https://cran.r-project.org/web/packages/pander/index.html)
 and the kable function of the [knitr package](https://cran.r-project.org/web/packages/knitr/index.html)
-These examples show how the enhanced options appear in the console.
+These examples show how the enhanced options should appear after 
+knitting, however your results may differ (see vignettes for details).
 Note that the `skimr::` names space is used to prevent it being
 replaced by knitr::kable (which will result in the long skim_df 
 object being printed.)
 
-```{r }
+```{r results='asis'}
 skim(iris) %>% skimr::kable()
+```
+
+```{r}
 skim(iris) %>% pander()
 ```
 
@@ -114,12 +129,6 @@ print.data.frame(skim(chickwts))
 ## Compute on the full `skim_df` object
 ```{r}
 skim(mtcars) %>% dplyr::filter(stat=="hist")
-```
-
-## Built in support for strings, lists and other column classes
-
-```{r}
-skim(dplyr::starwars)
 ```
 
 Users can add new classes.

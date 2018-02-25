@@ -41,13 +41,13 @@ Skim statistics in the console
 `skimr`:
 
 -   Provides a larger set of statistics than `summary()`, including
-    missing, complete, n, sd
+    missing, complete, n, and sd.
 -   reports each data types separately
 -   handles dates, logicals, and a variety of other types
 -   supports spark-bar and spark-line based on [Hadley Wickham's pillar
     package](https://github.com/hadley/pillar).
 
-### Nicely separates variables by class:
+### Separates variables by class:
 
     skim(chickwts)
 
@@ -81,6 +81,53 @@ Skim statistics in the console
     ##   Petal.Width       0      150 150 1.2  0.76 0.1 0.3   1.3  1.8  2.5 ▇▁▁▅▃▃▂▂
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
     ##   Sepal.Width       0      150 150 3.06 0.44 2   2.8   3    3.3  4.4 ▁▂▅▇▃▂▁▁
+
+### Built in support for strings, lists and other column classes
+
+    skim(dplyr::starwars)
+
+    ## Skim summary statistics
+    ##  n obs: 87 
+    ##  n variables: 13 
+    ## 
+    ## Variable type: character 
+    ##    variable missing complete  n min max empty n_unique
+    ##   eye_color       0       87 87   3  13     0       15
+    ##      gender       3       84 87   4  13     0        4
+    ##  hair_color       5       82 87   4  13     0       12
+    ##   homeworld      10       77 87   4  14     0       48
+    ##        name       0       87 87   3  21     0       87
+    ##  skin_color       0       87 87   3  19     0       31
+    ##     species       5       82 87   3  14     0       37
+    ## 
+    ## Variable type: integer 
+    ##  variable missing complete  n   mean    sd p0 p25 median p75 p100     hist
+    ##    height       6       81 87 174.36 34.77 66 167    180 191  264 ▁▁▁▂▇▃▁▁
+    ## 
+    ## Variable type: list 
+    ##   variable missing complete  n n_unique min_length median_length max_length
+    ##      films       0       87 87       24          1             1          7
+    ##  starships       0       87 87       17          0             0          5
+    ##   vehicles       0       87 87       11          0             0          2
+    ## 
+    ## Variable type: numeric 
+    ##    variable missing complete  n  mean     sd p0  p25 median  p75 p100     hist
+    ##  birth_year      44       43 87 87.57 154.69  8 35       52 72    896 ▇▁▁▁▁▁▁▁
+    ##        mass      28       59 87 97.31 169.46 15 55.6     79 84.5 1358 ▇▁▁▁▁▁▁▁
+
+### Has a useful summary function
+
+    skim(iris) %>% summary()
+
+    ## A skim object    
+    ## 
+    ## Name: iris   
+    ## Number of Rows: 150   
+    ## Number of Columns: 5    
+    ##     
+    ## Column type frequency    
+    ## factor: 1   
+    ## numeric: 4
 
 ### Individual columns can be selected using tidyverse-style selectors:
 
@@ -128,31 +175,123 @@ Enhanced print options are available by piping to `kable()` or
 package](https://cran.r-project.org/web/packages/pander/index.html) and
 the kable function of the [knitr
 package](https://cran.r-project.org/web/packages/knitr/index.html) These
-examples show how the enhanced options appear in the console. Note that
+examples show how the enhanced options should appear after knitting,
+however your results may differ (see vignettes for details). Note that
 the `skimr::` names space is used to prevent it being replaced by
 knitr::kable (which will result in the long skim\_df object being
 printed.)
 
     skim(iris) %>% skimr::kable()
 
-    ## Skim summary statistics  
-    ##  n obs: 150    
-    ##  n variables: 5    
-    ## 
-    ## Variable type: factor
-    ## 
-    ## variable   missing   complete   n     n_unique   top_counts                         ordered 
-    ## ---------  --------  ---------  ----  ---------  ---------------------------------  --------
-    ## Species    0         150        150   3          set: 50, ver: 50, vir: 50, NA: 0   FALSE   
-    ## 
-    ## Variable type: numeric
-    ## 
-    ## variable       missing   complete   n     mean   sd     p0    p25   median   p75   p100   hist     
-    ## -------------  --------  ---------  ----  -----  -----  ----  ----  -------  ----  -----  ---------
-    ## Petal.Length   0         150        150   3.76   1.77   1     1.6   4.35     5.1   6.9    ▇▁▁▂▅▅▃▁ 
-    ## Petal.Width    0         150        150   1.2    0.76   0.1   0.3   1.3      1.8   2.5    ▇▁▁▅▃▃▂▂ 
-    ## Sepal.Length   0         150        150   5.84   0.83   4.3   5.1   5.8      6.4   7.9    ▂▇▅▇▆▅▂▂ 
-    ## Sepal.Width    0         150        150   3.06   0.44   2     2.8   3        3.3   4.4    ▁▂▅▇▃▂▁▁
+Skim summary statistics  
+n obs: 150  
+n variables: 5
+
+Variable type: factor
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">missing</th>
+<th align="left">complete</th>
+<th align="left">n</th>
+<th align="left">n_unique</th>
+<th align="left">top_counts</th>
+<th align="left">ordered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="left">0</td>
+<td align="left">150</td>
+<td align="left">150</td>
+<td align="left">3</td>
+<td align="left">set: 50, ver: 50, vir: 50, NA: 0</td>
+<td align="left">FALSE</td>
+</tr>
+</tbody>
+</table>
+
+Variable type: numeric
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">missing</th>
+<th align="left">complete</th>
+<th align="left">n</th>
+<th align="left">mean</th>
+<th align="left">sd</th>
+<th align="left">p0</th>
+<th align="left">p25</th>
+<th align="left">median</th>
+<th align="left">p75</th>
+<th align="left">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="left">0</td>
+<td align="left">150</td>
+<td align="left">150</td>
+<td align="left">3.76</td>
+<td align="left">1.77</td>
+<td align="left">1</td>
+<td align="left">1.6</td>
+<td align="left">4.35</td>
+<td align="left">5.1</td>
+<td align="left">6.9</td>
+<td align="left">▇▁▁▂▅▅▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="left">0</td>
+<td align="left">150</td>
+<td align="left">150</td>
+<td align="left">1.2</td>
+<td align="left">0.76</td>
+<td align="left">0.1</td>
+<td align="left">0.3</td>
+<td align="left">1.3</td>
+<td align="left">1.8</td>
+<td align="left">2.5</td>
+<td align="left">▇▁▁▅▃▃▂▂</td>
+</tr>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="left">0</td>
+<td align="left">150</td>
+<td align="left">150</td>
+<td align="left">5.84</td>
+<td align="left">0.83</td>
+<td align="left">4.3</td>
+<td align="left">5.1</td>
+<td align="left">5.8</td>
+<td align="left">6.4</td>
+<td align="left">7.9</td>
+<td align="left">▂▇▅▇▆▅▂▂</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="left">0</td>
+<td align="left">150</td>
+<td align="left">150</td>
+<td align="left">3.06</td>
+<td align="left">0.44</td>
+<td align="left">2</td>
+<td align="left">2.8</td>
+<td align="left">3</td>
+<td align="left">3.3</td>
+<td align="left">4.4</td>
+<td align="left">▁▂▅▇▃▂▁▁</td>
+</tr>
+</tbody>
+</table>
 
     skim(iris) %>% pander()
 
@@ -376,40 +515,6 @@ Compute on the full `skim_df` object
     ##  9 am       numeric hist  .all     NA ▇▁▁▁▁▁▁▆ 
     ## 10 gear     numeric hist  .all     NA ▇▁▁▆▁▁▁▂ 
     ## 11 carb     numeric hist  .all     NA ▆▇▂▇▁▁▁▁
-
-Built in support for strings, lists and other column classes
-------------------------------------------------------------
-
-    skim(dplyr::starwars)
-
-    ## Skim summary statistics
-    ##  n obs: 87 
-    ##  n variables: 13 
-    ## 
-    ## Variable type: character 
-    ##    variable missing complete  n min max empty n_unique
-    ##   eye_color       0       87 87   3  13     0       15
-    ##      gender       3       84 87   4  13     0        4
-    ##  hair_color       5       82 87   4  13     0       12
-    ##   homeworld      10       77 87   4  14     0       48
-    ##        name       0       87 87   3  21     0       87
-    ##  skin_color       0       87 87   3  19     0       31
-    ##     species       5       82 87   3  14     0       37
-    ## 
-    ## Variable type: integer 
-    ##  variable missing complete  n   mean    sd p0 p25 median p75 p100     hist
-    ##    height       6       81 87 174.36 34.77 66 167    180 191  264 ▁▁▁▂▇▃▁▁
-    ## 
-    ## Variable type: list 
-    ##   variable missing complete  n n_unique min_length median_length max_length
-    ##      films       0       87 87       24          1             1          7
-    ##  starships       0       87 87       17          0             0          5
-    ##   vehicles       0       87 87       11          0             0          2
-    ## 
-    ## Variable type: numeric 
-    ##    variable missing complete  n  mean     sd p0  p25 median  p75 p100     hist
-    ##  birth_year      44       43 87 87.57 154.69  8 35       52 72    896 ▇▁▁▁▁▁▁▁
-    ##        mass      28       59 87 97.31 169.46 15 55.6     79 84.5 1358 ▇▁▁▁▁▁▁▁
 
 Users can add new classes.
 
