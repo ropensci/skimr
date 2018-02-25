@@ -253,8 +253,8 @@ detail in the `knitr` package for `kable()` and the `pander` package for
 and fonts, including a chunk option of `results = 'asis'`. This topic is
 addressed in more detail in the Using Fonts vignette.
 
-```{r results='asis'}
-skim(iris) %>% kable()
+```{r }
+skim(iris) %>% skimr::kable()
 
 ```
 

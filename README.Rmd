@@ -2,9 +2,13 @@
 output: 
  md_document
 ---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 # skimr
-```{r set-options, echo=FALSE}
+```{r set-options, echo=FALSE, message=FALSE}
+library(pander)
+library(knitr)
 library(skimr)
+library(magrittr)
 skim_with_defaults()
 options(tibble.width = Inf)
 options(width = 120)
@@ -47,30 +51,29 @@ Do not rely on APIs from the develop branch.
 
 - Provides a larger set of statistics than `summary()`, including missing,
 complete, n, sd
-- reports numeric/int/dbl types separately from factor/chr
-- handles dates, logicals
+- reports each data types separately
+- handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
 [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
-**Nicely separates variables by class:**  
+### Nicely separates variables by class:  
 
 ```{r}
 skim(chickwts)
 ```
 
-**Presentation is in a compact horizontal format:**  
+### Presentation is in a compact horizontal format: 
 ```{r}
 skim(iris)
 ```
 
-**Individual columns of a data frame can be selected using tidyverse-style
-selectors:**
+### Individual columns can be selected using tidyverse-style selectors:
 
 ```{r}
 skim(iris, Sepal.Length, Petal.Length)
 ```
 
-**Handles grouped data: **
+### Handles grouped data: 
 
 `skim()` can handle data that has been grouped using `dplyr::group_by`.
 
@@ -78,9 +81,21 @@ skim(iris, Sepal.Length, Petal.Length)
 iris %>% dplyr::group_by(Species) %>% skim()
 ```
 
-**Options for kable and pander: **
+### Options for kable and pander:
 
-Enhanced print options are available by piping to `kable()` or `pander()`. 
+Enhanced print options are available by piping to `kable()` or `pander()`.
+These build on the [pander package](https://cran.r-project.org/web/packages/pander/index.html)
+and the kable function of the [knitr package](https://cran.r-project.org/web/packages/knitr/index.html)
+These examples show how the enhanced options appear in the console.
+Note that the `skimr::` names space is used to prevent it being
+replaced by knitr::kable (which will result in the long skim_df 
+object being printed.)
+
+```{r }
+skim(iris) %>% skimr::kable()
+skim(iris) %>% pander()
+```
+
 
 ## `skim_df` object (long format)
 
@@ -101,7 +116,7 @@ print.data.frame(skim(chickwts))
 skim(mtcars) %>% dplyr::filter(stat=="hist")
 ```
 
-## Works with strings, lists and other column classes
+## Built in support for strings, lists and other column classes
 
 ```{r}
 skim(dplyr::starwars)

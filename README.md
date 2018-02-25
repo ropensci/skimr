@@ -1,3 +1,4 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 skimr
 =====
 
@@ -41,12 +42,12 @@ Skim statistics in the console
 
 -   Provides a larger set of statistics than `summary()`, including
     missing, complete, n, sd
--   reports numeric/int/dbl types separately from factor/chr
--   handles dates, logicals
+-   reports each data types separately
+-   handles dates, logicals, and a variety of other types
 -   supports spark-bar and spark-line based on [Hadley Wickham's pillar
     package](https://github.com/hadley/pillar).
 
-**Nicely separates variables by class:**
+### Nicely separates variables by class:
 
     skim(chickwts)
 
@@ -62,7 +63,7 @@ Skim statistics in the console
     ##  variable missing complete  n   mean    sd  p0   p25 median   p75 p100     hist
     ##    weight       0       71 71 261.31 78.07 108 204.5    258 323.5  423 ▃▅▅▇▃▇▂▂
 
-**Presentation is in a compact horizontal format:**
+### Presentation is in a compact horizontal format:
 
     skim(iris)
 
@@ -81,8 +82,7 @@ Skim statistics in the console
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
     ##   Sepal.Width       0      150 150 3.06 0.44 2   2.8   3    3.3  4.4 ▁▂▅▇▃▂▁▁
 
-**Individual columns of a data frame can be selected using
-tidyverse-style selectors:**
+### Individual columns can be selected using tidyverse-style selectors:
 
     skim(iris, Sepal.Length, Petal.Length)
 
@@ -95,7 +95,7 @@ tidyverse-style selectors:**
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6   4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
 
-**Handles grouped data: **
+### Handles grouped data:
 
 `skim()` can handle data that has been grouped using `dplyr::group_by`.
 
@@ -121,10 +121,203 @@ tidyverse-style selectors:**
     ##   virginica Sepal.Length       0       50 50 6.59 0.64 4.9 6.23   6.5  6.9   7.9 ▁▁▃▇▅▃▂▃
     ##   virginica  Sepal.Width       0       50 50 2.97 0.32 2.2 2.8    3    3.18  3.8 ▁▃▇▇▅▃▁▂
 
-**Options for kable and pander: **
+### Options for kable and pander:
 
 Enhanced print options are available by piping to `kable()` or
-`pander()`.
+`pander()`. These build on the [pander
+package](https://cran.r-project.org/web/packages/pander/index.html) and
+the kable function of the [knitr
+package](https://cran.r-project.org/web/packages/knitr/index.html) These
+examples show how the enhanced options appear in the console. Note that
+the `skimr::` names space is used to prevent it being replaced by
+knitr::kable (which will result in the long skim\_df object being
+printed.)
+
+    skim(iris) %>% skimr::kable()
+
+    ## Skim summary statistics  
+    ##  n obs: 150    
+    ##  n variables: 5    
+    ## 
+    ## Variable type: factor
+    ## 
+    ## variable   missing   complete   n     n_unique   top_counts                         ordered 
+    ## ---------  --------  ---------  ----  ---------  ---------------------------------  --------
+    ## Species    0         150        150   3          set: 50, ver: 50, vir: 50, NA: 0   FALSE   
+    ## 
+    ## Variable type: numeric
+    ## 
+    ## variable       missing   complete   n     mean   sd     p0    p25   median   p75   p100   hist     
+    ## -------------  --------  ---------  ----  -----  -----  ----  ----  -------  ----  -----  ---------
+    ## Petal.Length   0         150        150   3.76   1.77   1     1.6   4.35     5.1   6.9    ▇▁▁▂▅▅▃▁ 
+    ## Petal.Width    0         150        150   1.2    0.76   0.1   0.3   1.3      1.8   2.5    ▇▁▁▅▃▃▂▂ 
+    ## Sepal.Length   0         150        150   5.84   0.83   4.3   5.1   5.8      6.4   7.9    ▂▇▅▇▆▅▂▂ 
+    ## Sepal.Width    0         150        150   3.06   0.44   2     2.8   3        3.3   4.4    ▁▂▅▇▃▂▁▁
+
+    skim(iris) %>% pander()
+
+Skim summary statistics  
+n obs: 150  
+n variables: 5
+
+<table style="width:67%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="15%" />
+<col width="13%" />
+<col width="15%" />
+<col width="8%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Species</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+
+<table style="width:58%;">
+<colgroup>
+<col width="45%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">top_counts</th>
+<th align="center">ordered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">set: 50, ver: 50, vir: 50, NA: 0</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="14%" />
+<col width="7%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="7%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">p0</th>
+<th align="center">p25</th>
+<th align="center">median</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Petal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.76</td>
+<td align="center">1.77</td>
+<td align="center">1</td>
+<td align="center">1.6</td>
+<td align="center">4.35</td>
+</tr>
+<tr class="even">
+<td align="center">Petal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">1.2</td>
+<td align="center">0.76</td>
+<td align="center">0.1</td>
+<td align="center">0.3</td>
+<td align="center">1.3</td>
+</tr>
+<tr class="odd">
+<td align="center">Sepal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">5.84</td>
+<td align="center">0.83</td>
+<td align="center">4.3</td>
+<td align="center">5.1</td>
+<td align="center">5.8</td>
+</tr>
+<tr class="even">
+<td align="center">Sepal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.06</td>
+<td align="center">0.44</td>
+<td align="center">2</td>
+<td align="center">2.8</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+
+<table style="width:32%;">
+<colgroup>
+<col width="8%" />
+<col width="9%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">p75</th>
+<th align="center">p100</th>
+<th align="center">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">6.9</td>
+<td align="center">▇▁▁▂▅▅▃▁</td>
+</tr>
+<tr class="even">
+<td align="center">1.8</td>
+<td align="center">2.5</td>
+<td align="center">▇▁▁▅▃▃▂▂</td>
+</tr>
+<tr class="odd">
+<td align="center">6.4</td>
+<td align="center">7.9</td>
+<td align="center">▂▇▅▇▆▅▂▂</td>
+</tr>
+<tr class="even">
+<td align="center">3.3</td>
+<td align="center">4.4</td>
+<td align="center">▁▂▅▇▃▂▁▁</td>
+</tr>
+</tbody>
+</table>
 
 `skim_df` object (long format)
 ------------------------------
@@ -184,8 +377,8 @@ Compute on the full `skim_df` object
     ## 10 gear     numeric hist  .all     NA ▇▁▁▆▁▁▁▂ 
     ## 11 carb     numeric hist  .all     NA ▆▇▂▇▁▁▁▁
 
-Works with strings, lists and other column classes
---------------------------------------------------
+Built in support for strings, lists and other column classes
+------------------------------------------------------------
 
     skim(dplyr::starwars)
 
