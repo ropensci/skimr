@@ -270,8 +270,7 @@ Because of the complexity of this, the samples below are shown as they would
 be in the console.
 
 ```{r }
-skim(iris) %>% kable()
-
+skim(iris) %>% skimr::kable()
 ```
 
 ```{r }
