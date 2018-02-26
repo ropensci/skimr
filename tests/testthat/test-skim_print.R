@@ -180,7 +180,7 @@ test_that("skimr::pander prints as expected", {
 test_that("Pander warns on windows and drops histograms", {
   skip_on_os(c("mac", "linux", "solaris"))
   expect_warning(input <- utils::capture.output(skim(chickwts) %>% pander()))
-  expect_length(input, 36)
+  expect_length(input, 27)
   expect_false(grepl("hist", input[32]))
 })
 
