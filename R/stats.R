@@ -1,10 +1,10 @@
 #' Summary statistic functions
-#' 
+#'
 #' Skimr provides extensions to a variety of functions with R's stats package
 #' to simplify creating summaries of data. All functions are vectorized and take
 #' a single argument. Other parameters for these functions are set in the
 #' [skim_format()] function.
-#' 
+#'
 #' @param x A vector
 #' @seealso [skim_format()] and [purrr::partial()] for setting arguments of a
 #'   skimmer function.
@@ -45,8 +45,12 @@ sorted_count <- function(x) {
 #' @export
 
 inline_hist <- function(x) {
-  # Handle empty and NA vectors
-  if (length(x) < 1|| all(is.na(x))) 
+  # For the purposes of the histogram, treat infinite as NA
+  # (before the test for all NA)
+  x[is.infinite(x)] <- NA
+  
+  # Handle empty and NA vectors (is.na is TRUE for NaN)
+  if (length(x) < 1 || all(is.na(x)))
   {
     return(structure(" ", class = c("spark", "character")))
   }
@@ -61,7 +65,7 @@ inline_hist <- function(x) {
 
 #' Draw a sparkline bar graph with unicode block characters
 #'
-#' Rendered using 
+#' Rendered using
 #' [block elements](https://en.wikipedia.org/wiki/Block_Elements).
 #' In most common fixed width fonts these are rendered wider than regular
 #' characters which means they are not suitable if you need precise alignment.
@@ -86,12 +90,12 @@ inline_hist <- function(x) {
 
 spark_bar <- function(x, safe = TRUE) {
   stopifnot(is.numeric(x))
-  
+
   bars <- vapply(0x2581:0x2588, intToUtf8, character(1))
   if (safe) {
     bars <- bars[-c(4, 8)]
   }
-  
+
   factor <- cut(
     x,
     breaks = seq(0, 1, length.out = length(bars) + 1),
@@ -100,7 +104,7 @@ spark_bar <- function(x, safe = TRUE) {
   )
   chars <- as.character(factor)
   chars[is.na(chars)] <- bars[length(bars)]
-  
+
   structure(paste0(chars, collapse = ""), class = "spark")
 }
 
@@ -192,12 +196,12 @@ normalize01 <- function(x) {
 
 spark_line <- function(x) {
   stopifnot(is.numeric(x))
-  
+
   y <- findInterval(x, seq(0, 1, length.out = 5), all.inside = TRUE)
-  
+
   ind <- matrix(y, ncol = 2, byrow = TRUE)
   ind[, 2] <- ind[, 2] + 4
-  
+
   chars <- apply(ind, 1, braille)
   structure(paste0(chars, collapse = ""), class = "spark")
 }
@@ -207,13 +211,13 @@ spark_line <- function(x) {
 braille <- function(x) {
   # remap to braille sequence
   x <- c(7L, 3L, 2L, 1L, 8L, 6L, 5L, 4L)[x]
-  
+
   raised <- 1:8 %in% x
   binary <- raised * 2 ^ (0:7)
-  
+
   # offset in hex is 2800
   val <- 10240 + sum(raised * 2 ^ (0:7))
-  
+
   intToUtf8(val)
 }
 
