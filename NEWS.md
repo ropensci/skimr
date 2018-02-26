@@ -5,14 +5,22 @@ skimr 1.0.2 (2018-xx-xx)
     `skim_with(iqr = ~IQR(.x, na.rm = TRUE))`.
 
 ### MAJOR CHANGES
+  * The median label has been changed to p50 for consistency with 
+     the previous changes to p0 and p100. 
 
 #### MINOR IMPROVEMENTS
+   * Impovements and corrections to to readme and other documentation.
+   * New vignette showing defaults for skimmers and formats.
+   * Vector output match data frame output more closely.
+   * Add minimum required version for testhat.
 
 ### BUG FIXES
   * You can use `skim_with()` to add and remove skimmers at the same time, i.e.
     `skim_with(iqr = IQR, hist = NULL)` works as expected.
+  * Histograms work when Inf or -Inf are present.
+  * Change seq( ) parameter to length.out to avoid problems with name matching.
 
-skimr 1.0.1 (2018-01-xx)
+skimr 1.0.1 (2018-01-09)
 ========================
 ### NEW FEATURES
   * Add support for spark plots on Windows
