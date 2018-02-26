@@ -115,6 +115,8 @@ object being printed.)
 ```{r results='asis'}
 skim(iris) %>% skimr::kable()
 ```
+
+
 ### Options for pander
 
 At times you may need `panderOptions('knitr.auto.asis', FALSE)`.

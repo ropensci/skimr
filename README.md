@@ -300,22 +300,10 @@ Variable type: numeric
 <td align="left">4.4</td>
 <td align="left">▁▂▅▇▃▂▁▁</td>
 </tr>
-<tr class="odd">
-<td align="left">### Options for</td>
-<td align="left">pander</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
 </tbody>
 </table>
+
+### Options for pander
 
 At times you may need `panderOptions('knitr.auto.asis', FALSE)`.
 
