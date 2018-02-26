@@ -16,7 +16,7 @@ test_that("skim_v returns expected response for numeric vectors", {
   expect_identical(input$type, rep("numeric", 11))
   expect_identical(head(input$stat, 11),
                    c("missing", "complete", "n", "mean", "sd", "p0", "p25", 
-                     "median", "p75", "p100", "hist"))
+                     "p50", "p75", "p100", "hist"))
   expect_identical(input$level, rep(".all", 11))
   expect_equal(input$value, c(0, 32, 32, mean(mtcars$mpg), sd(mtcars$mpg), 
                                     min(mtcars$mpg), quantiles[1], 
@@ -75,7 +75,7 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
     "numeric",       "sd", ".all",  sd(patho, na.rm = TRUE),        "1.3e+16",
     "numeric",      "p0", ".all",  -(2^.Machine$double.digits),    "-9e+15",
     "numeric",      "p25", ".all",  pqs[1],                     "-4.5e+15",
-    "numeric",   "median", ".all",  0,                              "0",
+    "numeric",      "p50", ".all",  0,                              "0",
     "numeric",      "p75", ".all",  pqs[2],                     "4.5e+15", 
     "numeric",      "p100", ".all",  +(2^.Machine$double.digits),   "9e+15",
     "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▇")

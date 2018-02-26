@@ -68,26 +68,26 @@ test_that("Skimr kable prints as expected, 64-bit", {
   expect_equal(input[11], "Variable type: numeric")
   expect_equal(input[12], "")  
   expect_equal(input[15], 
-"|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35   |5.1 |6.9  |▇▁▁▂▅▅▃▁ |"
+"|Petal.Length |0       |150      |150 |3.76 |1.77 |1   |1.6 |4.35 |5.1 |6.9  |▇▁▁▂▅▅▃▁ |"
    )
   expect_equal(input[16], 
-"|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3    |1.8 |2.5  |▇▁▁▅▃▃▂▂ |"
+"|Petal.Width  |0       |150      |150 |1.2  |0.76 |0.1 |0.3 |1.3  |1.8 |2.5  |▇▁▁▅▃▃▂▂ |"
   )
   expect_equal(input[17], 
-"|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8    |6.4 |7.9  |▂▇▅▇▆▅▂▂ |"
+"|Sepal.Length |0       |150      |150 |5.84 |0.83 |4.3 |5.1 |5.8  |6.4 |7.9  |▂▇▅▇▆▅▂▂ |"
    )
   expect_equal(input[18], 
-"|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3      |3.3 |4.4  |▁▂▅▇▃▂▁▁ |"
+ "|Sepal.Width  |0       |150      |150 |3.06 |0.44 |2   |2.8 |3    |3.3 |4.4  |▁▂▅▇▃▂▁▁ |"
    )
   
   # The headers are different on windows
   # Just ignore them
   skip_on_os("windows")
   expect_equal(input[13], 
-"|variable     |missing |complete |n   |mean |sd   |p0  |p25 |median |p75 |p100 |hist     |"
+               "|variable     |missing |complete |n   |mean |sd   |p0  |p25 |p50  |p75 |p100 |hist     |"
   )
   expect_equal(input[14], 
-"|:------------|:-------|:--------|:---|:----|:----|:---|:---|:------|:---|:----|:--------|"
+ "|:------------|:-------|:--------|:---|:----|:----|:---|:---|:----|:---|:----|:--------|"
   )
 })
 
@@ -151,19 +151,19 @@ test_that("skimr::pander prints as expected", {
   expect_equal(input[20], "")
   expect_equal(input[21], "")
   expect_equal(input[22], 
- "----------------------------------------------------------------------------"
+  "-------------------------------------------------------------------------"
   )
   expect_equal(input[23], 
- " variable   missing   complete   n     mean     sd     p0     p25    median "
+ " variable   missing   complete   n     mean     sd     p0     p25    p50 "
   )
   expect_equal(input[24], 
- "---------- --------- ---------- ---- -------- ------- ----- ------- --------"
+    "---------- --------- ---------- ---- -------- ------- ----- ------- -----"
   )
   expect_equal(input[25], 
- "  weight       0         71      71   261.31   78.07   108   204.5    258   "
+   "  weight       0         71      71   261.31   78.07   108   204.5   258 "
   )
   expect_equal(input[26], 
- "----------------------------------------------------------------------------"
+   "-------------------------------------------------------------------------"
   )
   expect_equal(input[27], "")
   expect_equal(input[28], "Table: Table continues below")
