@@ -141,7 +141,7 @@ numeric_funs <- list(
   sd = purrr::partial(sd, na.rm = TRUE),
   p0 = purrr::partial(quantile, probs = 0, na.rm = TRUE, names = FALSE),
   p25 = purrr::partial(quantile, probs = .25, na.rm = TRUE, names = FALSE),
-  median = purrr::partial(median, na.rm = TRUE),
+  p50 = purrr::partial(quantile, probs= .50, na.rm = TRUE, names = FALSE),
   p75 = purrr::partial(quantile, probs = .75, na.rm = TRUE, names = FALSE),
   p100 = purrr::partial(quantile, probs = 1, na.rm = TRUE, names = FALSE),
   hist = inline_hist
