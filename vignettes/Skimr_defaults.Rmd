@@ -1,0 +1,47 @@
+---
+title: "Skimr defaults"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette simply displays the defaults for skimr functions.
+All of these may be overloaded as explained in the _Using skimr_ vignette_.
+
+## Skimmers
+
+The `show_skimmers()` function displays the named list of skimmers by type.
+
+```{r}
+library(skimr)
+show_skimmers()
+```
+
+## Skimmer functions
+
+The `get_skimmers()` function shows the actual functions used, including 
+function defaults such as NA handling.  
+
+```{r}
+get_skimmers()
+```
+
+## Formats
+
+Skimmer creates formatted values to use in printing. The show_formats()
+function shows the default formats. 
+
+```{r}
+show_formats()
+```
+

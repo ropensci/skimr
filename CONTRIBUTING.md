@@ -33,11 +33,11 @@ requests, note that in your issue comments.
 
 ## Code style
 
-Please use snake case (such as skim_v)  for function names.  Besides that, in general follow the Google code 
-style for R.
-
-
+Please use snake case (such as skim_v)  for function names.  
+Besides that, in general follow the 
+[tidyverse style](http://style.tidyverse.org/) style for R.
 
 ## Code of Conduct
 
-When contributing to `skimr` you must follow the code of conduct defined in CONDUCT.md
+When contributing to `skimr` you must follow the code of 
+conduct defined in [CONDUCT.md](CONDUCT.md)

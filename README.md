@@ -129,7 +129,7 @@ Skim statistics in the console
     ## factor: 1   
     ## numeric: 4
 
-### Individual columns can be selected using tidyverse-style selectors:
+### Individual columns can be selected using tidyverse-style selectors
 
     skim(iris, Sepal.Length, Petal.Length)
 
@@ -142,7 +142,7 @@ Skim statistics in the console
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6   4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1   5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
 
-### Handles grouped data:
+### Handles grouped data
 
 `skim()` can handle data that has been grouped using `dplyr::group_by`.
 
@@ -168,7 +168,14 @@ Skim statistics in the console
     ##   virginica Sepal.Length       0       50 50 6.59 0.64 4.9 6.23   6.5  6.9   7.9 ▁▁▃▇▅▃▂▃
     ##   virginica  Sepal.Width       0       50 50 2.97 0.32 2.2 2.8    3    3.18  3.8 ▁▃▇▇▅▃▁▂
 
-### Options for kable and pander:
+Knitted results
+---------------
+
+Simply skimming a data frame will produce the horizontal print layout
+shown above. When knitting you can also used enhanced rendering with
+kable and pander implementations.
+
+### Options for kable and pander
 
 Enhanced print options are available by piping to `kable()` or
 `pander()`. These build on the [pander
@@ -176,10 +183,13 @@ package](https://cran.r-project.org/web/packages/pander/index.html) and
 the kable function of the [knitr
 package](https://cran.r-project.org/web/packages/knitr/index.html) These
 examples show how the enhanced options should appear after knitting,
-however your results may differ (see vignettes for details). Note that
-the `skimr::` names space is used to prevent it being replaced by
-knitr::kable (which will result in the long skim\_df object being
-printed.)
+however your results may differ (see vignettes for details).
+
+### Option for kable.
+
+Note that the results='asis' chunk option is used and the `skimr::`
+namespace is used to prevent it being replaced by knitr::kable (which
+will result in the long skim\_df object being printed.)
 
     skim(iris) %>% skimr::kable()
 
@@ -290,8 +300,24 @@ Variable type: numeric
 <td align="left">4.4</td>
 <td align="left">▁▂▅▇▃▂▁▁</td>
 </tr>
+<tr class="odd">
+<td align="left">### Options for</td>
+<td align="left">pander</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
 </tbody>
 </table>
+
+At times you may need `panderOptions('knitr.auto.asis', FALSE)`.
 
     skim(iris) %>% pander()
 
@@ -496,8 +522,7 @@ produces a long, tidy-format `skim_df` object that can be computed on.
     ## 22     feed  factor top_counts      <NA>   0.0000     NA: 0
     ## 23     feed  factor    ordered      .all   0.0000     FALSE
 
-Compute on the full `skim_df` object
-------------------------------------
+### Compute on the full `skim_df` object
 
     skim(mtcars) %>% dplyr::filter(stat=="hist")
 
@@ -516,10 +541,19 @@ Compute on the full `skim_df` object
     ## 10 gear     numeric hist  .all     NA ▇▁▁▆▁▁▁▂ 
     ## 11 carb     numeric hist  .all     NA ▆▇▂▇▁▁▁▁
 
-Users can add new classes.
+Customizing skimr
+-----------------
 
-Specify your own statistics
----------------------------
+Although skimr provides opinionated defaults, it is highly customizable.
+Users can specify their own statistics, change the formatting of
+results, create statistics for new classes and develop skimmers for data
+structures that are not data frames.
+
+### Specify your own statistics and classes
+
+Users can specify their own statistics using a list combined with the
+`skim_with()` function. This can support any named class found in your
+data.
 
     funs <- list(
       iqr = IQR,
@@ -540,6 +574,18 @@ Specify your own statistics
     # Restore defaults
     skim_with_defaults()
 
+### Change formatting
+
+Skimr provides a set of default formats that allow decimals in columns
+to be aligned, a reasonable number of decimal places for numeric data,
+and a representation of dates. Users can view thes with `show_formats()`
+and modify them with `skim_format()`.
+
+### Skimming other objects
+
+Procedures for developing skim functions for other objects are described
+in the vignette *Supporting additional objects*.
+
 Limitations of current version
 ------------------------------
 
@@ -553,8 +599,8 @@ printing a data frame. For example, `"▂▅▇"` is printed as
 `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
 the low-level
 code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
-for printing dataframes; for example, there are reports of this issue in
-Emacs ESS.
+for printing dataframes. While some cases have been addressed, there
+are, for example, reports of this issue in Emacs ESS.
 
 This means that while `skimr` can render the histograms to the console
 and in `kable()`, it cannot in other circumstances. This includes:
