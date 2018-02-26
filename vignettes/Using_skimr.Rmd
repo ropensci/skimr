@@ -172,16 +172,30 @@ iris_setosa <- iris %>%
 
 ```
 
-- `skim_to_list()` returns of a list of the wide data frames for each data
+- `skim_to_list()` returns a nqmed list of the wide data frames for each data
 type. These data frames contain the formatted, character values, meaning that
 they are most useful for display. In general, users will want to store the
 results in an object for further handling.
 
+```{r}
+iris %>% skim_to_list()
+iris_skimmed <- iris %>% skim_to_list()
+iris_skimmed[["numeric"]] %>% dplyr::select(mean, sd)
+```
+
+
 - `skim_to_wide()` returns a single data frame with each variable in a row,
 again using formatted, character values. Variables that do not report a given
 statistic are assigned NA for that statistic.
+The results may be sparse and users should be aware that statistics such as
+mean that apply over many types of data (such as dates) should 
+be analyzed carefully.
 
-# `skim_with()` and `skim_with_defaults()`
+```{r}
+iris %>% skim_to_wide(iris)
+```
+
+# Modifying skim() with skim_with() and skim_with_defaults()
 
 `skimr` is opinionated in its choice of defaults, but users can easily add to,
 replace, or remove the statistics for a class.   
@@ -252,10 +266,11 @@ detail in the `knitr` package for `kable()` and the `pander` package for
 `pander()`. Using either of these may require use of document or chunk options
 and fonts, including a chunk option of `results = 'asis'`. This topic is
 addressed in more detail in the Using Fonts vignette.
+Because of the complexity of this, the samples below are shown as they would 
+be in the console.
 
 ```{r }
 skim(iris) %>% skimr::kable()
-
 ```
 
 ```{r }

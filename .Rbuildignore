@@ -1,8 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^\\inst\\docs\\blog\.html$
-^\\inst\\docs\\blog\.Rmd$
+^\\inst\\doc\\other_docs\\blog\.html$
+^\\inst\\doc\\other_docs\\blog\.Rmd$
+^\\inst\\rmarkdown\\other
 ^README\.Rmd
 ^README\.html
 ^CONTRIBUTING.md
