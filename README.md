@@ -625,5 +625,5 @@ Contributing
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr's flexibility to add their
-own customized classes. Please see the [contributing](contributing.md)
-and [conduct](conduct.md) documents.
+own customized classes. Please see the [contributing](CONTRIBUTING.md)
+and [conduct](CONDUCT.md) documents.
