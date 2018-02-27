@@ -67,7 +67,7 @@ test_that("Skimming a grouped data frame works as expected", {
                                     "carb"), 8, each = 11))
   expect_identical(input$type, rep("numeric", 792))
   expect_identical(input$stat, rep(c("missing", "complete", "n", "mean", "sd",
-                                     "p0", "p25", "median", "p75", "p100",
+                                     "p0", "p25", "p50", "p75", "p100",
                                      "hist"), 72))
   expect_identical(input$level, rep(".all", 792))
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))
@@ -95,7 +95,7 @@ test_that("skim_to_list works as expected", {
   expect_equal(dim(input[["numeric"]]), c(1, 12))
   expect_identical(names(input[["numeric"]]),
                    c("variable", "missing", "complete", "n", "mean",
-                     "sd", "p0", "p25", "median", "p75", "p100", "hist" ))
+                     "sd", "p0", "p25", "p50", "p75", "p100", "hist" ))
 })
 
 test_that("skim_to_list works with grouped data", {
@@ -243,7 +243,7 @@ test_that("Skimming a grouped df works as expected selecting two columns", {
   expect_identical(input$variable, rep(c("mpg", "disp"), 8, each = 11))
   expect_identical(input$type, rep("numeric", 176))
   expect_identical(input$stat, rep(c("missing", "complete", "n", "mean", "sd",
-                                     "p0", "p25", "median", "p75", "p100",
+                                     "p0", "p25", "p50", "p75", "p100",
                                      "hist"), 16))
   expect_identical(input$level, rep(".all", 176))
   expect_identical(input$value[1:5], c(0, 1, 1, 21.5, NA))

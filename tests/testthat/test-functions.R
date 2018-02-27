@@ -181,9 +181,9 @@ test_that("show_skimmers() lets you pick which type you want returned", {
   expect_identical(correct, skimmers)
 })
 
-test_that("show_skimmers() lets you pick which many types you want returned", {
+test_that("show_skimmers() lets you pick which multiple types you want returned", {
   correct <- list(numeric = c("missing", "complete", "n", "mean",  "sd", "p0",
-                              "p25", "median", "p75", "p100", "hist"),
+                              "p25", "p50", "p75", "p100", "hist"),
                   character = c("missing",  "complete", "n", "min", "max",
                                 "empty", "n_unique"))
   skimmers <- show_skimmers(c("numeric", "character"))
@@ -205,7 +205,7 @@ test_that("show_skimmers() returns something if given an unassigned type", {
 test_that("Skim functions can be removed by setting them to NULL", {
   skim_with(numeric = list(hist = NULL))
   correct <- list(numeric = c("missing", "complete", "n", "mean",  "sd", "p0",
-                              "p25", "median", "p75", "p100"))
+                              "p25", "p50", "p75", "p100"))
   input <- show_skimmers("numeric")
   expect_identical(correct, input)
   skim_with_defaults()
