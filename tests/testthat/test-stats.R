@@ -47,13 +47,12 @@ test_that("inline histogram is calculated correctly.", {
 })
 
 test_that("inline histogram is calculated correctly when x is all zeros.", {
-  all0s <- c(0, 0, 0, 0)
-  input <- inline_hist(all0s)
+  input <- inline_hist(numeric(10))
   correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
-test_that("inline histogram is calculated correctly when x is all zeros.", {
+test_that("inline histogram returns an empty string when x is length 0.", {
   input <- inline_hist(numeric(0))
   correct <- structure(" ", class = c("spark", "character"))
   expect_identical(input, correct)
@@ -67,14 +66,38 @@ test_that("inline histogram is calculated correctly when x is all zeores or
           })
 
 test_that("inline histogram is calculated correctly when x is all 1s.", {
-  input <- inline_hist(numeric(1))
+  input <- inline_hist(c(1, 1, 1, 1, 1, 1))
   correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
-test_that("inline histogram is calculated correctly when x is all NAs.", {
-  input <- inline_hist(as.numeric(c(NA, NA, NA)))
+test_that("inline histogram returns empty string when x is all NAs.", {
+  input <- inline_hist(as.numeric(rep(NA, 10)))
   correct <- structure(" ", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is returns empty string when x is all NaN.", {
+  input <- inline_hist(rep(NaN, 10))
+  correct <- structure(" ", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is calculated correctly when x is evenly distributed.", {
+  input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
+  correct <- structure("▇▇▇▇▇▇▇▇", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is calculated correctly with NaN.", {
+  input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, NaN))
+  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
+test_that("inline histogram is calculated correctly with NA.", {
+  input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, NA))
+  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
   expect_identical(input, correct)
 })
 
