@@ -35,7 +35,13 @@ n_complete <- function(x) {
 
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
-  out <- purrr::set_names(as.integer(tab), names(tab))
+  names_tab <- names(tab)
+  if (is.element("",  names_tab)) {
+    names_tab[names_tab == ""] <- "empty"
+    warning("Variable contains one or more values of \"\" that have 
+            been converted to \"empty\". ") 
+  }
+  out <- rlang::set_names(as.integer(tab), names_tab)
   sort(out, decreasing = TRUE)
 }
 

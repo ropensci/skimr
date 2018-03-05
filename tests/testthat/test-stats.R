@@ -191,3 +191,13 @@ test_that("sorted count is calculated correctly with a NA." , {
   expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1))
   expect_equal(names(sorted_count(dat)), c("A", "C", NA, "B"))
 })
+
+test_that("sorted count is calculated correctly with \"\"." , {
+  # \"\" should be converted to \"empty \" and a warning issued.
+  dat<-c("A", "A", "A","A", "B", "", "", "C","C", "C")
+  dat<-as.factor(dat)
+  expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1, 0))
+  expect_equal(names(sorted_count(dat)), c("A", "C", "empty", "B", NA))
+  expect_warning(sorted_count(dat),'Variable contains one or more values of "" that have 
+            been converted to \"empty\".')
+})
