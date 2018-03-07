@@ -368,3 +368,11 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
                       ))
 })
 
+test_that("Skimming with non-finite values works", {
+  expect_length(skim(c(x = c(0, 1, NA))), 6)
+  expect_length(skim(c(x = c(0, NA))), 6)
+  expect_warning(input<-skim(c(x = c(Inf, 0))))
+  expect_length(input, 6)
+  expect_warning(input<-skim(c(x = c(-Inf, 0))))
+  expect_length(input, 6)
+})

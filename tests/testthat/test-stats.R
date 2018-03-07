@@ -101,6 +101,12 @@ test_that("inline histogram is calculated correctly with NA.", {
   expect_identical(input, correct)
 })
 
+test_that("inline histogram is calculated correctly with Inf.", {
+  expect_warning(input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf)))
+  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
+  expect_identical(input, correct)
+})
+
 test_that("n_empty is calculated correctly.", {
   data<-c("a", "ab", "abc", "")
     correct <- as.integer(1)
@@ -196,8 +202,7 @@ test_that("sorted count is calculated correctly with \"\"." , {
   # \"\" should be converted to \"empty \" and a warning issued.
   dat<-c("A", "A", "A","A", "B", "", "", "C","C", "C")
   dat<-as.factor(dat)
-  expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1, 0))
-  expect_equal(names(sorted_count(dat)), c("A", "C", "empty", "B", NA))
-  expect_warning(sorted_count(dat),'Variable contains one or more values of "" that have 
-            been converted to \"empty\".')
+  expect_warning(expected <- sorted_count(dat))
+  expect_equal(unname(expected), c(4, 3, 2, 1, 0))
+  expect_equal(names(expected), c("A", "C", "empty", "B", NA))
 })
