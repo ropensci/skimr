@@ -250,15 +250,3 @@ test_that("Skimming a grouped df works as expected selecting two columns", {
   expect_identical(input$formatted[1:5], c("0", "1", "1", "21.5", "NA"))
 })
 
-test_that("Skimming with non-finite values works", {
-  expect_length(skim(data.frame(x = c(0, 1, NA))), 6)
-  expect_length(skim(data.frame(x = c(0, NA))), 6)
-  expect_length(skim(data.frame(x = c(-Inf, 0))), 6)
-  expect_length(skim(data.frame(x = c(0, Inf))), 6)
-})
-
-test_that("inline histogram is calculated correctly with Inf.", {
-  input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf))
-  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
-  expect_identical(input, correct)
-})
