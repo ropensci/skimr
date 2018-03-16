@@ -35,7 +35,13 @@ n_complete <- function(x) {
 
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
-  out <- purrr::set_names(as.integer(tab), names(tab))
+  names_tab <- names(tab)
+  if (is.element("",  names_tab)) {
+    names_tab[names_tab == ""] <- "empty"
+    warning(
+ "Variable contains value(s) of \"\" that have been converted to \"empty\".") 
+  }
+  out <- rlang::set_names(as.integer(tab), names_tab)
   sort(out, decreasing = TRUE)
 }
 
@@ -47,7 +53,12 @@ sorted_count <- function(x) {
 inline_hist <- function(x) {
   # For the purposes of the histogram, treat infinite as NA
   # (before the test for all NA)
-  x[is.infinite(x)] <- NA
+  if (any(is.infinite(x))){
+    x[is.infinite(x)] <- NA
+    warning(
+      "Variable contains Inf or -Inf value(s) that were converted to NA."
+     )
+  }
   
   # Handle empty and NA vectors (is.na is TRUE for NaN)
   if (length(x) < 1 || all(is.na(x)))
