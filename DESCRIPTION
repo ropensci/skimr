@@ -39,7 +39,7 @@ Imports:
     rlang,
     stats,
     stringr (>= 1.1),
-    knitr,
+    knitr (>= 1.2),
     tibble (>= 0.6),
     tidyr (>= 0.7),
     tidyselect

@@ -13,6 +13,7 @@ skimr 1.0.2 (2018-xx-xx)
    * New vignette showing defaults for skimmers and formats.
    * Vector output match data frame output more closely.
    * Add minimum required version for testhat.
+   * Add minimum requred version for knitr.
 
 ### BUG FIXES
   * You can use `skim_with()` to add and remove skimmers at the same time, i.e.
