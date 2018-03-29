@@ -45,7 +45,7 @@ print.skim_vector <- function(x, ...) {
 print.summary_skim_df <- function(x, ...) {
   n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
   n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
-  df_name <- paste0("Name: ", x$df_name, "   \n")
+  df_name <- ifelse(x$df_name == ".", "", paste0("Name: ", x$df_name, "   \n"))
   
   type_frequency_string <- paste0(x$type_frequencies$type,
                                   ": ",
