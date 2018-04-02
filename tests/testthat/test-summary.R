@@ -24,6 +24,20 @@ test_that("The summary print method prints the correct object", {
   expect_output(print(summary_input), "numeric: 4")
 })
 
+test_that("The summary print method prints the correct object when piped", {
+  # Test that the correct lines are output, no name should be output.
+  summary_input <- skim(iris) %>% summary()
+  
+  expect_output(print(summary_input), "A skim object")
+  
+  expect_output(print(summary_input), "Number of Rows: 150")
+  expect_output(print(summary_input), "Number of Columns: 5")
+  
+  expect_output(print(summary_input), "Column type frequency")
+  expect_output(print(summary_input), "factor: 1")
+  expect_output(print(summary_input), "numeric: 4")
+})
+
 test_that("The summary pander method returns the correct object", {
   s <- skim(iris)  %>% summary()
   pander_input <- capture.output(pander(s))
