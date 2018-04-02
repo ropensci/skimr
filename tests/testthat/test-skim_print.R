@@ -93,6 +93,7 @@ test_that("Skimr kable prints as expected, 64-bit", {
 
 test_that("Skimr kable prints as expected, 32-bit windows", {
   skip_if_not(R.Version()$arch == "i386")
+  skip_on_os(c("mac", "linux", "solaris"))
   skimmed <- skim(iris)
   inputRaw <- capture.output(skimr::kable(skimmed))
   input <- skimr:::fix_unicode(inputRaw)
