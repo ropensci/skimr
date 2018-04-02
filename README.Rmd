@@ -101,8 +101,8 @@ with kable and pander implementations.
 ### Options for kable and pander
 
 Enhanced print options are available by piping to `kable()` or `pander()`.
-These build on the [pander package](https://cran.r-project.org/web/packages/pander/index.html)
-and the kable function of the [knitr package](https://cran.r-project.org/web/packages/knitr/index.html)
+These build on the [pander package](https://CRAN.R-project.org/package=pander)
+and the kable function of the [knitr package](https://CRAN.R-project.org/package=knitr)
 These examples show how the enhanced options should appear after 
 knitting, however your results may differ (see vignettes for details).
 
