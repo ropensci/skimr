@@ -56,26 +56,26 @@ test_that("The summary pander method returns the correct object", {
   expect_equal(pander_input[15], "")
 })
 
-test_that("The summary pander method returns the correct object", {
+test_that("The summary kable method returns the correct object", {
   s <- skim(iris)  %>% summary()
   kable_input <- capture.output(kable(s))
   expect_equal(kable_input[1], "$Summary")
   expect_equal(kable_input[2], "")
   expect_equal(kable_input[3], "")
   expect_equal(kable_input[4], 
-               "|df_name    |n_rows              |n_cols               |")
+               "|  df_name   |       n_rows        |        n_cols        |")
   expect_equal(kable_input[5], 
-               "|:----------|:-------------------|:--------------------|")
+               "|------------|---------------------|----------------------|")
   expect_equal(kable_input[6],
-               "|Name: iris |Number of Rows: 150 |Number of Columns: 5 |")
+               "| Name: iris | Number of Rows: 150 | Number of Columns: 5 |")
   expect_equal(kable_input[7], "")
   expect_equal(kable_input[8], "$`Type counts`")
   expect_equal(kable_input[9], "")
   expect_equal(kable_input[10], "")
-  expect_equal(kable_input[11], "|type    |  n|")
-  expect_equal(kable_input[12], "|:-------|--:|" )
-  expect_equal(kable_input[13], "|factor  |  1|")
-  expect_equal(kable_input[14], "|numeric |  4|")
+  expect_equal(kable_input[11], "|  type   | n |")
+  expect_equal(kable_input[12], "|---------|---|" )
+  expect_equal(kable_input[13], "| factor  | 1 |")
+  expect_equal(kable_input[14], "| numeric | 4 |")
   expect_equal(kable_input[15], "")
 })
 
