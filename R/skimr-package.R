@@ -29,7 +29,7 @@ magrittr::`%>%`
 
 #' @importFrom pander pander
 
-#' @importFrom knitr kable
+#' @importFrom knitr image_uri
 
 #' @importFrom tidyselect contains
 #' @aliases select_helpers
