@@ -27,10 +27,6 @@ options <- new.env()
 #' @export
 magrittr::`%>%`
 
-#' @importFrom pander pander
-
-#' @importFrom knitr image_uri
-
 #' @importFrom tidyselect contains
 #' @aliases select_helpers
 #' @export

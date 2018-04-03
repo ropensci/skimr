@@ -6,25 +6,29 @@
 \alias{pander.summary_skim_df}
 \title{Render data frames as markdown}
 \usage{
-\method{pander}{skim_df}(x, caption = attr(x, "caption"), ...)
+pander(x, caption = attr(x, "caption"), ...)
 
-\method{pander}{summary_skim_df}(x, ...)
+pander.skim_df(x, caption = attr(x, "caption"), ...)
+
+pander.summary_skim_df(x, ...)
 }
 \arguments{
-\item{x}{an R object}
+\item{x}{Object to be processed}
 
 \item{caption}{A character scalar specifying the table's caption.}
 
-\item{...}{optional parameters passed to special methods and/or raw \code{pandoc.*} functions}
+\item{...}{Further arguments passed to or from other methods.}
 }
 \description{
 Render data frames as markdown
 }
-\section{Methods (by class)}{
+\section{Functions}{
 \itemize{
-\item \code{skim_df}: Produce \code{pander} output of a skimmed data frame
+\item \code{pander}: Produce \code{pander} output
 
-\item \code{summary_skim_df}: Pander method for a summary_skim_df object
+\item \code{pander.skim_df}: Produce \code{pander} output of a skimmed data frame
+
+\item \code{pander.summary_skim_df}: Pander method for a summary_skim_df object
 }}
 
 \seealso{

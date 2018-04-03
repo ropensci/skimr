@@ -16,8 +16,15 @@ kable <- function (x, format = NULL, digits = getOption("digits"),
 
 #' @export
 
-kable.data.frame <- knitr::kable
-
+kable.data.frame <- function(x, format = NULL, digits = getOption("digits"), 
+                             row.names = NA, col.names = NA, align = NULL, 
+                             caption = NULL, format.args = list(), 
+                             escape = TRUE, ...) { 
+       knitr::kable(x, format = NULL, digits = getOption("digits"), 
+                    row.names = NA, col.names = NA, align = NULL, 
+                    caption = NULL, format.args = list(), 
+                    escape = TRUE, ...) 
+  }
 
 #' @describeIn kable Produce `kable` output of a skimmed data frame
 #' @export
