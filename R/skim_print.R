@@ -84,8 +84,7 @@ skim_render <- function(.data, groups, FUN, ...) {
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
   collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, !!rlang::sym("stat"),
-                        !!rlang::sym("formatted"))
+  wide <- tidyr::spread(collapsed, "stat", "formatted")
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }
@@ -95,7 +94,7 @@ skim_render <- function(.data, groups, FUN, ...) {
 }
 
 collapse_levels <- function(.data, groups) {
-  all_groups <- c(groups, rlang::sym("variable"), rlang::sym("stat"))
+  all_groups <- c(groups, rlang::syms(c("variable", "stat")))
   grouped <- dplyr::group_by(.data, !!!all_groups)
   dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
 }
