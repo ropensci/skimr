@@ -1,15 +1,16 @@
 #' Render data frames as markdown
-#' 
+#' @describeIn pander Produce `pander` output
+#' @param x Object to be processed
+#' @param caption A character scalar specifying the table's caption.
+#' @param ... Further arguments passed to or from other methods.
+#' @export
 #' @seealso [`pander::pander()`]
-#' @inheritParams pander::pander
-#' @importFrom pander pander
-#' @name pander
-NULL
 
-
+pander <- function(x, caption = attr(x, "caption"), ...) {
+     pander::pander(x, caption = attr(x, "caption"), ...) 
+  }
 
 #' @describeIn pander Produce `pander` output of a skimmed data frame
-#' @param caption A character scalar specifying the table's caption.
 #' @export
 
 pander.skim_df <- function(x, caption = attr(x, "caption"), ...) {
