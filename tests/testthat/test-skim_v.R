@@ -342,7 +342,8 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
   expect_identical(input$level, rep(".all", 11))
   expect_equal(input$value, c(3, 0, 3, NaN, NA, NA, NA, NA, NA, NA, NA))
   expect_identical(input$formatted,
-                   c("3", "0", "3", "NaN", "NA", "NA", "NA", "NA", "NA", "NA", " "))
+                   c("3", "0", "3", "NaN", "NA", "NA", "NA", "NA", "NA", "NA",
+                     "        "))
 })  
 
 test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
