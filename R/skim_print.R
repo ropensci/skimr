@@ -61,7 +61,6 @@ print.summary_skim_df <- function(x, ...) {
       ,sep = "")
 }
 
-
 #' Print expanded skim tables with a simple caption
 #' @keywords internal
 #' @noRd
