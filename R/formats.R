@@ -21,8 +21,11 @@ NULL
 #'
 #' @param ... Named arguments that contain named lists specifying formats to
 #'   apply.
+#' @param .list Instead of individual named entries, you can provided a list
+#'   instead. If most \code{...} arguments and \code{.list} is provided, values
+#'   in \code{.list} take precedence.
 #' @param append Whether the provided options should be in addition to the
-#'  defaults already in `skim`. Default is `TRUE`.
+#'   defaults already in `skim`. Default is `TRUE`.
 #' @param drop_new Whether types outside of the defaults should be discarded.
 #' @return When setting formatting options, `invisible(NULL)`. When looking up
 #'   values, a list of option-value pairs.
@@ -31,17 +34,28 @@ NULL
 #' skim_format(numeric = list(digits = 3))
 #' 
 #' # Show the values for the formats
-#' show_formats
+#' show_formats()
 #' 
 #' # Show 4-character names in factor levels
 #' skim_format(.levels = list(max_char = 4))
+#' 
+#' # Set multiple formats
+#' skim_format(numeric = list(digits = 3), .levels = list(max_char = 4))
+#' 
+#' # Set multiple formats with a .list argument
+#' my_formats <- list(numeric = list(digits = 3), .levels = list(max_char = 4))
+#' skim_format(.list = my_formats)
+#' 
+#' # Alternatively, use rlang unquoting semantics
+#' skim_format(!!!my_formats)
 #' 
 #' # Reset to the defaults
 #' skim_format_defaults()
 #' @export
 
-skim_format <- function(..., append = TRUE, drop_new = FALSE) {
-  skim_options(list(...), env = "formats", append = append, drop_new = drop_new)
+skim_format <- function(..., .list = list(), append = TRUE, drop_new = FALSE) {
+  combined <- purrr::list_modify(rlang::dots_list(...), !!! .list)
+  skim_options(combined, env = "formats", append = append, drop_new = drop_new)
 }
 
 
@@ -49,7 +63,7 @@ skim_format <- function(..., append = TRUE, drop_new = FALSE) {
 #' @export
 
 skim_format_defaults <- function() {
-  do.call(skim_format, c(.formats, append = FALSE, drop_new = TRUE))
+  skim_format(.list = .formats, append = FALSE, drop_new = TRUE)
 }
 
 

@@ -101,14 +101,35 @@ test_functions_that("Skimming functions for new types can be added", {
 })
 
 test_functions_that("Set multiple sets of skimming functions", {
-  skimmers_default<-show_skimmers()
-  correct <- c("iqr", "q" )
-
-  funs <- list(iqr = IQR,
-    q = purrr::partial(quantile, probs = .99))
-
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, new_type = funs, append = FALSE)
   input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
+test_functions_that("Set multiple sets of skimming functions, list", {
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
+  skim_with(.list = list(numeric = funs, new_type = funs), append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
+test_functions_that("Set multiple sets of skimming functions, rlang", {
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
+  skim_with(!!!list(numeric = funs, new_type = funs), append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
   expect_identical(input$numeric, correct)
   expect_identical(input$new_type, correct)
   expect_identical(get_skimmers("new_type"), list(new_type = funs))
