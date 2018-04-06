@@ -124,6 +124,18 @@ test_functions_that("Set multiple sets of skimming functions, list", {
   skim_with_defaults()
 })
 
+test_functions_that("Set multiple sets of skimming functions, rlang", {
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
+  skim_with(!!!list(numeric = funs, new_type = funs), append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
 test_functions_that("Skimming functions without a class return a message.", {
   funs_no_class <- list( IQR)
   expect_error(skim_with(funs_no_class), "Please used named arguments")

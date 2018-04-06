@@ -39,6 +39,14 @@ test_formats_that("Multiple formats can be changed, list", {
   expect_identical(formats$integer, list(digits = 1))
 })
 
+test_formats_that("Multiple formats can be changed, rlang", {
+  new_formats <- list(numeric = list(digits = 1), integer = list(digits = 1))
+  skim_format(!!!new_formats, append = FALSE) 
+  formats <- show_formats()
+  expect_identical(formats$numeric, list(digits = 1))
+  expect_identical(formats$integer, list(digits = 1))
+})
+
 test_formats_that("Formatting options change printed output", {
   skim_format(numeric = list(digits = 2, nsmall = 2), .align_decimal = FALSE,
               append = FALSE)

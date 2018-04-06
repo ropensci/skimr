@@ -56,8 +56,11 @@ NULL
 #' 
 #' # Or pass the same as a list
 #' my_skimmers <- list(numeric = list(mean = mean),
-#'                    character = list(len = length))
+#'                     character = list(len = length))
 #' skim_with(.list = my_skimmers)
+#' 
+#' # Alternatively, use rlang unquoting semantics
+#' skim_with(!!!my_skimmers)
 #' 
 #' # Go back to defaults
 #' skim_with_defaults()
@@ -73,7 +76,7 @@ NULL
 #' @export
 
 skim_with <- function(..., .list = list(), append = TRUE, drop_new = FALSE) {
-  combined <- purrr::list_modify(list(...), !!! .list)
+  combined <- purrr::list_modify(rlang::dots_list(...), !!! .list)
   skimmers <- purrr::modify_depth(combined, 1, purrr::map_if,
                                   Negate(is.null), rlang::as_function)
   skim_options(skimmers, env = "functions", append = append,
