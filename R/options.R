@@ -11,9 +11,10 @@
 #' @param append Whether the provided options should be in addition to the
 #'   defaults already in skim for the given types specified by the named
 #'   arguments in `...`.
+#' @param drop_new Whether types outside of the defaults should be discarded.
 #' @noRd
 
-skim_options <- function(opts, env, append) {
+skim_options <- function(opts, env, append, drop_new) {
   if (any(is.null(names(opts))) || any(names(opts) == "")) {
     stop("Please used named arguments as follows: <type> = <named list>")
   }
@@ -25,6 +26,10 @@ skim_options <- function(opts, env, append) {
   }
   
   purrr::map2(names(opts), opts, set_options, env, append)
+  if (drop_new) {
+    newly_defined <- setdiff(names(options[[env]]), names(opts))
+    options[[env]][newly_defined] <- NULL
+  }
   invisible(NULL)
 }
 

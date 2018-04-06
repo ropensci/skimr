@@ -7,7 +7,7 @@
 \alias{get_skimmers}
 \title{Set or add the summary functions for a particular type of data}
 \usage{
-skim_with(..., append = TRUE)
+skim_with(..., append = TRUE, drop_new = FALSE)
 
 skim_with_defaults()
 
@@ -21,6 +21,8 @@ particular data type.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in \code{skim}. Default is \code{TRUE}.}
+
+\item{drop_new}{Whether types outside of the defaults should be discarded.}
 
 \item{which}{A character vector. One or more of the classes whose summary
 functions you wish to display.}

@@ -17,6 +17,11 @@ cache:
 
 build_script:
   - travis-tool.sh install_deps
+  
+environment:
+  matrix:
+    - R_ARCH: i386
+    - R_ARCH: x64
 
 test_script:
   - travis-tool.sh run_tests

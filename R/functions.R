@@ -23,6 +23,7 @@ NULL
 #'  summary functions. With [`show_skimmers()`], each entry in the list is a
 #'  character vector of function names. With [`get_skimmers()`], each entry
 #'  in the list is itself a list of named functions.
+#' @param drop_new Whether types outside of the defaults should be discarded.
 #' @examples
 #' # Use new functions for numeric functions
 #' skim_with(numeric = list(median = median, mad = mad), append = FALSE)
@@ -60,10 +61,11 @@ NULL
 #' skim_with(hms = funs$date)
 #' @export
 
-skim_with <- function(..., append = TRUE) {
+skim_with <- function(..., append = TRUE, drop_new = FALSE) {
   skimmers <- purrr::modify_depth(rlang::dots_list(...), 1, purrr::map_if,
                                   Negate(is.null), rlang::as_function)
-  skim_options(skimmers, env = "functions", append = append)
+  skim_options(skimmers, env = "functions", append = append,
+               drop_new = drop_new)
 }
 
 
@@ -71,7 +73,7 @@ skim_with <- function(..., append = TRUE) {
 #' @export
 
 skim_with_defaults <- function() {
-  assign("functions", .default, envir = options)
+  do.call(skim_with, c(.default, append = FALSE, drop_new = TRUE))
 }
 
 
@@ -246,5 +248,6 @@ difftime_funs <- date_funs
   AsIs = asis_funs,
   difftime = difftime_funs
 )
+
 # Set the default skimming functions
 options$functions <- .default

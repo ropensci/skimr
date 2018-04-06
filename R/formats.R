@@ -23,6 +23,7 @@ NULL
 #'   apply.
 #' @param append Whether the provided options should be in addition to the
 #'  defaults already in `skim`. Default is `TRUE`.
+#' @param drop_new Whether types outside of the defaults should be discarded.
 #' @return When setting formatting options, `invisible(NULL)`. When looking up
 #'   values, a list of option-value pairs.
 #' @examples
@@ -39,8 +40,8 @@ NULL
 #' skim_format_defaults()
 #' @export
 
-skim_format <- function(..., append = TRUE) {
-  skim_options(list(...), env = "formats", append = append)
+skim_format <- function(..., append = TRUE, drop_new = FALSE) {
+  skim_options(list(...), env = "formats", append = append, drop_new = drop_new)
 }
 
 
@@ -48,7 +49,7 @@ skim_format <- function(..., append = TRUE) {
 #' @export
 
 skim_format_defaults <- function() {
-  assign("formats", .formats, envir = options)
+  do.call(skim_format, c(.formats, append = FALSE, drop_new = TRUE))
 }
 
 

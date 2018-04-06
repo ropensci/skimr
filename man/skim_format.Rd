@@ -6,7 +6,7 @@
 \alias{show_formats}
 \title{Change the formatting options for printed skim objects}
 \usage{
-skim_format(..., append = TRUE)
+skim_format(..., append = TRUE, drop_new = FALSE)
 
 skim_format_defaults()
 
@@ -18,6 +18,8 @@ apply.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in \code{skim}. Default is \code{TRUE}.}
+
+\item{drop_new}{Whether types outside of the defaults should be discarded.}
 
 \item{which}{A character vector. One or more of the classes whose formatting
 options you wish to display.}
