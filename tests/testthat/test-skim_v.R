@@ -22,10 +22,11 @@ test_that("skim_v returns expected response for numeric vectors", {
                                     min(mtcars$mpg), quantiles[1], 
                                     median(mtcars$mpg), quantiles[2], 
                                     max(mtcars$mpg), NA))
-  expect_identical(input$formatted,
+  expect_identical(input$formatted[-11],
                    c("0", "32", "32", "20.09", "6.03", "10.4", "15.43", "19.2",
-                     "22.8", "33.9", "▃▇▇▇▃▂▂▂"
-                     ))
+                     "22.8", "33.9"))
+  skip_on_os("windows")
+  expect_identical(input$formatted[11], "▃▇▇▇▃▂▂▂")
 })  
 
 
@@ -80,7 +81,9 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
     "numeric",      "p100", ".all",  +(2^.Machine$double.digits),   "9e+15",
     "numeric",     "hist", ".all", NA, "▇▁▁▁▁▁▁▇")
   input <- skimr:::skim_v(patho)
-  expect_identical(input, correct_patho)
+  expect_identical(input[-11, ], correct_patho[-11, ])
+  skip_on_os("windows")
+  expect_identical(input[11, ], correct_patho[11, ])
 })
 
 test_that("skim_v returns expected response for chr vectors", {
@@ -227,7 +230,10 @@ test_that("skim_v returns expected response for ts vectors", {
     "ts",   "line_graph", ".all", NA,               "⣀⣀⠤⠤⠒⠒⠉⠉")
   data(freeny)
   input <- skimr:::skim_v(freeny$y)
-  expect_identical(input, correct)
+  expect_identical(input[-13, ], correct[-13, ])
+  
+  skip_on_os("windows")
+  expect_identical(input[13, ], correct[13, ])
 })
 
 test_that("skim_v returns expected response for POSIXct vectors", {
@@ -364,9 +370,10 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
                    c("missing", "complete", "n", "mean", "sd", "p0"))
   expect_identical(input$level, rep(".all", 11))
   expect_equal(input$value, c(3, 1, 4, 0, NA, 0, 0, 0, 0, 0, NA))
-  expect_identical(input$formatted,
-                   c("3", "1", "4", "0", "NA", "0", "0", "0", "0", "0", "▁▁▁▇▁▁▁▁"
-                      ))
+  expect_identical(input$formatted[-11],
+                   c("3", "1", "4", "0", "NA", "0", "0", "0", "0", "0"))
+  skip_on_os("windows")
+  expect_identical(input$formatted[11], "▁▁▁▇▁▁▁▁")
 })
 
 test_that("Skimming with non-finite values works", {
