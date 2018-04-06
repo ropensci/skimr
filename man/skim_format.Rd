@@ -63,7 +63,7 @@ For each data type, options are returned as a list of option-value pairs.
 skim_format(numeric = list(digits = 3))
 
 # Show the values for the formats
-show_formats
+show_formats()
 
 # Show 4-character names in factor levels
 skim_format(.levels = list(max_char = 4))
@@ -72,8 +72,11 @@ skim_format(.levels = list(max_char = 4))
 skim_format(numeric = list(digits = 3), .levels = list(max_char = 4))
 
 # Set multiple formats with a .list argument
-myFormats <- list(numeric = list(digits = 3), .levels = list(max_char = 4))
-skim_format(.list = myFormats)
+my_formats <- list(numeric = list(digits = 3), .levels = list(max_char = 4))
+skim_format(.list = my_formats)
+
+# Alternatively, use rlang unquoting semantics
+skim_format(!!!my_formats)
 
 # Reset to the defaults
 skim_format_defaults()
