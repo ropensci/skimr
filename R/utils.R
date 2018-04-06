@@ -29,9 +29,9 @@ is_windows <- function() {
 #' histograms on Windows.
 #' 
 #' There are known issues with printing the spark-histogram characters when
-#' printing a data frame. For example, "▂▅▇" is printed as
-#' "<U+2582><U+2585><U+2587>". This longstanding problem originates in the
-#' low-level code for printing dataframes.
+#' printing a data frame, appearing like this: "<U+2582><U+2585><U+2587>".
+#' This longstanding problem originates in the low-level code for printing
+#' dataframes.
 #' @export
 
 fix_windows_histograms <- function() {
