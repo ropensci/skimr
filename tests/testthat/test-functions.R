@@ -136,6 +136,17 @@ test_functions_that("Set multiple sets of skimming functions, rlang", {
   skim_with_defaults()
 })
 
+test_that("A class with an empty function list returns nothing",{
+  myfuns <- list(factor = list())
+  skim_with(!!!myfuns, append= FALSE)
+  input <- skim(iris)
+  expect_equal(nrow(input), 44)
+  inputlist <- skim_to_list(iris)
+  expect_equal(length(inputlist), 1)
+  expect_equal(names(inputlist), c("numeric"))
+  skim_with_defaults()
+})
+
 test_functions_that("Skimming functions without a class return a message.", {
   funs_no_class <- list( IQR)
   expect_error(skim_with(funs_no_class), "Please used named arguments")
@@ -317,4 +328,10 @@ test_functions_that("Defines skimmers using rlang-style formula lambdas", {
   input_funs <- get_skimmers()
   expect_identical(input$numeric, names(funs))
   expect_identical(input_funs$numeric, purrr::map(funs, rlang::as_function))
+})
+
+test_that("Setting skimmers to an empty list does not throw an error",{
+  expect_silent(skim_with(factor=list(), append=FALSE))
+  expect(is.null(show_skimmers()$factor))
+  skim_with_defaults()
 })
