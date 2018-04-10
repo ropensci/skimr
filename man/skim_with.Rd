@@ -90,8 +90,11 @@ skim_with(numeric = list(mean = mean), character = list(len = length))
 
 # Or pass the same as a list
 my_skimmers <- list(numeric = list(mean = mean),
-                   character = list(len = length))
+                    character = list(len = length))
 skim_with(.list = my_skimmers)
+
+# Alternatively, use rlang unquoting semantics
+skim_with(!!!my_skimmers)
 
 # Go back to defaults
 skim_with_defaults()
