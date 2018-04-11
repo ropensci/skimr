@@ -16,7 +16,10 @@ skim_v <- function(x, vector_type = class(x)) {
   stopifnot(length(x) > 0,
             is.character(vector_type))
   funs <- get_funs(vector_type)
-
+  # An empty list returns nothing
+  if (!is.null(funs) && length(funs) == 0  ){
+    return(NULL)
+  }
   if (is.null(funs)) {
     collapsed <- paste(class(x), collapse = ", ")
     msg <- paste("No summary functions for vectors of class:", collapsed)

@@ -110,6 +110,9 @@ skim.default <-function(.data, ...){
     return(message("No skim method exists for class ", class(.data), "."))
   }
   skimmed <- skim_v(.data)
+  if (is.null(skimmed)){
+    return(message("The skimmer list is empty for class ", class(.data), "."))
+  }
   skimmed$variable <- deparse(substitute(.data))
   cols <- c("variable", "type", "stat", "level", "value", "formatted")
   skimmed <- dplyr::select(skimmed, !!!rlang::syms(cols)) 
