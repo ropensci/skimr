@@ -5,8 +5,12 @@ test_that("Skim prints a header for the entire output and each type", {
   expect_output(print(input), "Skim summary statistics")
   expect_output(print(input), "n obs: 150")
   expect_output(print(input), "n variables: 5 \n")
-  expect_output(print(input), "Variable type: factor")
-  expect_output(print(input), "Variable type: numeric")
+  expect_output(print(input), 
+"── Variable type:factor ────────────────────────────────────────────────────────"
+)
+  expect_output(print(input), 
+"── Variable type:factor ────────────────────────────────────────────────────────"
+)
 })
 
 test_that("Skim prints a special header for grouped data frames", {
@@ -19,7 +23,9 @@ test_that("Skim prints a special header for grouped data frames", {
 test_that("Skim prints a special header for vectors", {
   input <- skim(lynx)
   expect_output(print(input), "Skim summary statistics")
-  expect_output(print(input), "Variable type: ts")
+  expect_output(print(input), 
+"── Variable type:ts ───────────────────────────────────────────────────────────"
+                )
 })
 
 test_that("Skim collapses counts and other multivalue stats into one cell", {
