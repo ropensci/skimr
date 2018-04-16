@@ -54,12 +54,10 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 71 
     ##  n variables: 2 
-    ## 
-    ## Variable type: factor 
+    ## ── Variable type:factor ────────────────────────────────────────────
     ##  variable missing complete  n n_unique                         top_counts ordered
     ##      feed       0       71 71        6 soy: 14, cas: 12, lin: 12, sun: 12   FALSE
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##  variable missing complete  n   mean    sd  p0   p25 p50   p75 p100     hist
     ##    weight       0       71 71 261.31 78.07 108 204.5 258 323.5  423 ▃▅▅▇▃▇▂▂
 
@@ -70,12 +68,10 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## 
-    ## Variable type: factor 
+    ## ── Variable type:factor ────────────────────────────────────────────
     ##  variable missing complete   n n_unique                       top_counts ordered
     ##   Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##   Petal.Width       0      150 150 1.2  0.76 0.1 0.3 1.3  1.8  2.5 ▇▁▁▅▃▃▂▂
@@ -89,8 +85,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 87 
     ##  n variables: 13 
-    ## 
-    ## Variable type: character 
+    ## ── Variable type:character ─────────────────────────────────────────
     ##    variable missing complete  n min max empty n_unique
     ##   eye_color       0       87 87   3  13     0       15
     ##      gender       3       84 87   4  13     0        4
@@ -99,18 +94,15 @@ Skim statistics in the console
     ##        name       0       87 87   3  21     0       87
     ##  skin_color       0       87 87   3  19     0       31
     ##     species       5       82 87   3  14     0       37
-    ## 
-    ## Variable type: integer 
+    ## ── Variable type:integer ───────────────────────────────────────────
     ##  variable missing complete  n   mean    sd p0 p25 p50 p75 p100     hist
     ##    height       6       81 87 174.36 34.77 66 167 180 191  264 ▁▁▁▂▇▃▁▁
-    ## 
-    ## Variable type: list 
+    ## ── Variable type:list ──────────────────────────────────────────────
     ##   variable missing complete  n n_unique min_length median_length max_length
     ##      films       0       87 87       24          1             1          7
     ##  starships       0       87 87       17          0             0          5
     ##   vehicles       0       87 87       11          0             0          2
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##    variable missing complete  n  mean     sd p0  p25 p50  p75 p100     hist
     ##  birth_year      44       43 87 87.57 154.69  8 35    52 72    896 ▇▁▁▁▁▁▁▁
     ##        mass      28       59 87 97.31 169.46 15 55.6  79 84.5 1358 ▇▁▁▁▁▁▁▁
@@ -136,8 +128,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1 5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
@@ -152,8 +143,7 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ##  group variables: Species 
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##     Species     variable missing complete  n mean   sd  p0  p25  p50  p75 p100     hist
     ##      setosa Petal.Length       0       50 50 1.46 0.17 1   1.4  1.5  1.58  1.9 ▁▁▅▇▇▅▂▁
     ##      setosa  Petal.Width       0       50 50 0.25 0.11 0.1 0.2  0.2  0.3   0.6 ▂▇▁▂▂▁▁▁
@@ -202,24 +192,24 @@ Variable type: factor
 <table>
 <thead>
 <tr class="header">
-<th align="left">variable</th>
-<th align="left">missing</th>
-<th align="left">complete</th>
-<th align="left">n</th>
-<th align="left">n_unique</th>
-<th align="left">top_counts</th>
-<th align="left">ordered</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">n_unique</th>
+<th align="center">top_counts</th>
+<th align="center">ordered</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Species</td>
-<td align="left">0</td>
-<td align="left">150</td>
-<td align="left">150</td>
-<td align="left">3</td>
-<td align="left">set: 50, ver: 50, vir: 50, NA: 0</td>
-<td align="left">FALSE</td>
+<td align="center">Species</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3</td>
+<td align="center">set: 50, ver: 50, vir: 50, NA: 0</td>
+<td align="center">FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -229,76 +219,76 @@ Variable type: numeric
 <table>
 <thead>
 <tr class="header">
-<th align="left">variable</th>
-<th align="left">missing</th>
-<th align="left">complete</th>
-<th align="left">n</th>
-<th align="left">mean</th>
-<th align="left">sd</th>
-<th align="left">p0</th>
-<th align="left">p25</th>
-<th align="left">p50</th>
-<th align="left">p75</th>
-<th align="left">p100</th>
-<th align="left">hist</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">p0</th>
+<th align="center">p25</th>
+<th align="center">p50</th>
+<th align="center">p75</th>
+<th align="center">p100</th>
+<th align="center">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Petal.Length</td>
-<td align="left">0</td>
-<td align="left">150</td>
-<td align="left">150</td>
-<td align="left">3.76</td>
-<td align="left">1.77</td>
-<td align="left">1</td>
-<td align="left">1.6</td>
-<td align="left">4.35</td>
-<td align="left">5.1</td>
-<td align="left">6.9</td>
-<td align="left">▇▁▁▂▅▅▃▁</td>
+<td align="center">Petal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.76</td>
+<td align="center">1.77</td>
+<td align="center">1</td>
+<td align="center">1.6</td>
+<td align="center">4.35</td>
+<td align="center">5.1</td>
+<td align="center">6.9</td>
+<td align="center">▇▁▁▂▅▅▃▁</td>
 </tr>
 <tr class="even">
-<td align="left">Petal.Width</td>
-<td align="left">0</td>
-<td align="left">150</td>
-<td align="left">150</td>
-<td align="left">1.2</td>
-<td align="left">0.76</td>
-<td align="left">0.1</td>
-<td align="left">0.3</td>
-<td align="left">1.3</td>
-<td align="left">1.8</td>
-<td align="left">2.5</td>
-<td align="left">▇▁▁▅▃▃▂▂</td>
+<td align="center">Petal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">1.2</td>
+<td align="center">0.76</td>
+<td align="center">0.1</td>
+<td align="center">0.3</td>
+<td align="center">1.3</td>
+<td align="center">1.8</td>
+<td align="center">2.5</td>
+<td align="center">▇▁▁▅▃▃▂▂</td>
 </tr>
 <tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="left">0</td>
-<td align="left">150</td>
-<td align="left">150</td>
-<td align="left">5.84</td>
-<td align="left">0.83</td>
-<td align="left">4.3</td>
-<td align="left">5.1</td>
-<td align="left">5.8</td>
-<td align="left">6.4</td>
-<td align="left">7.9</td>
-<td align="left">▂▇▅▇▆▅▂▂</td>
+<td align="center">Sepal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">5.84</td>
+<td align="center">0.83</td>
+<td align="center">4.3</td>
+<td align="center">5.1</td>
+<td align="center">5.8</td>
+<td align="center">6.4</td>
+<td align="center">7.9</td>
+<td align="center">▂▇▅▇▆▅▂▂</td>
 </tr>
 <tr class="even">
-<td align="left">Sepal.Width</td>
-<td align="left">0</td>
-<td align="left">150</td>
-<td align="left">150</td>
-<td align="left">3.06</td>
-<td align="left">0.44</td>
-<td align="left">2</td>
-<td align="left">2.8</td>
-<td align="left">3</td>
-<td align="left">3.3</td>
-<td align="left">4.4</td>
-<td align="left">▁▂▅▇▃▂▁▁</td>
+<td align="center">Sepal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.06</td>
+<td align="center">0.44</td>
+<td align="center">2</td>
+<td align="center">2.8</td>
+<td align="center">3</td>
+<td align="center">3.3</td>
+<td align="center">4.4</td>
+<td align="center">▁▂▅▇▃▂▁▁</td>
 </tr>
 </tbody>
 </table>
@@ -554,8 +544,7 @@ data.
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## 
-    ## Variable type: numeric 
+    ## ── Variable type:numeric ───────────────────────────────────────────
     ##      variable iqr quantile
     ##  Sepal.Length 1.3      7.7
 
