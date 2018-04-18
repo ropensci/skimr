@@ -32,6 +32,7 @@ Description: A simple to use summary function that can be used with pipes
 Depends:
     R (>= 3.1.2)
 Imports:
+    cli,
     dplyr (>= 0.7),
     magrittr,
     pander,
