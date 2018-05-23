@@ -17,11 +17,9 @@
 NULL
 
 
-# Create global package options
-options <- new.env()
-
-
 # Imports -----------------------------------------------------------------
+
+#' @importFrom rlang %||%
 
 #' @importFrom magrittr %>%
 #' @export
