@@ -13,7 +13,6 @@
 #' @name skimr-package
 #' @aliases skimr
 #' @docType package
-
 NULL
 
 
@@ -53,3 +52,6 @@ tidyselect::one_of
 #' @importFrom tidyselect starts_with
 #' @export
 tidyselect::starts_with
+
+# Silence complaints about NSE.
+globalVariables(".")
