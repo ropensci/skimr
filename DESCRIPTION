@@ -56,15 +56,13 @@ URL: https://github.com/ropenscilabs/skimr
 BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
 Collate: 
-    'skimr-package.R'
-    'formats.R'
     'stats.R'
     'get_skimmers.R'
-    'kable.R'
+    'reshape.R'
     'skim.R'
     'skim_print.R'
+    'skimr-package.R'
     'summary.R'
     'utils.R'
-    'wide.R'
-RoxygenNote: 6.0.1
