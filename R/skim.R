@@ -1,5 +1,3 @@
-globalVariables(".")
-
 #' Set or add the summary functions for a particular type of data
 #' 
 #' While skim is designed around having an opinionated set of defaults, you
@@ -13,61 +11,59 @@ globalVariables(".")
 #' also means that you need to assign the return of `skim_with()` before
 #' you can use it.
 #' 
-#' @param ... A list of functions, with an argument name that matches a
-#'  particular data type.
+#' You assign values within `skim_with` by using the [sfl()] helper (`skimr`
+#' function list). This helper behaves mostly like [dplyr::funs()], but lets
+#' you also identify which skimming functions you want to remove, by setting
+#' them to `NULL`.
+#' 
+#' @param ... One or more `skimmer_function_list` objects, with an argument name
+#'  that matches a particular data type.
 #' @param append Whether the provided options should be in addition to the
 #'  defaults already in `skim`. Default is `TRUE`.
 #' @return A new `skim()` function. This is callable. See [skim()] for
 #'  more details.
 #' @examples
-#' # Use new functions for numeric functions
-#' my_skim <- skim_with(numeric = list(median = median, mad = mad),
-#'                      append = FALSE)
+#' # Use new functions for numeric functions. If you don't provide a name,
+#' # one will be automatically generated.
+#' my_skim <- skim_with(numeric = sfl(median, mad), append = FALSE)
 #' my_skim(faithful)
 #' 
 #' # If you want to remove a particular skimmer, set it to NULL
 #' # This removes the inline histogram
-#' my_skim <- skim_with(numeric = list(hist = NULL))
+#' my_skim <- skim_with(numeric = sfl(hist = NULL))
 #' my_skim(faithful)
 #' 
 #' # This works with multiple skimmers. Just match names to overwrite
-#' my_skim <- skim_with(numeric = list(iqr = IQR, p25 = NULL, p75 = NULL))
+#' my_skim <- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
 #' my_skim(faithful)
 #' 
 #' # Alternatively, set `append = FALSE` to replace the skimmers of a type.
-#' my_skim <- skim_with(numeric = list(mean = mean, sd = sd), append = FALSE)
+#' my_skim <- skim_with(numeric = sfl(mean = mean, sd = sd), append = FALSE)
 #' 
 #' # Skimmers are unary functions. Partially apply arguments during assigment.
 #' # For example, you might want to remove NA values. Use `dplyr::funs()`
 #' # syntax for partial application.
-#' my_skim <- skim_with(numeric = list(iqr = IQR(., na.rm = TRUE)))
+#' my_skim <- skim_with(numeric = sfl(iqr = IQR(., na.rm = TRUE)))
 #' 
+#' # Or, use the `.args` argument from `dplyr::funs()`
+#' my_skim <- skim_with(numeric = sfl(median, mad, .args = list(na.rm = FALSE)))
 #' 
-#' # Set multiple types of skimmers simultaneously
-#' my_skim <- skim_with(numeric = list(mean = mean),
-#'                      character = list(len = length))
+#' # Set multiple types of skimmers simultaneously.
+#' skim2 <- skim_with(numeric = sfl(mean), character = sfl(length))
 #' 
 #' # Or pass the same as a list
-#' my_skimmers <- list(numeric = list(mean = mean),
-#'                     character = list(len = length))
+#' my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
 #' my_skim <- skim_with(!!!my_skimmers)
-#' 
-#' # Go back to defaults
-#' default_skim <- skim_with()
-#' idenctical(skim(faithful), default_skim(faithful))
-#' #> TRUE
 #' @export
-
 skim_with <- function(..., append = TRUE) {
-  validate_assignment(...)
-  local_skimmers <- purrr::map_if(list(...), ~!is.null(.x), assign_skimmers)
+  local_skimmers <- validate_assignment(...)
   function(data, ...) {
     .vars <- rlang::quos(...)
     cols <- names(data)
     if (length(.vars) == 0) {
       selected <- cols
     } else {
-      selected <- cols[tidyselect::vars_select(cols, !!! .vars)]
+      selected <- tidyselect::vars_select(cols, !!!.vars)
     }
     
     grps <- dplyr::groups(data)
@@ -76,63 +72,93 @@ skim_with <- function(..., append = TRUE) {
       selected <- selected[!group_variables]
     }
     
-    variables <- data.frame(variable = selected, stringsAsFactors = FALSE)
-    nested <- dplyr::mutate(variables, purrr::map(variable, skim_one, data,
-                                                  local_skimmers, append))
-    skimmers_used <- purrr::map(nested$local_skimmers,
+    variables <- tibble::tibble(variable = selected)
+    nested <- dplyr::mutate(variables,
+        skimmed = purrr::map(variable, skim_one, data, local_skimmers, append))
+    skimmers_used <- purrr::map(nested$skimmed,
                                 ~list(type = attr(.x, "skimmer_type"),
                                       used = attr(.x, "skimmers_used")))
-    skimmers <- unique(skimmers_used)
+    unique_skimmers <- unique(skimmers_used)
+    skimmers <- purrr::map(unique_skimmers, "used")
+    variable_types <- purrr::map(unique_skimmers, "type")
     out <- tidyr::unnest(nested)
     structure(out,
-              class = c("skim_df", class(data)),
+              class = c("skim_df", "tbl_df", "tbl", "data.frame"),
               data_rows = nrow(data),
               data_cols = ncol(data),
               df_name = rlang::expr_label(substitute(data)),
-              skimmers_used = setNames(skimmers$used, skimmers$type))
+              groups = attr(data, "vars"),
+              skimmers_used = purrr::set_names(skimmers, variable_types))
   }
 }
 
 skim_one <- function(column, data, local_skimmers, append) {
   reduced <- suppressMessages(dplyr::select(data, !!column))
   skimmers <- get_skimmers(reduced[[column]], local_skimmers, append)
-  out <- data.frame(dplyr::summarize_all(reduced, skimmers$funs),
-                    type = skimmers$type,
-                    stringsAsFactors = FALSE)
-  structure(out, skimmer_type = type, skimmers_used = names(skimmers))
+  out <- tibble::tibble(type = skimmers$type,
+                        !!!dplyr::summarize_all(reduced, skimmers$funs))
+  structure(out,
+            skimmer_type = skimmers$type,
+            skimmers_used = names(skimmers$funs))
 }
 
 validate_assignment <- function(...) {
-  if (length(list(...)) < 1) return(TRUE)
+  to_assign <- list(...)
+  if (length(to_assign) < 1) return(to_assign)
   
-  to_assign <- names(list(...))
-  if (anyNA(to_assign)) {
+  proposed_names <- names(to_assign)
+  if (anyNA(proposed_names)) {
     stop("skim_with requires all arguments to be named.", call. = FALSE)
   }
+  
+  if ("numeric" %in% proposed_names) {
+    warning("Numeric skimming functions are assigned to the `double` type.",
+            call. = FALSE)
+    to_assign$double <- to_assign$numeric
+    to_assign$numeric <- NULL
+  }
+  
   defaults <- get_default_skimmers()
-  existing <- tolower(to_assign) %in% tolower(defaults)
+  existing <- tolower(proposed_names) %in% tolower(proposed_names)
   if (!all(existing)) {
-    collapsed <- paste(to_assign[!existing], collapse = ", ")
+    collapsed <- paste(proposed_names[!existing], collapse = ", ")
     message("Creating new skimming functions for the following classes: ",
             collapsed, "\nThey did not have defaults. Call ",
             "get_default_skimmers() for more infomation.")
   }
-}
-
-assign_skimmers <- function(skimmer_list) {
-  dropable <- purrr::map_lgl(skimmer_list, is.null)
-  to_keep <- skimmer_list[!dropable]
-  to_drop <- skimmer_list[dropable]
-  list(keep = dplyr::funs(!!!to_keep), drop = to_drop)
+  to_assign
 }
 
 #' @describeIn skim_with Get a list of classes with default skim functions
 #' @export
-
 get_default_skimmers <- function() {
   defaults <- as.character(methods("get_skimmers"))
   classes <- stringr::str_replace(defaults, "get_skimmers.", "")
   purrr::discard(classes, ~.x == "default")
+}
+
+#' Create a skimr function list
+#' 
+#' This is an extension of [dplyr::funs()]. It is used to create a named list
+#' of functions. It also you also pass `NULL` to identify a skimming function
+#' that you wish to remove.
+#' 
+#' Only functions that return a single value, working with [dplyr::summarize()],
+#' can be used within `sfl`.
+#' 
+#' @inheritParams dplyr::funs
+#' @return A `skimr_function_list`, which contains a list of `fun_calls`,
+#'   returned by [dplyr::funs()] and a list of skimming functions to drop.
+#' @seealso [dplyr::funs()] and [skim_with()]
+#' @export
+sfl <- function(..., .args = list()) {
+  skimmer_list <- rlang::enquos(...)
+  dropable <- purrr::map_lgl(skimmer_list, rlang::quo_is_null)
+  keep <- skimmer_list[!dropable]
+  drop <- skimmer_list[dropable]
+  out <- list(keep = dplyr::funs(!!!keep, .args = .args), drop = names(drop))
+  
+  structure(out, class = "skimr_function_list")
 }
 
 #' Skim a data frame, getting useful summary statistics
@@ -205,7 +231,6 @@ get_default_skimmers <- function() {
 #'   dplyr::filter(feed == "sunflower")
 #' @export
 skim <- skim_with()
-
 
 #' @rdname skim 
 #' @export
