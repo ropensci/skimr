@@ -18,7 +18,7 @@ NULL
 #' @return A list with two entries:
 #' 
 #'   - `funs` is a `fun_list`. The same as [dplyr::funs()].
-#'   -  `type` is the type of skimmer called.
+#'   - `type` is the type of skimmer called.
 #'
 #' @seealso [dplyr::funs()]
 #' @export
@@ -34,7 +34,7 @@ make_skimmer <- function(type, local_skimmers, append, ...) {
     list(funs = merge_skimmers(dplyr::funs(...), locals),
          type = type)
   } else {
-    list(funs = local_skimmers[type]$keep %||% dplyr::funs(...),
+    list(funs = local_skimmers[[type]]$keep %||% dplyr::funs(...),
          type = type)
   }
 }
@@ -45,7 +45,7 @@ merge_skimmers <- function(default, user_provided) {
   }
   
   if (length(user_provided$drop) > 0) {
-    default[names(user_provided$drop)] <- NULL
+    default[user_provided$drop] <- NULL
   }
   
   default
@@ -58,8 +58,8 @@ get_skimmers.default <- function(column, local_skimmers = new.env(),
   first_match <- purrr::detect(all_matches, ~!is.null(.x))
   
   if (is.null(first_match)) {
-    msg <- "Couldn't find skimmers for type: %s; Using `character`."
-    warning(sprintf(msg, type(column)), call. = FALSE)
+    msg <- "Couldn't find skimmers for class: %s; Using `character`."
+    warning(sprintf(msg, class(column)), call. = FALSE)
     get_skimmers(as.character(column), local_skimmers)
   } else {
     dplyr::funs(!!!first_match)
@@ -219,10 +219,25 @@ get_skimmers.ts <- function(column, local_skimmers = new.env(),
 }
 
 #' @export
+get_skimmers.list <- function(column, local_skimmers = new.env(),
+                            append = TRUE) {
+  make_skimmer(
+    "list",
+    local_skimmers,
+    append,
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    n_unique = n_unique,
+    min_length= list_min_length,
+    max_length = list_max_length)
+}
+
+#' @export
 get_skimmers.AsIs <- function(column, local_skimmers = new.env(),
                             append = TRUE) {
   make_skimmer(
-    "ts",
+    "asis",
     local_skimmers,
     append,
     missing = n_missing,
