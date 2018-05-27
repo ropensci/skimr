@@ -1,46 +1,47 @@
 #' Print `skim` objects
 #' 
+#' `skimr` has custom print methods for all supported objects. Default printing
+#' methods for `knitr`/ `rmarkdown` documents is also provided.
+#' 
 #' @param x Either a `skim_df`, `skim_vector` or `skim_summary` object.
 #' @param ... Further arguments passed to or from other methods.
 #' @name print
 NULL
 
-
-#' @describeIn print Prints a skimmed data frame (`skim_df` from [`skim()`])
+#' @describeIn print Print a skimmed data frame (`skim_df` from [`skim()`]).
 #' @export
-
-print.skim_df <- function(x, ...) {
-  defaults <- options(dplyr.show_progress = FALSE)
-  on.exit(options(defaults)
-  )
-  cat("Skim summary statistics\n")
-  cat(" n obs:", attr(x, "data_rows"), "\n")
-  cat(" n variables:", attr(x, "data_cols"), "\n")
-
-  grps <- dplyr::groups(x) 
-  if (!is.null(grps)) {
-    flat <- paste(grps, collapse = ", ")
-    cat(" group variables:", flat, "\n")
+print.skim_df <- function(x, include_summary = TRUE, ...) {
+  if (include_summary) {
+    cat("Skim summary statistics\n")
+    cat(" n obs:", attr(x, "data_rows"), "\n")
+    cat(" n variables:", attr(x, "data_cols"), "\n")
   }
-  
-  grouped <- dplyr::group_by(x, !!rlang::sym("type"))
-  dplyr::do(grouped, skim_render(., grps, print_impl, ...))
-  invisible(x)
+
+  by_type <- partition(x)
+  purrr::imap(by_type, print)
+  invisible(NULL)
 }
 
-
-#' @describeIn print Manages print for `skim_vector` objects.
+#' @describeIn print Print an entry within a partitioned `skim_df`.
 #' @export
+print.one_skim_df <- function(x, ..) {
+  variable_type <- paste("Variable type:", attr(x, "type"))
+  with_line <- cli::rule(line = 1, left = variable_type)
+  print(with_line)
+  NextMethod("print")
+}
 
-print.skim_vector <- function(x, ...) {
-  cat("\nSkim summary statistics\n")
-  skim_render(x, groups = as.null(), print_impl, ...)
+#' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
+#' @export
+print.skim_list <- function(x, ..) {
+  nms <- names(x)
+  attributes(x) <- NULL
+  print(purrr::set_names(x, nms))
 }
 
 
 #' @describeIn print Print method for a `summary_skim_df` object.
 #' @export
- 
 print.summary_skim_df <- function(x, ...) {
   n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
   n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
@@ -61,60 +62,86 @@ print.summary_skim_df <- function(x, ...) {
       ,sep = "")
 }
 
-#' Print expanded skim tables with a simple caption
-#' @keywords internal
-#' @noRd
+#' Provide a default printing method for knitr.
+#' 
+#' Instead of standard R output, `knitr` and `RMarkdown` documents will have
+#' formatted [knitr::kable()] output on return. You can disable this by setting
+#' the chunk option `render = normal_print`.
+#' 
+#' The summary statistics for the original data frame can be disabled by setting
+#' the `knitr` chunk option `skimr_include_summary = FALSE`. See
+#' [knitr::opts_chunk] for more information. You can change the number of digits
+#' shown in the printed table with the `skimr_digits` chunk option.
+#' 
+#' Alternatively, you can call [collapse()] or [yank()] to get the particular
+#' `skim_df` objects and format them however you like. One warning though.
+#' Because histograms contain unicode characters, they can have unexpected
+#' print results, as R as varying levels of unicode support. This affects
+#' Windows users most commonly. Call `vignette("Using_fonts")` for more details.
+#'
+#' @seealso [knitr::kable()]
+#' @inheritParams knitr::knit_print
+#' @return A `knit_asis` object. Which is used by `knitr` when renderind.
+#' @importFrom knitr knit_print
+#' @name knit_print
+NULL
 
-print_impl <- function(transformed_df, skim_type, ...) {
-  print(cli::rule(line = 1, left = paste0("Variable type:", skim_type)))
-  mat <- as.matrix(transformed_df)
-  dimnames(mat)[[1]] <- rep("", nrow(mat))
-  print(enc2utf8(mat), quote = FALSE, right = TRUE)
-  transformed_df
-}
-
-
-#' Expand a skim_df and call a printing function on it
-#' @keywords internal
-#' @noRd
-
-skim_render <- function(.data, groups, FUN, ...) {
-  skim_type <- .data$type[1]
-  funs_used <- get_funs(skim_type)
-  fun_names <- names(funs_used)
-  collapsed <- collapse_levels(.data, groups)
-  wide <- tidyr::spread(collapsed, "stat", "formatted")
-  if (options$formats$.align_decimal) {
-    wide[fun_names] <- lapply(wide[fun_names], align_decimal)
-  }
-  
-  var_order <- c(as.character(groups), "variable", fun_names)
-  FUN(wide[var_order], skim_type, ...)
-}
-
-collapse_levels <- function(.data, groups) {
-  all_groups <- c(groups, rlang::syms(c("variable", "stat")))
-  grouped <- dplyr::group_by(.data, !!!all_groups)
-  dplyr::summarize(grouped, formatted = collapse_one(.data$formatted))
-}
-
-collapse_one <- function(vec) {
-  len <- min(length(vec), options$formats$.levels$max_levels)
-  paste(vec[seq_len(len)], collapse = ", ")
-}
-
-align_decimal <- function(x) {
-  split <- stringr::str_split(x, "\\.", simplify = TRUE)
-  if (ncol(split) < 2) return(x)
-  max_whole <- max(nchar(split[,1]))
-  max_decimal <- max(nchar(split[,2]))
-  left <- stringr::str_pad(split[,1], max_whole, side = "left")
-  right <- stringr::str_pad(split[,2], max_decimal, side = "right")
-  dec <- ifelse (split[, 2] == "", " ", ".") 
-  sprintf("%s%s%s", left, dec, right)
-}
-
+#' @describeIn knit_print Default `knitr` print for `skim_df` objects.
 #' @export
-print.spark <- function(x, ...) {
-  cat(x, "\n", sep = "")
+knit_print.skim_df <- function(x, options, ...) {
+  if (options$skimr_include_summary %||% TRUE) {
+    summary_stats <- data.frame(
+      n_obs = attr(x, "data_rows"),
+      n_cols =attr(x, "data_cols"))
+    kabled <- knitr::kable(
+      summary_stats, format = "html", 
+      table.attr = "style='width: auto;' class='table table-condensed'")
+    summary <- c("**Skim summary statistics**", "", kabled, "", "")
+  } else {
+    summary <- c()
+  }
+  by_type <- partition(x)
+  knit_print_by_type(by_type, options, summary)
+}
+
+knit_print_by_type <- function(x, options, summary) {
+  all_tables <- purrr::imap(x, knit_print_one, options)
+  combined <- c("", summary, "", "", unlist(all_tables))
+  knitr::asis_output(paste(combined, collapse = "\n"))
+}
+
+knit_print_one <- function(by_type, skim_type, options) {
+  kabled <- knitr::kable(by_type, digits = options$skimr_digits %||% 2)
+  if (is_windows()) {
+    kabled[] <- fix_unicode(kabled)
+  }
+  caption <- sprintf("**Variable type: %s**", skim_type)
+  c(caption, "", kabled, "", "")
+}
+
+#' @describeIn print Default `knitr` print for a `skim_list`.
+#' @export
+knit_print.skim_list <- function(x, options, ...) {
+  knit_print_by_type(x, options, NULL)
+}
+
+#' @describeIn print Default `knitr` print within a partitioned `skim_df`.
+#' @export
+knit_print.one_skim_df <- function(x, options, ...) {
+  kabled <- knit_print_one(x, attr(x, "type"), options)
+  combined <- c("", "", kabled, "")
+  knitr::asis_output(paste(combined, collapse = "\n"))
+}
+
+#' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
+#' @export
+knit_print.summary_skim_df <- function(x, options, ...) {
+  knit_print_one()
+  n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
+  n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
+  df_name <- paste0("Name: ", x[["df_name"]])
+  
+  kframe <- data.frame(df_name, n_rows, n_cols)
+  list(Summary = kable(kframe),
+       `Type counts` = kable(x$type_frequencies))
 }
