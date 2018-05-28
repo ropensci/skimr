@@ -114,13 +114,6 @@ validate_assignment <- function(...) {
     stop("skim_with requires all arguments to be named.", call. = FALSE)
   }
   
-  if ("numeric" %in% proposed_names) {
-    warning("Numeric skimming functions are assigned to the `double` type.",
-            call. = FALSE)
-    to_assign$double <- to_assign$numeric
-    to_assign$numeric <- NULL
-  }
-  
   defaults <- get_default_skimmers()
   existing <- proposed_names %in% names(defaults)
   if (!all(existing)) {
@@ -165,7 +158,7 @@ skim_one <- function(column, data, local_skimmers, append) {
     if (defaults$type == "default") {
       warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
               "provided. Falling back to `character`.", call. = FALSE)
-      reduced[[column]] <- as.character(reduced[[column]])
+      data[[column]] <- as.character(data[[column]])
       skimmers <- defaults
       skimmer$type <- "character"
     } else {
@@ -175,11 +168,12 @@ skim_one <- function(column, data, local_skimmers, append) {
     skimmers <- merge_skimmers(locals, defaults, append)
   }
   
+  reduced <- suppressMessages(dplyr::select(data, !!column))
   out <- tibble::tibble(type = skimmers$type,
                         !!!dplyr::summarize_all(reduced, skimmers$keep))
   structure(out,
-            skimmer_type = type,
-            skimmers_used = names(funs))
+            skimmer_type = skimmers$type,
+            skimmers_used = names(skimmers$keep))
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {
@@ -193,8 +187,8 @@ merge_skimmers <- function(locals, defaults, append) {
   if (locals$type != defaults$type || !append) {
     locals
   } else {
-    combined <- purrr::list_modify(defaults$keep, locals$keep)
-    combined[locals$drop] <- NULL
-    combined
+    defaults[names(locals$keep)] <- locals$keep
+    defaults[locals$drop] <- NULL
+    defaults
   }
 }

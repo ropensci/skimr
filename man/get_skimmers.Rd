@@ -2,55 +2,54 @@
 % Please edit documentation in R/get_skimmers.R
 \name{get_skimmers}
 \alias{get_skimmers}
-\alias{make_skimmer}
+\alias{get_default_skimmers}
 \title{Retrieve the summary functions for a specific data type}
 \usage{
-get_skimmers(column, local_skimmers = new.env(), append = TRUE)
+get_skimmers(column)
 
-make_skimmer(type, local_skimmers, append, ...)
+get_default_skimmers(class = NULL)
 }
 \arguments{
 \item{column}{An atomic vector or list. A column from a data frame.}
-
-\item{local_skimmers}{An environment. Used by \code{\link[=skim]{skim()}}.}
-
-\item{append}{A logical scalar. Used by \code{\link[=skim]{skim()}}. Whether new skim functions
-should be added to the existing set of functions or whether they new
-functions should replace the old.}
-
-\item{...}{A list of functions specified by:
-\itemize{
-\item Their name, \code{"mean"}
-\item The function itself, \code{mean}
-\item A call to the function with \code{.} as a dummy argument,
-\code{mean(., na.rm = TRUE)}
-}
-
-These arguments are automatically \link[rlang:quo]{quoted}. They
-support \link[rlang:quasiquotation]{unquoting} and splicing. See
-\code{vignette("programming")} for an introduction to these concepts.
-
-The following notations are \strong{not} supported, see examples:
-\itemize{
-\item An anonymous function, \code{function(x) mean(x, na.rm = TRUE)}
-\item An anonymous function in \pkg{purrr} notation, \code{~mean(., na.rm = TRUE)}
-}}
 }
 \value{
-A list with two entries:
-\itemize{
-\item \code{funs} is a \code{fun_list}. The same as \code{\link[dplyr:funs]{dplyr::funs()}}.
-\item \code{type} is the type of skimmer called.
-}
+A \code{skim_function_list} object.
 }
 \description{
 These functions are used to set the default skimming functions for a data
-type.
+type.  When creating your own set of skimming functions, call \code{\link[=sfl]{sfl()}}
+within a \code{\link[=get_skimmers]{get_skimmers()}} method for your particular type. Your call to
+\code{\link[=sfl]{sfl()}} should also provide a matching class in the \code{.class} argument.
+Otherwise, it will not be possible to dynamically reassign your default
+functions when working interactively.
 }
 \details{
-When creating your own set of skimming functions, call \code{\link[=make_skimmers]{make_skimmers()}}
-within a \code{\link[=get_skimmers]{get_skimmers()}}.
+Summary functions are provided for the following classes:
+\itemize{
+\item \code{numeric}
+\item \code{integer}
+\item \code{character}
+\item \code{factor}
+\item \code{logical}
+\item \code{complex}
+\item \code{Date}
+\item \code{POSIXct}
+\item \code{ts}
+\item \code{AsIs}
+}
+
+Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the functions for each.
+}
+\examples{
+# Defining default skimming functions for a new class, `my_class`.
+# Note that the class argument is required for dynamic reassignment.
+get_skimmers.my_class <- function(colum) {
+  sfl(
+    .class = "my_class",
+    mean,
+    sd)
+}
 }
 \seealso{
-\code{\link[dplyr:funs]{dplyr::funs()}}
+\code{\link[=sfl]{sfl()}}
 }

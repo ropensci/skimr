@@ -77,10 +77,10 @@ iris \%>\%
   dplyr::group_by(Species) \%>\%
   skim()
 
-# Which column as the greatest mean value?
+# Which five columns have the greatest mean value?
 iris \%>\%
   skim() \%>\%
-  dplyr::arrange(-mean)
+  dplyr::top_n(mean, 5)
 
 # Use skim_tee to view the skim results and
 # continue using the original data.
