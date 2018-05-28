@@ -82,14 +82,14 @@ inline_hist <- function(x, n_bins = 8) {
   # Handle empty and NA vectors (is.na is TRUE for NaN)
   if (length(x) < 1 || all(is.na(x)))
   {
-    return(structure(" ", class = c("spark", "character")))
+    return(" ")
   }
 
   # Addresses a known bug in cut()
   if (all(x == 0, na.rm = TRUE)) x <- x + 1
   hist_dt <- table(cut(x, n_bins))
   hist_dt <- hist_dt / max(hist_dt)
-  as.character(spark_bar(hist_dt))
+  spark_bar(hist_dt)
 }
 
 
@@ -134,8 +134,7 @@ spark_bar <- function(x, safe = TRUE) {
   )
   chars <- as.character(factor)
   chars[is.na(chars)] <- bars[length(bars)]
-
-  structure(paste0(chars, collapse = ""), class = "spark")
+  paste0(chars, collapse = "")
 }
 
 
@@ -205,7 +204,7 @@ inline_linegraph <- function(x, length.out = 16) {
   t <- x[!is.na(x)]
   id <- seq(1, length(t), length.out = length.out)
   normalized <- normalize01(t[floor(id)])
-  structure(spark_line(normalized), class = c("spark", "character"))
+  spark_line(normalized)
 }
 
 # Rescale data to be between 0 and 1
@@ -233,7 +232,7 @@ spark_line <- function(x) {
   ind[, 2] <- ind[, 2] + 4
 
   chars <- apply(ind, 1, braille)
-  structure(paste0(chars, collapse = ""), class = "spark")
+  paste0(chars, collapse = "")
 }
 
 
