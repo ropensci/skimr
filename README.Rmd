@@ -122,7 +122,7 @@ will automatically generate names from the provided values.
 By default, functions in the `sfl` call are appended to the default skimmers.
 
 ```{r}
-my_skim <- skim_with(double = sfl(mad))
+my_skim <- skim_with(numeric = sfl(mad))
 my_skim(iris, Sepal.Length)
 ```
 
@@ -131,7 +131,7 @@ particular function arguments. Setting the `append = FALSE` argument uses only
 those functions that you've provided.
 
 ```{r}
-my_skim <- skim_with(double = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
+my_skim <- skim_with(numeric = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
                      append = FALSE)
 my_skim(iris, Sepal.Length)
 ```
@@ -139,7 +139,7 @@ my_skim(iris, Sepal.Length)
 And you can default skimmers by setting them to `NULL`.
 
 ```{r}
-my_skim <- skim_with(double = sfl(hist = NULL))
+my_skim <- skim_with(numeric = sfl(hist = NULL))
 my_skim(iris, Sepal.Length)
 ```
 
@@ -147,9 +147,9 @@ my_skim(iris, Sepal.Length)
 
 `skimr` has summary functions for the following types of data by default:
 
-* `double`, with `numeric` coerced to this type.
+* `numeric`
 * `integer`
-* `character
+* `character`
 * `factor`
 * `logical`
 * `complex`
@@ -160,23 +160,16 @@ my_skim(iris, Sepal.Length)
 
 `skimr` also provides a small API for writing packages that provide their own
 default summary functions for data types not covered above. It relies on
-R S3 methods for the `get_skimmers` function. This function should wrap a
-call to `make_skimmer`. Here's an example.
+R S3 methods for the `get_skimmers` function. This function should return
+a `sfl`, similar to customization within `skim_with()`, but you should also
+provide a value for the `class` argument. Here's an example.
 
 ```{r}
-get_skimmers.my_data_type <- function(column, local_skimmers = new.env(),
-                                      append = TRUE) {
-  make_skimmer(
-    # Provide the type and pass the arguments from the previous function
-    "my_data_type",
-    local_skimmers,
-    append,
-    
-    # Provide named references to functions you wish to use.
+get_skimmers.my_data_type <- function(column) {
+  sfl(
+    .class = "my_data_type",
     missing = n_missing,
     complete = n_complete,
-    
-    # You can still use dummy arguments
     p99 = quantile(., probs = .99))
 }
 ```

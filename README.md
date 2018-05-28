@@ -55,16 +55,16 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 71 
     ##  n variables: 2 
-    ## ── Variable type: double ─────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────────
+    ## # A tibble: 1 x 7
+    ##   variable missing complete     n ordered n_unique top_counts                        
+    ## * <chr>      <int>    <int> <int> <lgl>      <int> <chr>                             
+    ## 1 feed           0       71    71 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 12
     ##   variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>      <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
     ## 1 weight         0       71    71  261.  78.1  108.  204.  258.  324.  423. ▆▆▇▇▃
-    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
-    ## # A tibble: 1 x 7
-    ##   variable missing complete ordered     n n_unique top_counts                        
-    ## * <chr>      <int>    <int> <lgl>   <int>    <int> <chr>                             
-    ## 1 feed           0       71 FALSE      71        6 soy: 14, cas: 12, lin: 12, sun: 12
 
 ### Presentation is in a compact horizontal format:
 
@@ -73,7 +73,12 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: double ─────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────────
+    ## # A tibble: 1 x 7
+    ##   variable missing complete     n ordered n_unique top_counts                      
+    ## * <chr>      <int>    <int> <int> <lgl>      <int> <chr>                           
+    ## 1 Species        0      150   150 FALSE          3 set: 50, ver: 50, vir: 50, NA: 0
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
     ## # A tibble: 4 x 12
     ##   variable     missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>          <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -81,11 +86,6 @@ Skim statistics in the console
     ## 2 Sepal.Width        0      150   150  3.06 0.436 2.00  2.80   3.00  3.30  4.40 ▁▆▇▂▁
     ## 3 Petal.Length       0      150   150  3.76 1.77  1.00  1.60   4.35  5.10  6.90 ▇▁▆▇▂
     ## 4 Petal.Width        0      150   150  1.20 0.762 0.100 0.300  1.30  1.80  2.50 ▇▁▇▅▃
-    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
-    ## # A tibble: 1 x 7
-    ##   variable missing complete ordered     n n_unique top_counts                      
-    ## * <chr>      <int>    <int> <lgl>   <int>    <int> <chr>                           
-    ## 1 Species        0      150 FALSE     150        3 set: 50, ver: 50, vir: 50, NA: 0
 
 ### Built in support for strings, lists and other column classes
 
@@ -94,7 +94,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 87 
     ##  n variables: 13 
-    ## ── Variable type: character ──────────────────────────────────────────────────────────
+    ## ── Variable type: character ─────────────────────────────────────────────────────────────────────
     ## # A tibble: 7 x 8
     ##   variable   missing complete     n   min   max empty n_unique
     ## * <chr>        <int>    <int> <int> <int> <int> <int>    <int>
@@ -105,24 +105,24 @@ Skim statistics in the console
     ## 5 gender           3       84    87     4    13     0        4
     ## 6 homeworld       10       77    87     4    14     0       48
     ## 7 species          5       82    87     3    14     0       37
-    ## ── Variable type: double ─────────────────────────────────────────────────────────────
-    ## # A tibble: 2 x 12
-    ##   variable   missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## * <chr>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
-    ## 1 mass            28       59    87  97.3  169.   15.  55.6   79.  84.5 1358. ▇▁▁▁▁
-    ## 2 birth_year      44       43    87  87.6  155.    8.  35.0   52.  72.0  896. ▇▁▁▁▁
-    ## ── Variable type: integer ────────────────────────────────────────────────────────────
+    ## ── Variable type: integer ───────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 12
     ##   variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>      <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
     ## 1 height         6       81    87  174.  34.8   66.  167.  180.  191.  264. ▁▁▇▅▁
-    ## ── Variable type: list ───────────────────────────────────────────────────────────────
+    ## ── Variable type: list ──────────────────────────────────────────────────────────────────────────
     ## # A tibble: 3 x 7
     ##   variable  missing complete     n n_unique min_length max_length
     ## * <chr>       <int>    <int> <int>    <int>      <int>      <int>
     ## 1 films           0       87    87       24          1          7
     ## 2 vehicles        0       87    87       11          0          2
     ## 3 starships       0       87    87       17          0          5
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
+    ## # A tibble: 2 x 12
+    ##   variable   missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## * <chr>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
+    ## 1 mass            28       59    87  97.3  169.   15.  55.6   79.  84.5 1358. ▇▁▁▁▁
+    ## 2 birth_year      44       43    87  87.6  155.    8.  35.0   52.  72.0  896. ▇▁▁▁▁
 
 ### Has a useful summary function
 
@@ -136,8 +136,8 @@ Skim statistics in the console
     ## Number of Columns: 5    
     ##     
     ## Column type frequency    
-    ## double: 4   
-    ## factor: 1
+    ## factor: 1   
+    ## numeric: 4
 
 ### Individual columns can be selected using tidyverse-style selectors
 
@@ -146,7 +146,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: double ─────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
     ## # A tibble: 2 x 12
     ##   variable     missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>          <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -165,7 +165,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: double ─────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
     ## # A tibble: 12 x 13
     ##    variable     Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ##  * <chr>        <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -212,11 +212,8 @@ values.
 By default, functions in the `sfl` call are appended to the default
 skimmers.
 
-    my_skim <- skim_with(double = sfl(mad))
+    my_skim <- skim_with(numeric = sfl(mad))
     my_skim(iris, Sepal.Length)
-
-    ## Called from: eval(expr, p)
-    ## debug at /Users/msquinn/Projects/skimr/R/skim_print.R#96: kabled <- knitr::kable(summary_stats, format = "html", table.attr = "style='width: auto;' class='table table-condensed'")
 
 **Skim summary statistics**
 
@@ -242,7 +239,7 @@ n\_cols
 </tr>
 </tbody>
 </table>
-**Variable type: double**
+**Variable type: numeric**
 
 <table>
 <thead>
@@ -259,7 +256,6 @@ n\_cols
 <th align="right">p75</th>
 <th align="right">p100</th>
 <th align="left">hist</th>
-<th align="right">mad</th>
 </tr>
 </thead>
 <tbody>
@@ -276,7 +272,6 @@ n\_cols
 <td align="right">6.4</td>
 <td align="right">7.9</td>
 <td align="left">▆▇▇▅▂</td>
-<td align="right">1.04</td>
 </tr>
 </tbody>
 </table>
@@ -285,12 +280,9 @@ But you can also use the dummy argument pattern from `dplyr::funs` to
 set particular function arguments. Setting the `append = FALSE` argument
 uses only those functions that you've provided.
 
-    my_skim <- skim_with(double = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
+    my_skim <- skim_with(numeric = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
                          append = FALSE)
     my_skim(iris, Sepal.Length)
-
-    ## Called from: eval(expr, p)
-    ## debug at /Users/msquinn/Projects/skimr/R/skim_print.R#96: kabled <- knitr::kable(summary_stats, format = "html", table.attr = "style='width: auto;' class='table table-condensed'")
 
 **Skim summary statistics**
 
@@ -316,7 +308,7 @@ n\_cols
 </tr>
 </tbody>
 </table>
-**Variable type: double**
+**Variable type: numeric**
 
 <table>
 <thead>
@@ -337,11 +329,8 @@ n\_cols
 
 And you can default skimmers by setting them to `NULL`.
 
-    my_skim <- skim_with(double = sfl(hist = NULL))
+    my_skim <- skim_with(numeric = sfl(hist = NULL))
     my_skim(iris, Sepal.Length)
-
-    ## Called from: eval(expr, p)
-    ## debug at /Users/msquinn/Projects/skimr/R/skim_print.R#96: kabled <- knitr::kable(summary_stats, format = "html", table.attr = "style='width: auto;' class='table table-condensed'")
 
 **Skim summary statistics**
 
@@ -367,7 +356,7 @@ n\_cols
 </tr>
 </tbody>
 </table>
-**Variable type: double**
+**Variable type: numeric**
 
 <table>
 <thead>
@@ -383,6 +372,7 @@ n\_cols
 <th align="right">p50</th>
 <th align="right">p75</th>
 <th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
@@ -398,6 +388,7 @@ n\_cols
 <td align="right">5.8</td>
 <td align="right">6.4</td>
 <td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
 </tr>
 </tbody>
 </table>
@@ -407,9 +398,9 @@ n\_cols
 `skimr` has summary functions for the following types of data by
 default:
 
--   `double`, with `numeric` coerced to this type.
+-   `numeric`
 -   `integer`
--   \`character
+-   `character`
 -   `factor`
 -   `logical`
 -   `complex`
@@ -421,21 +412,15 @@ default:
 `skimr` also provides a small API for writing packages that provide
 their own default summary functions for data types not covered above. It
 relies on R S3 methods for the `get_skimmers` function. This function
-should wrap a call to `make_skimmer`. Here's an example.
+should return a `sfl`, similar to customization within `skim_with()`,
+but you should also provide a value for the `class` argument. Here's an
+example.
 
-    get_skimmers.my_data_type <- function(column, local_skimmers = new.env(),
-                                          append = TRUE) {
-      make_skimmer(
-        # Provide the type and pass the arguments from the previous function
-        "my_data_type",
-        local_skimmers,
-        append,
-        
-        # Provide named references to functions you wish to use.
+    get_skimmers.my_data_type <- function(column) {
+      sfl(
+        .class = "my_data_type",
         missing = n_missing,
         complete = n_complete,
-        
-        # You can still use dummy arguments
         p99 = quantile(., probs = .99))
     }
 
