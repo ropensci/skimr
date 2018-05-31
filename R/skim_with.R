@@ -64,6 +64,8 @@
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
   function(data, ...) {
+    stopifnot(is.data.frame(data))
+    
     .vars <- rlang::quos(...)
     cols <- names(data)
     if (length(.vars) == 0) {
