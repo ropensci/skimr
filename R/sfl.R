@@ -14,6 +14,10 @@
 #' @export
 sfl <- function(..., .args = list(), .class = "") {
   skimmer_list <- rlang::enquos(...)
+  if (length(skimmer_list) < 1) {
+    stop("Please provide one or more named argument")
+  }
+  
   dropable <- purrr::map_lgl(skimmer_list, rlang::quo_is_null)
   keep <- skimmer_list[!dropable]
   drop <- skimmer_list[dropable]
