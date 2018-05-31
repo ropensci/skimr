@@ -71,7 +71,8 @@ skim <- skim_with()
 
 #' @rdname skim 
 #' @export
-skim_tee <- function(.data, ..., skim = skim) {
-  print(skim(.data))
+skim_tee <- function(.data, ..., skim_fun = skim) {
+  skimmed <- skim_fun(.data)
+  print(skimmed)
   invisible(.data)
 }
