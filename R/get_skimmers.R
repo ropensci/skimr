@@ -104,7 +104,7 @@ get_skimmers.logical <- function(column) {
     complete = n_complete,
     n = length,
     mean = mean(., na.rm = TRUE),
-    count = sorted_count)
+    count = top_counts)
 }
 
 #' @export
