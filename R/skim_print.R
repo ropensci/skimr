@@ -66,6 +66,7 @@ print.summary_skim_df <- function(x, ...) {
 #' @noRd
 
 print_impl <- function(transformed_df, skim_type, ...) {
+  cat("\n")
   print(cli::rule(line = 1, left = paste0("Variable type:", skim_type)))
   mat <- as.matrix(transformed_df)
   dimnames(mat)[[1]] <- rep("", nrow(mat))
