@@ -11,8 +11,8 @@ NULL
 
 print.skim_df <- function(x, ...) {
   defaults <- options(dplyr.show_progress = FALSE)
-  on.exit(options(defaults))
-  
+  on.exit(options(defaults)
+  )
   cat("Skim summary statistics\n")
   cat(" n obs:", attr(x, "data_rows"), "\n")
   cat(" n variables:", attr(x, "data_cols"), "\n")
@@ -33,9 +33,8 @@ print.skim_df <- function(x, ...) {
 #' @export
 
 print.skim_vector <- function(x, ...) {
-  cat("Skim summary statistics\n")
+  cat("\nSkim summary statistics\n")
   skim_render(x, groups = as.null(), print_impl, ...)
-  
 }
 
 
@@ -57,7 +56,8 @@ print.summary_skim_df <- function(x, ...) {
       n_rows, 
       n_cols, 
       "    \nColumn type frequency    \n",
-      type_frequency_string
+      type_frequency_string,
+      "\n"
       ,sep = "")
 }
 
@@ -66,7 +66,8 @@ print.summary_skim_df <- function(x, ...) {
 #' @noRd
 
 print_impl <- function(transformed_df, skim_type, ...) {
-  cat("\nVariable type:", skim_type, "\n")
+  cat("\n")
+  print(cli::rule(line = 1, left = paste0("Variable type:", skim_type)))
   mat <- as.matrix(transformed_df)
   dimnames(mat)[[1]] <- rep("", nrow(mat))
   print(enc2utf8(mat), quote = FALSE, right = TRUE)

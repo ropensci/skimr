@@ -7,7 +7,7 @@
 \alias{get_skimmers}
 \title{Set or add the summary functions for a particular type of data}
 \usage{
-skim_with(..., append = TRUE, drop_new = FALSE)
+skim_with(..., .list = list(), append = TRUE, drop_new = FALSE)
 
 skim_with_defaults()
 
@@ -18,6 +18,10 @@ get_skimmers(which = NULL)
 \arguments{
 \item{...}{A list of functions, with an argument name that matches a
 particular data type.}
+
+\item{.list}{Instead of individual named entries, you can provided a list
+instead. If most \code{...} arguments and \code{.list} is provided, values
+in \code{.list} take precedence.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in \code{skim}. Default is \code{TRUE}.}
@@ -80,6 +84,17 @@ skim_with(numeric = list(iqr = purrr::partial(IQR, na.rm = TRUE)))
 
 # Or use an rlang-style formula constructor for the function
 skim_with(numeric = list(med = ~median(., na.rm = TRUE)))
+
+# Set multiple types of skimmers simultaneously
+skim_with(numeric = list(mean = mean), character = list(len = length))
+
+# Or pass the same as a list
+my_skimmers <- list(numeric = list(mean = mean),
+                    character = list(len = length))
+skim_with(.list = my_skimmers)
+
+# Alternatively, use rlang unquoting semantics
+skim_with(!!!my_skimmers)
 
 # Go back to defaults
 skim_with_defaults()

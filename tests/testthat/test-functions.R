@@ -101,17 +101,49 @@ test_functions_that("Skimming functions for new types can be added", {
 })
 
 test_functions_that("Set multiple sets of skimming functions", {
-  skimmers_default<-show_skimmers()
-  correct <- c("iqr", "q" )
-
-  funs <- list(iqr = IQR,
-    q = purrr::partial(quantile, probs = .99))
-
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
   skim_with(numeric = funs, new_type = funs, append = FALSE)
   input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
   expect_identical(input$numeric, correct)
   expect_identical(input$new_type, correct)
   expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
+test_functions_that("Set multiple sets of skimming functions, list", {
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
+  skim_with(.list = list(numeric = funs, new_type = funs), append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
+test_functions_that("Set multiple sets of skimming functions, rlang", {
+  funs <- list(iqr = IQR, q = purrr::partial(quantile, probs = .99))
+  skim_with(!!!list(numeric = funs, new_type = funs), append = FALSE)
+  input <- show_skimmers(c("numeric", "new_type"))
+  
+  correct <- c("iqr", "q" )
+  expect_identical(input$numeric, correct)
+  expect_identical(input$new_type, correct)
+  expect_identical(get_skimmers("new_type"), list(new_type = funs))
+  skim_with_defaults()
+})
+
+test_that("A class with an empty function list returns nothing",{
+  myfuns <- list(factor = list())
+  skim_with(!!!myfuns, append= FALSE)
+  input <- skim(iris)
+  expect_equal(nrow(input), 44)
+  inputlist <- skim_to_list(iris)
+  expect_equal(length(inputlist), 1)
+  expect_equal(names(inputlist), c("numeric"))
   skim_with_defaults()
 })
 
@@ -296,4 +328,10 @@ test_functions_that("Defines skimmers using rlang-style formula lambdas", {
   input_funs <- get_skimmers()
   expect_identical(input$numeric, names(funs))
   expect_identical(input_funs$numeric, purrr::map(funs, rlang::as_function))
+})
+
+test_that("Setting skimmers to an empty list does not throw an error",{
+  expect_silent(skim_with(factor=list(), append=FALSE))
+  expect(is.null(show_skimmers()$factor))
+  skim_with_defaults()
 })

@@ -384,3 +384,11 @@ test_that("Skimming with non-finite values works", {
   expect_warning(input<-skim(c(x = c(-Inf, 0))))
   expect_length(input, 6)
 })
+
+test_that("Skimming with an empty function list for a class 
+          returns the expected message",{
+  skim_with(factor=list(), append=FALSE)
+  expect_message(skim(iris$Species), 
+                 "The skimmer list is empty for class factor.")
+  skim_with_defaults()
+})
