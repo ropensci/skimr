@@ -42,7 +42,7 @@ Imports:
     knitr (>= 1.2),
     tibble (>= 0.6),
     tidyr (>= 0.7),
-    tidyselect
+    tidyselect (>= 0.2)
 Suggests:
     extrafont,
     rmarkdown,
