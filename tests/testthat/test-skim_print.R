@@ -30,7 +30,6 @@ test_that("Skim prints a special header for vectors", {
 
 test_that("Skim collapses counts and other multivalue stats into one cell", {
   input <- skim(iris)
-  expect_output(print(skim, "set: 50, ver: 50, vir: 50, NA: 0"))
   expect_output(print(input, "set: 50, ver: 50, vir: 50, NA: 0"))
 })
 

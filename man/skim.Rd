@@ -60,7 +60,7 @@ can customize how the output is displayed with \code{\link[=skim_format]{skim_fo
 If the rendered examples show unencoded values such as \code{<U+2587>} you will
 need to change your locale to allow proper rendering. Please review the
 \emph{Using Skimr} vignette for more information
-(\code{vignette("Using_skimr" package = "skimr")}).
+(\code{vignette("Using_skimr", package = "skimr")}).
 }
 
 \examples{
