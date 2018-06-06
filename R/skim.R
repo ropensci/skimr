@@ -38,7 +38,7 @@ globalVariables(".")
 #' If the rendered examples show unencoded values such as `<U+2587>` you will
 #' need to change your locale to allow proper rendering. Please review the
 #' *Using Skimr* vignette for more information
-#' (`vignette("Using_skimr" package = "skimr")`).
+#' (`vignette("Using_skimr", package = "skimr")`).
 #'
 #' @param .data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Additional options, normally used to list individual unquoted
