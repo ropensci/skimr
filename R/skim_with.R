@@ -162,7 +162,7 @@ skim_one <- function(column, data, local_skimmers, append) {
               "provided. Falling back to `character`.", call. = FALSE)
       data[[column]] <- as.character(data[[column]])
       skimmers <- defaults
-      skimmer$type <- "character"
+      skimmers$type <- "character"
     } else {
       skimmers <- defaults
     }
@@ -189,8 +189,8 @@ merge_skimmers <- function(locals, defaults, append) {
   if (locals$type != defaults$type || !append) {
     locals
   } else {
-    defaults[names(locals$keep)] <- locals$keep
-    defaults[locals$drop] <- NULL
+    defaults$keep <- purrr::list_modify(defaults$keep, !!!locals$keep)
+    defaults$keep[locals$drop] <- NULL
     defaults
   }
 }
