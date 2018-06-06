@@ -4,7 +4,7 @@
 \alias{sfl}
 \title{Create a skimr function list}
 \usage{
-sfl(..., .args = list(), .class = "")
+sfl(..., .args = list(), .type = "")
 }
 \arguments{
 \item{...}{A list of functions specified by:
@@ -28,7 +28,7 @@ The following notations are \strong{not} supported, see examples:
 \item{.args}{A named list of additional arguments to be added
 to all function calls.}
 
-\item{.class}{A character scalar. This is used to match locally-provided
+\item{.type}{A character scalar. This is used to match locally-provided
 skimmers with defaults. See \code{\link[=get_skimmers]{get_skimmers()}} for more detail.}
 }
 \value{

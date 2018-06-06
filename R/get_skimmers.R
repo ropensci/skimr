@@ -6,7 +6,7 @@ NULL
 #' These functions are used to set the default skimming functions for a data
 #' type.  When creating your own set of skimming functions, call [sfl()]
 #' within a [get_skimmers()] method for your particular type. Your call to
-#' [sfl()] should also provide a matching class in the `.class` argument.
+#' [sfl()] should also provide a matching class in the `.type` argument.
 #' Otherwise, it will not be possible to dynamically reassign your default
 #' functions when working interactively.
 #' 
@@ -33,7 +33,7 @@ NULL
 #' # Note that the class argument is required for dynamic reassignment.
 #' get_skimmers.my_class <- function(colum) {
 #'   sfl(
-#'     .class = "my_class",
+#'     .type = "my_class",
 #'     mean,
 #'     sd)
 #' }
@@ -45,13 +45,13 @@ get_skimmers <- function(column) {
 #' @export
 get_skimmers.default <- function(column) {
   fallback <- get_skimmers(character())
-  sfl(.class = "default", !!!fallback$keep)
+  sfl(.type = "default", !!!fallback$keep)
 }
 
 #' @export
 get_skimmers.numeric <- function(column) {
   sfl(
-    .class = "numeric",
+    .type = "numeric",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -68,13 +68,13 @@ get_skimmers.numeric <- function(column) {
 #' @export
 get_skimmers.integer <- function(column) {
   numeric_skimmers <- get_skimmers(numeric())
-  sfl(.class = "integer", !!!numeric_skimmers$keep)
+  sfl(.type = "integer", !!!numeric_skimmers$keep)
 }
 
 #' @export
 get_skimmers.factor <- function(column) {
   sfl(
-    .class = "factor",
+    .type = "factor",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -86,7 +86,7 @@ get_skimmers.factor <- function(column) {
 #' @export
 get_skimmers.character <- function(column) {
   sfl(
-    .class = "character",
+    .type = "character",
     missing  = n_missing,
     complete = n_complete,
     n = length,
@@ -99,7 +99,7 @@ get_skimmers.character <- function(column) {
 #' @export
 get_skimmers.logical <- function(column) {
   sfl(
-    .class = "logical",
+    .type = "logical",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -110,7 +110,7 @@ get_skimmers.logical <- function(column) {
 #' @export
 get_skimmers.complex <- function(column) {
   sfl(
-    .class = "complex",
+    .type = "complex",
     missing = n_missing,
     complete = n_complete,
     n = length)
@@ -119,7 +119,7 @@ get_skimmers.complex <- function(column) {
 #' @export
 get_skimmers.Date <- function(column) {
   sfl(
-    .class = "Date",
+    .type = "Date",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -132,13 +132,19 @@ get_skimmers.Date <- function(column) {
 #' @export
 get_skimmers.POSIXct <- function(column) {
   date_skimmers <- get_skimmers(structure(list(), class = "Date"))
-  sfl(.class = "POSIXct", !!!date_skimmers$keep)
+  sfl(.type = "POSIXct", !!!date_skimmers$keep)
+}
+
+#' @export
+get_skimmers.difftime <- function(column) {
+  date_skimmers <- get_skimmers(structure(list(), class = "Date"))
+  sfl(.type = "difftime", !!!date_skimmers$keep)
 }
 
 #' @export
 get_skimmers.ts <- function(column) {
   sfl(
-    .class = "ts",
+    .type = "ts",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -157,7 +163,7 @@ get_skimmers.ts <- function(column) {
 #' @export
 get_skimmers.list <- function(column) {
   sfl(
-    .class = "list",
+    .type = "list",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -169,7 +175,7 @@ get_skimmers.list <- function(column) {
 #' @export
 get_skimmers.AsIs <- function(column) {
   list_skimmers <- get_skimmers(list())
-  sfl(.class = "AsIs", !!!list_skimmers$keep)
+  sfl(.type = "AsIs", !!!list_skimmers$keep)
 }
 
 #' @rdname get_skimmers
