@@ -522,10 +522,10 @@ produces a long, tidy-format `skim_df` object that can be computed on.
 Customizing skimr
 -----------------
 
-Although skimr provides opinionated defaults, it is highly customizable.
-Users can specify their own statistics, change the formatting of
-results, create statistics for new classes and develop skimmers for data
-structures that are not data frames.
+Although `skimr` provides opinionated defaults, it is highly
+customizable. Users can specify their own statistics, change the
+formatting of results, create statistics for new classes and develop
+skimmers for data structures that are not data frames.
 
 ### Specify your own statistics and classes
 
@@ -553,10 +553,10 @@ data.
 
 ### Change formatting
 
-Skimr provides a set of default formats that allow decimals in columns
+`skimr` provides a set of default formats that allow decimals in columns
 to be aligned, a reasonable number of decimal places for numeric data,
-and a representation of dates. Users can view thes with `show_formats()`
-and modify them with `skim_format()`.
+and a representation of dates. Users can view these with
+`show_formats()` and modify them with `skim_format()`.
 
 ### Skimming other objects
 
@@ -613,6 +613,6 @@ Contributing
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
-encourage users to take advantage of skimr's flexibility to add their
+encourage users to take advantage of `skimr`’s flexibility to add their
 own customized classes. Please see the [contributing](CONTRIBUTING.md)
 and [conduct](CONDUCT.md) documents.
