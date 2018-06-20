@@ -112,7 +112,8 @@ validate_assignment <- function(...) {
   if (length(to_assign) < 1) return(to_assign)
   
   proposed_names <- names(to_assign)
-  if (anyNA(proposed_names)) {
+  if (!all(nzchar(proposed_names)) || is.null(proposed_names) ||
+      anyNA(proposed_names)) {
     stop("skim_with requires all arguments to be named.", call. = FALSE)
   }
   
