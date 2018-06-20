@@ -186,13 +186,25 @@ get_default_skimmers <- function(class = NULL) {
     classes <- stringr::str_replace(defaults, "get_skimmers.", "")
     no_default <- purrr::discard(classes, ~.x == "default")
     iter <- purrr::set_names(no_default)
+    purrr::map(iter, get_class_defaults)
   } else {
     iter <- purrr::set_names(class)
+    results <- purrr::map(iter, get_class_defaults)
+    no_defaults_for_class <- purrr::map_lgl(results, anyNA)
+    if (any(no_defaults_for_class)) {
+      dropped <- paste(results[no_defaults_for_class], collapse = ", ")
+      msg <- sprintf("The following classes do not have defaults: %s", dropped)
+      warning(msg, call. = FALSE)
+    }
+    results[!no_defaults_for_class]
   }
-  purrr::map(iter, get_class_defaults)
 }
 
 get_class_defaults <- function(class) {
   skimmers <- get_skimmers(structure(integer(), class = class))
-  names(skimmers$keep)
+  if (skimmers$type == "default") {
+    NA
+  } else {
+    names(skimmers$keep)
+  }
 }
