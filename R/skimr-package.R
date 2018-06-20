@@ -20,6 +20,8 @@ NULL
 
 #' @importFrom rlang %||%
 
+#' @importFrom knitr knit_print
+
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
