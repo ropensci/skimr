@@ -16,6 +16,11 @@ print.skim_df <- function(x, include_summary = TRUE, ...) {
     cat(" n obs:", attr(x, "data_rows"), "\n")
     cat(" n variables:", attr(x, "data_cols"), "\n")
   }
+  
+  possible_groups <- attr(x, "groups")
+  if (!is.null(possible_groups)) {
+    cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
+  }
 
   by_type <- partition(x)
   purrr::imap(by_type, print)
@@ -88,7 +93,7 @@ NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
 #' @export
-knit_print.skim_df <- function(x, options, ...) {
+knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {
     summary_stats <- data.frame(
       n_obs = attr(x, "data_rows"),
@@ -121,13 +126,13 @@ knit_print_one <- function(by_type, skim_type, options) {
 
 #' @describeIn print Default `knitr` print for a `skim_list`.
 #' @export
-knit_print.skim_list <- function(x, options, ...) {
+knit_print.skim_list <- function(x, options = NULL, ...) {
   knit_print_by_type(x, options, NULL)
 }
 
 #' @describeIn print Default `knitr` print within a partitioned `skim_df`.
 #' @export
-knit_print.one_skim_df <- function(x, options, ...) {
+knit_print.one_skim_df <- function(x, options = NULL, ...) {
   kabled <- knit_print_one(x, attr(x, "type"), options)
   combined <- c("", "", kabled, "")
   knitr::asis_output(paste(combined, collapse = "\n"))
@@ -135,7 +140,7 @@ knit_print.one_skim_df <- function(x, options, ...) {
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
-knit_print.summary_skim_df <- function(x, options, ...) {
+knit_print.summary_skim_df <- function(x, options = NULL, ...) {
   knit_print_one()
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
   n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
