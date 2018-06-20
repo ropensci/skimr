@@ -7,7 +7,7 @@
 \usage{
 skim(data, ...)
 
-skim_tee(.data, ..., skim = skim)
+skim_tee(.data, ..., skim_fun = skim)
 }
 \arguments{
 \item{...}{Columns to select for skimming. When none are provided, the

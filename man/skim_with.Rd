@@ -34,6 +34,12 @@ You assign values within \code{skim_with} by using the \code{\link[=sfl]{sfl()}}
 function list). This helper behaves mostly like \code{\link[dplyr:funs]{dplyr::funs()}}, but lets
 you also identify which skimming functions you want to remove, by setting
 them to \code{NULL}.
+
+When \code{append = TRUE} and local skimmers have names matching the names of
+entries in the default \code{skim_function_list}, the values in the default list
+are overwritten. Similarly, if \code{NULL} values are passed within \code{sfl()}, these
+default skimmers are dropped. Otherwise, if \code{append = FALSE}, only the
+locally-provided skimming functions are used.
 }
 \examples{
 # Use new functions for numeric functions. If you don't provide a name,

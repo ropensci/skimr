@@ -59,8 +59,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Collate: 
     'stats.R'
+    'skim_with.R'
     'get_skimmers.R'
     'reshape.R'
+    'sfl.R'
     'skim.R'
     'skim_print.R'
     'skimr-package.R'

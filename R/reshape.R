@@ -27,8 +27,8 @@ partition <- function(data) {
   skimmers <- attr(data, "skimmers_used")
   groups <- attr(data, "groups")
   reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
-  class(reduced) <- "skim_list"
   structure(reduced,
+            class = "skim_list",
             data_rows = attr(data, "data_rows"),
             data_cols = attr(data, "data_cols"),
             df_name = attr(data, "df_name"),
