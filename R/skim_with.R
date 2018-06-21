@@ -123,7 +123,7 @@ validate_assignment <- function(...) {
     collapsed <- paste(proposed_names[!existing], collapse = ", ")
     message("Creating new skimming functions for the following classes: ",
             collapsed, ".\nThey did not have recognized defaults. Call ",
-            "get_default_skimmers() for more infomation.")
+            "get_default_skimmers() for more information.")
   }
   to_assign
 }
