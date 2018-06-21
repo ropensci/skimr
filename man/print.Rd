@@ -18,9 +18,9 @@
 
 \method{print}{summary_skim_df}(x, ...)
 
-\method{knit_print}{skim_list}(x, options, ...)
+\method{knit_print}{skim_list}(x, options = NULL, ...)
 
-\method{knit_print}{one_skim_df}(x, options, ...)
+\method{knit_print}{one_skim_df}(x, options = NULL, ...)
 }
 \arguments{
 \item{x}{Either a \code{skim_df}, \code{skim_vector} or \code{skim_summary} object.}

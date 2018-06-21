@@ -6,9 +6,9 @@
 \alias{knit_print.summary_skim_df}
 \title{Provide a default printing method for knitr.}
 \usage{
-\method{knit_print}{skim_df}(x, options, ...)
+\method{knit_print}{skim_df}(x, options = NULL, ...)
 
-\method{knit_print}{summary_skim_df}(x, options, ...)
+\method{knit_print}{summary_skim_df}(x, options = NULL, ...)
 }
 \arguments{
 \item{x}{An R object to be printed}
