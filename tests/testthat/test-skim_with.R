@@ -99,3 +99,10 @@ test_that("An empty call to skim_with() returns the default skim()", {
   input <- skim_with()
   expect_identical(input(iris), skim(iris))
 })
+
+test_that("sfls can use unnamed functions", {
+  dat <- tibble::tibble(1:3)
+  new_skim <- skim_with(integer = sfl(mad), append = FALSE)
+  input <- new_skim(dat)
+  expect_named(input, c("variable", "type", "mad"))
+})

@@ -174,9 +174,12 @@ skim_one <- function(column, data, local_skimmers, append) {
   reduced <- suppressMessages(dplyr::select(data, !!column))
   out <- tibble::tibble(type = skimmers$type,
                         !!!dplyr::summarize_all(reduced, skimmers$keep))
+  used <- names(skimmers$keep)
+  grps <- dplyr::groups(reduced)
+  names(out) <- c("type", as.character(grps), used)
   structure(out,
             skimmer_type = skimmers$type,
-            skimmers_used = names(skimmers$keep))
+            skimmers_used = used)
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {
