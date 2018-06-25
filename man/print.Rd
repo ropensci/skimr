@@ -12,9 +12,9 @@
 \usage{
 \method{print}{skim_df}(x, include_summary = TRUE, ...)
 
-\method{print}{one_skim_df}(x, ..)
+\method{print}{one_skim_df}(x, ...)
 
-\method{print}{skim_list}(x, ..)
+\method{print}{skim_list}(x, ...)
 
 \method{print}{summary_skim_df}(x, ...)
 

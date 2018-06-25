@@ -34,6 +34,7 @@ Summary functions are provided for the following classes:
 \item \code{complex}
 \item \code{Date}
 \item \code{POSIXct}
+\item \code{difftime}
 \item \code{ts}
 \item \code{AsIs}
 }
