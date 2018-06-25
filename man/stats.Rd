@@ -5,6 +5,7 @@
 \alias{n_missing}
 \alias{n_complete}
 \alias{sorted_count}
+\alias{top_counts}
 \alias{inline_hist}
 \alias{n_empty}
 \alias{min_char}
@@ -26,7 +27,9 @@ n_complete(x)
 
 sorted_count(x)
 
-inline_hist(x)
+top_counts(x, max_char = 3, max_levels = 4)
+
+inline_hist(x, n_bins = 8)
 
 n_empty(x)
 
@@ -40,7 +43,7 @@ ts_start(x)
 
 ts_end(x)
 
-inline_linegraph(x)
+inline_linegraph(x, length.out = 16)
 
 list_lengths_min(x)
 
@@ -54,6 +57,13 @@ list_max_length(x)
 }
 \arguments{
 \item{x}{A vector}
+
+\item{max_char}{In \code{top} = 3, max_levels = 4}
+
+\item{n_bins}{In \code{inline_hist}, the number of histogram bars.}
+
+\item{length.out}{In \code{inline_linegraph}, the length of the character time
+series.}
 }
 \description{
 Skimr provides extensions to a variety of functions with R's stats package
@@ -71,6 +81,9 @@ a single argument. Other parameters for these functions are set in the
 descending order. In case of ties, the ordering of results is alphabetical
 and depends upon the locale. \code{NA} is treated as a ordinary value for
 sorting.
+
+\item \code{top_counts}: Compute and collapse a contingency table into a single
+character scalar. Wraps \code{\link[=sorted_count]{sorted_count()}}.
 
 \item \code{inline_hist}: Generate inline histogram for numeric variables. The
 character length of the histogram is controlled by the formatting options

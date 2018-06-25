@@ -2,21 +2,20 @@ context("Use individual statistics functions on a vector")
 
 test_that("inline_linegraph returns expected response for a ts vector", {
   input <- inline_linegraph(freeny$y)
-  correct <- structure("⣀⣀⠤⠤⠒⠒⠉⠉", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "⣀⣀⠤⠤⠒⠒⠉⠉")
 })
 
-test_that("inline_linegraph returns expected response for a long ts vector.", {
-  input <- inline_linegraph(AirPassengers)
-  correct <- structure("⣀⣀⣀⠔⠤⠊⠑⠊", class = c("spark", "character"))
-  expect_identical(input, correct)
-})
+test_that("inline_linegraph returns expected response for a long ts vector.",
+          {
+            input <- inline_linegraph(AirPassengers)
+            expect_identical(input, "⣀⣀⣀⠔⠤⠊⠑⠊")
+          })
 
-test_that("inline_linegraph returns expected response for an NA ts vector.", {
-  input <- inline_linegraph(ts(c(NA, NA, NA, NA, NA, NA)))
-  correct <- structure("⠀", class = c("spark", "character"))
-  expect_identical(input, correct)
-})
+test_that("inline_linegraph returns expected response for an NA ts vector.",
+          {
+            input <- inline_linegraph(ts(c(NA, NA, NA, NA, NA, NA)))
+            expect_identical(input, "⠀")
+          })
 
 test_that("ts_start returns expected response for a ts vector", {
   input <- ts_start(freeny$y)
@@ -42,87 +41,77 @@ test_that("n_complete is calculated correctly.", {
 
 test_that("inline histogram is calculated correctly.", {
   input <- inline_hist(iris$Sepal.Length)
-  correct <- structure("▂▇▅▇▆▅▂▂", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "▂▇▅▇▆▅▂▂")
 })
 
 test_that("inline histogram is calculated correctly when x is all zeros.", {
   input <- inline_hist(numeric(10))
-  correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "▁▁▁▇▁▁▁▁")
 })
 
 test_that("inline histogram returns an empty string when x is length 0.", {
   input <- inline_hist(numeric(0))
-  correct <- structure(" ", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, " ")
 })
 
-test_that("inline histogram is calculated correctly when x is all zeores or
-          NAs", {
-            input <- inline_hist(as.numeric(c(NA, NA, NA, 0, 0)))
-            correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
-            expect_identical(input, correct)
-          })
+test_that("inline hist is calculated correctly when x is all zeores or NAs", {
+  input <- inline_hist(as.numeric(c(NA, NA, NA, 0, 0)))
+  expect_identical(input, "▁▁▁▇▁▁▁▁")
+})
 
 test_that("inline histogram is calculated correctly when x is all 1s.", {
   input <- inline_hist(c(1, 1, 1, 1, 1, 1))
-  correct <- structure("▁▁▁▇▁▁▁▁", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "▁▁▁▇▁▁▁▁")
 })
 
 test_that("inline histogram returns empty string when x is all NAs.", {
   input <- inline_hist(as.numeric(rep(NA, 10)))
-  correct <- structure(" ", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, " ")
 })
 
 test_that("inline histogram is returns empty string when x is all NaN.", {
   input <- inline_hist(rep(NaN, 10))
-  correct <- structure(" ", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, " ")
 })
 
-test_that("inline histogram is calculated correctly when x is evenly distributed.", {
-  input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
-  correct <- structure("▇▇▇▇▇▇▇▇", class = c("spark", "character"))
-  expect_identical(input, correct)
-})
+test_that("inline histogram is calculated correctly when x is evenly distributed.",
+          {
+            input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
+            expect_identical(input, "▇▇▇▇▇▇▇▇")
+          })
 
 test_that("inline histogram is calculated correctly with NaN.", {
   input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, NaN))
-  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "▂▂▅▁▁▇▁▂")
 })
 
 test_that("inline histogram is calculated correctly with NA.", {
   input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, NA))
-  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_identical(input, "▂▂▅▁▁▇▁▂")
 })
 
 test_that("inline histogram is calculated correctly with Inf.", {
-  expect_warning(input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf)))
-  correct <- structure("▂▂▅▁▁▇▁▂", class = c("spark", "character"))
-  expect_identical(input, correct)
+  expect_warning(input <-
+                   inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf,-Inf)))
+  expect_identical(input, "▂▂▅▁▁▇▁▂")
 })
 
 test_that("n_empty is calculated correctly.", {
-  data<-c("a", "ab", "abc", "")
-    correct <- as.integer(1)
-    input <- n_empty(data)
-    expect_identical(input, correct)
+  data <- c("a", "ab", "abc", "")
+  correct <- as.integer(1)
+  input <- n_empty(data)
+  expect_identical(input, correct)
 })
 
 test_that("min_char is calculated correctly, including empty strings.", {
-  data<-c("a", "ab", "abc", "")
+  data <- c("a", "ab", "abc", "")
   correct <- as.integer(0)
   input <- min_char(data)
   expect_identical(input, correct)
 })
 
 test_that("max_char is calculated correctly, including empty strings.", {
-  data<-c("a", "ab", "abc", "")
+  data <- c("a", "ab", "abc", "")
   correct <- as.integer(3)
   input <- max_char(data)
   expect_identical(input, correct)
@@ -130,14 +119,14 @@ test_that("max_char is calculated correctly, including empty strings.", {
 
 test_that("n_unique is calculated correctly.", {
   correct <- 4L
-  data<-c("a", "ab", "abc", "")
+  data <- c("a", "ab", "abc", "")
   input <- n_unique(data)
   expect_identical(input, correct)
 })
 
 test_that("n_unique handles NA as expected.", {
   correct <- 4L
-  data<-c("a", "ab", "abc", "", NA)
+  data <- c("a", "ab", "abc", "", NA)
   input <- n_unique(data)
   expect_identical(input, correct)
 })
@@ -147,9 +136,10 @@ test_that("list_lengths_min is calculated correctly.", {
     list("a", "b", "c"),
     list("d", "b", "d"),
     list("e", "f", "g"),
-    d = list("h"), 
+    d = list("h"),
     e = list("i", "j", "k", "l"),
-    f = NA)
+    f = NA
+  )
   expect_identical(list_lengths_min(dat), 1L)
 })
 
@@ -158,9 +148,10 @@ test_that("list_lengths_max is calculated correctly.", {
     list("a", "b", "c"),
     list("d", "b", "d"),
     list("e", "f", "g"),
-    d = list("h"), 
+    d = list("h"),
     e = list("i", "j", "k", "l"),
-    f = NA)
+    f = NA
+  )
   expect_identical(list_lengths_max(dat), 4L)
 })
 
@@ -169,39 +160,50 @@ test_that("list_lengths_median is calculated correctly.", {
     list("a", "b", "c"),
     list("d", "b", "d"),
     list("e", "f", "g"),
-    d = list("h"), 
+    d = list("h"),
     e = list("i", "j", "k", "l"),
-    f = NA)
+    f = NA
+  )
   expect_identical(list_lengths_median(dat), 3L)
 })
 
 test_that("list_min_length is calculated correctly.", {
-  dat <- I(list(5, 5:6,5:10, NA))
+  dat <- I(list(5, 5:6, 5:10, NA))
   expect_identical(list_min_length(dat), 1L)
 })
 
 test_that("list_max_length is calculated correctly.", {
-  dat <- I(list(5, 5:6,5:10, NA))
+  dat <- I(list(5, 5:6, 5:10, NA))
   expect_identical(list_max_length(dat), 6L)
 })
 
-test_that("sorted count is calculated correctly." , {
-  dat<-c("A", "A", "A", "B", "C","C")
+test_that("sorted count is calculated correctly.", {
+  dat <- c("A", "A", "A", "B", "C", "C")
   expect_equal(sorted_count(dat)[1:3], c("A" = 3, "C" = 2, "B" = 1))
   expect_equal(names(sorted_count(dat)), c("A", "C", "B", NA))
 })
 
-test_that("sorted count is calculated correctly with a NA." , {
+test_that("top counts is calculated correctly", {
+  dat <- c("A", "A", "A", "B", "C", "C")
+  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1, NA: 0")
+})
+
+test_that("sorted count is calculated correctly with a NA.", {
   # NA should be sorted as if it is a regular value
-  dat<-c("A", "A", "A","A", "B", NA, NA, "C","C", "C")
+  dat <- c("A", "A", "A", "A", "B", NA, NA, "C", "C", "C")
   expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1))
   expect_equal(names(sorted_count(dat)), c("A", "C", NA, "B"))
 })
 
+test_that("top counts is calculated correctly with a NA", {
+  dat <- c("A", "A", "A", "B", "C", "C")
+  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1, NA: 0")
+})
+
 test_that("sorted count is calculated correctly with \"\"." , {
   # \"\" should be converted to \"empty \" and a warning issued.
-  dat<-c("A", "A", "A","A", "B", "", "", "C","C", "C")
-  dat<-as.factor(dat)
+  dat <- c("A", "A", "A", "A", "B", "", "", "C", "C", "C")
+  dat <- as.factor(dat)
   expect_warning(expected <- sorted_count(dat))
   expect_equal(unname(expected), c(4, 3, 2, 1, 0))
   expect_equal(names(expected), c("A", "C", "empty", "B", NA))

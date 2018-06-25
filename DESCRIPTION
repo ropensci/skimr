@@ -35,7 +35,6 @@ Imports:
     cli,
     dplyr (>= 0.7),
     magrittr,
-    pander,
     purrr,
     rlang,
     stats,
@@ -59,16 +58,13 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Collate: 
-    'skimr-package.R'
-    'formats.R'
     'stats.R'
-    'functions.R'
-    'kable.R'
-    'options.R'
-    'pander.R'
+    'skim_with.R'
+    'get_skimmers.R'
+    'reshape.R'
+    'sfl.R'
     'skim.R'
     'skim_print.R'
-    'skim_v.R'
+    'skimr-package.R'
     'summary.R'
     'utils.R'
-    'wide.R'

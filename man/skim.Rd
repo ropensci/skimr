@@ -5,19 +5,21 @@
 \alias{skim_tee}
 \title{Skim a data frame, getting useful summary statistics}
 \usage{
-skim(.data, ...)
+skim(data, ...)
 
-skim_tee(.data, ...)
+skim_tee(.data, ..., skim_fun = skim)
 }
 \arguments{
+\item{...}{Columns to select for skimming. When none are provided, the
+default is to skim all columns.}
+
 \item{.data}{A tibble, or an object that can be coerced into a tibble.}
 
-\item{...}{Additional options, normally used to list individual unquoted
-column names.}
+\item{skim}{The skimming function to use in \code{skim_tee()}.}
 }
 \value{
-A \code{skim_df} object, which can be treated like a tibble in most
-instances.
+A \code{skim_df} object, which also inherits the class(es) of the input
+data. The result is usually a data frame or tibble.
 }
 \description{
 \code{skim()} is an alternative to \code{\link[=summary]{summary()}}, quickly providing a broad
@@ -33,7 +35,8 @@ Printing does not change the structure of the \code{skim_df}, which remains a lo
 tibble.
 
 If you just want to see the printed output, call \code{skim_tee()} instead.
-This function returns the original data frame.
+This function returns the original data. \code{skim_tee()} uses the default
+\code{skim()}, but you can replace it with the \code{skim} argument.
 
 If you want to work with a data frame that resembles the printed output,
 call \code{\link[=skim_to_wide]{skim_to_wide()}} or for a named list of data frames by type
@@ -51,8 +54,7 @@ further work with a \code{skim_df} using \code{dplyr} functions in a pipeline.
 \code{skim()} is an intentionally simple function, with minimal arguments like
 \code{\link[=summary]{summary()}}. Nonetheless, this package provides two broad approaches to
 how you can customize \code{skim()}'s behavior. You can customize the functions
-that are called to produce summary statistics with \code{\link[=skim_with]{skim_with()}}. You
-can customize how the output is displayed with \code{\link[=skim_format]{skim_format()}}.
+that are called to produce summary statistics with \code{\link[=skim_with]{skim_with()}}.
 }
 
 \section{Unicode rendering}{
@@ -71,18 +73,18 @@ skim(iris, Species)
 skim(iris, starts_with("Sepal"))
 
 # Skim also works groupwise
-dplyr::group_by(iris, Species) \%>\% skim()
+iris \%>\%
+  dplyr::group_by(Species) \%>\%
+  skim()
 
-# Skim pipelines; now we work with the tall format
-skim(iris) \%>\% as.data.frame()
-skim(iris) \%>\% dplyr::filter(type == "factor")
-
-# Which column as the greatest mean value?
-skim(iris) \%>\%
-  dplyr::filter(stat == "mean") \%>\%
-  dplyr::arrange(dplyr::desc(value))
+# Which five columns have the greatest mean value?
+iris \%>\%
+  skim() \%>\%
+  dplyr::top_n(mean, 5)
 
 # Use skim_tee to view the skim results and
 # continue using the original data.
-chickwts \%>\% skim_tee() \%>\% dplyr::filter(feed == "sunflower")
+chickwts \%>\%
+  skim_tee() \%>\%
+  dplyr::filter(feed == "sunflower")
 }

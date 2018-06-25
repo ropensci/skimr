@@ -6,6 +6,10 @@
 #' [skim_format()] function.
 #'
 #' @param x A vector
+#' @param n_bins In `inline_hist`, the number of histogram bars.
+#' @param length.out In `inline_linegraph`, the length of the character time
+#'   series.
+#' @param max_char In `top` = 3, max_levels = 4
 #' @seealso [skim_format()] and [purrr::partial()] for setting arguments of a
 #'   skimmer function.
 #' @name stats
@@ -38,11 +42,26 @@ sorted_count <- function(x) {
   names_tab <- names(tab)
   if (is.element("",  names_tab)) {
     names_tab[names_tab == ""] <- "empty"
-    warning(
- "Variable contains value(s) of \"\" that have been converted to \"empty\".") 
+    warning("Variable contains value(s) of \"\" that have been ",
+            "converted to \"empty\".") 
   }
   out <- rlang::set_names(as.integer(tab), names_tab)
   sort(out, decreasing = TRUE)
+}
+
+#' @describeIn stats Compute and collapse a contingency table into a single
+#'   character scalar. Wraps [sorted_count()].
+#' @export
+
+top_counts <- function(x, max_char = 3, max_levels = 4) {
+  counts <- sorted_count(x)
+  if (length(counts) > max_levels) {
+    top <- counts[seq_len(max_levels)]
+  } else {
+    top <- counts
+  }
+  top_names <- substr(names(top), 1, max_char)
+  paste0(top_names, ": ", top, collapse = ", ")
 }
 
 #' @describeIn stats Generate inline histogram for numeric variables. The
@@ -50,7 +69,7 @@ sorted_count <- function(x) {
 #'   for character vectors.
 #' @export
 
-inline_hist <- function(x) {
+inline_hist <- function(x, n_bins = 8) {
   # For the purposes of the histogram, treat infinite as NA
   # (before the test for all NA)
   if (any(is.infinite(x))){
@@ -63,14 +82,14 @@ inline_hist <- function(x) {
   # Handle empty and NA vectors (is.na is TRUE for NaN)
   if (length(x) < 1 || all(is.na(x)))
   {
-    return(structure(" ", class = c("spark", "character")))
+    return(" ")
   }
 
   # Addresses a known bug in cut()
   if (all(x == 0, na.rm = TRUE)) x <- x + 1
-  hist_dt <- table(cut(x, options$formats$character$width))
+  hist_dt <- table(cut(x, n_bins))
   hist_dt <- hist_dt / max(hist_dt)
-  structure(spark_bar(hist_dt), class = c("spark", "character"))
+  spark_bar(hist_dt)
 }
 
 
@@ -115,8 +134,7 @@ spark_bar <- function(x, safe = TRUE) {
   )
   chars <- as.character(factor)
   chars[is.na(chars)] <- bars[length(bars)]
-
-  structure(paste0(chars, collapse = ""), class = "spark")
+  paste0(chars, collapse = "")
 }
 
 
@@ -182,11 +200,11 @@ ts_end <- function(x) {
 #'   Based on the function in the pillar package.
 #' @export
 
-inline_linegraph <- function(x) {
+inline_linegraph <- function(x, length.out = 16) {
   t <- x[!is.na(x)]
-  id <- seq(1, length(t), length.out = 2 * options$formats$character$width)
+  id <- seq(1, length(t), length.out = length.out)
   normalized <- normalize01(t[floor(id)])
-  structure(spark_line(normalized), class = c("spark", "character"))
+  spark_line(normalized)
 }
 
 # Rescale data to be between 0 and 1
@@ -214,7 +232,7 @@ spark_line <- function(x) {
   ind[, 2] <- ind[, 2] + 4
 
   chars <- apply(ind, 1, braille)
-  structure(paste0(chars, collapse = ""), class = "spark")
+  paste0(chars, collapse = "")
 }
 
 

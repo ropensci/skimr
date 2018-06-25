@@ -1,5 +1,3 @@
-globalVariables(".")
-
 #' Skim a data frame, getting useful summary statistics
 #' 
 #' `skim()` is an alternative to [`summary()`], quickly providing a broad
@@ -14,7 +12,8 @@ globalVariables(".")
 #' tibble.
 #' 
 #' If you just want to see the printed output, call `skim_tee()` instead.
-#' This function returns the original data frame. 
+#' This function returns the original data. `skim_tee()` uses the default
+#' `skim()`, but you can replace it with the `skim` argument.
 #' 
 #' If you want to work with a data frame that resembles the printed output,
 #' call [`skim_to_wide()`] or for a named list of data frames by type
@@ -31,8 +30,7 @@ globalVariables(".")
 #' `skim()` is an intentionally simple function, with minimal arguments like
 #' [`summary()`]. Nonetheless, this package provides two broad approaches to
 #' how you can customize `skim()`'s behavior. You can customize the functions
-#' that are called to produce summary statistics with [`skim_with()`]. You
-#' can customize how the output is displayed with [`skim_format()`].
+#' that are called to produce summary statistics with [`skim_with()`].
 #'
 #' @section Unicode rendering:
 #' If the rendered examples show unencoded values such as `<U+2587>` you will
@@ -41,10 +39,11 @@ globalVariables(".")
 #' (`vignette("Using_skimr", package = "skimr")`).
 #'
 #' @param .data A tibble, or an object that can be coerced into a tibble.
-#' @param ...  Additional options, normally used to list individual unquoted
-#'   column names.
-#' @return A `skim_df` object, which can be treated like a tibble in most
-#'   instances.
+#' @param ...  Columns to select for skimming. When none are provided, the
+#'   default is to skim all columns.
+#' @param skim  The skimming function to use in `skim_tee()`.
+#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'   data. The result is usually a data frame or tibble.
 #' @examples
 #' skim(iris)
 #'
@@ -53,78 +52,27 @@ globalVariables(".")
 #' skim(iris, starts_with("Sepal"))
 #' 
 #' # Skim also works groupwise
-#' dplyr::group_by(iris, Species) %>% skim()
+#' iris %>%
+#'   dplyr::group_by(Species) %>%
+#'   skim()
 #' 
-#' # Skim pipelines; now we work with the tall format
-#' skim(iris) %>% as.data.frame()
-#' skim(iris) %>% dplyr::filter(type == "factor")
-#' 
-#' # Which column as the greatest mean value?
-#' skim(iris) %>%
-#'   dplyr::filter(stat == "mean") %>%
-#'   dplyr::arrange(dplyr::desc(value))
+#' # Which five columns have the greatest mean value?
+#' iris %>%
+#'   skim() %>%
+#'   dplyr::top_n(mean, 5)
 #' 
 #' # Use skim_tee to view the skim results and
 #' # continue using the original data.
-#' chickwts %>% skim_tee() %>% dplyr::filter(feed == "sunflower")
+#' chickwts %>%
+#'   skim_tee() %>%
+#'   dplyr::filter(feed == "sunflower")
 #' @export
-
-skim <- function(.data, ...) {
-  UseMethod("skim")
-}
-
-#'@export
-
-skim.data.frame <- function(.data, ... ) {
-  .vars <- rlang::quos(...)
-  if (length(.vars) == 0)  selected <- tidyselect::everything(.data)
-  else  selected <- tidyselect::vars_select(names(.data), !!! .vars) 
-
-  rows <- purrr::map(.data[selected], skim_v)
-  combined <- dplyr::bind_rows(rows, .id = "variable")
-  structure(combined, class = c("skim_df", class(combined)),
-            data_rows = nrow(.data), data_cols = ncol(.data), 
-            df_name = substitute(.data))
-}
-
-#' @export
-
-skim.grouped_df <- function(.data, ...) {
-  defaults <- options(dplyr.show_progress = FALSE)
-  on.exit(options(defaults))
-  skimmed <- dplyr::do(.data, skim(., ...))
-  
-  # Drop the grouping variable
-  groups <- dplyr::groups(skimmed)
-  to_drop <- quote(!(variable %in% groups))
-  skimmed <- dplyr::filter(skimmed, !!to_drop)
-  structure(skimmed, class = c("skim_df", class(skimmed)),
-            data_rows = nrow(.data), data_cols = ncol(.data), 
-            df_name = substitute(.data))
-}
-
-#' @export
-
-skim.default <-function(.data, ...){
-  if (!is.atomic(.data) | !is.null(dim(.data))[1]){
-    return(message("No skim method exists for class ", class(.data), "."))
-  }
-  skimmed <- skim_v(.data)
-  if (is.null(skimmed)){
-    return(message("The skimmer list is empty for class ", class(.data), "."))
-  }
-  skimmed$variable <- deparse(substitute(.data))
-  cols <- c("variable", "type", "stat", "level", "value", "formatted")
-  skimmed <- dplyr::select(skimmed, !!!rlang::syms(cols)) 
-  structure(skimmed, class = c("skim_vector", "skim_df", class(skimmed)),
-            df_name = skimmed$variable[1])
-}
-
+skim <- skim_with()
 
 #' @rdname skim 
 #' @export
-
-skim_tee <- function(.data, ...) {
-  print(skim(.data))
+skim_tee <- function(.data, ..., skim_fun = skim) {
+  skimmed <- skim_fun(.data)
+  print(skimmed)
   invisible(.data)
 }

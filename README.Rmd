@@ -5,11 +5,7 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # skimr
 ```{r set-options, echo=FALSE, message=FALSE}
-library(pander)
-library(knitr)
 library(skimr)
-library(magrittr)
-skim_with_defaults()
 options(tibble.width = Inf)
 options(width = 120)
 ```
@@ -18,7 +14,7 @@ options(width = 120)
 [![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
-<cite>skimr</cite> provides a frictionless approach to summary statistics which conforms
+`skimr` provides a frictionless approach to summary statistics which conforms
 to the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
 displaying summary statistics the user can skim quickly to understand their
 data. It handles different data types and returns a `skim_df` object which can
@@ -26,28 +22,30 @@ be included in a pipeline or displayed nicely for the human reader.
 
 ## Installation
 
-The current released version of <cite>skimr</cite> can be installed from CRAN. If you wish
+The current released version of `skimr` can be installed from CRAN. If you wish
 to install the current build of the next release you can do so using the
 following:
 
-``` r
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/skimr")
 ```
+
 The APIs for this branch should be considered reasonably stable but still
 subject to change if an issue is discovered.
 
 To install the version with the most recent changes that have not yet been
 incorporated in the master branch (and may not be):
 
-``` r
+```{r, eval = FALSE}
 devtools::install_github("ropenscilabs/skimr", ref = "develop")
 ```
-Do not rely on APIs from the develop branch.
+
+Do not rely on APIs from the develop branch, as they are likely to change.
 
 ## Skim statistics in the console
 
-<cite>skimr</cite>:
+`skimr`:
 
 - Provides a larger set of statistics than `summary()`, including missing,
 complete, n, and sd.
@@ -58,96 +56,54 @@ complete, n, and sd.
 
 ### Separates variables by class:  
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(chickwts)
 ```
 
 ### Presentation is in a compact horizontal format: 
-```{r}
+
+```{r, render = knitr::normal_print}
 skim(iris)
 ```
+
 ### Built in support for strings, lists and other column classes
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(dplyr::starwars)
 ```
 
 ### Has a useful summary function
-```{r}
-skim(iris) %>% summary()
-```
 
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  summary()
+```
 
 ### Individual columns can be selected using tidyverse-style selectors
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(iris, Sepal.Length, Petal.Length)
 ```
 
 ### Handles grouped data 
 
-`skim()` can handle data that has been grouped using `dplyr::group_by`.
+`skim()` can handle data that has been grouped using `dplyr::group_by()`.
 
-```{r}
-iris %>% dplyr::group_by(Species) %>% skim()
+```{r, render = knitr::normal_print}
+iris %>%
+  dplyr::group_by(Species) %>%
+  skim()
 ```
 
 ## Knitted results
 
 Simply skimming a data frame will produce the horizontal print
-layout shown above. When knitting you can also used enhanced rendering
-with kable and pander implementations. 
-
-### Options for kable and pander
-
-Enhanced print options are available by piping to `kable()` or `pander()`.
-These build on the [pander package](https://CRAN.R-project.org/package=pander)
-and the kable function of the [knitr package](https://CRAN.R-project.org/package=knitr)
-These examples show how the enhanced options should appear after 
-knitting, however your results may differ (see vignettes for details).
-
-
-### Option for kable. 
-Note that the results='asis' chunk option is used and  the
-`skimr::` namespace is used to prevent it being
-replaced by knitr::kable (which will result in the long skim_df 
-object being printed.)
-```{r results='asis'}
-skim(iris) %>% skimr::kable()
-```
-
-
-### Options for pander
-
-At times you may need `panderOptions('knitr.auto.asis', FALSE)`.
-
-```{r}
-skim(iris) %>% pander()
-```
-
-
-## `skim_df` object (long format)
-
-By default `skim()` prints beautifully in the console, but it also produces a
-long, tidy-format `skim_df` object that can be computed on. 
-
-```{r}
-a <-  skim(chickwts)
-dim(a)
-```
-
-```{r}
-print.data.frame(skim(chickwts))
-```
-
-### Compute on the full `skim_df` object
-```{r}
-skim(mtcars) %>% dplyr::filter(stat=="hist")
-```
+layout shown above. We provide a `knit_print` method for the types of objects
+in this package so that similar results are produced in documents.
 
 ## Customizing skimr
 
-Although <cite>skimr</cite> provides opinionated defaults, it is highly customizable.
+Although skimr provides opinionated defaults, it is highly customizable.
 Users can specify their own statistics, change the formatting of results,
 create statistics for new classes and develop skimmers for data structures
 that are not data frames.
@@ -155,34 +111,68 @@ that are not data frames.
 ### Specify your own statistics and classes
 
 Users can specify their own statistics using a list combined with the
-`skim_with()` function.  This can support any named class found in
-your data.
+`skim_with()` function factory. `skim_with()` returns a new `skim` function that
+can be called on your data. You can use this factory to produce summaries for
+any type of column within your data.
+
+Assignment within a call to `skim_with()` relies on a helper function, `sfl` or
+`skimr` function list. This is a light wrapper around `dplyr::funs()`. It
+will automatically generate names from the provided values.
+
+By default, functions in the `sfl` call are appended to the default skimmers.
 
 ```{r}
-funs <- list(
-  iqr = IQR,
-  quantile = purrr::partial(quantile, probs = .99)
-)
-
-skim_with(numeric = funs, append = FALSE)
-skim(iris, Sepal.Length)
-
-# Restore defaults
-skim_with_defaults()
-
+my_skim <- skim_with(numeric = sfl(mad))
+my_skim(iris, Sepal.Length)
 ```
 
-### Change formatting
+But you can also use the dummy argument pattern from `dplyr::funs` to set
+particular function arguments. Setting the `append = FALSE` argument uses only
+those functions that you've provided.
 
-<cite>skimr</cite> provides a set of default formats that allow decimals in columns to
-be aligned, a reasonable number of decimal places for numeric data, and a 
-representation of dates.  Users can view these with `show_formats()` and
-modify them with `skim_format()`.
+```{r}
+my_skim <- skim_with(numeric = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
+                     append = FALSE)
+my_skim(iris, Sepal.Length)
+```
+
+And you can default skimmers by setting them to `NULL`.
+
+```{r}
+my_skim <- skim_with(numeric = sfl(hist = NULL))
+my_skim(iris, Sepal.Length)
+```
 
 ### Skimming other objects
 
-Procedures for developing skim functions for other objects are described in 
-the vignette _Supporting additional objects_.
+`skimr` has summary functions for the following types of data by default:
+
+* `numeric`
+* `integer`
+* `character`
+* `factor`
+* `logical`
+* `complex`
+* `Date`
+* `POSIXct`
+* `ts`
+* `AsIs`
+
+`skimr` also provides a small API for writing packages that provide their own
+default summary functions for data types not covered above. It relies on
+R S3 methods for the `get_skimmers` function. This function should return
+a `sfl`, similar to customization within `skim_with()`, but you should also
+provide a value for the `class` argument. Here's an example.
+
+```{r}
+get_skimmers.my_data_type <- function(column) {
+  sfl(
+    .class = "my_data_type",
+    missing = n_missing,
+    complete = n_complete,
+    p99 = quantile(., probs = .99))
+}
+```
 
 ## Limitations of current version
 
@@ -198,11 +188,11 @@ the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-d
 While some cases have been addressed, there are, for example, reports of this 
 issue in Emacs ESS.
 
-This means that while <cite>skimr</cite> can render the histograms to the console and in
+This means that while `skimr` can render the histograms to the console and in
 `kable()`, it cannot in other circumstances. This includes:
 
-* rendering a <cite>skimr</cite> data frame within `pander()`
-* converting a <cite>skimr</cite> data frame to a vanilla R data frame, but tibbles render
+* rendering a `skimr` data frame within `pander()`
+* converting a `skimr` data frame to a vanilla R data frame, but tibbles render
   correctly
 
 One workaround for showing these characters in Windows is to set the CTYPE part
@@ -229,6 +219,6 @@ Microsoft Word and Libre Office Write.
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we encourage
-users to take advantage of <cite>skimr</cite>'s flexibility to add their own customized
+users to take advantage of skimr's flexibility to add their own customized
 classes. Please see the [contributing](CONTRIBUTING.md) and
 [conduct](CONDUCT.md) documents.
