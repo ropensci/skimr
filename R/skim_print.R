@@ -9,6 +9,8 @@
 NULL
 
 #' @describeIn print Print a skimmed data frame (`skim_df` from [`skim()`]).
+#' @param include_summary Whether a summary of the data frame should be printed
+#' @param options Options passed into the print function
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, ...) {
   if (include_summary) {
@@ -92,6 +94,7 @@ print.summary_skim_df <- function(x, ...) {
 NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
+#' @param options Options passed into the print function
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {

@@ -32,7 +32,7 @@ NULL
 #' @examples
 #' # Defining default skimming functions for a new class, `my_class`.
 #' # Note that the class argument is required for dynamic reassignment.
-#' get_skimmers.my_class <- function(colum) {
+#' get_skimmers.my_class <- function(column) {
 #'   sfl(
 #'     .type = "my_class",
 #'     mean,
@@ -180,6 +180,7 @@ get_skimmers.AsIs <- function(column) {
 }
 
 #' @rdname get_skimmers
+#' @param class The class of the column being skimmed
 #' @export
 get_default_skimmers <- function(class = NULL) {
   if (is.null(class)) {

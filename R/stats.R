@@ -10,7 +10,7 @@
 #' @param length.out In `inline_linegraph`, the length of the character time
 #'   series.
 #' @param max_char In `top` = 3, max_levels = 4
-#' @seealso [skim_format()] and [purrr::partial()] for setting arguments of a
+#' @seealso [purrr::partial()] for setting arguments of a
 #'   skimmer function.
 #' @name stats
 NULL
@@ -51,6 +51,7 @@ sorted_count <- function(x) {
 
 #' @describeIn stats Compute and collapse a contingency table into a single
 #'   character scalar. Wraps [sorted_count()].
+#' @param max_levels The maximum number of levels to be displayed.
 #' @export
 
 top_counts <- function(x, max_char = 3, max_levels = 4) {

@@ -11,6 +11,8 @@ get_default_skimmers(class = NULL)
 }
 \arguments{
 \item{column}{An atomic vector or list. A column from a data frame.}
+
+\item{class}{The class of the column being skimmed}
 }
 \value{
 A \code{skim_function_list} object.
@@ -44,7 +46,7 @@ Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the func
 \examples{
 # Defining default skimming functions for a new class, `my_class`.
 # Note that the class argument is required for dynamic reassignment.
-get_skimmers.my_class <- function(colum) {
+get_skimmers.my_class <- function(column) {
   sfl(
     .type = "my_class",
     mean,

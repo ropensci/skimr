@@ -25,7 +25,11 @@
 \arguments{
 \item{x}{Either a \code{skim_df}, \code{skim_vector} or \code{skim_summary} object.}
 
+\item{include_summary}{Whether a summary of the data frame should be printed}
+
 \item{...}{Further arguments passed to or from other methods.}
+
+\item{options}{Options passed into the print function}
 }
 \description{
 \code{skimr} has custom print methods for all supported objects. Default printing

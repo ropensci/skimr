@@ -15,9 +15,9 @@
 #' This function returns the original data. `skim_tee()` uses the default
 #' `skim()`, but you can replace it with the `skim` argument.
 #' 
-#' If you want to work with a data frame that resembles the printed output,
-#' call [`skim_to_wide()`] or for a named list of data frames by type
-#' [`skim_to_list()`]. Note that all of the columns in the data frames produced
+#' If you want to work with a data frame that is long (tidy),
+#' call `skim_to_long()` or for a named list of data frames by type
+#' `skim_to_list()`. Note that all of the columns in the data frames produced
 #' by these functions are character. The intent is that you will be processing
 #' the **printed** result further, not the original data.
 #' 
@@ -71,6 +71,8 @@
 skim <- skim_with()
 
 #' @rdname skim 
+#' @param data The data frame that is skimmed and returned.
+#' @param skim_fun  The skim function used. 
 #' @export
 skim_tee <- function(.data, ..., skim_fun = skim) {
   skimmed <- skim_fun(.data)
