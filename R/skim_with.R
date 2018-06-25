@@ -59,7 +59,7 @@
 #' 
 #' # Or pass the same as a list
 #' my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
-#' my_skim <- skim_with(!!!my_skimmers)
+#' my_skim <- skim_with(my_skimmers)
 #' @export
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
@@ -110,7 +110,10 @@ skim_with <- function(..., append = TRUE) {
 validate_assignment <- function(...) {
   to_assign <- list(...)
   if (length(to_assign) < 1) return(to_assign)
-  
+  if (is.list(to_assign[[1]])){
+    to_assign <- to_assign[[1]]
+  }
+
   proposed_names <- names(to_assign)
   if (!all(nzchar(proposed_names)) || is.null(proposed_names) ||
       anyNA(proposed_names)) {
