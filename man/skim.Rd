@@ -80,7 +80,8 @@ iris \%>\%
 # Which five columns have the greatest mean value?
 iris \%>\%
   skim() \%>\%
-  dplyr::top_n(mean, 5)
+  dplyr::select(mean) \%>\%
+  dplyr::top_n(5)
 
 # Use skim_tee to view the skim results and
 # continue using the original data.
