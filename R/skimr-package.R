@@ -13,15 +13,14 @@
 #' @name skimr-package
 #' @aliases skimr
 #' @docType package
-
 NULL
 
 
-# Create global package options
-options <- new.env()
-
-
 # Imports -----------------------------------------------------------------
+
+#' @importFrom rlang %||%
+
+#' @importFrom knitr knit_print
 
 #' @importFrom magrittr %>%
 #' @export
@@ -55,3 +54,6 @@ tidyselect::one_of
 #' @importFrom tidyselect starts_with
 #' @export
 tidyselect::starts_with
+
+# Silence complaints about NSE.
+globalVariables(".")

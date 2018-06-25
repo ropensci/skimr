@@ -3,15 +3,24 @@
 \name{print}
 \alias{print}
 \alias{print.skim_df}
-\alias{print.skim_vector}
+\alias{print.one_skim_df}
+\alias{print.skim_list}
 \alias{print.summary_skim_df}
+\alias{knit_print.skim_list}
+\alias{knit_print.one_skim_df}
 \title{Print \code{skim} objects}
 \usage{
-\method{print}{skim_df}(x, ...)
+\method{print}{skim_df}(x, include_summary = TRUE, ...)
 
-\method{print}{skim_vector}(x, ...)
+\method{print}{one_skim_df}(x, ..)
+
+\method{print}{skim_list}(x, ..)
 
 \method{print}{summary_skim_df}(x, ...)
+
+\method{knit_print}{skim_list}(x, options = NULL, ...)
+
+\method{knit_print}{one_skim_df}(x, options = NULL, ...)
 }
 \arguments{
 \item{x}{Either a \code{skim_df}, \code{skim_vector} or \code{skim_summary} object.}
@@ -19,14 +28,21 @@
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Print \code{skim} objects
+\code{skimr} has custom print methods for all supported objects. Default printing
+methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{skim_df}: Prints a skimmed data frame (\code{skim_df} from \code{\link[=skim]{skim()}})
+\item \code{skim_df}: Print a skimmed data frame (\code{skim_df} from \code{\link[=skim]{skim()}}).
 
-\item \code{skim_vector}: Manages print for \code{skim_vector} objects.
+\item \code{one_skim_df}: Print an entry within a partitioned \code{skim_df}.
+
+\item \code{skim_list}: Print a \code{skim_list}, a list of \code{skim_df} objects.
 
 \item \code{summary_skim_df}: Print method for a \code{summary_skim_df} object.
+
+\item \code{skim_list}: Default \code{knitr} print for a \code{skim_list}.
+
+\item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
 }}
 
