@@ -5,7 +5,6 @@ skimr
 [![Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
-[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
 `skimr` provides a frictionless approach to summary statistics which
 conforms to the [principle of least
@@ -628,4 +627,4 @@ encourage users to take advantage of skimr's flexibility to add their
 own customized classes. Please see the [contributing](CONTRIBUTING.md)
 and [conduct](CONDUCT.md) documents.
 
-[\[ropenci\_footer\]](https://ropensci.org/public_images/ropensci_footer.png)\](<https://ropensci.org>)\]
+[![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
