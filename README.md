@@ -628,4 +628,4 @@ encourage users to take advantage of skimr's flexibility to add their
 own customized classes. Please see the [contributing](CONTRIBUTING.md)
 and [conduct](CONDUCT.md) documents.
 
-[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+[\[ropenci\_footer\]](https://ropensci.org/public_images/ropensci_footer.png)\](<https://ropensci.org>)\]
