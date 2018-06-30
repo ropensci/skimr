@@ -3,9 +3,8 @@ skimr
 =====
 
 [![Build
-Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
-[![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
-[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
 
 <cite>skimr</cite> provides a frictionless approach to summary
 statistics which conforms to the [principle of least
@@ -44,7 +43,7 @@ Skim statistics in the console
     missing, complete, n, and sd.
 -   reports each data types separately
 -   handles dates, logicals, and a variety of other types
--   supports spark-bar and spark-line based on [Hadley Wickham’s pillar
+-   supports spark-bar and spark-line based on [Hadley Wickham's pillar
     package](https://github.com/hadley/pillar).
 
 ### Separates variables by class:
@@ -55,11 +54,11 @@ Skim statistics in the console
     ##  n obs: 71 
     ##  n variables: 2 
     ## 
-    ## ── Variable type:factor ───────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:factor ──────────────────────────────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n n_unique                         top_counts ordered
     ##      feed       0       71 71        6 soy: 14, cas: 12, lin: 12, sun: 12   FALSE
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n   mean    sd  p0   p25 p50   p75 p100     hist
     ##    weight       0       71 71 261.31 78.07 108 204.5 258 323.5  423 ▃▅▅▇▃▇▂▂
 
@@ -71,11 +70,11 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:factor ───────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:factor ──────────────────────────────────────────────────────────────────────────────────────────────────
     ##  variable missing complete   n n_unique                       top_counts ordered
     ##   Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##   Petal.Width       0      150 150 1.2  0.76 0.1 0.3 1.3  1.8  2.5 ▇▁▁▅▃▃▂▂
@@ -90,7 +89,7 @@ Skim statistics in the console
     ##  n obs: 87 
     ##  n variables: 13 
     ## 
-    ## ── Variable type:character ────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:character ───────────────────────────────────────────────────────────────────────────────────────────────
     ##    variable missing complete  n min max empty n_unique
     ##   eye_color       0       87 87   3  13     0       15
     ##      gender       3       84 87   4  13     0        4
@@ -100,17 +99,17 @@ Skim statistics in the console
     ##  skin_color       0       87 87   3  19     0       31
     ##     species       5       82 87   3  14     0       37
     ## 
-    ## ── Variable type:integer ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:integer ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n   mean    sd p0 p25 p50 p75 p100     hist
     ##    height       6       81 87 174.36 34.77 66 167 180 191  264 ▁▁▁▂▇▃▁▁
     ## 
-    ## ── Variable type:list ─────────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:list ────────────────────────────────────────────────────────────────────────────────────────────────────
     ##   variable missing complete  n n_unique min_length median_length max_length
     ##      films       0       87 87       24          1             1          7
     ##  starships       0       87 87       17          0             0          5
     ##   vehicles       0       87 87       11          0             0          2
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##    variable missing complete  n  mean     sd p0  p25 p50  p75 p100     hist
     ##  birth_year      44       43 87 87.57 154.69  8 35    52 72    896 ▇▁▁▁▁▁▁▁
     ##        mass      28       59 87 97.31 169.46 15 55.6  79 84.5 1358 ▇▁▁▁▁▁▁▁
@@ -137,7 +136,7 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1 5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
@@ -153,7 +152,7 @@ Skim statistics in the console
     ##  n variables: 5 
     ##  group variables: Species 
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##     Species     variable missing complete  n mean   sd  p0  p25  p50  p75 p100     hist
     ##      setosa Petal.Length       0       50 50 1.46 0.17 1   1.4  1.5  1.58  1.9 ▁▁▅▇▇▅▂▁
     ##      setosa  Petal.Width       0       50 50 0.25 0.11 0.1 0.2  0.2  0.3   0.6 ▂▇▁▂▂▁▁▁
@@ -187,7 +186,7 @@ results may differ (see vignettes for details).
 
 ### Option for kable.
 
-Note that the results=‘asis’ chunk option is used and the `skimr::`
+Note that the results='asis' chunk option is used and the `skimr::`
 namespace is used to prevent it being replaced by knitr::kable (which
 will result in the long skim\_df object being printed.)
 
@@ -202,24 +201,24 @@ Variable type: factor
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">variable</th>
-<th style="text-align: center;">missing</th>
-<th style="text-align: center;">complete</th>
-<th style="text-align: center;">n</th>
-<th style="text-align: center;">n_unique</th>
-<th style="text-align: center;">top_counts</th>
-<th style="text-align: center;">ordered</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">n_unique</th>
+<th align="center">top_counts</th>
+<th align="center">ordered</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Species</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">set: 50, ver: 50, vir: 50, NA: 0</td>
-<td style="text-align: center;">FALSE</td>
+<td align="center">Species</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3</td>
+<td align="center">set: 50, ver: 50, vir: 50, NA: 0</td>
+<td align="center">FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -229,76 +228,76 @@ Variable type: numeric
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">variable</th>
-<th style="text-align: center;">missing</th>
-<th style="text-align: center;">complete</th>
-<th style="text-align: center;">n</th>
-<th style="text-align: center;">mean</th>
-<th style="text-align: center;">sd</th>
-<th style="text-align: center;">p0</th>
-<th style="text-align: center;">p25</th>
-<th style="text-align: center;">p50</th>
-<th style="text-align: center;">p75</th>
-<th style="text-align: center;">p100</th>
-<th style="text-align: center;">hist</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">p0</th>
+<th align="center">p25</th>
+<th align="center">p50</th>
+<th align="center">p75</th>
+<th align="center">p100</th>
+<th align="center">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Petal.Length</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3.76</td>
-<td style="text-align: center;">1.77</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1.6</td>
-<td style="text-align: center;">4.35</td>
-<td style="text-align: center;">5.1</td>
-<td style="text-align: center;">6.9</td>
-<td style="text-align: center;">▇▁▁▂▅▅▃▁</td>
+<td align="center">Petal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.76</td>
+<td align="center">1.77</td>
+<td align="center">1</td>
+<td align="center">1.6</td>
+<td align="center">4.35</td>
+<td align="center">5.1</td>
+<td align="center">6.9</td>
+<td align="center">▇▁▁▂▅▅▃▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Petal.Width</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">1.2</td>
-<td style="text-align: center;">0.76</td>
-<td style="text-align: center;">0.1</td>
-<td style="text-align: center;">0.3</td>
-<td style="text-align: center;">1.3</td>
-<td style="text-align: center;">1.8</td>
-<td style="text-align: center;">2.5</td>
-<td style="text-align: center;">▇▁▁▅▃▃▂▂</td>
+<td align="center">Petal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">1.2</td>
+<td align="center">0.76</td>
+<td align="center">0.1</td>
+<td align="center">0.3</td>
+<td align="center">1.3</td>
+<td align="center">1.8</td>
+<td align="center">2.5</td>
+<td align="center">▇▁▁▅▃▃▂▂</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Sepal.Length</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">5.84</td>
-<td style="text-align: center;">0.83</td>
-<td style="text-align: center;">4.3</td>
-<td style="text-align: center;">5.1</td>
-<td style="text-align: center;">5.8</td>
-<td style="text-align: center;">6.4</td>
-<td style="text-align: center;">7.9</td>
-<td style="text-align: center;">▂▇▅▇▆▅▂▂</td>
+<td align="center">Sepal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">5.84</td>
+<td align="center">0.83</td>
+<td align="center">4.3</td>
+<td align="center">5.1</td>
+<td align="center">5.8</td>
+<td align="center">6.4</td>
+<td align="center">7.9</td>
+<td align="center">▂▇▅▇▆▅▂▂</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Sepal.Width</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3.06</td>
-<td style="text-align: center;">0.44</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2.8</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3.3</td>
-<td style="text-align: center;">4.4</td>
-<td style="text-align: center;">▁▂▅▇▃▂▁▁</td>
+<td align="center">Sepal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.06</td>
+<td align="center">0.44</td>
+<td align="center">2</td>
+<td align="center">2.8</td>
+<td align="center">3</td>
+<td align="center">3.3</td>
+<td align="center">4.4</td>
+<td align="center">▁▂▅▇▃▂▁▁</td>
 </tr>
 </tbody>
 </table>
@@ -313,50 +312,50 @@ Skim summary statistics
 n obs: 150  
 n variables: 5
 
-<table style="width:68%;">
+<table style="width:67%;">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 15%" />
-<col style="width: 13%" />
-<col style="width: 15%" />
-<col style="width: 8%" />
-<col style="width: 15%" />
+<col width="15%" />
+<col width="13%" />
+<col width="15%" />
+<col width="8%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">variable</th>
-<th style="text-align: center;">missing</th>
-<th style="text-align: center;">complete</th>
-<th style="text-align: center;">n</th>
-<th style="text-align: center;">n_unique</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">n_unique</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Species</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3</td>
+<td align="center">Species</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3</td>
 </tr>
 </tbody>
 </table>
 
-<table style="width:60%;">
+<table style="width:58%;">
 <colgroup>
-<col style="width: 45%" />
-<col style="width: 13%" />
+<col width="45%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">top_counts</th>
-<th style="text-align: center;">ordered</th>
+<th align="center">top_counts</th>
+<th align="center">ordered</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">set: 50, ver: 50, vir: 50, NA: 0</td>
-<td style="text-align: center;">FALSE</td>
+<td align="center">set: 50, ver: 50, vir: 50, NA: 0</td>
+<td align="center">FALSE</td>
 </tr>
 </tbody>
 </table>
@@ -364,110 +363,110 @@ n variables: 5
 <table style="width:100%;">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 12%" />
-<col style="width: 13%" />
-<col style="width: 7%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
+<col width="18%" />
+<col width="12%" />
+<col width="13%" />
+<col width="7%" />
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="7%" />
+<col width="8%" />
+<col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">variable</th>
-<th style="text-align: center;">missing</th>
-<th style="text-align: center;">complete</th>
-<th style="text-align: center;">n</th>
-<th style="text-align: center;">mean</th>
-<th style="text-align: center;">sd</th>
-<th style="text-align: center;">p0</th>
-<th style="text-align: center;">p25</th>
-<th style="text-align: center;">p50</th>
-<th style="text-align: center;">p75</th>
+<th align="center">variable</th>
+<th align="center">missing</th>
+<th align="center">complete</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">p0</th>
+<th align="center">p25</th>
+<th align="center">p50</th>
+<th align="center">p75</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Petal.Length</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3.76</td>
-<td style="text-align: center;">1.77</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1.6</td>
-<td style="text-align: center;">4.35</td>
-<td style="text-align: center;">5.1</td>
+<td align="center">Petal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.76</td>
+<td align="center">1.77</td>
+<td align="center">1</td>
+<td align="center">1.6</td>
+<td align="center">4.35</td>
+<td align="center">5.1</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Petal.Width</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">1.2</td>
-<td style="text-align: center;">0.76</td>
-<td style="text-align: center;">0.1</td>
-<td style="text-align: center;">0.3</td>
-<td style="text-align: center;">1.3</td>
-<td style="text-align: center;">1.8</td>
+<td align="center">Petal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">1.2</td>
+<td align="center">0.76</td>
+<td align="center">0.1</td>
+<td align="center">0.3</td>
+<td align="center">1.3</td>
+<td align="center">1.8</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Sepal.Length</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">5.84</td>
-<td style="text-align: center;">0.83</td>
-<td style="text-align: center;">4.3</td>
-<td style="text-align: center;">5.1</td>
-<td style="text-align: center;">5.8</td>
-<td style="text-align: center;">6.4</td>
+<td align="center">Sepal.Length</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">5.84</td>
+<td align="center">0.83</td>
+<td align="center">4.3</td>
+<td align="center">5.1</td>
+<td align="center">5.8</td>
+<td align="center">6.4</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Sepal.Width</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">3.06</td>
-<td style="text-align: center;">0.44</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2.8</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">3.3</td>
+<td align="center">Sepal.Width</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">150</td>
+<td align="center">3.06</td>
+<td align="center">0.44</td>
+<td align="center">2</td>
+<td align="center">2.8</td>
+<td align="center">3</td>
+<td align="center">3.3</td>
 </tr>
 </tbody>
 </table>
 
-<table style="width:25%;">
+<table style="width:24%;">
 <colgroup>
-<col style="width: 9%" />
-<col style="width: 15%" />
+<col width="9%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">p100</th>
-<th style="text-align: center;">hist</th>
+<th align="center">p100</th>
+<th align="center">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">6.9</td>
-<td style="text-align: center;">▇▁▁▂▅▅▃▁</td>
+<td align="center">6.9</td>
+<td align="center">▇▁▁▂▅▅▃▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2.5</td>
-<td style="text-align: center;">▇▁▁▅▃▃▂▂</td>
+<td align="center">2.5</td>
+<td align="center">▇▁▁▅▃▃▂▂</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">7.9</td>
-<td style="text-align: center;">▂▇▅▇▆▅▂▂</td>
+<td align="center">7.9</td>
+<td align="center">▂▇▅▇▆▅▂▂</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">4.4</td>
-<td style="text-align: center;">▁▂▅▇▃▂▁▁</td>
+<td align="center">4.4</td>
+<td align="center">▁▂▅▇▃▂▁▁</td>
 </tr>
 </tbody>
 </table>
@@ -555,7 +554,7 @@ data.
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##      variable iqr quantile
     ##  Sepal.Length 1.3      7.7
 
@@ -611,13 +610,13 @@ knit them to a specific document format. The same session that produces
 a correctly rendered HTML document may produce an incorrectly rendered
 PDF, for example. This issue can generally be addressed by changing
 fonts to one with good building block (for histograms) and Braille
-support (for line graphs). For example, the open font “DejaVu Sans” from
+support (for line graphs). For example, the open font "DejaVu Sans" from
 the `extrafont` package supports these. You may also want to try
 wrapping your results in `knitr::kable()`. Please see the vignette on
 using fonts for details.
 
 Displays in documents of different types will vary. For example, one
-user found that the font “Yu Gothic UI Semilight” produced consistent
+user found that the font "Yu Gothic UI Semilight" produced consistent
 results for Microsoft Word and Libre Office Write.
 
 Contributing
@@ -625,6 +624,8 @@ Contributing
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
-encourage users to take advantage of <cite>skimr</cite>’s flexibility to
+encourage users to take advantage of <cite>skimr</cite>'s flexibility to
 add their own customized classes. Please see the
 [contributing](CONTRIBUTING.md) and [conduct](CONDUCT.md) documents.
+
+[![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
