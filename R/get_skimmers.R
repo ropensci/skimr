@@ -20,6 +20,7 @@ NULL
 #'  - `complex`
 #'  - `Date`
 #'  - `POSIXct`
+#'  - `difftime`
 #'  - `ts`
 #'  - `AsIs`
 #'
@@ -31,7 +32,7 @@ NULL
 #' @examples
 #' # Defining default skimming functions for a new class, `my_class`.
 #' # Note that the class argument is required for dynamic reassignment.
-#' get_skimmers.my_class <- function(colum) {
+#' get_skimmers.my_class <- function(column) {
 #'   sfl(
 #'     .type = "my_class",
 #'     mean,
@@ -56,12 +57,12 @@ get_skimmers.numeric <- function(column) {
     complete = n_complete,
     n = length,
     mean = mean(., na.rm = TRUE),
-    sd = sd(., na.rm = TRUE),
-    p0 = quantile(., probs = 0, na.rm = TRUE, names = FALSE),
-    p25 = quantile(., probs = .25, na.rm = TRUE, names = FALSE),
-    p50 = quantile(., probs= .50, na.rm = TRUE, names = FALSE),
-    p75 = quantile(., probs = .75, na.rm = TRUE, names = FALSE),
-    p100 = quantile(., probs = 1, na.rm = TRUE, names = FALSE),
+    sd = stats::sd(., na.rm = TRUE),
+    p0 = stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
+    p25 = stats::quantile(., probs = .25, na.rm = TRUE, names = FALSE),
+    p50 = stats::quantile(., probs= .50, na.rm = TRUE, names = FALSE),
+    p75 = stats::quantile(., probs = .75, na.rm = TRUE, names = FALSE),
+    p100 = stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE),
     hist = inline_hist(., 5))
 }
 
@@ -125,7 +126,7 @@ get_skimmers.Date <- function(column) {
     n = length,
     min = min(., na.rm = TRUE),
     max = max(., na.rm = TRUE),
-    median = median(., na.rm = TRUE),
+    median = stats::median(., na.rm = TRUE),
     n_unique = n_unique)
 }
 
@@ -153,10 +154,10 @@ get_skimmers.ts <- function(column) {
     frequency = stats::frequency,
     deltat = stats::deltat,
     mean = mean(., na.rm = TRUE),
-    sd = sd(., na.rm = TRUE),
+    sd = stats::sd(., na.rm = TRUE),
     min = min(., na.rm = TRUE),
     max = max(., na.rm = TRUE),
-    median = median(., na.rm = TRUE),
+    median = stats::median(., na.rm = TRUE),
     line_graph  = inline_linegraph(., 16))
 }
 
@@ -179,10 +180,11 @@ get_skimmers.AsIs <- function(column) {
 }
 
 #' @rdname get_skimmers
+#' @param class The class of the column being skimmed
 #' @export
 get_default_skimmers <- function(class = NULL) {
   if (is.null(class)) {
-    defaults <- as.character(methods("get_skimmers"))
+    defaults <- as.character(utils::methods("get_skimmers"))
     classes <- stringr::str_replace(defaults, "get_skimmers.", "")
     no_default <- purrr::discard(classes, ~.x == "default")
     iter <- purrr::set_names(no_default)

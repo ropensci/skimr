@@ -15,9 +15,9 @@
 #' This function returns the original data. `skim_tee()` uses the default
 #' `skim()`, but you can replace it with the `skim` argument.
 #' 
-#' If you want to work with a data frame that resembles the printed output,
-#' call [`skim_to_wide()`] or for a named list of data frames by type
-#' [`skim_to_list()`]. Note that all of the columns in the data frames produced
+#' If you want to work with a data frame that is long (tidy),
+#' call `skim_to_long()` or for a named list of data frames by type
+#' `skim_to_list()`. Note that all of the columns in the data frames produced
 #' by these functions are character. The intent is that you will be processing
 #' the **printed** result further, not the original data.
 #' 
@@ -36,7 +36,7 @@
 #' If the rendered examples show unencoded values such as `<U+2587>` you will
 #' need to change your locale to allow proper rendering. Please review the
 #' *Using Skimr* vignette for more information
-#' (`vignette("Using_skimr" package = "skimr")`).
+#' (`vignette("Using_skimr", package = "skimr")`).
 #'
 #' @param .data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Columns to select for skimming. When none are provided, the
@@ -59,7 +59,8 @@
 #' # Which five columns have the greatest mean value?
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::top_n(mean, 5)
+#'   dplyr::select(mean) %>%
+#'   dplyr::top_n(5)
 #' 
 #' # Use skim_tee to view the skim results and
 #' # continue using the original data.
@@ -70,6 +71,8 @@
 skim <- skim_with()
 
 #' @rdname skim 
+#' @param data The data frame that is skimmed and returned.
+#' @param skim_fun  The skim function used. 
 #' @export
 skim_tee <- function(.data, ..., skim_fun = skim) {
   skimmed <- skim_fun(.data)

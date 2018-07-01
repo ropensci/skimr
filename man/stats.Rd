@@ -60,6 +60,8 @@ list_max_length(x)
 
 \item{max_char}{In \code{top} = 3, max_levels = 4}
 
+\item{max_levels}{The maximum number of levels to be displayed.}
+
 \item{n_bins}{In \code{inline_hist}, the number of histogram bars.}
 
 \item{length.out}{In \code{inline_linegraph}, the length of the character time
@@ -121,6 +123,6 @@ Based on the function in the pillar package.
 }}
 
 \seealso{
-\code{\link[=skim_format]{skim_format()}} and \code{\link[purrr:partial]{purrr::partial()}} for setting arguments of a
+\code{\link[purrr:partial]{purrr::partial()}} for setting arguments of a
 skimmer function.
 }

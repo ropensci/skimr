@@ -9,6 +9,8 @@
 NULL
 
 #' @describeIn print Print a skimmed data frame (`skim_df` from [`skim()`]).
+#' @param include_summary Whether a summary of the data frame should be printed
+#' @param options Options passed into the print function
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, ...) {
   if (include_summary) {
@@ -29,7 +31,7 @@ print.skim_df <- function(x, include_summary = TRUE, ...) {
 
 #' @describeIn print Print an entry within a partitioned `skim_df`.
 #' @export
-print.one_skim_df <- function(x, ..) {
+print.one_skim_df <- function(x, ...) {
   variable_type <- paste("Variable type:", attr(x, "type"))
   with_line <- cli::rule(line = 1, left = variable_type)
   print(with_line)
@@ -38,7 +40,7 @@ print.one_skim_df <- function(x, ..) {
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
 #' @export
-print.skim_list <- function(x, ..) {
+print.skim_list <- function(x, ...) {
   nms <- names(x)
   attributes(x) <- NULL
   print(purrr::set_names(x, nms))
@@ -92,6 +94,7 @@ print.summary_skim_df <- function(x, ...) {
 NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
+#' @param options Options passed into the print function
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {
@@ -147,6 +150,6 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
   df_name <- paste0("Name: ", x[["df_name"]])
   
   kframe <- data.frame(df_name, n_rows, n_cols)
-  list(Summary = kable(kframe),
-       `Type counts` = kable(x$type_frequencies))
+  list(Summary = knitr::kable(kframe),
+       `Type counts` = knitr::kable(x$type_frequencies))
 }

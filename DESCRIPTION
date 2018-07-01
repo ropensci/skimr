@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data 
-Version: 1.0.3
+Version: 2.0
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "aut"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -42,7 +42,7 @@ Imports:
     knitr (>= 1.2),
     tibble (>= 0.6),
     tidyr (>= 0.7),
-    tidyselect
+    tidyselect (>= 0.2.4)
 Suggests:
     extrafont,
     rmarkdown,

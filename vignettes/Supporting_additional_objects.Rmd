@@ -1,6 +1,5 @@
 ---
 title: "Supporting additional objects"
-author: "Elin Waring"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -8,11 +7,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+Under revision for skimr v2.
 
-Please note that this is based on the skimr 0.9 master branch and it is likely
-it  will have minor modifications.
-
-Skimr's `skim()` function supports the skimming of data frames through
+Skimr's `skim()` function supports the skimming of data frames.  through
 `skim.data.frame()`. The `skim()` function is a generic which means that, as
 with `print()` or `summary()` it is possible to create support for additional
 object types. Package authors can add support for skim to their packages or
@@ -50,11 +47,11 @@ if desired, especially for printing purposes, a different class could be used.
 
 ```{r}
 #' @include functions_sfc.R
-skim.sf <- function(.data) {
-  rows <- purrr::map(.data, skim_v)
-  combined <- dplyr::bind_rows(rows, .id = "var")
-  return(structure(combined, class = c("skim_df", class(combined))))
-}
+# skim.sf <- function(.data) {
+#   rows <- purrr::map(.data, skim_v)
+#   combined <- dplyr::bind_rows(rows, .id = "var")
+#   return(structure(combined, class = c("skim_df", class(combined))))
+# }
 ```
 
 
