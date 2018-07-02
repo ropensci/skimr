@@ -17,7 +17,13 @@ sfl(..., .args = list(), .type = "")
 
 These arguments are automatically \link[rlang:quo]{quoted}. They
 support \link[rlang:quasiquotation]{unquoting} and splicing. See
-\code{vignette("programming")} for an introduction to these concepts.}
+\code{vignette("programming")} for an introduction to these concepts.
+
+The following notations are \strong{not} supported, see examples:
+\itemize{
+\item An anonymous function, \code{function(x) mean(x, na.rm = TRUE)}
+\item An anonymous function in \pkg{purrr} notation, \code{~mean(., na.rm = TRUE)}
+}}
 
 \item{.args}{A named list of additional arguments to be added
 to all function calls.}

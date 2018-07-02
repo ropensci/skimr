@@ -26,6 +26,13 @@ columns that are mostly \code{NA}. For that reason, it can be convenient to
 work with "by type" subsets of the original data frame. These smaller
 subsets have their \code{NA} columns removed.
 }
+\details{
+\code{partition()} creates a list of smaller \code{skim_df} data frames. Each entry
+in the list is a data type from the original \code{skim_df}. The inverse of
+\code{partition()} is \code{bind()}, which takes the list and produces the original
+\code{skim_df}. While \code{partition()} keeps all of the subtables as list entries,
+\code{yank()} gives you a single subtable for a data type.
+}
 \section{Functions}{
 \itemize{
 \item \code{bind}: The inverse of a \code{partition()}. Rebuild the original

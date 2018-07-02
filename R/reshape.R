@@ -5,6 +5,12 @@
 #' work with "by type" subsets of the original data frame. These smaller
 #' subsets have their `NA` columns removed.
 #' 
+#' `partition()` creates a list of smaller `skim_df` data frames. Each entry
+#' in the list is a data type from the original `skim_df`. The inverse of
+#' `partition()` is `bind()`, which takes the list and produces the original
+#' `skim_df`. While `partition()` keeps all of the subtables as list entries,
+#' `yank()` gives you a single subtable for a data type.
+#' 
 #' @param data A `skim_df`.
 #' @param type A character scalar. The subtable to extract from a `skim_df`.
 #' @return A `skim_list` of `skim_df`'s, by type.

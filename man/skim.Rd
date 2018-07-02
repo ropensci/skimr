@@ -42,11 +42,11 @@ If you just want to see the printed output, call \code{skim_tee()} instead.
 This function returns the original data. \code{skim_tee()} uses the default
 \code{skim()}, but you can replace it with the \code{skim} argument.
 
-If you want to work with a data frame that is long (tidy),
-call \code{skim_to_long()} or for a named list of data frames by type
-\code{skim_to_list()}. Note that all of the columns in the data frames produced
-by these functions are character. The intent is that you will be processing
-the \strong{printed} result further, not the original data.
+The data frame produced by \code{skim} is wide and sparse, since not all summmary
+functions appear for all types. See \code{\link[=partition]{partition()}} and \code{\link[=yank]{yank()}} for methods
+for transforming this wide data frame. The first function splits it into
+a list, with each entry corresponding to a data type. The latter pulls
+a single subtable for a particular type from the \code{skim_df}.
 
 \code{skim()} is designed to operate in pipes and to generally play nicely with
 other \code{tidyverse} functions. This means that you can use \code{tidyselect} helpers
