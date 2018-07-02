@@ -42,7 +42,7 @@ If you just want to see the printed output, call \code{skim_tee()} instead.
 This function returns the original data. \code{skim_tee()} uses the default
 \code{skim()}, but you can replace it with the \code{skim} argument.
 
-The data frame produced by \code{skim} is wide and parse, since not all summmary
+The data frame produced by \code{skim} is wide and sparse, since not all summmary
 functions appear for all types. See \code{\link[=partition]{partition()}} and \code{\link[=yank]{yank()}} for methods
 for transforming this wide data frame. The first function splits it into
 a list, with each entry corresponding to a data type. The latter pulls

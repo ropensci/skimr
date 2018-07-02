@@ -15,7 +15,7 @@
 #' This function returns the original data. `skim_tee()` uses the default
 #' `skim()`, but you can replace it with the `skim` argument.
 #' 
-#' The data frame produced by `skim` is wide and parse, since not all summmary
+#' The data frame produced by `skim` is wide and sparse, since not all summmary
 #' functions appear for all types. See [partition()] and [yank()] for methods
 #' for transforming this wide data frame. The first function splits it into
 #' a list, with each entry corresponding to a data type. The latter pulls
