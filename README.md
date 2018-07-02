@@ -4,6 +4,7 @@ skimr
 
 [![Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![Build status](https://ci.appveyor.com/api/projects/status/8p93v3t949ubyl06/branch/master?svg=true)](https://ci.appveyor.com/project/michaelquinn32/skimr/branch/master)
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
 
 `skimr` provides a frictionless approach to summary statistics which
