@@ -83,8 +83,10 @@ skim_render <- function(.data, groups, FUN, ...) {
   skim_type <- .data$type[1]
   funs_used <- get_funs(skim_type)
   fun_names <- names(funs_used)
+  .data$variable <- forcats::fct_inorder(.data$variable) # To keep original order of variables
   collapsed <- collapse_levels(.data, groups)
   wide <- tidyr::spread(collapsed, "stat", "formatted")
+  wide$variable <- as.character(wide$variable) # To prevent warnings
   if (options$formats$.align_decimal) {
     wide[fun_names] <- lapply(wide[fun_names], align_decimal)
   }

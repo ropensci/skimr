@@ -34,6 +34,7 @@ Depends:
 Imports:
     cli,
     dplyr (>= 0.7),
+    forcats,
     magrittr,
     pander,
     purrr,
