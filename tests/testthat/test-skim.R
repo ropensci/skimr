@@ -82,7 +82,7 @@ test_that("skim_to_wide works as expected.", {
   expect_equal(nrow(input), 5)
   expect_identical(input$type, c("factor", rep("numeric", each = 4)))
   expect_identical(input$variable,
-    c("Species", "Petal.Length", "Petal.Width", "Sepal.Length", "Sepal.Width"))
+    c("Species", "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"))
   expect_identical(input$n, rep("150", each = 5))
   expect_identical(input$top_counts, c("set: 50, ver: 50, vir: 50, NA: 0",
                                        NA, NA, NA, NA))
