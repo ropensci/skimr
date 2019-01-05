@@ -59,6 +59,7 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Collate: 
+    'filter.r'
     'skimr-package.R'
     'formats.R'
     'stats.R'
