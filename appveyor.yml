@@ -21,7 +21,9 @@ build_script:
 environment:
   matrix:
     - R_ARCH: i386
+      GCC_PATH: mingw_32
     - R_ARCH: x64
+      GCC_PATH: mingw_64
 
 test_script:
   - travis-tool.sh run_tests
