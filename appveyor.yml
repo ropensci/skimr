@@ -20,7 +20,7 @@ build_script:
   
 environment:
   global:
-  USE_RTOOLS: true
+   - USE_RTOOLS: true
 
   matrix:
     - R_ARCH: i386
