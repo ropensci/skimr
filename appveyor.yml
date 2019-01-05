@@ -19,6 +19,8 @@ build_script:
   - travis-tool.sh install_deps
   
 environment:
+  global:
+   USE_RTOOLS: true
   matrix:
     - R_ARCH: i386
       GCC_PATH: mingw_32
