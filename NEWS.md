@@ -1,5 +1,6 @@
 skimr 1.0.3 (2018-06-06)
 ========================
+
 ### NEW FEATURES
   * You can use skim_with() with a nest list of functions:
      `skim_with(.list = mylist)` or `skim_with(!!!mylist)`
