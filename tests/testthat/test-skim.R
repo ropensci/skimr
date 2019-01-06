@@ -733,7 +733,7 @@ test_that("Skimming a grouped df works as expected", {
   expect_equal(attrs$data_rows, 32)
   expect_equal(attrs$data_cols, 11)
   expect_equal(attrs$df_name, "`grouped`")
-  expect_equal(attrs$groups, c("cyl", "gear"))
+  expect_equal(as.character(attrs$groups), c("cyl", "gear"))
   expect_equal(attrs$skimmers_used,
                list(numeric = c("missing", "complete", "n", "mean", "sd", "p0",
                                 "p25", "p50", "p75", "p100", "hist")))

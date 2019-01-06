@@ -1,35 +1,42 @@
 context("Using dplyr verbs on skim objects works as expected")
+# In v2 the base results are a skim_df object with nrow equal to the number of variables
+# and length of the total number of unique statistics across types plus 2.
 
 skimmed_iris <- skim(iris)
+nvar_iris <- length(iris)
+skimmers_used_iris <- attr(skimmed_iris, "skimmers_used")
+ntypes <- length(skimmers_used_iris)
+skimmers_iris <- union(skimmers_used_iris[[1]], skimmers_used_iris[[2]]) 
+length_skimmed_iris <- length(skimmers_iris) + 2
 # dplyr verbs in V1 of skimr should return long data frames _without_ the skim_df class.
-test_that("dplyr::filter works as expected (returns long data frame)", {
-  result <- dplyr::filter(skimmed_iris, stat == "mean")
-  expect_equal(length(result), 6)
-  expect_equal(nrow(result), 4)
+test_that("dplyr::filter works as expected (returns wide data frame)", {
+  result <- dplyr::filter(skimmed_iris, type == "numeric")
+  expect_equal(length(result), (length_skimmed_iris))
+  expect_equal(nrow(result), nvar_iris-1)
 })
 
-test_that("dplyr::select works as expected (returns long data frame)", {
-  result <- dplyr::select(skimmed_iris, stat, value)
+test_that("dplyr::select works as expected (returns wide data frame)", {
+  result <- dplyr::select(skimmed_iris, type, variable)
   expect_equal(length(result), 2)
-  expect_equal(nrow(result), 53)
+  expect_equal(nrow(result), nvar_iris)
 })
 
-test_that("dplyr::mutate works as expected (returns long data frame)", {
-  result <- dplyr::mutate(skimmed_iris, value2 = value^2)
-  expect_equal(length(result), 7)
-  expect_equal(nrow(result), 53)
+test_that("dplyr::mutate works as expected (returns wide data frame)", {
+  result <- dplyr::mutate(skimmed_iris, mean2 = mean^2)
+  expect_equal(length(result), (length_skimmed_iris + 1))
+  expect_equal(nrow(result), nvar_iris)
 })
 
-test_that("dplyr::slice works as expected (returns long data frame)", {
-  result <- dplyr::slice(skimmed_iris, 1:5)
-  expect_equal(length(result), 6)
-  expect_equal(nrow(result), 5)
+test_that("dplyr::slice works as expected (returns wide data frame)", {
+  result <- dplyr::slice(skimmed_iris, 1:3)
+  expect_equal(length(result), length_skimmed_iris)
+  expect_equal(nrow(result), 3)
 })
 
-test_that("dplyr::arrange works as expected (returns long data frame)", {
-  result <- dplyr::arrange(skimmed_iris, desc(value))
-  expect_equal(length(result), 6)
-  expect_equal(nrow(result), 53)
-  expect_equal(as.numeric(result[1, "value"]), 150)
-  expect_equal(is.na(as.numeric(result[53, "value"])), TRUE)
+test_that("dplyr::arrange works as expected (returns wide data frame)", {
+  result <- dplyr::arrange(skimmed_iris, desc(mean))
+  expect_equal(nrow(result), nvar_iris)
+  expect_equal(length(result), length_skimmed_iris)
+  expect_equal(as.numeric(result[1, "mean"]), max(result$mean, na.rm = TRUE))
+  expect_equal(is.na(as.numeric(result[5, "mean"])), TRUE)
 })
