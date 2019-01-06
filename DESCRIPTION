@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data 
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "aut"),
   person("Eduardo", "Arino de la Rubia", email="earino@gmail.com", role = "aut"),
@@ -59,7 +59,7 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 Collate: 
-    'filter.r'
+    'dplyr.r'
     'skimr-package.R'
     'formats.R'
     'stats.R'
