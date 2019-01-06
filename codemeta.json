@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "skimr",
   "description": "A simple to use summary function that can be used with pipes\n    and displays nicely in the console. The default summary statistics may be \n    modified by the user as can the default formatting. Support for data frames \n    and vectors is included, and users can implement their own skim methods for\n    specific object types as described in a vignette. Default summaries include\n    support for inline spark graphs. Instructions for managing these on \n    specific operating systems are given in the \"Using skimr\" vignette and the \n    README.",
@@ -7,7 +10,7 @@
   "codeRepository": "https://github.com/ropenscilabs/skimr",
   "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -350,8 +353,11 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "1596.612KB",
-  "contIntegration": ["https://travis-ci.org/ropenscilabs/skimr", "https://codecov.io/gh/ropenscilabs/skimr"],
+  "fileSize": "1656.814KB",
+  "contIntegration": [
+    "https://travis-ci.org/ropenscilabs/skimr",
+    "https://codecov.io/gh/ropenscilabs/skimr"
+  ],
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/onboarding/issues/175",
