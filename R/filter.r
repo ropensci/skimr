@@ -6,7 +6,7 @@
 #' @export
 filter.skim_df <-function (.data, ..., .preserve = FALSE) {
   .data <- as.data.frame(.data)
-  .data <- dplyr::filter(.data, ..., .preserve)
-  class(.data)  <- c("tbl_df",     "tbl", "data.frame")
+  .data <- dplyr::filter(.data, ...)
+  class(.data)  <- c("tbl_df", "tbl", "data.frame")
   .data
 }
