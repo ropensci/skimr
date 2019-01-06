@@ -79,7 +79,7 @@ skim_with <- function(..., append = TRUE) {
       group_variables <- selected %in% as.character(grps)
       selected <- selected[!group_variables]
     }
-    
+
     variables <- tibble::tibble(variable = selected)
     nested <- dplyr::mutate(variables,
         skimmed = purrr::map(variable, skim_one, data, local_skimmers, append))
@@ -95,7 +95,7 @@ skim_with <- function(..., append = TRUE) {
               data_rows = nrow(data),
               data_cols = ncol(data),
               df_name = rlang::expr_label(substitute(data)),
-              groups = attr(data, "vars"),
+              groups = dplyr::groups(data),
               skimmers_used = purrr::set_names(skimmers, variable_types))
   }
 }
