@@ -3,8 +3,8 @@ skimr
 =====
 
 [![Build
-Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
-[![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
 `skimr` provides a frictionless approach to summary statistics which
@@ -14,6 +14,8 @@ displaying summary statistics the user can skim quickly to understand
 their data. It handles different data types and returns a `skim_df`
 object which can be included in a pipeline or displayed nicely for the
 human reader.
+
+![Human reading](inst/figures/skimmer_hex.png)
 
 Installation
 ------------
@@ -55,12 +57,12 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 71 
     ##  n variables: 2 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 7
     ##   variable missing complete     n ordered n_unique top_counts                        
     ## * <chr>      <int>    <int> <int> <lgl>      <int> <chr>                             
     ## 1 feed           0       71    71 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 12
     ##   variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>      <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -73,12 +75,12 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 7
     ##   variable missing complete     n ordered n_unique top_counts                      
     ## * <chr>      <int>    <int> <int> <lgl>      <int> <chr>                           
     ## 1 Species        0      150   150 FALSE          3 set: 50, ver: 50, vir: 50, NA: 0
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 4 x 12
     ##   variable     missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>          <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -94,7 +96,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 87 
     ##  n variables: 13 
-    ## ── Variable type: character ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type: character ───────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 7 x 8
     ##   variable   missing complete     n   min   max empty n_unique
     ## * <chr>        <int>    <int> <int> <int> <int> <int>    <int>
@@ -105,19 +107,19 @@ Skim statistics in the console
     ## 5 gender           3       84    87     4    13     0        4
     ## 6 homeworld       10       77    87     4    14     0       48
     ## 7 species          5       82    87     3    14     0       37
-    ## ── Variable type: integer ───────────────────────────────────────────────────────────────────────
+    ## ── Variable type: integer ─────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 1 x 12
     ##   variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>      <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
     ## 1 height         6       81    87  174.  34.8   66.  167.  180.  191.  264. ▁▁▇▅▁
-    ## ── Variable type: list ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: list ────────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 3 x 7
     ##   variable  missing complete     n n_unique min_length max_length
     ## * <chr>       <int>    <int> <int>    <int>      <int>      <int>
     ## 1 films           0       87    87       24          1          7
     ## 2 vehicles        0       87    87       11          0          2
     ## 3 starships       0       87    87       17          0          5
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 2 x 12
     ##   variable   missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -146,7 +148,7 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────────────────────────────
     ## # A tibble: 2 x 12
     ##   variable     missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## * <chr>          <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
@@ -165,22 +167,22 @@ Skim statistics in the console
     ## Skim summary statistics
     ##  n obs: 150 
     ##  n variables: 5 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────────
-    ## # A tibble: 12 x 13
-    ##    variable     Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ##  * <chr>        <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
-    ##  1 Sepal.Length setosa           0       50    50 5.01  0.352 4.30  4.80  5.00  5.20  5.80  ▃▃▇▅▁
-    ##  2 Sepal.Length versicolor       0       50    50 5.94  0.516 4.90  5.60  5.90  6.30  7.00  ▂▇▆▃▃
-    ##  3 Sepal.Length virginica        0       50    50 6.59  0.636 4.90  6.22  6.50  6.90  7.90  ▁▃▇▃▂
-    ##  4 Sepal.Width  setosa           0       50    50 3.43  0.379 2.30  3.20  3.40  3.68  4.40  ▁▃▇▅▂
-    ##  5 Sepal.Width  versicolor       0       50    50 2.77  0.314 2.00  2.52  2.80  3.00  3.40  ▁▅▆▇▂
-    ##  6 Sepal.Width  virginica        0       50    50 2.97  0.322 2.20  2.80  3.00  3.18  3.80  ▂▆▇▅▁
-    ##  7 Petal.Length setosa           0       50    50 1.46  0.174 1.00  1.40  1.50  1.58  1.90  ▁▃▇▃▁
-    ##  8 Petal.Length versicolor       0       50    50 4.26  0.470 3.00  4.00  4.35  4.60  5.10  ▂▂▇▇▆
-    ##  9 Petal.Length virginica        0       50    50 5.55  0.552 4.50  5.10  5.55  5.88  6.90  ▃▇▇▃▂
-    ## 10 Petal.Width  setosa           0       50    50 0.246 0.105 0.100 0.200 0.200 0.300 0.600 ▇▂▂▁▁
-    ## 11 Petal.Width  versicolor       0       50    50 1.33  0.198 1.00  1.20  1.30  1.50  1.80  ▅▇▃▆▁
-    ## 12 Petal.Width  virginica        0       50    50 2.03  0.275 1.40  1.80  2.00  2.30  2.50  ▂▇▆▅▇
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────────────────────────────
+    ## # A tibble: 12 x 12
+    ##    variable     missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
+    ##  * <chr>          <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
+    ##  1 Sepal.Length       0       50    50 5.01  0.352 4.30  4.80  5.00  5.20  5.80  ▃▃▇▅▁
+    ##  2 Sepal.Length       0       50    50 5.94  0.516 4.90  5.60  5.90  6.30  7.00  ▂▇▆▃▃
+    ##  3 Sepal.Length       0       50    50 6.59  0.636 4.90  6.22  6.50  6.90  7.90  ▁▃▇▃▂
+    ##  4 Sepal.Width        0       50    50 3.43  0.379 2.30  3.20  3.40  3.68  4.40  ▁▃▇▅▂
+    ##  5 Sepal.Width        0       50    50 2.77  0.314 2.00  2.52  2.80  3.00  3.40  ▁▅▆▇▂
+    ##  6 Sepal.Width        0       50    50 2.97  0.322 2.20  2.80  3.00  3.18  3.80  ▂▆▇▅▁
+    ##  7 Petal.Length       0       50    50 1.46  0.174 1.00  1.40  1.50  1.58  1.90  ▁▃▇▃▁
+    ##  8 Petal.Length       0       50    50 4.26  0.470 3.00  4.00  4.35  4.60  5.10  ▂▂▇▇▆
+    ##  9 Petal.Length       0       50    50 5.55  0.552 4.50  5.10  5.55  5.88  6.90  ▃▇▇▃▂
+    ## 10 Petal.Width        0       50    50 0.246 0.105 0.100 0.200 0.200 0.300 0.600 ▇▂▂▁▁
+    ## 11 Petal.Width        0       50    50 1.33  0.198 1.00  1.20  1.30  1.50  1.80  ▅▇▃▆▁
+    ## 12 Petal.Width        0       50    50 2.03  0.275 1.40  1.80  2.00  2.30  2.50  ▂▇▆▅▇
 
 Knitted results
 ---------------
@@ -256,6 +258,7 @@ n\_cols
 <th align="right">p75</th>
 <th align="right">p100</th>
 <th align="left">hist</th>
+<th align="right">mad</th>
 </tr>
 </thead>
 <tbody>
@@ -272,6 +275,7 @@ n\_cols
 <td align="right">6.4</td>
 <td align="right">7.9</td>
 <td align="left">▆▇▇▅▂</td>
+<td align="right">1.04</td>
 </tr>
 </tbody>
 </table>
@@ -372,7 +376,6 @@ n\_cols
 <th align="right">p50</th>
 <th align="right">p75</th>
 <th align="right">p100</th>
-<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
@@ -388,7 +391,6 @@ n\_cols
 <td align="right">5.8</td>
 <td align="right">6.4</td>
 <td align="right">7.9</td>
-<td align="left">▆▇▇▅▂</td>
 </tr>
 </tbody>
 </table>
@@ -477,3 +479,5 @@ support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr's flexibility to add their
 own customized classes. Please see the [contributing](CONTRIBUTING.md)
 and [conduct](CONDUCT.md) documents.
+
+[![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
