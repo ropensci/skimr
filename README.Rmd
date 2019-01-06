@@ -15,14 +15,16 @@ options(width = 120)
 ```
 
 [![Build Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
-[![Build status](https://ci.appveyor.com/api/projects/status/8p93v3t949ubyl06/branch/master?svg=true)](https://ci.appveyor.com/project/michaelquinn32/skimr/branch/master)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
 `skimr` provides a frictionless approach to summary statistics which conforms
 to the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
 displaying summary statistics the user can skim quickly to understand their
 data. It handles different data types and returns a `skim_df` object which can
 be included in a pipeline or displayed nicely for the human reader.
+
+![Human reading](inst/figures/skimmer_hex.png)
 
 ## Installation
 
