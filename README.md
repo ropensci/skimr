@@ -15,7 +15,7 @@ their data. It handles different data types and returns a `skim_df`
 object which can be included in a pipeline or displayed nicely for the
 human reader.
 
-![Human reading](figures/skimmer_hex.png)
+![Human reading](inst/figures/skimmer_hex.png)
 
 Installation
 ------------
@@ -516,8 +516,20 @@ produces a long, tidy-format `skim_df` object that can be computed on.
 
     skim(mtcars) %>% dplyr::filter(stat=="hist")
 
-    ## # A tibble: 0 x 6
-    ## # ... with 6 variables: variable <chr>, type <chr>, stat <chr>, level <chr>, value <dbl>, formatted <chr>
+    ## # A tibble: 11 x 6
+    ##    variable type    stat  level value formatted
+    ##    <chr>    <chr>   <chr> <chr> <dbl> <chr>    
+    ##  1 mpg      numeric hist  .all     NA ▃▇▇▇▃▂▂▂ 
+    ##  2 cyl      numeric hist  .all     NA ▆▁▁▃▁▁▁▇ 
+    ##  3 disp     numeric hist  .all     NA ▇▆▁▂▅▃▁▂ 
+    ##  4 hp       numeric hist  .all     NA ▃▇▃▅▂▃▁▁ 
+    ##  5 drat     numeric hist  .all     NA ▃▇▁▅▇▂▁▁ 
+    ##  6 wt       numeric hist  .all     NA ▃▃▃▇▆▁▁▂ 
+    ##  7 qsec     numeric hist  .all     NA ▃▂▇▆▃▃▁▁ 
+    ##  8 vs       numeric hist  .all     NA ▇▁▁▁▁▁▁▆ 
+    ##  9 am       numeric hist  .all     NA ▇▁▁▁▁▁▁▆ 
+    ## 10 gear     numeric hist  .all     NA ▇▁▁▆▁▁▁▂ 
+    ## 11 carb     numeric hist  .all     NA ▆▇▂▇▁▁▁▁
 
 Customizing skimr
 -----------------
