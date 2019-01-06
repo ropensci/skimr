@@ -24,6 +24,8 @@ displaying summary statistics the user can skim quickly to understand their
 data. It handles different data types and returns a `skim_df` object which can
 be included in a pipeline or displayed nicely for the human reader.
 
+![Human reading](figures/skimmer_hex.png)
+
 ## Installation
 
 The current released version of `skimr` can be installed from CRAN. If you wish
