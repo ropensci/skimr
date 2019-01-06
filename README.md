@@ -3,9 +3,9 @@ skimr
 =====
 
 [![Build
-Status](https://travis-ci.org/ropenscilabs/skimr.svg?branch=master)](https://travis-ci.org/ropenscilabs/skimr)
-[![codecov](https://codecov.io/gh/ropenscilabs/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
-[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![Build status](https://ci.appveyor.com/api/projects/status/8p93v3t949ubyl06/branch/master?svg=true)](https://ci.appveyor.com/project/michaelquinn32/skimr/branch/master)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
 
 `skimr` provides a frictionless approach to summary statistics which
 conforms to the [principle of least
@@ -73,11 +73,11 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:factor ───────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:factor ──────────────────────────────────────────────────────────────────────────────────────────────────
     ##  variable missing complete   n n_unique                       top_counts ordered
     ##   Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
     ## 
-    ## ── Variable type:numeric ──────────────────────────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##   Petal.Width       0      150 150 1.2  0.76 0.1 0.3 1.3  1.8  2.5 ▇▁▁▅▃▃▂▂
@@ -629,3 +629,5 @@ support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr's flexibility to add their
 own customized classes. Please see the [contributing](CONTRIBUTING.md)
 and [conduct](CONDUCT.md) documents.
+
+[![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
