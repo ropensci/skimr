@@ -58,8 +58,8 @@
 #' my_skim <- skim_with(numeric = sfl(mean), character = sfl(length))
 #' 
 #' # Or pass the same as a list
-#' #my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
-#' #my_skim <- skim_with(!!!my_skimmers)
+#' my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
+#' my_skim <- skim_with(my_skimmers)
 #' @export
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
@@ -108,15 +108,16 @@ skim_with <- function(..., append = TRUE) {
 #' @keywords internal
 #' @noRd
 validate_assignment <- function(...) {
- 
+
   to_assign <- list(...)
+
+  if (length(to_assign) < 1) return(to_assign)
+  
   # Need to cope with case where ... is a list already
-  if (exists("to_assign[[1]][[1]]")){
+  if (class(to_assign[[1]]) != "skimr_function_list"){
     to_assign <- to_assign[[1]]
   }
  
-  if (length(to_assign) < 1) return(to_assign)
-  
   proposed_names <- names(to_assign)
   if (!all(nzchar(proposed_names)) || is.null(proposed_names) ||
       anyNA(proposed_names)) {

@@ -71,6 +71,6 @@ my_skim <- skim_with(numeric = sfl(median, mad, .args = list(na.rm = FALSE)))
 my_skim <- skim_with(numeric = sfl(mean), character = sfl(length))
 
 # Or pass the same as a list
-#my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
-#my_skim <- skim_with(!!!my_skimmers)
+my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
+my_skim <- skim_with(my_skimmers)
 }
