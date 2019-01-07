@@ -333,8 +333,8 @@ test_that("skim returns expected response for Date vectors", {
   expect_identical(input$missing, 0L)
   expect_identical(input$complete, 9L)
   expect_identical(input$n, 9L)
-  expect_identical(input$min, as.Date("2011-07-01"))
-  expect_identical(input$max, as.Date("2011-07-09"))
+  expect_equal(input$min, as.Date("2011-07-01"))
+  expect_equal(input$max, as.Date("2011-07-09"))
   expect_equal(input$median, as.Date("2011-07-05"))
   expect_identical(input$n_unique, 9L)
 })
@@ -733,7 +733,7 @@ test_that("Skimming a grouped df works as expected", {
   expect_equal(attrs$data_rows, 32)
   expect_equal(attrs$data_cols, 11)
   expect_equal(attrs$df_name, "`grouped`")
-  expect_equal(attrs$groups, c("cyl", "gear"))
+  expect_equal(as.character(attrs$groups), c("cyl", "gear"))
   expect_equal(attrs$skimmers_used,
                list(numeric = c("missing", "complete", "n", "mean", "sd", "p0",
                                 "p25", "p50", "p75", "p100", "hist")))

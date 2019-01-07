@@ -17,13 +17,14 @@ print.skim_df <- function(x, include_summary = TRUE, ...) {
     cat("Skim summary statistics\n")
     cat(" n obs:", attr(x, "data_rows"), "\n")
     cat(" n variables:", attr(x, "data_cols"), "\n")
+
+    possible_groups <- attr(x, "groups")
+    if (!is.null(possible_groups)) {
+      cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
+    }
+    
   }
   
-  possible_groups <- attr(x, "groups")
-  if (!is.null(possible_groups)) {
-    cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
-  }
-
   by_type <- partition(x)
   purrr::imap(by_type, print)
   invisible(NULL)
