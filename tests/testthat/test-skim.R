@@ -687,8 +687,12 @@ test_that("Skimming a complete data frame works as expected", {
                                "n_unique", "top_counts")))
 })
 
-test_that("skim requires a data.frame as input", {
-  expect_error(skim(volcano), "data.frame")
+test_that("skim handles a matrix as input", {
+  expect_error(skim(volcano), NA)
+})
+
+test_that("skim handles a vector as input", {
+  expect_error(skim(iris$Sepal.Length), NA)
 })
 
 test_that("You can use tidyselect negation", {
