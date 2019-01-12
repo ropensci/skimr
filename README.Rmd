@@ -3,7 +3,7 @@ output:
  md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr
+# skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
 ```{r set-options, echo=FALSE, message=FALSE}
 library(pander)
 library(knitr)
@@ -23,8 +23,6 @@ to the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_
 displaying summary statistics the user can skim quickly to understand their
 data. It handles different data types and returns a `skim_df` object which can
 be included in a pipeline or displayed nicely for the human reader.
-
-![Human reading](inst/figures/skimmer_hex.png)
 
 ## Installation
 

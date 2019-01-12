@@ -3,6 +3,7 @@
 ^\.travis\.yml$
 ^\\inst\\doc\\other_docs\\blog\.html$
 ^\\inst\\doc\\other_docs\\blog\.Rmd$
+^\\inst\\figures
 ^\\inst\\rmarkdown\\other
 ^README\.Rmd
 ^README\.html
