@@ -1,19 +1,18 @@
-#' @include skim_with.R stats.R 
+#' @include skim_with.R stats.R
 NULL
 
 #' Retrieve the summary functions for a specific data type
-#' 
+#'
 #' These functions are used to set the default skimming functions for a data
 #' type.  When creating your own set of skimming functions, call [sfl()]
 #' within a [get_skimmers()] method for your particular type. Your call to
 #' [sfl()] should also provide a matching class in the `.type` argument.
 #' Otherwise, it will not be possible to dynamically reassign your default
 #' functions when working interactively.
-#' 
+#'
 #' Summary functions are provided for the following classes:
-#' 
+#'
 #'  - `numeric`
-#'  - `integer`
 #'  - `character`
 #'  - `factor`
 #'  - `logical`
@@ -25,7 +24,7 @@ NULL
 #'  - `AsIs`
 #'
 #' Call [get_default_skimmers()] to see the functions for each.
-#' 
+#'
 #' @param column An atomic vector or list. A column from a data frame.
 #' @return A `skim_function_list` object.
 #' @seealso [sfl()]
@@ -38,6 +37,13 @@ NULL
 #'     mean,
 #'     sd)
 #' }
+#'
+#' # Integer and float columns are both "numeric" and are treated the same
+#' # by default. To switch this behavior in another package, add a method.
+#' get_skimmers.integer <- get_skimmers.numeric
+#'
+#' # Or, in a local session, use `skim_with` to create a different `skim`.
+#' new_skim <- skim_with(integer = get_skimmers.numeric())
 #' @export
 get_skimmers <- function(column) {
   UseMethod("get_skimmers")
@@ -64,12 +70,6 @@ get_skimmers.numeric <- function(column) {
     p75 = stats::quantile(., probs = .75, na.rm = TRUE, names = FALSE),
     p100 = stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE),
     hist = inline_hist(., 5))
-}
-
-#' @export
-get_skimmers.integer <- function(column) {
-  numeric_skimmers <- get_skimmers(numeric())
-  sfl(.type = "integer", !!!numeric_skimmers$keep)
 }
 
 #' @export

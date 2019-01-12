@@ -2,10 +2,10 @@ context("Get skimmers")
 
 test_that("get_default_skimmers() has a correct list of defaults", {
   defaults <- get_default_skimmers()
-  expect_equal(length(setdiff(names(defaults), c("AsIs", "character", "complex", "Date",
+  expect_equal(length(setdiff(names(defaults), c("AsIs", "character", "complex",
+                                                 "Date",
                            "difftime", "factor", "integer",
-                           "list", "logical", "numeric", 
-                           "POSIXct", "ts"))), 0)
+                           "list", "logical", "numeric", "POSIXct", "ts"))), 0)
   expect_identical(defaults$AsIs, c("missing", "complete", "n", "n_unique",
                                     "min_length", "max_length"))
   expect_identical(defaults$character, c("missing", "complete", "n", "min",
@@ -17,9 +17,6 @@ test_that("get_default_skimmers() has a correct list of defaults", {
                                         "max", "median", "n_unique"))
   expect_identical(defaults$factor, c("missing", "complete", "n", "ordered",
                                       "n_unique", "top_counts"))
-  expect_identical(defaults$integer, c("missing", "complete", "n", "mean", "sd",
-                                       "p0", "p25", "p50", "p75", "p100",
-                                       "hist"))
   expect_identical(defaults$list, c("missing", "complete", "n", "n_unique",
                                     "min_length", "max_length"))
   expect_identical(defaults$logical, c("missing", "complete", "n", "mean",
