@@ -30,10 +30,10 @@ test_that("knit_print produced expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  
+
   expect_match(input, "**Skim summary statistics**", fixed = TRUE)
-  expect_match(input,
-    "<table style='width: auto;' class='table table-condensed'>")
+  expect_match(input, "<table style='width: auto;'")
+  expect_match(input, "class='table table-condensed'>")
   expect_match(input, " <thead>")
   expect_match(input, "  <tr>")
   expect_match(input, "   <th style=\"text-align:right;\"> n_obs </th>")
@@ -72,8 +72,7 @@ test_that("You can yank a type from a skim_df and call knit_print", {
   skim_one <- yank(skimmed, "factor")
   input <- knit_print(skim_one)
   expect_match(input, "\n\n**Variable type: factor**\n\n", fixed = TRUE)
-  expect_false(grepl("\n\n**Variable type: numeric**\n\n", input, 
-                     fixed = TRUE))
+  expect_false(grepl("\n\n**Variable type: numeric**\n\n", input, fixed = TRUE))
 })
 
 test_that("make_utf8 produces the correct result ", {
