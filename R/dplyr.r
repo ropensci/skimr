@@ -1,8 +1,8 @@
-# #' Use dplyr verb filter on skim_df objects.
-# #' #' @seealso [`dplyr::filter()`]
-# #' @inheritParams dplyr::filter
-# #' @return  skim_df object coerced to a data frame.
-# #' @export
+#' Use dplyr verb filter on skim_df objects.
+#' #' @seealso [`dplyr::filter()`]
+#' @inheritParams dplyr::filter
+#' @return  skim_df object coerced to a data frame.
+#' @export
 filter.skim_df <-function (.data, ..., .preserve = FALSE) {
    .data <- as.data.frame(.data)
    .data <- dplyr::filter(.data, ...)
@@ -25,12 +25,12 @@ filter.skim_df <-function (.data, ..., .preserve = FALSE) {
 #    }
 #   .data
 # }
-#
-# #' Use dplyr verb mutate on skim_df objects.
-# #' #' @seealso [`dplyr::mutate()`]
-# #' @inheritParams dplyr::mutate
-# #' @return  skim_df object coerced to a data frame.
-# #' @export
+
+#' Use dplyr verb mutate on skim_df objects.
+#' #' @seealso [`dplyr::mutate()`]
+#' @inheritParams dplyr::mutate
+#' @return  skim_df object coerced to a data frame.
+#' @export
  mutate.skim_df <-function (.data, ...) {
    .data <- as.data.frame(.data)
    .data <- dplyr::mutate(.data, ...)
@@ -39,12 +39,12 @@ filter.skim_df <-function (.data, ..., .preserve = FALSE) {
     }
    .data
  }
-#
-# #' Use dplyr verb arrange on skim_df objects.
-# #' #' @seealso [`dplyr::arrange()`]
-# #' @inheritParams dplyr::arrange
-# #' @return  skim_df object coerced to a data frame.
-# #' @export
+
+#' Use dplyr verb arrange on skim_df objects.
+#' #' @seealso [`dplyr::arrange()`]
+#' @inheritParams dplyr::arrange
+#' @return  skim_df object coerced to a data frame.
+#' @export
  arrange.skim_df <-function (.data, ...) {
    .data <- as.data.frame(.data)
    .data <- dplyr::arrange(.data, ...)
@@ -53,12 +53,12 @@ filter.skim_df <-function (.data, ..., .preserve = FALSE) {
     }
    .data
  }
-#
-# #' Use dplyr verb slice on skim_df objects.
-# #' #' @seealso [`dplyr::slice()`]
-# #' @inheritParams dplyr::filter
-# #' @return  skim_df object coerced to a data frame.
-# #' @export
+
+#' Use dplyr verb slice on skim_df objects.
+#' #' @seealso [`dplyr::slice()`]
+#' @inheritParams dplyr::filter
+#' @return  skim_df object coerced to a data frame.
+#' @export
  slice.skim_df <-function (.data, ..., .preserve = FALSE) {
    .data <- as.data.frame(.data)
    .data <- dplyr::slice(.data, ...)
