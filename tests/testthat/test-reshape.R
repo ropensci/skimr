@@ -15,14 +15,14 @@ test_that("You can parition a skim_df", {
                                 "p25", "p50", "p75", "p100", "hist"),
                     factor = c("missing", "complete", "n", "ordered",
                                "n_unique", "top_counts")))
-  
+
   # Subtables
   expect_is(input$factor, c("one_skim_df", "tbl_df", "tbl", "data.frame"))
   expect_n_rows(input$factor, 1)
   expect_n_columns(input$factor, 7)
   expect_named(input$factor, c("variable", "missing", "complete", "n",
                                "ordered", "n_unique", "top_counts"))
-  
+
   expect_is(input$numeric, c("one_skim_df", "tbl_df", "tbl", "data.frame"))
   expect_n_rows(input$numeric, 4)
   expect_n_columns(input$numeric, 12)
@@ -47,4 +47,13 @@ test_that("You can yank a subtable from a skim_df", {
   expect_named(input, c("variable", "missing", "complete", "n", "mean",
                         "sd", "p0", "p25", "p50", "p75", "p100",
                         "hist"))
+})
+
+test_that("Partition is safe if some skimmers are missing", {
+  skimmed <- skim(iris)
+  reduced <- dplyr::select(skimmed, variable, type, missing)
+  partitioned <- partition(reduced)
+  expect_length(partitioned, 2)
+  expect_named(partitioned, c("factor", "numeric"))
+  expect_named(partitioned$numeric, c("variable", "missing"))
 })
