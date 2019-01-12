@@ -29,7 +29,6 @@ functions when working interactively.
 Summary functions are provided for the following classes:
 \itemize{
 \item \code{numeric}
-\item \code{integer}
 \item \code{character}
 \item \code{factor}
 \item \code{logical}
@@ -52,6 +51,13 @@ get_skimmers.my_class <- function(column) {
     mean,
     sd)
 }
+
+# Integer and float columns are both "numeric" and are treated the same
+# by default. To switch this behavior in another package, add a method.
+get_skimmers.integer <- get_skimmers.numeric
+
+# Or, in a local session, use `skim_with` to create a different `skim`.
+new_skim <- skim_with(integer = get_skimmers.numeric())
 }
 \seealso{
 \code{\link[=sfl]{sfl()}}
