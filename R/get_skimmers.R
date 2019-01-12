@@ -38,12 +38,14 @@ NULL
 #'     sd)
 #' }
 #'
-#' # Integer and float columns are both "numeric" and are treated the same
-#' # by default. To switch this behavior in another package, add a method.
-#' get_skimmers.integer <- get_skimmers.numeric
+#' \dontrun{
+#'  # Integer and float columns are both "numeric" and are treated the same
+#'  # by default. To switch this behavior in another package, add a method.
+#'  get_skimmers.integer <- skimr::get_skimmers.numeric
 #'
-#' # Or, in a local session, use `skim_with` to create a different `skim`.
-#' new_skim <- skim_with(integer = get_skimmers.numeric())
+#'  # Or, in a local session, use `skim_with` to create a different `skim`.
+#'  new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+#' }
 #' @export
 get_skimmers <- function(column) {
   UseMethod("get_skimmers")
