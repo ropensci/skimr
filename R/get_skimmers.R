@@ -51,7 +51,9 @@ NULL
 #' skim(x)
 #'
 #' # Or, in a local session, use `skim_with` to create a different `skim`.
-#' new_skim <- skim_with(integer = get_skimmers.integer())
+#' # This reverts to the older behavior of integers and floats being treated
+#' # separately, while skimming with the same functions.
+#' new_skim <- skim_with(integer = get_skimmers.numeric())
 #' @export
 get_skimmers <- function(column) {
   UseMethod("get_skimmers")
