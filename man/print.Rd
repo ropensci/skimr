@@ -23,7 +23,8 @@
 \method{knit_print}{one_skim_df}(x, options = NULL, ...)
 }
 \arguments{
-\item{x}{Either a \code{skim_df}, \code{skim_vector} or \code{skim_summary} object.}
+\item{x}{Either a \code{skim_df}, \code{one_skim_df}, \code{skim_list} or \code{skim_summary}
+object.}
 
 \item{include_summary}{Whether a summary of the data frame should be printed}
 
@@ -49,4 +50,12 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 
 \item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
 }}
+
+\section{Behavior in \code{dplyr} pipelins}{
+
+
+Printing a \code{skim_df} requires specific columns that might be dropped when
+using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarize]{dplyr::summarize()}} on a \code{skim_df}. In those
+cases, this method falls back to \code{\link[tibble:print.tbl]{tibble::print.tbl()}}.
+}
 

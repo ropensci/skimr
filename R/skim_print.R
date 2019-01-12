@@ -3,7 +3,14 @@
 #' `skimr` has custom print methods for all supported objects. Default printing
 #' methods for `knitr`/ `rmarkdown` documents is also provided.
 #'
-#' @param x Either a `skim_df`, `skim_vector` or `skim_summary` object.
+#' @section Behavior in `dplyr` pipelins:
+#'
+#' Printing a `skim_df` requires specific columns that might be dropped when
+#' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
+#' cases, this method falls back to [tibble::print.tbl()].
+#'
+#' @param x Either a `skim_df`, `one_skim_df`, `skim_list` or `skim_summary`
+#'  object.
 #' @param ... Further arguments passed to or from other methods.
 #' @name print
 NULL
@@ -13,19 +20,18 @@ NULL
 #' @param options Options passed into the print function
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, ...) {
-  if (include_summary) {
-    cat("Skim summary statistics\n")
-    cat(" n obs:", attr(x, "data_rows"), "\n")
-    cat(" n variables:", attr(x, "data_cols"), "\n")
+  if ("type" %in% names(x)) {
+    if (include_summary) {
+      cat("Skim summary statistics\n")
+      cat(" n obs:", attr(x, "data_rows"), "\n")
+      cat(" n variables:", attr(x, "data_cols"), "\n")
 
-    possible_groups <- attr(x, "groups")
-    if (!is.null(possible_groups)) {
-      cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
+      possible_groups <- attr(x, "groups")
+      if (!is.null(possible_groups)) {
+        cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
+      }
     }
 
-  }
-
-  if ("type" %in% names(x)) {
     by_type <- partition(x)
     purrr::imap(by_type, print)
     invisible(NULL)

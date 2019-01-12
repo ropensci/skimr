@@ -80,3 +80,9 @@ test_that("make_utf8 produces the correct result ", {
   correct <- "▅"
   expect_identical(input, correct)
 })
+
+test_that("Skim falls back to tibble::print.tbl() appropriately", {
+  input <- skim(iris)
+  mean_only <- dplyr::select(input, mean)
+  expect_output(print(mean_only), "# A tibble: 5 x 1")
+})
