@@ -24,9 +24,11 @@ test_that("Skimming functions can be appended.", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c("missing", "complete", "n", "mean", 
-                                          "sd", "p0", "p25", "p50", "p75",
-                                          "p100", "hist", "iqr")))
+  expect_identical(used, list(numeric = c(
+    "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75",
+    "p100", "hist", "iqr"
+  )))
 })
 
 test_that("Setting a statistic to null removes it from skimmers", {
@@ -34,9 +36,11 @@ test_that("Setting a statistic to null removes it from skimmers", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c("missing", "complete", "n", "mean", 
-                                          "sd", "p0", "p25", "p50", "p75",
-                                          "p100")))
+  expect_identical(used, list(numeric = c(
+    "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75",
+    "p100"
+  )))
 })
 
 test_that("Skimmers can be removed and added at the same time", {
@@ -44,9 +48,11 @@ test_that("Skimmers can be removed and added at the same time", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c("missing", "complete", "n", "mean", 
-                                          "sd", "p0", "p25", "p50", "p75",
-                                          "p100", "iqr")))
+  expect_identical(used, list(numeric = c(
+    "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75",
+    "p100", "iqr"
+  )))
 })
 
 test_that("Skimming functions for new types can be added", {
@@ -61,24 +67,29 @@ test_that("Skimming functions for new types can be added", {
 
 test_that("Set multiple sets of skimming functions", {
   funs <- sfl(iqr = IQR, quantile = quantile(., probs = .99))
-  expect_message(new_skim <- skim_with(numeric = funs, new_type = funs),
-                 "new_type")
+  expect_message(
+    new_skim <- skim_with(numeric = funs, new_type = funs),
+    "new_type"
+  )
   x <- tibble::tibble(x = rnorm(10), y = rnorm(10))
   class(x$x) <- "new_type"
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
   expect_named(used, c("new_type", "numeric"))
   expect_identical(used$new_type, c("iqr", "quantile"))
-  expect_identical(used$numeric, c("missing", "complete", "n", "mean",  "sd",
-                                   "p0", "p25", "p50", "p75", "p100", "hist",
-                                   "iqr", "quantile"))
+  expect_identical(used$numeric, c(
+    "missing", "complete", "n", "mean", "sd",
+    "p0", "p25", "p50", "p75", "p100", "hist",
+    "iqr", "quantile"
+  ))
 })
 
 
 test_that("Set multiple sets of skimming functions, rlang", {
   funs <- sfl(iqr = IQR, quantile = quantile(., probs = .99))
   expect_message(new_skim <- skim_with(!!!list(numeric = funs, new_type = funs),
-                                       append = FALSE))
+    append = FALSE
+  ))
   x <- tibble::tibble(x = rnorm(10), y = rnorm(10))
   class(x$x) <- "new_type"
   input <- new_skim(x)
@@ -89,10 +100,12 @@ test_that("Set multiple sets of skimming functions, rlang", {
 })
 
 test_that("Skimming functions without a class return a message.", {
-  funs_no_class <- sfl( IQR)
+  funs_no_class <- sfl(IQR)
   expect_error(skim_with(funs_no_class), "arguments to be named.")
-  expect_error(skim_with(funs_no_class, numeric = funs_no_class),
-               "arguments to be named.")
+  expect_error(
+    skim_with(funs_no_class, numeric = funs_no_class),
+    "arguments to be named."
+  )
 })
 
 test_that("An empty call to skim_with() returns the default skim()", {

@@ -12,17 +12,23 @@ test_that("skim returns expected response for numeric vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "mean",
-                        "sd", "p0", "p25", "p50", "p75", "p100", "hist"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75", "p100", "hist"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 32)
   expect_equal(attrs$data_cols, 11)
   expect_equal(attrs$df_name, "`mtcars`")
-  expect_equal(attrs$skimmers_used,
-               list(numeric = c("missing", "complete", "n", "mean", "sd", "p0",
-                                "p25", "p50", "p75", "p100", "hist")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(numeric = c(
+      "missing", "complete", "n", "mean", "sd", "p0",
+      "p25", "p50", "p75", "p100", "hist"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "mpg")
@@ -42,7 +48,8 @@ test_that("skim returns expected response for numeric vectors", {
 
 test_that("skim handles numeric vectors with NAs and extreme numbers", {
   patho <- tibble::tibble(
-    vals = c((2 ^ .Machine$double.digits), NA, -(2 ^ .Machine$double.digits)))
+    vals = c((2^.Machine$double.digits), NA, -(2^.Machine$double.digits))
+  )
 
   input <- skim(patho)
 
@@ -152,17 +159,23 @@ test_that("skim returns expected response for factor vectors", {
   # dimensions
   expect_n_rows(input, 1)
   expect_n_columns(input, 8)
-  expect_named(input, c("variable", "type", "missing", "complete", "n",
-                        "ordered", "n_unique", "top_counts"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n",
+    "ordered", "n_unique", "top_counts"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 150)
   expect_equal(attrs$data_cols, 5)
   expect_equal(attrs$df_name, "`iris`")
-  expect_equal(attrs$skimmers_used,
-               list(factor = c("missing", "complete", "n", "ordered",
-                               "n_unique", "top_counts")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(factor = c(
+      "missing", "complete", "n", "ordered",
+      "n_unique", "top_counts"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "Species")
@@ -198,17 +211,23 @@ test_that("skim returns expected response for character vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "empty", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "empty", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 5)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`x`")
-  expect_equal(attrs$skimmers_used,
-               list(character = c("missing", "complete", "n", "min", "max",
-                                  "empty", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(character = c(
+      "missing", "complete", "n", "min", "max",
+      "empty", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -223,7 +242,7 @@ test_that("skim returns expected response for character vectors", {
 })
 
 test_that("skim returns expected response for logical vectors", {
-  dat <- dplyr::mutate(chickwts, log_col = stringr::str_detect(feed, 'ea'))
+  dat <- dplyr::mutate(chickwts, log_col = stringr::str_detect(feed, "ea"))
   input <- skim(dat, log_col)
 
   # dimensions
@@ -235,16 +254,20 @@ test_that("skim returns expected response for logical vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "mean",
-                        "count"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "mean",
+    "count"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 71)
   expect_equal(attrs$data_cols, 3)
   expect_equal(attrs$df_name, "`dat`")
-  expect_equal(attrs$skimmers_used,
-               list(logical = c("missing", "complete", "n", "mean", "count")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(logical = c("missing", "complete", "n", "mean", "count"))
+  )
 
   # values
   expect_identical(input$variable, "log_col")
@@ -257,7 +280,7 @@ test_that("skim returns expected response for logical vectors", {
 })
 
 test_that("skim returns expected response for logical vectors with NA values", {
-  dat <-  dplyr::mutate(chickwts, log_col = stringr::str_detect(feed, 'ea'))
+  dat <- dplyr::mutate(chickwts, log_col = stringr::str_detect(feed, "ea"))
   dat$log_col[15:18] <- NA
   input <- skim(dat, log_col)
 
@@ -269,7 +292,7 @@ test_that("skim returns expected response for logical vectors with NA values", {
 })
 
 test_that("skim returns expected response for complex vectors", {
-  dat <-  dplyr::mutate(chickwts, test_complex = weight)
+  dat <- dplyr::mutate(chickwts, test_complex = weight)
   dat$test_complex[1:2] <- dat$test_complex[1:2] + 2i
   dat$test_complex[15:18] <- NA
   input <- skim(dat, test_complex)
@@ -290,8 +313,10 @@ test_that("skim returns expected response for complex vectors", {
   expect_equal(attrs$data_rows, 71)
   expect_equal(attrs$data_cols, 3)
   expect_equal(attrs$df_name, "`dat`")
-  expect_equal(attrs$skimmers_used,
-               list(complex = c("missing", "complete", "n")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(complex = c("missing", "complete", "n"))
+  )
 
   # values
   expect_identical(input$variable, "test_complex")
@@ -302,7 +327,7 @@ test_that("skim returns expected response for complex vectors", {
 })
 
 test_that("skim returns expected response for Date vectors", {
-  dat <- seq(as.Date("2011-07-01"), by=1, len=9)
+  dat <- seq(as.Date("2011-07-01"), by = 1, len = 9)
   x <- tibble::tibble(dat)
   input <- skim(x)
 
@@ -315,17 +340,23 @@ test_that("skim returns expected response for Date vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "median", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "median", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 9)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`x`")
-  expect_equal(attrs$skimmers_used,
-               list(Date = c("missing", "complete", "n", "min", "max",
-                             "median", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(Date = c(
+      "missing", "complete", "n", "min", "max",
+      "median", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -351,19 +382,25 @@ test_that("skim returns expected response for ts vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "start",
-                        "end", "frequency", "deltat", "mean", "sd", "min",
-                        "max", "median", "line_graph"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "start",
+    "end", "frequency", "deltat", "mean", "sd", "min",
+    "max", "median", "line_graph"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 39)
   expect_equal(attrs$data_cols, 5)
   expect_equal(attrs$df_name, "`freeny`")
-  expect_equal(attrs$skimmers_used,
-               list(ts = c("missing", "complete", "n", "start", "end",
-                           "frequency", "deltat", "mean", "sd", "min",
-                           "max", "median", "line_graph")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(ts = c(
+      "missing", "complete", "n", "start", "end",
+      "frequency", "deltat", "mean", "sd", "min",
+      "max", "median", "line_graph"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "y")
@@ -384,7 +421,7 @@ test_that("skim returns expected response for ts vectors", {
 })
 
 test_that("skim returns expected response for POSIXct vectors", {
-  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by=1, len=10)
+  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by = 1, len = 10)
   dat[2] <- NA
   posix <- tibble::tibble(dat)
   input <- skim(posix)
@@ -398,17 +435,23 @@ test_that("skim returns expected response for POSIXct vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "median", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "median", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 10)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`posix`")
-  expect_equal(attrs$skimmers_used,
-               list(POSIXct = c("missing", "complete", "n", "min", "max",
-                                "median", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(POSIXct = c(
+      "missing", "complete", "n", "min", "max",
+      "median", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -429,7 +472,8 @@ test_that("skim returns expected response for list (not AsIs) vectors", {
     list("e", "f", "g"),
     d = list("h"),
     e = list("i", "j", "k", "l"),
-    f = NA)
+    f = NA
+  )
   list_frame <- tibble::tibble(dat)
   input <- skim(list_frame)
 
@@ -442,17 +486,23 @@ test_that("skim returns expected response for list (not AsIs) vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n",
-                        "n_unique", "min_length", "max_length"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n",
+    "n_unique", "min_length", "max_length"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 6)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`list_frame`")
-  expect_equal(attrs$skimmers_used,
-               list(list = c("missing", "complete", "n", "n_unique",
-                             "min_length", "max_length")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(list = c(
+      "missing", "complete", "n", "n_unique",
+      "min_length", "max_length"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -479,17 +529,23 @@ test_that("skim returns expected response for list with all NA's", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n",
-                        "n_unique", "min_length", "max_length"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n",
+    "n_unique", "min_length", "max_length"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 3)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`list_frame`")
-  expect_equal(attrs$skimmers_used,
-               list(list = c("missing", "complete", "n", "n_unique",
-                             "min_length", "max_length")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(list = c(
+      "missing", "complete", "n", "n_unique",
+      "min_length", "max_length"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -503,7 +559,7 @@ test_that("skim returns expected response for list with all NA's", {
 })
 
 test_that("skim returns expected response for asis vectors", {
-  dat <- I(list(5, 5:6,5:10, NA))
+  dat <- I(list(5, 5:6, 5:10, NA))
   asis_frame <- tibble::tibble(dat)
   input <- skim(asis_frame)
 
@@ -516,17 +572,23 @@ test_that("skim returns expected response for asis vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n",
-                        "n_unique", "min_length", "max_length"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n",
+    "n_unique", "min_length", "max_length"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 4)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`asis_frame`")
-  expect_equal(attrs$skimmers_used,
-               list(AsIs = c("missing", "complete", "n", "n_unique",
-                             "min_length", "max_length")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(AsIs = c(
+      "missing", "complete", "n", "n_unique",
+      "min_length", "max_length"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -555,17 +617,23 @@ test_that("skim returns expected response for difftime vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "median", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "median", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 10)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`dt`")
-  expect_equal(attrs$skimmers_used,
-               list(difftime = c("missing", "complete", "n", "min", "max",
-                                 "median", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(difftime = c(
+      "missing", "complete", "n", "min", "max",
+      "median", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "dat")
@@ -580,7 +648,7 @@ test_that("skim returns expected response for difftime vectors", {
 })
 
 test_that("skim handles objects with multiple classes", {
-  dat <- seq(as.Date("2011-07-01"), by=1, len=10)
+  dat <- seq(as.Date("2011-07-01"), by = 1, len = 10)
   dat[2] <- NA
   class(dat) <- c("strange_type", "Date")
   x <- tibble::tibble(dat)
@@ -595,8 +663,10 @@ test_that("skim handles objects with multiple classes", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "median", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "median", "n_unique"
+  ))
 
   # values
   expect_identical(input$variable, "dat")
@@ -614,17 +684,23 @@ test_that("skim treats unknown classes as character", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "empty", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "empty", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 71)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`x`")
-  expect_equal(attrs$skimmers_used,
-               list(character = c("missing", "complete", "n", "min", "max",
-                                  "empty", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(character = c(
+      "missing", "complete", "n", "min", "max",
+      "empty", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "weight")
@@ -642,17 +718,23 @@ test_that("skim handles objects with two unknown classes", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "min",
-                        "max", "empty", "n_unique"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "min",
+    "max", "empty", "n_unique"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 71)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`x`")
-  expect_equal(attrs$skimmers_used,
-               list(character = c("missing", "complete", "n", "min", "max",
-                                  "empty", "n_unique")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(character = c(
+      "missing", "complete", "n", "min", "max",
+      "empty", "n_unique"
+    ))
+  )
 
   # values
   expect_identical(input$variable, "feed")
@@ -671,20 +753,30 @@ test_that("Skimming a complete data frame works as expected", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "missing", "complete", "n", "mean",
-                        "sd", "p0", "p25", "p50", "p75", "p100", "hist",
-                        "ordered", "n_unique", "top_counts"))
+  expect_named(input, c(
+    "variable", "type", "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75", "p100", "hist",
+    "ordered", "n_unique", "top_counts"
+  ))
 
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 71)
   expect_equal(attrs$data_cols, 2)
   expect_equal(attrs$df_name, "`chickwts`")
-  expect_equal(attrs$skimmers_used,
-               list(numeric = c("missing", "complete", "n", "mean", "sd", "p0",
-                                "p25", "p50", "p75", "p100", "hist"),
-                    factor = c("missing", "complete", "n", "ordered",
-                               "n_unique", "top_counts")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(
+      numeric = c(
+        "missing", "complete", "n", "mean", "sd", "p0",
+        "p25", "p50", "p75", "p100", "hist"
+      ),
+      factor = c(
+        "missing", "complete", "n", "ordered",
+        "n_unique", "top_counts"
+      )
+    )
+  )
 })
 
 test_that("skim requires a data.frame as input", {
@@ -724,9 +816,11 @@ test_that("Skimming a grouped df works as expected", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("variable", "type", "cyl", "gear", "missing",
-                        "complete", "n", "mean", "sd", "p0", "p25", "p50",
-                        "p75", "p100", "hist"))
+  expect_named(input, c(
+    "variable", "type", "cyl", "gear", "missing",
+    "complete", "n", "mean", "sd", "p0", "p25", "p50",
+    "p75", "p100", "hist"
+  ))
 
   # attributes
   attrs <- attributes(input)
@@ -734,9 +828,13 @@ test_that("Skimming a grouped df works as expected", {
   expect_equal(attrs$data_cols, 11)
   expect_equal(attrs$df_name, "`grouped`")
   expect_equal(as.character(attrs$groups), c("cyl", "gear"))
-  expect_equal(attrs$skimmers_used,
-               list(numeric = c("missing", "complete", "n", "mean", "sd", "p0",
-                                "p25", "p50", "p75", "p100", "hist")))
+  expect_equal(
+    attrs$skimmers_used,
+    list(numeric = c(
+      "missing", "complete", "n", "mean", "sd", "p0",
+      "p25", "p50", "p75", "p100", "hist"
+    ))
+  )
 })
 
 test_that("Using skim_tee returns the object", {

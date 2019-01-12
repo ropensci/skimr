@@ -66,15 +66,18 @@ print.summary_skim_df <- function(x, ...) {
   df_name <- ifelse(x$df_name == ".", "", paste0("Name: ", x$df_name, "   \n"))
 
   type_frequency_string <- paste0(x$type_frequencies$type,
-                                  ": ",
-                                  x$type_frequencies$n, collapse = "   \n")
+    ": ",
+    x$type_frequencies$n,
+    collapse = "   \n"
+  )
 
   cat("A skim object    \n\n",
-      df_name,
-      n_rows, n_cols, "    \nColumn type frequency    \n",
-      type_frequency_string,
-      "\n"
-      ,sep = "")
+    df_name,
+    n_rows, n_cols, "    \nColumn type frequency    \n",
+    type_frequency_string,
+    "\n",
+    sep = ""
+  )
 }
 
 #' Provide a default printing method for knitr.
@@ -108,10 +111,13 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {
     summary_stats <- data.frame(
       n_obs = attr(x, "data_rows"),
-      n_cols =attr(x, "data_cols"))
+      n_cols = attr(x, "data_cols")
+    )
     kabled <- knitr::kable(
-      summary_stats, format = "html", table.attr = "style='width: auto;'
-      class='table table-condensed'")
+      summary_stats,
+      format = "html", table.attr = "style='width: auto;'
+      class='table table-condensed'"
+    )
     summary <- c("**Skim summary statistics**", "", kabled, "", "")
   } else {
     summary <- c()
@@ -158,6 +164,8 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
   df_name <- paste0("Name: ", x[["df_name"]])
 
   kframe <- data.frame(df_name, n_rows, n_cols)
-  list(Summary = knitr::kable(kframe),
-       `Type counts` = knitr::kable(x$type_frequencies))
+  list(
+    Summary = knitr::kable(kframe),
+    `Type counts` = knitr::kable(x$type_frequencies)
+  )
 }

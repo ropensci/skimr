@@ -23,7 +23,7 @@
 #'
 #' # Put back together
 #' identical(bind(separate), skimmed)
-#' #> TRUE
+#' # > TRUE
 #'
 #' # Alternatively, get the subtable of a particular type
 #' yank(skimmed, "factor")
@@ -34,12 +34,13 @@ partition <- function(data) {
   groups <- attr(data, "groups")
   reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
   structure(reduced,
-            class = "skim_list",
-            data_rows = attr(data, "data_rows"),
-            data_cols = attr(data, "data_cols"),
-            df_name = attr(data, "df_name"),
-            groups = groups,
-            skimmers_used = skimmers)
+    class = "skim_list",
+    data_rows = attr(data, "data_rows"),
+    data_cols = attr(data, "data_cols"),
+    df_name = attr(data, "df_name"),
+    groups = groups,
+    skimmers_used = skimmers
+  )
 }
 
 simplify_skimdf <- function(data, type, skimmers, groups) {
@@ -47,8 +48,9 @@ simplify_skimdf <- function(data, type, skimmers, groups) {
   cols_in_data <- names(data)
   out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
   structure(out,
-            class = c("one_skim_df", "tbl_df", "tbl", "data.frame"),
-            type = type)
+    class = c("one_skim_df", "tbl_df", "tbl", "data.frame"),
+    type = type
+  )
 }
 
 #' @describeIn partition The inverse of a `partition()`. Rebuild the original
@@ -59,11 +61,12 @@ bind <- function(data) {
   # The variable column should always be first
   out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
   structure(out,
-            class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-            data_rows = attr(data, "data_rows"),
-            data_cols = attr(data, "data_cols"),
-            df_name = attr(data, "df_name"),
-            skimmers_used = attr(data, "skimmers_used"))
+    class = c("skim_df", "tbl_df", "tbl", "data.frame"),
+    data_rows = attr(data, "data_rows"),
+    data_cols = attr(data, "data_cols"),
+    df_name = attr(data, "df_name"),
+    skimmers_used = attr(data, "skimmers_used")
+  )
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
@@ -85,17 +88,17 @@ yank <- function(data, type) {
 #' @examples
 #' # Compare
 #' iris %>%
-#'  skim() %>%
-#'  dplyr::select(missing)
+#'   skim() %>%
+#'   dplyr::select(missing)
 #'
 #' iris %>%
-#'  skim() %>%
-#'  focus(missing)
+#'   skim() %>%
+#'   focus(missing)
 #'
 #' # This is equivalent to
 #' iris %>%
-#'  skim() %>%
-#'  dplyr::select(variable, type, missing)
+#'   skim() %>%
+#'   dplyr::select(variable, type, missing)
 #' @export
 focus <- function(.data, ...) {
   stopifnot(is(.data, "skim_df"))

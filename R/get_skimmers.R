@@ -35,29 +35,31 @@ NULL
 #'   sfl(
 #'     .type = "my_class",
 #'     mean,
-#'     sd)
+#'     sd
+#'   )
 #' }
 #'
 #' # Integer and float columns are both "numeric" and are treated the same
 #' # by default. To switch this behavior in another package, add a method.
-#' get_skimmers.integer <- function(column){
-#'    sfl(
-#'       .type = "integer",
-#'        p50 = stats::quantile(
-#'            ., probs= .50, na.rm = TRUE, names = FALSE, type = 1)
+#' get_skimmers.integer <- function(column) {
+#'   sfl(
+#'     .type = "integer",
+#'     p50 = stats::quantile(
+#'       .,
+#'       probs = .50, na.rm = TRUE, names = FALSE, type = 1
 #'     )
-#'   }
+#'   )
+#' }
 #' x <- mtcars[c("gear", "carb")]
 #' class(x$carb) <- "integer"
 #' skim(x)
-#'
 #' \dontrun{
-#'  # In a package, to revert to the V1 behavior of skimming separately with the
-#'  # same functions, assign the numeric `get_skimmers`.
-#'  get_skimmers.integer <- skimr::get_skimmers.numeric
+#' # In a package, to revert to the V1 behavior of skimming separately with the
+#' # same functions, assign the numeric `get_skimmers`.
+#' get_skimmers.integer <- skimr::get_skimmers.numeric
 #'
-#'  # Or, in a local session, use `skim_with` to create a different `skim`.
-#'  new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+#' # Or, in a local session, use `skim_with` to create a different `skim`.
+#' new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
 #' }
 #' @export
 get_skimmers <- function(column) {
@@ -81,10 +83,11 @@ get_skimmers.numeric <- function(column) {
     sd = stats::sd(., na.rm = TRUE),
     p0 = stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
     p25 = stats::quantile(., probs = .25, na.rm = TRUE, names = FALSE),
-    p50 = stats::quantile(., probs= .50, na.rm = TRUE, names = FALSE),
+    p50 = stats::quantile(., probs = .50, na.rm = TRUE, names = FALSE),
     p75 = stats::quantile(., probs = .75, na.rm = TRUE, names = FALSE),
     p100 = stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE),
-    hist = inline_hist(., 5))
+    hist = inline_hist(., 5)
+  )
 }
 
 #' @export
@@ -96,20 +99,22 @@ get_skimmers.factor <- function(column) {
     n = length,
     ordered = is.ordered,
     n_unique = n_unique,
-    top_counts = top_counts)
+    top_counts = top_counts
+  )
 }
 
 #' @export
 get_skimmers.character <- function(column) {
   sfl(
     .type = "character",
-    missing  = n_missing,
+    missing = n_missing,
     complete = n_complete,
     n = length,
     min = min_char,
     max = max_char,
     empty = n_empty,
-    n_unique = n_unique)
+    n_unique = n_unique
+  )
 }
 
 #' @export
@@ -120,7 +125,8 @@ get_skimmers.logical <- function(column) {
     complete = n_complete,
     n = length,
     mean = mean(., na.rm = TRUE),
-    count = top_counts)
+    count = top_counts
+  )
 }
 
 #' @export
@@ -129,7 +135,8 @@ get_skimmers.complex <- function(column) {
     .type = "complex",
     missing = n_missing,
     complete = n_complete,
-    n = length)
+    n = length
+  )
 }
 
 #' @export
@@ -142,7 +149,8 @@ get_skimmers.Date <- function(column) {
     min = min(., na.rm = TRUE),
     max = max(., na.rm = TRUE),
     median = stats::median(., na.rm = TRUE),
-    n_unique = n_unique)
+    n_unique = n_unique
+  )
 }
 
 #' @export
@@ -173,7 +181,8 @@ get_skimmers.ts <- function(column) {
     min = min(., na.rm = TRUE),
     max = max(., na.rm = TRUE),
     median = stats::median(., na.rm = TRUE),
-    line_graph  = inline_linegraph(., 16))
+    line_graph = inline_linegraph(., 16)
+  )
 }
 
 #' @export
@@ -184,8 +193,9 @@ get_skimmers.list <- function(column) {
     complete = n_complete,
     n = length,
     n_unique = n_unique,
-    min_length= list_min_length,
-    max_length = list_max_length)
+    min_length = list_min_length,
+    max_length = list_max_length
+  )
 }
 
 #' @export
@@ -201,7 +211,7 @@ get_default_skimmers <- function(class = NULL) {
   if (is.null(class)) {
     defaults <- as.character(utils::methods("get_skimmers"))
     classes <- stringr::str_replace(defaults, "get_skimmers.", "")
-    no_default <- purrr::discard(classes, ~.x == "default")
+    no_default <- purrr::discard(classes, ~ .x == "default")
     iter <- purrr::set_names(no_default)
     purrr::map(iter, get_class_defaults)
   } else {

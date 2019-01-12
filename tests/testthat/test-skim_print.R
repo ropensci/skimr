@@ -48,8 +48,10 @@ test_that("knit_print produced expected results", {
   expect_match(input, "</tbody>")
   expect_match(input, "</table>")
   expect_match(input, "**Variable type: factor**", fixed = TRUE)
-  expect_match(input,
-    "|variable | missing| complete|   n|ordered | n_unique|top_counts")
+  expect_match(
+    input,
+    "|variable | missing| complete|   n|ordered | n_unique|top_counts"
+  )
 })
 
 test_that("Summaries can be suppressed within knitr", {
@@ -95,5 +97,4 @@ test_that("Print focused objects appropriately", {
   expect_output(print(input), "n variables: 5")
   expect_output(print(input), "── Variable type: factor ────────────────")
   expect_output(print(input), "── Variable type: numeric ────────────────")
-
 })
