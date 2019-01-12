@@ -40,9 +40,19 @@ NULL
 #'
 #' # Integer and float columns are both "numeric" and are treated the same
 #' # by default. To switch this behavior in another package, add a method.
-#' get_skimmers.integer <- get_skimmers.numeric
+#' get_skimmers.integer <- function(column){
+#'    sfl(
+#'       .type = "integer",
+#'        p50 = stats::quantile(., probs= .50, na.rm = TRUE, names = FALSE, type = 1)
+#'     )
+#'   }
+#' x <- mtcars[c("gear", "carb")]  
+#' class(x$carb) <- "integer"
+#' skim(x)
 #'
 #' # Or, in a local session, use `skim_with` to create a different `skim`.
+#' # This reverts to the older behavior of integers and floats being treated
+#' # separately, while skimming with the same functions.
 #' new_skim <- skim_with(integer = get_skimmers.numeric())
 #' @export
 get_skimmers <- function(column) {
