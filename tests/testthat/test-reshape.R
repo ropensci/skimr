@@ -57,3 +57,9 @@ test_that("Partition is safe if some skimmers are missing", {
   expect_named(partitioned, c("factor", "numeric"))
   expect_named(partitioned$numeric, c("variable", "missing"))
 })
+
+test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
+  skimmed <- skim(iris)
+  expected <- dplyr::select(skimmed, variable, type, missing)
+  expect_identical(focus(skimmed, missing), expected)
+})

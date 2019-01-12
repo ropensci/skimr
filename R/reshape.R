@@ -72,3 +72,32 @@ bind <- function(data) {
 yank <- function(data, type) {
   partition(data)[[type]]
 }
+
+#' Only show a subset of summary statistics after skimming
+#'
+#' This function is a variant of [dplyr::select()] designed to work with
+#' `skim_df` objects. When using `focus()`, `skimr` metadata columns are kept,
+#' and `skimr` print methods are still utilized. Otherwise, the signature and
+#' behavior is identical to [dplyr::select()].
+#'
+#' @param .data A `skim_df` object.
+#' @inheritParams dplyr::select
+#' @examples
+#' # Compare
+#' iris %>%
+#'  skim() %>%
+#'  dplyr::select(missing)
+#'
+#' iris %>%
+#'  skim() %>%
+#'  focus(missing)
+#'
+#' # This is equivalent to
+#' iris %>%
+#'  skim() %>%
+#'  dplyr::select(variable, type, missing)
+#' @export
+focus <- function(.data, ...) {
+  stopifnot(is(.data, "skim_df"))
+  dplyr::select(.data, "variable", "type", ...)
+}

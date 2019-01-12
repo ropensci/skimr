@@ -86,3 +86,14 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
   mean_only <- dplyr::select(input, mean)
   expect_output(print(mean_only), "# A tibble: 5 x 1")
 })
+
+test_that("Print focused objects appropriately", {
+  skimmed <- skim(iris)
+  input <- focus(skimmed, missing)
+  expect_output(print(input), "Skim summary statistics")
+  expect_output(print(input), "n obs: 150")
+  expect_output(print(input), "n variables: 5")
+  expect_output(print(input), "── Variable type: factor ────────────────")
+  expect_output(print(input), "── Variable type: numeric ────────────────")
+
+})
