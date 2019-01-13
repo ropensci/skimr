@@ -5,17 +5,15 @@ test_that("inline_linegraph returns expected response for a ts vector", {
   expect_identical(input, "⣀⣀⠤⠤⠒⠒⠉⠉")
 })
 
-test_that("inline_linegraph returns expected response for a long ts vector.",
-          {
-            input <- inline_linegraph(AirPassengers)
-            expect_identical(input, "⣀⣀⣀⠔⠤⠊⠑⠊")
-          })
+test_that("inline_linegraph returns expected response for a long ts vector.", {
+  input <- inline_linegraph(AirPassengers)
+  expect_identical(input, "⣀⣀⣀⠔⠤⠊⠑⠊")
+})
 
-test_that("inline_linegraph returns expected response for an NA ts vector.",
-          {
-            input <- inline_linegraph(ts(c(NA, NA, NA, NA, NA, NA)))
-            expect_identical(input, "⠀")
-          })
+test_that("inline_linegraph returns expected response for an NA ts vector.", {
+  input <- inline_linegraph(ts(c(NA, NA, NA, NA, NA, NA)))
+  expect_identical(input, "⠀")
+})
 
 test_that("ts_start returns expected response for a ts vector", {
   input <- ts_start(freeny$y)
@@ -74,11 +72,10 @@ test_that("inline histogram is returns empty string when x is all NaN.", {
   expect_identical(input, " ")
 })
 
-test_that("inline histogram is calculated correctly when x is evenly distributed.",
-          {
-            input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
-            expect_identical(input, "▇▇▇▇▇▇▇▇")
-          })
+test_that("inline histogram is calculated correctly when x is evenly distributed.", {
+  input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
+  expect_identical(input, "▇▇▇▇▇▇▇▇")
+})
 
 test_that("inline histogram is calculated correctly with NaN.", {
   input <- inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, NaN))
@@ -92,7 +89,7 @@ test_that("inline histogram is calculated correctly with NA.", {
 
 test_that("inline histogram is calculated correctly with Inf.", {
   expect_warning(input <-
-                   inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf,-Inf)))
+    inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf)))
   expect_identical(input, "▂▂▅▁▁▇▁▂")
 })
 
@@ -200,7 +197,7 @@ test_that("top counts is calculated correctly with a NA", {
   expect_equal(top_counts(dat), "A: 3, C: 2, B: 1, NA: 0")
 })
 
-test_that("sorted count is calculated correctly with \"\"." , {
+test_that("sorted count is calculated correctly with \"\".", {
   # \"\" should be converted to \"empty \" and a warning issued.
   dat <- c("A", "A", "A", "A", "B", "", "", "C", "C", "C")
   dat <- as.factor(dat)

@@ -8,6 +8,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+Being revised for version 2
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -24,7 +26,7 @@ The `show_skimmers()` function displays the named list of skimmers by type.
 
 ```{r}
 library(skimr)
-show_skimmers()
+#show_skimmers()
 ```
 
 ## Skimmer functions
@@ -33,7 +35,7 @@ The `get_skimmers()` function shows the actual functions used, including
 function defaults such as NA handling.  
 
 ```{r}
-get_skimmers()
+get_default_skimmers()
 ```
 
 ## Formats
@@ -42,6 +44,6 @@ Skimmer creates formatted values to use in printing. The show_formats()
 function shows the default formats. 
 
 ```{r}
-show_formats()
+#show_formats()
 ```
 

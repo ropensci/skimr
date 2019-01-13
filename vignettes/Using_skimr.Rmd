@@ -8,6 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+## Under revision for skimr v2.
 
 `skimr` is designed to provide summary statistics about variables. It is
 opinionated in its defaults, but easy to modify.
@@ -58,8 +59,8 @@ and easy to use for additional manipulation: for example, the user could select
 all of the variable means, or all summary statistics for a specific variable.
 
 ```{r}
-skim(iris) %>%
-  dplyr::filter(stat == "mean")
+#skim(iris) %>%
+#  dplyr::filter(stat == "mean")
 
 ```
 
@@ -106,28 +107,21 @@ character variable with a warning.
 
 ## Skimming vectors
 
+In skimr v2 skimming vectors is not directly supported. Instead you 
+must coerce the vector to a data frame.
+
 `skim()` also handles individual vectors that are not part of a data frame. For
 example, the `lynx` data set is class `ts`.
 
 ```{r}
-skim(datasets::lynx)
-```
-
-If you attempt to use `skim()` on a class that does not have support, it will
-coerce it to  character (with a warning) and report number of `NA`s; number
-complete (non-missing); number of rows; number empty strings (i.e. ""); minimum
-and maximum lengths of non-empty strings; and number of unique values.
-
-```{r}
-lynx <- datasets::lynx
-class(lynx) <- "unknown_class"
+lynx <- as.data.frame(datasets::lynx)
 skim(lynx)
-
 ```
+
 
 ## Skimming matrices
 
-`skimr` does not include a `skim.matrix` function in order to preserve the
+`skimr` does not support skimming matrices directly. This preserves the
 ability to handle matrices in flexible ways (in contrast to
 `summary.matrix()`). Three possible ways to handle matrices with `skim()`
 parallel the three  variations of the mean function for matrices.
@@ -141,15 +135,10 @@ mean(m)
 
 skim(as.data.frame(m))    # Similar to summary.matrix and colMeans()
 skim(as.data.frame(t(m))) # Similar to rowMeans()
-skim(c(m))                # Similar to mean()
+skim(as.data.frame(c(m))) # Similar to mean()
 
 ```
 
-You can skim a single row or column in the same way as any vector.
-
-```{r}
-skim(m[,1])
-skim(m[1,])
 
 ```
 ## Alternatives to `skim()`
@@ -178,9 +167,9 @@ they are most useful for display. In general, users will want to store the
 results in an object for further handling.
 
 ```{r}
-iris %>% skim_to_list()
-iris_skimmed <- iris %>% skim_to_list()
-iris_skimmed[["numeric"]] %>% dplyr::select(mean, sd)
+#iris %>% skim_to_list()
+#iris_skimmed <- iris %>% skim_to_list()
+#iris_skimmed[["numeric"]] %>% dplyr::select(mean, sd)
 ```
 
 
@@ -192,7 +181,7 @@ mean that apply over many types of data (such as dates) should
 be analyzed carefully.
 
 ```{r}
-iris %>% skim_to_wide(iris)
+#iris %>% skim_to_wide(iris)
 ```
 
 # Modifying skim() with skim_with() and skim_with_defaults()
@@ -203,13 +192,13 @@ replace, or remove the statistics for a class.
 To add a statistic, create a named list for each class using the format below:
 
 ```
-classname = list(mad_name = mad)
+#classname = list(mad_name = mad)
 
 ```
 
 ```{r}
-skim_with(numeric = list(mad_name = mad))
-skim(datasets::chickwts)
+#skim_with(numeric = list(mad_name = mad))
+#skim(datasets::chickwts)
 
 ```
 
@@ -220,17 +209,17 @@ By default `skim_with()` appends the new statistics, but setting
 `append = FALSE` *replaces* the defaults.
 
 ```{r}
-skim_with_defaults()
-skim_with(numeric = list(mad_name = mad), append = FALSE)
-skim(datasets::chickwts)
-skim_with_defaults() # Reset to defaults
+#skim_with_defaults()
+#skim_with(numeric = list(mad_name = mad), append = FALSE)
+#skim(datasets::chickwts)
+#skim_with_defaults() # Reset to defaults
 
 ```
 
 You can also use `skim_with()` to remove specific statistics by setting them to
 `NULL`.
 
-```{r}
+```{}
 skim_with(numeric = list(hist = NULL))
 skim(datasets::chickwts)
 skim_with_defaults()
@@ -259,26 +248,8 @@ variable and statistic (and optionally for group). The horizontal display is
 created by default using `print.skim_df()`; users can specify additional
 options by explicitly calling `print([skim_df object], ...)`.
 
-`skim_df()` objects can also be rendered using `kable()` and `pander()`.  These
-both provide more control over the rendered results, particularly when used in
-conjunction with `knitr`. Documentation of these options is covered in more
-detail in the `knitr` package for `kable()` and the `pander` package for
-`pander()`. Using either of these may require use of document or chunk options
-and fonts, including a chunk option of `results = 'asis'`. This topic is
-addressed in more detail in the Using Fonts vignette.
-Because of the complexity of this, the samples below are shown as they would 
-be in the console.
 
-```{r }
-skim(iris) %>% skimr::kable()
-```
 
-```{r }
-library(pander)
-panderOptions('knitr.auto.asis', FALSE)
-skim(iris) %>% pander() 
-
-```
 
 ## Solutions to common rendering problems
 
@@ -287,8 +258,7 @@ the locale of the installation, and the fonts installed. Rendering may also
 differ based on whether it occurs in the console or when knitting to specific
 types of documents such as HTML and PDF.
 
-The most commonly reported problems involve rendering the spark graphs (inline histogram). Currently `pander()` does not support `inline_histograms` on
-Windows. Also, Windows does not support sparkline graphs.
+The most commonly reported problems involve rendering the spark graphs (inline histogram) on Windows.
 
 In order to render the sparkgraphs in html or PDF histogram you may need to
 change fonts to one that supports blocks or Braille (depending on which you

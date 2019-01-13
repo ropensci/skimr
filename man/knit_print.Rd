@@ -13,6 +13,8 @@
 \arguments{
 \item{x}{An R object to be printed}
 
+\item{options}{Options passed into the print function}
+
 \item{...}{Additional arguments passed to the S3 method. Currently ignored,
 except two optional arguments \code{options} and \code{inline}; see
 the references below.}

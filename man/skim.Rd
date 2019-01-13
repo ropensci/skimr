@@ -10,10 +10,14 @@ skim(data, ...)
 skim_tee(.data, ..., skim_fun = skim)
 }
 \arguments{
+\item{data}{The data frame that is skimmed and returned.}
+
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
 
 \item{.data}{A tibble, or an object that can be coerced into a tibble.}
+
+\item{skim_fun}{The skim function used.}
 
 \item{skim}{The skimming function to use in \code{skim_tee()}.}
 }
@@ -38,11 +42,11 @@ If you just want to see the printed output, call \code{skim_tee()} instead.
 This function returns the original data. \code{skim_tee()} uses the default
 \code{skim()}, but you can replace it with the \code{skim} argument.
 
-If you want to work with a data frame that resembles the printed output,
-call \code{\link[=skim_to_wide]{skim_to_wide()}} or for a named list of data frames by type
-\code{\link[=skim_to_list]{skim_to_list()}}. Note that all of the columns in the data frames produced
-by these functions are character. The intent is that you will be processing
-the \strong{printed} result further, not the original data.
+The data frame produced by \code{skim} is wide and sparse, since not all summmary
+functions appear for all types. See \code{\link[=partition]{partition()}} and \code{\link[=yank]{yank()}} for methods
+for transforming this wide data frame. The first function splits it into
+a list, with each entry corresponding to a data type. The latter pulls
+a single subtable for a particular type from the \code{skim_df}.
 
 \code{skim()} is designed to operate in pipes and to generally play nicely with
 other \code{tidyverse} functions. This means that you can use \code{tidyselect} helpers
@@ -62,7 +66,7 @@ that are called to produce summary statistics with \code{\link[=skim_with]{skim_
 If the rendered examples show unencoded values such as \code{<U+2587>} you will
 need to change your locale to allow proper rendering. Please review the
 \emph{Using Skimr} vignette for more information
-(\code{vignette("Using_skimr" package = "skimr")}).
+(\code{vignette("Using_skimr", package = "skimr")}).
 }
 
 \examples{
@@ -80,7 +84,8 @@ iris \%>\%
 # Which five columns have the greatest mean value?
 iris \%>\%
   skim() \%>\%
-  dplyr::top_n(mean, 5)
+  dplyr::select(mean) \%>\%
+  dplyr::top_n(5)
 
 # Use skim_tee to view the skim results and
 # continue using the original data.

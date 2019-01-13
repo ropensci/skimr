@@ -19,7 +19,7 @@ This is a method of the generic function \code{\link[=summary]{summary()}}.
 }
 \examples{
 \dontrun{
- a <- skim(mtcars)
- summary(a)
+a <- skim(mtcars)
+summary(a)
 }
 }

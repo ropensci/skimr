@@ -11,6 +11,8 @@ get_default_skimmers(class = NULL)
 }
 \arguments{
 \item{column}{An atomic vector or list. A column from a data frame.}
+
+\item{class}{The class of the column being skimmed}
 }
 \value{
 A \code{skim_function_list} object.
@@ -27,13 +29,13 @@ functions when working interactively.
 Summary functions are provided for the following classes:
 \itemize{
 \item \code{numeric}
-\item \code{integer}
 \item \code{character}
 \item \code{factor}
 \item \code{logical}
 \item \code{complex}
 \item \code{Date}
 \item \code{POSIXct}
+\item \code{difftime}
 \item \code{ts}
 \item \code{AsIs}
 }
@@ -43,11 +45,35 @@ Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the func
 \examples{
 # Defining default skimming functions for a new class, `my_class`.
 # Note that the class argument is required for dynamic reassignment.
-get_skimmers.my_class <- function(colum) {
+get_skimmers.my_class <- function(column) {
   sfl(
     .type = "my_class",
     mean,
-    sd)
+    sd
+  )
+}
+
+# Integer and float columns are both "numeric" and are treated the same
+# by default. To switch this behavior in another package, add a method.
+get_skimmers.integer <- function(column) {
+  sfl(
+    .type = "integer",
+    p50 = stats::quantile(
+      .,
+      probs = .50, na.rm = TRUE, names = FALSE, type = 1
+    )
+  )
+}
+x <- mtcars[c("gear", "carb")]
+class(x$carb) <- "integer"
+skim(x)
+\dontrun{
+# In a package, to revert to the V1 behavior of skimming separately with the
+# same functions, assign the numeric `get_skimmers`.
+get_skimmers.integer <- skimr::get_skimmers.numeric
+
+# Or, in a local session, use `skim_with` to create a different `skim`.
+new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
 }
 }
 \seealso{

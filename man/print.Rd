@@ -12,9 +12,9 @@
 \usage{
 \method{print}{skim_df}(x, include_summary = TRUE, ...)
 
-\method{print}{one_skim_df}(x, ..)
+\method{print}{one_skim_df}(x, ...)
 
-\method{print}{skim_list}(x, ..)
+\method{print}{skim_list}(x, ...)
 
 \method{print}{summary_skim_df}(x, ...)
 
@@ -23,9 +23,14 @@
 \method{knit_print}{one_skim_df}(x, options = NULL, ...)
 }
 \arguments{
-\item{x}{Either a \code{skim_df}, \code{skim_vector} or \code{skim_summary} object.}
+\item{x}{Either a \code{skim_df}, \code{one_skim_df}, \code{skim_list} or \code{skim_summary}
+object.}
+
+\item{include_summary}{Whether a summary of the data frame should be printed}
 
 \item{...}{Further arguments passed to or from other methods.}
+
+\item{options}{Options passed into the print function}
 }
 \description{
 \code{skimr} has custom print methods for all supported objects. Default printing
@@ -45,4 +50,12 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 
 \item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
 }}
+
+\section{Behavior in \code{dplyr} pipelins}{
+
+
+Printing a \code{skim_df} requires specific columns that might be dropped when
+using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarize]{dplyr::summarize()}} on a \code{skim_df}. In those
+cases, this method falls back to \code{\link[tibble:print.tbl]{tibble::print.tbl()}}.
+}
 
