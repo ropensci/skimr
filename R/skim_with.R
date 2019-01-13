@@ -83,7 +83,8 @@ skim_with <- function(..., append = TRUE) {
     variables <- tibble::tibble(variable = selected)
     nested <- dplyr::mutate(variables,
       skimmed = purrr::map(
-        !!rlang::sym("variable"), skim_one, data, local_skimmers, append)
+        !!rlang::sym("variable"), skim_one, data, local_skimmers, append
+      )
     )
     skimmers_used <- purrr::map(
       nested$skimmed,
@@ -134,9 +135,11 @@ validate_assignment <- function(...) {
   existing <- proposed_names %in% names(defaults)
   if (!all(existing)) {
     collapsed <- paste(proposed_names[!existing], collapse = ", ")
-    message("Creating new skimming functions for the following classes: ",
-            collapsed, ".\nThey did not have recognized defaults. Call ",
-            "get_default_skimmers() for more information.")
+    message(
+      "Creating new skimming functions for the following classes: ",
+      collapsed, ".\nThey did not have recognized defaults. Call ",
+      "get_default_skimmers() for more information."
+    )
   }
   to_assign
 }
