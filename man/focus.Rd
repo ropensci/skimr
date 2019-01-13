@@ -37,15 +37,15 @@ behavior is identical to \code{\link[dplyr:select]{dplyr::select()}}.
 \examples{
 # Compare
 iris \%>\%
- skim() \%>\%
- dplyr::select(missing)
+  skim() \%>\%
+  dplyr::select(missing)
 
 iris \%>\%
- skim() \%>\%
- focus(missing)
+  skim() \%>\%
+  focus(missing)
 
 # This is equivalent to
 iris \%>\%
- skim() \%>\%
- dplyr::select(variable, type, missing)
+  skim() \%>\%
+  dplyr::select(variable, type, missing)
 }

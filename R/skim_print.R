@@ -46,7 +46,8 @@ print.one_skim_df <- function(x, ...) {
   variable_type <- paste("Variable type:", attr(x, "type"))
   with_line <- cli::rule(line = 1, left = variable_type)
   print(with_line)
-  NextMethod("print")
+  out <- format(x)
+  cat(out[c(-1, -3)], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
