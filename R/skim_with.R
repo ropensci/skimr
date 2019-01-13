@@ -82,7 +82,8 @@ skim_with <- function(..., append = TRUE) {
 
     variables <- tibble::tibble(variable = selected)
     nested <- dplyr::mutate(variables,
-      skimmed = purrr::map(variable, skim_one, data, local_skimmers, append)
+      skimmed = purrr::map(
+        !!rlang::sym("variable"), skim_one, data, local_skimmers, append)
     )
     skimmers_used <- purrr::map(
       nested$skimmed,

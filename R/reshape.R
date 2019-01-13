@@ -101,6 +101,6 @@ yank <- function(data, type) {
 #'   dplyr::select(variable, type, missing)
 #' @export
 focus <- function(.data, ...) {
-  stopifnot(is(.data, "skim_df"))
+  stopifnot(inherits(.data, "skim_df"))
   dplyr::select(.data, "variable", "type", ...)
 }
