@@ -87,7 +87,7 @@ test_that("skim_to_list() returns a list of subtables",{
   skimmed_list <-  skim_to_list(iris)
   expect_equal(length(skimmed_list), 2)
   expect_equal(names(skimmed_list), c("factor", "numeric"))
-  expect_equal(class(skimmed_list[[1]]), c("tbl_df", "tbl", "data.frame", "skim_df"))
+  expect_true(setequal(class(skimmed_list[[1]]), c("tbl_df", "tbl", "data.frame", "skim_df")))
   expect_equal(class(skimmed_list), c("list", "skim_list"))
 })
 
