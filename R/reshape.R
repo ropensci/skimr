@@ -137,8 +137,10 @@ skim_to_list <- function(.data, ...){
   }
   process_elements <- function(x){
     # Based on https://stackoverflow.com/a/36059942
-    Filter(function(x) !all(is.na(x)), x)
-    class(x) <- c(class(x), "skim_df")
+    x <- Filter(function(x) !all(is.na(x)), x)
+    if (!("skim_df" %in% class(x))){
+         class(x) <- c(class(x), "skim_df")
+    }
     x
   }
   separate <- purrr::map(separate, process_elements)
