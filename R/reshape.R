@@ -135,11 +135,15 @@ skim_to_list <- function(.data, ...){
   not_all_na <- function(col){
     !all(is.na(col))
   }
-  select_relevant <- function(x){
+  process_elements <- function(x){
     # Based on https://stackoverflow.com/a/36059942
     Filter(function(x) !all(is.na(x)), x)
+    class(x) <- c(class(x), "skim_df")
+    x
   }
-  purrr::map(separate, select_relevant)
+  separate <- purrr::map(separate, process_elements)
+  class(separate) <- c(class(separate), "skim_list")
+  separate
 }
 
 #' Skim results returned as a tidy long data frame with four columns:

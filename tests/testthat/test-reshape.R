@@ -77,3 +77,26 @@ test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
   expected <- dplyr::select(skimmed, variable, type, missing)
   expect_identical(focus(skimmed, missing), expected)
 })
+
+test_that("skim_to_wide() returns the same result as skim() with a deprecation warning",{
+  expect_warning(skim_to_wide(iris))
+})
+
+
+test_that("skim_to_list() returns a list of subtables",{
+  skimmed_list <-  skim_to_list(iris)
+  expect_equal(length(skimmed_list), 2)
+  expect_equal(names(skimmed_list), c("factor", "numeric"))
+  expect_equal(class(skimmed_list[[1]]), c("tbl_df", "tbl", "data.frame", "skim_df"))
+  expect_equal(class(skimmed_list), c("list", "skim_list"))
+})
+
+test_that("skim_to_long() returns a long tidy data frame with 4 columns",{
+  skimmed_long <- skim_to_long(iris)
+  # Statistics from the skim_df  with values of NA are not included
+  expect_equal(nrow(skimmed_long), 50)
+  expect_equal(names(skimmed_long), c("variable", "type", "stat", "formatted"))
+  expect_equal(length(unique(skimmed_long$stat)), 14)
+  expect_equal(length(unique(skimmed_long$type)), 2)
+  expect_equal(length(unique(skimmed_long$variable)),5)
+})
