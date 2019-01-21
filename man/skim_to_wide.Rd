@@ -2,7 +2,8 @@
 % Please edit documentation in R/reshape.R
 \name{skim_to_wide}
 \alias{skim_to_wide}
-\title{Skim to a wide data froame}
+\title{Skim to a wide data frame
+Deprecated}
 \usage{
 skim_to_wide(.data, ...)
 }
@@ -17,8 +18,6 @@ A \code{skim_df} object, which also inherits the class(es) of the input
 data. The result is usually a data frame or tibble.
 }
 \description{
-Skim to a wide data froame
-}
-\examples{
-skim_to_wide(iris) 
+Skim to a wide data frame
+Deprecated
 }

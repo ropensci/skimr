@@ -105,7 +105,8 @@ focus <- function(.data, ...) {
   dplyr::select(.data, "variable", "type", ...)
 }
 
-#' Skim to a wide data froame
+#' Skim to a wide data frame
+#' Deprecated
 #' @param .data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
