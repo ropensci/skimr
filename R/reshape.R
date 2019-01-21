@@ -111,8 +111,6 @@ focus <- function(.data, ...) {
 #'   default is to skim all columns.
 #' @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. The result is usually a data frame or tibble.
-#' @examples
-#' skim_to_wide(iris) 
 #' @export
 skim_to_wide<- function(.data, ...){
   .Deprecated("skim()")
