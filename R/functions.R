@@ -180,7 +180,8 @@ character_funs <- list (
   min = min_char,
   max = max_char,
   empty = n_empty,
-  n_unique = n_unique
+  n_unique = n_unique,
+  whitespace = n_whitespace
 )
 
 logical_funs <- list(

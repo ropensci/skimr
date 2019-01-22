@@ -89,14 +89,15 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
 test_that("skim_v returns expected response for chr vectors", {
   correct <- tibble::tribble(
     ~type,          ~stat,     ~level,  ~value, ~formatted,
-    "character",   "missing",     ".all",  1L, "1",
-    "character",  "complete",     ".all",  4L, "4",
-    "character",         "n",     ".all",  5L, "5",
-    "character",       "min",     ".all",  0L, "0",
-    "character",       "max",     ".all",  4L, "4",
-    "character",     "empty",     ".all",  1L, "1",
-    "character",  "n_unique",     ".all",  4L, "4")
-  dat <- c("AAAB", "ABc", "acb", NA, "")
+    "character",    "missing",     ".all",  1L, "1",
+    "character",   "complete",     ".all",  5L, "5",
+    "character",          "n",     ".all",  6L, "6",
+    "character",        "min",     ".all",  0L, "0",
+    "character",        "max",     ".all",  4L, "4",
+    "character",      "empty",     ".all",  1L, "1",
+    "character",   "n_unique",     ".all",  5L, "5",
+    "character", "whitespace",     ".all",  1L, "1")
+  dat <- c("AAAB", "ABc", "acb", NA, "", " ")
   input <- skimr:::skim_v(dat)
   expect_identical(input, correct)
 })
@@ -183,13 +184,14 @@ test_that("skim_v handles objects with multiple classes", {
 test_that("skim_v returns treats unknown classes as character", {
   correct <- tibble::tribble(
     ~type,        ~stat,        ~level, ~value, ~formatted,
-    "character",  "missing",   ".all",       0L, "0",
-    "character",  "complete",  ".all",      71L, "71",
-    "character",  "n",         ".all",      71L, "71",
-    "character",  "min",       ".all",       3L, "3",
-    "character",  "max",       ".all",       3L, "3",
-    "character",  "empty",     ".all",       0L, "0",
-    "character",  "n_unique",  ".all",      66L, "66")
+    "character",   "missing",   ".all",       0L, "0",
+    "character",   "complete",  ".all",      71L, "71",
+    "character",   "n",         ".all",      71L, "71",
+    "character",   "min",       ".all",       3L, "3",
+    "character",   "max",       ".all",       3L, "3",
+    "character",   "empty",     ".all",       0L, "0",
+    "character",   "n_unique",  ".all",      66L, "66",
+    "character", "whitespace",  ".all",       0L, "0")
   weight <- chickwts$weight
   class(weight) <- "strange"
   expect_warning(input <- skimr:::skim_v(weight))
@@ -199,13 +201,14 @@ test_that("skim_v returns treats unknown classes as character", {
 test_that("skim_v handles objects with two unknown classes", {
   correct <- tibble::tribble(
     ~type,        ~stat,        ~level, ~value, ~formatted,
-    "character",  "missing",   ".all",       0L, "0",
-    "character",  "complete",  ".all",      71L, "71",
-    "character",  "n",         ".all",      71L, "71",
-    "character",  "min",       ".all",       1L, "1",
-    "character",  "max",       ".all",       1L, "1",
-    "character",  "empty",     ".all",       0L, "0",
-    "character",  "n_unique",  ".all",      6L, "6")
+    "character",  "missing",    ".all",       0L, "0",
+    "character",  "complete",   ".all",      71L, "71",
+    "character",  "n",          ".all",      71L, "71",
+    "character",  "min",        ".all",       1L, "1",
+    "character",  "max",        ".all",       1L, "1",
+    "character",  "empty",      ".all",       0L, "0",
+    "character",  "n_unique",   ".all",       6L, "6",
+    "character",  "whitespace", ".all",       0L, "0")
   feed <- chickwts$feed
   class(feed) <- c("strange", "stranger")
   expect_warning(input <- skimr:::skim_v(feed))

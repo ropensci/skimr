@@ -40,6 +40,12 @@ test_that("n_complete is calculated correctly.", {
   expect_identical(input, 3L)
 })
 
+test_that("n_whitespace is calculated correctly.", {
+  data <- c("a", "b", " ", NA)
+  input <- n_whitespace(data)
+  expect_identical(input, 1L)
+})
+
 test_that("inline histogram is calculated correctly.", {
   input <- inline_hist(iris$Sepal.Length)
   correct <- structure("▂▇▅▇▆▅▂▂", class = c("spark", "character"))

@@ -181,7 +181,7 @@ test_functions_that("show_skimmers() has a correct list of default types", {
 
 test_functions_that("show_skimmers() lets you pick which type you want", {
   correct <- list(character = c("missing", "complete", "n", "min", "max",
-                                "empty", "n_unique"))
+                                "empty", "n_unique", "whitespace"))
   skimmers <- show_skimmers("character")
   expect_identical(correct, skimmers)
 })
@@ -190,7 +190,7 @@ test_functions_that("show_skimmers() lets you pick multiple types", {
   correct <- list(numeric = c("missing", "complete", "n", "mean",  "sd", "p0",
                               "p25", "p50", "p75", "p100", "hist"),
                   character = c("missing",  "complete", "n", "min", "max",
-                                "empty", "n_unique"))
+                                "empty", "n_unique", "whitespace"))
   skimmers <- show_skimmers(c("numeric", "character"))
   expect_identical(correct, skimmers)
 })
@@ -203,7 +203,7 @@ test_functions_that("show_skimmers() warns when given an unassigned type", {
 test_functions_that("show_skimmers() returns if given an unassigned type", {
   expect_warning(skimmers <- show_skimmers(c("character", "banana")))
   correct <- list(character = c("missing", "complete", "n", "min", "max",
-                                "empty", "n_unique"))
+                                "empty", "n_unique", "whitespace"))
   expect_identical(skimmers, correct)
 })
 
