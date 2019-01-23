@@ -10,11 +10,14 @@
 \alias{knit_print.one_skim_df}
 \title{Print \code{skim} objects}
 \usage{
-\method{print}{skim_df}(x, include_summary = TRUE, ...)
+\method{print}{skim_df}(x, include_summary = TRUE, n = Inf,
+  width = Inf, n_extra = NULL, ...)
 
-\method{print}{one_skim_df}(x, ...)
+\method{print}{one_skim_df}(x, n = Inf, width = Inf, n_extra = NULL,
+  ...)
 
-\method{print}{skim_list}(x, ...)
+\method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL,
+  ...)
 
 \method{print}{summary_skim_df}(x, ...)
 
@@ -23,14 +26,25 @@
 \method{knit_print}{one_skim_df}(x, options = NULL, ...)
 }
 \arguments{
-\item{x}{Either a \code{skim_df}, \code{one_skim_df}, \code{skim_list} or \code{skim_summary}
-object.}
+\item{x}{Object to format or print.}
 
 \item{include_summary}{Whether a summary of the data frame should be printed}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
+if less than option \code{tibble.print_max}. Otherwise, will print
+\code{tibble.print_min} rows.}
 
-\item{options}{Options passed into the print function}
+\item{width}{Width of text output to generate. This defaults to \code{NULL}, which
+means use \code{getOption("tibble.width")} or (if also \code{NULL})
+\code{getOption("width")}; the latter displays only the columns that fit on one
+screen. You can also set \code{options(tibble.width = Inf)} to override this
+default and always print all columns.}
+
+\item{n_extra}{Number of extra columns to print abbreviated information for,
+if the width is too small for the entire tibble. If \code{NULL}, the default,
+will print information about at most \code{tibble.max_extra_cols} extra columns.}
+
+\item{...}{Other arguments passed on to individual methods.}
 }
 \description{
 \code{skimr} has custom print methods for all supported objects. Default printing
