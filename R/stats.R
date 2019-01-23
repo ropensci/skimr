@@ -3,7 +3,7 @@
 #' Skimr provides extensions to a variety of functions with R's stats package
 #' to simplify creating summaries of data. All functions are vectorized and take
 #' a single argument. Other parameters for these functions are set in the
-#' skim_format() function.
+#' [skim_format()] function.
 #'
 #' @param x A vector
 #' @param n_bins In `inline_hist`, the number of histogram bars.
