@@ -126,9 +126,9 @@ skim_to_wide<- function(.data, ...){
 #' @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. The result is usually a data frame or tibble.
 #' @examples
-#' skim_to_long(iris)
+#' to_long(iris)
 #' @export
-skim_to_long <- function( .data, ...){
+to_long <- function( .data, ...){
   skimmed <- skim(.data, ...)
   tidyr::gather(skimmed, key="stat", value="formatted",  na.rm = TRUE, 
                 -!!rlang::sym("type"), -!!rlang::sym("variable")) 

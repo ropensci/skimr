@@ -86,8 +86,8 @@ test_that("skim_to_list() returns a deprecation warning",{
   expect_warning(skim_to_list(iris))
 })
 
-test_that("skim_to_long() returns a long tidy data frame with 4 columns",{
-  skimmed_long <- skim_to_long(iris)
+test_that("to_long() returns a long tidy data frame with 4 columns",{
+  skimmed_long <- to_long(iris)
   # Statistics from the skim_df  with values of NA are not included
   expect_equal(nrow(skimmed_long), 50)
   expect_equal(names(skimmed_long), c("variable", "type", "stat", "formatted"))
