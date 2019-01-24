@@ -3,10 +3,16 @@
 \name{knit_print}
 \alias{knit_print}
 \alias{knit_print.skim_df}
+\alias{knit_print.skim_list}
+\alias{knit_print.one_skim_df}
 \alias{knit_print.summary_skim_df}
 \title{Provide a default printing method for knitr.}
 \usage{
 \method{knit_print}{skim_df}(x, options = NULL, ...)
+
+\method{knit_print}{skim_list}(x, options = NULL, ...)
+
+\method{knit_print}{one_skim_df}(x, options = NULL, ...)
 
 \method{knit_print}{summary_skim_df}(x, options = NULL, ...)
 }
@@ -40,6 +46,10 @@ Windows users most commonly. Call \code{vignette("Using_fonts")} for more detail
 \section{Methods (by class)}{
 \itemize{
 \item \code{skim_df}: Default \code{knitr} print for \code{skim_df} objects.
+
+\item \code{skim_list}: Default \code{knitr} print for a \code{skim_list}.
+
+\item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
 
 \item \code{summary_skim_df}: Default \code{knitr} print for \code{skim_df} summaries.
 }}

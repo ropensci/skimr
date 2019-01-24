@@ -11,11 +11,6 @@
 #'
 #' @inheritParams tibble:::print.tbl
 #' @param include_summary Whether a summary of the data frame should be printed
-#' @param n The number of rows of the skim_df tibble that should be printed to the console.
-#' @param width The maximum width of the skim_df tibble that should be printed
-#' @param n_extra Number of extra columns to print the information for.
-#' @param options Additional options for the print method.
-#' @param ... Further arguments passed to or from other methods.
 #' @name print
 NULL
 
@@ -147,13 +142,13 @@ knit_print_one <- function(by_type, skim_type, options) {
   c(caption, "", kabled, "", "")
 }
 
-#' @describeIn print Default `knitr` print for a `skim_list`.
+#' @describeIn knit_print Default `knitr` print for a `skim_list`.
 #' @export
 knit_print.skim_list <- function(x, options = NULL, ...) {
   knit_print_by_type(x, options, NULL)
 }
 
-#' @describeIn print Default `knitr` print within a partitioned `skim_df`.
+#' @describeIn knit_print Default `knitr` print within a partitioned `skim_df`.
 #' @export
 knit_print.one_skim_df <- function(x, options = NULL, ...) {
   kabled <- knit_print_one(x, attr(x, "type"), options)
