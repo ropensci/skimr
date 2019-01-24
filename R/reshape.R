@@ -118,36 +118,6 @@ skim_to_wide<- function(.data, ...){
   skim(.data, ...)
 }
 
-#' Skim results returned as a list
-#' @param .data A tibble, or an object that can be coerced into a tibble.
-#' @param ...  Columns to select for skimming. When none are provided, the
-#'   default is to skim all columns.
-#' @return A list of data frames, one per variable type containing relevant 
-#'         columns for the type 
-#' @examples
-#' skim_to_list(iris)
-#' @export
-skim_to_list <- function(.data, ...){
-  skimmed <- skim(.data, ...)
-  grps <- dplyr::groups(skimmed)
-  separate <- split(skimmed, skimmed$type)
-
-  not_all_na <- function(col){
-    !all(is.na(col))
-  }
-  process_elements <- function(x){
-    # Based on https://stackoverflow.com/a/36059942
-    x <- Filter(function(x) !all(is.na(x)), x)
-    if (!("skim_df" %in% class(x))){
-         class(x) <- c(class(x), "skim_df")
-    }
-    x
-  }
-  separate <- purrr::map(separate, process_elements)
-  class(separate) <- c(class(separate), "skim_list")
-  separate
-}
-
 #' Skim results returned as a tidy long data frame with four columns:
 #' variable, type, stat and formatted.
 #' @param .data A tibble, or an object that can be coerced into a tibble.
