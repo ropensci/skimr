@@ -133,3 +133,16 @@ skim_to_long <- function( .data, ...){
   tidyr::gather(skimmed, key="stat", value="formatted",  na.rm = TRUE, 
                 -!!rlang::sym("type"), -!!rlang::sym("variable")) 
 }
+
+#' Skim to a list of data frames by type
+#' Deprecated
+#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param ...  Columns to select for skimming. When none are provided, the
+#'   default is to skim all columns.
+#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'   data. The result is usually a data frame or tibble.
+#' @export
+skim_to_list<- function(.data, ...){
+  .Deprecated("partition(skim())")
+  skim(.data, ...) %>% partition()
+}

@@ -78,8 +78,12 @@ test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
   expect_identical(focus(skimmed, missing), expected)
 })
 
-test_that("skim_to_wide() returns the same result as skim() with a deprecation warning",{
+test_that("skim_to_wide() returns a deprecation warning",{
   expect_warning(skim_to_wide(iris))
+})
+
+test_that("skim_to_list() returns a deprecation warning",{
+  expect_warning(skim_to_list(iris))
 })
 
 test_that("skim_to_long() returns a long tidy data frame with 4 columns",{
