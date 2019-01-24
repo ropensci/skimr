@@ -9,17 +9,15 @@
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
 #' cases, this method falls back to [tibble::print.tbl()].
 #'
-#' @param x Either a `skim_df`, `one_skim_df`, `skim_list` or `skim_summary`
-#'  object.
-#' @param ... Further arguments passed to or from other methods.
+#' @inheritParams tibble:::print.tbl
+#' @param include_summary Whether a summary of the data frame should be printed
 #' @name print
 NULL
 
 #' @describeIn print Print a skimmed data frame (`skim_df` from [`skim()`]).
-#' @param include_summary Whether a summary of the data frame should be printed
-#' @param options Options passed into the print function
 #' @export
-print.skim_df <- function(x, include_summary = TRUE, ...) {
+print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
+                          n_extra = NULL, ...) {
   if ("type" %in% names(x)) {
     if (include_summary) {
       cat("Skim summary statistics\n")
@@ -33,7 +31,7 @@ print.skim_df <- function(x, include_summary = TRUE, ...) {
     }
 
     by_type <- partition(x)
-    purrr::imap(by_type, print)
+    purrr::imap(by_type, print, n, width, n_extra)
     invisible(NULL)
   } else {
     NextMethod("print")
@@ -42,17 +40,17 @@ print.skim_df <- function(x, include_summary = TRUE, ...) {
 
 #' @describeIn print Print an entry within a partitioned `skim_df`.
 #' @export
-print.one_skim_df <- function(x, ...) {
+print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
   variable_type <- paste("Variable type:", attr(x, "type"))
   with_line <- cli::rule(line = 1, left = variable_type)
   print(with_line)
-  out <- format(x)
+  out <- format(x, n = n, width = width, n_extra, ...)
   cat(out[c(-1, -3)], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
 #' @export
-print.skim_list <- function(x, ...) {
+print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
   nms <- names(x)
   attributes(x) <- NULL
   print(purrr::set_names(x, nms))

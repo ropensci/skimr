@@ -213,7 +213,6 @@ spark_line <- function(x) {
   paste0(chars, collapse = "")
 }
 
-
 # https://en.wikipedia.org/wiki/Braille_Patterns
 braille <- function(x) {
   # remap to braille sequence
@@ -239,7 +238,6 @@ list_lengths_min <- function(x) {
     NA
   }
 }
-
 
 #' @describeIn stats Get the median length of the lists.
 #' @export
