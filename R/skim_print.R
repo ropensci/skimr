@@ -11,6 +11,11 @@
 #'
 #' @inheritParams tibble:::print.tbl
 #' @param include_summary Whether a summary of the data frame should be printed
+#' @param n The number of rows of the skim_df tibble that should be printed to the console.
+#' @param width The maximum width of the skim_df tibble that should be printed
+#' @param n_extra Number of extra columns to print the information for.
+#' @param options Additional options for the print method.
+#' @param ... Further arguments passed to or from other methods.
 #' @name print
 NULL
 
@@ -104,7 +109,9 @@ print.summary_skim_df <- function(x, ...) {
 NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
+#' @param x A skim_df object.
 #' @param options Options passed into the print function
+#' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {

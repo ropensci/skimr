@@ -11,13 +11,11 @@
 \method{knit_print}{summary_skim_df}(x, options = NULL, ...)
 }
 \arguments{
-\item{x}{An R object to be printed}
+\item{x}{A skim_df object.}
 
 \item{options}{Options passed into the print function}
 
-\item{...}{Additional arguments passed to the S3 method. Currently ignored,
-except two optional arguments \code{options} and \code{inline}; see
-the references below.}
+\item{...}{Additional arguments passed to method}
 }
 \value{
 A \code{knit_asis} object. Which is used by \code{knitr} when renderind.
