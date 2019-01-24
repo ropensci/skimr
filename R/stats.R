@@ -17,26 +17,21 @@ NULL
 
 #' @describeIn stats Calculate the sum of `NA` and `NULL` (i.e. missing) values.
 #' @export
-
 n_missing <- function(x) {
   sum(is.na(x) | is.null(x))
 }
 
-
 #' @describeIn stats Calculate complete values; complete values are not missing.
 #' @export
-
 n_complete <- function(x) {
   length(x) - n_missing(x)
 }
-
 
 #' @describeIn stats Create a contingency table and arrange its levels in
 #'   descending order. In case of ties, the ordering of results is alphabetical
 #'   and depends upon the locale. `NA` is treated as a ordinary value for
 #'   sorting.
 #' @export
-
 sorted_count <- function(x) {
   tab <- table(x, useNA = "always")
   names_tab <- names(tab)
@@ -55,7 +50,6 @@ sorted_count <- function(x) {
 #'   character scalar. Wraps [sorted_count()].
 #' @param max_levels The maximum number of levels to be displayed.
 #' @export
-
 top_counts <- function(x, max_char = 3, max_levels = 4) {
   counts <- sorted_count(x)
   if (length(counts) > max_levels) {
@@ -71,7 +65,6 @@ top_counts <- function(x, max_char = 3, max_levels = 4) {
 #'   character length of the histogram is controlled by the formatting options
 #'   for character vectors.
 #' @export
-
 inline_hist <- function(x, n_bins = 8) {
   # For the purposes of the histogram, treat infinite as NA
   # (before the test for all NA)
@@ -93,7 +86,6 @@ inline_hist <- function(x, n_bins = 8) {
   hist_dt <- hist_dt / max(hist_dt)
   spark_bar(hist_dt)
 }
-
 
 #' Draw a sparkline bar graph with unicode block characters
 #'
@@ -119,7 +111,6 @@ inline_hist <- function(x, n_bins = 8) {
 #' spark_bar(c(0, NA, 0.5, NA, 1))
 #' }
 #' @noRd
-
 spark_bar <- function(x, safe = TRUE) {
   stopifnot(is.numeric(x))
 
@@ -139,69 +130,55 @@ spark_bar <- function(x, safe = TRUE) {
   paste0(chars, collapse = "")
 }
 
-
 #' @describeIn stats Calculate the number of blank values in a character vector.
 #'   A "blank" is equal to "".
 #' @export
-
 n_empty <- function(x) {
   empty.strings <- c("")
   sum(x %in% empty.strings)
 }
 
-
 #' @describeIn stats Calculate the minimum number of characters within a
 #'   character vector.
 #' @export
-
 min_char <- function(x) {
   characters <- nchar(x)
   min(characters, na.rm = TRUE)
 }
 
-
 #' @describeIn stats Calculate the maximum number of characters within a
 #'   character vector.
 #' @export
-
 max_char <- function(x) {
   characters <- nchar(x)
   max(characters, na.rm = TRUE)
 }
 
-
 #' @describeIn stats Calculate the number of unique elements but remove `NA`.
 #' @export
-
 n_unique <- function(x) {
   un <- x[!is.na(x)]
   un <- unique(un)
   length(un)
 }
 
-
 #' @describeIn stats Get the start for a time series without the frequency.
 #' @export
-
 ts_start <- function(x) {
   stats::start(x)[1]
 }
 
-
 #' @describeIn stats Get the finish for a time series without the frequency.
 #' @export
-
 ts_end <- function(x) {
   stats::end(x)[1]
 }
-
 
 #' @describeIn stats Generate inline line graph for time series variables. The
 #'   character length of the line graph is controlled by the formatting options
 #'   for character vectors.
 #'   Based on the function in the pillar package.
 #' @export
-
 inline_linegraph <- function(x, length.out = 16) {
   t <- x[!is.na(x)]
   id <- seq(1, length(t), length.out = length.out)
@@ -214,7 +191,6 @@ normalize01 <- function(x) {
   (x - min(x)) / (max(x) - min(x))
 }
 
-
 #' Draw a sparkline line graph with Braille characters.
 #'
 #' @inheritParams spark_bar
@@ -224,7 +200,6 @@ normalize01 <- function(x) {
 #' spark_line(x)
 #' }
 #' @noRd
-
 spark_line <- function(x) {
   stopifnot(is.numeric(x))
 
@@ -254,7 +229,6 @@ braille <- function(x) {
 
 #' @describeIn stats Get the length of the shortest list in a vector of lists.
 #' @export
-
 list_lengths_min <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
@@ -268,7 +242,6 @@ list_lengths_min <- function(x) {
 
 #' @describeIn stats Get the median length of the lists.
 #' @export
-
 list_lengths_median <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
@@ -279,10 +252,8 @@ list_lengths_median <- function(x) {
   }
 }
 
-
 #' @describeIn stats Get the maximum length of the lists.
 #' @export
-
 list_lengths_max <- function(x) {
   x <- x[!is.na(x)]
   l <- lengths(x)
@@ -293,19 +264,15 @@ list_lengths_max <- function(x) {
   }
 }
 
-
 #' @describeIn stats Get the length of the shortest list in a vector of lists.
 #' @export
-
 list_min_length <- function(x) {
   l <- lengths(x)
   min(l)
 }
 
-
 #' @describeIn stats Get the length of the longest list in a vector of lists.
 #' @export
-
 list_max_length <- function(x) {
   l <- lengths(x)
   max(l)
