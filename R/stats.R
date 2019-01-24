@@ -1,17 +1,18 @@
 #' Summary statistic functions
 #'
-#' Skimr provides extensions to a variety of functions with R's stats package
-#' to simplify creating summaries of data. All functions are vectorized and take
-#' a single argument. Other parameters for these functions are set in the
-#' [skim_format()] function.
+#' `skimr` provides extensions to a variety of functions with R's stats package
+#' to simplify creating summaries of data. All functions are vectorized over the
+#' first argument. Additional arguments should be set in the [sfl()] that sets
+#' the appropriate skimmers for a data type. You can use these, along with other
+#' vectorized R functions, for creating custom sets of summary functions for
+#' a given data type.
 #'
+#' @seealso [get_skimmers()] for customizing the functions called by [skim()].
 #' @param x A vector
 #' @param n_bins In `inline_hist`, the number of histogram bars.
 #' @param length.out In `inline_linegraph`, the length of the character time
 #'   series.
 #' @param max_char In `top` = 3, max_levels = 4
-#' @seealso [purrr::partial()] for setting arguments of a
-#'   skimmer function.
 #' @name stats
 NULL
 

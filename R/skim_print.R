@@ -104,7 +104,9 @@ print.summary_skim_df <- function(x, ...) {
 NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
+#' @param x A skim_df object.
 #' @param options Options passed into the print function
+#' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {
@@ -140,13 +142,13 @@ knit_print_one <- function(by_type, skim_type, options) {
   c(caption, "", kabled, "", "")
 }
 
-#' @describeIn print Default `knitr` print for a `skim_list`.
+#' @describeIn knit_print Default `knitr` print for a `skim_list`.
 #' @export
 knit_print.skim_list <- function(x, options = NULL, ...) {
   knit_print_by_type(x, options, NULL)
 }
 
-#' @describeIn print Default `knitr` print within a partitioned `skim_df`.
+#' @describeIn knit_print Default `knitr` print within a partitioned `skim_df`.
 #' @export
 knit_print.one_skim_df <- function(x, options = NULL, ...) {
   kabled <- knit_print_one(x, attr(x, "type"), options)

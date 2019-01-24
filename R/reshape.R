@@ -104,3 +104,45 @@ focus <- function(.data, ...) {
   stopifnot(inherits(.data, "skim_df"))
   dplyr::select(.data, "variable", "type", ...)
 }
+
+#' Skim to a wide data frame
+#' Deprecated
+#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param ...  Columns to select for skimming. When none are provided, the
+#'   default is to skim all columns.
+#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'   data. The result is usually a data frame or tibble.
+#' @export
+skim_to_wide<- function(.data, ...){
+  .Deprecated("skim()")
+  skim(.data, ...)
+}
+
+#' Skim results returned as a tidy long data frame with four columns:
+#' variable, type, stat and formatted.
+#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param ...  Columns to select for skimming. When none are provided, the
+#'   default is to skim all columns.
+#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'   data. The result is usually a data frame or tibble.
+#' @examples
+#' to_long(iris)
+#' @export
+to_long <- function( .data, ...){
+  skimmed <- skim(.data, ...)
+  tidyr::gather(skimmed, key="stat", value="formatted",  na.rm = TRUE, 
+                -!!rlang::sym("type"), -!!rlang::sym("variable")) 
+}
+
+#' Skim to a list of data frames by type
+#' Deprecated
+#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param ...  Columns to select for skimming. When none are provided, the
+#'   default is to skim all columns.
+#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'   data. The result is usually a data frame or tibble.
+#' @export
+skim_to_list<- function(.data, ...){
+  .Deprecated("partition(skim())")
+  skim(.data, ...) %>% partition()
+}
