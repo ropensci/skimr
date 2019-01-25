@@ -4,6 +4,7 @@
 \alias{stats}
 \alias{n_missing}
 \alias{n_complete}
+\alias{n_whitespace}
 \alias{sorted_count}
 \alias{top_counts}
 \alias{inline_hist}
@@ -24,6 +25,8 @@
 n_missing(x)
 
 n_complete(x)
+
+n_whitespace(x)
 
 sorted_count(x)
 
@@ -80,6 +83,8 @@ a given data type.
 \item \code{n_missing}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
 
 \item \code{n_complete}: Calculate complete values; complete values are not missing.
+
+\item \code{n_whitespace}: Calculate the sum of whitespace values.
 
 \item \code{sorted_count}: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical

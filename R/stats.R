@@ -28,6 +28,13 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
+#' @describeIn stats Calculate the sum of whitespace values.
+#' @export
+n_whitespace <- function(x) {
+  whitespace <- grepl("^\\s+", x)
+  sum(whitespace)
+}
+
 #' @describeIn stats Create a contingency table and arrange its levels in
 #'   descending order. In case of ties, the ordering of results is alphabetical
 #'   and depends upon the locale. `NA` is treated as a ordinary value for

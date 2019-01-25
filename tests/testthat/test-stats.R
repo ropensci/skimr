@@ -26,15 +26,21 @@ test_that("ts_start returns expected response for a ts vector", {
 })
 
 test_that("n_missing is calculated correctly.", {
-  data <- c("a", "b", "c", NA)
+  data <- c("a", "b", "c", NA, " ")
   input <- n_missing(data)
   expect_identical(input, 1L)
 })
 
 test_that("n_complete is calculated correctly.", {
-  data <- c("a", "b", "c", NA)
+  data <- c("a", "b", "c", NA, " ")
   input <- n_complete(data)
-  expect_identical(input, 3L)
+  expect_identical(input, 4L)
+})
+
+test_that("n_whitespace is calculated correctly.", {
+  data <- c("a", "b", "c", NA, " ")
+  input <- n_whitespace(data)
+  expect_identical(input, 1L)
 })
 
 test_that("inline histogram is calculated correctly.", {

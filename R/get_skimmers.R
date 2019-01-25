@@ -113,7 +113,8 @@ get_skimmers.character <- function(column) {
     min = min_char,
     max = max_char,
     empty = n_empty,
-    n_unique = n_unique
+    n_unique = n_unique,
+    whitespace = n_whitespace
   )
 }
 
