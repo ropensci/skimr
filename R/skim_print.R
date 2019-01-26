@@ -3,7 +3,7 @@
 #' `skimr` has custom print methods for all supported objects. Default printing
 #' methods for `knitr`/ `rmarkdown` documents is also provided.
 #'
-#' @section Behavior in `dplyr` pipelins:
+#' @section Behavior in `dplyr` pipelines:
 #'
 #' Printing a `skim_df` requires specific columns that might be dropped when
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
