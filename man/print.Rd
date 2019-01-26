@@ -55,7 +55,7 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 \item \code{summary_skim_df}: Print method for a \code{summary_skim_df} object.
 }}
 
-\section{Behavior in \code{dplyr} pipelins}{
+\section{Behavior in \code{dplyr} pipelines}{
 
 
 Printing a \code{skim_df} requires specific columns that might be dropped when
