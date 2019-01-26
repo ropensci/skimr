@@ -19,7 +19,8 @@ Authors@R: c(
   person("lbusett", "", email="lbusett@gmail.com", role='ctb'),
   person("Mikko","Korpela", email="mvkorpel@iki.fi", role='ctb'),
   person("Jennifer","Thompson", email="thompson.jennifer@gmail.com", role='ctb'),
-  person("Harris","McGehee", email="mcgehee.harris@gmail.com", role='ctb')
+  person("Harris","McGehee", email="mcgehee.harris@gmail.com", role='ctb'),
+  person("Roepke","Mark",email="mroepke5@gmail.com",role='ctb')
   )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may be 

@@ -84,7 +84,8 @@ a given data type.
 
 \item \code{n_complete}: Calculate complete values; complete values are not missing.
 
-\item \code{n_whitespace}: Calculate the sum of whitespace values.
+\item \code{n_whitespace}: Calculate the number of rows containing only whitespace values
+using s+ regex.
 
 \item \code{sorted_count}: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical

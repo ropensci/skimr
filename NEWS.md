@@ -1,3 +1,9 @@
+skimr 2.0.0 (2019-xx-xx)
+========================
+### NEW FEATURES
+ * New statistic for character variables counting the number of rows
+   that are completely made up of white space.
+
 skimr 1.0.4 (2018-01-05)
 ========================
 ### BUG FIXES

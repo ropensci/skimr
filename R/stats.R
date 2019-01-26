@@ -28,7 +28,8 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
-#' @describeIn stats Calculate the sum of whitespace values.
+#' @describeIn stats Calculate the number of rows containing only whitespace values
+#'    using s+ regex.
 #' @export
 n_whitespace <- function(x) {
   whitespace <- grepl("^\\s+", x)
