@@ -27,7 +27,7 @@ n_complete <- function(x) {
   length(x) - n_missing(x)
 }
 
-#' @describeIn stats Calculate the sum of whitespace values.
+#' @describeIn stats Calculate the number of cases that are entirely whitespace, e.g. " ".
 #' @export
 n_whitespace <- function(x) {
   whitespace <- grepl("^\\s+", x)

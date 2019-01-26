@@ -82,7 +82,7 @@ a single argument. Other parameters for these functions are set in the
 
 \item \code{n_complete}: Calculate complete values; complete values are not missing.
 
-\item \code{n_whitespace}: Calculate the sum of whitespace values.
+\item \code{n_whitespace}: Calculate the number of cases that are entirely whitespace, e.g. " ".
 
 \item \code{sorted_count}: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical
