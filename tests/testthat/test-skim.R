@@ -198,13 +198,13 @@ test_that("skim handles factors when NAs are present", {
 
 
 test_that("skim returns expected response for character vectors", {
-  dat <- c("AAAB", "ABc", "acb", NA, "")
+  dat <- c("AAAB", "ABc", "acb", NA, "", " ")
   x <- tibble::tibble(dat)
   input <- skim(x)
 
   # dimensions
   expect_n_rows(input, 1)
-  expect_n_columns(input, 9)
+  expect_n_columns(input, 10)
 
   # classes
   expect_is(input, "skim_df")
@@ -213,19 +213,19 @@ test_that("skim returns expected response for character vectors", {
   expect_is(input, "data.frame")
   expect_named(input, c(
     "variable", "type", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique"
+    "max", "empty", "n_unique", "whitespace"
   ))
 
   # attributes
   attrs <- attributes(input)
-  expect_equal(attrs$data_rows, 5)
+  expect_equal(attrs$data_rows, 6)
   expect_equal(attrs$data_cols, 1)
   expect_equal(attrs$df_name, "`x`")
   expect_equal(
     attrs$skimmers_used,
     list(character = c(
       "missing", "complete", "n", "min", "max",
-      "empty", "n_unique"
+      "empty", "n_unique", "whitespace"
     ))
   )
 
@@ -233,12 +233,13 @@ test_that("skim returns expected response for character vectors", {
   expect_identical(input$variable, "dat")
   expect_identical(input$type, "character")
   expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 4L)
-  expect_identical(input$n, 5L)
+  expect_identical(input$complete, 5L)
+  expect_identical(input$n, 6L)
   expect_identical(input$min, 0L)
   expect_identical(input$max, 4L)
   expect_identical(input$empty, 1L)
-  expect_identical(input$n_unique, 4L)
+  expect_identical(input$n_unique, 5L)
+  expect_identical(input$whitespace, 1L)
 })
 
 test_that("skim returns expected response for logical vectors", {
@@ -686,7 +687,7 @@ test_that("skim treats unknown classes as character", {
   expect_is(input, "data.frame")
   expect_named(input, c(
     "variable", "type", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique"
+    "max", "empty", "n_unique", "whitespace"
   ))
 
   # attributes
@@ -698,7 +699,7 @@ test_that("skim treats unknown classes as character", {
     attrs$skimmers_used,
     list(character = c(
       "missing", "complete", "n", "min", "max",
-      "empty", "n_unique"
+      "empty", "n_unique", "whitespace"
     ))
   )
 
@@ -720,7 +721,7 @@ test_that("skim handles objects with two unknown classes", {
   expect_is(input, "data.frame")
   expect_named(input, c(
     "variable", "type", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique"
+    "max", "empty", "n_unique", "whitespace"
   ))
 
   # attributes
@@ -732,7 +733,7 @@ test_that("skim handles objects with two unknown classes", {
     attrs$skimmers_used,
     list(character = c(
       "missing", "complete", "n", "min", "max",
-      "empty", "n_unique"
+      "empty", "n_unique", "whitespace"
     ))
   )
 

@@ -14,7 +14,7 @@ test_that("get_default_skimmers() has a correct list of defaults", {
   ))
   expect_identical(defaults$character, c(
     "missing", "complete", "n", "min",
-    "max", "empty", "n_unique"
+    "max", "empty", "n_unique", "whitespace"
   ))
   expect_identical(defaults$complex, c("missing", "complete", "n"))
   expect_identical(defaults$Date, c(
