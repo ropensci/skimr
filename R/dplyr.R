@@ -57,16 +57,6 @@ transmute.skim_df <- function(.data, ...) {
   rebuild_skim_obj(transmuted, .data)
 }
 
-#' Use dplyr verb filter on skim_df objects.
-#' @seealso [`dplyr::filter()`]
-#' @inheritParams dplyr::filter
-#' @return  skim_df object coerced to a data frame.
-#' @export
-filter.skim_df <-function (.data, ..., .preserve = FALSE) {
-  filtered <-  NextMethod("filter")
-  rebuild_skim_obj(filtered, .data)
-}
-#
 #' Use dplyr verb select on skim_df objects.
 #' Always includes variable and type columns even if user has not selected them.
 #' @seealso [`dplyr::select()`]
@@ -80,25 +70,3 @@ select.skim_df <-function (.data, ...) {
    selected <-  NextMethod("select")
    rebuild_skim_obj(selected, .data)
 }
-
-#' Use dplyr verb arrange on skim_df objects.
-#' #' @seealso [`dplyr::arrange()`]
-#' @inheritParams dplyr::arrange
-#' @return  skim_df object coerced to a data frame.
-#' @export
-arrange.skim_df <-function (.data, ...) {
-   arranged <-  NextMethod("arrange")
-   rebuild_skim_obj(arranged, .data)
-}
-
-#' Use dplyr verb slice on skim_df objects.
-#' @seealso [`dplyr::slice()`]
-#' @inheritParams dplyr::filter
-#' @return  skim_df object coerced to a data frame.
-#' @export
-slice.skim_df <-function (.data, ..., .preserve = FALSE) {
-  sliced <- NextMethod("slice")
-  rebuild_skim_obj(sliced, .data)
-}
-
-

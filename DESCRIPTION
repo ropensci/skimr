@@ -34,7 +34,7 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.7),
+    dplyr (>= 0.8.0),
     magrittr,
     pander,
     purrr,
@@ -51,6 +51,7 @@ Suggests:
     testthat (>= 2.0.0),
     withr,
     covr
+Remotes: tidyverse/dplyr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -229,14 +229,14 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 0.7",
+      "version": ">= 0.8.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+      "sameAs": "https://github.com/tidyverse/dplyr"
     },
     {
       "@type": "SoftwareApplication",
@@ -359,7 +359,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "2049.678KB",
+  "fileSize": "2051.967KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"

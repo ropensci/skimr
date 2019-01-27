@@ -2,8 +2,7 @@
 % Please edit documentation in R/dplyr.R
 \name{select.skim_df}
 \alias{select.skim_df}
-\title{Use dplyr verb select on skim_df objects.
-Always includes variable and type columns even if user has not selected them.}
+\title{Use dplyr verb filter on skim_df objects.}
 \usage{
 select.skim_df(.data, ...)
 }
@@ -11,32 +10,26 @@ select.skim_df(.data, ...)
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods
 for \code{\link[=tbl_df]{tbl_df()}}, \code{\link[dtplyr:tbl_dt]{dtplyr::tbl_dt()}} and \code{\link[dbplyr:tbl_dbi]{dbplyr::tbl_dbi()}}.}
 
-\item{...}{One or more unquoted expressions separated by commas.
-You can treat variable names like they are positions, so you can
-use expressions like \code{x:y} to select ranges of variables.
-
-Positive values select variables; negative values drop variables.
-If the first expression is negative, \code{select()} will automatically
-start with all variables.
-
-Use named arguments, e.g. \code{new_name = old_name}, to rename selected variables.
+\item{...}{Logical predicates defined in terms of the variables in \code{.data}.
+Multiple conditions are combined with \code{&}. Only rows where the
+condition evaluates to \code{TRUE} are kept.
 
 The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
-\link[rlang:eval_tidy]{evaluated} in a context where column names
-represent column positions. They also support
-\link[rlang:quasiquotation]{unquoting} and splicing. See
-\code{vignette("programming")} for an introduction to these concepts.
-
-See \link[tidyselect:select_helpers]{select helpers} for more details and
-examples about tidyselect helpers such as \code{starts_with()}, \code{everything()}, ...}
+\link[rlang:eval_tidy]{evaluated} in the context of the data
+frame. They support \link[rlang:quasiquotation]{unquoting} and
+splicing. See \code{vignette("programming")} for an introduction to
+these concepts.}
 }
 \value{
+skim_df object coerced to a data frame.
+
 skim_df object
 }
 \description{
-Use dplyr verb select on skim_df objects.
-Always includes variable and type columns even if user has not selected them.
+Use dplyr verb filter on skim_df objects.
 }
 \seealso{
+\code{\link[dplyr:filter]{dplyr::filter()}}
+
 \code{\link[dplyr:select]{dplyr::select()}}
 }
