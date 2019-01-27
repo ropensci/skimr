@@ -148,14 +148,14 @@ to_long <- function( .data, ...){
 #' @name deprecated-v1
 NULL
 
-#' @rdname deprecated-v1
+#' @describeIn deprecated-v1 [skim()] always produces a wide data frame.
 #' @export
 skim_to_wide<- function(.data, ...){
   .Deprecated("skim()")
   skim(.data, ...)
 }
 
-#' @rdname deprecated-v1
+#' @describeIn deprecated-v1 [partition()] creates a list.
 #' @export
 skim_to_list<- function(.data, ...){
   .Deprecated("partition(skim())")
