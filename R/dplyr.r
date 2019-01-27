@@ -27,7 +27,9 @@ mutate.skim_df <- function(.data, ...) {
   rebuild_skim_obj(mutated, .data)
 }
 
-#' @return A `skim_df` object, which also inherits the class(es) of the input
+#'  Transmute a skim_df
+#'
+#'  @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. The `variable`` and `type` variables will be included
 #'   even if not named. 
 #'   In many ways, the object behaves like a [tibble::tibble()].
@@ -76,17 +78,11 @@ arrange.skim_df <-function (.data, ...) {
 }
 
 #' Use dplyr verb slice on skim_df objects.
-#' #' @seealso [`dplyr::slice()`]
+#' @seealso [`dplyr::slice()`]
 #' @inheritParams dplyr::filter
 #' @return  skim_df object coerced to a data frame.
 #' @export
 slice.skim_df <-function (.data, ..., .preserve = FALSE) {
-  # .data <- as.data.frame(.data)
-  # .data <- dplyr::slice(.data, ...)
-  # if (!("skim_df" %in% class(.data) )){
-  #   class(.data)  <- c(class(.data), "skim_df")
-  # }
-  # .data
   sliced <- NextMethod("slice")
   rebuild_skim_obj(sliced, .data)
 }
