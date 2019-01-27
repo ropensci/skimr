@@ -29,7 +29,13 @@ mutate.skim_df <- function(.data, ...) {
 
 #'  Transmute a skim_df
 #'
-#'  @return A `skim_df` object, which also inherits the class(es) of the input
+#'   @param ... Name-value pairs of expressions, each with length 1 or the same
+#'   length as the number of rows in the group (if using [group_by()] or in the
+#'   entire input (if not using groups). The name of each argument will be the
+#'   name of a new variable, and the value will be its corresponding value. 
+#'   Use `NULL` value in `mutate` to drop a variable.  New variables overwrite
+#'   existing variables of the same name.
+#'   @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. The `variable`` and `type` variables will be included
 #'   even if not named. 
 #'   In many ways, the object behaves like a [tibble::tibble()].

@@ -11,6 +11,7 @@
 #'
 #' @inheritParams tibble:::print.tbl
 #' @param include_summary Whether a summary of the data frame should be printed
+#' @param ...  Additional arguments passed in.
 #' @name print
 NULL
 

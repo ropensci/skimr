@@ -2,8 +2,7 @@
 % Please edit documentation in R/dplyr.R
 \name{slice.skim_df}
 \alias{slice.skim_df}
-\title{Use dplyr verb slice on skim_df objects.
-#' @seealso \code{\link[dplyr:slice]{dplyr::slice()}}}
+\title{Use dplyr verb slice on skim_df objects.}
 \usage{
 slice.skim_df(.data, ..., .preserve = FALSE)
 }
@@ -29,5 +28,7 @@ skim_df object coerced to a data frame.
 }
 \description{
 Use dplyr verb slice on skim_df objects.
-#' @seealso \code{\link[dplyr:slice]{dplyr::slice()}}
+}
+\seealso{
+\code{\link[dplyr:slice]{dplyr::slice()}}
 }

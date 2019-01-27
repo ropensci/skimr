@@ -38,6 +38,8 @@ override this default and always print all columns.}
 if the width is too small for the entire tibble. If \code{NULL}, the
 default, will print information about at most \code{tibble.max_extra_cols}
 extra columns.}
+
+\item{...}{Additional arguments passed in.}
 }
 \description{
 \code{skimr} has custom print methods for all supported objects. Default printing
