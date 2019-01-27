@@ -19,11 +19,6 @@ test_that("dplyr::filter works as expected (returns wide data frame)", {
   expect_equal(class(result), classes_skimmed_iris)
 })
 
-test_that("dplyr::filter works as expected", {
-  input <- dplyr::filter(skimmed_iris, type == "numeric")
-  expect_output(print(input), "Skim summary statistics")
-})
-
 test_that("dplyr::select works as expected", {
   with_type <- dplyr::select(skimmed_iris, type, variable)
   expect_equal(class(with_type), classes_skimmed_iris)
@@ -37,7 +32,7 @@ test_that("dplyr::select works as expected", {
 })
 
 test_that("dplyr::mutate works as expected", {
-  input <- dplyr::mutate(skimmed_iris, mean2 = mean ^ 2)
+  input <- dplyr::mutate(skimmed_iris, complete2 = complete ^ 2)
   expect_equal(length(input), length_skimmed_iris + 1)
   expect_equal(nrow(input), nvar_iris)
   expect_equal(colnames(input)[length(input)], "mean2")
