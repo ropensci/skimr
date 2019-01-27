@@ -33,14 +33,7 @@ partition <- function(data) {
   skimmers <- attr(data, "skimmers_used")
   groups <- attr(data, "groups")
   reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
-  structure(reduced,
-    class = "skim_list",
-    data_rows = attr(data, "data_rows"),
-    data_cols = attr(data, "data_cols"),
-    df_name = attr(data, "df_name"),
-    groups = groups,
-    skimmers_used = skimmers
-  )
+  rebuild_skim_obj(reduced, data, class = "skim_list", skimmers_user = skimmers)
 }
 
 simplify_skimdf <- function(data, type, skimmers, groups) {
@@ -60,13 +53,7 @@ bind <- function(data) {
   combined <- dplyr::bind_rows(!!!data, .id = "type")
   # The variable column should always be first
   out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
-  structure(out,
-    class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-    data_rows = attr(data, "data_rows"),
-    data_cols = attr(data, "data_cols"),
-    df_name = attr(data, "df_name"),
-    skimmers_used = attr(data, "skimmers_used")
-  )
+  rebuild_skim_obj(out, data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular

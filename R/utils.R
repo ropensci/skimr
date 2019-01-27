@@ -1,6 +1,5 @@
 # Adapted from
 # https://stackoverflow.com/questions/28248457
-
 fix_unicode <- function(char) {
   m <- gregexpr("<U\\+[0-9a-fA-F]{4}>", char)
   codes <- regmatches(char, m)
@@ -33,7 +32,6 @@ is_windows <- function() {
 #' This longstanding problem originates in the low-level code for printing
 #' dataframes.
 #' @export
-
 fix_windows_histograms <- function() {
   message(
     "This function will change your system locale. It may have other ",
@@ -46,4 +44,19 @@ fix_windows_histograms <- function() {
     message("Locale was not changed.")
   }
   invisible(NULL)
+}
+
+#' Preserve skim_df attributes
+#' @noRd
+rebuild_skim_obj <- function(object, skim_df, ...) {
+  defaults <- list(
+    class = c("skim_df", "tbl_df", "tbl", "data.frame"),
+    data_rows = attr(skim_df, "data_rows"),
+    data_cols = attr(skim_df, "data_cols"),
+    df_name = attr(skim_df, "df_name"),
+    groups = attr(skim_df, "groups"),
+    skimmers_used = attr(skim_df, "skimmers_used")
+  )
+  updated <- purrr::list_modify(defaults, ...)
+  rlang::set_attrs(object, !!!updated)
 }
