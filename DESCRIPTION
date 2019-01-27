@@ -34,7 +34,7 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.7),
+    dplyr (>= 0.8),
     magrittr,
     pander,
     purrr,
