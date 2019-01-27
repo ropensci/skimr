@@ -51,7 +51,7 @@ separate <- partition(skimmed)
 
 # Put back together
 identical(bind(separate), skimmed)
-#> TRUE
+# > TRUE
 
 # Alternatively, get the subtable of a particular type
 yank(skimmed, "factor")

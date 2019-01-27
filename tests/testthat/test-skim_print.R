@@ -30,10 +30,10 @@ test_that("knit_print produced expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  
+
   expect_match(input, "**Skim summary statistics**", fixed = TRUE)
-  expect_match(input,
-    "<table style='width: auto;' class='table table-condensed'>")
+  expect_match(input, "<table style='width: auto;'")
+  expect_match(input, "class='table table-condensed'>")
   expect_match(input, " <thead>")
   expect_match(input, "  <tr>")
   expect_match(input, "   <th style=\"text-align:right;\"> n_obs </th>")
@@ -48,8 +48,10 @@ test_that("knit_print produced expected results", {
   expect_match(input, "</tbody>")
   expect_match(input, "</table>")
   expect_match(input, "**Variable type: factor**", fixed = TRUE)
-  expect_match(input,
-    "|variable | missing| complete|   n|ordered | n_unique|top_counts")
+  expect_match(
+    input,
+    "|variable | missing| complete|   n|ordered | n_unique|top_counts"
+  )
 })
 
 test_that("Summaries can be suppressed within knitr", {
@@ -72,12 +74,27 @@ test_that("You can yank a type from a skim_df and call knit_print", {
   skim_one <- yank(skimmed, "factor")
   input <- knit_print(skim_one)
   expect_match(input, "\n\n**Variable type: factor**\n\n", fixed = TRUE)
-  expect_false(grepl("\n\n**Variable type: numeric**\n\n", input, 
-                     fixed = TRUE))
+  expect_false(grepl("\n\n**Variable type: numeric**\n\n", input, fixed = TRUE))
 })
 
 test_that("make_utf8 produces the correct result ", {
   input <- make_utf8(c("<U+2585><U+2587>"))
   correct <- "▅"
   expect_identical(input, correct)
+})
+
+test_that("Skim falls back to tibble::print.tbl() appropriately", {
+  input <- skim(iris)
+  mean_only <- dplyr::select(input, mean)
+  expect_output(print(mean_only), "# A tibble: 5 x 1")
+})
+
+test_that("Print focused objects appropriately", {
+  skimmed <- skim(iris)
+  input <- focus(skimmed, missing)
+  expect_output(print(input), "Skim summary statistics")
+  expect_output(print(input), "n obs: 150")
+  expect_output(print(input), "n variables: 5")
+  expect_output(print(input), "── Variable type: factor ────────────────")
+  expect_output(print(input), "── Variable type: numeric ────────────────")
 })

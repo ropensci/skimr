@@ -4,6 +4,7 @@
 \alias{stats}
 \alias{n_missing}
 \alias{n_complete}
+\alias{n_whitespace}
 \alias{sorted_count}
 \alias{top_counts}
 \alias{inline_hist}
@@ -24,6 +25,8 @@
 n_missing(x)
 
 n_complete(x)
+
+n_whitespace(x)
 
 sorted_count(x)
 
@@ -68,16 +71,21 @@ list_max_length(x)
 series.}
 }
 \description{
-Skimr provides extensions to a variety of functions with R's stats package
-to simplify creating summaries of data. All functions are vectorized and take
-a single argument. Other parameters for these functions are set in the
-skim_format() function.
+\code{skimr} provides extensions to a variety of functions with R's stats package
+to simplify creating summaries of data. All functions are vectorized over the
+first argument. Additional arguments should be set in the \code{\link[=sfl]{sfl()}} that sets
+the appropriate skimmers for a data type. You can use these, along with other
+vectorized R functions, for creating custom sets of summary functions for
+a given data type.
 }
 \section{Functions}{
 \itemize{
 \item \code{n_missing}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
 
 \item \code{n_complete}: Calculate complete values; complete values are not missing.
+
+\item \code{n_whitespace}: Calculate the number of rows containing only whitespace values
+using s+ regex.
 
 \item \code{sorted_count}: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical
@@ -123,6 +131,5 @@ Based on the function in the pillar package.
 }}
 
 \seealso{
-\code{\link[purrr:partial]{purrr::partial()}} for setting arguments of a
-skimmer function.
+\code{\link[=get_skimmers]{get_skimmers()}} for customizing the functions called by \code{\link[=skim]{skim()}}.
 }

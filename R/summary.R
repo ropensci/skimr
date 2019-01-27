@@ -1,17 +1,17 @@
 #' Summary function for skim_df
-#' 
+#'
 #' This is a method of the generic function [`summary()`].
-#' 
+#'
 #' @param object a skim dataframe.
 #' @param ... Additional arguments affecting the summary produced. Not used.
 #' @return A summary of the skim data frame.
 #' @examples
 #' \dontrun{
-#'  a <- skim(mtcars)
-#'  summary(a)
+#' a <- skim(mtcars)
+#' summary(a)
 #' }
 #' @export
-summary.skim_df <- function(object, ...){
+summary.skim_df <- function(object, ...) {
   if (is.null(object)) {
     stop("dataframe is null.")
   }

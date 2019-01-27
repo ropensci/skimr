@@ -49,15 +49,32 @@ get_skimmers.my_class <- function(column) {
   sfl(
     .type = "my_class",
     mean,
-    sd)
+    sd
+  )
 }
 
 # Integer and float columns are both "numeric" and are treated the same
 # by default. To switch this behavior in another package, add a method.
-get_skimmers.integer <- get_skimmers.numeric
+get_skimmers.integer <- function(column) {
+  sfl(
+    .type = "integer",
+    p50 = stats::quantile(
+      .,
+      probs = .50, na.rm = TRUE, names = FALSE, type = 1
+    )
+  )
+}
+x <- mtcars[c("gear", "carb")]
+class(x$carb) <- "integer"
+skim(x)
+\dontrun{
+# In a package, to revert to the V1 behavior of skimming separately with the
+# same functions, assign the numeric `get_skimmers`.
+get_skimmers.integer <- skimr::get_skimmers.numeric
 
 # Or, in a local session, use `skim_with` to create a different `skim`.
-new_skim <- skim_with(integer = get_skimmers.numeric())
+new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+}
 }
 \seealso{
 \code{\link[=sfl]{sfl()}}

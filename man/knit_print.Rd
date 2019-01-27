@@ -3,21 +3,25 @@
 \name{knit_print}
 \alias{knit_print}
 \alias{knit_print.skim_df}
+\alias{knit_print.skim_list}
+\alias{knit_print.one_skim_df}
 \alias{knit_print.summary_skim_df}
 \title{Provide a default printing method for knitr.}
 \usage{
 \method{knit_print}{skim_df}(x, options = NULL, ...)
 
+\method{knit_print}{skim_list}(x, options = NULL, ...)
+
+\method{knit_print}{one_skim_df}(x, options = NULL, ...)
+
 \method{knit_print}{summary_skim_df}(x, options = NULL, ...)
 }
 \arguments{
-\item{x}{An R object to be printed}
+\item{x}{A skim_df object.}
 
 \item{options}{Options passed into the print function}
 
-\item{...}{Additional arguments passed to the S3 method. Currently ignored,
-except two optional arguments \code{options} and \code{inline}; see
-the references below.}
+\item{...}{Additional arguments passed to method}
 }
 \value{
 A \code{knit_asis} object. Which is used by \code{knitr} when renderind.
@@ -42,6 +46,10 @@ Windows users most commonly. Call \code{vignette("Using_fonts")} for more detail
 \section{Methods (by class)}{
 \itemize{
 \item \code{skim_df}: Default \code{knitr} print for \code{skim_df} objects.
+
+\item \code{skim_list}: Default \code{knitr} print for a \code{skim_list}.
+
+\item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
 
 \item \code{summary_skim_df}: Default \code{knitr} print for \code{skim_df} summaries.
 }}
