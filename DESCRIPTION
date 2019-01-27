@@ -60,6 +60,7 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Collate: 
+    'dplyr.R'
     'stats.R'
     'skim_with.R'
     'get_skimmers.R'
