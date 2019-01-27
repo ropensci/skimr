@@ -35,7 +35,7 @@ test_that("dplyr::mutate works as expected", {
   input <- dplyr::mutate(skimmed_iris, complete2 = complete ^ 2)
   expect_equal(length(input), length_skimmed_iris + 1)
   expect_equal(nrow(input), nvar_iris)
-  expect_equal(colnames(input)[length(input)], "mean2")
+  expect_equal(colnames(input)[length(input)], "complete2")
   expect_equal(class(input), classes_skimmed_iris)
 })
 

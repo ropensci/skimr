@@ -28,8 +28,16 @@ mutate.skim_df <- function(.data, ...) {
 }
 
 #'  Transmute a skim_df
+#'  
+#' [dplyr::transmute()] older than version 0.8.0 drops attributes, but we need to keep 
+#' them around for other skim behaviors and consistency with newer versions of dplyr. 
+#' Otherwise the behavior is exactly the same as dplyr 0.8.0. For more
+#' information, see https://github.com/tidyverse/dplyr/issues/3429. We also need to
+#' retain the two metadata columns (`variable` and `type`) that are the defining 
+#' features of a skim_df object.
 #'
-#'   @param ... Name-value pairs of expressions, each with length 1 or the same
+#' @param .data A `skim_df`, which behaves like a `tbl.`
+#' @param ... Name-value pairs of expressions, each with length 1 or the same
 #'   length as the number of rows in the group (if using [group_by()] or in the
 #'   entire input (if not using groups). The name of each argument will be the
 #'   name of a new variable, and the value will be its corresponding value. 

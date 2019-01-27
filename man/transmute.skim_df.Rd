@@ -2,12 +2,21 @@
 % Please edit documentation in R/dplyr.R
 \name{transmute.skim_df}
 \alias{transmute.skim_df}
-\title{Transmute a skim_df}
+\title{Transmute a skim_df
+
+\code{\link[dplyr:transmute]{dplyr::transmute()}} older than version 0.8.0 drops attributes, but we need to keep
+them around for other skim behaviors and consistency with newer versions of dplyr.
+Otherwise the behavior is exactly the same as dplyr 0.8.0. For more
+information, see https://github.com/tidyverse/dplyr/issues/3429. We also need to
+retain the two metadata columns (\code{variable} and \code{type}) that are the defining
+features of a skim_df object.}
 \usage{
 transmute.skim_df(.data, ...)
 }
-\description{
-@param ... Name-value pairs of expressions, each with length 1 or the same
+\arguments{
+\item{.data}{A \code{skim_df}, which behaves like a \code{tbl.}}
+
+\item{...}{Name-value pairs of expressions, each with length 1 or the same
 length as the number of rows in the group (if using \code{\link[=group_by]{group_by()}} or in the
 entire input (if not using groups). The name of each argument will be the
 name of a new variable, and the value will be its corresponding value.
@@ -16,7 +25,17 @@ existing variables of the same name.
 @return A \code{skim_df} object, which also inherits the class(es) of the input
 data. The \code{variable`` and}type` variables will be included
 even if not named.
-In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.
+In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.}
+}
+\description{
+Transmute a skim_df
+
+\code{\link[dplyr:transmute]{dplyr::transmute()}} older than version 0.8.0 drops attributes, but we need to keep
+them around for other skim behaviors and consistency with newer versions of dplyr.
+Otherwise the behavior is exactly the same as dplyr 0.8.0. For more
+information, see https://github.com/tidyverse/dplyr/issues/3429. We also need to
+retain the two metadata columns (\code{variable} and \code{type}) that are the defining
+features of a skim_df object.
 }
 \seealso{
 \code{\link[dplyr:transmute]{dplyr::transmute()}} for the function's expected behavior.
