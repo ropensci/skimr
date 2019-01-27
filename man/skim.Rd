@@ -23,7 +23,7 @@ default is to skim all columns.}
 }
 \value{
 A \code{skim_df} object, which also inherits the class(es) of the input
-data. The result is usually a data frame or tibble.
+data. In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.
 }
 \description{
 \code{skim()} is an alternative to \code{\link[=summary]{summary()}}, quickly providing a broad

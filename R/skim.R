@@ -43,7 +43,7 @@
 #'   default is to skim all columns.
 #' @param skim  The skimming function to use in `skim_tee()`.
 #' @return A `skim_df` object, which also inherits the class(es) of the input
-#'   data. The result is usually a data frame or tibble.
+#'   data. In many ways, the object behaves like a [tibble::tibble()].
 #' @examples
 #' skim(iris)
 #'
