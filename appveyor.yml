@@ -17,6 +17,7 @@ install:
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github tidyverse/dplyr
   
 environment:
   global:
