@@ -3,7 +3,7 @@ output:
  md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
+# skimr <img src="man/figures/logo.png" align="right" height="139" />
 ```{r set-options, echo=FALSE, message=FALSE}
 library(skimr)
 options(tibble.width = Inf)
