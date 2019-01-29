@@ -12,13 +12,13 @@ mutate.skim_df(.data, ...)
 \item{...}{Name-value pairs of expressions, each with length 1 or the same
 length as the number of rows in the group (if using \code{\link[=group_by]{group_by()}} or in the
 entire input (if not using groups). The name of each argument will be the
-name of a new variable, and the value will be its corresponding value.
-Use \code{NULL} value in \code{mutate} to drop a variable.  New variables overwrite
+name of a new variable, and the value will be its corresponding value.  Use
+\code{NULL} value in \code{mutate} to drop a variable.  New variables overwrite
 existing variables of the same name.
 
 The arguments in \code{...} are automatically \href{rlang::quo}{quoted} and
-\href{rlang::eval_tidy}{evaluated} in the context of the data frame. They support
-\href{rlang::quasiquotation}{unquoting} and splicing. See
+\href{rlang::eval_tidy}{evaluated} in the context of the data frame. They
+support \href{rlang::quasiquotation}{unquoting} and splicing. See
 \code{vignette("programming", package = "dplyr")} for an introduction to these
 concepts.}
 }

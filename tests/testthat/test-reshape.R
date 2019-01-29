@@ -72,6 +72,22 @@ test_that("Partition is safe if some skimmers are missing", {
   expect_named(partitioned$numeric, c("variable", "missing"))
 })
 
+test_that("Partition handles new columns", {
+  skimmed <- skim(iris)
+  expanded <- dplyr::mutate(skimmed, mean2 = mean ^ 2, complete2 = complete ^ 2)
+  partitioned <- partition(expanded)
+  expect_named(partitioned$numeric, c(
+    "variable", "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75", "p100",
+    "hist", "mean2", "complete2"
+  ))
+
+  expect_named(partitioned$factor, c(
+    "variable", "missing", "complete", "n",
+    "ordered", "n_unique", "top_counts", "complete2"
+  ))
+})
+
 test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
   skimmed <- skim(iris)
   expected <- dplyr::select(skimmed, variable, type, missing)
