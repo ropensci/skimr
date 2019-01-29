@@ -84,22 +84,15 @@ skim_with <- function(..., append = TRUE) {
       selected <- selected[!group_variables]
     }
 
+    skimmers <- purrr::map(
+      selected, get_final_skimmers, data, local_skimmers, append
+    )
     variables <- tibble::tibble(variable = selected)
     nested <- dplyr::mutate(variables,
-      skimmed = purrr::map(
-        !!rlang::sym("variable"), skim_one, data, local_skimmers, append
+      skimmed = purrr::map2(
+        !!rlang::sym("variable"), skimmers, skim_one, data
       )
     )
-    skimmers_used <- purrr::map(
-      nested$skimmed,
-      ~ list(
-        type = attr(.x, "skimmer_type"),
-        used = attr(.x, "skimmers_used")
-      )
-    )
-    unique_skimmers <- unique(skimmers_used)
-    skimmers <- purrr::map(unique_skimmers, "used")
-    variable_types <- purrr::map(unique_skimmers, "type")
     out <- tidyr::unnest(nested)
     structure(out,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
@@ -107,7 +100,7 @@ skim_with <- function(..., append = TRUE) {
       data_cols = ncol(data),
       df_name = rlang::expr_label(substitute(data)),
       groups = dplyr::groups(data),
-      skimmers_used = purrr::set_names(skimmers, variable_types)
+      skimmers_used = get_skimmers_used(skimmers)
     )
   }
 }
@@ -148,23 +141,17 @@ validate_assignment <- function(...) {
   to_assign
 }
 
-#' Generate one or more rows of a `skim_df`, using one column
+#' Combine local and default skimmers for each column
 #'
-#' Get the default skimmers for the current column using S3 dispatch for
-#' [get_skimmers()]. Get the user-provided local skimmers from [skim_with()].
-#' If no local skimmers are provided, use the defaults. Otherwise, merge the
-#' local and default skimmers with the following rules.
+#' Before summarizing the data, we need to build the set of inferred types
+#' and skimming functions for every column in the data.
 #'
-#'   - If `append = FALSE` of if the local and default types differ, use only
-#'     the locals.
-#'   - Else, replace the default values with the local values.
-#'
-#' Call all of the skimming functions on the single column, using grouped
-#' variants, if necessary.
-#'
-#' @keywords internal
+#' @param column A character scalar. The column name.
+#' @param data The data frame to summarize.
+#' @param local_skimmers A list of `sfl` objects. Skimmers defined using
+#'   `skim_with()`
 #' @noRd
-skim_one <- function(column, data, local_skimmers, append) {
+get_final_skimmers <- function(column, data, local_skimmers, append) {
   defaults <- get_skimmers(data[[column]])
   all_classes <- class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
@@ -195,19 +182,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   } else {
     skimmers <- merge_skimmers(locals, defaults, append)
   }
-
-  reduced <- suppressMessages(dplyr::select(data, !!column))
-  out <- tibble::tibble(
-    type = skimmers$type,
-    !!!dplyr::summarize_all(reduced, skimmers$keep)
-  )
-  used <- names(skimmers$keep)
-  grps <- dplyr::groups(reduced)
-  names(out) <- c("type", as.character(grps), used)
-  structure(out,
-    skimmer_type = skimmers$type,
-    skimmers_used = used
-  )
+  skimmers
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {
@@ -225,4 +200,37 @@ merge_skimmers <- function(locals, defaults, append) {
     defaults$keep[locals$drop] <- NULL
     defaults
   }
+}
+
+#' Generate one or more rows of a `skim_df`, using one column
+#'
+#' Get the default skimmers for the current column using S3 dispatch for
+#' [get_skimmers()]. Get the user-provided local skimmers from [skim_with()].
+#' If no local skimmers are provided, use the defaults. Otherwise, merge the
+#' local and default skimmers with the following rules.
+#'
+#'   - If `append = FALSE` of if the local and default types differ, use only
+#'     the locals.
+#'   - Else, replace the default values with the local values.
+#'
+#' Call all of the skimming functions on the single column, using grouped
+#' variants, if necessary.
+#'
+#' @keywords internal
+#' @noRd
+skim_one <- function(column, skimmers, data) {
+  reduced <- suppressMessages(dplyr::select(data, !!column))
+  out <- tibble::tibble(
+    type = skimmers$type,
+    !!!dplyr::summarize_all(reduced, skimmers$keep)
+  )
+  used <- names(skimmers$keep)
+  grps <- dplyr::groups(reduced)
+  purrr::set_names(out, c("type", as.character(grps), used))
+}
+
+get_skimmers_used <- function(skimmers, types) {
+  function_names <- purrr::map(skimmers, ~names(.x$keep))
+  skimmers_used <- purrr::set_names(function_names, types)
+  skimmers_used[unique(types)]
 }
