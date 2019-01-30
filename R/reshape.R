@@ -46,7 +46,7 @@ partition <- function(data) {
 reconcile_skimmers <- function(data, groups) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
-  with_base_columns <- c("variable", "type", purrr::flatten_chr(skimmers_used))
+  with_base_columns <- c("type", "variable", purrr::flatten_chr(skimmers_used))
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, !!rlang::sym("type"))
@@ -91,9 +91,7 @@ simplify_skimdf <- function(data, type, skimmers, groups) {
 #' @export
 bind <- function(data) {
   combined <- dplyr::bind_rows(!!!data, .id = "type")
-  # The variable column should always be first
-  out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
-  rebuild_skim_obj(out, data)
+  rebuild_skim_obj(combined, data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
@@ -129,7 +127,7 @@ yank <- function(data, type) {
 #' @export
 focus <- function(.data, ...) {
   stopifnot(inherits(.data, "skim_df"))
-  dplyr::select(.data, "variable", "type", ...)
+  dplyr::select(.data, "type", "variable", ...)
 }
 
 #' Skim results returned as a tidy long data frame with four columns:

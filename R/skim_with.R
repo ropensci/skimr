@@ -87,10 +87,20 @@ skim_with <- function(..., append = TRUE) {
     skimmers <- purrr::map(
       selected, get_final_skimmers, data, local_skimmers, append
     )
-    variables <- tibble::tibble(variable = selected)
-    nested <- dplyr::mutate(variables,
+    types <- purrr::map_chr(skimmers, "type")
+    unique_skimmers <- reduce_skimmers(skimmers, types)
+    ready_to_skim <- tibble::tibble(
+      type = unique(types),
+      skimmers = unique_skimmers,
+      variables = split(selected, types)[type]
+    )
+    grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("type"))
+    nested <- dplyr::summarize(grouped,
       skimmed = purrr::map2(
-        !!rlang::sym("variable"), skimmers, skim_one, data
+        !!rlang::sym("skimmers"),
+        !!rlang::sym("variables"),
+        skim_by_type,
+        data
       )
     )
     out <- tidyr::unnest(nested)
@@ -100,7 +110,7 @@ skim_with <- function(..., append = TRUE) {
       data_cols = ncol(data),
       df_name = rlang::expr_label(substitute(data)),
       groups = dplyr::groups(data),
-      skimmers_used = get_skimmers_used(skimmers)
+      skimmers_used = get_skimmers_used(unique_skimmers)
     )
   }
 }
@@ -143,8 +153,14 @@ validate_assignment <- function(...) {
 
 #' Combine local and default skimmers for each column
 #'
-#' Before summarizing the data, we need to build the set of inferred types
-#' and skimming functions for every column in the data.
+#' Get the default skimmers for the current column using S3 dispatch for
+#' [get_skimmers()]. Get the user-provided local skimmers from [skim_with()].
+#' If no local skimmers are provided, use the defaults. Otherwise, merge the
+#' local and default skimmers with the following rules.
+#'
+#'   - If `append = FALSE` of if the local and default types differ, use only
+#'     the locals.
+#'   - Else, replace the default values with the local values.
 #'
 #' @param column A character scalar. The column name.
 #' @param data The data frame to summarize.
@@ -202,35 +218,84 @@ merge_skimmers <- function(locals, defaults, append) {
   }
 }
 
+reduce_skimmers <- function(skimmers, types) {
+  named <- purrr::set_names(skimmers, types)
+  named[unique(types)]
+}
+
+get_skimmers_used <- function(skimmers) {
+  types <- names(skimmers)
+  function_names <- purrr::map(skimmers, ~names(.x$keep))
+  purrr::set_names(function_names, types)
+}
+
 #' Generate one or more rows of a `skim_df`, using one column
-#'
-#' Get the default skimmers for the current column using S3 dispatch for
-#' [get_skimmers()]. Get the user-provided local skimmers from [skim_with()].
-#' If no local skimmers are provided, use the defaults. Otherwise, merge the
-#' local and default skimmers with the following rules.
-#'
-#'   - If `append = FALSE` of if the local and default types differ, use only
-#'     the locals.
-#'   - Else, replace the default values with the local values.
 #'
 #' Call all of the skimming functions on the single column, using grouped
 #' variants, if necessary.
 #'
 #' @keywords internal
 #' @noRd
-skim_one <- function(column, skimmers, data) {
-  reduced <- suppressMessages(dplyr::select(data, !!column))
-  out <- tibble::tibble(
-    type = skimmers$type,
-    !!!dplyr::summarize_all(reduced, skimmers$keep)
-  )
-  used <- names(skimmers$keep)
-  grps <- dplyr::groups(reduced)
-  purrr::set_names(out, c("type", as.character(grps), used))
+skim_by_type <- function(skimmers, data_columns, data) {
+  UseMethod("skim_by_type", data)
 }
 
-get_skimmers_used <- function(skimmers, types) {
-  function_names <- purrr::map(skimmers, ~names(.x$keep))
-  skimmers_used <- purrr::set_names(function_names, types)
-  skimmers_used[unique(types)]
+#' @export
+skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
+  group_columns <- dplyr::groups(data)
+  new_names <- names(skimmers$keep)
+  delim <- "~!@#$%^&*()-+"
+  mangled_skimmers <- purrr::set_names(skimmers$keep, paste0(delim, new_names))
+  grouped <- dplyr::group_by(data, !!!group_columns)
+  skimmed <- dplyr::summarize_at(grouped, data_columns, mangled_skimmers)
+  build_results(skimmed, data, data_columns, group_columns, new_names, delim)
+}
+
+#' @export
+skim_by_type.default <- function(skimmers, data_columns, data) {
+  new_names <- names(skimmers$keep)
+  delim <- "~!@#$%^&*()-+"
+  mangled_skimmers <- purrr::set_names(skimmers$keep, paste0(delim, new_names))
+  skimmed <- dplyr::summarize_at(data, data_columns, mangled_skimmers)
+  build_results(skimmed, data, data_columns, NULL, new_names, delim)
+}
+
+#' Summarize returns a single row data frame, make it tall.
+#'
+#' We expect one row per variable/ group. To do this we need to take the
+#' processed results, find the appropriate columns for each variable and
+#' restack them. This uses a small hack that rests on the naming convention
+#' of data frame produced by `summarize_at`, which uses the following scheme:
+#'
+#'  - `variable_name` + `_` + `function_name`
+#'
+#' To avoid inappropriately assigning the columns to the wrong variable, we
+#' mangle the function names. That way, each set of relevant columns begin
+#' with the column name + `_` + our internal delimeter.
+#' @noRd
+build_results <- function(skimmed, data, data_cols, groups, new_names, delim) {
+  if (length(data_cols) > 1) {
+    out <- tibble::tibble(
+      variable = data_cols,
+      by_variable = purrr::map(
+        data_cols, reshape_skimmed, skimmed, groups, new_names, delim
+      )
+    )
+    tidyr::unnest(out)
+  } else {
+    tibble::tibble(
+      variable = data_cols,
+      !!!purrr::set_names(skimmed, new_names)
+    )
+  }
+}
+
+reshape_skimmed <- function(column, skimmed, groups, new_names, delim) {
+  delim_name <- paste0(column, "_", delim)
+  out <- dplyr::select(
+      skimmed,
+      !!!groups,
+      tidyselect::starts_with(delim_name)
+  )
+  purrr::set_names(out, c(groups, new_names))
 }

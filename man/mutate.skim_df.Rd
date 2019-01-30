@@ -4,7 +4,7 @@
 \alias{mutate.skim_df}
 \title{Mutate a skim_df}
 \usage{
-mutate.skim_df(.data, ...)
+\method{mutate}{skim_df}(.data, ...)
 }
 \arguments{
 \item{.data}{A \code{skim_df}, which behaves like a \code{tbl.}}

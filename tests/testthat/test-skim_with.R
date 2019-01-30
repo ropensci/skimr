@@ -117,5 +117,5 @@ test_that("sfls can use unnamed functions", {
   dat <- tibble::tibble(1:3)
   new_skim <- skim_with(integer = sfl(mad), append = FALSE)
   input <- new_skim(dat)
-  expect_named(input, c("variable", "type", "mad"))
+  expect_named(input, c("type", "variable", "mad"))
 })
