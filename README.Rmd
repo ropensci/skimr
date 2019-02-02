@@ -123,7 +123,7 @@ By default, functions in the `sfl` call are appended to the default skimmers.
 
 ```{r}
 my_skim <- skim_with(numeric = sfl(mad))
-my_skim(iris, Sepal.Length)
+#my_skim(iris, Sepal.Length)
 ```
 
 But you can also use the dummy argument pattern from `dplyr::funs` to set
@@ -131,16 +131,16 @@ particular function arguments. Setting the `append = FALSE` argument uses only
 those functions that you've provided.
 
 ```{r}
-my_skim <- skim_with(numeric = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
-                     append = FALSE)
-my_skim(iris, Sepal.Length)
+#my_skim <- skim_with(numeric = sfl(iqr = IQR, p99 = quantile(., probs = .99)),
+#                     append = FALSE)
+#my_skim(iris, Sepal.Length)
 ```
 
 And you can default skimmers by setting them to `NULL`.
 
 ```{r}
-my_skim <- skim_with(numeric = sfl(hist = NULL))
-my_skim(iris, Sepal.Length)
+#my_skim <- skim_with(numeric = sfl(hist = NULL))
+#my_skim(iris, Sepal.Length)
 ```
 
 ### Skimming other objects
@@ -165,13 +165,13 @@ a `sfl`, similar to customization within `skim_with()`, but you should also
 provide a value for the `class` argument. Here's an example.
 
 ```{r}
-get_skimmers.my_data_type <- function(column) {
-  sfl(
-    .class = "my_data_type",
-    missing = n_missing,
-    complete = n_complete,
-    p99 = quantile(., probs = .99))
-}
+# get_skimmers.my_data_type <- function(column) {
+#   sfl(
+#     .class = "my_data_type",
+#     missing = n_missing,
+#     complete = n_complete,
+#     p99 = quantile(., probs = .99))
+# }
 ```
 
 ## Limitations of current version
