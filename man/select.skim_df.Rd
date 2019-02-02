@@ -8,27 +8,9 @@ Always includes variable and type columns even if user has not selected them.}
 select.skim_df(.data, ...)
 }
 \arguments{
-\item{.data}{A tbl. All main verbs are S3 generics and provide methods
-for \code{\link[=tbl_df]{tbl_df()}}, \code{\link[dtplyr:tbl_dt]{dtplyr::tbl_dt()}} and \code{\link[dbplyr:tbl_dbi]{dbplyr::tbl_dbi()}}.}
+\item{.data}{a skim_df object}
 
-\item{...}{One or more unquoted expressions separated by commas.
-You can treat variable names like they are positions, so you can
-use expressions like \code{x:y} to select ranges of variables.
-
-Positive values select variables; negative values drop variables.
-If the first expression is negative, \code{select()} will automatically
-start with all variables.
-
-Use named arguments, e.g. \code{new_name = old_name}, to rename selected variables.
-
-The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
-\link[rlang:eval_tidy]{evaluated} in a context where column names
-represent column positions. They also support
-\link[rlang:quasiquotation]{unquoting} and splicing. See
-\code{vignette("programming")} for an introduction to these concepts.
-
-See \link[tidyselect:select_helpers]{select helpers} for more details and
-examples about tidyselect helpers such as \code{starts_with()}, \code{everything()}, ...}
+\item{...}{list of variables to be retained}
 }
 \value{
 skim_df object

@@ -60,13 +60,16 @@ transmute.skim_df <- function(.data, ...) {
 #' Use dplyr verb select on skim_df objects.
 #' Always includes variable and type columns even if user has not selected them.
 #' @seealso [`dplyr::select()`]
-#' @inheritParams dplyr::select
+#' @param .data a skim_df object
+#' @param ... list of variables to be retained
+#' 
 #' @return  skim_df object
 #' @export
 select.skim_df <-function (.data, ...) {
    mc <- match.call()
    mc[[length(mc) +1]] <- quote(variable)
    mc[[length(mc) +1]] <- quote(type)
+   message("The variables `variable`` and `type`` are retained.")
    selected <-  NextMethod("select")
    rebuild_skim_obj(selected, .data)
 }
