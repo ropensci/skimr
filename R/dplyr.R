@@ -43,7 +43,7 @@ mutate.skim_df <- function(.data, ...) {
 #'   name of a new variable, and the value will be its corresponding value. 
 #'   Use `NULL` value in `mutate` to drop a variable.  New variables overwrite
 #'   existing variables of the same name.
-#'   @return A `skim_df` object, which also inherits the class(es) of the input
+#' @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. The `variable`` and `type` variables will be included
 #'   even if not named. 
 #'   In many ways, the object behaves like a [tibble::tibble()].
@@ -58,11 +58,13 @@ transmute.skim_df <- function(.data, ...) {
 }
 
 #' Use dplyr verb select on skim_df objects.
+#'
 #' Always includes variable and type columns even if user has not selected them.
+#'
 #' @seealso [`dplyr::select()`]
 #' @param .data a skim_df object
 #' @param ... list of variables to be retained
-#' 
+#'
 #' @return  skim_df object
 #' @export
 select.skim_df <-function (.data, ...) {

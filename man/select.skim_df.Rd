@@ -2,8 +2,7 @@
 % Please edit documentation in R/dplyr.R
 \name{select.skim_df}
 \alias{select.skim_df}
-\title{Use dplyr verb select on skim_df objects.
-Always includes variable and type columns even if user has not selected them.}
+\title{Use dplyr verb select on skim_df objects.}
 \usage{
 select.skim_df(.data, ...)
 }
@@ -16,7 +15,6 @@ select.skim_df(.data, ...)
 skim_df object
 }
 \description{
-Use dplyr verb select on skim_df objects.
 Always includes variable and type columns even if user has not selected them.
 }
 \seealso{

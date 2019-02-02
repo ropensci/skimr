@@ -21,11 +21,13 @@ length as the number of rows in the group (if using \code{\link[=group_by]{group
 entire input (if not using groups). The name of each argument will be the
 name of a new variable, and the value will be its corresponding value.
 Use \code{NULL} value in \code{mutate} to drop a variable.  New variables overwrite
-existing variables of the same name.
-@return A \code{skim_df} object, which also inherits the class(es) of the input
+existing variables of the same name.}
+}
+\value{
+A \code{skim_df} object, which also inherits the class(es) of the input
 data. The \code{variable`` and}type` variables will be included
 even if not named.
-In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.}
+In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.
 }
 \description{
 Transmute a skim_df
