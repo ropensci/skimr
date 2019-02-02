@@ -2,18 +2,21 @@ context("Print a skim_df object")
 
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
-  expect_output(print(input), "Skim summary statistics")
-  expect_output(print(input), "n obs: 150")
-  expect_output(print(input), "n variables: 5")
+  expect_output(print(input), "Data Summary")
+  expect_output(print(input), "Number of Rows: 150")
+  expect_output(print(input), "Number of Columns: 5")
+  expect_output(print(input), "Column type frequency: ")  
+  expect_output(print(input), "  factor: 1")  
+  expect_output(print(input), "  numeric: 4")  
   expect_output(print(input), "── Variable type: factor ────────────────")
   expect_output(print(input), "── Variable type: numeric ────────────────")
 })
 
 test_that("Skim prints a special header for grouped data frames", {
   input <- skim(dplyr::group_by(iris, Species))
-  expect_output(print(input), " group variables: Species")
-  expect_output(print(input), "n obs: 150")
-  expect_output(print(input), "n variables: 5")
+  expect_output(print(input), "Group variables: Species")
+  expect_output(print(input), "Number of Rows: 150")
+  expect_output(print(input), "Number of Columns: 5")
 })
 
 test_that("Skim lists print as expected", {
@@ -58,7 +61,7 @@ test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
   input <- knit_print(skimmed, options = options)
-  expect_false(grepl("Skim summary statistics", input))
+  expect_false(grepl("Data Summary", input))
 })
 
 test_that("Skim lists have a separate knit_print method", {
@@ -92,9 +95,10 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
 test_that("Print focused objects appropriately", {
   skimmed <- skim(iris)
   input <- focus(skimmed, missing)
-  expect_output(print(input), "Skim summary statistics")
-  expect_output(print(input), "n obs: 150")
-  expect_output(print(input), "n variables: 5")
-  expect_output(print(input), "── Variable type: factor ────────────────")
-  expect_output(print(input), "── Variable type: numeric ────────────────")
+  expect_output(print(input), "Data Summary")
+  expect_output(print(input), "Number of Rows: 150")
+  expect_output(print(input), "Number of Columns: 5")
+  expect_output(print(input), "Column type frequency: ")  
+  expect_output(print(input), "  factor: 1")  
+  expect_output(print(input), "  numeric: 4")  
 })
