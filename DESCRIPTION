@@ -34,23 +34,24 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.8),
-    magrittr,
+    dplyr (>= 0.8.0),
+    magrittr (>= 1.5),
     pander,
     purrr,
-    rlang,
+    rlang (>= 0.3.1),
     stats,
     stringr (>= 1.1),
     knitr (>= 1.2),
-    tibble (>= 0.6),
+    tibble (>= 2.0.0),
     tidyr (>= 0.7),
-    tidyselect (>= 0.2.4)
+    tidyselect (>= 0.2.5)
 Suggests:
     extrafont,
     rmarkdown,
     testthat (>= 2.0.0),
     withr,
     covr
+Remotes: tidyverse/dplyr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
