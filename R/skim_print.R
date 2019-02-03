@@ -72,10 +72,10 @@ print.summary_skim_df <- function(x, ...) {
     collapse = "   \n  "
   )
 
-  cat("Data Summary\n",
-    df_name,  
-    n_rows,
-    n_cols, 
+  cat("Data Summary\n  ",
+    df_name, "\n   ",  
+    n_rows,  "\n  ",
+    n_cols, "\n   ",
     "Column type frequency:    \n  ",
     type_frequency_string,
     "\n",
@@ -117,16 +117,17 @@ NULL
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (options$skimr_include_summary %||% TRUE) {
-    summary_stats <- data.frame(
-      n_obs = attr(x, "data_rows"),
-      n_cols = attr(x, "data_cols")
-    )
-    kabled <- knitr::kable(
-      summary_stats,
-      format = "html", table.attr = "style='width: auto;'
-      class='table table-condensed'"
-    )
-    summary <- c("**Skim summary statistics**", "", kabled, "", "")
+    # summary_stats <- data.frame(
+    #   n_obs = attr(x, "data_rows"),
+    #   n_cols = attr(x, "data_cols")
+    # )
+    # kabled <- knitr::kable(
+    #   summary_stats,
+    #   format = "html", table.attr = "style='width: auto;'
+    #   class='table table-condensed'"
+    # )
+    # summary <- c("**Skim summary statistics**", "", kabled, "", "")
+    summary<- skimr:::knit_print.summary_skim_df(summary(x))
   } else {
     summary <- c()
   }
@@ -165,15 +166,45 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
-knit_print.summary_skim_df <- function(x, options = NULL, ...) {
-  knit_print_one()
-  n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
-  n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
-  df_name <- paste0("Name: ", x[["df_name"]])
-
-  kframe <- data.frame(df_name, n_rows, n_cols)
-  list(
-    Summary = knitr::kable(kframe),
-    `Type counts` = knitr::kable(x$type_frequencies)
+knit_print.summary_skim_df <- function(.x, options = NULL, ...) {
+  n_rows <- paste0("Number of Rows ", .x$n_rows, "   \n")
+  n_cols <- paste0("Number of Columns ", .x$n_cols, "    \n")
+  df_name <- ifelse(.x$df_name == "`.`", "", paste0("Name ", .x$df_name, ""))
+  if (!is.null(.x$possible_groups)) {
+    groups <- paste0("Group variables: ", 
+                     paste(.x[["possible_groups"]], 
+                           collapse = ", "), "\n")
+    
+    if (nchar(groups) > 70){
+      groups <- paste0(substr(groups, 1, 70), "...")
+    }
+  } else {
+    groups <- ""
+  }
+  
+  type_frequency_string <- paste0(.x$type_frequencies$type,
+                                  ": ",
+                                  .x$type_frequencies$n,
+                                  collapse = "   \n  "
   )
+  
+  summary_stats <- paste0(
+      df_name, "\n\n   ",  
+      n_rows,  "\n  ",
+      n_cols, "\n   ",
+      "Column type frequency:    \n  ",
+      type_frequency_string,
+      "\n",
+      groups,
+      "\n"
+  )
+  
+  kabled <- knitr::kable(
+    summary_stats,
+    format = "html", table.attr = "style='width: auto;'
+      class='table table-condensed'",
+    caption = "Data Summary",
+    col.names = c(" ")
+  )
+  kabled
 }
