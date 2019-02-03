@@ -87,8 +87,8 @@ iris \%>\%
   dplyr::select(mean) \%>\%
   dplyr::top_n(5)
 
-Use skim_tee to view the skim results and
-continue using the original data.
+# Use skim_tee to view the skim results and
+# continue using the original data.
 chickwts \%>\%
   skim_tee() \%>\%
   dplyr::filter(feed == "sunflower")
