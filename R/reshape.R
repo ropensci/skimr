@@ -78,7 +78,8 @@ get_complete_columns <- function(type, ..., names) {
 simplify_skimdf <- function(data, type, skimmers, groups) {
   keep <- c("variable", groups, skimmers[[type]])
   cols_in_data <- names(data)
-  out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
+  out <- data[dplyr::intersect(keep, cols_in_data)]
+ # out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
   structure(
     out,
     class = c("one_skim_df", "tbl_df", "tbl", "data.frame"),
