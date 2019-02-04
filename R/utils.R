@@ -45,18 +45,3 @@ fix_windows_histograms <- function() {
   }
   invisible(NULL)
 }
-
-#' Preserve skim_df attributes
-#' @noRd
-reassign_skim_attrs <- function(object, skim_df, ...) {
-  defaults <- list(
-    class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-    data_rows = attr(skim_df, "data_rows"),
-    data_cols = attr(skim_df, "data_cols"),
-    df_name = attr(skim_df, "df_name"),
-    groups = attr(skim_df, "groups"),
-    skimmers_used = attr(skim_df, "skimmers_used")
-  )
-  updated <- purrr::list_modify(defaults, ...)
-  rlang::set_attrs(object, !!!updated)
-}
