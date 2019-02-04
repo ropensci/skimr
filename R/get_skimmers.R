@@ -68,8 +68,7 @@ get_skimmers <- function(column) {
 
 #' @export
 get_skimmers.default <- function(column) {
-  fallback <- get_skimmers(character())
-  sfl(.type = "default", !!!fallback$keep)
+  purrr::list_modify(get_skimmers(character()), type = "default")
 }
 
 #' @export
@@ -156,14 +155,18 @@ get_skimmers.Date <- function(column) {
 
 #' @export
 get_skimmers.POSIXct <- function(column) {
-  date_skimmers <- get_skimmers(structure(list(), class = "Date"))
-  sfl(.type = "POSIXct", !!!date_skimmers$keep)
+  purrr::list_modify(
+    get_skimmers(structure(list(), class = "Date")),
+    type = "POSIXct"
+  )
 }
 
 #' @export
 get_skimmers.difftime <- function(column) {
-  date_skimmers <- get_skimmers(structure(list(), class = "Date"))
-  sfl(.type = "difftime", !!!date_skimmers$keep)
+  purrr::list_modify(
+    get_skimmers(structure(list(), class = "Date")),
+    type = "difftime"
+  )
 }
 
 #' @export
@@ -201,8 +204,7 @@ get_skimmers.list <- function(column) {
 
 #' @export
 get_skimmers.AsIs <- function(column) {
-  list_skimmers <- get_skimmers(list())
-  sfl(.type = "AsIs", !!!list_skimmers$keep)
+  purrr::list_modify(get_skimmers(list()), type = "AsIs")
 }
 
 #' @rdname get_skimmers
@@ -233,6 +235,6 @@ get_class_defaults <- function(class) {
   if (skimmers$type == "default") {
     NA
   } else {
-    names(skimmers$keep)
+    names(skimmers$funs)
   }
 }

@@ -11,18 +11,17 @@ test_that("sfl's require at least one function", {
 test_that("The interface for sfl's separates keep and drop functions", {
   input <- sfl(mad = mad, hist = NULL, .type = "test")
   expect_is(input, "skimr_function_list")
-  expect_length(input, 3)
-  expect_named(input, c("keep", "drop", "type"))
-  expect_identical(input$drop, "hist")
+  expect_length(input, 2)
+  expect_named(input, c("funs", "type"))
   expect_identical(input$type, "test")
 
-  keep <- input$keep
-  expect_is(keep, "list")
-  expect_named(keep, "mad")
+  funs <- input$funs
+  expect_is(funs, "list")
+  expect_named(funs, c("mad", "hist"))
 })
 
 test_that("sfl's support dummy names", {
   input <- sfl(mean = ~ mean(., na.rm = TRUE), .type = "test")
-  keep <- input$keep
-  expect_equal(keep$mean, rlang::quo(mean(., na.rm = TRUE)))
+  funs <- input$funs
+  expect_equal(funs$mean, rlang::quo(mean(., na.rm = TRUE)))
 })

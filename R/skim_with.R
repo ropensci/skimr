@@ -170,7 +170,7 @@ skim_one <- function(column, data, local_skimmers, append) {
     )
   }
 
-  if (is.null(locals$keep)) {
+  if (is.null(locals$funs)) {
     if (defaults$type == "default") {
       warning(
         "Couldn't find skimmers for class: %s; No user-defined `sfl` ",
@@ -190,9 +190,9 @@ skim_one <- function(column, data, local_skimmers, append) {
   reduced <- suppressMessages(dplyr::select(data, !!column))
   out <- tibble::tibble(
     type = skimmers$type,
-    !!!dplyr::summarize_all(reduced, skimmers$keep)
+    !!!dplyr::summarize_all(reduced, skimmers$funs)
   )
-  used <- names(skimmers$keep)
+  used <- names(skimmers$funs)
   grps <- dplyr::groups(reduced)
   names(out) <- c("type", as.character(grps), used)
   structure(out,
@@ -209,11 +209,10 @@ get_local_skimmers <- function(classes, local_skimmers) {
 }
 
 merge_skimmers <- function(locals, defaults, append) {
-  if (locals$type != defaults$type || !append) {
+  if (!append || locals$type != defaults$type) {
     locals
   } else {
-    defaults$keep <- purrr::list_modify(defaults$keep, !!!locals$keep)
-    defaults$keep[locals$drop] <- NULL
+    defaults$funs <- purrr::list_modify(defaults$funs, !!!locals$funs)
     defaults
   }
 }

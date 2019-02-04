@@ -14,18 +14,9 @@
 #' @export
 sfl <- function(..., .type = "") {
   stopifnot(length(.type) == 1, is.character(.type))
-  skimmer_list <- rlang::list2(...)
-  if (length(skimmer_list) < 1) {
+  funs <- rlang::list2(...)
+  if (length(funs) < 1) {
     stop("Please provide one or more named argument")
   }
-
-  dropable <- purrr::map_lgl(skimmer_list, is.null)
-  keep <- skimmer_list[!dropable]
-  drop <- skimmer_list[dropable]
-  out <- list(
-    keep = keep,
-    drop = names(drop),
-    type = .type
-  )
-  structure(out, class = "skimr_function_list")
+  structure(list(funs = funs, type = .type ), class = "skimr_function_list")
 }
