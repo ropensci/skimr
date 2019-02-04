@@ -23,5 +23,5 @@
 #' @export
 mutate.skim_df <- function(.data, ...) {
   mutated <- NextMethod("mutate")
-  rebuild_skim_obj(mutated, .data)
+  reassign_skim_attrs(mutated, .data)
 }

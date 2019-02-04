@@ -48,7 +48,7 @@ fix_windows_histograms <- function() {
 
 #' Preserve skim_df attributes
 #' @noRd
-rebuild_skim_obj <- function(object, skim_df, ...) {
+reassign_skim_attrs <- function(object, skim_df, ...) {
   defaults <- list(
     class = c("skim_df", "tbl_df", "tbl", "data.frame"),
     data_rows = attr(skim_df, "data_rows"),

@@ -35,7 +35,9 @@ partition <- function(data) {
   groups <- attr(data, "groups")
   skimmers <- reconcile_skimmers(data, groups)
   reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
-  rebuild_skim_obj(reduced, data, class = "skim_list", skimmers_used = skimmers)
+  reassign_skim_attrs(
+    reduced, data, class = "skim_list", skimmers_used = skimmers
+  )
 }
 
 #' Align the skimmers_used attribute with the current columns in the data
@@ -93,7 +95,7 @@ bind <- function(data) {
   combined <- dplyr::bind_rows(!!!data, .id = "type")
   # The variable column should always be first
   out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
-  rebuild_skim_obj(out, data)
+  reassign_skim_attrs(out, data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
