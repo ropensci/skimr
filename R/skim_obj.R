@@ -40,8 +40,10 @@ is_skim_df <- function(object) {
 #' @export
 assert_is_skim_df <- function(object) {
   stopifnot(
-    has_type_column(object), has_variable_column(object), has_skimr_attributes(object)
+    has_type_column(object), has_variable_column(object),
+    has_skimr_attributes(object)
   )
+  object
 }
 
 #' @describeIn skim-obj Is the object a `skim_list`?
@@ -56,6 +58,7 @@ is_skim_list <- function(object) {
 assert_is_skim_list <- function(object) {
   have_variable_column <- purrr::map_lgl(object, has_variable_column)
   stopifnot(all(have_variable_column), has_skimr_attributes(object))
+  object
 }
 
 #' @describeIn skim-obj Is this a data frame with variable and type columns?
