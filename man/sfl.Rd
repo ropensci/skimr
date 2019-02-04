@@ -38,6 +38,29 @@ also pass \code{NULL} to identify a skimming function that you wish to remove.
 Only functions that return a single value, working with \code{\link[dplyr:summarize]{dplyr::summarize()}},
 can be used within \code{sfl}.
 }
+\details{
+\code{sfl()} will automatically generate callables and names for a variety of
+inputs, including functions, formulas and strings. Nonetheless, we recommend
+providing names when reasonable to get better \code{\link[=skim]{skim()}} output.
+}
+\examples{
+# sfl's can take a variety of input formats and will generate names
+# if not provided.
+sfl(mad, "var", ~ length(.)^2)
+
+# But these can generate unpredictable names in your output.
+# Better to set your own names.
+sfl(mad = mad, variance = "var", length_sq = ~ length(.)^2)
+
+# sfl's can remove individual skimmers from defaults by passing NULL.
+sfl(hist = NULL)
+
+# When working interactively, you don't need to set a type.
+# But you should when defining new defaults with `get_skimmers()`.
+get_skimmers.my_new_class <- function(column) {
+  sfl(n_missing, .type = "my_new_class")
+}
+}
 \seealso{
 \code{\link[dplyr:funs]{dplyr::funs()}}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
 }

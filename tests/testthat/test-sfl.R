@@ -25,3 +25,8 @@ test_that("sfl's support dummy names", {
   funs <- input$funs
   expect_equal(funs$mean, rlang::quo(mean(., na.rm = TRUE)))
 })
+
+test_that("sfl's automatically generate function names", {
+  input <- sfl(mad, hist = NULL, ~ length(.)^2, "var")
+  expect_named(input$funs, c("mad", "hist", "~length(.)^2", '"var"'))
+})
