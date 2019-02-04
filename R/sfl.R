@@ -1,9 +1,9 @@
 #' Create a skimr function list
 #'
-#' This is an extension of [dplyr::funs()]. It is used to create a named list
-#' of functions. It also you also pass `NULL` to identify a skimming function
-#' that you wish to remove. Only functions that return a single value, working
-#' with [dplyr::summarize()], can be used within `sfl`.
+#' This constructor is used to create a named list of functions. It also you
+#' also pass `NULL` to identify a skimming function that you wish to remove.
+#' Only functions that return a single value, working with [dplyr::summarize()],
+#' can be used within `sfl`.
 #'
 #' @inheritParams dplyr::funs
 #' @param .type A character scalar. This is used to match locally-provided
@@ -12,21 +12,20 @@
 #'   returned by [dplyr::funs()] and a list of skimming functions to drop.
 #' @seealso [dplyr::funs()], [skim_with()] and [get_skimmers()].
 #' @export
-sfl <- function(..., .args = list(), .type = "") {
-  skimmer_list <- rlang::enquos(...)
+sfl <- function(..., .type = "") {
+  stopifnot(length(.type) == 1, is.character(.type))
+  skimmer_list <- rlang::list2(...)
   if (length(skimmer_list) < 1) {
     stop("Please provide one or more named argument")
   }
 
-  stopifnot(length(.type) == 1, is.character(.type))
-
-  dropable <- purrr::map_lgl(skimmer_list, rlang::quo_is_null)
+  dropable <- purrr::map_lgl(skimmer_list, is.null)
   keep <- skimmer_list[!dropable]
   drop <- skimmer_list[dropable]
   out <- list(
-    keep = dplyr::funs(!!!keep, .args = .args), drop = names(drop),
+    keep = keep,
+    drop = names(drop),
     type = .type
   )
-
   structure(out, class = "skimr_function_list")
 }

@@ -4,7 +4,7 @@
 \alias{sfl}
 \title{Create a skimr function list}
 \usage{
-sfl(..., .args = list(), .type = "")
+sfl(..., .type = "")
 }
 \arguments{
 \item{...}{A list of functions specified by:
@@ -25,9 +25,6 @@ The following notations are \strong{not} supported, see examples:
 \item An anonymous function in \pkg{purrr} notation, \code{~mean(., na.rm = TRUE)}
 }}
 
-\item{.args}{A named list of additional arguments to be added
-to all function calls.}
-
 \item{.type}{A character scalar. This is used to match locally-provided
 skimmers with defaults. See \code{\link[=get_skimmers]{get_skimmers()}} for more detail.}
 }
@@ -36,10 +33,10 @@ A \code{skimr_function_list}, which contains a list of \code{fun_calls},
 returned by \code{\link[dplyr:funs]{dplyr::funs()}} and a list of skimming functions to drop.
 }
 \description{
-This is an extension of \code{\link[dplyr:funs]{dplyr::funs()}}. It is used to create a named list
-of functions. It also you also pass \code{NULL} to identify a skimming function
-that you wish to remove. Only functions that return a single value, working
-with \code{\link[dplyr:summarize]{dplyr::summarize()}}, can be used within \code{sfl}.
+This constructor is used to create a named list of functions. It also you
+also pass \code{NULL} to identify a skimming function that you wish to remove.
+Only functions that return a single value, working with \code{\link[dplyr:summarize]{dplyr::summarize()}},
+can be used within \code{sfl}.
 }
 \seealso{
 \code{\link[dplyr:funs]{dplyr::funs()}}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.

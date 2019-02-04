@@ -17,25 +17,12 @@ test_that("The interface for sfl's separates keep and drop functions", {
   expect_identical(input$type, "test")
 
   keep <- input$keep
-  expect_is(keep, "fun_list")
-  expect_true(attr(keep, "have_name"))
+  expect_is(keep, "list")
   expect_named(keep, "mad")
-  expect_is(keep$mad, "quosure")
-})
-
-test_that("sfl's automatically generate names", {
-  input <- sfl(mad, .type = "test")
-  keep <- input$keep
-  expect_is(keep, "fun_list")
-  expect_false(attr(keep, "have_name"))
-  expect_named(keep, "mad")
-  expect_is(keep$mad, "quosure")
 })
 
 test_that("sfl's support dummy names", {
-  input <- sfl(mean = mean(., na.rm = TRUE))
+  input <- sfl(mean = ~ mean(., na.rm = TRUE), .type = "test")
   keep <- input$keep
-  expect_identical(keep$mean, rlang::quo(mean(., na.rm = TRUE)))
-  res <- rlang::eval_tidy(keep$mean, list(. = c(NA, 1:10)))
-  expect_equal(res, 5.5)
+  expect_equal(keep$mean, rlang::quo(mean(., na.rm = TRUE)))
 })
