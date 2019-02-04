@@ -16,17 +16,19 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
+  - travis-tool.sh install_github r-lib/devtools
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github tidyverse/dplyr
   
 environment:
   global:
    USE_RTOOLS: true
+   NOT_CRAN: true
   matrix:
     - R_ARCH: i386
       GCC_PATH: mingw_32
     - R_ARCH: x64
       GCC_PATH: mingw_64
-
 test_script:
   - travis-tool.sh run_tests
 
