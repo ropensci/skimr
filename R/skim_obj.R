@@ -40,7 +40,7 @@ is_skim_df <- function(object) {
 #' @export
 assert_is_skim_df <- function(object) {
   stopifnot(
-    has_type_column(object),  has_variable_column(object), has_skimr_attributes(object)
+    has_type_column(object), has_variable_column(object), has_skimr_attributes(object)
   )
 }
 

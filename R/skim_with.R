@@ -63,9 +63,9 @@
 #' @export
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
-  
+
   function(data, ...) {
-    if (!is.data.frame(data)){
+    if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
     stopifnot(is.data.frame(data))

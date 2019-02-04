@@ -36,7 +36,8 @@ partition <- function(data) {
   skimmers <- reconcile_skimmers(data, groups)
   reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
   reassign_skim_attrs(
-    reduced, data, class = "skim_list", skimmers_used = skimmers
+    reduced, data,
+    class = "skim_list", skimmers_used = skimmers
   )
 }
 
@@ -55,7 +56,7 @@ reconcile_skimmers <- function(data, groups) {
     complete_by_type <- dplyr::summarize_at(
       grouped,
       dplyr::vars(extra_cols),
-      ~!all(is.na(.x))
+      ~ !all(is.na(.x))
     )
 
     complete_cols <- purrr::pmap(
@@ -144,10 +145,13 @@ focus <- function(.data, ...) {
 #' @examples
 #' to_long(iris)
 #' @export
-to_long <- function( .data, ...){
+to_long <- function(.data, ...) {
   skimmed <- skim(.data, ...)
-  tidyr::gather(skimmed, key="stat", value="formatted",  na.rm = TRUE,
-                -!!rlang::sym("type"), -!!rlang::sym("variable")) }
+  tidyr::gather(skimmed,
+    key = "stat", value = "formatted", na.rm = TRUE,
+    -!!rlang::sym("type"), -!!rlang::sym("variable")
+  )
+}
 
 #' Deprecated functions from skimr v1
 #'
@@ -166,14 +170,14 @@ NULL
 
 #' @describeIn deprecated-v1 [skim()] always produces a wide data frame.
 #' @export
-skim_to_wide<- function(.data, ...){
+skim_to_wide <- function(.data, ...) {
   .Deprecated("skim()")
   skim(.data, ...)
 }
 
 #' @describeIn deprecated-v1 [partition()] creates a list.
 #' @export
-skim_to_list<- function(.data, ...){
+skim_to_list <- function(.data, ...) {
   .Deprecated("partition(skim())")
   skim(.data, ...) %>% partition()
 }
