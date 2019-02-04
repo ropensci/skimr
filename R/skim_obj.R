@@ -67,6 +67,22 @@ could_be_skim_df <- function(object) {
   is.data.frame(object) && has_variable_column(object) && has_type_column(object)
 }
 
+#' Remove `skimr` class if not needed.
+#' @noRd
+strip_skim_attrs <- function(object) {
+  attrs <- attributes(object)
+  stripped <- purrr::list_modify(
+    attrs,
+    class = class(object)[-1],
+    data_rows = NULL,
+    data_cols = NULL,
+    df_name = NULL,
+    skimmers_used = NULL
+  )
+  attributes(object) <- stripped
+  object
+}
+
 #' Pass attributes from a `skimr` object to a new object.
 #' @noRd
 reassign_skim_attrs <- function(object, skim_df, ...) {

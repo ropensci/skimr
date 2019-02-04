@@ -29,7 +29,7 @@
 #' yank(skimmed, "factor")
 #' @export
 partition <- function(data) {
-  stopifnot("type" %in% names(data))
+  assert_is_skim_df(data)
   as_list <- split(data, data$type)
   types <- names(as_list)
   groups <- attr(data, "groups")
@@ -79,6 +79,7 @@ get_complete_columns <- function(type, ..., names) {
 #' the skim_df
 #' @noRd
 simplify_skimdf <- function(data, type, skimmers, groups) {
+  stopifnot(has_variable_column(data))
   keep <- c("variable", groups, skimmers[[type]])
   cols_in_data <- names(data)
   out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
@@ -93,6 +94,7 @@ simplify_skimdf <- function(data, type, skimmers, groups) {
 #'   `skim_df`.
 #' @export
 bind <- function(data) {
+  assert_is_skim_list(data)
   combined <- dplyr::bind_rows(!!!data, .id = "type")
   # The variable column should always be first
   out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
@@ -131,8 +133,13 @@ yank <- function(data, type) {
 #'   dplyr::select(variable, type, missing)
 #' @export
 focus <- function(.data, ...) {
-  stopifnot(inherits(.data, "skim_df"))
-  dplyr::select(.data, "variable", "type", ...)
+  assert_is_skim_df(.data)
+  reduced <- dplyr::select(.data, "variable", "type", ...)
+  if (could_be_skim_df(reduced)) {
+    reassign_skim_attrs(reduced, .data)
+  } else {
+    stop("Cannot drop 'variable' or 'type' columns")
+  }
 }
 
 #' Skim results returned as a tidy long data frame with four columns:
