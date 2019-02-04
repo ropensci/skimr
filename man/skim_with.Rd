@@ -60,17 +60,13 @@ my_skim(faithful)
 my_skim <- skim_with(numeric = sfl(mean = mean, sd = sd), append = FALSE)
 
 # Skimmers are unary functions. Partially apply arguments during assigment.
-# For example, you might want to remove NA values. Use `dplyr::funs()`
-# syntax for partial application.
-my_skim <- skim_with(numeric = sfl(iqr = IQR(., na.rm = TRUE)))
-
-# Or, use the `.args` argument from `dplyr::funs()`
-my_skim <- skim_with(numeric = sfl(median, mad, .args = list(na.rm = FALSE)))
+# For example, you might want to remove NA values.
+my_skim <- skim_with(numeric = sfl(iqr = ~ IQR(., na.rm = TRUE)))
 
 # Set multiple types of skimmers simultaneously.
 my_skim <- skim_with(numeric = sfl(mean), character = sfl(length))
 
-# Or pass the same as a list
+# Or pass the same as a list, unquoting the input.
 my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
-my_skim <- skim_with(my_skimmers)
+my_skim <- skim_with(!!!my_skimmers)
 }

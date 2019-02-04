@@ -44,7 +44,7 @@ NULL
 #' get_skimmers.integer <- function(column) {
 #'   sfl(
 #'     .type = "integer",
-#'     p50 = stats::quantile(
+#'     p50 = ~ stats::quantile(
 #'       .,
 #'       probs = .50, na.rm = TRUE, names = FALSE, type = 1
 #'     )
@@ -54,12 +54,12 @@ NULL
 #' class(x$carb) <- "integer"
 #' skim(x)
 #' \dontrun{
-#' # In a package, to revert to the V1 behavior of skimming separately with the
-#' # same functions, assign the numeric `get_skimmers`.
-#' get_skimmers.integer <- skimr::get_skimmers.numeric
+#'   # In a package, to revert to the V1 behavior of skimming separately with the
+#'   # same functions, assign the numeric `get_skimmers`.
+#'   get_skimmers.integer <- skimr::get_skimmers.numeric
 #'
-#' # Or, in a local session, use `skim_with` to create a different `skim`.
-#' new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+#'   # Or, in a local session, use `skim_with` to create a different `skim`.
+#'   new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
 #' }
 #' @export
 get_skimmers <- function(column) {
@@ -68,8 +68,7 @@ get_skimmers <- function(column) {
 
 #' @export
 get_skimmers.default <- function(column) {
-  fallback <- get_skimmers(character())
-  sfl(.type = "default", !!!fallback$keep)
+  purrr::list_modify(get_skimmers(character()), type = "default")
 }
 
 #' @export
@@ -79,14 +78,14 @@ get_skimmers.numeric <- function(column) {
     missing = n_missing,
     complete = n_complete,
     n = length,
-    mean = mean(., na.rm = TRUE),
-    sd = stats::sd(., na.rm = TRUE),
-    p0 = stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
-    p25 = stats::quantile(., probs = .25, na.rm = TRUE, names = FALSE),
-    p50 = stats::quantile(., probs = .50, na.rm = TRUE, names = FALSE),
-    p75 = stats::quantile(., probs = .75, na.rm = TRUE, names = FALSE),
-    p100 = stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE),
-    hist = inline_hist(., 5)
+    mean = ~ mean(., na.rm = TRUE),
+    sd = ~ stats::sd(., na.rm = TRUE),
+    p0 = ~ stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
+    p25 = ~ stats::quantile(., probs = .25, na.rm = TRUE, names = FALSE),
+    p50 = ~ stats::quantile(., probs = .50, na.rm = TRUE, names = FALSE),
+    p75 = ~ stats::quantile(., probs = .75, na.rm = TRUE, names = FALSE),
+    p100 = ~ stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE),
+    hist = ~ inline_hist(., 5)
   )
 }
 
@@ -125,7 +124,7 @@ get_skimmers.logical <- function(column) {
     missing = n_missing,
     complete = n_complete,
     n = length,
-    mean = mean(., na.rm = TRUE),
+    mean = ~ mean(., na.rm = TRUE),
     count = top_counts
   )
 }
@@ -147,23 +146,27 @@ get_skimmers.Date <- function(column) {
     missing = n_missing,
     complete = n_complete,
     n = length,
-    min = min(., na.rm = TRUE),
-    max = max(., na.rm = TRUE),
-    median = stats::median(., na.rm = TRUE),
+    min = ~ min(., na.rm = TRUE),
+    max = ~ max(., na.rm = TRUE),
+    median = ~ stats::median(., na.rm = TRUE),
     n_unique = n_unique
   )
 }
 
 #' @export
 get_skimmers.POSIXct <- function(column) {
-  date_skimmers <- get_skimmers(structure(list(), class = "Date"))
-  sfl(.type = "POSIXct", !!!date_skimmers$keep)
+  purrr::list_modify(
+    get_skimmers(structure(list(), class = "Date")),
+    type = "POSIXct"
+  )
 }
 
 #' @export
 get_skimmers.difftime <- function(column) {
-  date_skimmers <- get_skimmers(structure(list(), class = "Date"))
-  sfl(.type = "difftime", !!!date_skimmers$keep)
+  purrr::list_modify(
+    get_skimmers(structure(list(), class = "Date")),
+    type = "difftime"
+  )
 }
 
 #' @export
@@ -177,12 +180,12 @@ get_skimmers.ts <- function(column) {
     end = ts_end,
     frequency = stats::frequency,
     deltat = stats::deltat,
-    mean = mean(., na.rm = TRUE),
-    sd = stats::sd(., na.rm = TRUE),
-    min = min(., na.rm = TRUE),
-    max = max(., na.rm = TRUE),
-    median = stats::median(., na.rm = TRUE),
-    line_graph = inline_linegraph(., 16)
+    mean = ~ mean(., na.rm = TRUE),
+    sd = ~ stats::sd(., na.rm = TRUE),
+    min = ~ min(., na.rm = TRUE),
+    max = ~ max(., na.rm = TRUE),
+    median = ~ stats::median(., na.rm = TRUE),
+    line_graph = ~ inline_linegraph(., 16)
   )
 }
 
@@ -201,8 +204,7 @@ get_skimmers.list <- function(column) {
 
 #' @export
 get_skimmers.AsIs <- function(column) {
-  list_skimmers <- get_skimmers(list())
-  sfl(.type = "AsIs", !!!list_skimmers$keep)
+  purrr::list_modify(get_skimmers(list()), type = "AsIs")
 }
 
 #' @rdname get_skimmers
@@ -233,6 +235,6 @@ get_class_defaults <- function(class) {
   if (skimmers$type == "default") {
     NA
   } else {
-    names(skimmers$keep)
+    names(skimmers$funs)
   }
 }
