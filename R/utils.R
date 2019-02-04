@@ -10,7 +10,7 @@ fix_unicode <- function(char) {
 
 make_utf8 <- function(x) {
   if (length(x) < 1) {
-    return(x)
+    x
   } else {
     digits <- substring(x, 4, 7)
     integers <- strtoi(sprintf("0x%s", digits))
