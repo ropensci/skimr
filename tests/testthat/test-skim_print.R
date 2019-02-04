@@ -54,6 +54,21 @@ test_that("knit_print produced expected results", {
   )
 })
 
+test_that("knit_print works with skim summaries", {
+  skimmed <- skim(iris)
+  summarized <- summary(skimmed)
+  multi_line <- capture.output(knit_print(summarized))
+  input <- paste(multi_line, collapse = "")
+  expect_match(input, "$Summary", fixed = TRUE)
+  expect_match(input, "df_name")
+  expect_match(input, "Name: `iris`")
+  expect_match(input, "Number of Rows: 150")
+  expect_match(input, "Number of Columns: 5")
+  expect_match(input, "$`Type counts`", fixed = TRUE)
+  expect_match(input, "factor")
+  expect_match(input, "numeric")
+})
+
 test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
