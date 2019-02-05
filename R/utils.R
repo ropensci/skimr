@@ -10,7 +10,7 @@ fix_unicode <- function(char) {
 
 make_utf8 <- function(x) {
   if (length(x) < 1) {
-    return(x)
+    x
   } else {
     digits <- substring(x, 4, 7)
     integers <- strtoi(sprintf("0x%s", digits))
@@ -44,19 +44,4 @@ fix_windows_histograms <- function() {
     message("Locale was not changed.")
   }
   invisible(NULL)
-}
-
-#' Preserve skim_df attributes
-#' @noRd
-rebuild_skim_obj <- function(object, skim_df, ...) {
-  defaults <- list(
-    class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-    data_rows = attr(skim_df, "data_rows"),
-    data_cols = attr(skim_df, "data_cols"),
-    df_name = attr(skim_df, "df_name"),
-    groups = attr(skim_df, "groups"),
-    skimmers_used = attr(skim_df, "skimmers_used")
-  )
-  updated <- purrr::list_modify(defaults, ...)
-  rlang::set_attrs(object, !!!updated)
 }
