@@ -42,7 +42,7 @@ n_whitespace <- function(x) {
 #'   sorting.
 #' @export
 sorted_count <- function(x) {
-  tab <- table(x, useNA = "always")
+  tab <- table(x, useNA = "no")
   names_tab <- names(tab)
   if (is.element("", names_tab)) {
     names_tab[names_tab == ""] <- "empty"
