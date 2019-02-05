@@ -184,7 +184,7 @@ test_that("skim returns expected response for factor vectors", {
   expect_identical(input$complete, 150L)
   expect_identical(input$n, 150L)
   expect_false(input$ordered)
-  expect_identical(input$top_counts, "set: 50, ver: 50, vir: 50, NA: 0")
+  expect_identical(input$top_counts, "set: 50, ver: 50, vir: 50")
 })
 
 test_that("skim handles factors when NAs are present", {
@@ -193,7 +193,7 @@ test_that("skim handles factors when NAs are present", {
   input <- skim(dat, Species)
   expect_identical(input$missing, 4L)
   expect_identical(input$complete, 146L)
-  expect_identical(input$top_counts, "ver: 50, vir: 50, set: 46, NA: 4")
+  expect_identical(input$top_counts, "ver: 50, vir: 50, set: 46")
 })
 
 
@@ -277,7 +277,7 @@ test_that("skim returns expected response for logical vectors", {
   expect_identical(input$complete, 71L)
   expect_identical(input$n, 71L)
   expect_equal(input$mean, 0.49, tolerance = .01)
-  expect_identical(input$count, "FAL: 36, TRU: 35, NA: 0")
+  expect_identical(input$count, "FAL: 36, TRU: 35")
 })
 
 test_that("skim returns expected response for logical vectors with NA values", {
@@ -289,7 +289,7 @@ test_that("skim returns expected response for logical vectors with NA values", {
   expect_identical(input$complete, 67L)
   expect_identical(input$n, 71L)
   expect_equal(input$mean, 0.52, tolerance = .01)
-  expect_identical(input$count, "TRU: 35, FAL: 32, NA: 4")
+  expect_identical(input$count, "TRU: 35, FAL: 32")
 })
 
 test_that("skim returns expected response for complex vectors", {
