@@ -4,10 +4,10 @@
 \alias{summary.skim_df}
 \title{Summary function for skim_df}
 \usage{
-\method{summary}{skim_df}(object, ...)
+\method{summary}{skim_df}(.object, ...)
 }
 \arguments{
-\item{object}{a skim dataframe.}
+\item{.object}{a skim dataframe.}
 
 \item{...}{Additional arguments affecting the summary produced. Not used.}
 }

@@ -47,25 +47,21 @@
 #' my_skim <- skim_with(numeric = sfl(mean = mean, sd = sd), append = FALSE)
 #'
 #' # Skimmers are unary functions. Partially apply arguments during assigment.
-#' # For example, you might want to remove NA values. Use `dplyr::funs()`
-#' # syntax for partial application.
-#' my_skim <- skim_with(numeric = sfl(iqr = IQR(., na.rm = TRUE)))
-#'
-#' # Or, use the `.args` argument from `dplyr::funs()`
-#' my_skim <- skim_with(numeric = sfl(median, mad, .args = list(na.rm = FALSE)))
+#' # For example, you might want to remove NA values.
+#' my_skim <- skim_with(numeric = sfl(iqr = ~ IQR(., na.rm = TRUE)))
 #'
 #' # Set multiple types of skimmers simultaneously.
 #' my_skim <- skim_with(numeric = sfl(mean), character = sfl(length))
 #'
-#' # Or pass the same as a list
+#' # Or pass the same as a list, unquoting the input.
 #' my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
-#' my_skim <- skim_with(my_skimmers)
+#' my_skim <- skim_with(!!!my_skimmers)
 #' @export
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
-  
+
   function(data, ...) {
-    if (!is.data.frame(data)){
+    if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
     stopifnot(is.data.frame(data))
@@ -120,14 +116,8 @@ skim_with <- function(..., append = TRUE) {
 #' @keywords internal
 #' @noRd
 validate_assignment <- function(...) {
-  to_assign <- list(...)
-
+  to_assign <- rlang::list2(...)
   if (length(to_assign) < 1) return(to_assign)
-
-  # Need to cope with case where ... is a list already
-  if (class(to_assign[[1]]) != "skimr_function_list") {
-    to_assign <- to_assign[[1]]
-  }
 
   proposed_names <- names(to_assign)
   if (!all(nzchar(proposed_names)) || is.null(proposed_names) ||
@@ -169,7 +159,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   all_classes <- class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
-  if (is.null(defaults$type)) {
+  if (!nzchar(defaults$type)) {
     msg <- sprintf(
       "Default skimming functions for column [%s] with class [%s]",
       column, paste(all_classes, collapse = ", ")
@@ -180,9 +170,10 @@ skim_one <- function(column, data, local_skimmers, append) {
     )
   }
 
-  if (is.null(locals$keep)) {
+  if (is.null(locals$funs)) {
     if (defaults$type == "default") {
-      warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
+      warning(
+        "Couldn't find skimmers for class: %s; No user-defined `sfl` ",
         "provided. Falling back to `character`.",
         call. = FALSE
       )
@@ -199,9 +190,9 @@ skim_one <- function(column, data, local_skimmers, append) {
   reduced <- suppressMessages(dplyr::select(data, !!column))
   out <- tibble::tibble(
     type = skimmers$type,
-    !!!dplyr::summarize_all(reduced, skimmers$keep)
+    !!!dplyr::summarize_all(reduced, skimmers$funs)
   )
-  used <- names(skimmers$keep)
+  used <- names(skimmers$funs)
   grps <- dplyr::groups(reduced)
   names(out) <- c("type", as.character(grps), used)
   structure(out,
@@ -218,11 +209,10 @@ get_local_skimmers <- function(classes, local_skimmers) {
 }
 
 merge_skimmers <- function(locals, defaults, append) {
-  if (locals$type != defaults$type || !append) {
+  if (!append || locals$type != defaults$type) {
     locals
   } else {
-    defaults$keep <- purrr::list_modify(defaults$keep, !!!locals$keep)
-    defaults$keep[locals$drop] <- NULL
+    defaults$funs <- purrr::list_modify(defaults$funs, !!!locals$funs)
     defaults
   }
 }

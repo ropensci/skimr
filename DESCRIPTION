@@ -1,5 +1,5 @@
 Package: skimr
-Title: Compact and Flexible Summaries of Data 
+Title: Compact and Flexible Summaries of Data
 Version: 2.0
 Authors@R: c(
   person("Amelia", "McNamara", email="amcnamara@smith.edu", role = "aut"),
@@ -23,34 +23,35 @@ Authors@R: c(
   person("Roepke","Mark",email="mroepke5@gmail.com",role='ctb')
   )
 Description: A simple to use summary function that can be used with pipes
-    and displays nicely in the console. The default summary statistics may be 
-    modified by the user as can the default formatting. Support for data frames 
+    and displays nicely in the console. The default summary statistics may be
+    modified by the user as can the default formatting. Support for data frames
     and vectors is included, and users can implement their own skim methods for
     specific object types as described in a vignette. Default summaries include
-    support for inline spark graphs. Instructions for managing these on 
-    specific operating systems are given in the "Using skimr" vignette and the 
+    support for inline spark graphs. Instructions for managing these on
+    specific operating systems are given in the "Using skimr" vignette and the
     README.
 Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.8),
-    magrittr,
+    dplyr (>= 0.8.0),
+    magrittr (>= 1.5),
     pander,
     purrr,
-    rlang,
+    rlang (>= 0.3.1),
     stats,
     stringr (>= 1.1),
     knitr (>= 1.2),
-    tibble (>= 0.6),
+    tibble (>= 2.0.0),
     tidyr (>= 0.7),
-    tidyselect (>= 0.2.4)
+    tidyselect (>= 0.2.5)
 Suggests:
     extrafont,
     rmarkdown,
     testthat (>= 2.0.0),
     withr,
     covr
+Remotes: tidyverse/dplyr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -59,7 +60,7 @@ BugReports: https://github.com/ropenscilabs/skimr/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Collate: 
+Collate:
     'dplyr.R'
     'stats.R'
     'skim_with.R'
@@ -67,6 +68,7 @@ Collate:
     'reshape.R'
     'sfl.R'
     'skim.R'
+    'skim_obj.R'
     'skim_print.R'
     'skimr-package.R'
     'summary.R'

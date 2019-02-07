@@ -5,8 +5,8 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "skimr",
-  "description": "A simple to use summary function that can be used with pipes\n    and displays nicely in the console. The default summary statistics may be \n    modified by the user as can the default formatting. Support for data frames \n    and vectors is included, and users can implement their own skim methods for\n    specific object types as described in a vignette. Default summaries include\n    support for inline spark graphs. Instructions for managing these on \n    specific operating systems are given in the \"Using skimr\" vignette and the \n    README.",
-  "name": "skimr: Compact and Flexible Summaries of Data ",
+  "description": "A simple to use summary function that can be used with pipes\n    and displays nicely in the console. The default summary statistics may be\n    modified by the user as can the default formatting. Support for data frames\n    and vectors is included, and users can implement their own skim methods for\n    specific object types as described in a vignette. Default summaries include\n    support for inline spark graphs. Instructions for managing these on\n    specific operating systems are given in the \"Using skimr\" vignette and the\n    README.",
+  "name": "skimr: Compact and Flexible Summaries of Data",
   "codeRepository": "https://github.com/ropenscilabs/skimr",
   "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -229,19 +229,20 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 0.7",
+      "version": ">= 0.8.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+      "sameAs": "https://github.com/tidyverse/dplyr"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
+      "version": ">= 1.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -278,6 +279,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
+      "version": ">= 0.3.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -321,7 +323,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "version": ">= 0.6",
+      "version": ">= 2.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -347,7 +349,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidyselect",
       "name": "tidyselect",
-      "version": ">= 0.2.4",
+      "version": ">= 0.2.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -359,7 +361,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "2049.678KB",
+  "fileSize": "2320.379KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -369,5 +371,5 @@
     "url": "https://github.com/ropensci/onboarding/issues/175",
     "provider": "http://ropensci.org"
   },
-  "keywords": "unconf17"
+  "keywords": ["unconf17", "r", "summary-statistics", "ropensci"]
 }

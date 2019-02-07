@@ -2,7 +2,7 @@
 #'
 #' This is a method of the generic function [`summary()`].
 #'
-#' @param object a skim dataframe.
+#' @param .object a skim dataframe.
 #' @param ... Additional arguments affecting the summary produced. Not used.
 #' @return A summary of the skim data frame.
 #' @examples
@@ -11,23 +11,25 @@
 #' summary(a)
 #' }
 #' @export
-summary.skim_df <- function(object, ...) {
-  if (is.null(object)) {
+summary.skim_df <- function(.object, ...) {
+  if (is.null(.object)) {
     stop("dataframe is null.")
   }
 
-  duplicated <- duplicated(object$variable)
-  counts <- table(type = object$type[!duplicated])
+  duplicated <- duplicated(.object$variable)
+  counts <- table(type = .object$type[!duplicated])
   type_frequencies <- tibble::as_tibble(counts)
-  possible_groups <- attr(object, "groups")
+  possible_groups <- attr(.object, "groups")
 
   summary_object <- list(
-    df_name = attr(object, "df_name"),
-    n_rows = attr(object, "data_rows"),
-    n_cols = attr(object, "data_cols"),
+    df_name = attr(.object, "df_name"),
+    n_rows = attr(.object, "data_rows"),
+    n_cols = attr(.object, "data_cols"),
     type_frequencies = type_frequencies,
     possible_groups = possible_groups
   )
 
-  structure(summary_object, class = c("summary_skim_df", "list"))
+  #class(summary_object) <- c("summary_skim_df", "list")
+  summary_object <- structure(summary_object, class = c("summary_skim_df", "list"))
+  summary_object
 }

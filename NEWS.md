@@ -5,6 +5,12 @@ skimr 2.0.0 (2019-xx-xx)
  * New statistic for character variables counting the number of rows
    that are completely made up of white space.
 
+### BUG FIXES
+  * Adjust code for several tidyverse soft deprecations.
+
+### MINOR IMPROVEMENTS
+  * Change top_counts to use useNA = "no".
+
 skimr 1.0.4 (2018-01-12)
 ========================
 This is likely to be the last release of skimr version 1.  Version 2

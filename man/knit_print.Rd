@@ -14,7 +14,7 @@
 
 \method{knit_print}{one_skim_df}(x, options = NULL, ...)
 
-\method{knit_print}{summary_skim_df}(.x, options = NULL, ...)
+\method{knit_print}{summary_skim_df}(x, options = NULL, ...)
 }
 \arguments{
 \item{x}{A skim_df object.}

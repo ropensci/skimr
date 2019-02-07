@@ -18,9 +18,17 @@ NULL
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
                           n_extra = NULL, ...) {
-  if ("type" %in% names(x)) {
+  if (is_skim_df(x)) {
     if (include_summary) {
       print(summary(x))
+      # cat("Skim summary statistics\n")
+      # cat(" n obs:", attr(x, "data_rows"), "\n")
+      # cat(" n variables:", attr(x, "data_cols"), "\n")
+      # 
+      # possible_groups <- attr(x, "groups")
+      # if (!is.null(possible_groups)) {
+      #   cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
+      # }
     }
 
     by_type <- partition(x)
@@ -53,37 +61,25 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 #' @describeIn print Print method for a `summary_skim_df` object.
 #' @export
 print.summary_skim_df <- function(x, ...) {
-  n_rows <- paste0("Number of Rows ", x$n_rows, "   \n")
-  n_cols <- paste0("Number of Columns ", x$n_cols, "    \n")
-  df_name <- ifelse(x$df_name == "`.`", "", paste0("Name ", x$df_name, ""))
-  if (!is.null(x$possible_groups)) {
-    groups <- paste0("Group variables: ", paste(x[["possible_groups"]], collapse = ", "), "\n")
-
-     if (nchar(groups) > 70){
-       groups <- paste0(substr(groups, 1, 70), "...")
-     }
-  } else {
-    groups <- ""
-  }
-
-  type_frequency_string <- paste0(x$type_frequencies$type,
-    ": ",
-    x$type_frequencies$n,
-    collapse = "   \n  "
-  )
-
-  cat("Data Summary\n  ",
-    df_name, "\n   ",  
-    n_rows,  "\n  ",
-    n_cols, "\n   ",
-    "Column type frequency:    \n  ",
-    type_frequency_string,
-    "\n",
-    groups,
-    "\n",
-    sep = ""
-  )
-
+  print("xxxx")
+  # n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
+  # n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
+  # df_name <- ifelse(x$df_name == ".", "", paste0("Name: ", x$df_name, "   \n"))
+  # 
+  # type_frequency_string <- paste0(x$type_frequencies$type,
+  #   ": ",
+  #   x$type_frequencies$n,
+  #   collapse = "   \n"
+  # )
+  # 
+  # cat("A skim object    \n\n",
+  #   df_name,
+  #   n_rows, n_cols, "    \nColumn type frequency    \n",
+  #   type_frequency_string,
+  #   "\n",
+  #   sep = ""
+  # )
+  x
 }
 
 #' Provide a default printing method for knitr.
@@ -116,18 +112,18 @@ NULL
 #' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
+  assert_is_skim_df(x)
   if (options$skimr_include_summary %||% TRUE) {
-    # summary_stats <- data.frame(
-    #   n_obs = attr(x, "data_rows"),
-    #   n_cols = attr(x, "data_cols")
-    # )
-    # kabled <- knitr::kable(
-    #   summary_stats,
-    #   format = "html", table.attr = "style='width: auto;'
-    #   class='table table-condensed'"
-    # )
-    # summary <- c("**Skim summary statistics**", "", kabled, "", "")
-    summary<- skimr:::knit_print.summary_skim_df(summary(x))
+    summary_stats <- data.frame(
+      n_obs = attr(x, "data_rows"),
+      n_cols = attr(x, "data_cols")
+    )
+    kabled <- knitr::kable(
+      summary_stats,
+      format = "html", table.attr = "style='width: auto;'
+      class='table table-condensed'"
+    )
+    summary <- c("**Skim summary statistics**", "", kabled, "", "")
   } else {
     summary <- c()
   }
@@ -166,45 +162,14 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
-knit_print.summary_skim_df <- function(.x, options = NULL, ...) {
-  n_rows <- paste0("Number of Rows ", .x$n_rows, "   \n")
-  n_cols <- paste0("Number of Columns ", .x$n_cols, "    \n")
-  df_name <- ifelse(.x$df_name == "`.`", "", paste0("Name ", .x$df_name, ""))
-  if (!is.null(.x$possible_groups)) {
-    groups <- paste0("Group variables: ", 
-                     paste(.x[["possible_groups"]], 
-                           collapse = ", "), "\n")
-    
-    if (nchar(groups) > 70){
-      groups <- paste0(substr(groups, 1, 70), "...")
-    }
-  } else {
-    groups <- ""
-  }
-  
-  type_frequency_string <- paste0(.x$type_frequencies$type,
-                                  ": ",
-                                  .x$type_frequencies$n,
-                                  collapse = "   \n  "
+knit_print.summary_skim_df <- function(x, options = NULL, ...) {
+  n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
+  n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
+  df_name <- paste0("Name: ", x[["df_name"]])
+
+  kframe <- data.frame(df_name, n_rows, n_cols)
+  list(
+    Summary = knitr::kable(kframe),
+    `Type counts` = knitr::kable(x$type_frequencies)
   )
-  
-  summary_stats <- paste0(
-      df_name, "\n\n   ",  
-      n_rows,  "\n  ",
-      n_cols, "\n   ",
-      "Column type frequency:    \n  ",
-      type_frequency_string,
-      "\n",
-      groups,
-      "\n"
-  )
-  
-  kabled <- knitr::kable(
-    summary_stats,
-    format = "html", table.attr = "style='width: auto;'
-      class='table table-condensed'",
-    caption = "Data Summary",
-    col.names = c(" ")
-  )
-  kabled
 }
