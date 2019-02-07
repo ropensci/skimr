@@ -74,7 +74,7 @@ test_that("Partition is safe if some skimmers are missing", {
 
 test_that("Partition handles new columns", {
   skimmed <- skim(iris)
-  expanded <- dplyr::mutate(skimmed, mean2 = mean ^ 2, complete2 = complete ^ 2)
+  expanded <- dplyr::mutate(skimmed, mean2 = mean^2, complete2 = complete^2)
   partitioned <- partition(expanded)
   expect_named(partitioned$numeric, c(
     "variable", "missing", "complete", "n", "mean",
@@ -90,24 +90,24 @@ test_that("Partition handles new columns", {
 
 test_that("focus() is identical to dplyr::select(data, type, variable, ...)", {
   skimmed <- skim(iris)
-  expected <- dplyr::select(skimmed, type, variable, missing)
-  expect_identical(focus(skimmed, missing), expected)
+  expected <- dplyr::select(skimmed, variable, type, missing)
+  expect_equal(focus(skimmed, missing), expected)
 })
 
-test_that("skim_to_wide() returns a deprecation warning",{
+test_that("skim_to_wide() returns a deprecation warning", {
   expect_warning(skim_to_wide(iris))
 })
 
-test_that("skim_to_list() returns a deprecation warning",{
+test_that("skim_to_list() returns a deprecation warning", {
   expect_warning(skim_to_list(iris))
 })
 
-test_that("to_long() returns a long tidy data frame with 4 columns",{
+test_that("to_long() returns a long tidy data frame with 4 columns", {
   skimmed_long <- to_long(iris)
   # Statistics from the skim_df  with values of NA are not included
   expect_equal(nrow(skimmed_long), 50)
-  expect_equal(names(skimmed_long), c("type", "variable", "stat", "formatted"))
+  expect_equal(names(skimmed_long), c("variable", "type", "stat", "formatted"))
   expect_equal(length(unique(skimmed_long$stat)), 14)
   expect_equal(length(unique(skimmed_long$type)), 2)
-  expect_equal(length(unique(skimmed_long$variable)),5)
+  expect_equal(length(unique(skimmed_long$variable)), 5)
 })

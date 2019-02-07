@@ -18,7 +18,7 @@ NULL
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
                           n_extra = NULL, ...) {
-  if ("type" %in% names(x)) {
+  if (is_skim_df(x)) {
     if (include_summary) {
       cat("Skim summary statistics\n")
       cat(" n obs:", attr(x, "data_rows"), "\n")
@@ -109,6 +109,7 @@ NULL
 #' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
+  assert_is_skim_df(x)
   if (options$skimr_include_summary %||% TRUE) {
     summary_stats <- data.frame(
       n_obs = attr(x, "data_rows"),
@@ -159,7 +160,6 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
-  knit_print_one()
   n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
   n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
   df_name <- paste0("Name: ", x[["df_name"]])

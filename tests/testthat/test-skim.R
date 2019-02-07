@@ -4,8 +4,8 @@ test_that("skim returns expected response for numeric vectors", {
   input <- skim(mtcars, mpg)
 
   # dimensions
-  expect_n_rows(input, 1)
-  expect_n_columns(input, 13)
+  expect_equal(nrow(input), 1)
+  expect_equal(length(input), 13)
 
   # classes
   expect_is(input, "skim_df")
@@ -13,7 +13,7 @@ test_that("skim returns expected response for numeric vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "mean",
+    "variable","type", "missing", "complete", "n", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100", "hist"
   ))
 
@@ -160,7 +160,7 @@ test_that("skim returns expected response for factor vectors", {
   expect_n_rows(input, 1)
   expect_n_columns(input, 8)
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n",
+    "variable","type", "missing", "complete", "n",
     "ordered", "n_unique", "top_counts"
   ))
 
@@ -184,7 +184,7 @@ test_that("skim returns expected response for factor vectors", {
   expect_identical(input$complete, 150L)
   expect_identical(input$n, 150L)
   expect_false(input$ordered)
-  expect_identical(input$top_counts, "set: 50, ver: 50, vir: 50, NA: 0")
+  expect_identical(input$top_counts, "set: 50, ver: 50, vir: 50")
 })
 
 test_that("skim handles factors when NAs are present", {
@@ -193,7 +193,7 @@ test_that("skim handles factors when NAs are present", {
   input <- skim(dat, Species)
   expect_identical(input$missing, 4L)
   expect_identical(input$complete, 146L)
-  expect_identical(input$top_counts, "ver: 50, vir: 50, set: 46, NA: 4")
+  expect_identical(input$top_counts, "ver: 50, vir: 50, set: 46")
 })
 
 
@@ -212,7 +212,7 @@ test_that("skim returns expected response for character vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable","type", "missing", "complete", "n", "min",
     "max", "empty", "n_unique", "whitespace"
   ))
 
@@ -256,7 +256,7 @@ test_that("skim returns expected response for logical vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "mean",
+    "variable", "type", "missing", "complete", "n", "mean",
     "count"
   ))
 
@@ -277,7 +277,7 @@ test_that("skim returns expected response for logical vectors", {
   expect_identical(input$complete, 71L)
   expect_identical(input$n, 71L)
   expect_equal(input$mean, 0.49, tolerance = .01)
-  expect_identical(input$count, "FAL: 36, TRU: 35, NA: 0")
+  expect_identical(input$count, "FAL: 36, TRU: 35")
 })
 
 test_that("skim returns expected response for logical vectors with NA values", {
@@ -289,7 +289,7 @@ test_that("skim returns expected response for logical vectors with NA values", {
   expect_identical(input$complete, 67L)
   expect_identical(input$n, 71L)
   expect_equal(input$mean, 0.52, tolerance = .01)
-  expect_identical(input$count, "TRU: 35, FAL: 32, NA: 4")
+  expect_identical(input$count, "TRU: 35, FAL: 32")
 })
 
 test_that("skim returns expected response for complex vectors", {
@@ -307,7 +307,7 @@ test_that("skim returns expected response for complex vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("type", "variable", "missing", "complete", "n"))
+  expect_named(input, c("variable", "type", "missing", "complete", "n"))
 
   # attributes
   attrs <- attributes(input)
@@ -342,7 +342,7 @@ test_that("skim returns expected response for Date vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "median", "n_unique"
   ))
 
@@ -384,7 +384,7 @@ test_that("skim returns expected response for ts vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "start",
+    "variable", "type", "missing", "complete", "n", "start",
     "end", "frequency", "deltat", "mean", "sd", "min",
     "max", "median", "line_graph"
   ))
@@ -437,7 +437,7 @@ test_that("skim returns expected response for POSIXct vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "median", "n_unique"
   ))
 
@@ -488,7 +488,7 @@ test_that("skim returns expected response for list (not AsIs) vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n",
+    "variable", "type", "missing", "complete", "n",
     "n_unique", "min_length", "max_length"
   ))
 
@@ -531,7 +531,7 @@ test_that("skim returns expected response for list with all NA's", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n",
+    "variable", "type", "missing", "complete", "n",
     "n_unique", "min_length", "max_length"
   ))
 
@@ -574,7 +574,7 @@ test_that("skim returns expected response for asis vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n",
+    "variable", "type", "missing", "complete", "n",
     "n_unique", "min_length", "max_length"
   ))
 
@@ -619,7 +619,7 @@ test_that("skim returns expected response for difftime vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "median", "n_unique"
   ))
 
@@ -665,7 +665,7 @@ test_that("skim handles objects with multiple classes", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "median", "n_unique"
   ))
 
@@ -686,7 +686,7 @@ test_that("skim treats unknown classes as character", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "empty", "n_unique", "whitespace"
   ))
 
@@ -720,7 +720,7 @@ test_that("skim handles objects with two unknown classes", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n", "min",
+    "variable", "type", "missing", "complete", "n", "min",
     "max", "empty", "n_unique", "whitespace"
   ))
 
@@ -755,9 +755,9 @@ test_that("Skimming a complete data frame works as expected", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "missing", "complete", "n",
-    "ordered", "n_unique", "top_counts",
-    "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"
+    "variable","type", "missing", "complete", "n",
+    "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist",
+    "ordered", "n_unique", "top_counts"
   ))
 
   # attributes
@@ -822,7 +822,7 @@ test_that("Skimming a grouped df works as expected", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "type", "variable", "cyl", "gear", "missing",
+    "variable", "type", "cyl", "gear", "missing",
     "complete", "n", "mean", "sd", "p0", "p25", "p50",
     "p75", "p100", "hist"
   ))

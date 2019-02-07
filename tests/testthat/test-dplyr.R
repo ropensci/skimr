@@ -10,13 +10,13 @@ test_that("dplyr::filter works as expected", {
 test_that("dplyr::select works as expected", {
   with_type <- dplyr::select(skimmed_iris, type, variable)
   expect_output(print(with_type), "Skim summary statistics")
-  
+
   without_type <- dplyr::select(skimmed_iris, mean)
   expect_output(print(without_type), "# A tibble")
 })
 
 test_that("dplyr::mutate works as expected", {
-  input <- dplyr::mutate(skimmed_iris, mean2 = mean ^ 2)
+  input <- dplyr::mutate(skimmed_iris, mean2 = mean^2)
   expect_output(print(input), "Skim summary statistics")
 })
 

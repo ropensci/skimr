@@ -183,24 +183,24 @@ test_that("list_max_length is calculated correctly.", {
 test_that("sorted count is calculated correctly.", {
   dat <- c("A", "A", "A", "B", "C", "C")
   expect_equal(sorted_count(dat)[1:3], c("A" = 3, "C" = 2, "B" = 1))
-  expect_equal(names(sorted_count(dat)), c("A", "C", "B", NA))
+  expect_equal(names(sorted_count(dat)), c("A", "C", "B"))
 })
 
 test_that("top counts is calculated correctly", {
   dat <- c("A", "A", "A", "B", "C", "C")
-  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1, NA: 0")
+  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1")
 })
 
 test_that("sorted count is calculated correctly with a NA.", {
   # NA should be sorted as if it is a regular value
   dat <- c("A", "A", "A", "A", "B", NA, NA, "C", "C", "C")
-  expect_equal(unname(sorted_count(dat)), c(4, 3, 2, 1))
-  expect_equal(names(sorted_count(dat)), c("A", "C", NA, "B"))
+  expect_equal(unname(sorted_count(dat)), c(4, 3, 1))
+  expect_equal(names(sorted_count(dat)), c("A", "C", "B"))
 })
 
 test_that("top counts is calculated correctly with a NA", {
   dat <- c("A", "A", "A", "B", "C", "C")
-  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1, NA: 0")
+  expect_equal(top_counts(dat), "A: 3, C: 2, B: 1")
 })
 
 test_that("sorted count is calculated correctly with \"\".", {
@@ -208,6 +208,6 @@ test_that("sorted count is calculated correctly with \"\".", {
   dat <- c("A", "A", "A", "A", "B", "", "", "C", "C", "C")
   dat <- as.factor(dat)
   expect_warning(expected <- sorted_count(dat))
-  expect_equal(unname(expected), c(4, 3, 2, 1, 0))
-  expect_equal(names(expected), c("A", "C", "empty", "B", NA))
+  expect_equal(unname(expected), c(4, 3, 2, 1))
+  expect_equal(names(expected), c("A", "C", "empty", "B"))
 })

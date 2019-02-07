@@ -10,7 +10,7 @@ test_that("Skimmer list is updated correctly when changing functions", {
 })
 
 test_that("Skimming functions can be changed for multiple types", {
-  newfuns1 <- sfl(iqr = IQR, q99 = quantile(., probs = .99))
+  newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
   newfuns2 <- sfl(n2 = length)
   new_skim <- skim_with(numeric = newfuns1, factor = newfuns2, append = FALSE)
   input <- new_skim(iris)
@@ -56,7 +56,7 @@ test_that("Skimmers can be removed and added at the same time", {
 })
 
 test_that("Skimming functions for new types can be added", {
-  funs <- sfl(iqr = IQR, quantile = quantile(., probs = .99))
+  funs <- sfl(iqr = IQR, quantile = ~ quantile(., probs = .99))
   expect_message(new_skim <- skim_with(new_type = funs), "new_type")
   x <- tibble::tibble(x = rnorm(10))
   class(x$x) <- "new_type"
@@ -66,7 +66,7 @@ test_that("Skimming functions for new types can be added", {
 })
 
 test_that("Set multiple sets of skimming functions", {
-  funs <- sfl(iqr = IQR, quantile = quantile(., probs = .99))
+  funs <- sfl(iqr = IQR, quantile = ~ quantile(., probs = .99))
   expect_message(
     new_skim <- skim_with(numeric = funs, new_type = funs),
     "new_type"
@@ -86,7 +86,7 @@ test_that("Set multiple sets of skimming functions", {
 
 
 test_that("Set multiple sets of skimming functions, rlang", {
-  funs <- sfl(iqr = IQR, quantile = quantile(., probs = .99))
+  funs <- sfl(iqr = IQR, quantile = ~ quantile(., probs = .99))
   expect_message(new_skim <- skim_with(!!!list(numeric = funs, new_type = funs),
     append = FALSE
   ))
@@ -113,9 +113,9 @@ test_that("An empty call to skim_with() returns the default skim()", {
   expect_identical(input(iris), skim(iris))
 })
 
-test_that("sfls can use unnamed functions", {
-  dat <- tibble::tibble(1:3)
-  new_skim <- skim_with(integer = sfl(mad), append = FALSE)
-  input <- new_skim(dat)
-  expect_named(input, c("type", "variable", "mad"))
+test_that("User-defined defaults require sfl's with class names", {
+  with_mock(
+    get_skimmers = function(column) sfl(length),
+    expect_error(skim(data.frame(1)), "Default skimming functions")
+  )
 })
