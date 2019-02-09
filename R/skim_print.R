@@ -21,14 +21,6 @@ print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
   if (is_skim_df(x)) {
     if (include_summary) {
       print(summary(x))
-      # cat("Skim summary statistics\n")
-      # cat(" n obs:", attr(x, "data_rows"), "\n")
-      # cat(" n variables:", attr(x, "data_cols"), "\n")
-      # 
-      # possible_groups <- attr(x, "groups")
-      # if (!is.null(possible_groups)) {
-      #   cat(" group variables:", paste(possible_groups, collapse = ", "), "\n")
-      # }
     }
 
     by_type <- partition(x)
@@ -61,26 +53,34 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 #' @describeIn print Print method for a `summary_skim_df` object.
 #' @export
 print.summary_skim_df <- function(x, ...) {
-  print("xxxx")
-  # n_rows <- paste0("Number of Rows: ", x$n_rows, "   \n")
-  # n_cols <- paste0("Number of Columns: ", x$n_cols, "    \n")
-  # df_name <- ifelse(x$df_name == ".", "", paste0("Name: ", x$df_name, "   \n"))
-  # 
-  # type_frequency_string <- paste0(x$type_frequencies$type,
-  #   ": ",
-  #   x$type_frequencies$n,
-  #   collapse = "   \n"
-  # )
-  # 
-  # cat("A skim object    \n\n",
-  #   df_name,
-  #   n_rows, n_cols, "    \nColumn type frequency    \n",
-  #   type_frequency_string,
-  #   "\n",
-  #   sep = ""
-  # )
-  x
+
+  summary_string <- build_summary_string(x)
+  cat(summary_string)
+  invisible(summary_string)
 }
+
+
+build_summary_string <- function(x) {
+  n_rows <- paste0("Number of rows: ", x$n_rows, "   \n  ")
+  n_cols <- paste0("Number of columns: ", x$n_cols, "    \n  ")
+  df_name <- ifelse(x$df_name %in% c("`.`", ".data" ), "Piped data  \n  ", paste0("Name: ", x$df_name, "   \n  "))
+  groups <- ifelse(is.null(x$possible_groups), "", paste0("Group variables: ", paste(x$possible_groups, collapse = ", "), "  \n  "))
+  type_frequency_string <- paste0(x$type_frequencies$type,
+                                  ": ",
+                                  x$type_frequencies$n,
+                                  collapse = "   \n  "
+  )
+
+  summary_string <- paste0("Data summary    \n\n  ",
+                        df_name,
+                        n_rows, n_cols, groups, "    \nColumn type frequency:    \n  ",
+                        type_frequency_string,
+                        "\n  ",
+                        sep = ""
+  )
+  summary_string
+}
+
 
 #' Provide a default printing method for knitr.
 #'
@@ -114,21 +114,20 @@ NULL
 knit_print.skim_df <- function(x, options = NULL, ...) {
   assert_is_skim_df(x)
   if (options$skimr_include_summary %||% TRUE) {
-    summary_stats <- data.frame(
-      n_obs = attr(x, "data_rows"),
-      n_cols = attr(x, "data_cols")
-    )
+    summary_stats <- summary(x)
+    summary_string <- build_summary_string(summary_stats)
     kabled <- knitr::kable(
-      summary_stats,
+      summary_string,
       format = "html", table.attr = "style='width: auto;'
-      class='table table-condensed'"
+      class='table table-condensed'",
+      col.names = c("")
     )
-    summary <- c("**Skim summary statistics**", "", kabled, "", "")
   } else {
-    summary <- c()
+    kabled <- c()
   }
   by_type <- partition(x)
-  knit_print_by_type(by_type, options, summary)
+
+  knit_print_by_type(by_type, options, kabled)
 }
 
 knit_print_by_type <- function(x, options, summary) {
@@ -163,13 +162,14 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
-  n_rows <- paste0("Number of Rows: ", x[["n_rows"]])
-  n_cols <- paste0("Number of Columns: ", x[["n_cols"]])
-  df_name <- paste0("Name: ", x[["df_name"]])
 
-  kframe <- data.frame(df_name, n_rows, n_cols)
-  list(
-    Summary = knitr::kable(kframe),
-    `Type counts` = knitr::kable(x$type_frequencies)
-  )
+    summary_string <- build_summary_string(x)
+    kabled <- knitr::kable(
+      summary_string,
+      format = "html", table.attr = "style='width: auto;'
+      class='table table-condensed'",
+      col.names = c("")
+    )
+
+    knitr::asis_output(kabled)
 }
