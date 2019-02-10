@@ -39,7 +39,7 @@ sfl <- function(..., .type = "") {
   if (length(funs) < 1) {
     stop("Please provide one or more skimming functions.")
   }
-  structure(list(funs = funs, type = .type ), class = "skimr_function_list")
+  structure(list(funs = funs, type = .type), class = "skimr_function_list")
 }
 
 build_sfl_names <- function(...) {

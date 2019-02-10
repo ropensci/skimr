@@ -53,23 +53,23 @@ reconcile_skimmers <- function(data, groups) {
   skimmers_used <- attr(data, "skimmers_used")
   with_base_columns <- c("skim_variable", "skim_type", purrr::flatten_chr(skimmers_used))
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
-   if (length(extra_cols) > 0) {
-     grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))
-     complete_by_type <- dplyr::summarize_at(
-                            grouped,
-                            dplyr::vars(extra_cols),
-                            ~ !all(is.na(.x))
+  if (length(extra_cols) > 0) {
+    grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))
+    complete_by_type <- dplyr::summarize_at(
+      grouped,
+      dplyr::vars(extra_cols),
+      ~ !all(is.na(.x))
     )
 
     complete_cols <- purrr::pmap(
-                      complete_by_type[extra_cols],
-                      get_complete_columns,
-                      names = extra_cols
-                      )
- 
-     new_cols_by_type <- purrr::set_names(complete_cols, complete_by_type$skim_type)
-     skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
-   }
+      complete_by_type[extra_cols],
+      get_complete_columns,
+      names = extra_cols
+    )
+
+    new_cols_by_type <- purrr::set_names(complete_cols, complete_by_type$skim_type)
+    skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
+  }
 
   skimmers_used
 }

@@ -593,7 +593,7 @@ test_that("skim returns expected response for asis vectors", {
 
   # values
   expect_identical(input$skim_variable, "dat")
-  #expect_identical(input$skim_type, "AsIs")
+  # expect_identical(input$skim_type, "AsIs")
   expect_identical(input$skim_type, "list")
   expect_identical(input$missing, 1L)
   expect_identical(input$complete, 3L)
