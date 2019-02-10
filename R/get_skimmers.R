@@ -204,7 +204,7 @@ get_skimmers.list <- function(column) {
 
 #' @export
 get_skimmers.AsIs <- function(column) {
-  purrr::list_modify(get_skimmers(list()), .type = "AsIs")
+  purrr::list_modify(get_skimmers(list()), type = "AsIs")
 }
 
 #' @rdname get_skimmers
