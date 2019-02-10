@@ -21,6 +21,9 @@ test_that("dplyr::select works as expected", {
 test_that("dplyr::mutate works as expected", {
   input <- dplyr::mutate(skimmed_iris, mean2 = mean^2)
   expect_output(print(input), "Skim summary statistics")
+  
+  no_variable <- dplyr::mutate(skimmed_iris, variable = NULL)
+  expect_output(print(no_variable), "# A tibble: 5 x 15")
 })
 
 test_that("dplyr::slice works as expected", {
