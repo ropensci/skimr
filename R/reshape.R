@@ -51,7 +51,8 @@ partition <- function(data) {
 reconcile_skimmers <- function(data, groups) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
-  with_base_columns <- c("skim_variable", "skim_type", purrr::flatten_chr(skimmers_used))
+  with_base_columns <- c(
+    "skim_variable", "skim_type", purrr::flatten_chr(skimmers_used))
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))
@@ -62,7 +63,7 @@ reconcile_skimmers <- function(data, groups) {
     )
 
     complete_cols <- purrr::pmap(
-      complete_by_type[extra_cols],
+      complete_by_type,
       get_complete_columns,
       names = extra_cols
     )
@@ -74,7 +75,7 @@ reconcile_skimmers <- function(data, groups) {
   skimmers_used
 }
 
-get_complete_columns <- function(type, ..., names) {
+get_complete_columns <- function(skim_type, ..., names) {
   names[c(...)]
 }
 
