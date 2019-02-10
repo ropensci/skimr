@@ -80,22 +80,24 @@ skim_with <- function(..., append = TRUE) {
       selected <- selected[!group_variables]
     }
 
-    variables <- tibble::tibble(variable = selected)
+    variables <- tibble::tibble(skim_variable = selected)
     nested <- dplyr::mutate(variables,
       skimmed = purrr::map(
-        !!rlang::sym("variable"), skim_one, data, local_skimmers, append
+        !!rlang::sym("skim_variable"), skim_one, data, local_skimmers, append
       )
     )
+
     skimmers_used <- purrr::map(
       nested$skimmed,
       ~ list(
-        type = attr(.x, "skimmer_type"),
+        skimmer_type = attr(.x, "skimmer_type"),
         used = attr(.x, "skimmers_used")
       )
     )
+
     unique_skimmers <- unique(skimmers_used)
     skimmers <- purrr::map(unique_skimmers, "used")
-    variable_types <- purrr::map(unique_skimmers, "type")
+    variable_types <- purrr::map(unique_skimmers, "skimmer_type")
     out <- tidyr::unnest(nested)
     structure(out,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
@@ -188,13 +190,15 @@ skim_one <- function(column, data, local_skimmers, append) {
   }
 
   reduced <- suppressMessages(dplyr::select(data, !!column))
+
   out <- tibble::tibble(
-    type = skimmers$type,
+    skim_type = skimmers$type,
     !!!dplyr::summarize_all(reduced, skimmers$funs)
   )
+
   used <- names(skimmers$funs)
   grps <- dplyr::groups(reduced)
-  names(out) <- c("type", as.character(grps), used)
+  names(out) <- c("skim_type", as.character(grps), used)
   structure(out,
     skimmer_type = skimmers$type,
     skimmers_used = used

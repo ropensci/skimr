@@ -12,13 +12,13 @@ NULL
 #' @describeIn skim-obj Does the object have the `skim_type` column?
 #' @export
 has_type_column <- function(object) {
-  "type" %in% names(object)
+  "skim_type" %in% names(object)
 }
 
 #' @describeIn skim-obj Does the object have the `skim_variable` column?
 #' @export
 has_variable_column <- function(object) {
-  "variable" %in% names(object)
+  "skim_variable" %in% names(object)
 }
 
 #' @describeIn skim-obj Does the object have the appropriate `skimr` attributes?
@@ -61,7 +61,7 @@ assert_is_skim_list <- function(object) {
   object
 }
 
-#' @describeIn skim-obj Is this a data frame with variable and type columns?
+#' @describeIn skim-obj Is this a data frame with skim_variable and skim_type columns?
 #' @export
 could_be_skim_df <- function(object) {
   is.data.frame(object) && has_variable_column(object) && has_type_column(object)

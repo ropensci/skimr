@@ -53,6 +53,6 @@ used internally.
 
 \item \code{assert_is_skim_list}: Stop if the object is not a \code{skim_list}.
 
-\item \code{could_be_skim_df}: Is this a data frame with variable and type columns?
+\item \code{could_be_skim_df}: Is this a data frame with skim_variable and skim_type columns?
 }}
 
