@@ -5,6 +5,9 @@ skimmed_iris <- skim(iris)
 test_that("dplyr::filter works as expected", {
   input <- dplyr::filter(skimmed_iris, type == "numeric")
   expect_output(print(input), "Skim summary statistics")
+  
+  no_rows <- dplyr::filter(skimmed_iris, type == "no_type")
+  expect_output(print(no_rows), "# A tibble: 0 x 16")
 })
 
 test_that("dplyr::select works as expected", {
