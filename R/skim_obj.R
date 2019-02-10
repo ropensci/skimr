@@ -61,7 +61,8 @@ assert_is_skim_list <- function(object) {
   object
 }
 
-#' @describeIn skim-obj Is this a data frame with skim_variable and skim_type columns?
+#' @describeIn skim-obj Is this a data frame with `skim_variable` and
+#'  `skim_type` columns?
 #' @export
 could_be_skim_df <- function(object) {
   is.data.frame(object) && has_variable_column(object) && has_type_column(object)
