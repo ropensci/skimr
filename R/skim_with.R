@@ -161,7 +161,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   all_classes <- class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
-  if (!nzchar(defaults$type)) {
+  if (!nzchar(defaults$skim_type)) {
     msg <- sprintf(
       "Default skimming functions for column [%s] with class [%s]",
       column, paste(all_classes, collapse = ", ")
@@ -173,7 +173,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   }
 
   if (is.null(locals$funs)) {
-    if (defaults$type == "default") {
+    if (defaults$skim_type == "default") {
       warning(
         "Couldn't find skimmers for class: %s; No user-defined `sfl` ",
         "provided. Falling back to `character`.",
@@ -181,7 +181,7 @@ skim_one <- function(column, data, local_skimmers, append) {
       )
       data[[column]] <- as.character(data[[column]])
       skimmers <- defaults
-      skimmers$type <- "character"
+      skimmers$skim_type <- "character"
     } else {
       skimmers <- defaults
     }
@@ -192,7 +192,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   reduced <- suppressMessages(dplyr::select(data, !!column))
 
   out <- tibble::tibble(
-    skim_type = skimmers$type,
+    skim_type = skimmers$skim_type,
     !!!dplyr::summarize_all(reduced, skimmers$funs)
   )
 
@@ -200,7 +200,7 @@ skim_one <- function(column, data, local_skimmers, append) {
   grps <- dplyr::groups(reduced)
   names(out) <- c("skim_type", as.character(grps), used)
   structure(out,
-    skimmer_type = skimmers$type,
+    skimmer_type = skimmers$skim_type,
     skimmers_used = used
   )
 }
@@ -208,12 +208,16 @@ skim_one <- function(column, data, local_skimmers, append) {
 get_local_skimmers <- function(classes, local_skimmers) {
   all_matches <- local_skimmers[classes]
   safe_modify <- purrr::possibly(purrr::list_modify, NULL)
-  add_types <- purrr::map2(all_matches, classes, ~ safe_modify(.x, type = .y))
+  add_types <- purrr::map2(
+    all_matches,
+    classes,
+    ~ safe_modify(.x, skim_type = .y)
+  )
   purrr::detect(add_types, ~ !is.null(.x))
 }
 
 merge_skimmers <- function(locals, defaults, append) {
-  if (!append || locals$type != defaults$type) {
+  if (!append || locals$skim_type != defaults$skim_type) {
     locals
   } else {
     defaults$funs <- purrr::list_modify(defaults$funs, !!!locals$funs)

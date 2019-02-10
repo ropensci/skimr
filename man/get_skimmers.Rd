@@ -21,7 +21,7 @@ A \code{skim_function_list} object.
 These functions are used to set the default skimming functions for a data
 type.  When creating your own set of skimming functions, call \code{\link[=sfl]{sfl()}}
 within a \code{\link[=get_skimmers]{get_skimmers()}} method for your particular type. Your call to
-\code{\link[=sfl]{sfl()}} should also provide a matching class in the \code{.type} argument.
+\code{\link[=sfl]{sfl()}} should also provide a matching class in the \code{skim_type} argument.
 Otherwise, it will not be possible to dynamically reassign your default
 functions when working interactively.
 }
@@ -47,7 +47,7 @@ Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the func
 # Note that the class argument is required for dynamic reassignment.
 get_skimmers.my_class <- function(column) {
   sfl(
-    .type = "my_class",
+    skim_type = "my_class",
     mean,
     sd
   )
@@ -57,7 +57,7 @@ get_skimmers.my_class <- function(column) {
 # by default. To switch this behavior in another package, add a method.
 get_skimmers.integer <- function(column) {
   sfl(
-    .type = "integer",
+    skim_type = "integer",
     p50 = ~ stats::quantile(
       .,
       probs = .50, na.rm = TRUE, names = FALSE, type = 1

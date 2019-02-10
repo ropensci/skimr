@@ -10,7 +10,7 @@
 #' providing names when reasonable to get better [skim()] output.
 #'
 #' @inheritParams dplyr::funs
-#' @param .type A character scalar. This is used to match locally-provided
+#' @param skim_type A character scalar. This is used to match locally-provided
 #'   skimmers with defaults. See [get_skimmers()] for more detail.
 #' @return A `skimr_function_list`, which contains a list of `fun_calls`,
 #'   returned by [dplyr::funs()] and a list of skimming functions to drop.
@@ -30,16 +30,19 @@
 #' # When working interactively, you don't need to set a type.
 #' # But you should when defining new defaults with `get_skimmers()`.
 #' get_skimmers.my_new_class <- function(column) {
-#'   sfl(n_missing, .type = "my_new_class")
+#'   sfl(n_missing, skim_type = "my_new_class")
 #' }
 #' @export
-sfl <- function(..., .type = "") {
-  stopifnot(length(.type) == 1, is.character(.type))
+sfl <- function(..., skim_type = "") {
+  stopifnot(length(skim_type) == 1, is.character(skim_type))
   funs <- build_sfl_names(...)
   if (length(funs) < 1) {
     stop("Please provide one or more skimming functions.")
   }
-  structure(list(funs = funs, type = .type), class = "skimr_function_list")
+  structure(
+    list(funs = funs, skim_type = skim_type), 
+    class = "skimr_function_list"
+  )
 }
 
 build_sfl_names <- function(...) {

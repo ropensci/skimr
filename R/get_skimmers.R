@@ -6,7 +6,7 @@ NULL
 #' These functions are used to set the default skimming functions for a data
 #' type.  When creating your own set of skimming functions, call [sfl()]
 #' within a [get_skimmers()] method for your particular type. Your call to
-#' [sfl()] should also provide a matching class in the `.type` argument.
+#' [sfl()] should also provide a matching class in the `skim_type` argument.
 #' Otherwise, it will not be possible to dynamically reassign your default
 #' functions when working interactively.
 #'
@@ -33,7 +33,7 @@ NULL
 #' # Note that the class argument is required for dynamic reassignment.
 #' get_skimmers.my_class <- function(column) {
 #'   sfl(
-#'     .type = "my_class",
+#'     skim_type = "my_class",
 #'     mean,
 #'     sd
 #'   )
@@ -43,7 +43,7 @@ NULL
 #' # by default. To switch this behavior in another package, add a method.
 #' get_skimmers.integer <- function(column) {
 #'   sfl(
-#'     .type = "integer",
+#'     skim_type = "integer",
 #'     p50 = ~ stats::quantile(
 #'       .,
 #'       probs = .50, na.rm = TRUE, names = FALSE, type = 1
@@ -68,13 +68,13 @@ get_skimmers <- function(column) {
 
 #' @export
 get_skimmers.default <- function(column) {
-  purrr::list_modify(get_skimmers(character()), type = "default")
+  purrr::list_modify(get_skimmers(character()), skim_type = "default")
 }
 
 #' @export
 get_skimmers.numeric <- function(column) {
   sfl(
-    .type = "numeric",
+    skim_type = "numeric",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -92,7 +92,7 @@ get_skimmers.numeric <- function(column) {
 #' @export
 get_skimmers.factor <- function(column) {
   sfl(
-    .type = "factor",
+    skim_type = "factor",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -105,7 +105,7 @@ get_skimmers.factor <- function(column) {
 #' @export
 get_skimmers.character <- function(column) {
   sfl(
-    .type = "character",
+    skim_type = "character",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -120,7 +120,7 @@ get_skimmers.character <- function(column) {
 #' @export
 get_skimmers.logical <- function(column) {
   sfl(
-    .type = "logical",
+    skim_type = "logical",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -132,7 +132,7 @@ get_skimmers.logical <- function(column) {
 #' @export
 get_skimmers.complex <- function(column) {
   sfl(
-    .type = "complex",
+    skim_type = "complex",
     missing = n_missing,
     complete = n_complete,
     n = length
@@ -142,7 +142,7 @@ get_skimmers.complex <- function(column) {
 #' @export
 get_skimmers.Date <- function(column) {
   sfl(
-    .type = "Date",
+    skim_type = "Date",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -157,7 +157,7 @@ get_skimmers.Date <- function(column) {
 get_skimmers.POSIXct <- function(column) {
   purrr::list_modify(
     get_skimmers(structure(list(), class = "Date")),
-    type = "POSIXct"
+    skim_type = "POSIXct"
   )
 }
 
@@ -165,14 +165,14 @@ get_skimmers.POSIXct <- function(column) {
 get_skimmers.difftime <- function(column) {
   purrr::list_modify(
     get_skimmers(structure(list(), class = "Date")),
-    type = "difftime"
+    skim_type = "difftime"
   )
 }
 
 #' @export
 get_skimmers.ts <- function(column) {
   sfl(
-    .type = "ts",
+    skim_type = "ts",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -192,7 +192,7 @@ get_skimmers.ts <- function(column) {
 #' @export
 get_skimmers.list <- function(column) {
   sfl(
-    .type = "list",
+    skim_type = "list",
     missing = n_missing,
     complete = n_complete,
     n = length,
@@ -204,7 +204,7 @@ get_skimmers.list <- function(column) {
 
 #' @export
 get_skimmers.AsIs <- function(column) {
-  purrr::list_modify(get_skimmers(list()), type = "AsIs")
+  purrr::list_modify(get_skimmers(list()), skim_type = "AsIs")
 }
 
 #' @rdname get_skimmers
@@ -233,7 +233,7 @@ get_default_skimmers <- function(class = NULL) {
 get_class_defaults <- function(class) {
   skimmers <- get_skimmers(structure(integer(), class = class))
 
-  if (skimmers$type == "default") {
+  if (skimmers$skim_type == "default") {
     NA
   } else {
     names(skimmers$funs)
