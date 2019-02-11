@@ -34,7 +34,7 @@ print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
 #' @describeIn print Print an entry within a partitioned `skim_df`.
 #' @export
 print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
-  variable_type <- paste("Variable type:", attr(x, "type"))
+  variable_type <- paste("Variable type:", attr(x, "skim_type"))
   with_line <- cli::rule(line = 1, left = variable_type)
   print(with_line)
   out <- format(x, n = n, width = width, n_extra, ...)
@@ -136,12 +136,12 @@ knit_print_by_type <- function(x, options, summary) {
   knitr::asis_output(paste(combined, collapse = "\n"))
 }
 
-knit_print_one <- function(by_type, skim_type, options) {
+knit_print_one <- function(by_type, type, options) {
   kabled <- knitr::kable(by_type, digits = options$skimr_digits %||% 2)
   if (is_windows()) {
     kabled[] <- fix_unicode(kabled)
   }
-  caption <- sprintf("**Variable type: %s**", skim_type)
+  caption <- sprintf("**Variable type: %s**", type)
   c(caption, "", kabled, "", "")
 }
 
@@ -154,7 +154,7 @@ knit_print.skim_list <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print within a partitioned `skim_df`.
 #' @export
 knit_print.one_skim_df <- function(x, options = NULL, ...) {
-  kabled <- knit_print_one(x, attr(x, "type"), options)
+  kabled <- knit_print_one(x, attr(x, "skim_type"), options)
   combined <- c("", "", kabled, "")
   knitr::asis_output(paste(combined, collapse = "\n"))
 }

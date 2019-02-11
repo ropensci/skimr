@@ -37,6 +37,22 @@ attributes and data columns for all operations to succeed. These checks help
 ensure this. While they have some application externally, they are mostly
 used internally.
 }
+\details{
+Most notably, a \code{skim_df}
+\itemize{
+\item has columns \code{type} and \code{variable}
+\item has more than zero rows
+}
+
+And has the following special attributes
+\itemize{
+\item \code{data_rows}: n rows in the original data
+\item \code{data_cols}: original number of columns
+\item \code{df_name}: name of the original data frame
+\item \code{groups}: if there were group variables
+\item \code{skimmers_used}: names of functions used to skim each type
+}
+}
 \section{Functions}{
 \itemize{
 \item \code{has_type_column}: Does the object have the \code{skim_type} column?
@@ -53,6 +69,7 @@ used internally.
 
 \item \code{assert_is_skim_list}: Stop if the object is not a \code{skim_list}.
 
-\item \code{could_be_skim_df}: Is this a data frame with variable and type columns?
+\item \code{could_be_skim_df}: Is this a data frame with \code{skim_variable} and
+\code{skim_type} columns?
 }}
 

@@ -10,12 +10,12 @@ partition(data)
 
 bind(data)
 
-yank(data, type)
+yank(data, skim_type)
 }
 \arguments{
 \item{data}{A \code{skim_df}.}
 
-\item{type}{A character scalar. The subtable to extract from a \code{skim_df}.}
+\item{skim_type}{A character scalar. The subtable to extract from a \code{skim_df}.}
 }
 \value{
 A \code{skim_list} of \code{skim_df}'s, by type.
