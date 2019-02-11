@@ -54,31 +54,21 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 #' @export
 print.summary_skim_df <- function(x, ...) {
 
-  summary_string <- build_summary_string(x)
-  cat(summary_string)
-  invisible(summary_string)
+  summary<-build_summary_string(x)
+  cat("Data summary  ")
+  print(summary)
 }
 
 
 build_summary_string <- function(x) {
-  n_rows <- paste0("Number of rows: ", x$n_rows, "   \n  ")
-  n_cols <- paste0("Number of columns: ", x$n_cols, "    \n  ")
-  df_name <- ifelse(x$df_name %in% c("`.`", ".data" ), "Piped data  \n  ", paste0("Name: ", x$df_name, "   \n  "))
-  groups <- ifelse(is.null(x$possible_groups), "", paste0("Group variables: ", paste(x$possible_groups, collapse = ", "), "  \n  "))
-  type_frequency_string <- paste0(x$type_frequencies$type,
-                                  ": ",
-                                  x$type_frequencies$n,
-                                  collapse = "   \n  "
-  )
-
-  summary_string <- paste0("Data summary    \n\n  ",
-                        df_name,
-                        n_rows, n_cols, groups, "    \nColumn type frequency:    \n  ",
-                        type_frequency_string,
-                        "\n  ",
-                        sep = ""
-  )
-  summary_string
+  df_name <- ifelse(x$df_name %in% c("`.`", ".data" ), "Piped data", x$df_name)
+  groups <- ifelse(is.null(x$possible_groups), "None", paste0(x$possible_groups, collapse = ", "))
+  summary <- data.frame("Values" = c(x$n_rows, x$n_cols, df_name, "", 
+                                     x$type_frequencies$n, groups))
+  row.names( summary )  <- c("Number of rows ", "Number of columns ", "Name", 
+                           "Column type frequency ",x$type_frequencies$type, 
+                           "Group variables")
+  summary
 }
 
 
@@ -118,9 +108,11 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
     summary_string <- build_summary_string(summary_stats)
     kabled <- knitr::kable(
       summary_string,
-      format = "html", table.attr = "style='width: auto;'
+      #format = "html", 
+      table.attr = "style='width: auto;'
       class='table table-condensed'",
-      col.names = c("")
+      col.names = c(" "),
+      caption = "Data summary"
     )
   } else {
     kabled <- c()
@@ -164,12 +156,16 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 
     summary_string <- build_summary_string(x)
+
     kabled <- knitr::kable(
       summary_string,
-      format = "html", table.attr = "style='width: auto;'
+      #format = "html", 
+      table.attr = "style='width: auto;'
       class='table table-condensed'",
-      col.names = c("")
+      col.names = c(" "),
+      caption = "Data summary"
     )
+    
+    knitr::asis_output(paste(kabled, collapse = "\n"))
 
-    knitr::asis_output(kabled)
 }

@@ -96,8 +96,8 @@ test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
 
 test_that("focus() does not allow dropping skim metadata columns", {
   skimmed <- skim(iris)
-  expect_error(focus(skimmed, -variable), "Cannot drop")
-  expect_error(focus(skimmed, -type), "Cannot drop")
+  expect_error(focus(skimmed, -variable), "focus() does not allow dropping skim metadata columns")
+  expect_error(focus(skimmed, -type), "focus() does not allow dropping skim metadata columns")
 })
 
 test_that("skim_to_wide() returns a deprecation warning", {

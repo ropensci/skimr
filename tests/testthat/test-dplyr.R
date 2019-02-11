@@ -6,7 +6,7 @@ test_that("dplyr::filter works as expected", {
   input <- dplyr::filter(skimmed_iris, skim_type == "numeric")
   expect_output(print(input), "Skim summary statistics")
   
-  no_rows <- dplyr::filter(skimmed_iris, type == "no_type")
+  no_rows <- dplyr::filter(skimmed_iris, skim_type == "no_type")
   expect_output(print(no_rows), "# A tibble: 0 x 16")
 })
 
