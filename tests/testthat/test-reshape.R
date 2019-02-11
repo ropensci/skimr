@@ -88,9 +88,9 @@ test_that("Partition handles new columns", {
   ))
 })
 
-test_that("focus() is identical to dplyr::select(data, type, variable, ...)", {
+test_that("focus() matches select(data, skim_type, skim_variable, ...)", {
   skimmed <- skim(iris)
-  expected <- dplyr::select(skimmed, skim_variable, skim_type, missing)
+  expected <- dplyr::select(skimmed, skim_type, skim_variable, missing)
   expect_identical(focus(skimmed, missing), expected)
 })
 
@@ -112,7 +112,10 @@ test_that("to_long() returns a long tidy data frame with 4 columns", {
   skimmed_long <- to_long(iris)
   # Statistics from the skim_df  with values of NA are not included
   expect_equal(nrow(skimmed_long), 50)
-  expect_equal(names(skimmed_long), c("skim_variable", "skim_type", "stat", "formatted"))
+  expect_equal(
+    names(skimmed_long),
+    c("skim_type", "skim_variable", "stat", "formatted")
+  )
   expect_equal(length(unique(skimmed_long$stat)), 14)
   expect_equal(length(unique(skimmed_long$skim_type)), 2)
   expect_equal(length(unique(skimmed_long$skim_variable)), 5)

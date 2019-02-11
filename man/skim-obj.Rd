@@ -40,7 +40,7 @@ used internally.
 \details{
 Most notably, a \code{skim_df}
 \itemize{
-\item has columns \code{type} and \code{variable}
+\item has columns \code{skim_type} and \code{skim_variable}
 \item has more than zero rows
 }
 
