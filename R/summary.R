@@ -16,8 +16,8 @@ summary.skim_df <- function(object, ...) {
     stop("dataframe is null.")
   }
 
-  duplicated <- duplicated(object$variable)
-  counts <- table(type = object$type[!duplicated])
+  duplicated <- duplicated(object$skim_variable)
+  counts <- table(type = object$skim_type[!duplicated])
   type_frequencies <- tibble::as_tibble(counts)
 
   summary_object <- list(

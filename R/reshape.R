@@ -12,7 +12,7 @@
 #' `yank()` gives you a single subtable for a data type.
 #'
 #' @param data A `skim_df`.
-#' @param type A character scalar. The subtable to extract from a `skim_df`.
+#' @param skim_type A character scalar. The subtable to extract from a `skim_df`.
 #' @return A `skim_list` of `skim_df`'s, by type.
 #' @examples
 #' # Create a wide skimmed data frame (a skim_df)
@@ -30,11 +30,13 @@
 #' @export
 partition <- function(data) {
   assert_is_skim_df(data)
-  as_list <- split(data, data$type)
-  types <- names(as_list)
+  data_as_list <- split(data, data$skim_type)
+  types <- names(data_as_list)
   groups <- attr(data, "groups")
+
   skimmers <- reconcile_skimmers(data, groups)
-  reduced <- purrr::imap(as_list, simplify_skimdf, skimmers, groups)
+  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups)
+
   reassign_skim_attrs(
     reduced, data,
     class = "skim_list", skimmers_used = skimmers
@@ -49,10 +51,11 @@ partition <- function(data) {
 reconcile_skimmers <- function(data, groups) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
-  with_base_columns <- c("variable", "type", purrr::flatten_chr(skimmers_used))
+  with_base_columns <- c(
+    "skim_variable", "skim_type", purrr::flatten_chr(skimmers_used))
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
-    grouped <- dplyr::group_by(data, !!rlang::sym("type"))
+    grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))
     complete_by_type <- dplyr::summarize_at(
       grouped,
       dplyr::vars(extra_cols),
@@ -64,13 +67,15 @@ reconcile_skimmers <- function(data, groups) {
       get_complete_columns,
       names = extra_cols
     )
-    new_cols_by_type <- purrr::set_names(complete_cols, complete_by_type$type)
+
+    new_cols_by_type <- purrr::set_names(complete_cols, complete_by_type$skim_type)
     skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
   }
+
   skimmers_used
 }
 
-get_complete_columns <- function(type, ..., names) {
+get_complete_columns <- function(skim_type, ..., names) {
   names[c(...)]
 }
 
@@ -78,15 +83,16 @@ get_complete_columns <- function(type, ..., names) {
 #' This function also catches the case where the user removed columns from
 #' the skim_df
 #' @noRd
-simplify_skimdf <- function(data, type, skimmers, groups) {
+simplify_skimdf <- function(data, skim_type, skimmers, groups) {
   stopifnot(has_variable_column(data))
-  keep <- c("variable", groups, skimmers[[type]])
+  keep <- c("skim_variable", groups, skimmers[[skim_type]])
   cols_in_data <- names(data)
   out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
+
   structure(
     out,
     class = c("one_skim_df", "tbl_df", "tbl", "data.frame"),
-    type = type
+    skim_type = skim_type
   )
 }
 
@@ -95,17 +101,17 @@ simplify_skimdf <- function(data, type, skimmers, groups) {
 #' @export
 bind <- function(data) {
   assert_is_skim_list(data)
-  combined <- dplyr::bind_rows(!!!data, .id = "type")
+  combined <- dplyr::bind_rows(!!!data, .id = "skim_type")
   # The variable column should always be first
-  out <- dplyr::select(combined, !!rlang::sym("variable"), dplyr::everything())
+  out <- dplyr::select(combined, !!rlang::sym("skim_variable"), dplyr::everything())
   reassign_skim_attrs(out, data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
 #'   type.
 #' @export
-yank <- function(data, type) {
-  partition(data)[[type]]
+yank <- function(data, skim_type) {
+  partition(data)[[skim_type]]
 }
 
 #' Only show a subset of summary statistics after skimming
@@ -130,15 +136,15 @@ yank <- function(data, type) {
 #' # This is equivalent to
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(variable, type, missing)
+#'   dplyr::select(skim_variable, skim_type, missing)
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)
-  reduced <- dplyr::select(.data, "variable", "type", ...)
+  reduced <- dplyr::select(.data, "skim_variable", "skim_type", ...)
   if (could_be_skim_df(reduced)) {
     reassign_skim_attrs(reduced, .data)
   } else {
-    stop("Cannot drop 'variable' or 'type' columns")
+    stop("Cannot drop 'skim_variable' or 'skim_type' columns")
   }
 }
 
@@ -156,7 +162,7 @@ to_long <- function(.data, ...) {
   skimmed <- skim(.data, ...)
   tidyr::gather(skimmed,
     key = "stat", value = "formatted", na.rm = TRUE,
-    -!!rlang::sym("type"), -!!rlang::sym("variable")
+    -!!rlang::sym("skim_type"), -!!rlang::sym("skim_variable")
   )
 }
 

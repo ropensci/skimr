@@ -4,6 +4,19 @@
 #' attributes and data columns for all operations to succeed. These checks help
 #' ensure this. While they have some application externally, they are mostly
 #' used internally.
+#' 
+#' Most notably, a `skim_df`
+#' 
+#' * has columns `type` and `variable`
+#' * has more than zero rows
+#' 
+#' And has the following special attributes
+#' 
+#' * `data_rows`: n rows in the original data
+#' * `data_cols`: original number of columns
+#' * `df_name`: name of the original data frame
+#' * `groups`: if there were group variables
+#' * `skimmers_used`: names of functions used to skim each type
 #'
 #' @param object Any `R` object.
 #' @name skim-obj
@@ -12,13 +25,13 @@ NULL
 #' @describeIn skim-obj Does the object have the `skim_type` column?
 #' @export
 has_type_column <- function(object) {
-  "type" %in% names(object)
+  "skim_type" %in% names(object)
 }
 
 #' @describeIn skim-obj Does the object have the `skim_variable` column?
 #' @export
 has_variable_column <- function(object) {
-  "variable" %in% names(object)
+  "skim_variable" %in% names(object)
 }
 
 #' @describeIn skim-obj Does the object have the appropriate `skimr` attributes?
@@ -33,7 +46,8 @@ has_skimr_attributes <- function(object) {
 #' @describeIn skim-obj Is the object a `skim_df`?
 #' @export
 is_skim_df <- function(object) {
-  has_type_column(object) && has_variable_column(object) && has_skimr_attributes(object)
+  has_type_column(object) && has_variable_column(object) &&
+    has_skimr_attributes(object) && nrow(object) > 0
 }
 
 #' @describeIn skim-obj Stop if the object is not a `skim_df`.
@@ -41,7 +55,7 @@ is_skim_df <- function(object) {
 assert_is_skim_df <- function(object) {
   stopifnot(
     has_type_column(object), has_variable_column(object),
-    has_skimr_attributes(object)
+    has_skimr_attributes(object), nrow(object) > 0
   )
   object
 }
@@ -61,10 +75,12 @@ assert_is_skim_list <- function(object) {
   object
 }
 
-#' @describeIn skim-obj Is this a data frame with variable and type columns?
+#' @describeIn skim-obj Is this a data frame with `skim_variable` and
+#'  `skim_type` columns?
 #' @export
 could_be_skim_df <- function(object) {
-  is.data.frame(object) && has_variable_column(object) && has_type_column(object)
+  is.data.frame(object) && has_variable_column(object) &&
+    has_type_column(object) && nrow(object) > 0
 }
 
 #' Remove `skimr` class if not needed.

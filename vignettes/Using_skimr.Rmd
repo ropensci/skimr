@@ -60,16 +60,15 @@ all of the variable means, or all summary statistics for a specific variable.
 
 ```{r}
 skim(iris) %>%
-  dplyr::filter(variable == "Petal.Length")
+  dplyr::filter(skim_variable == "Petal.Length")
 skim(iris) %>%
-  dplyr::select(type, variable, mean)
-
+  dplyr::select(skim_type, skim_variable, mean)
 ```
 
 The `skim_df` object always contains 2  columns: 
 
-- `variable`: name of the original variable
-- `type`: class of the variable
+- `skim_variable`: name of the original variable
+- `skim_type`: class of the variable
 
 It also contains additional columns for each unique statistic (across the variable)
 types.
