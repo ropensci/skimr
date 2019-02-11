@@ -29,7 +29,7 @@ test_that("You can parition a skim_df", {
   expect_n_rows(input$factor, 1)
   expect_n_columns(input$factor, 7)
   expect_named(input$factor, c(
-    "variable", "missing", "complete", "n",
+    "skim_variable", "missing", "complete", "n",
     "ordered", "n_unique", "top_counts"
   ))
 
@@ -37,7 +37,7 @@ test_that("You can parition a skim_df", {
   expect_n_rows(input$numeric, 4)
   expect_n_columns(input$numeric, 12)
   expect_named(input$numeric, c(
-    "variable", "missing", "complete", "n", "mean",
+    "skim_variable", "missing", "complete", "n", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100",
     "hist"
   ))
@@ -57,7 +57,7 @@ test_that("You can yank a subtable from a skim_df", {
   expect_n_rows(input, 4)
   expect_n_columns(input, 12)
   expect_named(input, c(
-    "variable", "missing", "complete", "n", "mean",
+    "skim_variable", "missing", "complete", "n", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100",
     "hist"
   ))
@@ -65,11 +65,11 @@ test_that("You can yank a subtable from a skim_df", {
 
 test_that("Partition is safe if some skimmers are missing", {
   skimmed <- skim(iris)
-  reduced <- dplyr::select(skimmed, variable, type, missing)
+  reduced <- dplyr::select(skimmed, skim_variable, skim_type, missing)
   partitioned <- partition(reduced)
   expect_length(partitioned, 2)
   expect_named(partitioned, c("factor", "numeric"))
-  expect_named(partitioned$numeric, c("variable", "missing"))
+  expect_named(partitioned$numeric, c("skim_variable", "missing"))
 })
 
 test_that("Partition handles new columns", {
@@ -77,20 +77,20 @@ test_that("Partition handles new columns", {
   expanded <- dplyr::mutate(skimmed, mean2 = mean^2, complete2 = complete^2)
   partitioned <- partition(expanded)
   expect_named(partitioned$numeric, c(
-    "variable", "missing", "complete", "n", "mean",
+    "skim_variable", "missing", "complete", "n", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100",
     "hist", "mean2", "complete2"
   ))
 
   expect_named(partitioned$factor, c(
-    "variable", "missing", "complete", "n",
+    "skim_variable", "missing", "complete", "n",
     "ordered", "n_unique", "top_counts", "complete2"
   ))
 })
 
 test_that("focus() is identical to dplyr::select(data, variable, type, ...)", {
   skimmed <- skim(iris)
-  expected <- dplyr::select(skimmed, variable, type, missing)
+  expected <- dplyr::select(skimmed, skim_variable, skim_type, missing)
   expect_identical(focus(skimmed, missing), expected)
 })
 
@@ -106,8 +106,8 @@ test_that("to_long() returns a long tidy data frame with 4 columns", {
   skimmed_long <- to_long(iris)
   # Statistics from the skim_df  with values of NA are not included
   expect_equal(nrow(skimmed_long), 50)
-  expect_equal(names(skimmed_long), c("variable", "type", "stat", "formatted"))
+  expect_equal(names(skimmed_long), c("skim_variable", "skim_type", "stat", "formatted"))
   expect_equal(length(unique(skimmed_long$stat)), 14)
-  expect_equal(length(unique(skimmed_long$type)), 2)
-  expect_equal(length(unique(skimmed_long$variable)), 5)
+  expect_equal(length(unique(skimmed_long$skim_type)), 2)
+  expect_equal(length(unique(skimmed_long$skim_variable)), 5)
 })

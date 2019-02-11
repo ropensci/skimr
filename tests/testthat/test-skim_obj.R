@@ -27,11 +27,11 @@ test_that("Bind produces skim_df objects", {
   expect_error(assert_is_skim_list(combined))
 })
 
-test_that("Creating a skim_df requires type and variable columns", {
+test_that("Creating a skim_df requires skim_type and skim_variable columns", {
   expect_true(could_be_skim_df(
     data.frame(
-      type = "t",
-      variable = "v"
+      skim_type = "t",
+      skim_variable = "v"
     )
   ))
   expect_false(could_be_skim_df(

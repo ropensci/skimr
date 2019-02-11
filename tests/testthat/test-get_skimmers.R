@@ -1,7 +1,20 @@
 context("Get skimmers")
 
-test_that("get_default_skimmers() has a correct list of defaults", {
-  defaults <- get_default_skimmers()
+test_that("get_sfl() behaves correctly", {
+  my_sfl <- get_sfl("numeric")
+  expect_is(my_sfl, "skimr_function_list")
+  expect_equal(my_sfl$skim_type, "numeric")
+  expect_named(my_sfl$funs, c(
+    "missing", "complete", "n", "mean", "sd",
+    "p0", "p25", "p50", "p75", "p100",
+    "hist"
+  ))
+  
+  expect_warning(get_sfl("missing class"), "no default")
+})
+
+test_that("get_default_skimmer_names() has a correct list of defaults", {
+  defaults <- get_default_skimmer_names()
   expect_equal(length(setdiff(names(defaults), c(
     "AsIs", "character", "complex",
     "Date",
@@ -54,7 +67,7 @@ test_that("get_default_skimmers() has a correct list of defaults", {
 })
 
 test_that("You can get the default skimmers for a particular class", {
-  input <- get_default_skimmers("numeric")
+  input <- get_default_skimmer_names("numeric")
   expect_named(input, "numeric")
   expect_identical(input$numeric, c(
     "missing", "complete", "n", "mean", "sd",
@@ -63,7 +76,7 @@ test_that("You can get the default skimmers for a particular class", {
 })
 
 test_that("You can get the default skimmers for multiple classes", {
-  input <- get_default_skimmers(c("list", "AsIs"))
+  input <- get_default_skimmer_names(c("list", "AsIs"))
   expect_named(input, c("list", "AsIs"))
   expect_identical(input$AsIs, c(
     "missing", "complete", "n", "n_unique",
@@ -76,5 +89,12 @@ test_that("You can get the default skimmers for multiple classes", {
 })
 
 test_that("A warning is given for classes that don't have defaults", {
-  expect_warning(input <- get_default_skimmers(c("no_class")), "defaults")
+  expect_warning(get_default_skimmer_names("no_class"), "no default")
+})
+
+test_that("get_one_default_skimmer_names() behaves as expected", {
+  expect_identical(get_one_default_skimmer_names("list"), c(
+    "missing", "complete", "n", "n_unique",
+    "min_length", "max_length"
+  ))
 })

@@ -4,7 +4,7 @@
 \alias{sfl}
 \title{Create a skimr function list}
 \usage{
-sfl(..., .type = "")
+sfl(..., skim_type = "")
 }
 \arguments{
 \item{...}{A list of functions specified by:
@@ -25,7 +25,7 @@ The following notations are \strong{not} supported, see examples:
 \item An anonymous function in \pkg{purrr} notation, \code{~mean(., na.rm = TRUE)}
 }}
 
-\item{.type}{A character scalar. This is used to match locally-provided
+\item{skim_type}{A character scalar. This is used to match locally-provided
 skimmers with defaults. See \code{\link[=get_skimmers]{get_skimmers()}} for more detail.}
 }
 \value{
@@ -58,7 +58,7 @@ sfl(hist = NULL)
 # When working interactively, you don't need to set a type.
 # But you should when defining new defaults with `get_skimmers()`.
 get_skimmers.my_new_class <- function(column) {
-  sfl(n_missing, .type = "my_new_class")
+  sfl(n_missing, skim_type = "my_new_class")
 }
 }
 \seealso{

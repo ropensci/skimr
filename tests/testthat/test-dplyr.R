@@ -3,12 +3,12 @@ context("Using dplyr verbs on skim objects works as expected")
 skimmed_iris <- skim(iris)
 
 test_that("dplyr::filter works as expected", {
-  input <- dplyr::filter(skimmed_iris, type == "numeric")
+  input <- dplyr::filter(skimmed_iris, skim_type == "numeric")
   expect_output(print(input), "Skim summary statistics")
 })
 
 test_that("dplyr::select works as expected", {
-  with_type <- dplyr::select(skimmed_iris, type, variable)
+  with_type <- dplyr::select(skimmed_iris, skim_type, skim_variable)
   expect_output(print(with_type), "Skim summary statistics")
 
   without_type <- dplyr::select(skimmed_iris, mean)

@@ -47,5 +47,5 @@ iris \%>\%
 # This is equivalent to
 iris \%>\%
   skim() \%>\%
-  dplyr::select(variable, type, missing)
+  dplyr::select(skim_variable, skim_type, missing)
 }
