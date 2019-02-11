@@ -52,7 +52,8 @@ reconcile_skimmers <- function(data, groups) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
   with_base_columns <- c(
-    "skim_variable", "skim_type", purrr::flatten_chr(skimmers_used))
+    "skim_variable", "skim_type", purrr::flatten_chr(skimmers_used)
+  )
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))

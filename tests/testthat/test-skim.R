@@ -757,7 +757,7 @@ test_that("Skimming a complete data frame works as expected", {
   expect_named(input, c(
     "skim_type", "skim_variable", "missing", "complete", "n",
     "ordered", "n_unique", "top_counts",
-     "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"
+    "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"
   ))
 
   # attributes

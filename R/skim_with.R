@@ -59,13 +59,13 @@
 #' @export
 skim_with <- function(..., append = TRUE) {
   local_skimmers <- validate_assignment(...)
-  
+
   function(data, ...) {
-    if (!is.data.frame(data)){
+    if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
     stopifnot(is.data.frame(data))
-    
+
     .vars <- rlang::quos(...)
     cols <- names(data)
     if (length(.vars) == 0) {
@@ -73,13 +73,13 @@ skim_with <- function(..., append = TRUE) {
     } else {
       selected <- tidyselect::vars_select(cols, !!!.vars)
     }
-    
+
     grps <- dplyr::groups(data)
     if (length(grps) > 0) {
       group_variables <- selected %in% as.character(grps)
       selected <- selected[!group_variables]
     }
-    
+
     skimmers <- purrr::map(
       selected, get_final_skimmers, data, local_skimmers, append
     )
@@ -101,12 +101,12 @@ skim_with <- function(..., append = TRUE) {
       )
     )
     structure(tidyr::unnest(nested),
-              class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-              data_rows = nrow(data),
-              data_cols = ncol(data),
-              df_name = rlang::expr_label(substitute(data)),
-              groups = dplyr::groups(data),
-              skimmers_used = get_skimmers_used(unique_skimmers)
+      class = c("skim_df", "tbl_df", "tbl", "data.frame"),
+      data_rows = nrow(data),
+      data_cols = ncol(data),
+      df_name = rlang::expr_label(substitute(data)),
+      groups = dplyr::groups(data),
+      skimmers_used = get_skimmers_used(unique_skimmers)
     )
   }
 }
@@ -120,20 +120,20 @@ skim_with <- function(..., append = TRUE) {
 #' @noRd
 validate_assignment <- function(...) {
   to_assign <- rlang::list2(...)
-  
+
   if (length(to_assign) < 1) return(to_assign)
-  
+
   # Need to cope with case where ... is a list already
   if (class(to_assign[[1]]) != "skimr_function_list") {
     to_assign <- to_assign[[1]]
   }
-  
+
   proposed_names <- names(to_assign)
   if (!all(nzchar(proposed_names)) || is.null(proposed_names) ||
-      anyNA(proposed_names)) {
+    anyNA(proposed_names)) {
     stop("skim_with requires all arguments to be named.", call. = FALSE)
   }
-  
+
   defaults <- get_default_skimmers()
   existing <- proposed_names %in% names(defaults)
   if (!all(existing)) {
@@ -167,23 +167,23 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
   defaults <- get_skimmers(data[[column]])
   all_classes <- class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
-  
+
   if (!nzchar(defaults$skim_type)) {
     msg <- sprintf(
       "Default skimming functions for column [%s] with class [%s]",
       column, paste(all_classes, collapse = ", ")
     )
     stop(msg, " did not have value for its `.class` argument. Please ",
-         "investigate the definition of the associated S3 method.",
-         call. = FALSE
+      "investigate the definition of the associated S3 method.",
+      call. = FALSE
     )
   }
-  
+
   if (is.null(locals$funs)) {
     if (defaults$skim_type == "default") {
       warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
-              "provided. Falling back to `character`.",
-              call. = FALSE
+        "provided. Falling back to `character`.",
+        call. = FALSE
       )
       data[[column]] <- as.character(data[[column]])
       skimmers <- defaults
@@ -224,7 +224,7 @@ reduce_skimmers <- function(skimmers, types) {
 
 get_skimmers_used <- function(skimmers) {
   types <- names(skimmers)
-  function_names <- purrr::map(skimmers, ~names(.x$funs))
+  function_names <- purrr::map(skimmers, ~ names(.x$funs))
   purrr::set_names(function_names, types)
 }
 
