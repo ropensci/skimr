@@ -3,20 +3,23 @@ context("Print a skim_df object")
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_output(print(input), "Data summary")
-  expect_output(print(input), "Number of rows: 150")
-  expect_output(print(input), "Number of columns: 5")
-  expect_output(print(input), "Column type frequency: ")  
-  expect_output(print(input), "  factor: 1")  
-  expect_output(print(input), "  numeric: 4")  
+  expect_output(print(input), "                       Values")
+  expect_output(print(input), "Name                   `iris`")
+  expect_output(print(input), "Number of rows            150")
+  expect_output(print(input), "Number of columns           5")
+  expect_output(print(input), "Column type frequency        ")  
+  expect_output(print(input), "factor                      1")  
+  expect_output(print(input), "numeric                     4")  
   expect_output(print(input), "── Variable type: factor ────────────────")
   expect_output(print(input), "── Variable type: numeric ────────────────")
 })
 
 test_that("Skim prints a special header for grouped data frames", {
   input <- skim(dplyr::group_by(iris, Species))
-  expect_output(print(input), "Group variables: Species")
-  expect_output(print(input), "Number of rows: 150")
-  expect_output(print(input), "Number of columns: 5")
+  expect_output(print(input), "Name                   `dplyr::group_by\\(iris, Species\\)`")
+  expect_output(print(input), "Number of rows                                      150")
+  expect_output(print(input), "Number of columns                                     5")
+  expect_output(print(input), "Group variables                                 Species")
 })
 
 test_that("Skim lists print as expected", {
@@ -33,8 +36,7 @@ test_that("knit_print produced expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-
-  expect_match(input, "Data summary  ", fixed = TRUE)
+  # expect_match(input, "Data summary  ", fixed = TRUE)
   # expect_match(input, "<table style='width: auto;'")
   # expect_match(input, "class='table table-condensed'>")
   # expect_match(input, " <thead>")
@@ -53,7 +55,7 @@ test_that("knit_print produced expected results", {
   # expect_match(input, "**Variable type: factor**", fixed = TRUE)
   expect_match(
     input,
-    "|variable | missing| complete|   n|ordered | n_unique|top_counts"
+    "|skim_variable | missing| complete|   n|ordered | n_unique|top_counts"
   )
 })
 
@@ -62,14 +64,14 @@ test_that("knit_print works with skim summaries", {
   summarized <- summary(skimmed)
   multi_line <- capture.output(knit_print(summarized))
   input <- paste(multi_line, collapse = "")
-  expect_match(input, "Data summary    ", fixed = TRUE)
+  #expect_match(input, "Data summary    ", fixed = TRUE)
   #expect_match(input, "df_name")
-  expect_match(input, "Name: `iris`  ")
-  expect_match(input, "Number of rows: 150")
-  expect_match(input, "Number of columns: 5")
-  expect_match(input, "Column type frequency:   ", fixed = TRUE)
-  expect_match(input, "  factor: 1  ")
-  expect_match(input, "  numeric: 4 ")
+  expect_output(print(input), "|Name                  |`iris` |")
+  expect_output(print(input), "|Number of rows        |150    |")
+  expect_output(print(input), "Number of columns     |5      |")
+  expect_match(input, "|Column type frequency |       |", fixed = TRUE)
+  expect_match(input, "|factor                |1      |")
+  expect_match(input, "|numeric               |4      |")
 })
 
 test_that("Summaries can be suppressed within knitr", {
@@ -110,10 +112,10 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
 test_that("Print focused objects appropriately", {
   skimmed <- skim(iris)
   input <- focus(skimmed, missing)
-  expect_output(print(input), "Data summary")
-  expect_output(print(input), "Number of rows: 150")
-  expect_output(print(input), "Number of columns: 5")
-  expect_output(print(input), "Column type frequency: ")  
-  expect_output(print(input), "  factor: 1")  
-  expect_output(print(input), "  numeric: 4")  
+  expect_output(print(input), "Name                   `iris`")
+  expect_output(print(input), "Number of rows            150")
+  expect_output(print(input), "Number of columns           5")
+  expect_output(print(input), "Column type frequency        ")  
+  expect_output(print(input), "factor                      1")  
+  expect_output(print(input), "numeric                     4")    
 })

@@ -54,18 +54,17 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 #' @export
 print.summary_skim_df <- function(x, ...) {
 
-  summary<-build_summary_string(x)
-  cat("Data summary  ")
-  print(summary)
+  cat("Data summary  \n")
+  print(build_summary_string(x))
 }
 
 
 build_summary_string <- function(x) {
   df_name <- ifelse(x$df_name %in% c("`.`", ".data" ), "Piped data", x$df_name)
   groups <- ifelse(is.null(x$possible_groups), "None", paste0(x$possible_groups, collapse = ", "))
-  summary <- data.frame("Values" = c(x$n_rows, x$n_cols, df_name, "", 
+  summary <- data.frame("Values" = c(df_name,  x$n_rows, x$n_cols, "", 
                                      x$type_frequencies$n, groups))
-  row.names( summary )  <- c("Number of rows ", "Number of columns ", "Name", 
+  row.names( summary )  <- c("Name", "Number of rows ",   "Number of columns ",
                            "Column type frequency ",x$type_frequencies$type, 
                            "Group variables")
   summary
