@@ -36,23 +36,6 @@ test_that("knit_print produced expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  # expect_match(input, "Data summary  ", fixed = TRUE)
-  # expect_match(input, "<table style='width: auto;'")
-  # expect_match(input, "class='table table-condensed'>")
-  # expect_match(input, " <thead>")
-  # expect_match(input, "  <tr>")
-  # expect_match(input, "   <th style=\"text-align:right;\"> n_obs </th>")
-  # expect_match(input, "   <th style=\"text-align:right;\"> n_cols </th>")
-  # expect_match(input, "  </tr>")
-  # expect_match(input, " </thead>")
-  # expect_match(input, "<tbody>")
-  # expect_match(input, "  <tr>")
-  # expect_match(input, "   <td style=\"text-align:right;\"> 150 </td>")
-  # expect_match(input, "   <td style=\"text-align:right;\"> 5 </td>")
-  # expect_match(input, "  </tr>")
-  # expect_match(input, "</tbody>")
-  # expect_match(input, "</table>")
-  # expect_match(input, "**Variable type: factor**", fixed = TRUE)
   expect_match(
     input,
     "|skim_variable | missing| complete|   n|ordered | n_unique|top_counts"
