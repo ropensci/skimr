@@ -51,7 +51,6 @@ Suggests:
     testthat (>= 2.0.0),
     withr,
     covr
-Remotes: tidyverse/dplyr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
