@@ -236,7 +236,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+      "sameAs": "https://github.com/tidyverse/dplyr"
     },
     {
       "@type": "SoftwareApplication",
@@ -361,7 +361,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "2323.307KB",
+  "fileSize": "2320.379KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -371,5 +371,5 @@
     "url": "https://github.com/ropensci/onboarding/issues/175",
     "provider": "http://ropensci.org"
   },
-  "keywords": ["unconf17", "r", "summary-statistics", "ropensci", "unconf", "r-package", "rstats"]
+  "keywords": ["unconf17", "r", "summary-statistics", "ropensci"]
 }
