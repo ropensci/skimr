@@ -6,7 +6,8 @@ test_that("Summary creates the correct summary object", {
   summary_input <- summary(skim_input)
   expect_named(summary_input, c(
     "df_name", "n_rows", "n_cols",
-    "type_frequencies"
+    "type_frequencies",
+    "possible_groups"
   ))
 })
 
@@ -15,15 +16,14 @@ test_that("The summary print method prints the correct object", {
   skim_input <- skim(iris)
   summary_input <- summary(skim_input)
 
-  expect_output(print(summary_input), "A skim object")
+  expect_output(print(summary_input), "Data summary  ")
 
-  expect_output(print(summary_input), "Name: `iris`")
-  expect_output(print(summary_input), "Number of Rows: 150")
-  expect_output(print(summary_input), "Number of Columns: 5")
-
+  expect_output(print(summary_input), "Name                   `iris`")
+  expect_output(print(summary_input), "Number of rows            150")
+  expect_output(print(summary_input), "Number of columns           5")
   expect_output(print(summary_input), "Column type frequency")
-  expect_output(print(summary_input), "factor: 1")
-  expect_output(print(summary_input), "numeric: 4")
+  expect_output(print(summary_input), "factor                      1")
+  expect_output(print(summary_input), "numeric                     4")
 })
 
 test_that("The summary print method prints the correct object when piped", {
@@ -31,12 +31,12 @@ test_that("The summary print method prints the correct object when piped", {
   summary_input <- skim(iris) %>%
     summary()
 
-  expect_output(print(summary_input), "A skim object")
-  expect_output(print(summary_input), "Number of Rows: 150")
-  expect_output(print(summary_input), "Number of Columns: 5")
-  expect_output(print(summary_input), "Column type frequency")
-  expect_output(print(summary_input), "factor: 1")
-  expect_output(print(summary_input), "numeric: 4")
+  expect_output(print(summary_input), "Data summary")
+  expect_output(print(summary_input), "Number of rows            150")
+  expect_output(print(summary_input), "Number of columns           5")
+  expect_output(print(summary_input), "factor                      1")
+  expect_output(print(summary_input), "numeric                     4")
+  expect_output(print(summary_input), "Group variables          None")
 })
 
 test_that("null object gets expected message", {
