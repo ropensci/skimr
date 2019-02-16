@@ -5,7 +5,7 @@ skimmed_iris <- skim(iris)
 test_that("dplyr::filter works as expected", {
   input <- dplyr::filter(skimmed_iris, skim_type == "numeric")
   expect_output(print(input), "Data summary  \\n")
-  
+
   no_rows <- dplyr::filter(skimmed_iris, skim_type == "no_type")
   expect_output(print(no_rows), "# A tibble: 0 x 16")
 })
@@ -21,7 +21,7 @@ test_that("dplyr::select works as expected", {
 test_that("dplyr::mutate works as expected", {
   input <- dplyr::mutate(skimmed_iris, mean2 = mean^2)
   expect_output(print(input), "Data summary  \\n")
-  
+
   no_variable <- dplyr::mutate(skimmed_iris, skim_variable = NULL)
   expect_output(print(no_variable), "# A tibble: 5 x 15")
 })

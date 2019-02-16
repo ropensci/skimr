@@ -852,5 +852,4 @@ test_that("Using skim_tee prints out the object", {
   expect_output(skim_tee(chickwts), "Number of rows              71")
   expect_output(skim_tee(chickwts), "Number of columns            2")
   expect_output(skim_tee(chickwts), "── Variable type: factor ")
-  
 })

@@ -9,7 +9,7 @@ test_that("get_sfl() behaves correctly", {
     "p0", "p25", "p50", "p75", "p100",
     "hist"
   ))
-  
+
   expect_warning(get_sfl("missing class"), "no default")
 })
 
