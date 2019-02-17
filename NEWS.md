@@ -7,6 +7,7 @@ skimr 2.0.0 (2019-xx-xx)
 
 ### BUG FIXES
   * Adjust code for several tidyverse soft deprecations.
+  * Fix isue where multibyte characters were causing an error.
 
 ### MINOR IMPROVEMENTS
   * Change top_counts to use useNA = "no".
