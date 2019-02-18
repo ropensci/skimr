@@ -1,0 +1,10 @@
+
+
+**Variable type: factor**
+
+|skim_variable | missing| complete|   n|ordered | n_unique|top_counts                |
+|:-------------|-------:|--------:|---:|:-------|--------:|:-------------------------|
+|Species       |       0|      150| 150|FALSE   |        3|set: 50, ver: 50, vir: 50 |
+
+
+
