@@ -19,10 +19,7 @@ NULL
 print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
                           n_extra = NULL, ...) {
   if (is_skim_df(x)) {
-    if (include_summary) {
-      print(summary(x))
-    }
-
+    if (include_summary) print(summary(x))
     by_type <- partition(x)
     purrr::imap(by_type, print, n, width, n_extra)
     invisible(NULL)
@@ -35,10 +32,22 @@ print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
 #' @export
 print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
-  with_line <- cli::rule(line = 1, left = variable_type)
-  print(with_line)
-  out <- format(x, n = n, width = width, n_extra, ...)
-  cat(out[c(-1, -3)], sep = "\n")
+  top_line <- cli::rule(line = 1, left = variable_type)
+  out <- format(x, n = n, width = width, n_extra = n_extra, ...)
+  metadata <- grab_tibble_metadata(out)
+  render_skim_body(top_line, out, metadata)
+}
+
+grab_tibble_metadata <- function(x) {
+  if (rlang::is_true(getOption("crayon.enabled"))) {
+    grep("^\\\033\\[38;5;\\d{3}m[#\\*]", x)
+  } else {
+    grep("^[#\\*]", x)
+  }
+}
+
+render_skim_body <- function(top_line, out, metadata) {
+  cat(top_line, out[-metadata], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
