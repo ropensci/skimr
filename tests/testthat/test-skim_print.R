@@ -90,6 +90,6 @@ test_that("Crayon is supported", {
         rendered <- print(numeric)
       }
     )
-    expect_match(rendered, "\\\033\\[38;5;246m")
+    expect_match(rendered, "\\\033")
   })
 })
