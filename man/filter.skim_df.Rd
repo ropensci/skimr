@@ -4,7 +4,7 @@
 \alias{filter.skim_df}
 \title{Use dplyr verb filter on skim_df objects.}
 \usage{
-filter.skim_df(.data, ..., .preserve = FALSE)
+\method{filter}{skim_df}(.data, ..., .preserve = FALSE)
 }
 \arguments{
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods

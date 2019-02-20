@@ -4,7 +4,7 @@
 \alias{mutate.skim_df}
 \title{Use dplyr verb mutate on skim_df objects.}
 \usage{
-mutate.skim_df(.data, ...)
+\method{mutate}{skim_df}(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods

@@ -55,3 +55,19 @@ tidyselect::one_of
 #' @importFrom tidyselect starts_with
 #' @export
 tidyselect::starts_with
+
+#' @importFrom dplyr select
+dplyr::select
+
+#' @importFrom dplyr arrange
+dplyr::arrange
+
+#' @importFrom dplyr filter
+#' @export
+dplyr::filter
+
+#' @importFrom dplyr mutate
+dplyr::mutate
+
+#' @importFrom dplyr slice
+dplyr::slice

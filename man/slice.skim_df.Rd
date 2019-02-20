@@ -4,7 +4,7 @@
 \alias{slice.skim_df}
 \title{Use dplyr verb slice on skim_df objects.}
 \usage{
-slice.skim_df(.data, ..., .preserve = FALSE)
+\method{slice}{skim_df}(.data, ..., .preserve = FALSE)
 }
 \arguments{
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods
