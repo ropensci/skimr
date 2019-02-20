@@ -4,20 +4,13 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
-\alias{reexports}
 \alias{contains}
 \alias{select_helpers}
-\alias{reexports}
 \alias{ends_with}
-\alias{reexports}
 \alias{everything}
-\alias{reexports}
 \alias{matches}
-\alias{reexports}
 \alias{num_range}
-\alias{reexports}
 \alias{one_of}
-\alias{reexports}
 \alias{starts_with}
 \title{Objects exported from other packages}
 \keyword{internal}

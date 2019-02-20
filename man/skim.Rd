@@ -80,7 +80,7 @@ skim(iris) \%>\% dplyr::filter(type == "factor")
 # Which column as the greatest mean value?
 skim(iris) \%>\%
   dplyr::filter(stat == "mean") \%>\%
-  dplyr::arrange(dplyr::desc(value))
+  arrange(dplyr::desc(value))
 
 # Use skim_tee to view the skim results and
 # continue using the original data.

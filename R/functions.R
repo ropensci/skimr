@@ -154,7 +154,7 @@ numeric_funs <- list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  mean = purrr::partial(mean, na.rm = TRUE),
+  mean = purrr::partial(mean.default, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
   p0 = purrr::partial(quantile, probs = 0, na.rm = TRUE, names = FALSE),
   p25 = purrr::partial(quantile, probs = .25, na.rm = TRUE, names = FALSE),
@@ -187,7 +187,7 @@ logical_funs <- list(
   missing = n_missing,
   complete = n_complete,
   n = length,
-  mean = purrr::partial(mean, na.rm = TRUE),
+  mean = purrr::partial(mean.default, na.rm = TRUE),
   count = sorted_count
 )
 
@@ -217,7 +217,7 @@ ts_funs <- list(
   end = ts_end,
   frequency = stats::frequency,
   deltat = stats::deltat,
-  mean = purrr::partial(mean, na.rm = TRUE),
+  mean = purrr::partial(mean.default, na.rm = TRUE),
   sd = purrr::partial(sd, na.rm = TRUE),
   min = purrr::partial(min, na.rm = TRUE),
   max = purrr::partial(max, na.rm = TRUE),
