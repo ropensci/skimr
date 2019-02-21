@@ -121,6 +121,12 @@
       "givenName": "Harris",
       "familyName": "McGehee",
       "email": "mcgehee.harris@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Patrick",
+      "familyName": "Kennedy",
+      "email": "pkqstr@protonmail.com"
     }
   ],
   "copyrightHolder": [
@@ -353,7 +359,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "1656.814KB",
+  "fileSize": "1979.557KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -363,5 +369,5 @@
     "url": "https://github.com/ropensci/onboarding/issues/175",
     "provider": "http://ropensci.org"
   },
-  "keywords": "unconf17"
+  "keywords": ["unconf17", "r", "summary-statistics", "ropensci", "unconf", "r-package", "rstats"]
 }
