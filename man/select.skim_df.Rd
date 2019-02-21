@@ -4,7 +4,7 @@
 \alias{select.skim_df}
 \title{Use dplyr verb select on skim_df objects.}
 \usage{
-select.skim_df(.data, ...)
+\method{select}{skim_df}(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods

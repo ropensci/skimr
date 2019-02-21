@@ -4,7 +4,7 @@
 \alias{arrange.skim_df}
 \title{Use dplyr verb arrange on skim_df objects.}
 \usage{
-arrange.skim_df(.data, ...)
+\method{arrange}{skim_df}(.data, ...)
 }
 \arguments{
 \item{.data}{A tbl. All main verbs are S3 generics and provide methods
