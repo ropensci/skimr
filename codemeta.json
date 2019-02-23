@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/ropenscilabs/skimr",
   "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -359,7 +359,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "1979.557KB",
+  "fileSize": "1981.177KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -369,5 +369,13 @@
     "url": "https://github.com/ropensci/onboarding/issues/175",
     "provider": "http://ropensci.org"
   },
-  "keywords": ["unconf17", "r", "summary-statistics", "ropensci", "unconf", "r-package", "rstats"]
+  "keywords": [
+    "unconf17",
+    "r",
+    "summary-statistics",
+    "ropensci",
+    "unconf",
+    "r-package",
+    "rstats"
+  ]
 }
