@@ -7,8 +7,8 @@ Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
-`skimr` provides a frictionless approach to summary statistics which
-conforms to the [principle of least
+<cite>skimr</cite> provides a frictionless approach to summary
+statistics which conforms to the [principle of least
 surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
 displaying summary statistics the user can skim quickly to understand
 their data. It handles different data types and returns a `skim_df`
@@ -18,9 +18,9 @@ human reader.
 Installation
 ------------
 
-The current released version of `skimr` can be installed from CRAN. If
-you wish to install the current build of the next release you can do so
-using the following:
+The current released version of <cite>skimr</cite> can be installed from
+CRAN. If you wish to install the current build of the next release you
+can do so using the following:
 
     # install.packages("devtools")
     devtools::install_github("ropenscilabs/skimr")
@@ -38,7 +38,7 @@ Do not rely on APIs from the develop branch.
 Skim statistics in the console
 ------------------------------
 
-`skimr`:
+<cite>skimr</cite>:
 
 -   Provides a larger set of statistics than `summary()`, including
     missing, complete, n, and sd.
@@ -532,10 +532,10 @@ produces a long, tidy-format `skim_df` object that can be computed on.
 Customizing skimr
 -----------------
 
-Although skimr provides opinionated defaults, it is highly customizable.
-Users can specify their own statistics, change the formatting of
-results, create statistics for new classes and develop skimmers for data
-structures that are not data frames.
+Although <cite>skimr</cite> provides opinionated defaults, it is highly
+customizable. Users can specify their own statistics, change the
+formatting of results, create statistics for new classes and develop
+skimmers for data structures that are not data frames.
 
 ### Specify your own statistics and classes
 
@@ -564,10 +564,10 @@ data.
 
 ### Change formatting
 
-Skimr provides a set of default formats that allow decimals in columns
-to be aligned, a reasonable number of decimal places for numeric data,
-and a representation of dates. Users can view thes with `show_formats()`
-and modify them with `skim_format()`.
+<cite>skimr</cite> provides a set of default formats that allow decimals
+in columns to be aligned, a reasonable number of decimal places for
+numeric data, and a representation of dates. Users can view these with
+`show_formats()` and modify them with `skim_format()`.
 
 ### Skimming other objects
 
@@ -590,12 +590,13 @@ code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-und
 for printing dataframes. While some cases have been addressed, there
 are, for example, reports of this issue in Emacs ESS.
 
-This means that while `skimr` can render the histograms to the console
-and in `kable()`, it cannot in other circumstances. This includes:
+This means that while <cite>skimr</cite> can render the histograms to
+the console and in `kable()`, it cannot in other circumstances. This
+includes:
 
--   rendering a `skimr` data frame within `pander()`
--   converting a `skimr` data frame to a vanilla R data frame, but
-    tibbles render correctly
+-   rendering a <cite>skimr</cite> data frame within `pander()`
+-   converting a <cite>skimr</cite> data frame to a vanilla R data
+    frame, but tibbles render correctly
 
 One workaround for showing these characters in Windows is to set the
 CTYPE part of your locale to Chinese/Japanese/Korean with
@@ -624,8 +625,8 @@ Contributing
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
-encourage users to take advantage of skimr's flexibility to add their
-own customized classes. Please see the [contributing](CONTRIBUTING.md)
-and [conduct](CONDUCT.md) documents.
+encourage users to take advantage of <cite>skimr</cite>'s flexibility to
+add their own customized classes. Please see the
+[contributing](CONTRIBUTING.md) and [conduct](CONDUCT.md) documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

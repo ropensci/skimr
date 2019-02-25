@@ -1,5 +1,17 @@
-skimr 1.0.4 (2018-01-12)
+
+skimr 1.0.5 (2019-01-05)
 ========================
+This is likely to be the last release of skimr version 1.  Version 2
+has major changes to the API. Users should review and prepare for 
+those changes now. 
+
+### BUG FIXES
+  * Fix issue where multibyte characters were causing an error.
+  * Fix problem in which purrr cannot find mean.default.
+
+skimr 1.0.4 (2019-01-12)
+========================
+
 This is likely to be the last release of skimr version 1.  Version 2
 has major changes to the API. Users should review and prepare for 
 those changes now. 

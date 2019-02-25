@@ -4,21 +4,19 @@
 \name{reexports}
 \alias{reexports}
 \alias{\%>\%}
-\alias{reexports}
 \alias{contains}
 \alias{select_helpers}
-\alias{reexports}
 \alias{ends_with}
-\alias{reexports}
 \alias{everything}
-\alias{reexports}
 \alias{matches}
-\alias{reexports}
 \alias{num_range}
-\alias{reexports}
 \alias{one_of}
-\alias{reexports}
 \alias{starts_with}
+\alias{select}
+\alias{arrange}
+\alias{filter}
+\alias{mutate}
+\alias{slice}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -26,6 +24,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{dplyr}{\code{\link[dplyr]{select}}, \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{slice}}}
+
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
   \item{tidyselect}{\code{\link[tidyselect]{contains}}, \code{\link[tidyselect]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect]{matches}}, \code{\link[tidyselect]{num_range}}, \code{\link[tidyselect]{one_of}}, \code{\link[tidyselect]{starts_with}}}

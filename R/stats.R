@@ -135,7 +135,7 @@ n_empty <- function(x) {
 #' @export
 
 min_char <- function(x) {
-  characters <- nchar(x)
+  characters <- nchar(x, allowNA = TRUE)
   min(characters, na.rm = TRUE)
 }
 
@@ -145,7 +145,7 @@ min_char <- function(x) {
 #' @export
 
 max_char <- function(x) {
-  characters <- nchar(x)
+  characters <- nchar(x, allowNA = TRUE)
   max(characters, na.rm = TRUE)
 }
 
