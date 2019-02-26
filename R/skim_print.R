@@ -39,7 +39,7 @@ print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 }
 
 grab_tibble_metadata <- function(x) {
-  if (rlang::is_true(getOption("crayon.enabled"))) {
+  if (crayon::has_color()) {
     grep("^\\\033\\[38;5;\\d{3}m[#\\*]", x)
   } else {
     grep("^[#\\*]", x)
