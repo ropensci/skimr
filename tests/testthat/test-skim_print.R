@@ -1,10 +1,11 @@
 context("Print a skim_df object")
 
-
-
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
+  
+  input$hist <- NULL
+  expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
 
 test_that("Skim prints a special header for grouped data frames", {
@@ -18,7 +19,7 @@ test_that("Skim lists print as expected", {
   expect_print_matches_file(input, "print/list.txt")
 })
 
-test_that("knit_print produced expected results", {
+test_that("knit_print produces expected results", {
   skimmed <- skim(iris)
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
