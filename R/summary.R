@@ -19,13 +19,16 @@ summary.skim_df <- function(object, ...) {
   duplicated <- duplicated(object$skim_variable)
   counts <- table(type = object$skim_type[!duplicated])
   type_frequencies <- tibble::as_tibble(counts)
+  possible_groups <- attr(object, "groups")
 
   summary_object <- list(
     df_name = attr(object, "df_name"),
     n_rows = attr(object, "data_rows"),
     n_cols = attr(object, "data_cols"),
-    type_frequencies = type_frequencies
+    type_frequencies = type_frequencies,
+    possible_groups = possible_groups
   )
 
-  structure(summary_object, class = c("summary_skim_df", "list"))
+  summary_object <- structure(summary_object, class = c("summary_skim_df", "list"))
+  summary_object
 }
