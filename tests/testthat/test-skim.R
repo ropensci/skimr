@@ -46,6 +46,20 @@ test_that("Using skim_tee prints out the object", {
    )
 })
 
+test_that("skim_tee prints only selected columns, but returns full object", {
+  expect_output(skim_tee(iris, Species), "Species")
+  expect_output(skim_tee(iris, Species), "^(?s)(?!.*Petal).*$", perl = TRUE)
+  expect_output(
+    skim_tee(iris, starts_with("Sepal")), "^(?s)(?!.*Petal).*$", perl = TRUE)
+  expect_output(skim_tee(iris, -Species), "^(?s)(?!.*Species).*$", perl = TRUE)
+  iris_grouped <- dplyr::group_by(iris, Species)
+  expect_output(
+    skim_tee(iris_grouped, Sepal.Length), "Species")
+  expect_output(
+    skim_tee(iris_grouped, Sepal.Length), "^(?s)(?!.*Petal).*$", perl = TRUE)
+  expect_identical(skim_tee(iris, Species), iris)
+})
+
 test_that("Skimming a grouped data frame works as expected", {
   input <- dplyr::group_by(mtcars, cyl, gear) %>% skim()
 
