@@ -153,6 +153,7 @@ test_that("Skimming with non-finite values works", {
   expect_identical(input$hist, "▁▁▇▁▁")
 })
 
+<<<<<<< HEAD
 test_that("skim returns expected response for factor vectors", {
   input <- skim(iris, Species)
 
@@ -807,6 +808,20 @@ test_that("Tidyselect helpers work as expected", {
   expect_n_columns(input, 13)
   expect_identical(input$skim_variable, c("Sepal.Length", "Sepal.Width"))
 })
+
+  test_that("skim_tee prints only selected columns, but returns full object", {
+    expect_output(skim_tee(iris, Species), "Species")
+    expect_output(skim_tee(iris, Species), "^(?s)(?!.*Petal).*$", perl = TRUE)
+    expect_output(
+      skim_tee(iris, starts_with("Sepal")), "^(?s)(?!.*Petal).*$", perl = TRUE)
+    expect_output(skim_tee(iris, -Species), "^(?s)(?!.*Species).*$", perl = TRUE)
+    iris_grouped <- dplyr::group_by(iris, Species)
+    expect_output(
+      skim_tee(iris_grouped, Sepal.Length), "Species")
+    expect_output(
+      skim_tee(iris_grouped, Sepal.Length), "^(?s)(?!.*Petal).*$", perl = TRUE)
+    expect_identical(skim_tee(iris, Species), iris)
+  })
 
 test_that("Skimming a grouped df works as expected", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
