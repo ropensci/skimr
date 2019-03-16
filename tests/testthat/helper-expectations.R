@@ -25,8 +25,7 @@ expect_NA <- function(object) {
   invisible(act$val)
 }
 
-expect_print_matches_file <- function(object, filename,
-                                      skip_on_windows = TRUE) {
+expect_print_matches_file <- function(object, filename, skip_on_windows = TRUE) {
   if (skip_on_windows) testthat::skip_on_os("windows")
   withr::with_options(list(crayon.enabled = FALSE), {
     testthat::expect_known_output(
@@ -38,7 +37,9 @@ expect_print_matches_file <- function(object, filename,
   })
 }
 
-expect_matches_file <- function(object, file, update = TRUE, ...) {
+expect_matches_file <- function(object, file, update = TRUE,
+                                skip_on_windows = TRUE, ...) {
+  if (skip_on_windows) testthat::skip_on_os("windows")
   act <- testthat::quasi_label(rlang::enquo(object), NULL)
 
   if (!file.exists(file)) {
