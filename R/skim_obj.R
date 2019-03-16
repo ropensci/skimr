@@ -7,7 +7,7 @@
 #' 
 #' Most notably, a `skim_df`
 #' 
-#' * has columns `type` and `variable`
+#' * has columns `skim_type` and `skim_variable`
 #' * has more than zero rows
 #' 
 #' And has the following special attributes

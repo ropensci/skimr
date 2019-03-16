@@ -96,8 +96,13 @@ test_that("focus() matches select(data, skim_type, skim_variable, ...)", {
 
 test_that("focus() does not allow dropping skim metadata columns", {
   skimmed <- skim(iris)
+<<<<<<< HEAD
   expect_error(focus(skimmed, -skim_variable), "Cannot drop")
   expect_error(focus(skimmed, -skim_type), "Cannot drop")
+=======
+  expect_error(focus(skimmed, -skim_variable), "Cannot drop 'skim_variable' or 'skim_type' columns")
+  expect_error(focus(skimmed, -skim_type), "Cannot drop 'skim_variable' or 'skim_type' columns")
+>>>>>>> v2
 })
 
 test_that("skim_to_wide() returns a deprecation warning", {

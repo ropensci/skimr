@@ -141,7 +141,7 @@ yank <- function(data, skim_type) {
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)
-  reduced <- dplyr::select(.data, "skim_variable", "skim_type", ...)
+  reduced <- dplyr::select(.data, "skim_type", "skim_variable", ...)
   if (could_be_skim_df(reduced)) {
     reassign_skim_attrs(reduced, .data)
   } else {
