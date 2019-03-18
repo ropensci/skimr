@@ -848,8 +848,10 @@ test_that("Using skim_tee returns the object", {
 })
 
 test_that("Using skim_tee prints out the object", {
-  expect_output(skim_tee(chickwts), "Data summary  ")
-  expect_output(skim_tee(chickwts), "Number of rows              71")
-  expect_output(skim_tee(chickwts), "Number of columns            2")
+  expect_output(skim_tee(chickwts), "── Data Summary ────────────────────────")
+  expect_output(skim_tee(chickwts), "                       Value")
+  expect_output(skim_tee(chickwts), "Name                    .data", fixed = TRUE)
+  expect_output(skim_tee(chickwts), "Number of rows             71")
+  expect_output(skim_tee(chickwts), "Number of columns           2")
   expect_output(skim_tee(chickwts), "── Variable type: factor ")
 })
