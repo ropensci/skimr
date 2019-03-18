@@ -119,3 +119,10 @@ test_that("User-defined defaults require sfl's with class names", {
     expect_error(skim(data.frame(1)), "Default skimming functions")
   )
 })
+
+test_that("Sfl's can be passed as an unquoted list", {
+  my_skimmers <- list(numeric = sfl(mean), factor = sfl(length))
+  my_skim <- skim_with(!!!my_skimmers, append = FALSE)
+  input <- my_skim(iris)
+  expect_named(input, c("skim_type", "skim_variable", "length", "mean"))
+})

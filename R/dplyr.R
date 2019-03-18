@@ -20,6 +20,7 @@
 #' @return A `skim_df` object, which also inherits the class(es) of the input
 #'   data. In many ways, the object behaves like a [tibble::tibble()].
 #' @seealso [dplyr::mutate()] for the function's expected behavior.
+#' @importFrom dplyr mutate
 #' @export
 mutate.skim_df <- function(.data, ...) {
   mutated <- NextMethod("mutate")
