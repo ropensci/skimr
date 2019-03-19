@@ -52,12 +52,14 @@ test_that("skim_tee prints only selected columns, but returns full object", {
   expect_output(
     skim_tee(iris, starts_with("Sepal")), "^(?s)(?!.*Petal).*$", perl = TRUE)
   expect_output(skim_tee(iris, -Species), "^(?s)(?!.*Species).*$", perl = TRUE)
+  skim_with(numeric = list(hist = NULL))
   iris_grouped <- dplyr::group_by(iris, Species)
   expect_output(
     skim_tee(iris_grouped, Sepal.Length), "Species")
   expect_output(
     skim_tee(iris_grouped, Sepal.Length), "^(?s)(?!.*Petal).*$", perl = TRUE)
   expect_identical(skim_tee(iris, Species), iris)
+  skim_with_defaults()
 })
 
 test_that("Skimming a grouped data frame works as expected", {

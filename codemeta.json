@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/ropenscilabs/skimr",
   "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -359,7 +359,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "1981.177KB",
+  "fileSize": "726.624KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"

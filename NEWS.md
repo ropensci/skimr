@@ -1,3 +1,7 @@
+skimr 1.0.6 (xxx-xx-xx)
+=======================
+### BUG FIXES
+  * Fix issue where skim_tee() was not respecting ... options.
 
 skimr 1.0.5 (2019-01-05)
 ========================
