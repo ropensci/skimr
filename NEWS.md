@@ -12,6 +12,11 @@ skimr 2.0.0 (2019-xx-xx)
 ### MINOR IMPROVEMENTS
   * Change top_counts to use useNA = "no".
 
+skimr 1.0.6 (xxx-xx-xx)
+=======================
+### BUG FIXES
+  * Fix issue where skim_tee() was not respecting ... options.
+
 skimr 1.0.4 (2018-01-12)
 ========================
 This is likely to be the last release of skimr version 1.  Version 2
