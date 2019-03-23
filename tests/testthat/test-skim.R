@@ -821,7 +821,6 @@ test_that("Tidyselect helpers work as expected", {
     expect_output(
       skim_tee(iris_grouped, Sepal.Length), "^(?s)(?!.*Petal).*$", perl = TRUE)
     expect_identical(skim_tee(iris, Species), iris)
-    skim_with_defaults()
   })
 
 test_that("Skimming a grouped df works as expected", {
