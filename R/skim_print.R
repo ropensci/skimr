@@ -62,22 +62,25 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
 #' @describeIn print Print method for a `summary_skim_df` object.
 #' @export
 print.summary_skim_df <- function(x, ...) {
-  cat("Data summary  \n")
+  cat(paste0(cli::rule(line = 1, left = "Data Summary", width = 40), "\n"))
   print(build_summary_string(x))
 }
 
 
 build_summary_string <- function(x) {
   df_name <- ifelse(x$df_name %in% c("`.`", ".data"), "Piped data", x$df_name)
+  df_name <- gsub("`", "", df_name)
+  df_name <- ifelse(nchar(df_name) > 25, paste0(substring(df_name, 1, 25), "..."), df_name)
   groups <- ifelse(is.null(x$possible_groups), "None", paste0(x$possible_groups, collapse = ", "))
-  summary <- data.frame("Values" = c(
-    df_name, x$n_rows, x$n_cols, "",
-    x$type_frequencies$n, groups
+  types <- paste0("  ",x$type_frequencies$type)
+  summary <- data.frame("Value" = c(
+    df_name, x$n_rows, x$n_cols, "", "",
+    x$type_frequencies$n, "", groups, ""
   ))
   row.names(summary) <- c(
-    "Name", "Number of rows ", "Number of columns ",
-    "Column type frequency ", x$type_frequencies$type,
-    "Group variables"
+    "Name", "Number of rows ", "Number of columns "," ",
+    "Column type frequency: ", types,"  ",
+    "Group variables", "   "
   )
   summary
 }

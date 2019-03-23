@@ -18,6 +18,24 @@ test_that("Skimming functions can be changed for multiple types", {
   expect_identical(used, list(numeric = c("iqr", "q99"), factor = "n2"))
 })
 
+test_that("Skimming functions can be changed with a list", {
+  newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
+  new_skim <- skim_with(list(numeric = newfuns1), append = FALSE)
+  input <- new_skim(iris)
+  used <- attr(input, "skimmers_used")
+  expect_identical(used$numeric, c("iqr", "q99"))
+})
+
+test_that("Skimming functions can be changed with a list with 
+          multiple elements", {
+  newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
+  newfuns2 <- sfl(n2 = length)
+  new_skim <- skim_with(list(numeric = newfuns1, factor = newfuns2), append = FALSE)
+  input <- new_skim(iris)
+  used <- attr(input, "skimmers_used")
+  expect_identical(used, list(numeric = c("iqr", "q99"), factor = c("n2")))
+})
+
 test_that("Skimming functions can be appended.", {
   funs <- sfl(iqr = IQR)
   new_skim <- skim_with(numeric = funs)

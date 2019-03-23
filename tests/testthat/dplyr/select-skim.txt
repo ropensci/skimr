@@ -1,12 +1,15 @@
-Data summary  
-                       Values
-Name                   `iris`
+── Data Summary ────────────────────────
+                        Value
+Name                     iris
 Number of rows            150
 Number of columns           5
-Column type frequency        
-factor                      1
-numeric                     4
+                             
+Column type frequency:       
+  factor                    1
+  numeric                   4
+                             
 Group variables          None
+                             
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
   skim_variable
 1 Species      

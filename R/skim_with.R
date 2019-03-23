@@ -282,6 +282,7 @@ build_results <- function(skimmed, data, data_cols, groups, new_names, delim) {
     )
     tidyr::unnest(out)
   } else {
+    new_names <- c(groups, new_names)
     tibble::tibble(
       skim_variable = data_cols,
       !!!purrr::set_names(skimmed, new_names)

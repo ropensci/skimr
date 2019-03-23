@@ -30,14 +30,14 @@ test_that("knit_print produces expected results", {
 test_that("knit_print works with skim summaries", {
   skimmed <- skim(iris)
   summarized <- summary(skimmed)
-  input <- knit_print(summarized)
+  input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")
 })
 
 test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
-  input <- knit_print(skimmed, options = options)
+  input <- knitr::knit_print(skimmed, options = options)
   expect_matches_file(input, "print/knit_print-suppressed.txt")
 })
 
