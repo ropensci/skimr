@@ -842,6 +842,29 @@ test_that("Skimming a grouped df works as expected", {
   )
 })
 
+test_that("Skimming a grouped df works as expected when selecting exactly 
+          one variable", {
+  grouped <- dplyr::group_by(mtcars, cyl, gear)
+  input <- skim(grouped, mpg)
+  
+  # dimensions
+  expect_n_rows(input, 8)
+  expect_n_columns(input, 15)
+  
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_named(input, c(
+    "skim_type", "skim_variable", "cyl", "gear", "missing",
+    "complete", "n", "mean", "sd", "p0", "p25", "p50",
+    "p75", "p100", "hist"
+  ))
+  expect_true(all(input$skim_variable == "mpg"))
+})
+
+
 test_that("Using skim_tee returns the object", {
   capture.output(skim_object <- skim_tee(chickwts))
   expect_identical(chickwts, skim_object)
