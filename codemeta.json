@@ -127,6 +127,18 @@
       "givenName": "Roepke",
       "familyName": "Mark",
       "email": "mroepke5@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Patrick",
+      "familyName": "Kennedy",
+      "email": "pkqstr@protonmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Daniel",
+      "familyName": "Possenriede",
+      "email": "possenriede@gmail.com"
     }
   ],
   "copyrightHolder": [
@@ -236,7 +248,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/tidyverse/dplyr"
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
     {
       "@type": "SoftwareApplication",
@@ -361,7 +373,7 @@
   ],
   "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "2320.379KB",
+  "fileSize": "2388.553KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -371,5 +383,13 @@
     "url": "https://github.com/ropensci/onboarding/issues/175",
     "provider": "http://ropensci.org"
   },
-  "keywords": ["unconf17", "r", "summary-statistics", "ropensci"]
+  "keywords": [
+    "unconf17",
+    "r",
+    "summary-statistics",
+    "ropensci",
+    "unconf",
+    "r-package",
+    "rstats"
+  ]
 }
