@@ -2,85 +2,57 @@ context("Print a skim_df object")
 
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
-  expect_output(print(input), "── Data Summary ────────────────────────")
-  expect_output(print(input), "                        Value")
-  expect_output(print(input), "Name                     iris")
-  expect_output(print(input), "Number of rows            150")
-  expect_output(print(input), "Number of columns           5")
-  expect_output(print(input), "Column type frequency:       ")
-  expect_output(print(input), "  factor                    1")
-  expect_output(print(input), "  numeric                   4")
-  expect_output(print(input), "Group variables          None")
-  expect_output(print(input), "── Variable type: factor ────────────────")
-  expect_output(print(input), "── Variable type: numeric ────────────────")
+  expect_print_matches_file(input, "print/default.txt")
+  
+  input$hist <- NULL
+  expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
 
 test_that("Skim prints a special header for grouped data frames", {
   input <- skim(dplyr::group_by(iris, Species))
-  expect_output(print(input), "── Data Summary ────────────────────────")
-  expect_output(print(input), "Name                    dplyr::group_by(iris, Spe...", fixed =TRUE)
-  expect_output(print(input), "Number of rows                                   150")
-  expect_output(print(input), "Number of columns                                  5")
-  expect_output(print(input), "Group variables                              Species")
+  expect_print_matches_file(input, "print/groups.txt")
 })
 
 test_that("Skim lists print as expected", {
   skimmed <- skim(iris)
   input <- partition(skimmed)
-  expect_output(print(input), "\\$factor")
-  expect_output(print(input), "── Variable type: factor ────────────────")
-  expect_output(print(input), "\\$numeric")
-  expect_output(print(input), "── Variable type: numeric ───────────────")
+  expect_print_matches_file(input, "print/list.txt")
 })
 
-test_that("knit_print produced expected results", {
+test_that("knit_print produces expected results", {
   skimmed <- skim(iris)
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  expect_match(
-    input,
-    "|skim_variable | missing| complete|   n|ordered | n_unique|top_counts"
-  )
+  expect_matches_file(input, "print/knit_print.txt")
 })
 
 test_that("knit_print works with skim summaries", {
   skimmed <- skim(iris)
   summarized <- summary(skimmed)
-  multi_line <- capture.output(knitr::knit_print(summarized))
-  input <- paste(multi_line, collapse = "")
-  # expect_match(input, "Data summary    ", fixed = TRUE)
-  # expect_match(input, "df_name")
-  expect_output(print(input), "|Name                  |`iris` |")
-  expect_output(print(input), "|Number of rows        |150    |")
-  expect_output(print(input), "|Number of columns     |5      |")
-  expect_output(print(input), "|                      |       |")
-  expect_match(input, "|Column type frequency: |     |", fixed = TRUE)
-  expect_match(input, "|factor                |1      |")
-  expect_match(input, "|numeric               |4      |")
+  input <- knitr::knit_print(summarized)
+  expect_matches_file(input, "print/knit_print-summary.txt")
 })
 
 test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
-  input <- knit_print(skimmed, options = options)
-  expect_false(grepl("── Data Summary ────────────────────────\\n", input))
+  input <- knitr::knit_print(skimmed, options = options)
+  expect_matches_file(input, "print/knit_print-suppressed.txt")
 })
 
 test_that("Skim lists have a separate knit_print method", {
   skimmed <- skim(iris)
   skim_list <- partition(skimmed)
   input <- knit_print(skim_list)
-  expect_match(input, "\n\n\n**Variable type: factor**\n\n", fixed = TRUE)
-  expect_match(input, "\n\n\n**Variable type: numeric**\n\n", fixed = TRUE)
+  expect_matches_file(input, "print/knit_print-skim_list.txt")
 })
 
 test_that("You can yank a type from a skim_df and call knit_print", {
   skimmed <- skim(iris)
   skim_one <- yank(skimmed, "factor")
   input <- knit_print(skim_one)
-  expect_match(input, "\n\n**Variable type: factor**\n\n", fixed = TRUE)
-  expect_false(grepl("\n\n**Variable type: numeric**\n\n", input, fixed = TRUE))
+  expect_matches_file(input, "print/knit_print-yank.txt")
 })
 
 test_that("make_utf8 produces the correct result ", {
@@ -92,16 +64,33 @@ test_that("make_utf8 produces the correct result ", {
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
   input <- skim(iris)
   mean_only <- dplyr::select(input, mean)
-  expect_output(print(mean_only), "# A tibble: 5 x 1")
+  expect_print_matches_file(mean_only, "print/fallback.txt")
 })
 
 test_that("Print focused objects appropriately", {
   skimmed <- skim(iris)
   input <- focus(skimmed, missing)
-  expect_output(print(input), "Name                     iris")
-  expect_output(print(input), "Number of rows            150")
-  expect_output(print(input), "Number of columns           5")
-  expect_output(print(input), "Column type frequency:       ")
-  expect_output(print(input), "  factor                    1")
-  expect_output(print(input), "  numeric                   4")
+  expect_print_matches_file(input, "print/focus.txt")
+})
+
+test_that("Metadata is stripped from smaller consoles", {
+  withr::with_options(list(width = 50), {
+    skimmed <- skim(iris)
+    expect_print_matches_file(skimmed, "print/smaller.txt")
+  })
+})
+
+test_that("Crayon is supported", {
+  withr::with_options(list(crayon.enabled = TRUE), {
+    with_mock(
+      .env = "skimr",
+      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"),
+      {
+        skimmed <- skim(iris)
+        numeric <- yank(skimmed, "numeric")
+        rendered <- print(numeric)
+      }
+    )
+    expect_match(rendered, "\\\033")
+  })
 })
