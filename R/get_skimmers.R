@@ -250,9 +250,9 @@ get_default_skimmers <- function(skim_type = NULL) {
     defaults <- as.character(utils::methods("get_skimmers"))
     types <- stringr::str_replace(defaults, "get_skimmers.", "")
     no_default <- purrr::discard(types, ~ .x == "default")
-    iter <- purrr::set_names(no_default)
+    iter <- rlang::set_names(no_default)
   } else {
-    iter <- purrr::set_names(skim_type)
+    iter <- rlang::set_names(skim_type)
   }
   
   results <- purrr::map(iter, get_one_default_skimmer)

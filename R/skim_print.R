@@ -55,7 +55,7 @@ render_skim_body <- function(top_line, out, metadata) {
 print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
   nms <- names(x)
   attributes(x) <- NULL
-  print(purrr::set_names(x, nms))
+  print(rlang::set_names(x, nms))
 }
 
 
