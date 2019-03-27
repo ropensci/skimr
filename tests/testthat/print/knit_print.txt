@@ -10,7 +10,6 @@
 |numeric                |4    |
 |                       |     |
 |Group variables        |None |
-|                       |     |
 
 
 **Variable type: factor**

@@ -8,7 +8,7 @@ Column type frequency:
   numeric                                          4
                                                     
 Group variables                              Species
-                                                    
+
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
    skim_variable Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
  * <chr>         <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
