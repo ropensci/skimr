@@ -154,7 +154,7 @@ test_that("Doubles and integers are both 'numeric'", {
   used <- attr(input, "skimmers_used")
   expect_identical(used, list(numeric = c(
     "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75", "p100" 
+    "sd", "p0", "p25", "p50", "p75", "p100"
   )))
 })
 
@@ -170,12 +170,12 @@ test_that("Defining an integer sfl changes behavior", {
   expect_true("int_mean" %in% names(input))
   used <- attr(input, "skimmers_used")
   expect_identical(
-    used, 
+    used,
     list(
       integer = c("int_mean"),
       numeric = c(
-      "missing", "complete", "n", "mean",
-      "sd", "p0", "p25", "p50", "p75", "p100" 
+        "missing", "complete", "n", "mean",
+        "sd", "p0", "p25", "p50", "p75", "p100"
       )
     )
   )

@@ -846,11 +846,11 @@ test_that("Skimming a grouped df works as expected when selecting exactly
           one variable", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
   input <- skim(grouped, mpg)
-  
+
   # dimensions
   expect_n_rows(input, 8)
   expect_n_columns(input, 15)
-  
+
   # classes
   expect_is(input, "skim_df")
   expect_is(input, "tbl_df")

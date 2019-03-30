@@ -3,7 +3,7 @@ context("Print a skim_df object")
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
-  
+
   input$hist <- NULL
   expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
@@ -84,8 +84,7 @@ test_that("Crayon is supported", {
   withr::with_options(list(crayon.enabled = TRUE), {
     with_mock(
       .env = "skimr",
-      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"),
-      {
+      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"), {
         skimmed <- skim(iris)
         numeric <- yank(skimmed, "numeric")
         rendered <- print(numeric)
