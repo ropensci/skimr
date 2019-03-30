@@ -3,7 +3,7 @@ output:
  md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
+# skimr <img src="man/figures/logo.png" align="right" height="139" />
 ```{r set-options, echo=FALSE, message=FALSE}
 library(pander)
 library(knitr)
@@ -32,7 +32,7 @@ following:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ropenscilabs/skimr")
+devtools::install_github("ropensci/skimr")
 ```
 The APIs for this branch should be considered reasonably stable but still
 subject to change if an issue is discovered.
