@@ -47,7 +47,7 @@ grab_tibble_metadata <- function(x) {
 }
 
 render_skim_body <- function(top_line, out, metadata) {
-  cat(top_line, out[-metadata], sep = "\n")
+  cat(paste0("\n",top_line), out[-metadata], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
@@ -75,12 +75,12 @@ build_summary_string <- function(x) {
   types <- paste0("  ",x$type_frequencies$type)
   summary <- data.frame("Value" = c(
     df_name, x$n_rows, x$n_cols, "", "",
-    x$type_frequencies$n, "", groups, ""
+    x$type_frequencies$n, "", groups
   ))
   row.names(summary) <- c(
     "Name", "Number of rows ", "Number of columns "," ",
     "Column type frequency: ", types,"  ",
-    "Group variables", "   "
+    "Group variables"
   )
   summary
 }

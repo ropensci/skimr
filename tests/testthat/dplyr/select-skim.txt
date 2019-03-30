@@ -9,10 +9,11 @@ Column type frequency:
   numeric                   4
                              
 Group variables          None
-                             
+
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
   skim_variable
 1 Species      
+
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
   skim_variable
 1 Sepal.Length 

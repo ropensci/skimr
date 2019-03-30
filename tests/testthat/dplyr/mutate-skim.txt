@@ -9,10 +9,11 @@ Column type frequency:
   numeric                   4
                              
 Group variables          None
-                             
+
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
   skim_variable missing complete     n ordered n_unique top_counts               
 1 Species             0      150   150 FALSE          3 set: 50, ver: 50, vir: 50
+
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist  mean2
 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂ 34.1 
