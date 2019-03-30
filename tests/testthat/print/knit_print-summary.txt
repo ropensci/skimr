@@ -9,4 +9,3 @@
 |numeric                |4    |
 |                       |     |
 |Group variables        |None |
-|                       |     |
