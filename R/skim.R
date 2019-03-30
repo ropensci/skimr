@@ -125,6 +125,6 @@ skim.default <-function(.data, ...){
 #' @export
 
 skim_tee <- function(.data, ...) {
-  print(skim(.data))
+  print(skim(.data, ...))
   invisible(.data)
 }

@@ -4,24 +4,15 @@
 \alias{filter.skim_df}
 \title{Use dplyr verb filter on skim_df objects.}
 \usage{
-filter.skim_df(.data, ..., .preserve = FALSE)
+\method{filter}{skim_df}(.data, ..., .preserve = FALSE)
 }
 \arguments{
-\item{.data}{A tbl. All main verbs are S3 generics and provide methods
-for \code{\link[=tbl_df]{tbl_df()}}, \code{\link[dtplyr:tbl_dt]{dtplyr::tbl_dt()}} and \code{\link[dbplyr:tbl_dbi]{dbplyr::tbl_dbi()}}.}
+\item{.data}{A skim object}
 
-\item{...}{Logical predicates defined in terms of the variables in \code{.data}.
-Multiple conditions are combined with \code{&}. Only rows where the
-condition evaluates to \code{TRUE} are kept.
+\item{...}{Logical predicates defined in terms of the variables in .data.}
 
-The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
-\link[rlang:eval_tidy]{evaluated} in the context of the data
-frame. They support \link[rlang:quasiquotation]{unquoting} and
-splicing. See \code{vignette("programming")} for an introduction to
-these concepts.}
-
-\item{.preserve}{when \code{FALSE} (the default), the grouping structure
-is recalculated based on the resulting data, otherwise it is kept as is.}
+\item{.preserve}{When FALSE (the default) the grouping structuree is recalculated
+based on the resulting data.}
 }
 \value{
 skim_df object coerced to a data frame.

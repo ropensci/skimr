@@ -167,12 +167,12 @@ original data.
 
 ```{r}
 iris_setosa <- iris %>%
-  skim_tee(iris) %>%
+  skim_tee() %>%
   dplyr::filter(Species == "setosa")
 
 ```
 
-- `skim_to_list()` returns a nqmed list of the wide data frames for each data
+- `skim_to_list()` returns a named list of the wide data frames for each data
 type. These data frames contain the formatted, character values, meaning that
 they are most useful for display. In general, users will want to store the
 results in an object for further handling.

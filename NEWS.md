@@ -1,8 +1,30 @@
-skimr 1.0.4 (2018-01-05)
+skimr 1.0.6 (xxx-xx-xx)
+=======================
+### BUG FIXES
+  * Fix issue where skim_tee() was not respecting ... options.
+  * Fix issue where all NA character vectors were not returning NA for 
+    max() and min()
+
+skimr 1.0.5 (2019-01-05)
 ========================
+This is likely to be the last release of skimr version 1.  Version 2
+has major changes to the API. Users should review and prepare for 
+those changes now. 
+
+### BUG FIXES
+  * Fix issue where multibyte characters were causing an error.
+  * Fix problem in which purrr cannot find mean.default.
+
+skimr 1.0.4 (2019-01-12)
+========================
+
+This is likely to be the last release of skimr version 1.  Version 2
+has major changes to the API. Users should review and prepare for 
+those changes now. 
+
 ### BUG FIXES
   * Fix failures in handling dplyr verbs related to upcoming release
-     of dplyr 0.0.0.
+     of dplyr 0.8.0.
 
 skimr 1.0.3 (2018-06-06)
 ========================
