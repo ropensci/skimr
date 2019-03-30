@@ -8,7 +8,7 @@ Column type frequency:
   factor                    1
                              
 Group variables          None
-                             
+
 ── Variable type: factor ───────────────────────────────────────────────────────
   skim_variable missing complete     n ordered n_unique
 1 Species             0      150   150 FALSE          3

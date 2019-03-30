@@ -8,7 +8,7 @@ Column type frequency:
   numeric                     1
                                
 Group variables         Species
-                               
+
 ── Variable type: numeric ──────────────────────────────────────────────────────
   skim_variable Species    missing complete     n  mean    sd    p0   p25   p50
 1 Sepal.Length  setosa           0       50    50  5.01 0.352   4.3  4.8    5  
