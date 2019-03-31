@@ -165,7 +165,7 @@ validate_assignment <- function(...) {
 #' @noRd
 get_final_skimmers <- function(column, data, local_skimmers, append) {
   defaults <- get_skimmers(data[[column]])
-  all_classes <- class(data[[column]])
+  all_classes <- skim_class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
   if (!nzchar(defaults$skim_type)) {
@@ -195,6 +195,15 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
     skimmers <- merge_skimmers(locals, defaults, append)
   }
   skimmers
+}
+
+skim_class <- function(column) {
+  base_class <- class(column)
+  if (any(base_class %in% c("double", "integer"))) {
+    c(base_class, "numeric")
+  } else {
+    base_class
+  }
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {

@@ -18,7 +18,7 @@ test_that("get_default_skimmer_names() has a correct list of defaults", {
   expect_equal(length(setdiff(names(defaults), c(
     "AsIs", "character", "complex",
     "Date",
-    "difftime", "factor", "integer",
+    "difftime", "factor",
     "list", "logical", "numeric", "POSIXct", "ts"
   ))), 0)
   expect_identical(defaults$AsIs, c(

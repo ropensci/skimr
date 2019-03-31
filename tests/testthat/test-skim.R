@@ -808,21 +808,6 @@ test_that("Tidyselect helpers work as expected", {
   expect_identical(input$skim_variable, c("Sepal.Length", "Sepal.Width"))
 })
 
-  test_that("skim_tee prints only selected columns, but returns full object", {
-    expect_output(skim_tee(iris, Species), "Species")
-    expect_output(skim_tee(iris, Species), "^(?s)(?!.*Petal).*$", perl = TRUE)
-    expect_output(
-      skim_tee(iris, starts_with("Sepal")), "^(?s)(?!.*Petal).*$", perl = TRUE)
-    expect_output(skim_tee(iris, -Species), "^(?s)(?!.*Species).*$", perl = TRUE)
-    skim_with(numeric = list(hist = NULL))
-    iris_grouped <- dplyr::group_by(iris, Species)
-    expect_output(
-      skim_tee(iris_grouped, Sepal.Length), "Species")
-    expect_output(
-      skim_tee(iris_grouped, Sepal.Length), "^(?s)(?!.*Petal).*$", perl = TRUE)
-    expect_identical(skim_tee(iris, Species), iris)
-  })
-
 test_that("Skimming a grouped df works as expected", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
   input <- skim(grouped, mpg, disp)
@@ -861,11 +846,11 @@ test_that("Skimming a grouped df works as expected when selecting exactly
           one variable", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
   input <- skim(grouped, mpg)
-  
+
   # dimensions
   expect_n_rows(input, 8)
   expect_n_columns(input, 15)
-  
+
   # classes
   expect_is(input, "skim_df")
   expect_is(input, "tbl_df")
@@ -877,19 +862,4 @@ test_that("Skimming a grouped df works as expected when selecting exactly
     "p75", "p100", "hist"
   ))
   expect_true(all(input$skim_variable == "mpg"))
-})
-
-
-test_that("Using skim_tee returns the object", {
-  capture.output(skim_object <- skim_tee(chickwts))
-  expect_identical(chickwts, skim_object)
-})
-
-test_that("Using skim_tee prints out the object", {
-  expect_output(skim_tee(chickwts), "── Data Summary ────────────────────────")
-  expect_output(skim_tee(chickwts), "                       Value")
-  expect_output(skim_tee(chickwts), "Name                    .data", fixed = TRUE)
-  expect_output(skim_tee(chickwts), "Number of rows             71")
-  expect_output(skim_tee(chickwts), "Number of columns           2")
-  expect_output(skim_tee(chickwts), "── Variable type: factor ")
 })

@@ -115,13 +115,13 @@ test_that("min_char is calculated correctly, including empty strings.", {
 
 test_that("min_char with a multibyte character does not throw an error.", {
   data <- c("a", "ab", "abc", "Coleophora asteris M\x9fhl.")
-  #correct <- as.integer(1)
-  #input <- min_char(data)
-  #expect_identical(input, correct)
+  # correct <- as.integer(1)
+  # input <- min_char(data)
+  # expect_identical(input, correct)
   expect_error(min_char(data), NA)
 })
 
-test_that("min_char returns NA when there are only NA values.",{
+test_that("min_char returns NA when there are only NA values.", {
   data <- as.character(c(NA, NA, NA, NA))
   input <- min_char(data)
   expect_equal(input, NA)
@@ -136,13 +136,13 @@ test_that("max_char is calculated correctly, including empty strings.", {
 
 test_that("max_char with a multibyte character does not throw an error.", {
   data <- c("a", "ab", "abc", "Coleophora asteris M\x9fhl.")
-  #correct <- as.integer(3)
-  #input <- max_char(data)
-  #expect_identical(input, correct)
+  # correct <- as.integer(3)
+  # input <- max_char(data)
+  # expect_identical(input, correct)
   expect_error(max_char(data, NA))
 })
 
-test_that("max_char returns NA when there are only NA values.",{
+test_that("max_char returns NA when there are only NA values.", {
   data <- as.character(c(NA, NA, NA, NA))
   input <- max_char(data)
   expect_equal(input, NA)

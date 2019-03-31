@@ -72,7 +72,7 @@ build_summary_string <- function(x) {
   df_name <- gsub("`", "", df_name)
   df_name <- ifelse(nchar(df_name) > 25, paste0(substring(df_name, 1, 25), "..."), df_name)
   groups <- ifelse(is.null(x$possible_groups), "None", paste0(x$possible_groups, collapse = ", "))
-  types <- paste0("  ",x$type_frequencies$type)
+  types <- paste0("  ", x$type_frequencies$type)
   summary <- data.frame("Value" = c(
     df_name, x$n_rows, x$n_cols, "", "",
     x$type_frequencies$n, "", groups
