@@ -10,6 +10,13 @@ before_install:
   - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
 r_github_packages:
   - jimhester/covr
-
 after_success:
   - Rscript -e 'covr::codecov(line_exclusions = list("R/skim_print.R" = c(147, 167, 178:180, 190)))'
+before_cache:
+  - Rscript -e 'remotes::install_cran("pkgdown"); remotes::install_github("ropenscilabs/rotemplate")'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
+  on:
+    tags: true
