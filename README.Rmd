@@ -41,8 +41,15 @@ To install the version with the most recent changes that have not yet been
 incorporated in the master branch (and may not be):
 
 ``` r
-devtools::install_github("ropenscilabs/skimr", ref = "develop")
+devtools::install_github("ropensci/skimr", ref = "develop")
 ```
+
+or for version 2
+
+``` r
+devtools::install_github("ropensci/skimr", ref = "v-2")
+```
+
 Do not rely on APIs from the develop branch.
 
 ## Skim statistics in the console
@@ -54,7 +61,7 @@ complete, n, and sd.
 - reports each data types separately
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
-[Hadley Wickham's pillar package](https://github.com/hadley/pillar).
+[the pillar package](https://github.com/r-lib/pillar).
 
 ### Separates variables by class:  
 
