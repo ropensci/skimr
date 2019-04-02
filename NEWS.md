@@ -1,9 +1,67 @@
 
 skimr 2.0.0 (2019-xx-xx)
 ========================
-### NEW FEATURES
- * New statistic for character variables counting the number of rows
-   that are completely made up of white space.
+### Welcome to skimr V2
+V2 is a complete rewrite of `skimr`, incorporating all of the great feedback the
+developers have received over the last year. A big thank you goes to @GShotwell,
+@akraemer007, @puterleat, @tonyfischetti, @Nowosad, @rgayler, @jrosen48,
+@randomgambit, @elben10, @koliii, @AndreaPi, @rubenarslan, @GegznaV, @svraka,
+@dpprdan and to our ROpenSci reviewers @jenniferthompson and @jimhester for all
+of the great support and feedback over the last year. We couldn't have done this
+without you.
+
+### Breaking changes
+
+#### The `skim_df`
+
+We've changed the way data is represented within `skimr` to closer match
+expectations. It is now wide by default. This makes piping statistics much
+simpler
+
+```
+skim(iris) %>%
+  dplyr::filter(sd > 1)
+```
+
+This means that the old reshaping functions `skim_to_wide()` and
+`skim_to_list()` are deprecated. The latter is replaced with a reshaping
+function called `partition()` that breaks a `skim_df` into a list by data type.
+Similarly, `yank()` gets a specific data type from the `skim_df`. `to_long()`
+gets you data that is closest to the format in the old API.
+
+#### Rendering
+
+We've deprecated support for `pander()` and our `kable()` method. Instead, we
+now support `knitr` through the `knit_print()` API. This is much more seamless
+than before. Having a `skim_df` as the final object in a code chunk should
+produce nice results in the majority of RMarkdown formats.
+
+#### Customizing and extending
+
+We've deprecated the previous approach customization. We no longer use
+`skim_format()` and `skim_with()` no longer depends on a global state. Instead
+`skim_with()` is now a function factory. Customization creates a new skimming
+function.
+
+```
+my_skim <- skim_with(numeric = sfl(mad = mad))
+```
+
+The fundamental tool for customization is the `sfl` object, a skimmer function
+list. It is used within `skim_with()` and also within our new API for adding
+default functions for new data types, the generic `get_skimmers()`.
+
+### OTHER NEW FEATURES
+  * Substantial improvements to `summary()`, and it is now incorporated into
+    `print()` methods.
+  * `focus()` is like `dplyr::select()`, but it keeps around the columns
+    `skim_type` and `skim_variable`.
+  * We are also evaluating the behavior of different `dplyr` verbs to make sure
+    that they place nice with `skimr` objects.
+  * While `skimr` has never really focused on performance, it should do a better
+    job on big data sets with lots of different columns.
+  * New statistic for character variables counting the number of rows
+    that are completely made up of white space.
 
 ### BUG FIXES
   * Adjust code for several tidyverse soft deprecations.
