@@ -1,0 +1,144 @@
+/* general ----------------------------------------------- */
+
+body {
+  color: #333E50;
+}
+
+a {
+  color: #6faef5;
+}
+
+a:focus, a:hover {
+  color: #6faef5;
+  text-decoration: underline;
+}
+
+
+
+.h1, .h2, .h3, h1, h2, h3{
+  color: #5c677e;
+}
+
+
+.btn-primary {
+
+    color: #c6deff;
+    background-color: #6faef5;
+    border-color: #6faef5;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus{
+
+    color: #fff;
+    background-color: #6faef5;
+    border-color: #6faef5;
+}
+/* footer ----------------------------------------------- */
+
+/* https://github.com/tidyverse/tidytemplate/blob/27af8fd35dbba81d83e8b4a7e8677b8821fb8cc3/inst/pkgdown/assets/tidyverse-2.css#L15*/
+/* navbar ----------------------------------------------- */
+.navbar {
+  background-color: #6faef5;
+}
+
+
+.navbar .navbar-brand {
+  color: #c6deff;
+}
+
+
+.version.label.label-default.version-default {
+   background-color: #dfe3eb;
+    color: #5c677e;
+    margin-bottom: 3px;
+    font-size: 100%;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #c6deff;
+}
+
+.navbar-brand{
+  font-size: 40px;
+}
+
+.navbar .navbar-brand:hover {
+  color: #fff;
+}
+
+.navbar .info {
+  float: left;
+  height: 50px;
+  width: 140px;
+  font-size: 100%;
+  position: relative;
+  margin-left: 5px;
+  background-color: #6faef5;
+  box-shadow: unset;
+}
+
+.navbar .info .partof {
+  position: absolute;
+  top: 0;
+  color: #c6deff;
+}
+
+.navbar .info .version {
+  position: absolute;
+  bottom: 0;
+  color: #c6deff;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: #c6deff;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover{
+  background-color: #dfe3eb;
+  color: #5c677e;
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+  color: #fff;
+}
+
+/* sidebar ----------------------------------------------- */
+
+#sidebar h2{
+  color: #5c677e;
+}
+
+#sidebar .links h2::before{
+  content: "🔗 ";
+}
+
+
+#sidebar .developers h2::before{
+  content: "🏭 ";
+}
+
+#sidebar .license h2::before{
+  content: "©️ ";
+}
+
+#sidebar .dev-status h2::before{
+  content: "🚦️ ";
+}
+
+#sidebar .citation h2::before{
+  content: "✍️ ";
+}
+
+/* reference navbar ----------------------------------------------- */
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+  color: #fff;
+  background-color: #6faef5;
+}
+
+
+#sidebar .nav > li {
+  padding: 0px 0 0px 20px;
+  display: list-item;
+  line-height: 15px;
+}
+
