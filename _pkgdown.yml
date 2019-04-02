@@ -27,4 +27,4 @@ navbar:
       href: reference/index.html
   right:
     - icon: fa-github
-href: https://github.com/ropensci/skimr
+      href: https://github.com/ropensci/skimr
