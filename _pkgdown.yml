@@ -9,7 +9,7 @@ toc:
   depth: 3
 
 navbar:
-  title: "skmir"
+  title: "skimr"
   left:
     - icon: fa-home
       href: index.html
@@ -35,4 +35,4 @@ navbar:
          href: CONDUCT.html
   right:
     - icon: fa-github
-href: https://github.com/ropensci/skimr
+      href: https://github.com/ropensci/skimr

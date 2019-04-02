@@ -26,8 +26,12 @@ be included in a pipeline or displayed nicely for the human reader.
 
 ## Installation
 
-The current released version of <cite>skimr</cite> can be installed from CRAN. If you wish
-to install the current build of the next release you can do so using the
+Version 2 of skimr is under very active development and near release. Version 1 is 
+only receiving updates for significant issues. We recommend that new users 
+interested in the development version consider installing the v-2 branch. 
+
+The current released version of <cite>skimr</cite> can be installed from CRAN. 
+If you wish to install the current build of the next release you can do so using the
 following:
 
 ``` r
@@ -44,6 +48,7 @@ incorporated in the master branch (and may not be):
 devtools::install_github("ropensci/skimr", ref = "develop")
 ```
 
+
 or for version 2
 
 ``` r
@@ -52,16 +57,24 @@ devtools::install_github("ropensci/skimr", ref = "v-2")
 
 Do not rely on APIs from the develop branch.
 
+The v-2 branch is the equivalent to the develop branch for Version 2. While subject
+to change, we consider the APIs to be those that will be part of the version 2 release.
+Please visit the issue tracker for more extensive information about version 2.
+
+
 ## Skim statistics in the console
 
 <cite>skimr</cite>:
 
 - Provides a larger set of statistics than `summary()`, including missing,
 complete, n, and sd.
-- reports each data types separately
+- reports each data type separately.
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
 [the pillar package](https://github.com/r-lib/pillar).
+allows users to customize the statistics included by data type and to 
+implement skimming for additional classes.
+- works with many Tidyverse features.
 
 ### Separates variables by class:  
 
@@ -103,7 +116,7 @@ iris %>% dplyr::group_by(Species) %>% skim()
 
 Simply skimming a data frame will produce the horizontal print
 layout shown above. When knitting you can also used enhanced rendering
-with kable and pander implementations. 
+with kable and pander implementations (pander support is deprecated for v2). 
 
 ### Options for kable and pander
 
@@ -113,12 +126,14 @@ and the kable function of the [knitr package](https://CRAN.R-project.org/package
 These examples show how the enhanced options should appear after 
 knitting, however your results may differ (see vignettes for details).
 
+Note that pander support within the package is deprecated for version 2.
 
 ### Option for kable. 
 Note that the results='asis' chunk option is used and  the
 `skimr::` namespace is used to prevent it being
 replaced by knitr::kable (which will result in the long skim_df 
 object being printed.)
+
 ```{r results='asis'}
 skim(iris) %>% skimr::kable()
 ```
@@ -146,6 +161,8 @@ dim(a)
 ```{r}
 print.data.frame(skim(chickwts))
 ```
+
+Note that the long skimr object is not supported in version 2.
 
 ### Compute on the full `skim_df` object
 ```{r}
