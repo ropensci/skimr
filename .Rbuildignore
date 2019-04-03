@@ -13,3 +13,4 @@
 ^CONDUCT.md
 ^appveyor\.yml$
 ^codemeta\.json$
+^pkgdown$
