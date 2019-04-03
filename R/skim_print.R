@@ -3,6 +3,13 @@
 #' `skimr` has custom print methods for all supported objects. Default printing
 #' methods for `knitr`/ `rmarkdown` documents is also provided.
 #'
+#' @section Printing options:
+#' 
+#' For better or for worse, `skimr` often produces more output than can fit in
+#' the standard R console. Fortunately, most modern environments like RStudio
+#' and Jupyter support more than 80 character outputs. Call
+#' `options(width = 90)` to get a better experience with `skimr`.
+#' 
 #' @section Behavior in `dplyr` pipelines:
 #'
 #' Printing a `skim_df` requires specific columns that might be dropped when
@@ -184,3 +191,5 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 
   knitr::asis_output(paste(kabled, collapse = "\n"))
 }
+
+
