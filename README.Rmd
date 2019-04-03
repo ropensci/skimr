@@ -45,13 +45,22 @@ To install the version with the most recent changes that have not yet been
 incorporated in the master branch (and may not be):
 
 ``` r
-devtools::install_github("ropenscilabs/skimr", ref = "develop")
+devtools::install_github("ropensci/skimr", ref = "develop")
 ```
-Do not rely on APIs from the develop branch. 
+
+
+or for version 2
+
+``` r
+devtools::install_github("ropensci/skimr", ref = "v-2")
+```
+
+Do not rely on APIs from the develop branch.
 
 The v-2 branch is the equivalent to the develop branch for Version 2. While subject
 to change, we consider the APIs to be those that will be part of the version 2 release.
 Please visit the issue tracker for more extensive information about version 2.
+
 
 ## Skim statistics in the console
 
@@ -62,8 +71,8 @@ complete, n, and sd.
 - reports each data type separately.
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
-[the pillar package](https://github.com/hadley/pillar).
-- allows users to customize the statistics included by data type and to 
+[the pillar package](https://github.com/r-lib/pillar).
+allows users to customize the statistics included by data type and to 
 implement skimming for additional classes.
 - works with many Tidyverse features.
 
