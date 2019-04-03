@@ -54,12 +54,6 @@ If you are having difficulties making the spark graphs work, you can opt to turn
 them off using the code below.
 
 ```
-skim_with(numeric = list(hist = NULL), ts = list(line_graph = NULL))
-
-```
-To restore use 
-
-```
-skim_with_defaults()
+no_sparks <- skim_with(numeric = sfl(hist = NULL), ts = sfl(line_graph = NULL))
 
 ```
