@@ -51,6 +51,11 @@ The fundamental tool for customization is the `sfl` object, a skimmer function
 list. It is used within `skim_with()` and also within our new API for adding
 default functions for new data types, the generic `get_skimmers()`.
 
+Most of the options set in `skim_format` are now either in function arguments
+or print arguments. The former can be updated using `skim_with`, the latter in
+a call to `print()`. In RMarkdown documents, you can change the number of
+displayed digits by adding the `skimr_digits` option to your code chunk.
+
 ### OTHER NEW FEATURES
   * Substantial improvements to `summary()`, and it is now incorporated into
     `print()` methods.
