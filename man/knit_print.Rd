@@ -19,7 +19,7 @@
 \arguments{
 \item{x}{A skim_df object.}
 
-\item{options}{Options passed into the print function}
+\item{options}{Options passed into the print function.}
 
 \item{...}{Additional arguments passed to method}
 }
