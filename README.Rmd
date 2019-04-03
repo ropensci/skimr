@@ -28,7 +28,7 @@ following:
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("ropenscilabs/skimr")
+devtools::install_github("ropensci/skimr")
 ```
 
 The APIs for this branch should be considered reasonably stable but still
@@ -38,7 +38,7 @@ To install the version with the most recent changes that have not yet been
 incorporated in the master branch (and may not be):
 
 ```{r, eval = FALSE}
-devtools::install_github("ropenscilabs/skimr", ref = "develop")
+devtools::install_github("ropensci/skimr", ref = "develop")
 ```
 
 Do not rely on APIs from the develop branch, as they are likely to change.
@@ -95,11 +95,25 @@ iris %>%
   skim()
 ```
 
+### Behaves nicely in pipelines
+
+```{r, render = knitr::normal_print}
+iris %>%
+  skim() %>%
+  dplyr::filter(sd > 1)
+```
+
 ## Knitted results
 
 Simply skimming a data frame will produce the horizontal print
 layout shown above. We provide a `knit_print` method for the types of objects
-in this package so that similar results are produced in documents.
+in this package so that similar results are produced in documents. To use this,
+make sure the `skimmed` object is the last item in your code chunk.
+
+```{r}
+faithful %>%
+  skim()
+```
 
 ## Customizing skimr
 
@@ -147,8 +161,7 @@ my_skim(iris, Sepal.Length)
 
 `skimr` has summary functions for the following types of data by default:
 
-* `numeric`
-* `integer`
+* `numeric` (which includes both `double` and `integer`)
 * `character`
 * `factor`
 * `logical`
@@ -189,7 +202,7 @@ While some cases have been addressed, there are, for example, reports of this
 issue in Emacs ESS.
 
 This means that while `skimr` can render the histograms to the console and in
-`kable()`, it cannot in other circumstances. This includes:
+RMarkdown documents, it cannot in other circumstances. This includes:
 
 * rendering a `skimr` data frame within `pander()`
 * converting a `skimr` data frame to a vanilla R data frame, but tibbles render
@@ -197,8 +210,7 @@ This means that while `skimr` can render the histograms to the console and in
 
 One workaround for showing these characters in Windows is to set the CTYPE part
 of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE",
-"Chinese")`. These values do show up by default when printing a data-frame
-created by `skim()` as a list (`as.list()`) or as a matrix (`as.matrix()`).
+"Chinese"). The helper function `fix_windows_histograms()` does this for you.
 
 ### Printing spark histograms and line graphs in knitted documents
 

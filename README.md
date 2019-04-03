@@ -24,7 +24,7 @@ you wish to install the current build of the next release you can do so
 using the following:
 
     # install.packages("devtools")
-    devtools::install_github("ropenscilabs/skimr")
+    devtools::install_github("ropensci/skimr")
 
 The APIs for this branch should be considered reasonably stable but
 still subject to change if an issue is discovered.
@@ -32,7 +32,7 @@ still subject to change if an issue is discovered.
 To install the version with the most recent changes that have not yet
 been incorporated in the master branch (and may not be):
 
-    devtools::install_github("ropenscilabs/skimr", ref = "develop")
+    devtools::install_github("ropensci/skimr", ref = "develop")
 
 Do not rely on APIs from the develop branch, as they are likely to
 change.
@@ -53,13 +53,23 @@ Skim statistics in the console
 
     skim(chickwts)
 
-    ## Skim summary statistics
-    ##  n obs: 71 
-    ##  n variables: 2 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────
+    ## ── Data Summary ────────────────────────
+    ##                            Value
+    ## Name                    chickwts
+    ## Number of rows                71
+    ## Number of columns              2
+    ##                                 
+    ## Column type frequency:          
+    ##   factor                       1
+    ##   numeric                      1
+    ##                                 
+    ## Group variables             None
+    ## 
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n ordered n_unique top_counts                        
     ## 1 feed                0       71    71 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 weight              0       71    71  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
@@ -67,13 +77,23 @@ Skim statistics in the console
 
     skim(iris)
 
-    ## Skim summary statistics
-    ##  n obs: 150 
-    ##  n variables: 5 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────
+    ## ── Data Summary ────────────────────────
+    ##                         Value
+    ## Name                     iris
+    ## Number of rows            150
+    ## Number of columns           5
+    ##                              
+    ## Column type frequency:       
+    ##   factor                    1
+    ##   numeric                   4
+    ##                              
+    ## Group variables          None
+    ## 
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n ordered n_unique top_counts               
     ## 1 Species             0      150   150 FALSE          3 set: 50, ver: 50, vir: 50
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width         0      150   150  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -84,10 +104,20 @@ Skim statistics in the console
 
     skim(dplyr::starwars)
 
-    ## Skim summary statistics
-    ##  n obs: 87 
-    ##  n variables: 13 
-    ## ── Variable type: character ─────────────────────────────────────────────────────────
+    ## ── Data Summary ────────────────────────
+    ##                                   Value
+    ## Name                    dplyr::starwars
+    ## Number of rows                       87
+    ## Number of columns                    13
+    ##                                        
+    ## Column type frequency:                 
+    ##   character                           7
+    ##   list                                3
+    ##   numeric                             3
+    ##                                        
+    ## Group variables                    None
+    ## 
+    ## ── Variable type: character ──────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n   min   max empty n_unique whitespace
     ## 1 name                0       87    87     3    21     0       87          0
     ## 2 hair_color          5       82    87     4    13     0       12          0
@@ -96,12 +126,14 @@ Skim statistics in the console
     ## 5 gender              3       84    87     4    13     0        4          0
     ## 6 homeworld          10       77    87     4    14     0       48          0
     ## 7 species             5       82    87     3    14     0       37          0
-    ## ── Variable type: list ──────────────────────────────────────────────────────────────
+    ## 
+    ## ── Variable type: list ───────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n n_unique min_length max_length
     ## 1 films               0       87    87       24          1          7
     ## 2 vehicles            0       87    87       11          0          2
     ## 3 starships           0       87    87       17          0          5
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 height              6       81    87 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
     ## 2 mass               28       59    87  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
@@ -112,24 +144,34 @@ Skim statistics in the console
     skim(iris) %>%
       summary()
 
-    ## A skim object    
-    ## 
-    ## Name: `iris`   
-    ## Number of Rows: 150   
-    ## Number of Columns: 5    
-    ##     
-    ## Column type frequency    
-    ## factor: 1   
-    ## numeric: 4
+    ## ── Data Summary ────────────────────────
+    ##                         Value
+    ## Name                     iris
+    ## Number of rows            150
+    ## Number of columns           5
+    ##                              
+    ## Column type frequency:       
+    ##   factor                    1
+    ##   numeric                   4
+    ##                              
+    ## Group variables          None
 
 ### Individual columns can be selected using tidyverse-style selectors
 
     skim(iris, Sepal.Length, Petal.Length)
 
-    ## Skim summary statistics
-    ##  n obs: 150 
-    ##  n variables: 5 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────
+    ## ── Data Summary ────────────────────────
+    ##                         Value
+    ## Name                     iris
+    ## Number of rows            150
+    ## Number of columns           5
+    ##                              
+    ## Column type frequency:       
+    ##   numeric                   2
+    ##                              
+    ## Group variables          None
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Petal.Length        0      150   150  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
@@ -143,12 +185,20 @@ Skim statistics in the console
       dplyr::group_by(Species) %>%
       skim()
 
-    ## Skim summary statistics
-    ##  n obs: 150 
-    ##  n variables: 5 
-    ##  group variables: Species 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────
+    ## ── Data Summary ────────────────────────
+    ##                              Value
+    ## Name                    Piped data
+    ## Number of rows                 150
+    ## Number of columns                5
+    ##                                   
+    ## Column type frequency:            
+    ##   numeric                        4
+    ##                                   
+    ## Group variables            Species
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
     ##    skim_variable Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
+    ##  * <chr>         <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
     ##  1 Sepal.Length  setosa           0       50    50 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
     ##  2 Sepal.Length  versicolor       0       50    50 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
     ##  3 Sepal.Length  virginica        0       50    50 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂
@@ -162,12 +212,111 @@ Skim statistics in the console
     ## 11 Petal.Width   versicolor       0       50    50 1.33  0.198   1    1.2   1.3   1.5    1.8 ▅▇▃▆▁
     ## 12 Petal.Width   virginica        0       50    50 2.03  0.275   1.4  1.8   2     2.3    2.5 ▂▇▆▅▇
 
+### Behaves nicely in pipelines
+
+    iris %>%
+      skim() %>%
+      dplyr::filter(sd > 1)
+
+    ## ── Data Summary ────────────────────────
+    ##                              Value
+    ## Name                    Piped data
+    ## Number of rows                 150
+    ## Number of columns                5
+    ##                                   
+    ## Column type frequency:            
+    ##   numeric                        1
+    ##                                   
+    ## Group variables               None
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Petal.Length        0      150   150  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
+
 Knitted results
 ---------------
 
 Simply skimming a data frame will produce the horizontal print layout
 shown above. We provide a `knit_print` method for the types of objects
-in this package so that similar results are produced in documents.
+in this package so that similar results are produced in documents. To
+use this, make sure the `skimmed` object is the last item in your code
+chunk.
+
+    faithful %>%
+      skim()
+
+<table style="width:51%;">
+<caption>Data summary</caption>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 16%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name Number of rows Number of columns</td>
+<td style="text-align: left;">Piped data 272 2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Column type frequency: numeric</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+
+**Variable type: numeric**
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">missing</th>
+<th style="text-align: right;">complete</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">eruptions</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">1.6</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4.45</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: left;">▇▂▂▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">waiting</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">272</td>
+<td style="text-align: right;">70.90</td>
+<td style="text-align: right;">13.59</td>
+<td style="text-align: right;">43.0</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">82.00</td>
+<td style="text-align: right;">96.0</td>
+<td style="text-align: left;">▃▃▂▇▂</td>
+</tr>
+</tbody>
+</table>
 
 Customizing skimr
 -----------------
@@ -195,28 +344,24 @@ skimmers.
     my_skim <- skim_with(numeric = sfl(mad))
     my_skim(iris, Sepal.Length)
 
-**Skim summary statistics**
-
-<table style='width: auto;'
-      class='table table-condensed'>
-<thead>
-<tr>
-<th style="text-align:right;">
-n\_obs
-</th>
-<th style="text-align:right;">
-n\_cols
-</th>
-</tr>
-</thead>
+<table style="width:43%;">
+<caption>Data summary</caption>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 8%" />
+</colgroup>
 <tbody>
-<tr>
-<td style="text-align:right;">
-150
-</td>
-<td style="text-align:right;">
-5
-</td>
+<tr class="odd">
+<td style="text-align: left;">Name Number of rows Number of columns</td>
+<td style="text-align: left;">iris 150 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Column type frequency: numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -268,28 +413,24 @@ uses only those functions that you’ve provided.
       numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE)
     my_skim(iris, Sepal.Length)
 
-**Skim summary statistics**
-
-<table style='width: auto;'
-      class='table table-condensed'>
-<thead>
-<tr>
-<th style="text-align:right;">
-n\_obs
-</th>
-<th style="text-align:right;">
-n\_cols
-</th>
-</tr>
-</thead>
+<table style="width:43%;">
+<caption>Data summary</caption>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 8%" />
+</colgroup>
 <tbody>
-<tr>
-<td style="text-align:right;">
-150
-</td>
-<td style="text-align:right;">
-5
-</td>
+<tr class="odd">
+<td style="text-align: left;">Name Number of rows Number of columns</td>
+<td style="text-align: left;">iris 150 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Column type frequency: numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -318,28 +459,24 @@ And you can default skimmers by setting them to `NULL`.
     my_skim <- skim_with(numeric = sfl(hist = NULL))
     my_skim(iris, Sepal.Length)
 
-**Skim summary statistics**
-
-<table style='width: auto;'
-      class='table table-condensed'>
-<thead>
-<tr>
-<th style="text-align:right;">
-n\_obs
-</th>
-<th style="text-align:right;">
-n\_cols
-</th>
-</tr>
-</thead>
+<table style="width:43%;">
+<caption>Data summary</caption>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 8%" />
+</colgroup>
 <tbody>
-<tr>
-<td style="text-align:right;">
-150
-</td>
-<td style="text-align:right;">
-5
-</td>
+<tr class="odd">
+<td style="text-align: left;">Name Number of rows Number of columns</td>
+<td style="text-align: left;">iris 150 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Column type frequency: numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -384,8 +521,7 @@ n\_cols
 `skimr` has summary functions for the following types of data by
 default:
 
--   `numeric`
--   `integer`
+-   `numeric` (which includes both `double` and `integer`)
 -   `character`
 -   `factor`
 -   `logical`
@@ -427,7 +563,8 @@ for printing dataframes. While some cases have been addressed, there
 are, for example, reports of this issue in Emacs ESS.
 
 This means that while `skimr` can render the histograms to the console
-and in `kable()`, it cannot in other circumstances. This includes:
+and in RMarkdown documents, it cannot in other circumstances. This
+includes:
 
 -   rendering a `skimr` data frame within `pander()`
 -   converting a `skimr` data frame to a vanilla R data frame, but
@@ -435,9 +572,8 @@ and in `kable()`, it cannot in other circumstances. This includes:
 
 One workaround for showing these characters in Windows is to set the
 CTYPE part of your locale to Chinese/Japanese/Korean with
-`Sys.setlocale("LC_CTYPE", "Chinese")`. These values do show up by
-default when printing a data-frame created by `skim()` as a list
-(`as.list()`) or as a matrix (`as.matrix()`).
+`Sys.setlocale("LC_CTYPE", "Chinese"). The helper function`fix\_windows\_histograms()\`
+does this for you.
 
 ### Printing spark histograms and line graphs in knitted documents
 
