@@ -27,8 +27,7 @@ test_that("knit_print produces expected results", {
   expect_matches_file(input, "print/knit_print.txt")
 })
 
-test_that("knit_print works with skim summaries", {
-  skimmed <- skim(iris)
+test_that("knit_print works with skim summaries", { skimmed <- skim(iris)
   summarized <- summary(skimmed)
   input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")
@@ -37,7 +36,10 @@ test_that("knit_print works with skim summaries", {
 test_that("knit_print appropriately falls back to tibble printing", {
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, mean)
-  input <- knit_print(reduced)
+  expect_known_output(
+    input <- knit_print(reduced),
+    "print/knit_print-fallback.txt"
+  )
   expect_is(input, "data.frame")
 })
 
@@ -99,4 +101,9 @@ test_that("Crayon is supported", {
     )
     expect_match(rendered, "\\\033")
   })
+})
+
+test_that("skimr creates appropriate output for Jupyter", {
+  skimmed <- skim(iris)
+  expect_known_output(repr_text(skimmed), "print/repr.txt")
 })

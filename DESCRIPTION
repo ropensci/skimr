@@ -36,18 +36,18 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
+    crayon,
     dplyr (>= 0.8.0),
+    knitr (>= 1.2),
     magrittr (>= 1.5),
-    pander,
     purrr,
+    repr,
     rlang (>= 0.3.1),
     stats,
     stringr (>= 1.1),
-    knitr (>= 1.2),
     tibble (>= 2.0.0),
     tidyr (>= 0.7),
-    tidyselect (>= 0.2.5),
-    crayon
+    tidyselect (>= 0.2.5)
 Suggests:
     extrafont,
     rmarkdown,
