@@ -1,0 +1,23 @@
+── Data Summary ────────────────────────
+                        Value
+Name                    .data
+Number of rows             71
+Number of columns           2
+                             
+Column type frequency:       
+  factor                    1
+  numeric                   1
+                             
+Group variables          None
+
+── Variable type: factor ───────────────────────────────────────────────────────
+  skim_variable missing complete     n ordered n_unique
+1 feed                0       71    71 FALSE          6
+  top_counts                        
+1 soy: 14, cas: 12, lin: 12, sun: 12
+
+── Variable type: numeric ──────────────────────────────────────────────────────
+  skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100
+1 weight              0       71    71  261.  78.1   108  204.   258  324.   423
+  hist 
+1 ▆▆▇▇▃

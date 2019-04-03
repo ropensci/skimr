@@ -47,5 +47,5 @@ sfl <- function(..., skim_type = "") {
 
 build_sfl_names <- function(...) {
   labels <- rlang::quos_auto_name(rlang::enquos(...))
-  purrr::set_names(rlang::list2(...), names(labels))
+  rlang::set_names(rlang::list2(...), names(labels))
 }

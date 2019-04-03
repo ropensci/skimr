@@ -8,42 +8,28 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Being revised for version 2
+# Introduction
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+This vignette simply displays the default data types and summary functions for
+`skimr`. Customizing `skimr` is explained in the **Using Skimr** vignette.
 
-This vignette simply displays the defaults for skimr functions.
-All of these may be overloaded as explained in the _Using skimr_ vignette_.
+# Default skimmers
 
-## Skimmers
-
-The `show_skimmers()` function displays the named list of skimmers by type.
+To learn more about the functions used in this package, use the function
+`get_default_skimmer_names()`.
 
 ```{r}
 library(skimr)
-#show_skimmers()
+get_default_skimmer_names()
 ```
 
-## Skimmer functions
-
-The `get_skimmers()` function shows the actual functions used, including 
-function defaults such as NA handling.  
+The counterpart to this function is `get_default_skimmers()`, which returns the
+functions themselves. If you are interested in a particular class within
+`skimr`, pass it as a string to either function.
 
 ```{r}
-get_default_skimmers()
+get_default_skimmer_names("numeric")
 ```
 
-## Formats
-
-Skimmer creates formatted values to use in printing. The show_formats()
-function shows the default formats. 
-
-```{r}
-#show_formats()
-```
-
+The same information is stored in the `skimmers_used` attribute of the object
+returned by `skim()`.

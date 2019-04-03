@@ -3,7 +3,7 @@ context("Print a skim_df object")
 test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
-  
+
   input$hist <- NULL
   expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
@@ -30,14 +30,21 @@ test_that("knit_print produces expected results", {
 test_that("knit_print works with skim summaries", {
   skimmed <- skim(iris)
   summarized <- summary(skimmed)
-  input <- knit_print(summarized)
+  input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")
+})
+
+test_that("knit_print appropriately falls back to tibble printing", {
+  skimmed <- skim(iris)
+  reduced <- dplyr::select(skimmed, skim_variable, mean)
+  input <- knit_print(reduced)
+  expect_is(input, "data.frame")
 })
 
 test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
-  input <- knit_print(skimmed, options = options)
+  input <- knitr::knit_print(skimmed, options = options)
   expect_matches_file(input, "print/knit_print-suppressed.txt")
 })
 
@@ -84,8 +91,7 @@ test_that("Crayon is supported", {
   withr::with_options(list(crayon.enabled = TRUE), {
     with_mock(
       .env = "skimr",
-      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"),
-      {
+      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"), {
         skimmed <- skim(iris)
         numeric <- yank(skimmed, "numeric")
         rendered <- print(numeric)

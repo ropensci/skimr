@@ -8,7 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-## Under revision for skimr v2.
+
+# Introduction
 
 `skimr` is designed to provide summary statistics about variables. It is
 opinionated in its defaults, but easy to modify.
@@ -19,22 +20,25 @@ frames and `fivenum()` for numeric  vectors:
 ```{r}
 summary(iris)
 ```
+
 ```{r}
 summary(iris$Sepal.Length)
 ```
+
 ```{r}
 fivenum(iris$Sepal.Length)
 ```
+
 ```{r}
 summary(iris$Species)
 ```
 
-# The `skim` function
+# The `skim()` function
 
-The core function of skimr is `skim()`. `skim()` is a S3 generic function, with
-methods for data frames, grouped data frames and vectors. Like `summary()`,
-`skim()`'s method for data frames presents results for every column; the
-statistics it provides depend on the class of the variable.
+The core function of `skimr` is `skim()`, which is designed to work with
+(grouped) data frames, and will try coerce other objects if possible. Like
+`summary()`, `skim()`'s method for data frames presents results for every
+column; the statistics it provides depend on the class of the variable.
 
 ## Skimming data frames
 
@@ -44,13 +48,21 @@ extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 
 Results of `skim()` are *printed* horizontally, with one section per variable
-type and one row per variable. Results are *returned* from `skim()` as a long
-[tibble](http://tibble.tidyverse.org/) of class `skim_df`, with one row per
-variable + summary statistic.
+type and one row per variable. 
 
-```{r}
+```{r, render = knitr::normal_print}
 library(skimr)
 skim(iris)
+```
+
+The format of the results are a similar data frame, with some additional 
+attributes. Of course, we can't really separate that data frame by type, so
+columns are somewhat sparse, with quite a few missing variables.  Statistics
+that are not applicable for a given type of data are set to `NA`.
+
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  tibble::as_tibble()
 ```
 
 This is in contrast to `summary.data.frame()`, which stores statistics in a
@@ -58,9 +70,14 @@ This is in contrast to `summary.data.frame()`, which stores statistics in a
 and easy to use for additional manipulation: for example, the user could select
 all of the variable means, or all summary statistics for a specific variable.
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(iris) %>%
   dplyr::filter(skim_variable == "Petal.Length")
+```
+
+Most `dplyr` verbs should work as expected.
+
+```{r, render = knitr::normal_print}
 skim(iris) %>%
   dplyr::select(skim_type, skim_variable, mean)
 ```
@@ -70,30 +87,35 @@ The `skim_df` object always contains 2  columns:
 - `skim_variable`: name of the original variable
 - `skim_type`: class of the variable
 
-It also contains additional columns for each unique statistic (across the variable)
-types.
+Unlike many other objects within `R`, these columns are intrinsic to the
+`skim_df` class. Dropping these variables will result in a coercion to a
+`tibble`.
 
-The `skim_df` contains one row for each variable in the data. Statistics
-that are not applicable for a given type of data are set to NA.
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  dplyr::select(skim_type)
+```
 
 `skim()` also supports grouped data. In this case, one additional column for
 each grouping variable is added to the `skim_df` object.
 
-```{r}
-mtcars %>%
-  dplyr::group_by(gear) %>%
+```{r, render = knitr::normal_print}
+iris %>%
+  dplyr::group_by(Species) %>%
   skim()
 ```
 
 Individual columns from a data frame may be selected using tidyverse-style
 selectors.
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(iris, Sepal.Length, Species)
 ```
-```{r}
-skim(iris, starts_with("Sepal"))
 
+Or with common `select` helpers.
+
+```{r, render = knitr::normal_print}
+skim(iris, starts_with("Sepal"))
 ```
 
 If an individual column is of an unsuppported class, it is treated as a
@@ -101,137 +123,116 @@ character variable with a warning.
 
 ## Skimming vectors
 
-In skimr v2 skim will attempt to coerce non-data frames (such as vectors
-and matrices) to data frames.
+In `skimr` v2, `skim()` will attempt to coerce non-data frames (such as vectors
+and matrices) to data frames. In most cases with vectors, the object being
+evaluated should be equivalent to wrapping the object in `as.data.frame()`.
 
-`skim()` also handles individual vectors that are not part of a data frame. For
-example, the `lynx` data set is class `ts`.
+For example, the `lynx` data set is class `ts`.
 
-```{r}
+```{r, render = knitr::normal_print}
 skim(lynx)
 ```
 
+Which is the same as
+
+```{r}
+all.equal(skim(lynx), skim(as.data.frame(lynx)))
+```
 
 ## Skimming matrices
 
-`skimr` does not support skimming matrices directly but coerces
-them to data frames meaning that the matrix columns become variables 
-similarly to `summary.matrix()`). Three possible ways to handle matrices 
-with `skim()` parallel the three  variations of the mean function for matrices.
+`skimr` does not support skimming matrices directly but coerces them to data
+frames. Columns in the matrix become variables. This behavior is similar to 
+`summary.matrix()`). Three possible ways to handle matrices  with `skim()`
+parallel the three variations of the mean function for matrices.
 
-```{r}
+```{r, render = knitr::normal_print}
 m <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), nrow = 4, ncol = 3)
 m
+```
+
+Skimming the matrix produces similar results to `colMeans()`.
+
+```{r, render = knitr::normal_print}
 colMeans(m)
-rowMeans(m)
-mean(m)
-
 skim(m)    # Similar to summary.matrix and colMeans()
-skim(t(m)) # Similar to rowMeans()
-skim(c(m)) # Similar to mean()
-
 ```
 
+Skimming the transpose of the matrix will give rowwise results.
 
+```{r, render = knitr::normal_print}
+rowMeans(m)
+skim(t(m))
 ```
 
-## Alternatives to `skim()`
+And call `c()` on the matrix to get results across all columns.
 
-`skim()` for a data frame returns a wide data frame. This long data
-frame is printed horizontally as a separate summary for each data type found in
-the data frame, but the object itself is not transformed during the print. 
+```{r, render = knitr::normal_print}
+skim(c(m))
+mean(m)
+```
 
-Three other functions are available that may prove useful as part of `skim()`
-workflows:
+## Skimming without modification
 
-- `skim_tee()` produces the same printed version as `skim()` but returns the
+`skim_tee()` produces the same printed version as `skim()` but returns the
 original, unmodified data frame. This allows for continued piping of the
 original data.
 
-```{r}
+```{r, render = knitr::normal_print}
 iris_setosa <- iris %>%
-  skim_tee(iris) %>%
+  skim_tee() %>%
   dplyr::filter(Species == "setosa")
-
 ```
 
-- `partition()` returns a named list of the wide data frames for each data
-type. These data frames contain the formatted, character values, meaning that
-they are most useful for display. In general, users will want to store the
-results in an object for further handling. Alternatively, `yank()` selects
-only the subtable for a specific type.
+Note, that `skim_tee()` is customized differently than `skim` itself. See below
+for more details.
 
-```{r}
-iris %>% skim() %>% partition()
-iris %>% skim() %>% yank("numeric")
+# Reshaping the results from `skim()`
 
+As noted above, `skim()` returns a wide data frame. This is usually the most
+sensible format for the majority of operations when investigating data, but
+the package has some other functions to help with edge cases.
+
+First, `partition()` returns a named list of the wide data frames for each data
+type. Unlike the original data the parititioned data only has columns
+corresponding to the skimming functions use for this data type.
+
+```{r, render = knitr::normal_print}
+iris %>%
+  skim() %>%
+  partition()
 ```
 
+Alternatively, `yank()` selects only the subtable for a specific type. Think of
+it like `dplyr::filter` on column types in the original data. Again, unsuitable
+columns are dropped.
 
-- `to_long()` returns a single long data frame with columns variable, 
-type, statistic and formatted. This is similar but not identical to
-the skim_df object in skimr v1.
-
-```{r}
-iris %>% skim() %>% to_long()
+```{r, render = knitr::normal_print}
+iris %>%
+  skim() %>%
+  yank("numeric")
 ```
 
-# Modifying skim() with skim_with() and skim_with_defaults()
+`to_long()` returns a single long data frame with columns `variable`, `type`,
+`statistic` and `formatted`. This is similar but not identical to the `skim_df`
+object in `skimr` v1.
 
-`skimr` is opinionated in its choice of defaults, but users can easily add to,
-replace, or remove the statistics for a class.   
-
-To add a statistic, create a named list for each class using the format below:
-
-```
-#classname = list(mad_name = mad)
-
+```{r, render = knitr::normal_print}
+iris %>%
+  skim() %>%
+  to_long()
 ```
 
-```{r}
-#skim_with(numeric = list(mad_name = mad))
-#skim(datasets::chickwts)
+Since the `skim_variable` and `skim_type` columns are a core component of the
+`skim_df` class, it's possible to get unwanted side effects when using
+`dplyr::select()`. Instead, use `focus()` to select columns of the skimmed
+results; it always keeps the metadata column.
 
+```{r, render = knitr::normal_print}
+iris %>%
+  skim() %>%
+  focus(missing, mean)
 ```
-
-_When `skim_with()` is used to modify the statistics, the new list(s) of
-statistics remains in place until they are reset using `skim_with_defaults()`._
-
-By default `skim_with()` appends the new statistics, but setting
-`append = FALSE` *replaces* the defaults.
-
-```{r}
-#skim_with_defaults()
-#skim_with(numeric = list(mad_name = mad), append = FALSE)
-#skim(datasets::chickwts)
-#skim_with_defaults() # Reset to defaults
-
-```
-
-You can also use `skim_with()` to remove specific statistics by setting them to
-`NULL`.
-
-```{}
-skim_with(numeric = list(hist = NULL))
-skim(datasets::chickwts)
-skim_with_defaults()
-
-```
-
-# Formatting individual values
-
-When printing, `skimr` formats displayed statistics in an opinionated way;
-these values are stored in the `formatted` column of the `skim_df` object and
-are always character. `skim()` attempts to use a reasonable number of decimal
-places for calculated values based on the data type (integer or numeric) and
-number of stored decimals. For statistics such as `p0` and `p100`, the actual
-stored values are displayed. Decimals in a column are aligned. Date formats are
-used for date statistics. 
-
-Users can override these opinionated formats using `skim_format()`.
-`show_formats()` will display the current options in use for each data type.
-Using `skim_format_defaults()` will reset the formats to their default
-settings.
 
 # Rendering the results of `skim()`
 
@@ -240,17 +241,121 @@ variable and statistic (and optionally for group). The horizontal display is
 created by default using `print.skim_df()`; users can specify additional
 options by explicitly calling `print([skim_df object], ...)`.
 
+For documents rendered by `knitr`, the package provides a custom `knit_print`
+method. To use it, the final line of your code chunk should have a `skim_df`
+object.
+
+```{r}
+skim(Orange)
+```
+
+The same type of rendering is available from reshaped `skim_df` objects, those
+generated by `partition()` and `yank()` in particular.
+
+```{r}
+skim(Orange) %>%
+  yank("numeric")
+```
+
+## Customizing print options
+
+Although its not a common use case outside of writing vignettes about `skimr`,
+you can fall back to default printing methods by adding the chunk option
+`render = knitr::normal_print`.
+
+You can also disable the `skimr` summary by setting the chunk option
+`skimr_include_summary = FALSE`.
+
+# Modifying `skim()`
+
+`skimr` is opinionated in its choice of defaults, but users can easily add,
+replace, or remove the statistics for a class. For interactive use, you can
+create your own skimming function with the `skim_with()` factory. `skimr` also 
+has an API for extensions in other packages. Working with that is covered later.
+
+To add a statistic, create an `sfl()` (a `skimr` function list) for each class
+that you want to change:
+
+```{r}
+my_skim <- skim_with(numeric = sfl(new_mad = mad))
+my_skim(faithful)
+```
+
+As the previous example suggests, the default is to append *new* summary
+statistics to the preexisting set. This behavior isn't always desirable,
+expecially when you want lots of changes. To stop appending, set
+`append = FALSE`.
+
+```{r}
+my_skim <- skim_with(numeric = sfl(new_mad = mad), append = FALSE)
+my_skim(faithful)
+```
+
+You can also use `skim_with()` to remove specific statistics by setting them to
+`NULL`. This is commonly used to disable the inline histograms and spark graphs.
+
+```{r}
+no_hist <- skim_with(ts = sfl(line_graph = NULL))
+no_hist(Nile)
+```
+
+The same pattern applies to changing skimmers for multiple classes
+simultaneously. If you want to partially-apply function arguments, use the
+tidyverse lambda syntax.
+
+```{r}
+my_skim <- skim_with(
+  numeric = sfl(total = ~ sum(., na.rm = TRUE)),
+  factor = sfl(missing = ~ sum(is.na(.))),
+  append = FALSE
+)
+
+my_skim(iris)
+```
 
 
+# Extending `skimr`
 
-## Solutions to common rendering problems
+Packages may wish to export their own `skim()` functions. Use `skim_with()` for
+this. In fact, this is how `skimr` generates its version of `skim()`.
+
+```{r}
+#' @export
+my_package_skim <- skim_with()
+```
+
+Alternatively, defaults for another data types can be added to `skimr` with the
+`get_skimmers` generic. The method for your data type should return an `sfl()`.
+Unlike the `sfl()` used interactively, you also need to set the `skim_type`
+argument. It should match the method type in the function signature.
+
+```{r}
+get_skimmers.my_type <- function(column) {
+  sfl(
+    skim_type = "my_type",
+    total = sum
+  )
+}
+
+my_data <- data.frame(
+  my_type = structure(1:3, class = c("my_type", "integer"))
+)
+skim(my_data)
+```
+
+An extended example is available in the vignette *Supporting additional
+objects*.
+
+# Solutions to common rendering problems
 
 The details of rendering are dependent on the operating system R is running on,
 the locale of the installation, and the fonts installed. Rendering may also
 differ based on whether it occurs in the console or when knitting to specific
 types of documents such as HTML and PDF.
 
-The most commonly reported problems involve rendering the spark graphs (inline histogram) on Windows.
+The most commonly reported problems involve rendering the spark graphs (inline
+histogram) on Windows. One common fix is to switch your locale. The
+function `fix_windows_histograms()` does this for you.
 
 In order to render the sparkgraphs in html or PDF histogram you may need to
 change fonts to one that supports blocks or Braille (depending on which you

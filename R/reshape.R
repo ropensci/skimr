@@ -69,7 +69,7 @@ reconcile_skimmers <- function(data, groups) {
       names = extra_cols
     )
 
-    new_cols_by_type <- purrr::set_names(complete_cols, complete_by_type$skim_type)
+    new_cols_by_type <- rlang::set_names(complete_cols, complete_by_type$skim_type)
     skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
   }
 

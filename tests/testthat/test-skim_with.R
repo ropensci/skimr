@@ -18,6 +18,25 @@ test_that("Skimming functions can be changed for multiple types", {
   expect_identical(used, list(numeric = c("iqr", "q99"), factor = "n2"))
 })
 
+test_that("Skimming functions can be changed with a list", {
+  newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
+  new_skim <- skim_with(list(numeric = newfuns1), append = FALSE)
+  input <- new_skim(iris)
+  used <- attr(input, "skimmers_used")
+  expect_identical(used$numeric, c("iqr", "q99"))
+})
+
+test_that("Skimming functions can be changed with a list", {
+  newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
+  newfuns2 <- sfl(n2 = length)
+  new_skim <- skim_with(list(numeric = newfuns1, factor = newfuns2), append = FALSE)
+  input <- new_skim(iris)
+  used <- attr(input, "skimmers_used")
+  expect_identical(
+    used, list(numeric = c("iqr", "q99"), factor = c("n2"))
+  )
+})
+
 test_that("Skimming functions can be appended.", {
   funs <- sfl(iqr = IQR)
   new_skim <- skim_with(numeric = funs)
@@ -125,4 +144,39 @@ test_that("Sfl's can be passed as an unquoted list", {
   my_skim <- skim_with(!!!my_skimmers, append = FALSE)
   input <- my_skim(iris)
   expect_named(input, c("skim_type", "skim_variable", "length", "mean"))
+})
+
+test_that("Doubles and integers are both 'numeric'", {
+  df <- dplyr::mutate(faithful, eruptions = as.integer(eruptions))
+  my_skim <- skim_with(numeric = sfl(hist = NULL))
+  input <- my_skim(df)
+  expect_false("hist" %in% names(input))
+  used <- attr(input, "skimmers_used")
+  expect_identical(used, list(numeric = c(
+    "missing", "complete", "n", "mean",
+    "sd", "p0", "p25", "p50", "p75", "p100"
+  )))
+})
+
+test_that("Defining an integer sfl changes behavior", {
+  df <- dplyr::mutate(faithful, eruptions = as.integer(eruptions))
+  my_skim <- expect_message(
+    skim_with(
+      numeric = sfl(hist = NULL), integer = sfl(int_mean = mean)
+    )
+  )
+  input <- my_skim(df)
+  expect_false("hist" %in% names(input))
+  expect_true("int_mean" %in% names(input))
+  used <- attr(input, "skimmers_used")
+  expect_identical(
+    used,
+    list(
+      integer = c("int_mean"),
+      numeric = c(
+        "missing", "complete", "n", "mean",
+        "sd", "p0", "p25", "p50", "p75", "p100"
+      )
+    )
+  )
 })

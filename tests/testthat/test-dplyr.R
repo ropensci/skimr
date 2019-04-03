@@ -7,7 +7,7 @@ test_that("dplyr::filter works as expected", {
   expect_print_matches_file(input, "dplyr/filter-skim.txt")
 
   no_rows <- dplyr::filter(skimmed_iris, skim_type == "no_type")
-  expect_print_matches_file(input, "dplyr/filter-no-skim.txt")
+  expect_print_matches_file(no_rows, "dplyr/filter-no-skim.txt")
 })
 
 test_that("dplyr::select works as expected", {

@@ -165,7 +165,7 @@ validate_assignment <- function(...) {
 #' @noRd
 get_final_skimmers <- function(column, data, local_skimmers, append) {
   defaults <- get_skimmers(data[[column]])
-  all_classes <- class(data[[column]])
+  all_classes <- skim_class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
   if (!nzchar(defaults$skim_type)) {
@@ -197,6 +197,15 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
   skimmers
 }
 
+skim_class <- function(column) {
+  base_class <- class(column)
+  if (any(base_class %in% c("double", "integer"))) {
+    c(base_class, "numeric")
+  } else {
+    base_class
+  }
+}
+
 get_local_skimmers <- function(classes, local_skimmers) {
   all_matches <- local_skimmers[classes]
   safe_modify <- purrr::possibly(purrr::list_modify, NULL)
@@ -218,14 +227,14 @@ merge_skimmers <- function(locals, defaults, append) {
 }
 
 reduce_skimmers <- function(skimmers, types) {
-  named <- purrr::set_names(skimmers, types)
+  named <- rlang::set_names(skimmers, types)
   named[unique(types)]
 }
 
 get_skimmers_used <- function(skimmers) {
   types <- names(skimmers)
   function_names <- purrr::map(skimmers, ~ names(.x$funs))
-  purrr::set_names(function_names, types)
+  rlang::set_names(function_names, types)
 }
 
 #' Generate one or more rows of a `skim_df`, using one column
@@ -244,7 +253,7 @@ skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
   group_columns <- dplyr::groups(data)
   new_names <- names(skimmers$funs)
   delim <- "~!@#$%^&*()-+"
-  mangled_skimmers <- purrr::set_names(skimmers$funs, paste0(delim, new_names))
+  mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
   grouped <- dplyr::group_by(data, !!!group_columns)
   skimmed <- dplyr::summarize_at(grouped, data_columns, mangled_skimmers)
   build_results(skimmed, data, data_columns, group_columns, new_names, delim)
@@ -254,7 +263,7 @@ skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
 skim_by_type.default <- function(skimmers, data_columns, data) {
   new_names <- names(skimmers$funs)
   delim <- "~!@#$%^&*()-+"
-  mangled_skimmers <- purrr::set_names(skimmers$funs, paste0(delim, new_names))
+  mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
   skimmed <- dplyr::summarize_at(data, data_columns, mangled_skimmers)
   build_results(skimmed, data, data_columns, NULL, new_names, delim)
 }
@@ -282,9 +291,10 @@ build_results <- function(skimmed, data, data_cols, groups, new_names, delim) {
     )
     tidyr::unnest(out)
   } else {
+    new_names <- c(groups, new_names)
     tibble::tibble(
       skim_variable = data_cols,
-      !!!purrr::set_names(skimmed, new_names)
+      !!!rlang::set_names(skimmed, new_names)
     )
   }
 }
@@ -296,5 +306,5 @@ reshape_skimmed <- function(column, skimmed, groups, new_names, delim) {
     !!!groups,
     tidyselect::starts_with(delim_name)
   )
-  purrr::set_names(out, c(groups, new_names))
+  rlang::set_names(out, c(groups, new_names))
 }

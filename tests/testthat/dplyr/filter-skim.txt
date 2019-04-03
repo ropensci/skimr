@@ -1,11 +1,14 @@
-Data summary  
-                       Values
-Name                   `iris`
+── Data Summary ────────────────────────
+                        Value
+Name                     iris
 Number of rows            150
 Number of columns           5
-Column type frequency        
-numeric                     4
+                             
+Column type frequency:       
+  numeric                   4
+                             
 Group variables          None
+
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂

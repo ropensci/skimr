@@ -1,0 +1,20 @@
+── Data Summary ────────────────────────
+                          Value
+Name                      .data
+Number of rows              150
+Number of columns             5
+                               
+Column type frequency:         
+  numeric                     1
+                               
+Group variables         Species
+
+── Variable type: numeric ──────────────────────────────────────────────────────
+  skim_variable Species    missing complete     n  mean    sd    p0   p25   p50
+1 Sepal.Length  setosa           0       50    50  5.01 0.352   4.3  4.8    5  
+2 Sepal.Length  versicolor       0       50    50  5.94 0.516   4.9  5.6    5.9
+3 Sepal.Length  virginica        0       50    50  6.59 0.636   4.9  6.22   6.5
+    p75  p100
+1   5.2   5.8
+2   6.3   7  
+3   6.9   7.9
