@@ -34,6 +34,13 @@ test_that("knit_print works with skim summaries", {
   expect_matches_file(input, "print/knit_print-summary.txt")
 })
 
+test_that("knit_print appropriately falls back to tibble printing", {
+  skimmed <- skim(iris)
+  reduced <- dplyr::select(skimmed, skim_variable, mean)
+  input <- knit_print(reduced)
+  expect_is(input, "data.frame")
+})
+
 test_that("Summaries can be suppressed within knitr", {
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)

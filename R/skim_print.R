@@ -116,24 +116,27 @@ NULL
 #' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
-  assert_is_skim_df(x)
-  if (options$skimr_include_summary %||% TRUE) {
-    summary_stats <- summary(x)
-    summary_string <- build_summary_string(summary_stats)
-    kabled <- knitr::kable(
-      summary_string,
-      # format = "html",
-      table.attr = "style='width: auto;'
-      class='table table-condensed'",
-      col.names = c(" "),
-      caption = "Data summary"
-    )
+  if (is_skim_df(x)) {
+    if (options$skimr_include_summary %||% TRUE) {
+      summary_stats <- summary(x)
+      summary_string <- build_summary_string(summary_stats)
+      kabled <- knitr::kable(
+        summary_string,
+        # format = "html",
+        table.attr = "style='width: auto;'
+        class='table table-condensed'",
+        col.names = c(" "),
+        caption = "Data summary"
+      )
+    } else {
+      kabled <- c()
+    }
+      
+    by_type <- partition(x)
+    knit_print_by_type(by_type, options, kabled)
   } else {
-    kabled <- c()
+    NextMethod("knit_print")
   }
-  by_type <- partition(x)
-
-  knit_print_by_type(by_type, options, kabled)
 }
 
 knit_print_by_type <- function(x, options, summary) {
