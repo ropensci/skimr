@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-skimr <img src="man/figures/logo.png" align="right" height="139" />
-===================================================================
+skimr <a href='https://ropensci.github.io/skimr'><img src='https://ropensci.github.io/skimr/reference/figures/logo.png' align="right" height="139" /></a>
+=========================================================================================================================================================
 
 [![Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
@@ -36,7 +36,11 @@ still subject to change if an issue is discovered.
 To install the version with the most recent changes that have not yet
 been incorporated in the master branch (and may not be):
 
-    devtools::install_github("ropenscilabs/skimr", ref = "develop")
+    devtools::install_github("ropensci/skimr", ref = "develop")
+
+or for version 2
+
+    devtools::install_github("ropensci/skimr", ref = "v-2")
 
 Do not rely on APIs from the develop branch.
 
@@ -55,9 +59,9 @@ Skim statistics in the console
 -   reports each data type separately.
 -   handles dates, logicals, and a variety of other types
 -   supports spark-bar and spark-line based on [the pillar
-    package](https://github.com/hadley/pillar).
--   allows users to customize the statistics included by data type and
-    to implement skimming for additional classes.
+    package](https://github.com/r-lib/pillar). allows users to customize
+    the statistics included by data type and to implement skimming for
+    additional classes.
 -   works with many Tidyverse features.
 
 ### Separates variables by class:
