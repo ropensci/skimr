@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Skimr defaults">
 <meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://ropensci.github.io/skimr/logo.png">
 <meta name="twitter:card" content="summary">
 </head>
 <body>
@@ -77,6 +77,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Etc
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../CONTRIBUTING.html">Contributing</a>
+    </li>
+    <li>
+      <a href="../CONDUCT.html">Code of Conduct</a>
+    </li>
+  </ul>
+</li>
         <li>
   <a href="https://github.com/ropensci/skimr">
     <span class="fa fa-github"></span>
@@ -97,7 +112,7 @@
     <div class="page-header toc-ignore">
       <h1>Skimr defaults</h1>
             
-            <h4 class="date">2019-04-02</h4>
+            <h4 class="date">2019-04-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropenscilabs/skimr/blob/master/vignettes/Skimr_defaults.Rmd"><code>vignettes/Skimr_defaults.Rmd</code></a></small>
       <div class="hidden name"><code>Skimr_defaults.Rmd</code></div>
@@ -180,7 +195,7 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; &lt;bytecode: 0x60fd418&gt;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; &lt;bytecode: 0x4cb7180&gt;</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; $numeric$complete</span></a>
@@ -188,7 +203,7 @@
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; &lt;bytecode: 0x6100f00&gt;</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; &lt;bytecode: 0x4cb6e38&gt;</span></a>
 <a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt; $numeric$n</span></a>
@@ -245,7 +260,7 @@
 <a class="sourceLine" id="cb2-70" data-line-number="70"><span class="co">#&gt;     hist_dt &lt;- hist_dt/max(hist_dt)</span></a>
 <a class="sourceLine" id="cb2-71" data-line-number="71"><span class="co">#&gt;     structure(spark_bar(hist_dt), class = c("spark", "character"))</span></a>
 <a class="sourceLine" id="cb2-72" data-line-number="72"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-73" data-line-number="73"><span class="co">#&gt; &lt;bytecode: 0x6141818&gt;</span></a>
+<a class="sourceLine" id="cb2-73" data-line-number="73"><span class="co">#&gt; &lt;bytecode: 0x4cf7750&gt;</span></a>
 <a class="sourceLine" id="cb2-74" data-line-number="74"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-75" data-line-number="75"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-76" data-line-number="76"><span class="co">#&gt; </span></a>
@@ -255,7 +270,7 @@
 <a class="sourceLine" id="cb2-80" data-line-number="80"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-81" data-line-number="81"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-82" data-line-number="82"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-83" data-line-number="83"><span class="co">#&gt; &lt;bytecode: 0x61439a0&gt;</span></a>
+<a class="sourceLine" id="cb2-83" data-line-number="83"><span class="co">#&gt; &lt;bytecode: 0x4cf98d8&gt;</span></a>
 <a class="sourceLine" id="cb2-84" data-line-number="84"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-85" data-line-number="85"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-86" data-line-number="86"><span class="co">#&gt; $integer$complete</span></a>
@@ -263,7 +278,7 @@
 <a class="sourceLine" id="cb2-88" data-line-number="88"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-89" data-line-number="89"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-90" data-line-number="90"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-91" data-line-number="91"><span class="co">#&gt; &lt;bytecode: 0x6143658&gt;</span></a>
+<a class="sourceLine" id="cb2-91" data-line-number="91"><span class="co">#&gt; &lt;bytecode: 0x4cf9590&gt;</span></a>
 <a class="sourceLine" id="cb2-92" data-line-number="92"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-93" data-line-number="93"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-94" data-line-number="94"><span class="co">#&gt; $integer$n</span></a>
@@ -320,7 +335,7 @@
 <a class="sourceLine" id="cb2-145" data-line-number="145"><span class="co">#&gt;     hist_dt &lt;- hist_dt/max(hist_dt)</span></a>
 <a class="sourceLine" id="cb2-146" data-line-number="146"><span class="co">#&gt;     structure(spark_bar(hist_dt), class = c("spark", "character"))</span></a>
 <a class="sourceLine" id="cb2-147" data-line-number="147"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-148" data-line-number="148"><span class="co">#&gt; &lt;bytecode: 0x614dcb0&gt;</span></a>
+<a class="sourceLine" id="cb2-148" data-line-number="148"><span class="co">#&gt; &lt;bytecode: 0x4d03be8&gt;</span></a>
 <a class="sourceLine" id="cb2-149" data-line-number="149"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-150" data-line-number="150"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-151" data-line-number="151"><span class="co">#&gt; </span></a>
@@ -330,7 +345,7 @@
 <a class="sourceLine" id="cb2-155" data-line-number="155"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-156" data-line-number="156"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-157" data-line-number="157"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-158" data-line-number="158"><span class="co">#&gt; &lt;bytecode: 0x614ff18&gt;</span></a>
+<a class="sourceLine" id="cb2-158" data-line-number="158"><span class="co">#&gt; &lt;bytecode: 0x4d07d70&gt;</span></a>
 <a class="sourceLine" id="cb2-159" data-line-number="159"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-160" data-line-number="160"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-161" data-line-number="161"><span class="co">#&gt; $factor$complete</span></a>
@@ -338,7 +353,7 @@
 <a class="sourceLine" id="cb2-163" data-line-number="163"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-164" data-line-number="164"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-165" data-line-number="165"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-166" data-line-number="166"><span class="co">#&gt; &lt;bytecode: 0x614fbd0&gt;</span></a>
+<a class="sourceLine" id="cb2-166" data-line-number="166"><span class="co">#&gt; &lt;bytecode: 0x4d07a28&gt;</span></a>
 <a class="sourceLine" id="cb2-167" data-line-number="167"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-168" data-line-number="168"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-169" data-line-number="169"><span class="co">#&gt; $factor$n</span></a>
@@ -351,7 +366,7 @@
 <a class="sourceLine" id="cb2-176" data-line-number="176"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-177" data-line-number="177"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-178" data-line-number="178"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-179" data-line-number="179"><span class="co">#&gt; &lt;bytecode: 0x614f888&gt;</span></a>
+<a class="sourceLine" id="cb2-179" data-line-number="179"><span class="co">#&gt; &lt;bytecode: 0x4d076e0&gt;</span></a>
 <a class="sourceLine" id="cb2-180" data-line-number="180"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-181" data-line-number="181"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-182" data-line-number="182"><span class="co">#&gt; $factor$top_counts</span></a>
@@ -366,13 +381,13 @@
 <a class="sourceLine" id="cb2-191" data-line-number="191"><span class="co">#&gt;     out &lt;- rlang::set_names(as.integer(tab), names_tab)</span></a>
 <a class="sourceLine" id="cb2-192" data-line-number="192"><span class="co">#&gt;     sort(out, decreasing = TRUE)</span></a>
 <a class="sourceLine" id="cb2-193" data-line-number="193"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-194" data-line-number="194"><span class="co">#&gt; &lt;bytecode: 0x614f230&gt;</span></a>
+<a class="sourceLine" id="cb2-194" data-line-number="194"><span class="co">#&gt; &lt;bytecode: 0x4d07088&gt;</span></a>
 <a class="sourceLine" id="cb2-195" data-line-number="195"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-196" data-line-number="196"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-197" data-line-number="197"><span class="co">#&gt; $factor$ordered</span></a>
 <a class="sourceLine" id="cb2-198" data-line-number="198"><span class="co">#&gt; function (x) </span></a>
 <a class="sourceLine" id="cb2-199" data-line-number="199"><span class="co">#&gt; inherits(x, "ordered")</span></a>
-<a class="sourceLine" id="cb2-200" data-line-number="200"><span class="co">#&gt; &lt;bytecode: 0x6153e38&gt;</span></a>
+<a class="sourceLine" id="cb2-200" data-line-number="200"><span class="co">#&gt; &lt;bytecode: 0x4d09d70&gt;</span></a>
 <a class="sourceLine" id="cb2-201" data-line-number="201"><span class="co">#&gt; &lt;environment: namespace:base&gt;</span></a>
 <a class="sourceLine" id="cb2-202" data-line-number="202"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-203" data-line-number="203"><span class="co">#&gt; </span></a>
@@ -382,7 +397,7 @@
 <a class="sourceLine" id="cb2-207" data-line-number="207"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-208" data-line-number="208"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-209" data-line-number="209"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-210" data-line-number="210"><span class="co">#&gt; &lt;bytecode: 0x6153b98&gt;</span></a>
+<a class="sourceLine" id="cb2-210" data-line-number="210"><span class="co">#&gt; &lt;bytecode: 0x4d09ad0&gt;</span></a>
 <a class="sourceLine" id="cb2-211" data-line-number="211"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-212" data-line-number="212"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-213" data-line-number="213"><span class="co">#&gt; $character$complete</span></a>
@@ -390,7 +405,7 @@
 <a class="sourceLine" id="cb2-215" data-line-number="215"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-216" data-line-number="216"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-217" data-line-number="217"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-218" data-line-number="218"><span class="co">#&gt; &lt;bytecode: 0x6153850&gt;</span></a>
+<a class="sourceLine" id="cb2-218" data-line-number="218"><span class="co">#&gt; &lt;bytecode: 0x4d09788&gt;</span></a>
 <a class="sourceLine" id="cb2-219" data-line-number="219"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-220" data-line-number="220"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-221" data-line-number="221"><span class="co">#&gt; $character$n</span></a>
@@ -404,7 +419,7 @@
 <a class="sourceLine" id="cb2-229" data-line-number="229"><span class="co">#&gt;     characters &lt;- nchar(x, allowNA = TRUE)</span></a>
 <a class="sourceLine" id="cb2-230" data-line-number="230"><span class="co">#&gt;     min(characters, na.rm = TRUE)</span></a>
 <a class="sourceLine" id="cb2-231" data-line-number="231"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-232" data-line-number="232"><span class="co">#&gt; &lt;bytecode: 0x6153508&gt;</span></a>
+<a class="sourceLine" id="cb2-232" data-line-number="232"><span class="co">#&gt; &lt;bytecode: 0x4d09440&gt;</span></a>
 <a class="sourceLine" id="cb2-233" data-line-number="233"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-234" data-line-number="234"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-235" data-line-number="235"><span class="co">#&gt; $character$max</span></a>
@@ -415,7 +430,7 @@
 <a class="sourceLine" id="cb2-240" data-line-number="240"><span class="co">#&gt;     characters &lt;- nchar(x, allowNA = TRUE)</span></a>
 <a class="sourceLine" id="cb2-241" data-line-number="241"><span class="co">#&gt;     max(characters, na.rm = TRUE)</span></a>
 <a class="sourceLine" id="cb2-242" data-line-number="242"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-243" data-line-number="243"><span class="co">#&gt; &lt;bytecode: 0x6152dd0&gt;</span></a>
+<a class="sourceLine" id="cb2-243" data-line-number="243"><span class="co">#&gt; &lt;bytecode: 0x4d0cb38&gt;</span></a>
 <a class="sourceLine" id="cb2-244" data-line-number="244"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-245" data-line-number="245"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-246" data-line-number="246"><span class="co">#&gt; $character$empty</span></a>
@@ -424,7 +439,7 @@
 <a class="sourceLine" id="cb2-249" data-line-number="249"><span class="co">#&gt;     empty.strings &lt;- c("")</span></a>
 <a class="sourceLine" id="cb2-250" data-line-number="250"><span class="co">#&gt;     sum(x %in% empty.strings)</span></a>
 <a class="sourceLine" id="cb2-251" data-line-number="251"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-252" data-line-number="252"><span class="co">#&gt; &lt;bytecode: 0x6156538&gt;</span></a>
+<a class="sourceLine" id="cb2-252" data-line-number="252"><span class="co">#&gt; &lt;bytecode: 0x4d0c470&gt;</span></a>
 <a class="sourceLine" id="cb2-253" data-line-number="253"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-254" data-line-number="254"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-255" data-line-number="255"><span class="co">#&gt; $character$n_unique</span></a>
@@ -434,7 +449,7 @@
 <a class="sourceLine" id="cb2-259" data-line-number="259"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-260" data-line-number="260"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-261" data-line-number="261"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-262" data-line-number="262"><span class="co">#&gt; &lt;bytecode: 0x6156030&gt;</span></a>
+<a class="sourceLine" id="cb2-262" data-line-number="262"><span class="co">#&gt; &lt;bytecode: 0x4d0bf68&gt;</span></a>
 <a class="sourceLine" id="cb2-263" data-line-number="263"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-264" data-line-number="264"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-265" data-line-number="265"><span class="co">#&gt; </span></a>
@@ -444,7 +459,7 @@
 <a class="sourceLine" id="cb2-269" data-line-number="269"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-270" data-line-number="270"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-271" data-line-number="271"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-272" data-line-number="272"><span class="co">#&gt; &lt;bytecode: 0x6155a10&gt;</span></a>
+<a class="sourceLine" id="cb2-272" data-line-number="272"><span class="co">#&gt; &lt;bytecode: 0x4d0b948&gt;</span></a>
 <a class="sourceLine" id="cb2-273" data-line-number="273"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-274" data-line-number="274"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-275" data-line-number="275"><span class="co">#&gt; $logical$complete</span></a>
@@ -452,7 +467,7 @@
 <a class="sourceLine" id="cb2-277" data-line-number="277"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-278" data-line-number="278"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-279" data-line-number="279"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-280" data-line-number="280"><span class="co">#&gt; &lt;bytecode: 0x61556c8&gt;</span></a>
+<a class="sourceLine" id="cb2-280" data-line-number="280"><span class="co">#&gt; &lt;bytecode: 0x4d0b600&gt;</span></a>
 <a class="sourceLine" id="cb2-281" data-line-number="281"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-282" data-line-number="282"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-283" data-line-number="283"><span class="co">#&gt; $logical$n</span></a>
@@ -475,7 +490,7 @@
 <a class="sourceLine" id="cb2-300" data-line-number="300"><span class="co">#&gt;     out &lt;- rlang::set_names(as.integer(tab), names_tab)</span></a>
 <a class="sourceLine" id="cb2-301" data-line-number="301"><span class="co">#&gt;     sort(out, decreasing = TRUE)</span></a>
 <a class="sourceLine" id="cb2-302" data-line-number="302"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-303" data-line-number="303"><span class="co">#&gt; &lt;bytecode: 0x6164ba0&gt;</span></a>
+<a class="sourceLine" id="cb2-303" data-line-number="303"><span class="co">#&gt; &lt;bytecode: 0x4d1aad8&gt;</span></a>
 <a class="sourceLine" id="cb2-304" data-line-number="304"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-305" data-line-number="305"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-306" data-line-number="306"><span class="co">#&gt; </span></a>
@@ -485,7 +500,7 @@
 <a class="sourceLine" id="cb2-310" data-line-number="310"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-311" data-line-number="311"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-312" data-line-number="312"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-313" data-line-number="313"><span class="co">#&gt; &lt;bytecode: 0x61679a0&gt;</span></a>
+<a class="sourceLine" id="cb2-313" data-line-number="313"><span class="co">#&gt; &lt;bytecode: 0x4d1d8d8&gt;</span></a>
 <a class="sourceLine" id="cb2-314" data-line-number="314"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-315" data-line-number="315"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-316" data-line-number="316"><span class="co">#&gt; $complex$complete</span></a>
@@ -493,7 +508,7 @@
 <a class="sourceLine" id="cb2-318" data-line-number="318"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-319" data-line-number="319"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-320" data-line-number="320"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-321" data-line-number="321"><span class="co">#&gt; &lt;bytecode: 0x6167658&gt;</span></a>
+<a class="sourceLine" id="cb2-321" data-line-number="321"><span class="co">#&gt; &lt;bytecode: 0x4d1d590&gt;</span></a>
 <a class="sourceLine" id="cb2-322" data-line-number="322"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-323" data-line-number="323"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-324" data-line-number="324"><span class="co">#&gt; $complex$n</span></a>
@@ -506,7 +521,7 @@
 <a class="sourceLine" id="cb2-331" data-line-number="331"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-332" data-line-number="332"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-333" data-line-number="333"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-334" data-line-number="334"><span class="co">#&gt; &lt;bytecode: 0x61672d8&gt;</span></a>
+<a class="sourceLine" id="cb2-334" data-line-number="334"><span class="co">#&gt; &lt;bytecode: 0x4d1d210&gt;</span></a>
 <a class="sourceLine" id="cb2-335" data-line-number="335"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-336" data-line-number="336"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-337" data-line-number="337"><span class="co">#&gt; $date$complete</span></a>
@@ -514,7 +529,7 @@
 <a class="sourceLine" id="cb2-339" data-line-number="339"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-340" data-line-number="340"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-341" data-line-number="341"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-342" data-line-number="342"><span class="co">#&gt; &lt;bytecode: 0x6166f90&gt;</span></a>
+<a class="sourceLine" id="cb2-342" data-line-number="342"><span class="co">#&gt; &lt;bytecode: 0x4d1cec8&gt;</span></a>
 <a class="sourceLine" id="cb2-343" data-line-number="343"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-344" data-line-number="344"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-345" data-line-number="345"><span class="co">#&gt; $date$n</span></a>
@@ -542,7 +557,7 @@
 <a class="sourceLine" id="cb2-367" data-line-number="367"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-368" data-line-number="368"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-369" data-line-number="369"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-370" data-line-number="370"><span class="co">#&gt; &lt;bytecode: 0x6181188&gt;</span></a>
+<a class="sourceLine" id="cb2-370" data-line-number="370"><span class="co">#&gt; &lt;bytecode: 0x4d370c0&gt;</span></a>
 <a class="sourceLine" id="cb2-371" data-line-number="371"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-372" data-line-number="372"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-373" data-line-number="373"><span class="co">#&gt; </span></a>
@@ -552,7 +567,7 @@
 <a class="sourceLine" id="cb2-377" data-line-number="377"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-378" data-line-number="378"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-379" data-line-number="379"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-380" data-line-number="380"><span class="co">#&gt; &lt;bytecode: 0x6180b68&gt;</span></a>
+<a class="sourceLine" id="cb2-380" data-line-number="380"><span class="co">#&gt; &lt;bytecode: 0x4d36aa0&gt;</span></a>
 <a class="sourceLine" id="cb2-381" data-line-number="381"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-382" data-line-number="382"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-383" data-line-number="383"><span class="co">#&gt; $Date$complete</span></a>
@@ -560,7 +575,7 @@
 <a class="sourceLine" id="cb2-385" data-line-number="385"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-386" data-line-number="386"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-387" data-line-number="387"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-388" data-line-number="388"><span class="co">#&gt; &lt;bytecode: 0x6180820&gt;</span></a>
+<a class="sourceLine" id="cb2-388" data-line-number="388"><span class="co">#&gt; &lt;bytecode: 0x4d36758&gt;</span></a>
 <a class="sourceLine" id="cb2-389" data-line-number="389"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-390" data-line-number="390"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-391" data-line-number="391"><span class="co">#&gt; $Date$n</span></a>
@@ -588,7 +603,7 @@
 <a class="sourceLine" id="cb2-413" data-line-number="413"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-414" data-line-number="414"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-415" data-line-number="415"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-416" data-line-number="416"><span class="co">#&gt; &lt;bytecode: 0x6181780&gt;</span></a>
+<a class="sourceLine" id="cb2-416" data-line-number="416"><span class="co">#&gt; &lt;bytecode: 0x4d3b4e8&gt;</span></a>
 <a class="sourceLine" id="cb2-417" data-line-number="417"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-418" data-line-number="418"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-419" data-line-number="419"><span class="co">#&gt; </span></a>
@@ -598,7 +613,7 @@
 <a class="sourceLine" id="cb2-423" data-line-number="423"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-424" data-line-number="424"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-425" data-line-number="425"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-426" data-line-number="426"><span class="co">#&gt; &lt;bytecode: 0x6184f90&gt;</span></a>
+<a class="sourceLine" id="cb2-426" data-line-number="426"><span class="co">#&gt; &lt;bytecode: 0x4d3aec8&gt;</span></a>
 <a class="sourceLine" id="cb2-427" data-line-number="427"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-428" data-line-number="428"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-429" data-line-number="429"><span class="co">#&gt; $ts$complete</span></a>
@@ -606,7 +621,7 @@
 <a class="sourceLine" id="cb2-431" data-line-number="431"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-432" data-line-number="432"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-433" data-line-number="433"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-434" data-line-number="434"><span class="co">#&gt; &lt;bytecode: 0x6184c48&gt;</span></a>
+<a class="sourceLine" id="cb2-434" data-line-number="434"><span class="co">#&gt; &lt;bytecode: 0x4d3ab80&gt;</span></a>
 <a class="sourceLine" id="cb2-435" data-line-number="435"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-436" data-line-number="436"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-437" data-line-number="437"><span class="co">#&gt; $ts$n</span></a>
@@ -617,7 +632,7 @@
 <a class="sourceLine" id="cb2-442" data-line-number="442"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-443" data-line-number="443"><span class="co">#&gt;     stats::start(x)[1]</span></a>
 <a class="sourceLine" id="cb2-444" data-line-number="444"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-445" data-line-number="445"><span class="co">#&gt; &lt;bytecode: 0x6184900&gt;</span></a>
+<a class="sourceLine" id="cb2-445" data-line-number="445"><span class="co">#&gt; &lt;bytecode: 0x4d3a838&gt;</span></a>
 <a class="sourceLine" id="cb2-446" data-line-number="446"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-447" data-line-number="447"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-448" data-line-number="448"><span class="co">#&gt; $ts$end</span></a>
@@ -625,19 +640,19 @@
 <a class="sourceLine" id="cb2-450" data-line-number="450"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-451" data-line-number="451"><span class="co">#&gt;     stats::end(x)[1]</span></a>
 <a class="sourceLine" id="cb2-452" data-line-number="452"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-453" data-line-number="453"><span class="co">#&gt; &lt;bytecode: 0x6184580&gt;</span></a>
+<a class="sourceLine" id="cb2-453" data-line-number="453"><span class="co">#&gt; &lt;bytecode: 0x4d3a4b8&gt;</span></a>
 <a class="sourceLine" id="cb2-454" data-line-number="454"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-455" data-line-number="455"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-456" data-line-number="456"><span class="co">#&gt; $ts$frequency</span></a>
 <a class="sourceLine" id="cb2-457" data-line-number="457"><span class="co">#&gt; function (x, ...) </span></a>
 <a class="sourceLine" id="cb2-458" data-line-number="458"><span class="co">#&gt; UseMethod("frequency")</span></a>
-<a class="sourceLine" id="cb2-459" data-line-number="459"><span class="co">#&gt; &lt;bytecode: 0x61841c8&gt;</span></a>
+<a class="sourceLine" id="cb2-459" data-line-number="459"><span class="co">#&gt; &lt;bytecode: 0x4d3a100&gt;</span></a>
 <a class="sourceLine" id="cb2-460" data-line-number="460"><span class="co">#&gt; &lt;environment: namespace:stats&gt;</span></a>
 <a class="sourceLine" id="cb2-461" data-line-number="461"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-462" data-line-number="462"><span class="co">#&gt; $ts$deltat</span></a>
 <a class="sourceLine" id="cb2-463" data-line-number="463"><span class="co">#&gt; function (x, ...) </span></a>
 <a class="sourceLine" id="cb2-464" data-line-number="464"><span class="co">#&gt; UseMethod("deltat")</span></a>
-<a class="sourceLine" id="cb2-465" data-line-number="465"><span class="co">#&gt; &lt;bytecode: 0x6184040&gt;</span></a>
+<a class="sourceLine" id="cb2-465" data-line-number="465"><span class="co">#&gt; &lt;bytecode: 0x4d39f78&gt;</span></a>
 <a class="sourceLine" id="cb2-466" data-line-number="466"><span class="co">#&gt; &lt;environment: namespace:stats&gt;</span></a>
 <a class="sourceLine" id="cb2-467" data-line-number="467"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-468" data-line-number="468"><span class="co">#&gt; $ts$mean</span></a>
@@ -673,7 +688,7 @@
 <a class="sourceLine" id="cb2-498" data-line-number="498"><span class="co">#&gt;     normalized &lt;- normalize01(t[floor(id)])</span></a>
 <a class="sourceLine" id="cb2-499" data-line-number="499"><span class="co">#&gt;     structure(spark_line(normalized), class = c("spark", "character"))</span></a>
 <a class="sourceLine" id="cb2-500" data-line-number="500"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-501" data-line-number="501"><span class="co">#&gt; &lt;bytecode: 0x61b7080&gt;</span></a>
+<a class="sourceLine" id="cb2-501" data-line-number="501"><span class="co">#&gt; &lt;bytecode: 0x4d6cfb8&gt;</span></a>
 <a class="sourceLine" id="cb2-502" data-line-number="502"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-503" data-line-number="503"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-504" data-line-number="504"><span class="co">#&gt; </span></a>
@@ -683,7 +698,7 @@
 <a class="sourceLine" id="cb2-508" data-line-number="508"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-509" data-line-number="509"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-510" data-line-number="510"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-511" data-line-number="511"><span class="co">#&gt; &lt;bytecode: 0x61b6088&gt;</span></a>
+<a class="sourceLine" id="cb2-511" data-line-number="511"><span class="co">#&gt; &lt;bytecode: 0x4d6fdf0&gt;</span></a>
 <a class="sourceLine" id="cb2-512" data-line-number="512"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-513" data-line-number="513"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-514" data-line-number="514"><span class="co">#&gt; $POSIXct$complete</span></a>
@@ -691,7 +706,7 @@
 <a class="sourceLine" id="cb2-516" data-line-number="516"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-517" data-line-number="517"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-518" data-line-number="518"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-519" data-line-number="519"><span class="co">#&gt; &lt;bytecode: 0x61b9b70&gt;</span></a>
+<a class="sourceLine" id="cb2-519" data-line-number="519"><span class="co">#&gt; &lt;bytecode: 0x4d6faa8&gt;</span></a>
 <a class="sourceLine" id="cb2-520" data-line-number="520"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-521" data-line-number="521"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-522" data-line-number="522"><span class="co">#&gt; $POSIXct$n</span></a>
@@ -719,7 +734,7 @@
 <a class="sourceLine" id="cb2-544" data-line-number="544"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-545" data-line-number="545"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-546" data-line-number="546"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-547" data-line-number="547"><span class="co">#&gt; &lt;bytecode: 0x61baad0&gt;</span></a>
+<a class="sourceLine" id="cb2-547" data-line-number="547"><span class="co">#&gt; &lt;bytecode: 0x4d70a08&gt;</span></a>
 <a class="sourceLine" id="cb2-548" data-line-number="548"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-549" data-line-number="549"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-550" data-line-number="550"><span class="co">#&gt; </span></a>
@@ -729,7 +744,7 @@
 <a class="sourceLine" id="cb2-554" data-line-number="554"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-555" data-line-number="555"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-556" data-line-number="556"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-557" data-line-number="557"><span class="co">#&gt; &lt;bytecode: 0x61ba4b0&gt;</span></a>
+<a class="sourceLine" id="cb2-557" data-line-number="557"><span class="co">#&gt; &lt;bytecode: 0x4d703e8&gt;</span></a>
 <a class="sourceLine" id="cb2-558" data-line-number="558"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-559" data-line-number="559"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-560" data-line-number="560"><span class="co">#&gt; $list$complete</span></a>
@@ -737,7 +752,7 @@
 <a class="sourceLine" id="cb2-562" data-line-number="562"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-563" data-line-number="563"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-564" data-line-number="564"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-565" data-line-number="565"><span class="co">#&gt; &lt;bytecode: 0x61ba168&gt;</span></a>
+<a class="sourceLine" id="cb2-565" data-line-number="565"><span class="co">#&gt; &lt;bytecode: 0x4d700a0&gt;</span></a>
 <a class="sourceLine" id="cb2-566" data-line-number="566"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-567" data-line-number="567"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-568" data-line-number="568"><span class="co">#&gt; $list$n</span></a>
@@ -750,7 +765,7 @@
 <a class="sourceLine" id="cb2-575" data-line-number="575"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-576" data-line-number="576"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-577" data-line-number="577"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-578" data-line-number="578"><span class="co">#&gt; &lt;bytecode: 0x61b9e20&gt;</span></a>
+<a class="sourceLine" id="cb2-578" data-line-number="578"><span class="co">#&gt; &lt;bytecode: 0x4d73b88&gt;</span></a>
 <a class="sourceLine" id="cb2-579" data-line-number="579"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-580" data-line-number="580"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-581" data-line-number="581"><span class="co">#&gt; $list$min_length</span></a>
@@ -762,7 +777,7 @@
 <a class="sourceLine" id="cb2-587" data-line-number="587"><span class="co">#&gt;         min(l)</span></a>
 <a class="sourceLine" id="cb2-588" data-line-number="588"><span class="co">#&gt;     else NA</span></a>
 <a class="sourceLine" id="cb2-589" data-line-number="589"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-590" data-line-number="590"><span class="co">#&gt; &lt;bytecode: 0x61bd668&gt;</span></a>
+<a class="sourceLine" id="cb2-590" data-line-number="590"><span class="co">#&gt; &lt;bytecode: 0x4d735a0&gt;</span></a>
 <a class="sourceLine" id="cb2-591" data-line-number="591"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-592" data-line-number="592"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-593" data-line-number="593"><span class="co">#&gt; $list$median_length</span></a>
@@ -774,7 +789,7 @@
 <a class="sourceLine" id="cb2-599" data-line-number="599"><span class="co">#&gt;         stats::median(l)</span></a>
 <a class="sourceLine" id="cb2-600" data-line-number="600"><span class="co">#&gt;     else NA</span></a>
 <a class="sourceLine" id="cb2-601" data-line-number="601"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-602" data-line-number="602"><span class="co">#&gt; &lt;bytecode: 0x61bce88&gt;</span></a>
+<a class="sourceLine" id="cb2-602" data-line-number="602"><span class="co">#&gt; &lt;bytecode: 0x4d72dc0&gt;</span></a>
 <a class="sourceLine" id="cb2-603" data-line-number="603"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-604" data-line-number="604"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-605" data-line-number="605"><span class="co">#&gt; $list$max_length</span></a>
@@ -786,7 +801,7 @@
 <a class="sourceLine" id="cb2-611" data-line-number="611"><span class="co">#&gt;         max(l)</span></a>
 <a class="sourceLine" id="cb2-612" data-line-number="612"><span class="co">#&gt;     else NA</span></a>
 <a class="sourceLine" id="cb2-613" data-line-number="613"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-614" data-line-number="614"><span class="co">#&gt; &lt;bytecode: 0x61bc590&gt;</span></a>
+<a class="sourceLine" id="cb2-614" data-line-number="614"><span class="co">#&gt; &lt;bytecode: 0x4d724c8&gt;</span></a>
 <a class="sourceLine" id="cb2-615" data-line-number="615"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-616" data-line-number="616"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-617" data-line-number="617"><span class="co">#&gt; </span></a>
@@ -796,7 +811,7 @@
 <a class="sourceLine" id="cb2-621" data-line-number="621"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-622" data-line-number="622"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-623" data-line-number="623"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-624" data-line-number="624"><span class="co">#&gt; &lt;bytecode: 0x61bbd78&gt;</span></a>
+<a class="sourceLine" id="cb2-624" data-line-number="624"><span class="co">#&gt; &lt;bytecode: 0x4d77a00&gt;</span></a>
 <a class="sourceLine" id="cb2-625" data-line-number="625"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-626" data-line-number="626"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-627" data-line-number="627"><span class="co">#&gt; $AsIs$complete</span></a>
@@ -804,7 +819,7 @@
 <a class="sourceLine" id="cb2-629" data-line-number="629"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-630" data-line-number="630"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-631" data-line-number="631"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-632" data-line-number="632"><span class="co">#&gt; &lt;bytecode: 0x61bf860&gt;</span></a>
+<a class="sourceLine" id="cb2-632" data-line-number="632"><span class="co">#&gt; &lt;bytecode: 0x4d776b8&gt;</span></a>
 <a class="sourceLine" id="cb2-633" data-line-number="633"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-634" data-line-number="634"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-635" data-line-number="635"><span class="co">#&gt; $AsIs$n</span></a>
@@ -817,7 +832,7 @@
 <a class="sourceLine" id="cb2-642" data-line-number="642"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-643" data-line-number="643"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-644" data-line-number="644"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-645" data-line-number="645"><span class="co">#&gt; &lt;bytecode: 0x61bf518&gt;</span></a>
+<a class="sourceLine" id="cb2-645" data-line-number="645"><span class="co">#&gt; &lt;bytecode: 0x4d77370&gt;</span></a>
 <a class="sourceLine" id="cb2-646" data-line-number="646"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-647" data-line-number="647"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-648" data-line-number="648"><span class="co">#&gt; $AsIs$min_length</span></a>
@@ -826,7 +841,7 @@
 <a class="sourceLine" id="cb2-651" data-line-number="651"><span class="co">#&gt;     l &lt;- lengths(x)</span></a>
 <a class="sourceLine" id="cb2-652" data-line-number="652"><span class="co">#&gt;     min(l)</span></a>
 <a class="sourceLine" id="cb2-653" data-line-number="653"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-654" data-line-number="654"><span class="co">#&gt; &lt;bytecode: 0x61bef30&gt;</span></a>
+<a class="sourceLine" id="cb2-654" data-line-number="654"><span class="co">#&gt; &lt;bytecode: 0x4d76d88&gt;</span></a>
 <a class="sourceLine" id="cb2-655" data-line-number="655"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-656" data-line-number="656"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-657" data-line-number="657"><span class="co">#&gt; $AsIs$max_length</span></a>
@@ -835,7 +850,7 @@
 <a class="sourceLine" id="cb2-660" data-line-number="660"><span class="co">#&gt;     l &lt;- lengths(x)</span></a>
 <a class="sourceLine" id="cb2-661" data-line-number="661"><span class="co">#&gt;     max(l)</span></a>
 <a class="sourceLine" id="cb2-662" data-line-number="662"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-663" data-line-number="663"><span class="co">#&gt; &lt;bytecode: 0x61bebb0&gt;</span></a>
+<a class="sourceLine" id="cb2-663" data-line-number="663"><span class="co">#&gt; &lt;bytecode: 0x4d76a08&gt;</span></a>
 <a class="sourceLine" id="cb2-664" data-line-number="664"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-665" data-line-number="665"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-666" data-line-number="666"><span class="co">#&gt; </span></a>
@@ -845,7 +860,7 @@
 <a class="sourceLine" id="cb2-670" data-line-number="670"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-671" data-line-number="671"><span class="co">#&gt;     sum(is.na(x) | is.null(x))</span></a>
 <a class="sourceLine" id="cb2-672" data-line-number="672"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-673" data-line-number="673"><span class="co">#&gt; &lt;bytecode: 0x61be7f8&gt;</span></a>
+<a class="sourceLine" id="cb2-673" data-line-number="673"><span class="co">#&gt; &lt;bytecode: 0x4d76650&gt;</span></a>
 <a class="sourceLine" id="cb2-674" data-line-number="674"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-675" data-line-number="675"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-676" data-line-number="676"><span class="co">#&gt; $difftime$complete</span></a>
@@ -853,7 +868,7 @@
 <a class="sourceLine" id="cb2-678" data-line-number="678"><span class="co">#&gt; {</span></a>
 <a class="sourceLine" id="cb2-679" data-line-number="679"><span class="co">#&gt;     length(x) - n_missing(x)</span></a>
 <a class="sourceLine" id="cb2-680" data-line-number="680"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-681" data-line-number="681"><span class="co">#&gt; &lt;bytecode: 0x61be4b0&gt;</span></a>
+<a class="sourceLine" id="cb2-681" data-line-number="681"><span class="co">#&gt; &lt;bytecode: 0x4d76308&gt;</span></a>
 <a class="sourceLine" id="cb2-682" data-line-number="682"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a>
 <a class="sourceLine" id="cb2-683" data-line-number="683"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-684" data-line-number="684"><span class="co">#&gt; $difftime$n</span></a>
@@ -881,7 +896,7 @@
 <a class="sourceLine" id="cb2-706" data-line-number="706"><span class="co">#&gt;     un &lt;- unique(un)</span></a>
 <a class="sourceLine" id="cb2-707" data-line-number="707"><span class="co">#&gt;     length(un)</span></a>
 <a class="sourceLine" id="cb2-708" data-line-number="708"><span class="co">#&gt; }</span></a>
-<a class="sourceLine" id="cb2-709" data-line-number="709"><span class="co">#&gt; &lt;bytecode: 0x61c5160&gt;</span></a>
+<a class="sourceLine" id="cb2-709" data-line-number="709"><span class="co">#&gt; &lt;bytecode: 0x4d7b098&gt;</span></a>
 <a class="sourceLine" id="cb2-710" data-line-number="710"><span class="co">#&gt; &lt;environment: namespace:skimr&gt;</span></a></code></pre></div>
 </div>
 <div id="formats" class="section level2">

@@ -26,7 +26,7 @@
     support for inline spark graphs. Instructions for managing these on 
     specific operating systems are given in the "Using skimr" vignette and the 
     README.'>
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://ropensci.github.io/skimr/logo.png">
 <meta name="twitter:card" content="summary">
 </head>
 <body>
@@ -84,6 +84,21 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Etc
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="CONTRIBUTING.html">Contributing</a>
+    </li>
+    <li>
+      <a href="CONDUCT.html">Code of Conduct</a>
+    </li>
+  </ul>
+</li>
         <li>
   <a href="https://github.com/ropensci/skimr">
     <span class="fa fa-github"></span>
@@ -108,7 +123,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="skimr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#skimr" class="anchor"></a>skimr <img src="reference/figures/logo.png" align="right" height="139">
+<a href="#skimr" class="anchor"></a>skimr <a href="https://ropensci.github.io/skimr"><img src="https://ropensci.github.io/skimr/reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 
 <p><cite>skimr</cite> provides a frictionless approach to summary statistics which conforms to the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>, displaying summary statistics the user can skim quickly to understand their data. It handles different data types and returns a <code>skim_df</code> object which can be included in a pipeline or displayed nicely for the human reader.</p>
@@ -118,10 +133,12 @@
 <p>Version 2 of skimr is under very active development and near release. Version 1 is only receiving updates for significant issues. We recommend that new users interested in the development version consider installing the v-2 branch.</p>
 <p>The current released version of <cite>skimr</cite> can be installed from CRAN. If you wish to install the current build of the next release you can do so using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ropensci/skimr"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>)</a></code></pre></div>
 <p>The APIs for this branch should be considered reasonably stable but still subject to change if an issue is discovered.</p>
 <p>To install the version with the most recent changes that have not yet been incorporated in the master branch (and may not be):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ropenscilabs/skimr"</span>, <span class="dt">ref =</span> <span class="st">"develop"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"develop"</span>)</a></code></pre></div>
+<p>or for version 2</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"v-2"</span>)</a></code></pre></div>
 <p>Do not rely on APIs from the develop branch.</p>
 <p>The v-2 branch is the equivalent to the develop branch for Version 2. While subject to change, we consider the APIs to be those that will be part of the version 2 release. Please visit the issue tracker for more extensive information about version 2.</p>
 </div>
@@ -133,14 +150,13 @@
 <li>Provides a larger set of statistics than <code><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary()</a></code>, including missing, complete, n, and sd.</li>
 <li>reports each data type separately.</li>
 <li>handles dates, logicals, and a variety of other types</li>
-<li>supports spark-bar and spark-line based on <a href="https://github.com/hadley/pillar">the pillar package</a>.</li>
-<li>allows users to customize the statistics included by data type and to implement skimming for additional classes.</li>
+<li>supports spark-bar and spark-line based on <a href="https://github.com/r-lib/pillar">the pillar package</a>. allows users to customize the statistics included by data type and to implement skimming for additional classes.</li>
 <li>works with many Tidyverse features.</li>
 </ul>
 <div id="separates-variables-by-class" class="section level3">
 <h3 class="hasAnchor">
 <a href="#separates-variables-by-class" class="anchor"></a>Separates variables by class:</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts)</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 71 
 ##  n variables: 2 
@@ -156,7 +172,7 @@
 <div id="presentation-is-in-a-compact-horizontal-format" class="section level3">
 <h3 class="hasAnchor">
 <a href="#presentation-is-in-a-compact-horizontal-format" class="anchor"></a>Presentation is in a compact horizontal format:</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris)</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 150 
 ##  n variables: 5 
@@ -175,7 +191,7 @@
 <div id="built-in-support-for-strings-lists-and-other-column-classes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#built-in-support-for-strings-lists-and-other-column-classes" class="anchor"></a>Built in support for strings, lists and other column classes</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(dplyr<span class="op">::</span>starwars)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(dplyr<span class="op">::</span>starwars)</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 87 
 ##  n variables: 13 
@@ -208,7 +224,7 @@
 <div id="has-a-useful-summary-function" class="section level3">
 <h3 class="hasAnchor">
 <a href="#has-a-useful-summary-function" class="anchor"></a>Has a useful summary function</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>()</a></code></pre></div>
 <pre><code>## A skim object    
 ## 
 ## Name: iris   
@@ -222,7 +238,7 @@
 <div id="individual-columns-can-be-selected-using-tidyverse-style-selectors" class="section level3">
 <h3 class="hasAnchor">
 <a href="#individual-columns-can-be-selected-using-tidyverse-style-selectors" class="anchor"></a>Individual columns can be selected using tidyverse-style selectors</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris, Sepal.Length, Petal.Length)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris, Sepal.Length, Petal.Length)</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 150 
 ##  n variables: 5 
@@ -236,7 +252,7 @@
 <h3 class="hasAnchor">
 <a href="#handles-grouped-data" class="anchor"></a>Handles grouped data</h3>
 <p><code><a href="reference/skim.html">skim()</a></code> can handle data that has been grouped using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by</a></code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">iris <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Species) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/skim.html">skim</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">iris <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Species) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/skim.html">skim</a></span>()</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 150 
 ##  n variables: 5 
@@ -272,7 +288,7 @@
 <h3 class="hasAnchor">
 <a href="#option-for-kable-" class="anchor"></a>Option for kable.</h3>
 <p>Note that the results=‘asis’ chunk option is used and the <code>skimr::</code> namespace is used to prevent it being replaced by knitr::kable (which will result in the long skim_df object being printed.)</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>skimr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/kable">kable</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>skimr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/skimr/topics/kable">kable</a></span>()</a></code></pre></div>
 <p>Skim summary statistics<br>
 n obs: 150<br>
 n variables: 5</p>
@@ -377,7 +393,7 @@ n variables: 5</p>
 <h3 class="hasAnchor">
 <a href="#options-for-pander" class="anchor"></a>Options for pander</h3>
 <p>At times you may need <code>panderOptions('knitr.auto.asis', FALSE)</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/pander.html">pander</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/pander.html">pander</a></span>()</a></code></pre></div>
 <p>Skim summary statistics<br>
 n obs: 150<br>
 n variables: 5</p>
@@ -530,10 +546,10 @@ n variables: 5</p>
 <h2 class="hasAnchor">
 <a href="#skim_df-object-long-format" class="anchor"></a><code>skim_df</code> object (long format)</h2>
 <p>By default <code><a href="reference/skim.html">skim()</a></code> prints beautifully in the console, but it also produces a long, tidy-format <code>skim_df</code> object that can be computed on.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">a &lt;-<span class="st">  </span><span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(a)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">a &lt;-<span class="st">  </span><span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(a)</a></code></pre></div>
 <pre><code>## [1] 23  6</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print.dataframe">print.data.frame</a></span>(<span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts))</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print.dataframe">print.data.frame</a></span>(<span class="kw"><a href="reference/skim.html">skim</a></span>(chickwts))</a></code></pre></div>
 <pre><code>##    variable    type       stat     level    value formatted
 ## 1    weight numeric    missing      .all   0.0000         0
 ## 2    weight numeric   complete      .all  71.0000        71
@@ -562,7 +578,7 @@ n variables: 5</p>
 <div id="compute-on-the-full-skim_df-object" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compute-on-the-full-skim_df-object" class="anchor"></a>Compute on the full <code>skim_df</code> object</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(mtcars) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(stat<span class="op">==</span><span class="st">"hist"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="reference/skim.html">skim</a></span>(mtcars) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(stat<span class="op">==</span><span class="st">"hist"</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 11 x 6
 ##    variable type    stat  level value formatted
 ##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    
@@ -587,13 +603,13 @@ n variables: 5</p>
 <h3 class="hasAnchor">
 <a href="#specify-your-own-statistics-and-classes" class="anchor"></a>Specify your own statistics and classes</h3>
 <p>Users can specify their own statistics using a list combined with the <code><a href="reference/skim_with.html">skim_with()</a></code> function. This can support any named class found in your data.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">funs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="dt">iqr =</span> IQR,</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">  <span class="dt">quantile =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span>(quantile, <span class="dt">probs =</span> <span class="fl">.99</span>)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="kw"><a href="reference/skim_with.html">skim_with</a></span>(<span class="dt">numeric =</span> funs, <span class="dt">append =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris, Sepal.Length)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">funs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  <span class="dt">iqr =</span> IQR,</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">  <span class="dt">quantile =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/partial.html">partial</a></span>(quantile, <span class="dt">probs =</span> <span class="fl">.99</span>)</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="kw"><a href="reference/skim_with.html">skim_with</a></span>(<span class="dt">numeric =</span> funs, <span class="dt">append =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="kw"><a href="reference/skim.html">skim</a></span>(iris, Sepal.Length)</a></code></pre></div>
 <pre><code>## Skim summary statistics
 ##  n obs: 150 
 ##  n variables: 5 
@@ -601,8 +617,8 @@ n variables: 5</p>
 ## ── Variable type:numeric ───────────────────────────────────────────────────────────────────────────────────────────────
 ##      variable iqr quantile
 ##  Sepal.Length 1.3      7.7</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># Restore defaults</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw"><a href="reference/skim_with.html">skim_with_defaults</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># Restore defaults</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="kw"><a href="reference/skim_with.html">skim_with_defaults</a></span>()</a></code></pre></div>
 </div>
 <div id="change-formatting" class="section level3">
 <h3 class="hasAnchor">

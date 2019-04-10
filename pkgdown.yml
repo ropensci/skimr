@@ -6,4 +6,7 @@ articles:
   Supporting_additional_objects: Supporting_additional_objects.html
   Using_fonts: Using_fonts.html
   Using_skimr: Using_skimr.html
+urls:
+  reference: https://ropensci.github.io/skimr/reference
+  article: https://ropensci.github.io/skimr/articles
 
