@@ -3,13 +3,6 @@
 #' `skimr` has custom print methods for all supported objects. Default printing
 #' methods for `knitr`/ `rmarkdown` documents is also provided.
 #'
-#' @section Printing options:
-#' 
-#' For better or for worse, `skimr` often produces more output than can fit in
-#' the standard R console. Fortunately, most modern environments like RStudio
-#' and Jupyter support more than 80 character outputs. Call
-#' `options(width = 90)` to get a better experience with `skimr`.
-#' 
 #' @section Behavior in `dplyr` pipelines:
 #'
 #' Printing a `skim_df` requires specific columns that might be dropped when
@@ -119,7 +112,7 @@ NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
 #' @param x A skim_df object.
-#' @param options Options passed into the print function
+#' @param options Options passed into the print function.
 #' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
@@ -129,7 +122,6 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
       summary_string <- build_summary_string(summary_stats)
       kabled <- knitr::kable(
         summary_string,
-        # format = "html",
         table.attr = "style='width: auto;'
         class='table table-condensed'",
         col.names = c(" "),
@@ -153,7 +145,9 @@ knit_print_by_type <- function(x, options, summary) {
 }
 
 knit_print_one <- function(by_type, type, options) {
-  kabled <- knitr::kable(by_type, digits = options$skimr_digits %||% 2)
+  kabled <- knitr::kable(
+    by_type, digits = options$skimr_digits %||% 2
+  )
   if (is_windows()) {
     kabled[] <- fix_unicode(kabled)
   }
@@ -182,7 +176,6 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 
   kabled <- knitr::kable(
     summary_string,
-    # format = "html",
     table.attr = "style='width: auto;'
       class='table table-condensed'",
     col.names = c(" "),
@@ -193,3 +186,28 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 }
 
 
+#' Skimr printing within Jupyter notebooks
+#' 
+#' This reproduces printed results in the console. By default Jupyter kernels
+#' render the final object in the cell. We want the version printed by
+#' `skimr` instead of the data that it contains.
+#' 
+#' @param obj The object to \link{print} and then return the output.
+#' @param ... ignored.
+#' @return None. `invisible(NULL)`.
+#' @importFrom repr repr_text
+#' @name repr
+
+#' @rdname repr
+#' @export
+repr_text.skim_df <- function(obj, ...) {
+  print(obj)
+}
+
+#' @rdname repr
+#' @export
+repr_text.skim_list <- repr_text.skim_df
+
+#' @rdname repr
+#' @export
+repr_text.one_skim_df <- repr_text.skim_df
