@@ -55,6 +55,15 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 \item \code{summary_skim_df}: Print method for a \code{summary_skim_df} object.
 }}
 
+\section{Printing options}{
+
+
+For better or for worse, \code{skimr} often produces more output than can fit in
+the standard R console. Fortunately, most modern environments like RStudio
+and Jupyter support more than 80 character outputs. Call
+\code{options(width = 90)} to get a better experience with \code{skimr}.
+}
+
 \section{Behavior in \code{dplyr} pipelines}{
 
 

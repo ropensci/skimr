@@ -10,6 +10,10 @@ developers have received over the last year. A big thank you goes to @GShotwell,
 of the great support and feedback over the last year. We couldn't have done this
 without you.
 
+For most users using `skimr` will not change in terms of visual outputs. However
+for users who use `skimr` outputs as part of a larger workflow the differences are 
+substantial. 
+
 ### Breaking changes
 
 #### The `skim_df`
@@ -50,6 +54,11 @@ my_skim <- skim_with(numeric = sfl(mad = mad))
 The fundamental tool for customization is the `sfl` object, a skimmer function
 list. It is used within `skim_with()` and also within our new API for adding
 default functions for new data types, the generic `get_skimmers()`.
+
+Most of the options set in `skim_format` are now either in function arguments
+or print arguments. The former can be updated using `skim_with`, the latter in
+a call to `print()`. In RMarkdown documents, you can change the number of
+displayed digits by adding the `skimr_digits` option to your code chunk.
 
 ### OTHER NEW FEATURES
   * Substantial improvements to `summary()`, and it is now incorporated into

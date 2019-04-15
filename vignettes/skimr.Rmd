@@ -266,6 +266,9 @@ you can fall back to default printing methods by adding the chunk option
 You can also disable the `skimr` summary by setting the chunk option
 `skimr_include_summary = FALSE`.
 
+You can change the number of digits shown in the columns of generated statistics
+by changing the `skimr_digits` chunk option.
+
 # Modifying `skim()`
 
 `skimr` is opinionated in its choice of defaults, but users can easily add,
