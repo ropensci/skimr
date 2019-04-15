@@ -800,6 +800,27 @@ test_that("Skimming a complete data frame works as expected", {
   )
 })
 
+test_that("successfully skim mixed data types with common skimmers", {
+  df <- data.frame(
+    Date = seq(as.Date("2011-07-01"), by = 1, len = 10),
+    POSIXct = as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
+  )
+  input <- skim(df)
+  expect_n_rows(input, 2)
+  expect_n_columns(input, 16)
+  
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_named(input, c(
+    "skim_type", "skim_variable", "Date.missing", "Date.complete", 
+    "Date.n", "Date.min", "Date.max", "Date.median", "Date.n_unique", 
+    "POSIXct.missing", "POSIXct.complete", "POSIXct.n", "POSIXct.min", 
+    "POSIXct.max", "POSIXct.median", "POSIXct.n_unique")
+  )
+})
+
 test_that("skim handles a matrix as input", {
   expect_error(skim(volcano), NA)
 })
