@@ -4,11 +4,14 @@
 \alias{deprecated-v1}
 \alias{skim_to_wide}
 \alias{skim_to_list}
+\alias{skim_format}
 \title{Deprecated functions from skimr v1}
 \usage{
 skim_to_wide(.data, ...)
 
 skim_to_list(.data, ...)
+
+skim_format(...)
 }
 \arguments{
 \item{.data}{A tibble, or an object that can be coerced into a tibble.}
@@ -31,5 +34,7 @@ data frame. Others have been replaced by functions that do a single thing.
 \item \code{skim_to_wide}: \code{\link[=skim]{skim()}} always produces a wide data frame.
 
 \item \code{skim_to_list}: \code{\link[=partition]{partition()}} creates a list.
+
+\item \code{skim_format}: \code{\link[=print]{print()}} and \code{\link[=skim_with]{skim_with()}} set options.
 }}
 

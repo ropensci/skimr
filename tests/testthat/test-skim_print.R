@@ -27,8 +27,7 @@ test_that("knit_print produces expected results", {
   expect_matches_file(input, "print/knit_print.txt")
 })
 
-test_that("knit_print works with skim summaries", {
-  skimmed <- skim(iris)
+test_that("knit_print works with skim summaries", { skimmed <- skim(iris)
   summarized <- summary(skimmed)
   input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")
@@ -102,4 +101,9 @@ test_that("Crayon is supported", {
     )
     expect_match(rendered, "\\\033")
   })
+})
+
+test_that("skimr creates appropriate output for Jupyter", {
+  skimmed <- skim(iris)
+  expect_known_output(repr_text(skimmed), "print/repr.txt")
 })

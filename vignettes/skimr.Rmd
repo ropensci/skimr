@@ -4,7 +4,7 @@ author: "Elin Waring"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using Skimr}
+  %\VignetteIndexEntry{get-started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -267,6 +267,9 @@ you can fall back to default printing methods by adding the chunk option
 
 You can also disable the `skimr` summary by setting the chunk option
 `skimr_include_summary = FALSE`.
+
+You can change the number of digits shown in the columns of generated statistics
+by changing the `skimr_digits` chunk option.
 
 # Modifying `skim()`
 
