@@ -65,11 +65,11 @@ Skim statistics in the console
     ##                                 
     ## Group variables             None
     ## 
-    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n ordered n_unique top_counts                        
     ## 1 feed                0       71    71 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 weight              0       71    71  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
@@ -89,11 +89,11 @@ Skim statistics in the console
     ##                              
     ## Group variables          None
     ## 
-    ## ── Variable type: factor ─────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n ordered n_unique top_counts               
     ## 1 Species             0      150   150 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width         0      150   150  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -117,7 +117,7 @@ Skim statistics in the console
     ##                                        
     ## Group variables                    None
     ## 
-    ## ── Variable type: character ──────────────────────────────────────────────────────────
+    ## ── Variable type: character ───────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n   min   max empty n_unique whitespace
     ## 1 name                0       87    87     3    21     0       87          0
     ## 2 hair_color          5       82    87     4    13     0       12          0
@@ -127,13 +127,13 @@ Skim statistics in the console
     ## 6 homeworld          10       77    87     4    14     0       48          0
     ## 7 species             5       82    87     3    14     0       37          0
     ## 
-    ## ── Variable type: list ───────────────────────────────────────────────────────────────
+    ## ── Variable type: list ────────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n n_unique min_length max_length
     ## 1 films               0       87    87       24          1          7
     ## 2 vehicles            0       87    87       11          0          2
     ## 3 starships           0       87    87       17          0          5
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 height              6       81    87 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
     ## 2 mass               28       59    87  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
@@ -171,7 +171,7 @@ Skim statistics in the console
     ##                              
     ## Group variables          None
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Petal.Length        0      150   150  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
@@ -196,7 +196,7 @@ Skim statistics in the console
     ##                                   
     ## Group variables            Species
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##    skim_variable Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ##  * <chr>         <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
     ##  1 Sepal.Length  setosa           0       50    50 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
@@ -216,7 +216,7 @@ Skim statistics in the console
 
     iris %>%
       skim() %>%
-      dplyr::filter(sd > 1)
+      dplyr::filter(numeric.sd > 1)
 
     ## ── Data Summary ────────────────────────
     ##                              Value
@@ -229,7 +229,7 @@ Skim statistics in the console
     ##                                   
     ## Group variables               None
     ## 
-    ## ── Variable type: numeric ────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
     ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length        0      150   150  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 

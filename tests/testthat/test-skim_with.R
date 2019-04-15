@@ -143,7 +143,10 @@ test_that("Sfl's can be passed as an unquoted list", {
   my_skimmers <- list(numeric = sfl(mean), factor = sfl(length))
   my_skim <- skim_with(!!!my_skimmers, append = FALSE)
   input <- my_skim(iris)
-  expect_named(input, c("skim_type", "skim_variable", "length", "mean"))
+  expect_named(
+    input,
+    c("skim_type", "skim_variable", "factor.length", "numeric.mean")
+  )
 })
 
 test_that("Doubles and integers are both 'numeric'", {
@@ -167,7 +170,7 @@ test_that("Defining an integer sfl changes behavior", {
   )
   input <- my_skim(df)
   expect_false("hist" %in% names(input))
-  expect_true("int_mean" %in% names(input))
+  expect_true("integer.int_mean" %in% names(input))
   used <- attr(input, "skimmers_used")
   expect_identical(
     used,

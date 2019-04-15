@@ -65,7 +65,7 @@ test_that("You can yank a subtable from a skim_df", {
 
 test_that("Partition is safe if some skimmers are missing", {
   skimmed <- skim(iris)
-  reduced <- dplyr::select(skimmed, skim_variable, skim_type, missing)
+  reduced <- dplyr::select(skimmed, skim_variable, skim_type, numeric.missing)
   partitioned <- partition(reduced)
   expect_length(partitioned, 2)
   expect_named(partitioned, c("factor", "numeric"))
@@ -74,24 +74,23 @@ test_that("Partition is safe if some skimmers are missing", {
 
 test_that("Partition handles new columns", {
   skimmed <- skim(iris)
-  expanded <- dplyr::mutate(skimmed, mean2 = mean^2, complete2 = complete^2)
+  expanded <- dplyr::mutate(
+    skimmed,
+    mean2 = numeric.mean^2,
+    complete2 = numeric.complete^2
+  )
   partitioned <- partition(expanded)
   expect_named(partitioned$numeric, c(
     "skim_variable", "missing", "complete", "n", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100",
     "hist", "mean2", "complete2"
   ))
-
-  expect_named(partitioned$factor, c(
-    "skim_variable", "missing", "complete", "n",
-    "ordered", "n_unique", "top_counts", "complete2"
-  ))
 })
 
 test_that("focus() matches select(data, skim_type, skim_variable, ...)", {
   skimmed <- skim(iris)
-  expected <- dplyr::select(skimmed, skim_type, skim_variable, missing)
-  expect_identical(focus(skimmed, missing), expected)
+  expected <- dplyr::select(skimmed, skim_type, skim_variable, numeric.missing)
+  expect_identical(focus(skimmed, numeric.missing), expected)
 })
 
 test_that("focus() does not allow dropping skim metadata columns", {
@@ -116,7 +115,7 @@ test_that("to_long() returns a long tidy data frame with 4 columns", {
     names(skimmed_long),
     c("skim_type", "skim_variable", "stat", "formatted")
   )
-  expect_equal(length(unique(skimmed_long$stat)), 14)
+  expect_equal(length(unique(skimmed_long$stat)), 17)
   expect_equal(length(unique(skimmed_long$skim_type)), 2)
   expect_equal(length(unique(skimmed_long$skim_variable)), 5)
 })

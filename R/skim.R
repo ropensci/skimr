@@ -15,11 +15,15 @@
 #' This function returns the original data. `skim_tee()` uses the default
 #' `skim()`, but you can replace it with the `skim` argument.
 #'
-#' The data frame produced by `skim` is wide and sparse, since not all summmary
-#' functions appear for all types. See [partition()] and [yank()] for methods
-#' for transforming this wide data frame. The first function splits it into
-#' a list, with each entry corresponding to a data type. The latter pulls
-#' a single subtable for a particular type from the `skim_df`.
+#' The data frame produced by `skim` is wide and sparse. To avoid type coercion
+#' `skimr` uses a type namespace for all summary statistics. Columns for numeric
+#' summary statistics all begin `numeric`; for factor summary statistics
+#' begin `factor`; and so on.
+#' 
+#' See [partition()] and [yank()] for methods for transforming this wide data
+#' frame. The first function splits it into a list, with each entry
+#' corresponding to a data type. The latter pulls a single subtable for a
+#' particular type from the `skim_df`.
 #'
 #' `skim()` is designed to operate in pipes and to generally play nicely with
 #' other `tidyverse` functions. This means that you can use `tidyselect` helpers
@@ -56,10 +60,10 @@
 #'   dplyr::group_by(Species) %>%
 #'   skim()
 #'
-#' # Which five columns have the greatest mean value?
+#' # Which five numeric columns have the greatest mean value?
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(mean) %>%
+#'   dplyr::select(numeric.mean) %>%
 #'   dplyr::top_n(5)
 #'
 #' # Use skim_tee to view the skim results and

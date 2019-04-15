@@ -251,7 +251,7 @@ skim_by_type <- function(skimmers, data_columns, data) {
 #' @export
 skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
   group_columns <- dplyr::groups(data)
-  new_names <- names(skimmers$funs)
+  new_names <- paste0(skimmers$skim_type, ".", names(skimmers$funs))
   delim <- "~!@#$%^&*()-+"
   mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
   grouped <- dplyr::group_by(data, !!!group_columns)
@@ -261,7 +261,7 @@ skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
 
 #' @export
 skim_by_type.default <- function(skimmers, data_columns, data) {
-  new_names <- names(skimmers$funs)
+  new_names <- paste0(skimmers$skim_type, ".", names(skimmers$funs))
   delim <- "~!@#$%^&*()-+"
   mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
   skimmed <- dplyr::summarize_at(data, data_columns, mangled_skimmers)

@@ -48,11 +48,11 @@ Do not rely on APIs from the develop branch, as they are likely to change.
 `skimr`:
 
 - Provides a larger set of statistics than `summary()`, including missing,
-complete, n, and sd.
+  complete, n, and sd.
 - reports each data types separately
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
-[Hadley Wickham's pillar package](https://github.com/hadley/pillar).
+  [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
 ### Separates variables by class:  
 
@@ -100,7 +100,7 @@ iris %>%
 ```{r, render = knitr::normal_print}
 iris %>%
   skim() %>%
-  dplyr::filter(sd > 1)
+  dplyr::filter(numeric.sd > 1)
 ```
 
 ## Knitted results

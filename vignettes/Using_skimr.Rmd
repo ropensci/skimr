@@ -56,9 +56,24 @@ skim(iris)
 ```
 
 The format of the results are a similar data frame, with some additional 
-attributes. Of course, we can't really separate that data frame by type, so
-columns are somewhat sparse, with quite a few missing variables.  Statistics
-that are not applicable for a given type of data are set to `NA`.
+attributes and two metadata columns: 
+
+- `skim_variable`: name of the original variable
+- `skim_type`: class of the variable
+
+Unlike many other objects within `R`, these columns are intrinsic to the
+`skim_df` class. Dropping these variables will result in a coercion to a
+`tibble`.
+
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  dplyr::select(skim_type)
+```
+
+In order to avoid type coercion, columns for summary statistics for different
+types are prefixed with the corresponding `skim_type`. This means that the 
+columns of the `skim_df` are somewhat sparse, with quite a few missing
+variables.
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
@@ -75,25 +90,12 @@ skim(iris) %>%
   dplyr::filter(skim_variable == "Petal.Length")
 ```
 
-Most `dplyr` verbs should work as expected.
+Most `dplyr` verbs should work as expected, but note that you need to use a
+`skim_type` prefix to refer to correct column.
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
-  dplyr::select(skim_type, skim_variable, mean)
-```
-
-The `skim_df` object always contains 2  columns: 
-
-- `skim_variable`: name of the original variable
-- `skim_type`: class of the variable
-
-Unlike many other objects within `R`, these columns are intrinsic to the
-`skim_df` class. Dropping these variables will result in a coercion to a
-`tibble`.
-
-```{r, render = knitr::normal_print}
-skim(iris) %>%
-  dplyr::select(skim_type)
+  dplyr::select(skim_type, skim_variable, numeric.mean)
 ```
 
 `skim()` also supports grouped data. In this case, one additional column for
@@ -231,7 +233,7 @@ results; it always keeps the metadata column.
 ```{r, render = knitr::normal_print}
 iris %>%
   skim() %>%
-  focus(missing, mean)
+  focus(numeric.missing, numeric.mean)
 ```
 
 # Rendering the results of `skim()`
