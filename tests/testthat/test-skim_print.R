@@ -4,7 +4,7 @@ test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
 
-  input$hist <- NULL
+  input$numeric.hist <- NULL
   expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
 
