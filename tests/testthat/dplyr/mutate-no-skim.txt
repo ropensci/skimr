@@ -1,9 +1,11 @@
-# A tibble: 5 x 15
-  skim_type missing complete     n ordered n_unique top_counts  mean     sd    p0   p25   p50   p75
-* <chr>       <int>    <int> <int> <lgl>      <int> <chr>      <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-1 factor          0      150   150 FALSE          3 set: 50, … NA    NA      NA    NA   NA     NA  
-2 numeric         0      150   150 NA            NA <NA>        5.84  0.828   4.3   5.1  5.8    6.4
-3 numeric         0      150   150 NA            NA <NA>        3.06  0.436   2     2.8  3      3.3
-4 numeric         0      150   150 NA            NA <NA>        3.76  1.77    1     1.6  4.35   5.1
-5 numeric         0      150   150 NA            NA <NA>        1.20  0.762   0.1   0.3  1.3    1.8
-# … with 2 more variables: p100 <dbl>, hist <chr>
+# A tibble: 5 x 18
+  skim_type factor.missing factor.complete factor.n factor.ordered factor.n_unique factor.top_coun…
+* <chr>              <int>           <int>    <int> <lgl>                    <int> <chr>           
+1 factor                 0             150      150 FALSE                        3 set: 50, ver: 5…
+2 numeric               NA              NA       NA NA                          NA <NA>            
+3 numeric               NA              NA       NA NA                          NA <NA>            
+4 numeric               NA              NA       NA NA                          NA <NA>            
+5 numeric               NA              NA       NA NA                          NA <NA>            
+# … with 11 more variables: numeric.missing <int>, numeric.complete <int>, numeric.n <int>,
+#   numeric.mean <dbl>, numeric.sd <dbl>, numeric.p0 <dbl>, numeric.p25 <dbl>, numeric.p50 <dbl>,
+#   numeric.p75 <dbl>, numeric.p100 <dbl>, numeric.hist <chr>

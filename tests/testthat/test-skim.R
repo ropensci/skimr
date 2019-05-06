@@ -13,8 +13,9 @@ test_that("skim returns expected response for numeric vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75", "p100", "hist"
+    "skim_type", "skim_variable", "numeric.missing", "numeric.complete",
+    "numeric.n", "numeric.mean", "numeric.sd", "numeric.p0", "numeric.p25",
+    "numeric.p50", "numeric.p75", "numeric.p100", "numeric.hist"
   ))
 
   # attributes
@@ -33,17 +34,17 @@ test_that("skim returns expected response for numeric vectors", {
   # values
   expect_identical(input$skim_variable, "mpg")
   expect_identical(input$skim_type, "numeric")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 32L)
-  expect_identical(input$n, 32L)
-  expect_equal(input$mean, 20.1, tolerance = 0.1)
-  expect_equal(input$p0, 10.4, tolerance = 0.1)
-  expect_equal(input$p25, 15.4, tolerance = 0.1)
-  expect_equal(input$p50, 19.2, tolerance = 0.1)
-  expect_equal(input$p75, 22.8, tolerance = 0.1)
-  expect_equal(input$p100, 33.9, tolerance = 0.1)
+  expect_identical(input$numeric.missing, 0L)
+  expect_identical(input$numeric.complete, 32L)
+  expect_identical(input$numeric.n, 32L)
+  expect_equal(input$numeric.mean, 20.1, tolerance = 0.1)
+  expect_equal(input$numeric.p0, 10.4, tolerance = 0.1)
+  expect_equal(input$numeric.p25, 15.4, tolerance = 0.1)
+  expect_equal(input$numeric.p50, 19.2, tolerance = 0.1)
+  expect_equal(input$numeric.p75, 22.8, tolerance = 0.1)
+  expect_equal(input$numeric.p100, 33.9, tolerance = 0.1)
   skip_on_os("windows")
-  expect_identical(input$hist, "▃▇▅▁▂")
+  expect_identical(input$numeric.hist, "▃▇▅▁▂")
 })
 
 test_that("skim handles numeric vectors with NAs and extreme numbers", {
@@ -62,18 +63,18 @@ test_that("skim handles numeric vectors with NAs and extreme numbers", {
   # values
   expect_identical(input$skim_variable, "vals")
   expect_identical(input$skim_type, "numeric")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 2L)
-  expect_identical(input$n, 3L)
-  expect_equal(input$mean, 0, tolerance = 1)
-  expect_equal(input$sd, 1.27e16, tolerance = 1e14)
-  expect_equal(input$p0, -9.01e+15, tolerance = 1e14)
-  expect_equal(input$p25, -4.5e+15, tolerance = 1e14)
-  expect_equal(input$p50, 0, tolerance = 1)
-  expect_equal(input$p75, 4.5e+15, tolerance = 1e14)
-  expect_equal(input$p100, 9.01e+15, tolerance = 1e14)
+  expect_identical(input$numeric.missing, 1L)
+  expect_identical(input$numeric.complete, 2L)
+  expect_identical(input$numeric.n, 3L)
+  expect_equal(input$numeric.mean, 0, tolerance = 1)
+  expect_equal(input$numeric.sd, 1.27e16, tolerance = 1e14)
+  expect_equal(input$numeric.p0, -9.01e+15, tolerance = 1e14)
+  expect_equal(input$numeric.p25, -4.5e+15, tolerance = 1e14)
+  expect_equal(input$numeric.p50, 0, tolerance = 1)
+  expect_equal(input$numeric.p75, 4.5e+15, tolerance = 1e14)
+  expect_equal(input$numeric.p100, 9.01e+15, tolerance = 1e14)
   skip_on_os("windows")
-  expect_identical(input$hist, "▇▁▁▁▇")
+  expect_identical(input$numeric.hist, "▇▁▁▁▇")
 })
 
 test_that("numeric skim is calculated correctly when x is all NAs.", {
@@ -90,18 +91,18 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
   # values
   expect_identical(input$skim_variable, "nas")
   expect_identical(input$skim_type, "numeric")
-  expect_identical(input$missing, 3L)
-  expect_identical(input$complete, 0L)
-  expect_identical(input$n, 3L)
-  expect_equal(input$mean, NaN)
-  expect_equal(input$sd, NaN)
-  expect_NA(input$p0)
-  expect_NA(input$p25)
-  expect_NA(input$p50)
-  expect_NA(input$p75)
-  expect_NA(input$p100)
+  expect_identical(input$numeric.missing, 3L)
+  expect_identical(input$numeric.complete, 0L)
+  expect_identical(input$numeric.n, 3L)
+  expect_equal(input$numeric.mean, NaN)
+  expect_equal(input$numeric.sd, NaN)
+  expect_NA(input$numeric.p0)
+  expect_NA(input$numeric.p25)
+  expect_NA(input$numeric.p50)
+  expect_NA(input$numeric.p75)
+  expect_NA(input$numeric.p100)
   skip_on_os("windows")
-  expect_identical(input$hist, " ")
+  expect_identical(input$numeric.hist, " ")
 })
 
 test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
@@ -118,18 +119,18 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
   # values
   expect_identical(input$skim_variable, "na_and_zeros")
   expect_identical(input$skim_type, "numeric")
-  expect_identical(input$missing, 3L)
-  expect_identical(input$complete, 1L)
-  expect_identical(input$n, 4L)
-  expect_equal(input$mean, 0)
-  expect_NA(input$sd)
-  expect_equal(input$p0, 0)
-  expect_equal(input$p25, 0)
-  expect_equal(input$p50, 0)
-  expect_equal(input$p75, 0)
-  expect_equal(input$p100, 0)
+  expect_identical(input$numeric.missing, 3L)
+  expect_identical(input$numeric.complete, 1L)
+  expect_identical(input$numeric.n, 4L)
+  expect_equal(input$numeric.mean, 0)
+  expect_NA(input$numeric.sd)
+  expect_equal(input$numeric.p0, 0)
+  expect_equal(input$numeric.p25, 0)
+  expect_equal(input$numeric.p50, 0)
+  expect_equal(input$numeric.p75, 0)
+  expect_equal(input$numeric.p100, 0)
   skip_on_os("windows")
-  expect_identical(input$hist, "▁▁▇▁▁")
+  expect_identical(input$numeric.hist, "▁▁▇▁▁")
 })
 
 test_that("Skimming with non-finite values works", {
@@ -139,18 +140,18 @@ test_that("Skimming with non-finite values works", {
 
   expect_identical(input$skim_variable, "inf_vals")
   expect_identical(input$skim_type, "numeric")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 3L)
-  expect_identical(input$n, 3L)
-  expect_equal(input$mean, NaN)
-  expect_equal(input$sd, NaN)
-  expect_equal(input$p0, -Inf)
-  expect_equal(input$p25, -Inf)
-  expect_equal(input$p50, 0)
-  expect_equal(input$p75, Inf)
-  expect_equal(input$p100, Inf)
+  expect_identical(input$numeric.missing, 0L)
+  expect_identical(input$numeric.complete, 3L)
+  expect_identical(input$numeric.n, 3L)
+  expect_equal(input$numeric.mean, NaN)
+  expect_equal(input$numeric.sd, NaN)
+  expect_equal(input$numeric.p0, -Inf)
+  expect_equal(input$numeric.p25, -Inf)
+  expect_equal(input$numeric.p50, 0)
+  expect_equal(input$numeric.p75, Inf)
+  expect_equal(input$numeric.p100, Inf)
   skip_on_os("windows")
-  expect_identical(input$hist, "▁▁▇▁▁")
+  expect_identical(input$numeric.hist, "▁▁▇▁▁")
 })
 
 test_that("skim returns expected response for factor vectors", {
@@ -160,8 +161,8 @@ test_that("skim returns expected response for factor vectors", {
   expect_n_rows(input, 1)
   expect_n_columns(input, 8)
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n",
-    "ordered", "n_unique", "top_counts"
+    "skim_type", "skim_variable", "factor.missing", "factor.complete",
+    "factor.n", "factor.ordered", "factor.n_unique", "factor.top_counts"
   ))
 
   # attributes
@@ -180,20 +181,20 @@ test_that("skim returns expected response for factor vectors", {
   # values
   expect_identical(input$skim_variable, "Species")
   expect_identical(input$skim_type, "factor")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 150L)
-  expect_identical(input$n, 150L)
-  expect_false(input$ordered)
-  expect_identical(input$top_counts, "set: 50, ver: 50, vir: 50")
+  expect_identical(input$factor.missing, 0L)
+  expect_identical(input$factor.complete, 150L)
+  expect_identical(input$factor.n, 150L)
+  expect_false(input$factor.ordered)
+  expect_identical(input$factor.top_counts, "set: 50, ver: 50, vir: 50")
 })
 
 test_that("skim handles factors when NAs are present", {
   dat <- iris
   dat$Species[15:18] <- NA
   input <- skim(dat, Species)
-  expect_identical(input$missing, 4L)
-  expect_identical(input$complete, 146L)
-  expect_identical(input$top_counts, "ver: 50, vir: 50, set: 46")
+  expect_identical(input$factor.missing, 4L)
+  expect_identical(input$factor.complete, 146L)
+  expect_identical(input$factor.top_counts, "ver: 50, vir: 50, set: 46")
 })
 
 
@@ -212,8 +213,9 @@ test_that("skim returns expected response for character vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique", "whitespace"
+    "skim_type", "skim_variable", "character.missing", "character.complete",
+    "character.n", "character.min", "character.max", "character.empty",
+    "character.n_unique", "character.whitespace"
   ))
 
   # attributes
@@ -232,14 +234,14 @@ test_that("skim returns expected response for character vectors", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "character")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 5L)
-  expect_identical(input$n, 6L)
-  expect_identical(input$min, 0L)
-  expect_identical(input$max, 4L)
-  expect_identical(input$empty, 1L)
-  expect_identical(input$n_unique, 5L)
-  expect_identical(input$whitespace, 1L)
+  expect_identical(input$character.missing, 1L)
+  expect_identical(input$character.complete, 5L)
+  expect_identical(input$character.n, 6L)
+  expect_identical(input$character.min, 0L)
+  expect_identical(input$character.max, 4L)
+  expect_identical(input$character.empty, 1L)
+  expect_identical(input$character.n_unique, 5L)
+  expect_identical(input$character.whitespace, 1L)
 })
 
 test_that("skim returns expected response for logical vectors", {
@@ -256,8 +258,8 @@ test_that("skim returns expected response for logical vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "mean",
-    "count"
+    "skim_type", "skim_variable", "logical.missing", "logical.complete",
+    "logical.n", "logical.mean", "logical.count"
   ))
 
   # attributes
@@ -273,11 +275,11 @@ test_that("skim returns expected response for logical vectors", {
   # values
   expect_identical(input$skim_variable, "log_col")
   expect_identical(input$skim_type, "logical")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 71L)
-  expect_identical(input$n, 71L)
-  expect_equal(input$mean, 0.49, tolerance = .01)
-  expect_identical(input$count, "FAL: 36, TRU: 35")
+  expect_identical(input$logical.missing, 0L)
+  expect_identical(input$logical.complete, 71L)
+  expect_identical(input$logical.n, 71L)
+  expect_equal(input$logical.mean, 0.49, tolerance = .01)
+  expect_identical(input$logical.count, "FAL: 36, TRU: 35")
 })
 
 test_that("skim returns expected response for logical vectors with NA values", {
@@ -285,11 +287,11 @@ test_that("skim returns expected response for logical vectors with NA values", {
   dat$log_col[15:18] <- NA
   input <- skim(dat, log_col)
 
-  expect_identical(input$missing, 4L)
-  expect_identical(input$complete, 67L)
-  expect_identical(input$n, 71L)
-  expect_equal(input$mean, 0.52, tolerance = .01)
-  expect_identical(input$count, "TRU: 35, FAL: 32")
+  expect_identical(input$logical.missing, 4L)
+  expect_identical(input$logical.complete, 67L)
+  expect_identical(input$logical.n, 71L)
+  expect_equal(input$logical.mean, 0.52, tolerance = .01)
+  expect_identical(input$logical.count, "TRU: 35, FAL: 32")
 })
 
 test_that("skim returns expected response for complex vectors", {
@@ -307,7 +309,11 @@ test_that("skim returns expected response for complex vectors", {
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
-  expect_named(input, c("skim_type", "skim_variable", "missing", "complete", "n"))
+  expect_named( input, c(
+      "skim_type", "skim_variable", "complex.missing", "complex.complete",
+      "complex.n"
+    )
+  )
 
   # attributes
   attrs <- attributes(input)
@@ -322,9 +328,9 @@ test_that("skim returns expected response for complex vectors", {
   # values
   expect_identical(input$skim_variable, "test_complex")
   expect_identical(input$skim_type, "complex")
-  expect_identical(input$missing, 4L)
-  expect_identical(input$complete, 67L)
-  expect_identical(input$n, 71L)
+  expect_identical(input$complex.missing, 4L)
+  expect_identical(input$complex.complete, 67L)
+  expect_identical(input$complex.n, 71L)
 })
 
 test_that("skim returns expected response for Date vectors", {
@@ -342,8 +348,8 @@ test_that("skim returns expected response for Date vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "median", "n_unique"
+    "skim_type", "skim_variable", "Date.missing", "Date.complete", "Date.n",
+    "Date.min", "Date.max", "Date.median", "Date.n_unique"
   ))
 
   # attributes
@@ -354,21 +360,20 @@ test_that("skim returns expected response for Date vectors", {
   expect_equal(
     attrs$skimmers_used,
     list(Date = c(
-      "missing", "complete", "n", "min", "max",
-      "median", "n_unique"
+      "missing", "complete", "n", "min", "max", "median", "n_unique"
     ))
   )
 
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "Date")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 9L)
-  expect_identical(input$n, 9L)
-  expect_equal(input$min, as.Date("2011-07-01"))
-  expect_equal(input$max, as.Date("2011-07-09"))
-  expect_equal(input$median, as.Date("2011-07-05"))
-  expect_identical(input$n_unique, 9L)
+  expect_identical(input$Date.missing, 0L)
+  expect_identical(input$Date.complete, 9L)
+  expect_identical(input$Date.n, 9L)
+  expect_equal(input$Date.min, as.Date("2011-07-01"))
+  expect_equal(input$Date.max, as.Date("2011-07-09"))
+  expect_equal(input$Date.median, as.Date("2011-07-05"))
+  expect_identical(input$Date.n_unique, 9L)
 })
 
 test_that("skim returns expected response for ts vectors", {
@@ -384,9 +389,9 @@ test_that("skim returns expected response for ts vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "start",
-    "end", "frequency", "deltat", "mean", "sd", "min",
-    "max", "median", "line_graph"
+    "skim_type", "skim_variable", "ts.missing", "ts.complete", "ts.n",
+    "ts.start", "ts.end", "ts.frequency", "ts.deltat", "ts.mean", "ts.sd",
+    "ts.min", "ts.max", "ts.median", "ts.line_graph"
   ))
 
   # attributes
@@ -406,19 +411,19 @@ test_that("skim returns expected response for ts vectors", {
   # values
   expect_identical(input$skim_variable, "y")
   expect_identical(input$skim_type, "ts")
-  expect_identical(input$missing, 0L)
-  expect_identical(input$complete, 39L)
-  expect_identical(input$n, 39L)
-  expect_equal(input$start, 1962)
-  expect_equal(input$end, 1971)
-  expect_equal(input$frequency, 4)
-  expect_equal(input$deltat, 0.25)
-  expect_equal(input$mean, 9.31, tolerance = 0.001)
-  expect_equal(input$sd, 0.316, tolerance = 0.001)
-  expect_equal(input$min, 8.79, tolerance = 0.001)
-  expect_equal(input$max, 9.79, tolerance = 0.001)
-  expect_equal(input$median, 9.31, tolerance = 0.001)
-  expect_identical(input$line_graph, "⣀⣀⠤⠤⠒⠒⠉⠉")
+  expect_identical(input$ts.missing, 0L)
+  expect_identical(input$ts.complete, 39L)
+  expect_identical(input$ts.n, 39L)
+  expect_equal(input$ts.start, 1962)
+  expect_equal(input$ts.end, 1971)
+  expect_equal(input$ts.frequency, 4)
+  expect_equal(input$ts.deltat, 0.25)
+  expect_equal(input$ts.mean, 9.31, tolerance = 0.001)
+  expect_equal(input$ts.sd, 0.316, tolerance = 0.001)
+  expect_equal(input$ts.min, 8.79, tolerance = 0.001)
+  expect_equal(input$ts.max, 9.79, tolerance = 0.001)
+  expect_equal(input$ts.median, 9.31, tolerance = 0.001)
+  expect_identical(input$ts.line_graph, "⣀⣀⠤⠤⠒⠒⠉⠉")
 })
 
 test_that("skim returns expected response for POSIXct vectors", {
@@ -437,8 +442,9 @@ test_that("skim returns expected response for POSIXct vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "median", "n_unique"
+    "skim_type", "skim_variable", "POSIXct.missing", "POSIXct.complete",
+    "POSIXct.n", "POSIXct.min", "POSIXct.max", "POSIXct.median",
+    "POSIXct.n_unique"
   ))
 
   # attributes
@@ -457,13 +463,22 @@ test_that("skim returns expected response for POSIXct vectors", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "POSIXct")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 9L)
-  expect_identical(input$n, 10L)
-  expect_identical(input$min, as.POSIXct("2011-07-01 00:00:00", tz = "UTC"))
-  expect_identical(input$max, as.POSIXct("2011-07-01 00:00:09", tz = "UTC"))
-  expect_identical(input$median, as.POSIXct("2011-07-01 00:00:05", tz = "UTC"))
-  expect_identical(input$n_unique, 9L)
+  expect_identical(input$POSIXct.missing, 1L)
+  expect_identical(input$POSIXct.complete, 9L)
+  expect_identical(input$POSIXct.n, 10L)
+  expect_identical(
+    input$POSIXct.min,
+    as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
+  )
+  expect_identical(
+    input$POSIXct.max,
+    as.POSIXct("2011-07-01 00:00:09", tz = "UTC")
+  )
+  expect_identical(
+    input$POSIXct.median,
+    as.POSIXct("2011-07-01 00:00:05", tz = "UTC")
+  )
+  expect_identical(input$POSIXct.n_unique, 9L)
 })
 
 test_that("skim returns expected response for list (not AsIs) vectors", {
@@ -488,8 +503,8 @@ test_that("skim returns expected response for list (not AsIs) vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n",
-    "n_unique", "min_length", "max_length"
+    "skim_type", "skim_variable", "list.missing", "list.complete", "list.n",
+    "list.n_unique", "list.min_length", "list.max_length"
   ))
 
   # attributes
@@ -508,12 +523,12 @@ test_that("skim returns expected response for list (not AsIs) vectors", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "list")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 5L)
-  expect_identical(input$n, 6L)
-  expect_identical(input$n_unique, 5L)
-  expect_identical(input$min_length, 1L)
-  expect_identical(input$max_length, 4L)
+  expect_identical(input$list.missing, 1L)
+  expect_identical(input$list.complete, 5L)
+  expect_identical(input$list.n, 6L)
+  expect_identical(input$list.n_unique, 5L)
+  expect_identical(input$list.min_length, 1L)
+  expect_identical(input$list.max_length, 4L)
 })
 
 test_that("skim returns expected response for list with all NA's", {
@@ -531,8 +546,8 @@ test_that("skim returns expected response for list with all NA's", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n",
-    "n_unique", "min_length", "max_length"
+    "skim_type", "skim_variable", "list.missing", "list.complete", "list.n",
+    "list.n_unique", "list.min_length", "list.max_length"
   ))
 
   # attributes
@@ -551,12 +566,12 @@ test_that("skim returns expected response for list with all NA's", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "list")
-  expect_identical(input$missing, 3L)
-  expect_identical(input$complete, 0L)
-  expect_identical(input$n, 3L)
-  expect_identical(input$n_unique, 0L)
-  expect_identical(input$min_length, 1L)
-  expect_identical(input$max_length, 1L)
+  expect_identical(input$list.missing, 3L)
+  expect_identical(input$list.complete, 0L)
+  expect_identical(input$list.n, 3L)
+  expect_identical(input$list.n_unique, 0L)
+  expect_identical(input$list.min_length, 1L)
+  expect_identical(input$list.max_length, 1L)
 })
 
 test_that("skim returns expected response for asis vectors", {
@@ -574,8 +589,8 @@ test_that("skim returns expected response for asis vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n",
-    "n_unique", "min_length", "max_length"
+    "skim_type", "skim_variable", "AsIs.missing", "AsIs.complete", "AsIs.n",
+    "AsIs.n_unique", "AsIs.min_length", "AsIs.max_length"
   ))
 
   # attributes
@@ -594,12 +609,12 @@ test_that("skim returns expected response for asis vectors", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "AsIs")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 3L)
-  expect_identical(input$n, 4L)
-  expect_identical(input$n_unique, 3L)
-  expect_identical(input$min_length, 1L)
-  expect_identical(input$max_length, 6L)
+  expect_identical(input$AsIs.missing, 1L)
+  expect_identical(input$AsIs.complete, 3L)
+  expect_identical(input$AsIs.n, 4L)
+  expect_identical(input$AsIs.n_unique, 3L)
+  expect_identical(input$AsIs.min_length, 1L)
+  expect_identical(input$AsIs.max_length, 6L)
 })
 
 test_that("skim returns expected response for difftime vectors", {
@@ -619,8 +634,9 @@ test_that("skim returns expected response for difftime vectors", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "median", "n_unique"
+    "skim_type", "skim_variable", "difftime.missing", "difftime.complete",
+    "difftime.n", "difftime.min", "difftime.max", "difftime.median",
+    "difftime.n_unique"
   ))
 
   # attributes
@@ -639,13 +655,13 @@ test_that("skim returns expected response for difftime vectors", {
   # values
   expect_identical(input$skim_variable, "dat")
   expect_identical(input$skim_type, "difftime")
-  expect_identical(input$missing, 1L)
-  expect_identical(input$complete, 9L)
-  expect_identical(input$n, 10L)
-  expect_identical(input$min, as.difftime(-30, units = "secs"))
-  expect_identical(input$max, as.difftime(60, units = "secs"))
-  expect_identical(input$median, as.difftime(20, units = "secs"))
-  expect_identical(input$n_unique, 9L)
+  expect_identical(input$difftime.missing, 1L)
+  expect_identical(input$difftime.complete, 9L)
+  expect_identical(input$difftime.n, 10L)
+  expect_identical(input$difftime.min, as.difftime(-30, units = "secs"))
+  expect_identical(input$difftime.max, as.difftime(60, units = "secs"))
+  expect_identical(input$difftime.median, as.difftime(20, units = "secs"))
+  expect_identical(input$difftime.n_unique, 9L)
 })
 
 test_that("skim handles objects with multiple classes", {
@@ -665,8 +681,8 @@ test_that("skim handles objects with multiple classes", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "median", "n_unique"
+    "skim_type", "skim_variable", "Date.missing", "Date.complete", "Date.n",
+    "Date.min", "Date.max", "Date.median", "Date.n_unique"
   ))
 
   # values
@@ -686,8 +702,9 @@ test_that("skim treats unknown classes as character", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique", "whitespace"
+    "skim_type", "skim_variable", "character.missing", "character.complete",
+    "character.n", "character.min", "character.max", "character.empty",
+    "character.n_unique", "character.whitespace"
   ))
 
   # attributes
@@ -720,8 +737,9 @@ test_that("skim handles objects with two unknown classes", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n", "min",
-    "max", "empty", "n_unique", "whitespace"
+    "skim_type", "skim_variable", "character.missing", "character.complete",
+    "character.n", "character.min", "character.max", "character.empty",
+    "character.n_unique", "character.whitespace"
   ))
 
   # attributes
@@ -747,7 +765,7 @@ test_that("Skimming a complete data frame works as expected", {
 
   # dimensions
   expect_n_rows(input, 2)
-  expect_n_columns(input, 16)
+  expect_n_columns(input, 19)
 
   # classes
   expect_is(input, "skim_df")
@@ -755,9 +773,11 @@ test_that("Skimming a complete data frame works as expected", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "missing", "complete", "n",
-    "ordered", "n_unique", "top_counts",
-    "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"
+    "skim_type", "skim_variable", "factor.missing", "factor.complete",
+    "factor.n", "factor.ordered", "factor.n_unique", "factor.top_counts",
+    "numeric.missing", "numeric.complete", "numeric.n", "numeric.mean",
+    "numeric.sd", "numeric.p0", "numeric.p25", "numeric.p50", "numeric.p75",
+    "numeric.p100", "numeric.hist"
   ))
 
   # attributes
@@ -777,6 +797,27 @@ test_that("Skimming a complete data frame works as expected", {
         "n_unique", "top_counts"
       )
     )
+  )
+})
+
+test_that("successfully skim mixed data types with common skimmers", {
+  df <- data.frame(
+    Date = seq(as.Date("2011-07-01"), by = 1, len = 10),
+    POSIXct = as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
+  )
+  input <- skim(df)
+  expect_n_rows(input, 2)
+  expect_n_columns(input, 16)
+  
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_named(input, c(
+    "skim_type", "skim_variable", "Date.missing", "Date.complete", 
+    "Date.n", "Date.min", "Date.max", "Date.median", "Date.n_unique", 
+    "POSIXct.missing", "POSIXct.complete", "POSIXct.n", "POSIXct.min", 
+    "POSIXct.max", "POSIXct.median", "POSIXct.n_unique")
   )
 })
 
@@ -822,9 +863,9 @@ test_that("Skimming a grouped df works as expected", {
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "cyl", "gear", "missing",
-    "complete", "n", "mean", "sd", "p0", "p25", "p50",
-    "p75", "p100", "hist"
+    "skim_type", "skim_variable", "cyl", "gear", "numeric.missing",
+    "numeric.complete", "numeric.n", "numeric.mean", "numeric.sd", "numeric.p0",
+    "numeric.p25", "numeric.p50", "numeric.p75", "numeric.p100", "numeric.hist"
   ))
 
   # attributes
@@ -857,9 +898,9 @@ test_that("Skimming a grouped df works as expected when selecting exactly
   expect_is(input, "tbl")
   expect_is(input, "data.frame")
   expect_named(input, c(
-    "skim_type", "skim_variable", "cyl", "gear", "missing",
-    "complete", "n", "mean", "sd", "p0", "p25", "p50",
-    "p75", "p100", "hist"
+    "skim_type", "skim_variable", "cyl", "gear", "numeric.missing",
+    "numeric.complete", "numeric.n", "numeric.mean", "numeric.sd", "numeric.p0",
+    "numeric.p25", "numeric.p50", "numeric.p75", "numeric.p100", "numeric.hist"
   ))
   expect_true(all(input$skim_variable == "mpg"))
 })

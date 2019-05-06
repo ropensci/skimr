@@ -38,8 +38,10 @@ partition <- function(data) {
   reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups)
 
   reassign_skim_attrs(
-    reduced, data,
-    class = "skim_list", skimmers_used = skimmers
+    reduced,
+    data,
+    class = "skim_list",
+    skimmers_used = skimmers
   )
 }
 
@@ -52,7 +54,7 @@ reconcile_skimmers <- function(data, groups) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
   with_base_columns <- c(
-    "skim_variable", "skim_type", purrr::flatten_chr(skimmers_used)
+    "skim_variable", "skim_type", collapse_skimmers(skimmers_used)
   )
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
@@ -62,18 +64,24 @@ reconcile_skimmers <- function(data, groups) {
       dplyr::vars(extra_cols),
       ~ !all(is.na(.x))
     )
-
     complete_cols <- purrr::pmap(
       complete_by_type,
       get_complete_columns,
       names = extra_cols
     )
-
-    new_cols_by_type <- rlang::set_names(complete_cols, complete_by_type$skim_type)
+    new_cols_by_type <- rlang::set_names(
+      complete_cols,
+      complete_by_type$skim_type
+    )
     skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
   }
 
   skimmers_used
+}
+
+collapse_skimmers <- function(skimmers_used) {
+  with_type <- purrr::imap(skimmers_used, ~ paste(.y, .x, sep = "."))
+  purrr::flatten_chr(with_type)
 }
 
 get_complete_columns <- function(skim_type, ..., names) {
@@ -86,6 +94,7 @@ get_complete_columns <- function(skim_type, ..., names) {
 #' @noRd
 simplify_skimdf <- function(data, skim_type, skimmers, groups) {
   stopifnot(has_variable_column(data))
+  names(data) <- stringr::str_remove(names(data), paste0(skim_type, "\\."))
   keep <- c("skim_variable", groups, skimmers[[skim_type]])
   cols_in_data <- names(data)
   out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
@@ -102,10 +111,16 @@ simplify_skimdf <- function(data, skim_type, skimmers, groups) {
 #' @export
 bind <- function(data) {
   assert_is_skim_list(data)
-  combined <- dplyr::bind_rows(!!!data, .id = "skim_type")
-  # The variable column should always be first
-  out <- dplyr::select(combined, !!rlang::sym("skim_variable"), dplyr::everything())
-  reassign_skim_attrs(out, data)
+  with_namespaces <- purrr::imap(data, add_namespaces)
+  combined <- dplyr::bind_rows(!!!with_namespaces, .id = "skim_type")
+  reassign_skim_attrs(combined, data)
+}
+
+add_namespaces <- function(data, skim_type) {
+  meta_columns <- c("skim_variable", dplyr::group_vars(data))
+  no_meta_columns <- dplyr::setdiff(names(data), meta_columns)
+  with_namespace <- paste(skim_type, no_meta_columns, sep = ".")
+  rlang::set_names(data, c(meta_columns, with_namespace))
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
@@ -128,16 +143,16 @@ yank <- function(data, skim_type) {
 #' # Compare
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(missing)
+#'   dplyr::select(numeric.missing)
 #'
 #' iris %>%
 #'   skim() %>%
-#'   focus(missing)
+#'   focus(numeric.missing)
 #'
 #' # This is equivalent to
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(skim_variable, skim_type, missing)
+#'   dplyr::select(skim_variable, skim_type, numeric.missing)
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)
@@ -161,9 +176,13 @@ focus <- function(.data, ...) {
 #' @export
 to_long <- function(.data, ...) {
   skimmed <- skim(.data, ...)
-  tidyr::gather(skimmed,
-    key = "stat", value = "formatted", na.rm = TRUE,
-    -!!rlang::sym("skim_type"), -!!rlang::sym("skim_variable")
+  tidyr::gather(
+    skimmed,
+    key = "stat",
+    value = "formatted",
+    na.rm = TRUE,
+    -!!rlang::sym("skim_type"),
+    -!!rlang::sym("skim_variable")
   )
 }
 

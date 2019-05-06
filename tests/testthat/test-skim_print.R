@@ -4,7 +4,7 @@ test_that("Skim prints a header for the entire output and each type", {
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
 
-  input$hist <- NULL
+  input$numeric.hist <- NULL
   expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
 })
 
@@ -35,7 +35,7 @@ test_that("knit_print works with skim summaries", { skimmed <- skim(iris)
 
 test_that("knit_print appropriately falls back to tibble printing", {
   skimmed <- skim(iris)
-  reduced <- dplyr::select(skimmed, skim_variable, mean)
+  reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
   expect_known_output(
     input <- knit_print(reduced),
     "print/knit_print-fallback.txt"
@@ -72,13 +72,13 @@ test_that("make_utf8 produces the correct result ", {
 
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
   input <- skim(iris)
-  mean_only <- dplyr::select(input, mean)
+  mean_only <- dplyr::select(input, numeric.mean)
   expect_print_matches_file(mean_only, "print/fallback.txt")
 })
 
 test_that("Print focused objects appropriately", {
   skimmed <- skim(iris)
-  input <- focus(skimmed, missing)
+  input <- focus(skimmed, numeric.missing)
   expect_print_matches_file(input, "print/focus.txt")
 })
 

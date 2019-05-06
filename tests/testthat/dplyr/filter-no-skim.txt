@@ -1,4 +1,6 @@
-# A tibble: 0 x 16
-# … with 16 variables: skim_type <chr>, skim_variable <chr>, missing <int>, complete <int>,
-#   n <int>, ordered <lgl>, n_unique <int>, top_counts <chr>, mean <dbl>, sd <dbl>, p0 <dbl>,
-#   p25 <dbl>, p50 <dbl>, p75 <dbl>, p100 <dbl>, hist <chr>
+# A tibble: 0 x 19
+# … with 19 variables: skim_type <chr>, skim_variable <chr>, factor.missing <int>,
+#   factor.complete <int>, factor.n <int>, factor.ordered <lgl>, factor.n_unique <int>,
+#   factor.top_counts <chr>, numeric.missing <int>, numeric.complete <int>, numeric.n <int>,
+#   numeric.mean <dbl>, numeric.sd <dbl>, numeric.p0 <dbl>, numeric.p25 <dbl>, numeric.p50 <dbl>,
+#   numeric.p75 <dbl>, numeric.p100 <dbl>, numeric.hist <chr>

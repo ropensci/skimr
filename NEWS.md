@@ -24,7 +24,7 @@ simpler
 
 ```
 skim(iris) %>%
-  dplyr::filter(sd > 1)
+  dplyr::filter(numeric.sd > 1)
 ```
 
 This means that the old reshaping functions `skim_to_wide()` and
@@ -32,6 +32,10 @@ This means that the old reshaping functions `skim_to_wide()` and
 function called `partition()` that breaks a `skim_df` into a list by data type.
 Similarly, `yank()` gets a specific data type from the `skim_df`. `to_long()`
 gets you data that is closest to the format in the old API.
+
+As the above example suggests, columns of summary statistics are prefixed by
+`skim_type`. That is, statistics from numeric columns all begin `numeric.`,
+those for factors all begin `factor.`, and so on.
 
 #### Rendering
 

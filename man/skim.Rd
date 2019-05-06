@@ -42,11 +42,15 @@ If you just want to see the printed output, call \code{skim_tee()} instead.
 This function returns the original data. \code{skim_tee()} uses the default
 \code{skim()}, but you can replace it with the \code{skim} argument.
 
-The data frame produced by \code{skim} is wide and sparse, since not all summmary
-functions appear for all types. See \code{\link[=partition]{partition()}} and \code{\link[=yank]{yank()}} for methods
-for transforming this wide data frame. The first function splits it into
-a list, with each entry corresponding to a data type. The latter pulls
-a single subtable for a particular type from the \code{skim_df}.
+The data frame produced by \code{skim} is wide and sparse. To avoid type coercion
+\code{skimr} uses a type namespace for all summary statistics. Columns for numeric
+summary statistics all begin \code{numeric}; for factor summary statistics
+begin \code{factor}; and so on.
+
+See \code{\link[=partition]{partition()}} and \code{\link[=yank]{yank()}} for methods for transforming this wide data
+frame. The first function splits it into a list, with each entry
+corresponding to a data type. The latter pulls a single subtable for a
+particular type from the \code{skim_df}.
 
 \code{skim()} is designed to operate in pipes and to generally play nicely with
 other \code{tidyverse} functions. This means that you can use \code{tidyselect} helpers
@@ -81,10 +85,10 @@ iris \%>\%
   dplyr::group_by(Species) \%>\%
   skim()
 
-# Which five columns have the greatest mean value?
+# Which five numeric columns have the greatest mean value?
 iris \%>\%
   skim() \%>\%
-  dplyr::select(mean) \%>\%
+  dplyr::select(numeric.mean) \%>\%
   dplyr::top_n(5)
 
 # Use skim_tee to view the skim results and

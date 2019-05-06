@@ -11,8 +11,8 @@ Column type frequency:
 Group variables          None
 
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
-  skim_variable missing
-1 Species             0
+  skim_variable
+1 Species      
 
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
   skim_variable missing

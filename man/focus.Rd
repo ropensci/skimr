@@ -38,14 +38,14 @@ behavior is identical to \code{\link[dplyr:select]{dplyr::select()}}.
 # Compare
 iris \%>\%
   skim() \%>\%
-  dplyr::select(missing)
+  dplyr::select(numeric.missing)
 
 iris \%>\%
   skim() \%>\%
-  focus(missing)
+  focus(numeric.missing)
 
 # This is equivalent to
 iris \%>\%
   skim() \%>\%
-  dplyr::select(skim_variable, skim_type, missing)
+  dplyr::select(skim_variable, skim_type, numeric.missing)
 }
