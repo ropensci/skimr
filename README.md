@@ -21,7 +21,7 @@ Installation
 Version 2 of skimr is under very active development and near release.
 Version 1 is only receiving updates for significant issues. We recommend
 that new users interested in the development version consider installing
-the v-2 branch.
+the v2 branch.
 
 The current released version of <cite>skimr</cite> can be installed from
 CRAN. If you wish to install the current build of the next release you
@@ -40,11 +40,11 @@ been incorporated in the master branch (and may not be):
 
 or for version 2
 
-    devtools::install_github("ropensci/skimr", ref = "v-2")
+    devtools::install_github("ropensci/skimr", ref = "v2")
 
 Do not rely on APIs from the develop branch.
 
-The v-2 branch is the equivalent to the develop branch for Version 2.
+The v2 branch is the equivalent to the develop branch for Version 2.
 While subject to change, we consider the APIs to be those that will be
 part of the version 2 release. Please visit the issue tracker for more
 extensive information about version 2.
