@@ -26,6 +26,7 @@ test_that("skim_v returns expected response for numeric vectors", {
                    c("0", "32", "32", "20.09", "6.03", "10.4", "15.43", "19.2",
                      "22.8", "33.9"))
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$formatted[11], "▃▇▇▇▃▂▂▂")
 })  
 
@@ -83,6 +84,7 @@ test_that("skim_v handles numeric vectors with NAs and extreme numbers", {
   input <- skimr:::skim_v(patho)
   expect_identical(input[-11, ], correct_patho[-11, ])
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input[11, ], correct_patho[11, ])
 })
 
@@ -233,6 +235,7 @@ test_that("skim_v returns expected response for ts vectors", {
   expect_identical(input[-13, ], correct[-13, ])
   
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input[13, ], correct[13, ])
 })
 
@@ -352,7 +355,7 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
                      "        "))
 })  
 
-test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
+test_that("numeric skim is calculated correctly when x is all zeroes or NAs.", {
   x <- as.numeric(c(NA, NA, NA, 0))
   input <- skim(x)
   # dimensions
@@ -373,6 +376,7 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
   expect_identical(input$formatted[-11],
                    c("3", "1", "4", "0", "NA", "0", "0", "0", "0", "0"))
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$formatted[11], "▁▁▁▇▁▁▁▁")
 })
 
