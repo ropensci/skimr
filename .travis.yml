@@ -3,6 +3,10 @@
 language: r
 sudo: required
 warnings_are_errors: true
+r:
+  - oldrel
+  - release
+  - devel
 env:
   global:
     - NOT_CRAN=false

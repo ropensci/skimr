@@ -27,6 +27,12 @@
   "author": [
     {
       "@type": "Person",
+      "givenName": "Michael",
+      "familyName": "Quinn",
+      "email": "msquinn@google.com"
+    },
+    {
+      "@type": "Person",
       "givenName": "Amelia",
       "familyName": "McNamara",
       "email": "amcnamara@smith.edu"
@@ -48,12 +54,6 @@
       "givenName": "Shannon",
       "familyName": "Ellis",
       "email": "sellis18@jhmi.edu"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Michael",
-      "familyName": "Quinn",
-      "email": "msquinn@google.com"
     }
   ],
   "contributor": [
@@ -363,9 +363,9 @@
       "sameAs": "https://CRAN.R-project.org/package=tidyselect"
     }
   ],
-  "releaseNotes": "https://github.com/elinw/skimr/blob/master/NEWS.md",
-  "readme": "https://github.com/elinw/skimr/blob/master/README.md",
-  "fileSize": "726.653KB",
+  "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
+  "fileSize": "2671.87KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -382,6 +382,7 @@
     "ropensci",
     "unconf",
     "r-package",
-    "rstats"
+    "rstats",
+    "peer-reviewed"
   ]
 }
