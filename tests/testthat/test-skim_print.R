@@ -1,6 +1,7 @@
 context("Print a skim_df object")
 
 test_that("Skim prints a header for the entire output and each type", {
+  skip_if_not( l10n_info()$`UTF-8` )
   input <- skim(iris)
   expect_output(print(input), "Skim summary statistics")
   expect_output(print(input), "n obs: 150")
@@ -21,6 +22,7 @@ test_that("Skim prints a special header for grouped data frames", {
 })
 
 test_that("Skim prints a special header for vectors", {
+  skip_if_not( l10n_info()$`UTF-8` )
   input <- skim(lynx)
   expect_output(print(input), "Skim summary statistics")
   expect_output(print(input), 
@@ -49,6 +51,7 @@ test_that("spark.print returns the correct result", {
 
 test_that("Skimr kable prints as expected, 64-bit", {
   skip_if(R.Version()$arch == "i386")
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   inputRaw <- capture.output(skimr::kable(skimmed))
   input <- skimr:::fix_unicode(inputRaw)
@@ -89,6 +92,7 @@ test_that("Skimr kable prints as expected, 64-bit", {
   # The headers are different on windows
   # Just ignore them
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_equal(input[13], 
   "|   variable   | missing | complete |  n  | mean |  sd  | p0  | p25 | p50  | p75 | p100 |   hist   |"
   )
@@ -122,6 +126,7 @@ test_that("Skimr kable prints as expected, 32-bit windows", {
 test_that("skimr::pander prints as expected", {
   # This assumes the default option for line length (80).
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   input <- utils::capture.output(skim(chickwts) %>% pander())
   expect_length(input, 36)
   expect_equal(input[1], "Skim summary statistics  ")
