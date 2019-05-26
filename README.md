@@ -648,6 +648,9 @@ We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
 encourage users to take advantage of <cite>skimr</cite>'s flexibility to
 add their own customized classes. Please see the
-[contributing](CONTRIBUTING.md) and [conduct](CONDUCT.md) documents.
+[contributing](#contributing)
+(<https://github.com/ropensci/skimr/blob/master/CONTRIBUTING.md>) and
+[conduct](https://github.com/ropensci/skimr/blob/master/CONDUCT.md)
+documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
