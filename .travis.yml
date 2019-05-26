@@ -3,6 +3,11 @@
 language: r
 sudo: required
 warnings_are_errors: true
+r:
+  - oldrel
+  - release
+  - devel
+  - bioc-devel
 env:
   global:
     - NOT_CRAN=false
