@@ -7,7 +7,6 @@ r:
   - oldrel
   - release
   - devel
-  - bioc-devel
 env:
   global:
     - NOT_CRAN=false
