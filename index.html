@@ -13,11 +13,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<link href="ropensci.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Compact and Flexible Summaries of Data ">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><!-- ropensci --><link href="ropensci.css" rel="stylesheet">
+<meta property="og:title" content="Compact and Flexible Summaries of Data ">
 <meta property="og:description" content='A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may be 
     modified by the user as can the default formatting. Support for data frames 
@@ -28,6 +28,13 @@
     README.'>
 <meta property="og:image" content="https://ropensci.github.io/skimr/logo.png">
 <meta name="twitter:card" content="summary">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-462421-8"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-462421-8');
+</script>
 </head>
 <body>
     <div class="container template-article">
@@ -42,11 +49,8 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a class="navbar-brand" href="index.html">skimr</a>
-        <div class="info">
-          <span class="partof">part of  <a href="https://ropensci.org"><img src="https://d33wubrfki0l68.cloudfront.net/88338b7637e084df5c43e7a9e6293719dbaf10e2/30903/img/icon_lettering_white.svg" height="24" alt="rOpenSci"></a></span>
-          <span class="version label label-default version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
-        </div>
+        <a href="https://ropensci.org"><img src="hexlogo.png" id="hexlogo" alt="rOpenSci"></a>
+        <a class="navbar-brand" href="index.html"><i>skimr <small>v1.0.6</small></i></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -130,7 +134,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Version 2 of skimr is under very active development and near release. Version 1 is only receiving updates for significant issues. We recommend that new users interested in the development version consider installing the v-2 branch.</p>
+<p>Version 2 of skimr is under very active development and near release. Version 1 is only receiving updates for significant issues. We recommend that new users interested in the development version consider installing the v2 branch.</p>
 <p>The current released version of <cite>skimr</cite> can be installed from CRAN. If you wish to install the current build of the next release you can do so using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>)</a></code></pre></div>
@@ -138,9 +142,9 @@
 <p>To install the version with the most recent changes that have not yet been incorporated in the master branch (and may not be):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"develop"</span>)</a></code></pre></div>
 <p>or for version 2</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"v-2"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"v2"</span>)</a></code></pre></div>
 <p>Do not rely on APIs from the develop branch.</p>
-<p>The v-2 branch is the equivalent to the develop branch for Version 2. While subject to change, we consider the APIs to be those that will be part of the version 2 release. Please visit the issue tracker for more extensive information about version 2.</p>
+<p>The v2 branch is the equivalent to the develop branch for Version 2. While subject to change, we consider the APIs to be those that will be part of the version 2 release. Please visit the issue tracker for more extensive information about version 2.</p>
 </div>
 <div id="skim-statistics-in-the-console" class="section level2">
 <h2 class="hasAnchor">
@@ -657,7 +661,7 @@ n variables: 5</p>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>We welcome issue reports and pull requests, including potentially adding support for commonly used variable classes. However, in general, we encourage users to take advantage of <cite>skimr</cite>’s flexibility to add their own customized classes. Please see the <a href="CONTRIBUTING.html">contributing</a> and <a href="CONDUCT.html">conduct</a> documents.</p>
+<p>We welcome issue reports and pull requests, including potentially adding support for commonly used variable classes. However, in general, we encourage users to take advantage of <cite>skimr</cite>’s flexibility to add their own customized classes. Please see the <a href="https://ropensci.github.io/skimr/CONTRIBUTING.html">contributing</a> and <a href="https://ropensci.github.io/skimr/CONDUCT.html">conduct</a> documents.</p>
 <p><a href="https://ropensci.org"><img src="https://ropensci.org/public_images/ropensci_footer.png" alt="ropenci_footer"></a></p>
 </div>
 </div>
@@ -684,12 +688,12 @@ n variables: 5</p>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
+<li>Elin Waring <br><small class="roles"> Maintainer </small>  </li>
+<li>Michael Quinn <br><small class="roles"> Author </small>  </li>
 <li>Amelia McNamara <br><small class="roles"> Author </small>  </li>
 <li>Eduardo Arino de la Rubia <br><small class="roles"> Author </small>  </li>
 <li>Hao Zhu <br><small class="roles"> Author </small>  </li>
 <li>Shannon Ellis <br><small class="roles"> Author </small>  </li>
-<li>Elin Waring <br><small class="roles"> Maintainer </small>  </li>
-<li>Michael Quinn <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -698,7 +702,7 @@ n variables: 5</p>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/ropensci/skimr"><img src="https://travis-ci.org/ropensci/skimr.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/gh/ropenscilabs/skimr"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://codecov.io/gh/ropensci/skimr"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://github.com/ropensci/onboarding/issues/175"><img src="https://badges.ropensci.org/175_status.svg"></a></li>
 </ul>
 </div>
@@ -713,8 +717,8 @@ n variables: 5</p>
 
 <div class="author">
   <p>
-    Developed by Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis, Elin Waring, Michael Quinn.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a> &amp; <a href="https://ropensci.github.io/rotemplate/">rotemplate</a>.
+    Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.
+    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a> &amp; <a href="https://docs.ropensci.org/rotemplate/">rotemplate</a>.
   </p>
 </div>
       </footer>
