@@ -71,3 +71,8 @@ dplyr::mutate
 
 #' @importFrom dplyr slice
 dplyr::slice
+
+
+.onLoad <- function(lib, pkg) {
+  init_functions()
+}
