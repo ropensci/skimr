@@ -150,119 +150,141 @@ get_vector_type_used <- function(type) {
 
 # Default summarizing functions for each type -----------------------------
 
-numeric_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  mean = purrr::partial(mean.default, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
-  p0 = purrr::partial(quantile, probs = 0, na.rm = TRUE, names = FALSE),
-  p25 = purrr::partial(quantile, probs = .25, na.rm = TRUE, names = FALSE),
-  p50 = purrr::partial(quantile, probs= .50, na.rm = TRUE, names = FALSE),
-  p75 = purrr::partial(quantile, probs = .75, na.rm = TRUE, names = FALSE),
-  p100 = purrr::partial(quantile, probs = 1, na.rm = TRUE, names = FALSE),
-  hist = inline_hist
-)
+numeric_funs <- NULL
+factor_funs <- NULL
+character_funs <- NULL
+logical_funs <- NULL
+integer_funs <- NULL
+complex_funs <- NULL
+date_funs <- NULL
+ts_funs <- NULL
+posixct_funs <- NULL
+asis_funs <- NULL
+list_funs <- NULL
+difftime_funs <- NULL
+.default <- NULL
 
-factor_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  n_unique = n_unique,
-  top_counts = sorted_count,
-  ordered = is.ordered
-)
+# These functions must be copied at load time rather than build
+# time. Otherwise we partially copy their internals at the time of
+# build time (their body()) into our namespace. This is only partial
+# because the namespaces they inherit from is not copied. If a package
+# is updated in a way that is incompatible with these bodies, we'll
+# get bugs until the package is rebuilt and reinstalled.
+init_functions <- function() {
+  numeric_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    mean = purrr::partial(mean.default, na.rm = TRUE),
+    sd = purrr::partial(stats::sd, na.rm = TRUE),
+    p0 = purrr::partial(stats::quantile, probs = 0, na.rm = TRUE, names = FALSE),
+    p25 = purrr::partial(stats::quantile, probs = .25, na.rm = TRUE, names = FALSE),
+    p50 = purrr::partial(stats::quantile, probs= .50, na.rm = TRUE, names = FALSE),
+    p75 = purrr::partial(stats::quantile, probs = .75, na.rm = TRUE, names = FALSE),
+    p100 = purrr::partial(stats::quantile, probs = 1, na.rm = TRUE, names = FALSE),
+    hist = inline_hist
+  )
 
-character_funs <- list (
-  missing  = n_missing,
-  complete = n_complete,
-  n = length,
-  min = min_char,
-  max = max_char,
-  empty = n_empty,
-  n_unique = n_unique
-)
+  factor_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    n_unique = n_unique,
+    top_counts = sorted_count,
+    ordered = is.ordered
+  )
 
-logical_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  mean = purrr::partial(mean.default, na.rm = TRUE),
-  count = sorted_count
-)
+  character_funs <<- list (
+    missing  = n_missing,
+    complete = n_complete,
+    n = length,
+    min = min_char,
+    max = max_char,
+    empty = n_empty,
+    n_unique = n_unique
+  )
 
-integer_funs <- numeric_funs
+  logical_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    mean = purrr::partial(mean.default, na.rm = TRUE),
+    count = sorted_count
+  )
 
-complex_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length
-)
+  integer_funs <<- numeric_funs
 
-date_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  n_unique = n_unique
-)
+  complex_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length
+  )
 
-ts_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  start = ts_start,
-  end = ts_end,
-  frequency = stats::frequency,
-  deltat = stats::deltat,
-  mean = purrr::partial(mean.default, na.rm = TRUE),
-  sd = purrr::partial(sd, na.rm = TRUE),
-  min = purrr::partial(min, na.rm = TRUE),
-  max = purrr::partial(max, na.rm = TRUE),
-  median = purrr::partial(median, na.rm = TRUE),
-  line_graph  = inline_linegraph
-)
+  date_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    min = purrr::partial(min, na.rm = TRUE),
+    max = purrr::partial(max, na.rm = TRUE),
+    median = purrr::partial(stats::median, na.rm = TRUE),
+    n_unique = n_unique
+  )
 
-posixct_funs <- date_funs
+  ts_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    start = ts_start,
+    end = ts_end,
+    frequency = stats::frequency,
+    deltat = stats::deltat,
+    mean = purrr::partial(mean.default, na.rm = TRUE),
+    sd = purrr::partial(stats::sd, na.rm = TRUE),
+    min = purrr::partial(min, na.rm = TRUE),
+    max = purrr::partial(max, na.rm = TRUE),
+    median = purrr::partial(stats::median, na.rm = TRUE),
+    line_graph  = inline_linegraph
+  )
 
-asis_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  n_unique = n_unique,
-  min_length= list_min_length,
-  max_length = list_max_length
-)
+  posixct_funs <<- date_funs
 
-list_funs <- list(
-  missing = n_missing,
-  complete = n_complete,
-  n = length,
-  n_unique = n_unique,
-  min_length = list_lengths_min,
-  median_length = list_lengths_median,
-  max_length = list_lengths_max
-)
+  asis_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    n_unique = n_unique,
+    min_length= list_min_length,
+    max_length = list_max_length
+  )
 
-difftime_funs <- date_funs
+  list_funs <<- list(
+    missing = n_missing,
+    complete = n_complete,
+    n = length,
+    n_unique = n_unique,
+    min_length = list_lengths_min,
+    median_length = list_lengths_median,
+    max_length = list_lengths_max
+  )
 
-.default <- list(
-  numeric = numeric_funs,
-  integer = integer_funs,
-  factor = factor_funs,
-  character = character_funs,
-  logical = logical_funs,
-  complex = complex_funs,
-  date = date_funs,
-  Date = date_funs,
-  ts = ts_funs,
-  POSIXct = posixct_funs,
-  list = list_funs,
-  AsIs = asis_funs,
-  difftime = difftime_funs
-)
+  difftime_funs <<- date_funs
 
-# Set the default skimming functions
-options$functions <- .default
+  .default <<- list(
+    numeric = numeric_funs,
+    integer = integer_funs,
+    factor = factor_funs,
+    character = character_funs,
+    logical = logical_funs,
+    complex = complex_funs,
+    date = date_funs,
+    Date = date_funs,
+    ts = ts_funs,
+    POSIXct = posixct_funs,
+    list = list_funs,
+    AsIs = asis_funs,
+    difftime = difftime_funs
+  )
+
+  # Set the default skimming functions
+  options$functions <- .default
+}
