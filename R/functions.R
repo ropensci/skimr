@@ -150,6 +150,8 @@ get_vector_type_used <- function(type) {
 
 # Default summarizing functions for each type -----------------------------
 
+# nocov start
+
 numeric_funs <- NULL
 factor_funs <- NULL
 character_funs <- NULL
@@ -288,3 +290,5 @@ init_functions <- function() {
   # Set the default skimming functions
   options$functions <- .default
 }
+
+# nocov end
