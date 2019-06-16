@@ -28,8 +28,10 @@ summary.skim_df <- function(object, ...) {
   types <- paste0("  ", types)
   possible_groups <- ifelse(is.null(attr(object, "groups")), 
                             "None", 
-                            attr(object, "groups"))
-
+                            paste(as.character(attr(object, "groups")), 
+                                  collapse = ", "))
+  
+  
   summary_object <- c(
     df_name, 
     attr(object, "data_rows"), 
