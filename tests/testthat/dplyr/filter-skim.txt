@@ -1,13 +1,13 @@
 ── Data Summary ────────────────────────
-                        Value
-Name                     iris
-Number of rows            150
-Number of columns           5
-                             
-Column type frequency:       
-  numeric                   4
-                             
-Group variables          None
+                           Values
+Name                       iris  
+Number of rows             150   
+Number of columns          5     
+_______________________          
+Column type frequency:           
+  numeric                  4     
+________________________         
+Group variables            None  
 
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 

@@ -108,8 +108,7 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
   if (is_skim_df(x)) {
     if (options$skimr_include_summary %||% TRUE) {
       summary_stats <- summary(x)
-      
-      #kabled <- knitr::kable(summary_stats)
+
       kabled <- knitr::kable(
         summary_stats,
         table.attr = "style='width: auto;'

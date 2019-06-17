@@ -1,15 +1,15 @@
 
-|                       |     |
-|:----------------------|:----|
-|Name                   |iris |
-|Number of rows         |150  |
-|Number of columns      |5    |
-|                       |     |
-|Column type frequency: |     |
-|factor                 |1    |
-|numeric                |4    |
-|                       |     |
-|Group variables        |None |
+|                         |     |
+|:------------------------|:----|
+|Name                     |iris |
+|Number of rows           |150  |
+|Number of columns        |5    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|factor                   |1    |
+|numeric                  |4    |
+|________________________ |     |
+|Group variables          |None |
 
 
 **Variable type: factor**
