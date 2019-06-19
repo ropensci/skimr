@@ -1,10 +1,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-skimr <img src="man/figures/logo.png" align="right" height="139" />
-===================================================================
+skimr <a href='https://ropensci.github.io/skimr'><img src='https://ropensci.github.io/skimr/reference/figures/logo.png' align="right" height="139" /></a>
+=========================================================================================================================================================
 
 [![Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
 <cite>skimr</cite> provides a frictionless approach to summary
@@ -21,7 +21,7 @@ Installation
 Version 2 of skimr is under very active development and near release.
 Version 1 is only receiving updates for significant issues. We recommend
 that new users interested in the development version consider installing
-the v-2 branch.
+the v2 branch.
 
 The current released version of <cite>skimr</cite> can be installed from
 CRAN. If you wish to install the current build of the next release you
@@ -36,11 +36,15 @@ still subject to change if an issue is discovered.
 To install the version with the most recent changes that have not yet
 been incorporated in the master branch (and may not be):
 
-    devtools::install_github("ropenscilabs/skimr", ref = "develop")
+    devtools::install_github("ropensci/skimr", ref = "develop")
+
+or for version 2
+
+    devtools::install_github("ropensci/skimr", ref = "v2")
 
 Do not rely on APIs from the develop branch.
 
-The v-2 branch is the equivalent to the develop branch for Version 2.
+The v2 branch is the equivalent to the develop branch for Version 2.
 While subject to change, we consider the APIs to be those that will be
 part of the version 2 release. Please visit the issue tracker for more
 extensive information about version 2.
@@ -55,9 +59,9 @@ Skim statistics in the console
 -   reports each data type separately.
 -   handles dates, logicals, and a variety of other types
 -   supports spark-bar and spark-line based on [the pillar
-    package](https://github.com/hadley/pillar).
--   allows users to customize the statistics included by data type and
-    to implement skimming for additional classes.
+    package](https://github.com/r-lib/pillar). allows users to customize
+    the statistics included by data type and to implement skimming for
+    additional classes.
 -   works with many Tidyverse features.
 
 ### Separates variables by class:
@@ -68,11 +72,11 @@ Skim statistics in the console
     ##  n obs: 71 
     ##  n variables: 2 
     ## 
-    ## ── Variable type:factor ──────────────────────────────────────────────────────────────────────
+    ## ── Variable type:factor ─────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n n_unique                         top_counts ordered
     ##      feed       0       71 71        6 soy: 14, cas: 12, lin: 12, sun: 12   FALSE
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n   mean    sd  p0   p25 p50   p75 p100     hist
     ##    weight       0       71 71 261.31 78.07 108 204.5 258 323.5  423 ▃▅▅▇▃▇▂▂
 
@@ -84,11 +88,11 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:factor ──────────────────────────────────────────────────────────────────────
+    ## ── Variable type:factor ─────────────────────────────────────────────────────────────────────────
     ##  variable missing complete   n n_unique                       top_counts ordered
     ##   Species       0      150 150        3 set: 50, ver: 50, vir: 50, NA: 0   FALSE
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##   Petal.Width       0      150 150 1.2  0.76 0.1 0.3 1.3  1.8  2.5 ▇▁▁▅▃▃▂▂
@@ -103,7 +107,7 @@ Skim statistics in the console
     ##  n obs: 87 
     ##  n variables: 13 
     ## 
-    ## ── Variable type:character ───────────────────────────────────────────────────────────────────
+    ## ── Variable type:character ──────────────────────────────────────────────────────────────────────
     ##    variable missing complete  n min max empty n_unique
     ##   eye_color       0       87 87   3  13     0       15
     ##      gender       3       84 87   4  13     0        4
@@ -113,17 +117,17 @@ Skim statistics in the console
     ##  skin_color       0       87 87   3  19     0       31
     ##     species       5       82 87   3  14     0       37
     ## 
-    ## ── Variable type:integer ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:integer ────────────────────────────────────────────────────────────────────────
     ##  variable missing complete  n   mean    sd p0 p25 p50 p75 p100     hist
     ##    height       6       81 87 174.36 34.77 66 167 180 191  264 ▁▁▁▂▇▃▁▁
     ## 
-    ## ── Variable type:list ────────────────────────────────────────────────────────────────────────
+    ## ── Variable type:list ───────────────────────────────────────────────────────────────────────────
     ##   variable missing complete  n n_unique min_length median_length max_length
     ##      films       0       87 87       24          1             1          7
     ##  starships       0       87 87       17          0             0          5
     ##   vehicles       0       87 87       11          0             0          2
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##    variable missing complete  n  mean     sd p0  p25 p50  p75 p100     hist
     ##  birth_year      44       43 87 87.57 154.69  8 35    52 72    896 ▇▁▁▁▁▁▁▁
     ##        mass      28       59 87 97.31 169.46 15 55.6  79 84.5 1358 ▇▁▁▁▁▁▁▁
@@ -150,7 +154,7 @@ Skim statistics in the console
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##      variable missing complete   n mean   sd  p0 p25  p50 p75 p100     hist
     ##  Petal.Length       0      150 150 3.76 1.77 1   1.6 4.35 5.1  6.9 ▇▁▁▂▅▅▃▁
     ##  Sepal.Length       0      150 150 5.84 0.83 4.3 5.1 5.8  6.4  7.9 ▂▇▅▇▆▅▂▂
@@ -166,7 +170,7 @@ Skim statistics in the console
     ##  n variables: 5 
     ##  group variables: Species 
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##     Species     variable missing complete  n mean   sd  p0  p25  p50  p75 p100     hist
     ##      setosa Petal.Length       0       50 50 1.46 0.17 1   1.4  1.5  1.58  1.9 ▁▁▅▇▇▅▂▁
     ##      setosa  Petal.Width       0       50 50 0.25 0.11 0.1 0.2  0.2  0.3   0.6 ▂▇▁▂▂▁▁▁
@@ -572,7 +576,7 @@ data.
     ##  n obs: 150 
     ##  n variables: 5 
     ## 
-    ## ── Variable type:numeric ─────────────────────────────────────────────────────────────────────
+    ## ── Variable type:numeric ────────────────────────────────────────────────────────────────────────
     ##      variable iqr quantile
     ##  Sepal.Length 1.3      7.7
 
@@ -644,6 +648,7 @@ We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
 encourage users to take advantage of <cite>skimr</cite>'s flexibility to
 add their own customized classes. Please see the
-[contributing](CONTRIBUTING.md) and [conduct](CONDUCT.md) documents.
+[contributing](https://ropensci.github.io/skimr/CONTRIBUTING.html) and
+[conduct](https://ropensci.github.io/skimr/CONDUCT.html) documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

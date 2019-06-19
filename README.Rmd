@@ -3,7 +3,7 @@ output:
  md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr <img src="man/figures/logo.png" align="right" height="139" />
+# skimr <a href='https://ropensci.github.io/skimr'><img src='https://ropensci.github.io/skimr/reference/figures/logo.png' align="right" height="139" /></a>
 ```{r set-options, echo=FALSE, message=FALSE}
 library(pander)
 library(knitr)
@@ -15,7 +15,7 @@ options(width = 120)
 ```
 
 [![Build Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
 
 <cite>skimr</cite> provides a frictionless approach to summary statistics which conforms
@@ -28,7 +28,7 @@ be included in a pipeline or displayed nicely for the human reader.
 
 Version 2 of skimr is under very active development and near release. Version 1 is 
 only receiving updates for significant issues. We recommend that new users 
-interested in the development version consider installing the v-2 branch. 
+interested in the development version consider installing the v2 branch. 
 
 The current released version of <cite>skimr</cite> can be installed from CRAN. 
 If you wish to install the current build of the next release you can do so using the
@@ -52,12 +52,12 @@ devtools::install_github("ropensci/skimr", ref = "develop")
 or for version 2
 
 ``` r
-devtools::install_github("ropensci/skimr", ref = "v-2")
+devtools::install_github("ropensci/skimr", ref = "v2")
 ```
 
 Do not rely on APIs from the develop branch.
 
-The v-2 branch is the equivalent to the develop branch for Version 2. While subject
+The v2 branch is the equivalent to the develop branch for Version 2. While subject
 to change, we consider the APIs to be those that will be part of the version 2 release.
 Please visit the issue tracker for more extensive information about version 2.
 
@@ -254,7 +254,8 @@ Microsoft Word and Libre Office Write.
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we encourage
 users to take advantage of <cite>skimr</cite>'s flexibility to add their own customized
-classes. Please see the [contributing](CONTRIBUTING.md) and
-[conduct](CONDUCT.md) documents.
+classes. Please see the 
+[contributing](https://ropensci.github.io/skimr/CONTRIBUTING.html) and
+[conduct](https://ropensci.github.io/skimr/CONDUCT.html) documents.
 
 [![ropenci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
