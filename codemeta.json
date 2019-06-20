@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/ropenscilabs/skimr",
   "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -132,6 +132,12 @@
       "@type": "Person",
       "givenName": "Daniel",
       "familyName": "Possenriede",
+      "email": "possenriede@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Lionel",
+      "familyName": "Henry",
       "email": "possenriede@gmail.com"
     }
   ],
@@ -365,7 +371,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "2671.87KB",
+  "fileSize": "2636.374KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"

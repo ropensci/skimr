@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data 
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: c(
   person("Elin", "Waring", email="elin.waring@gmail.com", role = "cre"),
   person("Michael", "Quinn", email="msquinn@google.com", role = "aut"),
@@ -21,7 +21,8 @@ Authors@R: c(
   person("Jennifer", "Thompson", email="thompson.jennifer@gmail.com", role='ctb'),
   person("Harris", "McGehee", email="mcgehee.harris@gmail.com", role='ctb'),
   person("Patrick", "Kennedy", email="pkqstr@protonmail.com", role='ctb'),
-  person("Daniel", "Possenriede", email="possenriede@gmail.com", role='ctb')
+  person("Daniel", "Possenriede", email="possenriede@gmail.com", role='ctb'),
+  person("Lionel", "Henry", email="possenriede@gmail.com", role='ctb')
   )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may be 
