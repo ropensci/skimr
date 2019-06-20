@@ -138,7 +138,7 @@
       "@type": "Person",
       "givenName": "Lionel",
       "familyName": "Henry",
-      "email": "possenriede@gmail.com"
+      "email": "lionel.hry@gmail.com"
     }
   ],
   "copyrightHolder": [
@@ -371,7 +371,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "2636.374KB",
+  "fileSize": "2636.469KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
