@@ -1,3 +1,8 @@
+skimr 1.0.7 (2019-06-20)
+========================
+## BUG FIXES
+  * Stop assignment of foreign functions in namesspace at build time.
+
 skimr 1.0.6 (2019-05-26)
 =======================
 ### BUG FIXES
