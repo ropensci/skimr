@@ -40,7 +40,8 @@ print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
 print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
   top_line <- cli::rule(line = 1, left = variable_type)
-  out <- format(x, n = n, width = width, n_extra = n_extra, ...)
+  dots <- list(...)
+  out <- format(x, n = n, width = width, n_extra = n_extra, dots)
   metadata <- grab_tibble_metadata(out)
   render_skim_body(top_line, out, metadata)
 }
