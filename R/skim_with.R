@@ -65,6 +65,7 @@ skim_with <- function(...,
                       ),
                       append = TRUE) {
   local_skimmers <- validate_assignment(...)
+  delim <- "~!@#$%^&*()-+"
 
   function(data, ...) {
     if (!is.data.frame(data)) {
@@ -103,7 +104,8 @@ skim_with <- function(...,
         !!rlang::sym("skimmers"),
         !!rlang::sym("skim_variable"),
         skim_by_type,
-        data
+        data,
+        delim
       )
     )
     structure(
@@ -259,28 +261,26 @@ get_skimmers_used <- function(skimmers) {
 #'
 #' @keywords internal
 #' @noRd
-skim_by_type <- function(skimmers, data_columns, data) {
-  UseMethod("skim_by_type", data)
+skim_by_type <- function(skimmers, data_columns, data, delim) {
+  new_names <- paste0(delim, skimmers$skim_type, ".", names(skimmers$funs))
+  mangled_skimmers <- rlang::set_names(skimmers$funs, new_names)
+  skim_each(data, data_columns, delim, mangled_skimmers)
 }
 
-#' @export
-skim_by_type.grouped_df <- function(skimmers, data_columns, data) {
+skim_each <- function(data, columns, delim, mangled) {
+  UseMethod("skim_each")
+}
+
+skim_each.grouped_df <- function(data, columns, delim, mangled) {
   group_columns <- dplyr::groups(data)
-  new_names <- paste0(skimmers$skim_type, ".", names(skimmers$funs))
-  delim <- "~!@#$%^&*()-+"
-  mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
   grouped <- dplyr::group_by(data, !!!group_columns)
-  skimmed <- dplyr::summarize_at(grouped, data_columns, mangled_skimmers)
-  build_results(skimmed, data, data_columns, group_columns, new_names, delim)
+  skimmed <- dplyr::summarize_at(grouped, columns, mangled)
+  build_results(skimmed, columns, group_columns, delim)
 }
 
-#' @export
-skim_by_type.default <- function(skimmers, data_columns, data) {
-  new_names <- paste0(skimmers$skim_type, ".", names(skimmers$funs))
-  delim <- "~!@#$%^&*()-+"
-  mangled_skimmers <- rlang::set_names(skimmers$funs, paste0(delim, new_names))
-  skimmed <- dplyr::summarize_at(data, data_columns, mangled_skimmers)
-  build_results(skimmed, data, data_columns, NULL, new_names, delim)
+skim_each.data.frame <- function(data, columns, delim, mangled) {
+  skimmed <- dplyr::summarize_at(data, columns, mangled)
+  build_results(skimmed, columns, NULL, delim)
 }
 
 #' Summarize returns a single row data frame, make it tall.
@@ -296,30 +296,35 @@ skim_by_type.default <- function(skimmers, data_columns, data) {
 #' mangle the function names. That way, each set of relevant columns begin
 #' with the column name + `_` + our internal delimeter.
 #' @noRd
-build_results <- function(skimmed, data, data_cols, groups, new_names, delim) {
+build_results <- function(skimmed, data_cols, groups, delim) {
   if (length(data_cols) > 1) {
     out <- tibble::tibble(
       skim_variable = data_cols,
       by_variable = purrr::map(
-        data_cols, reshape_skimmed, skimmed, groups, new_names, delim
+        data_cols, reshape_skimmed, skimmed, groups, delim
       )
     )
     tidyr::unnest(out)
   } else {
-    new_names <- c(groups, new_names)
     tibble::tibble(
       skim_variable = data_cols,
-      !!!rlang::set_names(skimmed, new_names)
+      !!!set_clean_names(skimmed, delim)
     )
   }
 }
 
-reshape_skimmed <- function(column, skimmed, groups, new_names, delim) {
+reshape_skimmed <- function(column, skimmed, groups, delim) {
   delim_name <- paste0(column, "_", delim)
   out <- dplyr::select(
     skimmed,
     !!!groups,
     tidyselect::starts_with(delim_name)
   )
-  rlang::set_names(out, c(groups, new_names))
+  set_clean_names(out, delim)
+}
+
+set_clean_names <- function(out, delim) {
+  separated <- strsplit(names(out), delim, fixed = TRUE)
+  clean_names <- purrr::map_chr(separated, ~.x[length(.x)])
+  rlang::set_names(out, clean_names)
 }
