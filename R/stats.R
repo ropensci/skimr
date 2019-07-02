@@ -24,8 +24,8 @@ n_missing <- function(x) {
 
 #' @describeIn stats Calculate complete values; complete values are not missing.
 #' @export
-n_complete <- function(x) {
-  length(x) - n_missing(x)
+complete_rate <- function(x) {
+  1 - n_missing(x) / length(x)
 }
 
 #' @describeIn stats Calculate the number of rows containing only whitespace values

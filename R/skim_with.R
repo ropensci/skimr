@@ -22,8 +22,9 @@
 #' default skimmers are dropped. Otherwise, if `append = FALSE`, only the
 #' locally-provided skimming functions are used.
 #'
-#' @param ... One or more `skimmer_function_list` objects, with an argument name
-#'  that matches a particular data type.
+#' @param ... One or more (`sfl`) `skimmer_function_list` objects, with an
+#'  argument name that matches a particular data type.
+#' @param base An `sfl` that sets skimmers for all column types.
 #' @param append Whether the provided options should be in addition to the
 #'  defaults already in `skim`. Default is `TRUE`.
 #' @return A new `skim()` function. This is callable. See [skim()] for
@@ -57,7 +58,12 @@
 #' my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
 #' my_skim <- skim_with(!!!my_skimmers)
 #' @export
-skim_with <- function(..., append = TRUE) {
+skim_with <- function(...,
+                      base = sfl(
+                        n_missing = n_missing,
+                        complete_rate = complete_rate
+                      ),
+                      append = TRUE) {
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
@@ -81,7 +87,7 @@ skim_with <- function(..., append = TRUE) {
     }
 
     skimmers <- purrr::map(
-      selected, get_final_skimmers, data, local_skimmers, append
+      selected, get_final_skimmers, data, local_skimmers, append, base
     )
     types <- purrr::map_chr(skimmers, "skim_type")
     unique_skimmers <- reduce_skimmers(skimmers, types)
@@ -100,7 +106,8 @@ skim_with <- function(..., append = TRUE) {
         data
       )
     )
-    structure(tidyr::unnest(nested),
+    structure(
+      tidyr::unnest(nested),
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
@@ -162,9 +169,11 @@ validate_assignment <- function(...) {
 #' @param data The data frame to summarize.
 #' @param local_skimmers A list of `sfl` objects. Skimmers defined using
 #'   `skim_with()`
+#' @param append Same as above.
+#' @param base Same as above.
 #' @noRd
-get_final_skimmers <- function(column, data, local_skimmers, append) {
-  defaults <- get_skimmers(data[[column]])
+get_final_skimmers <- function(column, data, local_skimmers, append, base) {
+  defaults <- get_skimmers_with_base(data[[column]], base)
   all_classes <- skim_class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
@@ -204,6 +213,12 @@ skim_class <- function(column) {
   } else {
     base_class
   }
+}
+
+get_skimmers_with_base <- function(column, base) {
+  skimmers <- get_skimmers(column)
+  skimmers$funs <- c(base$funs, skimmers$funs)
+  skimmers
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {

@@ -43,11 +43,15 @@ test_that("Skimming functions can be appended.", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75",
-    "p100", "hist", "iqr"
-  )))
+  expect_identical(
+    used,
+    list(
+      numeric = c(
+        "n_missing", "complete_rate", "mean", "sd", "p0", "p25", "p50", "p75",
+        "p100", "hist", "iqr"
+      )
+    )
+  )
 })
 
 test_that("Setting a statistic to null removes it from skimmers", {
@@ -56,7 +60,7 @@ test_that("Setting a statistic to null removes it from skimmers", {
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
   expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
+    "n_missing", "complete_rate", "mean",
     "sd", "p0", "p25", "p50", "p75",
     "p100"
   )))
@@ -68,7 +72,7 @@ test_that("Skimmers can be removed and added at the same time", {
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
   expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
+    "n_missing", "complete_rate", "mean",
     "sd", "p0", "p25", "p50", "p75",
     "p100", "iqr"
   )))
@@ -97,7 +101,7 @@ test_that("Set multiple sets of skimming functions", {
   expect_named(used, c("new_type", "numeric"))
   expect_identical(used$new_type, c("iqr", "quantile"))
   expect_identical(used$numeric, c(
-    "missing", "complete", "n", "mean", "sd",
+    "n_missing", "complete_rate", "mean", "sd",
     "p0", "p25", "p50", "p75", "p100", "hist",
     "iqr", "quantile"
   ))
@@ -156,7 +160,7 @@ test_that("Doubles and integers are both 'numeric'", {
   expect_false("hist" %in% names(input))
   used <- attr(input, "skimmers_used")
   expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
+    "n_missing", "complete_rate", "mean",
     "sd", "p0", "p25", "p50", "p75", "p100"
   )))
 })
@@ -177,8 +181,8 @@ test_that("Defining an integer sfl changes behavior", {
     list(
       integer = c("int_mean"),
       numeric = c(
-        "missing", "complete", "n", "mean",
-        "sd", "p0", "p25", "p50", "p75", "p100"
+        "n_missing", "complete_rate", "mean", "sd", "p0", "p25", "p50", "p75",
+        "p100"
       )
     )
   )

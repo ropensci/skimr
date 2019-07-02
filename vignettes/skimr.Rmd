@@ -90,8 +90,16 @@ skim(iris) %>%
   dplyr::filter(skim_variable == "Petal.Length")
 ```
 
-Most `dplyr` verbs should work as expected, but note that you need to use a
-`skim_type` prefix to refer to correct column.
+Most `dplyr` verbs should work as expected.
+
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  dplyr::select(skim_type, skim_variable, n_missing)
+```
+
+The base skimmers `n_missing` and `complete_rate` are computed for all of the
+columns in the data. But all other type-based skimmers have a namespace. You
+need to use a `skim_type` prefix to refer to correct column.
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
@@ -233,7 +241,7 @@ results; it always keeps the metadata column.
 ```{r, render = knitr::normal_print}
 iris %>%
   skim() %>%
-  focus(numeric.missing, numeric.mean)
+  focus(n_missing, numeric.mean)
 ```
 
 # Rendering the results of `skim()`

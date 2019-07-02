@@ -86,9 +86,6 @@ get_skimmers.default <- function(column) {
 get_skimmers.numeric <- function(column) {
   sfl(
     skim_type = "numeric",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     mean = ~ mean(., na.rm = TRUE),
     sd = ~ stats::sd(., na.rm = TRUE),
     p0 = ~ stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
@@ -104,9 +101,6 @@ get_skimmers.numeric <- function(column) {
 get_skimmers.factor <- function(column) {
   sfl(
     skim_type = "factor",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     ordered = is.ordered,
     n_unique = n_unique,
     top_counts = top_counts
@@ -117,9 +111,6 @@ get_skimmers.factor <- function(column) {
 get_skimmers.character <- function(column) {
   sfl(
     skim_type = "character",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     min = min_char,
     max = max_char,
     empty = n_empty,
@@ -132,9 +123,6 @@ get_skimmers.character <- function(column) {
 get_skimmers.logical <- function(column) {
   sfl(
     skim_type = "logical",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     mean = ~ mean(., na.rm = TRUE),
     count = top_counts
   )
@@ -144,9 +132,7 @@ get_skimmers.logical <- function(column) {
 get_skimmers.complex <- function(column) {
   sfl(
     skim_type = "complex",
-    missing = n_missing,
-    complete = n_complete,
-    n = length
+    mean = ~ mean(., na.rm = TRUE)
   )
 }
 
@@ -154,9 +140,6 @@ get_skimmers.complex <- function(column) {
 get_skimmers.Date <- function(column) {
   sfl(
     skim_type = "Date",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     min = ~ min(., na.rm = TRUE),
     max = ~ max(., na.rm = TRUE),
     median = ~ stats::median(., na.rm = TRUE),
@@ -178,9 +161,6 @@ get_skimmers.difftime <- function(column) {
 get_skimmers.ts <- function(column) {
   sfl(
     skim_type = "ts",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     start = ts_start,
     end = ts_end,
     frequency = stats::frequency,
@@ -198,9 +178,6 @@ get_skimmers.ts <- function(column) {
 get_skimmers.list <- function(column) {
   sfl(
     skim_type = "list",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     min_length = list_min_length,
     max_length = list_max_length

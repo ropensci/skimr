@@ -33,8 +33,8 @@ test_that("n_missing is calculated correctly.", {
 
 test_that("n_complete is calculated correctly.", {
   data <- c("a", "b", "c", NA, " ")
-  input <- n_complete(data)
-  expect_identical(input, 4L)
+  input <- complete_rate(data)
+  expect_equal(input, .8, tolerance = .001)
 })
 
 test_that("n_whitespace is calculated correctly.", {

@@ -10,7 +10,7 @@ Column type frequency:
 Group variables          None
 
 ── Variable type: factor ───────────────────────────────────────────────────────
-  skim_variable missing complete     n ordered n_unique
-1 Species             0      150   150 FALSE          3
+  skim_variable n_missing complete_rate ordered n_unique
+1 Species               0             1 FALSE          3
   top_counts               
 1 set: 50, ver: 50, vir: 50

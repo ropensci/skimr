@@ -3,7 +3,7 @@
 \name{stats}
 \alias{stats}
 \alias{n_missing}
-\alias{n_complete}
+\alias{complete_rate}
 \alias{n_whitespace}
 \alias{sorted_count}
 \alias{top_counts}
@@ -24,7 +24,7 @@
 \usage{
 n_missing(x)
 
-n_complete(x)
+complete_rate(x)
 
 n_whitespace(x)
 
@@ -82,7 +82,7 @@ a given data type.
 \itemize{
 \item \code{n_missing}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
 
-\item \code{n_complete}: Calculate complete values; complete values are not missing.
+\item \code{complete_rate}: Calculate complete values; complete values are not missing.
 
 \item \code{n_whitespace}: Calculate the number of rows containing only whitespace values
 using s+ regex.
