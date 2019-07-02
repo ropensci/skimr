@@ -252,7 +252,6 @@ get_skimmers_used <- function(skimmers) {
   rlang::set_names(function_names, types)
 }
 
-NAME_DELIMETER <- "~!@#$%^&*()-+" 
 #' Generate one or more rows of a `skim_df`, using one column
 #'
 #' Call all of the skimming functions on the single column, using grouped
@@ -272,11 +271,16 @@ NAME_DELIMETER <- "~!@#$%^&*()-+"
 #' @keywords internal
 #' @noRd
 skim_by_type <- function(skimmers, data_columns, data) {
-  new_names <- paste0(
+  mangled_skimmers <- mangle_names(skimmers)
+  skim_each(data, data_columns, mangled_skimmers)
+}
+
+NAME_DELIMETER <- "~!@#$%^&*()-+" 
+mangle_names <- function(skimmers) {
+  mangled <- paste0(
     NAME_DELIMETER, skimmers$skim_type, ".", names(skimmers$funs)
   )
-  mangled_skimmers <- rlang::set_names(skimmers$funs, new_names)
-  skim_each(data, data_columns, mangled_skimmers)
+  rlang::set_names(skimmers$funs, mangled)
 }
 
 skim_each <- function(data, columns, mangled) {
