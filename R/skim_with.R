@@ -93,7 +93,7 @@ skim_with <- function(...,
     unique_skimmers <- reduce_skimmers(skimmers, types)
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
-      skimmers = unique_skimmers,
+      skimmers = purrr::map(unique_skimmers, mangle_names),
       skim_variable = split(selected, types)[!!rlang::sym("skim_type")]
     )
     grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("skim_type"))
@@ -252,6 +252,15 @@ get_skimmers_used <- function(skimmers) {
   rlang::set_names(function_names, types)
 }
 
+NAME_DELIMETER <- "~!@#$%^&*()-+" 
+mangle_names <- function(skimmers) {
+  mangled <- paste0(
+    NAME_DELIMETER, skimmers$skim_type, ".", names(skimmers$funs)
+  )
+  skimmers$funs <- rlang::set_names(skimmers$funs, mangled)
+  skimmers
+}
+
 #' Generate one or more rows of a `skim_df`, using one column
 #'
 #' Call all of the skimming functions on the single column, using grouped
@@ -270,32 +279,19 @@ get_skimmers_used <- function(skimmers) {
 #'
 #' @keywords internal
 #' @noRd
-skim_by_type <- function(skimmers, data_columns, data) {
-  mangled_skimmers <- mangle_names(skimmers)
-  skim_each(data, data_columns, mangled_skimmers)
+skim_by_type <- function(mangled, columns, data) {
+  UseMethod("skim_by_type", data)
 }
 
-NAME_DELIMETER <- "~!@#$%^&*()-+" 
-mangle_names <- function(skimmers) {
-  mangled <- paste0(
-    NAME_DELIMETER, skimmers$skim_type, ".", names(skimmers$funs)
-  )
-  rlang::set_names(skimmers$funs, mangled)
-}
-
-skim_each <- function(data, columns, mangled) {
-  UseMethod("skim_each")
-}
-
-skim_each.grouped_df <- function(data, columns, mangled) {
+skim_by_type.grouped_df <- function(mangled, columns, data) {
   group_columns <- dplyr::groups(data)
   grouped <- dplyr::group_by(data, !!!group_columns)
-  skimmed <- dplyr::summarize_at(grouped, columns, mangled)
+  skimmed <- dplyr::summarize_at(grouped, columns, mangled$funs)
   build_results(skimmed, columns, group_columns)
 }
 
-skim_each.data.frame <- function(data, columns, mangled) {
-  skimmed <- dplyr::summarize_at(data, columns, mangled)
+skim_by_type.data.frame <- function(mangled, columns, data) {
+  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
   build_results(skimmed, columns, NULL)
 }
 
