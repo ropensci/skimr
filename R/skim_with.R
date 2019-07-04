@@ -93,7 +93,7 @@ skim_with <- function(...,
     unique_skimmers <- reduce_skimmers(skimmers, types)
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
-      skimmers = purrr::map(unique_skimmers, mangle_names),
+      skimmers = purrr::map(unique_skimmers, mangle_names, names(base$funs)),
       skim_variable = split(selected, types)[!!rlang::sym("skim_type")]
     )
     grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("skim_type"))
@@ -253,13 +253,18 @@ get_skimmers_used <- function(skimmers) {
 }
 
 NAME_DELIMETER <- "~!@#$%^&*()-+" 
-mangle_names <- function(skimmers) {
-  mangled <- paste0(
-    NAME_DELIMETER, skimmers$skim_type, ".", names(skimmers$funs)
+mangle_names <- function(skimmers, base_names) {
+  fun_names <- names(skimmers$funs)
+  prefixes <- ifelse(
+    fun_names %in% base_names,
+    NAME_DELIMETER,
+    paste0(NAME_DELIMETER, skimmers$skim_type, ".")
   )
+  mangled <- paste0(prefixes, fun_names)
   skimmers$funs <- rlang::set_names(skimmers$funs, mangled)
   skimmers
 }
+
 
 #' Generate one or more rows of a `skim_df`, using one column
 #'
