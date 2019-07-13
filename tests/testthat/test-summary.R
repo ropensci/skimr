@@ -4,40 +4,30 @@ test_that("Summary creates the correct summary object", {
   # Test it creates the correct 4 parts
   skim_input <- skim(iris)
   summary_input <- summary(skim_input)
-  expect_named(summary_input, c(
-    "df_name", "n_rows", "n_cols",
-    "type_frequencies",
-    "possible_groups"
+  expect_equal(rownames(summary_input), c(
+    "Name", "Number of rows ", "Number of columns ",
+    "_______________________ ",
+    "Column type frequency: ", 
+    "  factor", "  numeric",
+    "________________________  ",
+    "Group variables"
   ))
 })
 
 test_that("The summary print method prints the correct object", {
-  # Test that the correct lines are output
-  skim_input <- skim(iris)
-  summary_input <- summary(skim_input)
-
-  expect_output(print(summary_input), "── Data Summary ────────────────────────")
-
-  expect_output(print(summary_input), "Name                     iris")
-  expect_output(print(summary_input), "Number of rows            150")
-  expect_output(print(summary_input), "Number of columns           5")
-  expect_output(print(summary_input), "Column type frequency:       ")
-  expect_output(print(summary_input), "  factor                    1")
-  expect_output(print(summary_input), "  numeric                   4")
+  skim_summary_input <- summary(skim(iris))
+  expect_known_output(
+     skim_summary_input, "summary/summary_iris.txt", 
+    update = FALSE, print = TRUE
+  )
+  #expect_identical(summary(skim_input), summary_input)
 })
 
 test_that("The summary print method prints the correct object when piped", {
   # Test that the correct lines are output, no name should be output.
-  summary_input <- skim(iris) %>%
-    summary()
-
-  expect_output(print(summary_input), "── Data Summary ────────────────────────")
-  expect_output(print(summary_input), "Number of rows            150")
-  expect_output(print(summary_input), "Number of columns           5")
-  expect_output(print(summary_input), "Column type frequency:       ")
-  expect_output(print(summary_input), "  factor                    1")
-  expect_output(print(summary_input), "  numeric                   4")
-  expect_output(print(summary_input), "Group variables          None")
+  summary_input <- iris %>% skim() %>% summary()
+   expect_known_output(summary_input, "summary/summary_iris_piped.txt",
+                       update = FALSE, print = TRUE)
 })
 
 test_that("null object gets expected message", {
