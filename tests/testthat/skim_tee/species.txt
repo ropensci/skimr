@@ -1,13 +1,13 @@
 ── Data Summary ────────────────────────
-                        Value
-Name                    .data
-Number of rows            150
-Number of columns           5
-                             
-Column type frequency:       
-  factor                    1
-                             
-Group variables          None
+                           Values
+Name                       .data 
+Number of rows             150   
+Number of columns          5     
+_______________________          
+Column type frequency:           
+  factor                   1     
+________________________         
+Group variables            None  
 
 ── Variable type: factor ───────────────────────────────────────────────────────
   skim_variable missing complete     n ordered n_unique
