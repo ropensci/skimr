@@ -3,7 +3,7 @@ title: "Using Skimr"
 author: "Elin Waring"
 date: "`r Sys.Date()`"
 output: 
-  pdf_document:
+  rmarkdown::html_vignette:
     latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{get-started}

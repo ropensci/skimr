@@ -2,7 +2,7 @@
 title: "Supporting additional objects"
 date: "`r Sys.Date()`"
 output: 
-  pdf_document:
+  rmarkdown::html_vignette:
     latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{Supporting additional objects}
