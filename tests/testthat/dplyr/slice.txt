@@ -1,14 +1,14 @@
 ── Data Summary ────────────────────────
-                        Value
-Name                     iris
-Number of rows            150
-Number of columns           5
-                             
-Column type frequency:       
-  factor                    1
-  numeric                   2
-                             
-Group variables          None
+                           Values
+Name                       iris  
+Number of rows             150   
+Number of columns          5     
+_______________________          
+Column type frequency:           
+  factor                   1     
+  numeric                  2     
+________________________         
+Group variables            None  
 
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
   skim_variable missing complete     n ordered n_unique top_counts               
