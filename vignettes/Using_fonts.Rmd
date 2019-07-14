@@ -1,7 +1,7 @@
 ---
 title: "Using Fonts"
 output: 
-  pdf_document:
+  rmarkdown::html_vignette:
     latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{Using Fonts}
