@@ -64,6 +64,7 @@ skim_with <- function(...,
                         complete_rate = complete_rate
                       ),
                       append = TRUE) {
+  stopifnot(inherits(base, "skimr_function_list"))
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
