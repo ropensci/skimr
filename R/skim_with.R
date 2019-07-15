@@ -87,13 +87,14 @@ skim_with <- function(...,
     }
 
     skimmers <- purrr::map(
-      selected, get_final_skimmers, data, local_skimmers, append, base
+      selected, get_final_skimmers, data, local_skimmers, append
     )
     types <- purrr::map_chr(skimmers, "skim_type")
     unique_skimmers <- reduce_skimmers(skimmers, types)
+    combined_skimmers <- purrr::map(unique_skimmers, join_with_base, base)
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
-      skimmers = purrr::map(unique_skimmers, mangle_names, names(base$funs)),
+      skimmers = purrr::map(combined_skimmers, mangle_names, names(base$funs)),
       skim_variable = split(selected, types)[!!rlang::sym("skim_type")]
     )
     grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("skim_type"))
@@ -113,6 +114,7 @@ skim_with <- function(...,
       data_cols = ncol(data),
       df_name = rlang::expr_label(substitute(data)),
       groups = dplyr::groups(data),
+      base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
     )
   }
@@ -172,8 +174,8 @@ validate_assignment <- function(...) {
 #' @param append Same as above.
 #' @param base Same as above.
 #' @noRd
-get_final_skimmers <- function(column, data, local_skimmers, append, base) {
-  defaults <- get_skimmers_with_base(data[[column]], base)
+get_final_skimmers <- function(column, data, local_skimmers, append) {
+  defaults <- get_skimmers(data[[column]])
   all_classes <- skim_class(data[[column]])
   locals <- get_local_skimmers(all_classes, local_skimmers)
 
@@ -215,12 +217,6 @@ skim_class <- function(column) {
   }
 }
 
-get_skimmers_with_base <- function(column, base) {
-  skimmers <- get_skimmers(column)
-  skimmers$funs <- c(base$funs, skimmers$funs)
-  skimmers
-}
-
 get_local_skimmers <- function(classes, local_skimmers) {
   all_matches <- local_skimmers[classes]
   safe_modify <- purrr::possibly(purrr::list_modify, NULL)
@@ -244,6 +240,11 @@ merge_skimmers <- function(locals, defaults, append) {
 reduce_skimmers <- function(skimmers, types) {
   named <- rlang::set_names(skimmers, types)
   named[unique(types)]
+}
+
+join_with_base <- function(skimmers, base) {
+  skimmers$funs <- c(base$funs, skimmers$funs)
+  skimmers
 }
 
 get_skimmers_used <- function(skimmers) {

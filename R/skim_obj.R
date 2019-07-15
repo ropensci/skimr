@@ -16,6 +16,7 @@
 #' * `data_cols`: original number of columns
 #' * `df_name`: name of the original data frame
 #' * `groups`: if there were group variables
+#' * `base_skimmers`: names of functions applied to all skim types
 #' * `skimmers_used`: names of functions used to skim each type
 #'
 #' @param object Any `R` object.
@@ -38,7 +39,8 @@ has_variable_column <- function(object) {
 #' @export
 has_skimr_attributes <- function(object) {
   skimr_attrs <- c(
-    "data_rows", "data_cols", "df_name", "groups", "skimmers_used"
+    "data_rows", "data_cols", "df_name", "groups", "base_skimmers",
+    "skimmers_used"
   )
   all(skimr_attrs %in% skimr_attrs)
 }
@@ -93,6 +95,7 @@ strip_skim_attrs <- function(object) {
     data_rows = NULL,
     data_cols = NULL,
     df_name = NULL,
+    base_skimmers = NULL,
     skimmers_used = NULL
   )
   attributes(object) <- stripped
@@ -108,6 +111,7 @@ reassign_skim_attrs <- function(object, skim_df, ...) {
     data_cols = attr(skim_df, "data_cols"),
     df_name = attr(skim_df, "df_name"),
     groups = attr(skim_df, "groups"),
+    base_skimmers = attr(skim_df, "base_skimmers"),
     skimmers_used = attr(skim_df, "skimmers_used")
   )
   updated <- purrr::list_modify(defaults, ...)
