@@ -10,6 +10,7 @@
 #' provides an API for customization. Users can change both the functions
 #' dispatched and the way the results are formatted.
 #'
+#' @importFrom rlang .data
 #' @name skimr-package
 #' @aliases skimr
 #' @docType package
@@ -54,6 +55,3 @@ tidyselect::one_of
 #' @importFrom tidyselect starts_with
 #' @export
 tidyselect::starts_with
-
-# Silence complaints about NSE.
-globalVariables(".")

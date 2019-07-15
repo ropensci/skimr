@@ -88,14 +88,14 @@ skim_with <- function(..., append = TRUE) {
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
       skimmers = unique_skimmers,
-      skim_variable = split(selected, types)[!!rlang::sym("skim_type")]
+      skim_variable = split(selected, types)[.data$skim_type]
     )
-    grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("skim_type"))
+    grouped <- dplyr::group_by(ready_to_skim, .data$skim_type)
     nested <- dplyr::summarize(
       grouped,
       skimmed = purrr::map2(
-        !!rlang::sym("skimmers"),
-        !!rlang::sym("skim_variable"),
+        .data$skimmers,
+        .data$skim_variable,
         skim_by_type,
         data
       )
