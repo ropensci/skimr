@@ -190,3 +190,7 @@ test_that("Base skimmers can be changed", {
   expect_true("length" %in% names(skimmed))
   expect_equal(attr(skimmed, "base_skimmers"), "length")
 })
+
+test_that("Base skimmers require an sfl", {
+  expect_error(skim_with(base = list(length = length)))
+})
