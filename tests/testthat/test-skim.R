@@ -173,7 +173,7 @@ test_that("skim returns expected response for factor vectors", {
   expect_identical(input$skim_variable, "Species")
   expect_identical(input$skim_type, "factor")
   expect_identical(input$n_missing, 0L)
-  expect_equal(input$complete_rate,  1)
+  expect_equal(input$complete_rate, 1)
   expect_false(input$factor.ordered)
   expect_identical(input$factor.top_counts, "set: 50, ver: 50, vir: 50")
 })
@@ -756,7 +756,7 @@ test_that("successfully skim mixed data types with common skimmers", {
   input <- skim(df)
   expect_n_rows(input, 2)
   expect_n_columns(input, 12)
-  
+
   expect_is(input, "skim_df")
   expect_is(input, "tbl_df")
   expect_is(input, "tbl")
@@ -764,8 +764,8 @@ test_that("successfully skim mixed data types with common skimmers", {
   expect_named(
     input,
     c(
-      "skim_type", "skim_variable", "n_missing", "complete_rate", 
-      "Date.min", "Date.max", "Date.median", "Date.n_unique", 
+      "skim_type", "skim_variable", "n_missing", "complete_rate",
+      "Date.min", "Date.max", "Date.median", "Date.n_unique",
       "POSIXct.min", "POSIXct.max", "POSIXct.median", "POSIXct.n_unique"
     )
   )

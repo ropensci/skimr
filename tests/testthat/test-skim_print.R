@@ -27,7 +27,8 @@ test_that("knit_print produces expected results", {
   expect_matches_file(input, "print/knit_print.txt")
 })
 
-test_that("knit_print works with skim summaries", { skimmed <- skim(iris)
+test_that("knit_print works with skim summaries", {
+  skimmed <- skim(iris)
   summarized <- summary(skimmed)
   input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")

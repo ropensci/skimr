@@ -4,14 +4,14 @@
 #' attributes and data columns for all operations to succeed. These checks help
 #' ensure this. While they have some application externally, they are mostly
 #' used internally.
-#' 
+#'
 #' Most notably, a `skim_df`
-#' 
+#'
 #' * has columns `skim_type` and `skim_variable`
 #' * has more than zero rows
-#' 
+#'
 #' And has the following special attributes
-#' 
+#'
 #' * `data_rows`: n rows in the original data
 #' * `data_cols`: original number of columns
 #' * `df_name`: name of the original data frame

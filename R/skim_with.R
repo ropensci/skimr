@@ -131,7 +131,9 @@ skim_with <- function(...,
 validate_assignment <- function(...) {
   to_assign <- rlang::list2(...)
 
-  if (length(to_assign) < 1) return(to_assign)
+  if (length(to_assign) < 1) {
+    return(to_assign)
+  }
 
   # Need to cope with case where ... is a list already
   if (class(to_assign[[1]]) != "skimr_function_list") {
@@ -254,7 +256,7 @@ get_skimmers_used <- function(skimmers) {
   rlang::set_names(function_names, types)
 }
 
-NAME_DELIMETER <- "~!@#$%^&*()-+" 
+NAME_DELIMETER <- "~!@#$%^&*()-+"
 mangle_names <- function(skimmers, base_names) {
   fun_names <- names(skimmers$funs)
   prefixes <- ifelse(
@@ -272,7 +274,7 @@ mangle_names <- function(skimmers, base_names) {
 #'
 #' Call all of the skimming functions on the single column, using grouped
 #' variants, if necessary.
-#' 
+#'
 #' We expect one row per variable/ group. To do this we need to take the
 #' processed results, find the appropriate columns for each variable and
 #' restack them. This uses a small hack that rests on the naming convention
@@ -331,6 +333,6 @@ reshape_skimmed <- function(column, skimmed, groups) {
 
 set_clean_names <- function(out) {
   separated <- strsplit(names(out), NAME_DELIMETER, fixed = TRUE)
-  clean_names <- purrr::map_chr(separated, ~.x[length(.x)])
+  clean_names <- purrr::map_chr(separated, ~ .x[length(.x)])
   rlang::set_names(out, clean_names)
 }

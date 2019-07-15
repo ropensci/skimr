@@ -65,5 +65,6 @@ test_that("A warning is given for classes that don't have defaults", {
 test_that("get_one_default_skimmer_names() behaves as expected", {
   expect_identical(
     get_one_default_skimmer_names("list"),
-    c("n_unique", "min_length", "max_length"))
+    c("n_unique", "min_length", "max_length")
+  )
 })

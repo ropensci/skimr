@@ -54,7 +54,7 @@ grab_tibble_metadata <- function(x) {
 }
 
 render_skim_body <- function(top_line, out, metadata) {
-  cat(paste0("\n",top_line), out[-metadata], sep = "\n")
+  cat(paste0("\n", top_line), out[-metadata], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
@@ -85,8 +85,8 @@ build_summary_string <- function(x) {
     x$type_frequencies$n, "", groups
   ))
   row.names(summary) <- c(
-    "Name", "Number of rows ", "Number of columns "," ",
-    "Column type frequency: ", types,"  ",
+    "Name", "Number of rows ", "Number of columns ", " ",
+    "Column type frequency: ", types, "  ",
     "Group variables"
   )
   summary
@@ -137,7 +137,7 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
     } else {
       kabled <- c()
     }
-      
+
     by_type <- partition(x)
     knit_print_by_type(by_type, options, kabled)
   } else {
@@ -153,7 +153,8 @@ knit_print_by_type <- function(x, options, summary) {
 
 knit_print_one <- function(by_type, type, options) {
   kabled <- knitr::kable(
-    by_type, digits = options$skimr_digits %||% 2
+    by_type,
+    digits = options$skimr_digits %||% 2
   )
   if (is_windows()) {
     kabled[] <- fix_unicode(kabled)
@@ -194,11 +195,11 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 
 
 #' Skimr printing within Jupyter notebooks
-#' 
+#'
 #' This reproduces printed results in the console. By default Jupyter kernels
 #' render the final object in the cell. We want the version printed by
 #' `skimr` instead of the data that it contains.
-#' 
+#'
 #' @param obj The object to \link{print} and then return the output.
 #' @param ... ignored.
 #' @return None. `invisible(NULL)`.

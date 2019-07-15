@@ -40,7 +40,7 @@ sfl <- function(..., skim_type = "") {
     stop("Please provide one or more skimming functions.")
   }
   structure(
-    list(funs = funs, skim_type = skim_type), 
+    list(funs = funs, skim_type = skim_type),
     class = "skimr_function_list"
   )
 }
