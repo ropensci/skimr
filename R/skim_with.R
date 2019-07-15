@@ -292,6 +292,7 @@ skim_by_type <- function(mangled, columns, data) {
   UseMethod("skim_by_type", data)
 }
 
+#' @export
 skim_by_type.grouped_df <- function(mangled, columns, data) {
   group_columns <- dplyr::groups(data)
   grouped <- dplyr::group_by(data, !!!group_columns)
@@ -299,6 +300,7 @@ skim_by_type.grouped_df <- function(mangled, columns, data) {
   build_results(skimmed, columns, group_columns)
 }
 
+#' @export
 skim_by_type.data.frame <- function(mangled, columns, data) {
   skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
   build_results(skimmed, columns, NULL)
