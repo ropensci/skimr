@@ -78,7 +78,7 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
 
 test_that("Print focused objects appropriately", {
   skimmed <- skim(iris)
-  input <- focus(skimmed, numeric.n_missing)
+  input <- focus(skimmed, n_missing)
   expect_print_matches_file(input, "print/focus.txt")
 })
 
