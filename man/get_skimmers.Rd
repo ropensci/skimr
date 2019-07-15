@@ -78,17 +78,17 @@ x <- mtcars[c("gear", "carb")]
 class(x$carb) <- "integer"
 skim(x)
 \dontrun{
-  # In a package, to revert to the V1 behavior of skimming separately with the
-  # same functions, assign the numeric `get_skimmers`.
-  get_skimmers.integer <- skimr::get_skimmers.numeric
+# In a package, to revert to the V1 behavior of skimming separately with the
+# same functions, assign the numeric `get_skimmers`.
+get_skimmers.integer <- skimr::get_skimmers.numeric
 
-  # Or, in a local session, use `skim_with` to create a different `skim`.
-  new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
-  
-  # To apply a set of skimmers from an old type to a new type
-  get_skimmers.new_type <- function(column) {
-    modify_default_skimmers("old_type", new_skim_type = "new_type")
-  }
+# Or, in a local session, use `skim_with` to create a different `skim`.
+new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+
+# To apply a set of skimmers from an old type to a new type
+get_skimmers.new_type <- function(column) {
+  modify_default_skimmers("old_type", new_skim_type = "new_type")
+}
 }
 }
 \seealso{

@@ -148,16 +148,16 @@ yank <- function(data, skim_type) {
 #' # Compare
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(numeric.missing)
+#'   dplyr::select(n_missing)
 #'
 #' iris %>%
 #'   skim() %>%
-#'   focus(numeric.missing)
+#'   focus(n_missing)
 #'
 #' # This is equivalent to
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(skim_variable, skim_type, numeric.missing)
+#'   dplyr::select(skim_variable, skim_type, n_missing)
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)

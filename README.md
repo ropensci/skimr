@@ -65,13 +65,13 @@ Skim statistics in the console
     ##                                 
     ## Group variables             None
     ## 
-    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n ordered n_unique top_counts                        
-    ## 1 feed                0       71    71 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
+    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate ordered n_unique top_counts                        
+    ## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 weight              0       71    71  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
 ### Presentation is in a compact horizontal format:
 
@@ -89,16 +89,16 @@ Skim statistics in the console
     ##                              
     ## Group variables          None
     ## 
-    ## ── Variable type: factor ──────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n ordered n_unique top_counts               
-    ## 1 Species             0      150   150 FALSE          3 set: 50, ver: 50, vir: 50
+    ## ── Variable type: factor ────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
+    ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
-    ## 2 Sepal.Width         0      150   150  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
-    ## 3 Petal.Length        0      150   150  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
-    ## 4 Petal.Width         0      150   150  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
+    ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
+    ## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
 
 ### Built in support for strings, lists and other column classes
 
@@ -117,27 +117,27 @@ Skim statistics in the console
     ##                                        
     ## Group variables                    None
     ## 
-    ## ── Variable type: character ───────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n   min   max empty n_unique whitespace
-    ## 1 name                0       87    87     3    21     0       87          0
-    ## 2 hair_color          5       82    87     4    13     0       12          0
-    ## 3 skin_color          0       87    87     3    19     0       31          0
-    ## 4 eye_color           0       87    87     3    13     0       15          0
-    ## 5 gender              3       84    87     4    13     0        4          0
-    ## 6 homeworld          10       77    87     4    14     0       48          0
-    ## 7 species             5       82    87     3    14     0       37          0
+    ## ── Variable type: character ─────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+    ## 1 name                  0         1         3    21     0       87          0
+    ## 2 hair_color            5         0.943     4    13     0       12          0
+    ## 3 skin_color            0         1         3    19     0       31          0
+    ## 4 eye_color             0         1         3    13     0       15          0
+    ## 5 gender                3         0.966     4    13     0        4          0
+    ## 6 homeworld            10         0.885     4    14     0       48          0
+    ## 7 species               5         0.943     3    14     0       37          0
     ## 
-    ## ── Variable type: list ────────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n n_unique min_length max_length
-    ## 1 films               0       87    87       24          1          7
-    ## 2 vehicles            0       87    87       11          0          2
-    ## 3 starships           0       87    87       17          0          5
+    ## ── Variable type: list ──────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate n_unique min_length max_length
+    ## 1 films                 0             1       24          1          7
+    ## 2 vehicles              0             1       11          0          2
+    ## 3 starships             0             1       17          0          5
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 height              6       81    87 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
-    ## 2 mass               28       59    87  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
-    ## 3 birth_year         44       43    87  87.6 155.      8  35      52  72     896 ▇▁▁▁▁
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
+    ## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
+    ## 3 birth_year           44         0.494  87.6 155.      8  35      52  72     896 ▇▁▁▁▁
 
 ### Has a useful summary function
 
@@ -171,10 +171,10 @@ Skim statistics in the console
     ##                              
     ## Group variables          None
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Sepal.Length        0      150   150  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
-    ## 2 Petal.Length        0      150   150  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
+    ## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 ### Handles grouped data
 
@@ -196,21 +196,21 @@ Skim statistics in the console
     ##                                   
     ## Group variables            Species
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##    skim_variable Species    missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ##  * <chr>         <fct>        <int>    <int> <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
-    ##  1 Sepal.Length  setosa           0       50    50 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
-    ##  2 Sepal.Length  versicolor       0       50    50 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
-    ##  3 Sepal.Length  virginica        0       50    50 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂
-    ##  4 Sepal.Width   setosa           0       50    50 3.43  0.379   2.3  3.2   3.4   3.68   4.4 ▁▃▇▅▂
-    ##  5 Sepal.Width   versicolor       0       50    50 2.77  0.314   2    2.52  2.8   3      3.4 ▁▅▆▇▂
-    ##  6 Sepal.Width   virginica        0       50    50 2.97  0.322   2.2  2.8   3     3.18   3.8 ▂▆▇▅▁
-    ##  7 Petal.Length  setosa           0       50    50 1.46  0.174   1    1.4   1.5   1.58   1.9 ▁▃▇▃▁
-    ##  8 Petal.Length  versicolor       0       50    50 4.26  0.470   3    4     4.35  4.6    5.1 ▂▂▇▇▆
-    ##  9 Petal.Length  virginica        0       50    50 5.55  0.552   4.5  5.1   5.55  5.88   6.9 ▃▇▇▃▂
-    ## 10 Petal.Width   setosa           0       50    50 0.246 0.105   0.1  0.2   0.2   0.3    0.6 ▇▂▂▁▁
-    ## 11 Petal.Width   versicolor       0       50    50 1.33  0.198   1    1.2   1.3   1.5    1.8 ▅▇▃▆▁
-    ## 12 Petal.Width   virginica        0       50    50 2.03  0.275   1.4  1.8   2     2.3    2.5 ▂▇▆▅▇
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ##  * <chr>         <fct>          <int>         <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
+    ##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
+    ##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
+    ##  3 Sepal.Length  virginica          0             1 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂
+    ##  4 Sepal.Width   setosa             0             1 3.43  0.379   2.3  3.2   3.4   3.68   4.4 ▁▃▇▅▂
+    ##  5 Sepal.Width   versicolor         0             1 2.77  0.314   2    2.52  2.8   3      3.4 ▁▅▆▇▂
+    ##  6 Sepal.Width   virginica          0             1 2.97  0.322   2.2  2.8   3     3.18   3.8 ▂▆▇▅▁
+    ##  7 Petal.Length  setosa             0             1 1.46  0.174   1    1.4   1.5   1.58   1.9 ▁▃▇▃▁
+    ##  8 Petal.Length  versicolor         0             1 4.26  0.470   3    4     4.35  4.6    5.1 ▂▂▇▇▆
+    ##  9 Petal.Length  virginica          0             1 5.55  0.552   4.5  5.1   5.55  5.88   6.9 ▃▇▇▃▂
+    ## 10 Petal.Width   setosa             0             1 0.246 0.105   0.1  0.2   0.2   0.3    0.6 ▇▂▂▁▁
+    ## 11 Petal.Width   versicolor         0             1 1.33  0.198   1    1.2   1.3   1.5    1.8 ▅▇▃▆▁
+    ## 12 Petal.Width   virginica          0             1 2.03  0.275   1.4  1.8   2     2.3    2.5 ▂▇▆▅▇
 
 ### Behaves nicely in pipelines
 
@@ -229,9 +229,9 @@ Skim statistics in the console
     ##                                   
     ## Group variables               None
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────────────────────────
-    ##   skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Petal.Length        0      150   150  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 Knitted results
 ---------------
@@ -273,9 +273,8 @@ chunk.
 <thead>
 <tr class="header">
 <th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">missing</th>
-<th style="text-align: right;">complete</th>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
 <th style="text-align: right;">p0</th>
@@ -290,8 +289,7 @@ chunk.
 <tr class="odd">
 <td style="text-align: left;">eruptions</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">272</td>
-<td style="text-align: right;">272</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">3.49</td>
 <td style="text-align: right;">1.14</td>
 <td style="text-align: right;">1.6</td>
@@ -304,8 +302,7 @@ chunk.
 <tr class="even">
 <td style="text-align: left;">waiting</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">272</td>
-<td style="text-align: right;">272</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">70.90</td>
 <td style="text-align: right;">13.59</td>
 <td style="text-align: right;">43.0</td>
@@ -372,9 +369,8 @@ skimmers.
 <thead>
 <tr class="header">
 <th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">missing</th>
-<th style="text-align: right;">complete</th>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
 <th style="text-align: right;">p0</th>
@@ -390,8 +386,7 @@ skimmers.
 <tr class="odd">
 <td style="text-align: left;">Sepal.Length</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">150</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">5.84</td>
 <td style="text-align: right;">0.83</td>
 <td style="text-align: right;">4.3</td>
@@ -441,6 +436,8 @@ uses only those functions that you’ve provided.
 <thead>
 <tr class="header">
 <th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
 <th style="text-align: right;">iqr</th>
 <th style="text-align: right;">p99</th>
 </tr>
@@ -448,6 +445,8 @@ uses only those functions that you’ve provided.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">7.7</td>
 </tr>
@@ -487,9 +486,8 @@ And you can default skimmers by setting them to `NULL`.
 <thead>
 <tr class="header">
 <th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">missing</th>
-<th style="text-align: right;">complete</th>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
 <th style="text-align: right;">p0</th>
@@ -503,8 +501,7 @@ And you can default skimmers by setting them to `NULL`.
 <tr class="odd">
 <td style="text-align: left;">Sepal.Length</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">150</td>
-<td style="text-align: right;">150</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">5.84</td>
 <td style="text-align: right;">0.83</td>
 <td style="text-align: right;">4.3</td>

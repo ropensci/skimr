@@ -50,6 +50,7 @@ And has the following special attributes
 \item \code{data_cols}: original number of columns
 \item \code{df_name}: name of the original data frame
 \item \code{groups}: if there were group variables
+\item \code{base_skimmers}: names of functions applied to all skim types
 \item \code{skimmers_used}: names of functions used to skim each type
 }
 }
