@@ -43,7 +43,7 @@ column; the statistics it provides depend on the class of the variable.
 ## Skimming data frames
 
 By design, the main focus of `skimr` is on data frames; it is intended to fit
-well withiin a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
+well within a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
 extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 
@@ -286,8 +286,8 @@ replace, or remove the statistics for a class. For interactive use, you can
 create your own skimming function with the `skim_with()` factory. `skimr` also 
 has an API for extensions in other packages. Working with that is covered later.
 
-To add a statistic, create an `sfl()` (a `skimr` function list) for each class
-that you want to change:
+To add a statistic for a data type, create an `sfl()` (a `skimr` function list)
+for each class that you want to change:
 
 ```{r}
 my_skim <- skim_with(numeric = sfl(new_mad = mad))
@@ -326,6 +326,14 @@ my_skim <- skim_with(
 my_skim(iris)
 ```
 
+To modify the "base" skimmers, refer to them in a similar manner. Since base
+skimmers are usually a small group, they must return the same type for all
+data types in R, `append` doesn't apply here.
+
+```{r}
+my_skim <- skim_with(base = sfl(length = length))
+my_skim(faithful)
+```
 
 # Extending `skimr`
 
