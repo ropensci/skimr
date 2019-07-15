@@ -2,7 +2,9 @@
 title: "Using Skimr"
 author: "Elin Waring"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{get-started}
   %\VignetteEngine{knitr::rmarkdown}

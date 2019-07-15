@@ -1,6 +1,8 @@
 ---
 title: "Using Fonts"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{Using Fonts}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,7 +20,7 @@ One of the features of skim is the production of spark graphs for numeric data.
 However these graphs may not render properly because of lack of font support or for other
 reasons. In your specific environment this may depend on the fonts installed and the operating
 system and may occur for only specific types of documents such as PDF documents.
-Skimr supports kable() and pander() formatted tables, which used in conjunction with 
+Skimr supports kable() formatted tables, which used in conjunction with 
 fonts to render the spark graphs.
 
 To produce spark histograms a font that supports block elements must be used. To

@@ -1,13 +1,13 @@
 ── Data Summary ────────────────────────
-                                               Value
-Name                    dplyr::group_by(iris, Spe...
-Number of rows                                   150
-Number of columns                                  5
-                                                    
-Column type frequency:                              
-  numeric                                          4
-                                                    
-Group variables                              Species
+                           Values                      
+Name                       dplyr::group_by(iris, Spe...
+Number of rows             150                         
+Number of columns          5                           
+_______________________                                
+Column type frequency:                                 
+  numeric                  4                           
+________________________                               
+Group variables            Species                     
 
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 

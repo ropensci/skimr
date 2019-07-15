@@ -1,14 +1,14 @@
 ── Data Summary ────────────────────────
-                        Value
-Name                    .data
-Number of rows             71
-Number of columns           2
-                             
-Column type frequency:       
-  factor                    1
-  numeric                   1
-                             
-Group variables          None
+                           Values
+Name                       .data 
+Number of rows             71    
+Number of columns          2     
+_______________________          
+Column type frequency:           
+  factor                   1     
+  numeric                  1     
+________________________         
+Group variables            None  
 
 ── Variable type: factor ───────────────────────────────────────────────────────
   skim_variable n_missing complete_rate ordered n_unique

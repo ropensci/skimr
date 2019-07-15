@@ -1,7 +1,9 @@
 ---
 title: "Supporting additional objects"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{Supporting additional objects}
   %\VignetteEngine{knitr::rmarkdown}
