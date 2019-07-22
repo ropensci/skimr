@@ -11,7 +11,6 @@ Group variables            Species
 
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
- * <chr>         <fct>          <int>         <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
  3 Sepal.Length  virginica          0             1 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂
