@@ -60,17 +60,17 @@ NULL
 #' class(x$carb) <- "integer"
 #' skim(x)
 #' \dontrun{
-#'   # In a package, to revert to the V1 behavior of skimming separately with the
-#'   # same functions, assign the numeric `get_skimmers`.
-#'   get_skimmers.integer <- skimr::get_skimmers.numeric
+#' # In a package, to revert to the V1 behavior of skimming separately with the
+#' # same functions, assign the numeric `get_skimmers`.
+#' get_skimmers.integer <- skimr::get_skimmers.numeric
 #'
-#'   # Or, in a local session, use `skim_with` to create a different `skim`.
-#'   new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
-#'   
-#'   # To apply a set of skimmers from an old type to a new type
-#'   get_skimmers.new_type <- function(column) {
-#'     modify_default_skimmers("old_type", new_skim_type = "new_type")
-#'   }
+#' # Or, in a local session, use `skim_with` to create a different `skim`.
+#' new_skim <- skim_with(integer = skimr::get_skimmers.numeric())
+#'
+#' # To apply a set of skimmers from an old type to a new type
+#' get_skimmers.new_type <- function(column) {
+#'   modify_default_skimmers("old_type", new_skim_type = "new_type")
+#' }
 #' }
 #' @export
 get_skimmers <- function(column) {
@@ -86,9 +86,6 @@ get_skimmers.default <- function(column) {
 get_skimmers.numeric <- function(column) {
   sfl(
     skim_type = "numeric",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     mean = ~ mean(., na.rm = TRUE),
     sd = ~ stats::sd(., na.rm = TRUE),
     p0 = ~ stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE),
@@ -104,9 +101,6 @@ get_skimmers.numeric <- function(column) {
 get_skimmers.factor <- function(column) {
   sfl(
     skim_type = "factor",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     ordered = is.ordered,
     n_unique = n_unique,
     top_counts = top_counts
@@ -117,9 +111,6 @@ get_skimmers.factor <- function(column) {
 get_skimmers.character <- function(column) {
   sfl(
     skim_type = "character",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     min = min_char,
     max = max_char,
     empty = n_empty,
@@ -132,9 +123,6 @@ get_skimmers.character <- function(column) {
 get_skimmers.logical <- function(column) {
   sfl(
     skim_type = "logical",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     mean = ~ mean(., na.rm = TRUE),
     count = top_counts
   )
@@ -144,9 +132,7 @@ get_skimmers.logical <- function(column) {
 get_skimmers.complex <- function(column) {
   sfl(
     skim_type = "complex",
-    missing = n_missing,
-    complete = n_complete,
-    n = length
+    mean = ~ mean(., na.rm = TRUE)
   )
 }
 
@@ -154,9 +140,6 @@ get_skimmers.complex <- function(column) {
 get_skimmers.Date <- function(column) {
   sfl(
     skim_type = "Date",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     min = ~ min(., na.rm = TRUE),
     max = ~ max(., na.rm = TRUE),
     median = ~ stats::median(., na.rm = TRUE),
@@ -178,9 +161,6 @@ get_skimmers.difftime <- function(column) {
 get_skimmers.ts <- function(column) {
   sfl(
     skim_type = "ts",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     start = ts_start,
     end = ts_end,
     frequency = stats::frequency,
@@ -198,9 +178,6 @@ get_skimmers.ts <- function(column) {
 get_skimmers.list <- function(column) {
   sfl(
     skim_type = "list",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     min_length = list_min_length,
     max_length = list_max_length
@@ -216,33 +193,34 @@ get_skimmers.AsIs <- function(column) {
 #' @param new_skim_type The type to assign to the looked up set of skimmers.
 #' @param new_funs Replacement functions for those in
 #' @export
-modify_default_skimmers <- function(
-    skim_type, new_skim_type = NULL, new_funs = list()) {
+modify_default_skimmers <- function(skim_type,
+                                    new_skim_type = NULL,
+                                    new_funs = list()) {
   funs <- get_one_default_skimmer(skim_type)
   new_funs <- purrr::list_modify(funs, !!!new_funs)
   sfl(skim_type = new_skim_type %||% skim_type, !!!new_funs)
 }
 
 #' View default skimmer names and functions
-#' 
+#'
 #' These utility functions look up the currently-available defaults for one or
 #' more `skim_type`'s. They work with all defaults in the `skimr` package, as
 #' well as the defaults in any package that extends `skimr`. See
 #' [get_skimmers()] for writing lookup methods for different.
-#' 
+#'
 #' The functions differ in return type and whether or not the result is in
 #' a list. `get_default_skimmers()` and `get_one_default_skimmer()` return
 #' functions. The former returns functions within a typed list, i.e.
 #' `list(numeric = list(...functions...))`.
-#' 
+#'
 #' The functions differ in return type and whether or not the result is in
-#' a list. `get_default_skimmer_names()` and `get_one_default_skimmer_names()` 
+#' a list. `get_default_skimmer_names()` and `get_one_default_skimmer_names()`
 #' return a list of character vectors or a single character vector.
-#' 
+#'
 #' `get_sfl` returns the skimmer function list for a particular `skim_type`.
 #' It differs from `get_default_skimmers` in that the returned `sfl` contains
 #' a list of functions and a `skim_type`.
-#' 
+#'
 #' @param skim_type The class of the column being skimmed.
 #' @export
 get_default_skimmers <- function(skim_type = NULL) {
@@ -254,7 +232,7 @@ get_default_skimmers <- function(skim_type = NULL) {
   } else {
     iter <- rlang::set_names(skim_type)
   }
-  
+
   results <- purrr::map(iter, get_one_default_skimmer)
   no_defaults_for_class <- purrr::map_lgl(results, anyNA)
   results[!no_defaults_for_class]

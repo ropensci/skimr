@@ -45,7 +45,7 @@ column; the statistics it provides depend on the class of the variable.
 ## Skimming data frames
 
 By design, the main focus of `skimr` is on data frames; it is intended to fit
-well withiin a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
+well within a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
 extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 
@@ -92,8 +92,16 @@ skim(iris) %>%
   dplyr::filter(skim_variable == "Petal.Length")
 ```
 
-Most `dplyr` verbs should work as expected, but note that you need to use a
-`skim_type` prefix to refer to correct column.
+Most `dplyr` verbs should work as expected.
+
+```{r, render = knitr::normal_print}
+skim(iris) %>%
+  dplyr::select(skim_type, skim_variable, n_missing)
+```
+
+The base skimmers `n_missing` and `complete_rate` are computed for all of the
+columns in the data. But all other type-based skimmers have a namespace. You
+need to use a `skim_type` prefix to refer to correct column.
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
@@ -235,7 +243,7 @@ results; it always keeps the metadata column.
 ```{r, render = knitr::normal_print}
 iris %>%
   skim() %>%
-  focus(numeric.missing, numeric.mean)
+  focus(n_missing, numeric.mean)
 ```
 
 # Rendering the results of `skim()`
@@ -280,8 +288,8 @@ replace, or remove the statistics for a class. For interactive use, you can
 create your own skimming function with the `skim_with()` factory. `skimr` also 
 has an API for extensions in other packages. Working with that is covered later.
 
-To add a statistic, create an `sfl()` (a `skimr` function list) for each class
-that you want to change:
+To add a statistic for a data type, create an `sfl()` (a `skimr` function list)
+for each class that you want to change:
 
 ```{r}
 my_skim <- skim_with(numeric = sfl(new_mad = mad))
@@ -320,6 +328,14 @@ my_skim <- skim_with(
 my_skim(iris)
 ```
 
+To modify the "base" skimmers, refer to them in a similar manner. Since base
+skimmers are usually a small group, they must return the same type for all
+data types in R, `append` doesn't apply here.
+
+```{r}
+my_skim <- skim_with(base = sfl(length = length))
+my_skim(faithful)
+```
 
 # Extending `skimr`
 

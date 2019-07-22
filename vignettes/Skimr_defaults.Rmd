@@ -15,6 +15,15 @@ vignette: >
 This vignette simply displays the default data types and summary functions for
 `skimr`. Customizing `skimr` is explained in the **Using Skimr** vignette.
 
+# The base skimmers
+
+`skimr` has a group of functions that it applies to all data types. We call
+these the "base"" skimmers:
+
+*  `n_missing`: The number of missing values in the column.
+*  `complete_rate`: The ratio of non-missing values to the total values in the
+   column.
+
 # Default skimmers
 
 To learn more about the functions used in this package, use the function

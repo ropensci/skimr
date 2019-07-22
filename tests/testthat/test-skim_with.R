@@ -43,11 +43,14 @@ test_that("Skimming functions can be appended.", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75",
-    "p100", "hist", "iqr"
-  )))
+  expect_identical(
+    used,
+    list(
+      numeric = c(
+        "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist", "iqr"
+      )
+    )
+  )
 })
 
 test_that("Setting a statistic to null removes it from skimmers", {
@@ -55,11 +58,9 @@ test_that("Setting a statistic to null removes it from skimmers", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75",
-    "p100"
-  )))
+  expect_identical(
+    used, list(numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100"))
+  )
 })
 
 test_that("Skimmers can be removed and added at the same time", {
@@ -67,11 +68,10 @@ test_that("Skimmers can be removed and added at the same time", {
   x <- tibble::tibble(rnorm(10))
   input <- new_skim(x)
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75",
-    "p100", "iqr"
-  )))
+  expect_identical(
+    used,
+    list(numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100", "iqr"))
+  )
 })
 
 test_that("Skimming functions for new types can be added", {
@@ -96,11 +96,12 @@ test_that("Set multiple sets of skimming functions", {
   used <- attr(input, "skimmers_used")
   expect_named(used, c("new_type", "numeric"))
   expect_identical(used$new_type, c("iqr", "quantile"))
-  expect_identical(used$numeric, c(
-    "missing", "complete", "n", "mean", "sd",
-    "p0", "p25", "p50", "p75", "p100", "hist",
-    "iqr", "quantile"
-  ))
+  expect_identical(
+    used$numeric,
+    c(
+      "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist", "iqr", "quantile"
+    )
+  )
 })
 
 
@@ -145,7 +146,10 @@ test_that("Sfl's can be passed as an unquoted list", {
   input <- my_skim(iris)
   expect_named(
     input,
-    c("skim_type", "skim_variable", "factor.length", "numeric.mean")
+    c(
+      "skim_type", "skim_variable", "n_missing", "complete_rate",
+      "factor.length", "numeric.mean"
+    )
   )
 })
 
@@ -155,10 +159,9 @@ test_that("Doubles and integers are both 'numeric'", {
   input <- my_skim(df)
   expect_false("hist" %in% names(input))
   used <- attr(input, "skimmers_used")
-  expect_identical(used, list(numeric = c(
-    "missing", "complete", "n", "mean",
-    "sd", "p0", "p25", "p50", "p75", "p100"
-  )))
+  expect_identical(
+    used, list(numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100"))
+  )
 })
 
 test_that("Defining an integer sfl changes behavior", {
@@ -176,10 +179,18 @@ test_that("Defining an integer sfl changes behavior", {
     used,
     list(
       integer = c("int_mean"),
-      numeric = c(
-        "missing", "complete", "n", "mean",
-        "sd", "p0", "p25", "p50", "p75", "p100"
-      )
+      numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100")
     )
   )
+})
+
+test_that("Base skimmers can be changed", {
+  my_skim <- skim_with(base = sfl(length = length))
+  skimmed <- my_skim(iris)
+  expect_true("length" %in% names(skimmed))
+  expect_equal(attr(skimmed, "base_skimmers"), "length")
+})
+
+test_that("Base skimmers require an sfl", {
+  expect_error(skim_with(base = list(length = length)))
 })

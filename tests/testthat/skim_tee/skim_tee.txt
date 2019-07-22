@@ -11,13 +11,13 @@ ________________________
 Group variables            None  
 
 ── Variable type: factor ───────────────────────────────────────────────────────
-  skim_variable missing complete     n ordered n_unique
-1 feed                0       71    71 FALSE          6
+  skim_variable n_missing complete_rate ordered n_unique
+1 feed                  0             1 FALSE          6
   top_counts                        
 1 soy: 14, cas: 12, lin: 12, sun: 12
 
 ── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable missing complete     n  mean    sd    p0   p25   p50   p75  p100
-1 weight              0       71    71  261.  78.1   108  204.   258  324.   423
-  hist 
-1 ▆▆▇▇▃
+  skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
+1 weight                0             1  261.  78.1   108  204.   258  324.
+   p100 hist 
+1   423 ▆▆▇▇▃

@@ -11,12 +11,12 @@ ________________________
 Group variables            None  
 
 ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
-  skim_variable
-1 Species      
+  skim_variable n_missing
+1 Species               0
 
 ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-  skim_variable missing
-1 Sepal.Length        0
-2 Sepal.Width         0
-3 Petal.Length        0
-4 Petal.Width         0
+  skim_variable n_missing
+1 Sepal.Length          0
+2 Sepal.Width           0
+3 Petal.Length          0
+4 Petal.Width           0

@@ -19,7 +19,7 @@
 #' `skimr` uses a type namespace for all summary statistics. Columns for numeric
 #' summary statistics all begin `numeric`; for factor summary statistics
 #' begin `factor`; and so on.
-#' 
+#'
 #' See [partition()] and [yank()] for methods for transforming this wide data
 #' frame. The first function splits it into a list, with each entry
 #' corresponding to a data type. The latter pulls a single subtable for a

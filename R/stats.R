@@ -24,8 +24,8 @@ n_missing <- function(x) {
 
 #' @describeIn stats Calculate complete values; complete values are not missing.
 #' @export
-n_complete <- function(x) {
-  length(x) - n_missing(x)
+complete_rate <- function(x) {
+  1 - n_missing(x) / length(x)
 }
 
 #' @describeIn stats Calculate the number of rows containing only whitespace values
@@ -151,7 +151,9 @@ n_empty <- function(x) {
 #'   character vector.
 #' @export
 min_char <- function(x) {
-  if (all(is.na(x))) return(NA)
+  if (all(is.na(x))) {
+    return(NA)
+  }
   characters <- nchar(x, allowNA = TRUE)
   min(characters, na.rm = TRUE)
 }
@@ -160,7 +162,9 @@ min_char <- function(x) {
 #'   character vector.
 #' @export
 max_char <- function(x) {
-  if (all(is.na(x))) return(NA)
+  if (all(is.na(x))) {
+    return(NA)
+  }
   characters <- nchar(x, allowNA = TRUE)
   max(characters, na.rm = TRUE)
 }

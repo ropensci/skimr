@@ -4,11 +4,14 @@
 \alias{skim_with}
 \title{Set or add the summary functions for a particular type of data}
 \usage{
-skim_with(..., append = TRUE)
+skim_with(..., base = sfl(n_missing = n_missing, complete_rate =
+  complete_rate), append = TRUE)
 }
 \arguments{
-\item{...}{One or more \code{skimmer_function_list} objects, with an argument name
-that matches a particular data type.}
+\item{...}{One or more (\code{sfl}) \code{skimmer_function_list} objects, with an
+argument name that matches a particular data type.}
+
+\item{base}{An \code{sfl} that sets skimmers for all column types.}
 
 \item{append}{Whether the provided options should be in addition to the
 defaults already in \code{skim}. Default is \code{TRUE}.}

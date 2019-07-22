@@ -33,9 +33,10 @@ partition <- function(data) {
   data_as_list <- split(data, data$skim_type)
   types <- names(data_as_list)
   groups <- attr(data, "groups")
+  base <- attr(data, "base_skimmers")
 
-  skimmers <- reconcile_skimmers(data, groups)
-  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups)
+  skimmers <- reconcile_skimmers(data, groups, base)
+  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups, base)
 
   reassign_skim_attrs(
     reduced,
@@ -50,11 +51,14 @@ partition <- function(data) {
 #' This catches the case where users partition (or more likely print) a data
 #' frame that has had columns added after skimming.
 #' @noRd
-reconcile_skimmers <- function(data, groups) {
+reconcile_skimmers <- function(data, groups, base) {
   all_columns <- names(data)
   skimmers_used <- attr(data, "skimmers_used")
   with_base_columns <- c(
-    "skim_variable", "skim_type", collapse_skimmers(skimmers_used)
+    "skim_variable",
+    "skim_type",
+    base,
+    collapse_skimmers(skimmers_used)
   )
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
@@ -92,10 +96,10 @@ get_complete_columns <- function(skim_type, ..., names) {
 #' This function also catches the case where the user removed columns from
 #' the skim_df
 #' @noRd
-simplify_skimdf <- function(data, skim_type, skimmers, groups) {
+simplify_skimdf <- function(data, skim_type, skimmers, groups, base) {
   stopifnot(has_variable_column(data))
   names(data) <- stringr::str_remove(names(data), paste0(skim_type, "\\."))
-  keep <- c("skim_variable", groups, skimmers[[skim_type]])
+  keep <- c("skim_variable", groups, base, skimmers[[skim_type]])
   cols_in_data <- names(data)
   out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
 
@@ -117,7 +121,8 @@ bind <- function(data) {
 }
 
 add_namespaces <- function(data, skim_type) {
-  meta_columns <- c("skim_variable", dplyr::group_vars(data))
+  base <- attr(data, "base_skimmers")
+  meta_columns <- c("skim_variable", dplyr::group_vars(data), base)
   no_meta_columns <- dplyr::setdiff(names(data), meta_columns)
   with_namespace <- paste(skim_type, no_meta_columns, sep = ".")
   rlang::set_names(data, c(meta_columns, with_namespace))
@@ -143,16 +148,16 @@ yank <- function(data, skim_type) {
 #' # Compare
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(numeric.missing)
+#'   dplyr::select(n_missing)
 #'
 #' iris %>%
 #'   skim() %>%
-#'   focus(numeric.missing)
+#'   focus(n_missing)
 #'
 #' # This is equivalent to
 #' iris %>%
 #'   skim() %>%
-#'   dplyr::select(skim_variable, skim_type, numeric.missing)
+#'   dplyr::select(skim_variable, skim_type, n_missing)
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)
