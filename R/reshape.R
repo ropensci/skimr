@@ -62,7 +62,7 @@ reconcile_skimmers <- function(data, groups, base) {
   )
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
-    grouped <- dplyr::group_by(data, !!rlang::sym("skim_type"))
+    grouped <- dplyr::group_by(data, .data$skim_type)
     complete_by_type <- dplyr::summarize_at(
       grouped,
       dplyr::vars(extra_cols),
@@ -186,8 +186,8 @@ to_long <- function(.data, ...) {
     key = "stat",
     value = "formatted",
     na.rm = TRUE,
-    -!!rlang::sym("skim_type"),
-    -!!rlang::sym("skim_variable")
+    -.data$skim_type,
+    -.data$skim_variable
   )
 }
 
