@@ -46,7 +46,7 @@ Imports:
     stats,
     stringr (>= 1.1),
     tibble (>= 2.0.0),
-    tidyr (>= 0.7),
+    tidyr (>= 1.0),
     tidyselect (>= 0.2.5)
 Suggests:
     extrafont,
