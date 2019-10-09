@@ -10,5 +10,3 @@ repos:
     -   id: readme-rmd-rendered
     -   id: roxygenize
     -   id: use-tidy-description
-    -   id: spell-check
-        args: [--ignore_files=(NAMESPACE|\\.pre-commit-hooks\\.yaml)]
