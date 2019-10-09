@@ -8,32 +8,38 @@ respond to questions, comments or needed changes promptly.
 
 ## Understanding the scope of skimr
 
-Skimr solves a very specific set of problems focused on the compact, flexible
+`skimr` solves a very specific set of problems focused on the compact, flexible
 and useful display of summary data in the console. By itself it is not intended
 as a replacement for packages that create publication ready tables. The basic
 concept is that of "skimming" a data frame or tibble to get an overview of the
-data it contains. One intended group of users is students in a first semester
-statistics class. As such, the package is focused on data types that are widely
-used. One general guideline is that if a data type is not found in the
-`datasets` package it will not be directly supported in `skimr`. Fortunately,
-the `skim()` function is a generic which means that rather than add to the core
-package you can write your own implementation for specialized classes of data
-and for objects that are not data frames. Please read the vignette "Supporting
-additional objects" that provides documentation of how to do this.
+data it contains.
+
+One intended group of users is students in a first semester statistics class. As
+such, the package is focused on data types that are widely used. One general
+guideline is that if a data type is not found in the `datasets` package it will
+not be directly supported in `skimr`. Fortunately, `skim()` has a generic
+internal function for handling a variety of data types `get_skimmers()`. See the
+documentation for that function or the vignette "Supporting additional objects"
+for documentation on how to do this.
+
+Similarly, `skimr` is deeply tied to the `tidyverse` and `dplyr` in particular.
+The comes with a lot of benefits, but some constraints too. Most importantly,
+data processed by `skim()` needs to be an object that inherits from a data frame
+or in a form that can be coerced to a data frame.
 
 ## Tests
 
-Skimr uses testthat for testing. Please try to provide 100% test coverage for
-any submitted code and always check that existing tests continue to pass. If you
-are a beginner and need help with writing a test, mention this in the issue and
-we will try to help.
+`skimr` uses `testthat` for testing. Please try to provide 100% test coverage
+for any submitted code and always check that existing tests continue to pass. If
+you are a beginner and need help with writing a test, mention this in the issue
+and we will try to help.
 
 ## Pull requests
 
 Pull requests should be against the _develop_ branch not the master branch. You
 can set this when creating your pull request. Please make a separately named
 branch to submit. Keep each branch for a complete specific issue. If you create
-a pull request by editing in the github web editor and you end up with multiple
+a pull request by editing in the GitHub web editor and you end up with multiple
 pull requests, note that in your issue comments.
 
 ## Code style
