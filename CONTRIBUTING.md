@@ -48,6 +48,7 @@ completes. Install the tool with `pip`.
 
 ```
 pip install pre-commit
+pre-commit install
 ```
 
 The checks will run automatically from there.
