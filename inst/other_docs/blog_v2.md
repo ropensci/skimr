@@ -53,6 +53,7 @@ package typically boils down to a single function call:
 
     library(skimr)
     library(dplyr)
+    options(width = 100)
 
     skim(iris)
 
@@ -74,23 +75,16 @@ package typically boils down to a single function call:
     ##                              
     ## Group variables          None
     ## 
-    ## ── Variable type: factor ──────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate ordered n_unique
-    ## 1 Species               0             1 FALSE          3
-    ##   top_counts               
-    ## 1 set: 50, ver: 50, vir: 50
+    ## ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
+    ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4
-    ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3
-    ## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1
-    ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8
-    ##    p100 hist 
-    ## 1   7.9 ▆▇▇▅▂
-    ## 2   4.4 ▁▆▇▂▁
-    ## 3   6.9 ▇▁▆▇▂
-    ## 4   2.5 ▇▁▇▅▃
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
+    ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
+    ## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
 
 Getting it right
 ================
@@ -164,11 +158,9 @@ Now, working with `skimr` is a bit more sane.
     ##                                   
     ## Group variables               None
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1
-    ##    p100 hist 
-    ## 1   6.9 ▇▁▆▇▂
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 And
 
@@ -220,11 +212,9 @@ this with `partition()`. It replaces the v1 function `skim_to_list()`.
 
     ## $numeric
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1
-    ##    p100 hist 
-    ## 1   6.9 ▇▁▆▇▂
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 You can undo a call to `partition()` with `bind()`, which joins the
 subtables into the original `skim_df` object and properly accounts for
@@ -234,11 +224,9 @@ partition and pulls out a particular subtable
     yank(skimmed, "numeric")
 
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1
-    ##    p100 hist 
-    ## 1   6.9 ▇▁▆▇▂
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
+    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 Last, with support something close to the older format with the
 `to_long()` function. This can be added for backwards compatibility.
@@ -278,7 +266,7 @@ preserves metadata columns.
     ##                                   
     ## Group variables               None
     ## 
-    ## ── Variable type: numeric ─────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable  mean
     ## 1 Petal.Length   3.76
 

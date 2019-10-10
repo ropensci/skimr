@@ -67,6 +67,7 @@ boils down to a single function call:
 ```{r render = knitr::normal_print}
 library(skimr)
 library(dplyr)
+options(width = 100)
 
 skim(iris)
 ```
