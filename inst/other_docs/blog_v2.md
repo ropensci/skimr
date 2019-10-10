@@ -53,33 +53,27 @@ package typically boils down to a single function call:
 
     library(skimr)
     library(dplyr)
-    options(width = 100)
+    options(width = 90)
 
     skim(iris)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
     ## ── Data Summary ────────────────────────
-    ##                         Value
-    ## Name                     iris
-    ## Number of rows            150
-    ## Number of columns           5
-    ##                              
-    ## Column type frequency:       
-    ##   factor                    1
-    ##   numeric                   4
-    ##                              
-    ## Group variables          None
+    ##                            Values
+    ## Name                       iris  
+    ## Number of rows             150   
+    ## Number of columns          5     
+    ## _______________________          
+    ## Column type frequency:           
+    ##   factor                   1     
+    ##   numeric                  4     
+    ## ________________________         
+    ## Group variables            None  
     ## 
-    ## ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
     ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -139,26 +133,20 @@ Now, working with `skimr` is a bit more sane.
       skim() %>%
       dplyr::filter(numeric.sd > 1)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
     skimmed
 
     ## ── Data Summary ────────────────────────
-    ##                              Value
-    ## Name                    Piped data
-    ## Number of rows                 150
-    ## Number of columns                5
-    ##                                   
-    ## Column type frequency:            
-    ##   numeric                        1
-    ##                                   
-    ## Group variables               None
+    ##                            Values    
+    ## Name                       Piped data
+    ## Number of rows             150       
+    ## Number of columns          5         
+    ## _______________________              
+    ## Column type frequency:               
+    ##   numeric                  1         
+    ## ________________________             
+    ## Group variables            None      
     ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -212,7 +200,7 @@ this with `partition()`. It replaces the v1 function `skim_to_list()`.
 
     ## $numeric
     ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -224,7 +212,7 @@ partition and pulls out a particular subtable
     yank(skimmed, "numeric")
 
     ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -256,17 +244,17 @@ preserves metadata columns.
     focus(skimmed, numeric.mean)
 
     ## ── Data Summary ────────────────────────
-    ##                              Value
-    ## Name                    Piped data
-    ## Number of rows                 150
-    ## Number of columns                5
-    ##                                   
-    ## Column type frequency:            
-    ##   numeric                        1
-    ##                                   
-    ## Group variables               None
+    ##                            Values    
+    ## Name                       Piped data
+    ## Number of rows             150       
+    ## Number of columns          5         
+    ## _______________________              
+    ## Column type frequency:               
+    ##   numeric                  1         
+    ## ________________________             
+    ## Group variables            None      
     ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable  mean
     ## 1 Petal.Length   3.76
 
@@ -285,78 +273,21 @@ different, we have a function factory for that!
     my_skim <- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
     my_skim(faithful)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 13%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name Number of rows Number of columns</td>
-<td style="text-align: left;">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Column type frequency: numeric</td>
-<td style="text-align: left;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-
-**Variable type: numeric**
-
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-<th style="text-align: right;">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">eruptions</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3.49</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: left;">▇▂▂▇▇</td>
-<td style="text-align: right;">2.29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">waiting</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">70.90</td>
-<td style="text-align: right;">13.59</td>
-<td style="text-align: right;">43.0</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">96.0</td>
-<td style="text-align: left;">▃▃▂▇▂</td>
-<td style="text-align: right;">24.00</td>
-</tr>
-</tbody>
-</table>
+    ## ── Data Summary ────────────────────────
+    ##                            Values  
+    ## Name                       faithful
+    ## Number of rows             272     
+    ## Number of columns          2       
+    ## _______________________            
+    ## Column type frequency:             
+    ##   numeric                  2       
+    ## ________________________           
+    ## Group variables            None    
+    ## 
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
+    ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
+    ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
 
 Those of you familiar with customizing `skim()` in v1 will notice a
 couple differences:
@@ -421,23 +352,40 @@ produce something nice by default.
 
     skim(chickwts)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-<table style="width:49%;">
+<table>
 <caption>Data summary</caption>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 13%" />
-</colgroup>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Name Number of rows Number of columns</td>
-<td style="text-align: left;">chickwts 71 2</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">chickwts</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Column type frequency: factor numeric</td>
-<td style="text-align: left;">1 1</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">71</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Group variables</td>
