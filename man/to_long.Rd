@@ -2,8 +2,7 @@
 % Please edit documentation in R/reshape.R
 \name{to_long}
 \alias{to_long}
-\title{Skim results returned as a tidy long data frame with four columns:
-variable, type, stat and formatted.}
+\title{Create "long" skim output}
 \usage{
 to_long(.data, ...)
 }
