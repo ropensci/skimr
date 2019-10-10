@@ -211,7 +211,7 @@ One big one is customization. We like the `skimr` defaults, but that doesn't
 guarantee you will. So what if you want to do something different, we have
 a function factory for that!
 
-```{r}
+```{r render = knitr::normal_print}
 my_skim <- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
 my_skim(faithful)
 ```
