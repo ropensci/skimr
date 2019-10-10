@@ -550,70 +550,21 @@ my_skim(faithful)</code></pre>
 ## Please use `cols = c(by_variable)`</code></pre>
 <pre><code>## Warning: `cols` is now required.
 ## Please use `cols = c(skimmed)`</code></pre>
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col width="34%"></col>
-<col width="13%"></col>
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name Number of rows Number of columns</td>
-<td align="left">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td align="left">Column type frequency: numeric</td>
-<td align="left">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p50</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-<th align="right">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">eruptions</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.49</td>
-<td align="right">1.14</td>
-<td align="right">1.6</td>
-<td align="right">4</td>
-<td align="right">5.1</td>
-<td align="left">▇▂▂▇▇</td>
-<td align="right">2.29</td>
-</tr>
-<tr class="even">
-<td align="left">waiting</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">70.90</td>
-<td align="right">13.59</td>
-<td align="right">43.0</td>
-<td align="right">76</td>
-<td align="right">96.0</td>
-<td align="left">▃▃▂▇▂</td>
-<td align="right">24.00</td>
-</tr>
-</tbody>
-</table>
+<pre><code>## ── Data Summary ────────────────────────
+##                            Value
+## Name                    faithful
+## Number of rows               272
+## Number of columns              2
+##                                 
+## Column type frequency:          
+##   numeric                      2
+##                                 
+## Group variables             None
+## 
+## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
+## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
+## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24</code></pre>
 <p>Those of you familiar with customizing <code>skim()</code> in v1 will notice a couple differences:</p>
 <ul>
 <li>we now has an object called <code>sfl()</code> for managing <code>skimr</code> function lists; more below</li>

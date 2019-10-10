@@ -291,72 +291,21 @@ different, we have a function factory for that!
     ## Warning: `cols` is now required.
     ## Please use `cols = c(skimmed)`
 
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 13%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name Number of rows Number of columns</td>
-<td style="text-align: left;">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Column type frequency: numeric</td>
-<td style="text-align: left;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-
-**Variable type: numeric**
-
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-<th style="text-align: right;">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">eruptions</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3.49</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: left;">▇▂▂▇▇</td>
-<td style="text-align: right;">2.29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">waiting</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">70.90</td>
-<td style="text-align: right;">13.59</td>
-<td style="text-align: right;">43.0</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">96.0</td>
-<td style="text-align: left;">▃▃▂▇▂</td>
-<td style="text-align: right;">24.00</td>
-</tr>
-</tbody>
-</table>
+    ## ── Data Summary ────────────────────────
+    ##                            Value
+    ## Name                    faithful
+    ## Number of rows               272
+    ## Number of columns              2
+    ##                                 
+    ## Column type frequency:          
+    ##   numeric                      2
+    ##                                 
+    ## Group variables             None
+    ## 
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+    ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
+    ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
+    ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
 
 Those of you familiar with customizing `skim()` in v1 will notice a
 couple differences:
