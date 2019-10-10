@@ -78,7 +78,7 @@ test_that("inline histogram is returns empty string when x is all NaN.", {
   expect_identical(input, " ")
 })
 
-test_that("inline histogram is calculated correctly when x is evenly distributed.", {
+test_that("inline histogram is correct when x is evenly distributed.", {
   input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
   expect_identical(input, "▇▇▇▇▇▇▇▇")
 })
@@ -115,9 +115,6 @@ test_that("min_char is calculated correctly, including empty strings.", {
 
 test_that("min_char with a multibyte character does not throw an error.", {
   data <- c("a", "ab", "abc", "Coleophora asteris M\x9fhl.")
-  # correct <- as.integer(1)
-  # input <- min_char(data)
-  # expect_identical(input, correct)
   expect_error(min_char(data), NA)
 })
 

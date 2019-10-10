@@ -29,7 +29,10 @@ test_that("Skimming functions can be changed with a list", {
 test_that("Skimming functions can be changed with a list", {
   newfuns1 <- sfl(iqr = IQR, q99 = ~ quantile(., probs = .99))
   newfuns2 <- sfl(n2 = length)
-  new_skim <- skim_with(list(numeric = newfuns1, factor = newfuns2), append = FALSE)
+  new_skim <- skim_with(
+    list(numeric = newfuns1, factor = newfuns2),
+    append = FALSE
+  )
   input <- new_skim(iris)
   used <- attr(input, "skimmers_used")
   expect_identical(

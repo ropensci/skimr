@@ -12,7 +12,8 @@
 #' `yank()` gives you a single subtable for a data type.
 #'
 #' @param data A `skim_df`.
-#' @param skim_type A character scalar. The subtable to extract from a `skim_df`.
+#' @param skim_type A character scalar. The subtable to extract from a
+#'   `skim_df`.
 #' @return A `skim_list` of `skim_df`'s, by type.
 #' @examples
 #' # Create a wide skimmed data frame (a skim_df)
@@ -31,7 +32,6 @@
 partition <- function(data) {
   assert_is_skim_df(data)
   data_as_list <- split(data, data$skim_type)
-  types <- names(data_as_list)
   groups <- attr(data, "groups")
   base <- attr(data, "base_skimmers")
 
