@@ -96,20 +96,17 @@ skim_with <- function(...,
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
       skimmers = purrr::map(combined_skimmers, mangle_names, names(base$funs)),
-      skim_variable = split(selected, types)[!!rlang::sym("skim_type")]
+      skim_variable = split(selected, types)[.data$skim_type]
     )
-    grouped <- dplyr::group_by(ready_to_skim, !!rlang::sym("skim_type"))
+    grouped <- dplyr::group_by(ready_to_skim, .data$skim_type)
     nested <- dplyr::summarize(
       grouped,
       skimmed = purrr::map2(
-        !!rlang::sym("skimmers"),
-        !!rlang::sym("skim_variable"),
-        skim_by_type,
-        data
+        .data$skimmers, .data$skim_variable, skim_by_type, data
       )
     )
     structure(
-      tidyr::unnest(nested),
+      tidyr::unnest(nested, .data$skimmed),
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
@@ -314,7 +311,7 @@ build_results <- function(skimmed, data_cols, groups) {
       skim_variable = data_cols,
       by_variable = purrr::map(data_cols, reshape_skimmed, skimmed, groups)
     )
-    tidyr::unnest(out)
+    tidyr::unnest(out, .data$by_variable)
   } else {
     tibble::tibble(
       skim_variable = data_cols,
