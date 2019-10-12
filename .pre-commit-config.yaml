@@ -1,0 +1,11 @@
+# Configuration of project precommits
+repos:
+-   repo: https://github.com/lorenzwalthert/pre-commit-hooks
+    rev: v0.0.0.9016
+    hooks:
+    -   id: style-files
+    -   id: parsable-R
+    -   id: no-browser-statement
+    -   id: readme-rmd-rendered
+    -   id: roxygenize
+    -   id: use-tidy-description

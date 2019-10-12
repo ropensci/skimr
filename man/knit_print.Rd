@@ -24,7 +24,7 @@
 \item{...}{Additional arguments passed to method}
 }
 \value{
-A \code{knit_asis} object. Which is used by \code{knitr} when renderind.
+A \code{knit_asis} object. Which is used by \code{knitr} when rendered.
 }
 \description{
 Instead of standard R output, \code{knitr} and \code{RMarkdown} documents will have
