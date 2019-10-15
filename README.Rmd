@@ -1,6 +1,5 @@
 ---
-output: 
- md_document
+output: md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
@@ -10,12 +9,16 @@ options(tibble.width = Inf)
 options(width = 120)
 ```
 
-[![Build Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![Build
+Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/skimr)
 [![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+[![cran
+checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
 
 `skimr` provides a frictionless approach to summary statistics which conforms
-to the [principle of least surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
+to the [principle of least
+surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
 displaying summary statistics the user can skim quickly to understand their
 data. It handles different data types and returns a `skim_df` object which can
 be included in a pipeline or displayed nicely for the human reader.
@@ -54,13 +57,13 @@ Do not rely on APIs from the develop branch, as they are likely to change.
 - supports spark-bar and spark-line based on
   [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
 
-### Separates variables by class:  
+### Separates variables by class:
 
 ```{r, render = knitr::normal_print}
 skim(chickwts)
 ```
 
-### Presentation is in a compact horizontal format: 
+### Presentation is in a compact horizontal format:
 
 ```{r, render = knitr::normal_print}
 skim(iris)
@@ -85,7 +88,7 @@ skim(iris) %>%
 skim(iris, Sepal.Length, Petal.Length)
 ```
 
-### Handles grouped data 
+### Handles grouped data
 
 `skim()` can handle data that has been grouped using `dplyr::group_by()`.
 
@@ -190,15 +193,17 @@ get_skimmers.my_data_type <- function(column) {
 ## Limitations of current version
 
 We are aware that there are issues with rendering the inline histograms and
-line charts in various contexts, some of which are described below. 
+line charts in various contexts, some of which are described below.
 
 ### Support for spark histograms
 
 There are known issues with printing the spark-histogram characters when
 printing a data frame. For example, `"▂▅▇"` is printed as
 `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
-the low-level code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html) for printing dataframes.
-While some cases have been addressed, there are, for example, reports of this 
+the low-level
+code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
+for printing dataframes.
+While some cases have been addressed, there are, for example, reports of this
 issue in Emacs ESS.
 
 This means that while `skimr` can render the histograms to the console and in
