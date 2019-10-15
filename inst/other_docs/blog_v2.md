@@ -3,7 +3,7 @@ Jay-Z](https://www.youtube.com/watch?v=-LzdKH1naok)
 
 We announced the testing version of `skimr` v2 on [June 19,
 2018](https://github.com/ropensci/skimr/issues/341). After more than a
-year of (admittedly intermittent) work, we’re thrilled to be able to say
+year of (admittedly intermittent) work, we're thrilled to be able to say
 that the package is ready to go to CRAN. So, what happened over the last
 year? And why are we so excited for V2?
 
@@ -21,8 +21,8 @@ collaboration between eight different participants that resulted in a
 conceptual outline of the package and a basic working version.
 Participating in the unconf was a truly magical experience, with
 everyone bringing a tremendous amount of energy and ideas to the
-project, and implementation happening over a flurry of [“fancy git
-commits”](https://twitter.com/AmeliaMN/status/867818976666976256).
+project, and implementation happening over a flurry of ["fancy git
+commits"](https://twitter.com/AmeliaMN/status/867818976666976256).
 
 About six months later, we released our first version on CRAN. The time
 between these two milestones was mostly spent on fleshing out all of the
@@ -32,8 +32,8 @@ way.
 
 Getting the package on CRAN opened the gates for bug reports and feature
 requests on [GitHub](https://github.com/ropensci/skimr/issues). About
-the same time we pushed our first version to CRAN, Elin got `skimr`’s
-rOpenSci’s package [peer
+the same time we pushed our first version to CRAN, Elin got `skimr`'s
+rOpenSci's package [peer
 review](https://github.com/ropensci/software-review/issues/175) started
 (thank you Jennifer and Jim!), opening another incredibly useful channel
 for collecting feedback on the package. All of these new ideas and
@@ -42,12 +42,12 @@ level, but doing that would require rethinking the package, from the
 ground up.
 
 A month after finishing the peer review (and six months after the
-process began), we announced v2. Over the first phase of `skimr`’s life,
+process began), we announced v2. Over the first phase of `skimr`'s life,
 we accumulated 700 commits, two release, 400 GitHub stars, 95 percent
-code coverage and a lifetime’s worth of [unicode rendering
+code coverage and a lifetime's worth of [unicode rendering
 bugs](https://github.com/ropensci/skimr#support-for-spark-histograms)!
 
-Just kidding! We love our little histograms, even when they don’t love
+Just kidding! We love our little histograms, even when they don't love
 us back! For those of you that might have never seen `skimr`, using the
 package typically boils down to a single function call:
 
@@ -83,11 +83,11 @@ package typically boils down to a single function call:
 Getting it right
 ================
 
-Under normal circumstances (i.e. not during a hackathon), most software
+Under normal circumstances (i.e. not during a hackathon), most software
 engineering projects begin with a design phase and series of
 increasingly detailed design docs. `skimr` is only a few hundred lines
-of code, which means “increasingly detailed design docs” translates to
-one doc. But we did actually write it! [It’s
+of code, which means "increasingly detailed design docs" translates to
+one doc. But we did actually write it! [It's
 here](https://docs.google.com/document/d/18lBStDZzd1rJq08O-4Sw2qHhuHEZ79QX4sBkeyzWNFY/edit#heading=h.5x0d5h95i329).
 And it still goes a good job of laying out some of the big ideas we were
 interested in taking on for v2.
@@ -101,9 +101,9 @@ interested in taking on for v2.
 Better internal data structures
 -------------------------------
 
-In v1, `skimr` stored all of its data in a “long format”, data frame.
+In v1, `skimr` stored all of its data in a "long format", data frame.
 Although hidden from the user by its print methods, this format would
-appear any time you’d try do something with the results of a `skim()`
+appear any time you'd try do something with the results of a `skim()`
 call. It looked something like this:
 
     skim(mtcars) %>% dplyr::filter(stat=="hist")
@@ -172,22 +172,22 @@ And
     ## $ numeric.p100      <dbl> 6.9
     ## $ numeric.hist      <chr> "▇▁▆▇▂"
 
-It’s still not perfect, as you need to rely on a *pseudo-namespace* to
+It's still not perfect, as you need to rely on a *pseudo-namespace* to
 refer to the column that you want. But this is unfortunately a necessary
-trade-off. As the Rstats Bible, errr Hadley Wickham’s *Advanced R*,
+trade-off. As the Rstats Bible, errr Hadley Wickham's *Advanced R*,
 states, all elements of [an atomic vector must have the same
-type](https://adv-r.hadley.nz/vectors-chap.html). This normally isn’t
+type](https://adv-r.hadley.nz/vectors-chap.html). This normally isn't
 something that you have to think too much about, that is until you try
 to combine the means of all your `Date` columns with the means of your
 `numeric` columns and everything comes out utterly garbled. So instead
 of that basket of laughs, we prefix columns names by their data type.
 
-There’s a couple of other nuances here:
+There's a couple of other nuances here:
 
 -   The data frame `skim()` produces always starts off with some
     metadata columns
 -   Functions that always produce the same, regardless of input type,
-    can be treated as `base_skimmers` and don’t need a namespace
+    can be treated as `base_skimmers` and don't need a namespace
 
 ### Manipulating internal data
 
@@ -217,18 +217,23 @@ partition and pulls out a particular subtable
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 Last, with support something close to the older format with the
-`to_long()` function. This can be added for backwards compatibility.
+`to_long()` function. This can be added for something close to backwards
+compatibility. Being realistic on open source sustainability means that
+we are not able to support 100% backward compatibility in v2 even with
+new functions. Meanwhile you can keep using v1 if you are happy with it.
+However, because `skimr`'s dependencies are under ongoing development,
+sooner or later skimr v1 will no longer work with updates to them.
 
 ### Working with dplyr
 
 Using `skimr` in a `dplyr` pipeline was part of the original package
-design, and we’ve needed to devote some extra love to making sure that
+design, and we've needed to devote some extra love to making sure that
 everything is as seamless as possible. Part of this is due to the object
-produce by `skim()`, which we call `skim_df`. It’s a little weird in
+produce by `skim()`, which we call `skim_df`. It's a little weird in
 that it needs both metadata and columns in the underlying data frame.
 
 In practice, this means that you can coerce it into a different type
-through normal `dplyr` operations. Here’s one:
+through normal `dplyr` operations. Here's one:
 
     select(skimmed, numeric.mean)
 
@@ -237,7 +242,7 @@ through normal `dplyr` operations. Here’s one:
     ##          <dbl>
     ## 1         3.76
 
-To get around this, we’ve added some helper functions and methods. The
+To get around this, we've added some helper functions and methods. The
 more `skimr`-like replacement for `select()` is `focus()`, which
 preserves metadata columns.
 
@@ -261,19 +266,18 @@ preserves metadata columns.
 Configuring and extending skimr
 ===============================
 
-Most of `skimr`’s magic, to [steal a
+Most of `skimr`'s magic, to [steal a
 term](https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages),
 comes from the fact that you can do most everything with one function.
-But believe it or not, there’s actually a bit more to the package.
+But believe it or not, there's actually a bit more to the package.
 
 One big one is customization. We like the `skimr` defaults, but that
-doesn’t guarantee you will. So what if you want to do something
+doesn't guarantee you will. So what if you want to do something
 different, we have a function factory for that!
 
     my_skim <- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
     my_skim(faithful)
 
-<<<<<<< HEAD
     ## ── Data Summary ────────────────────────
     ##                            Values  
     ## Name                       faithful
@@ -289,102 +293,6 @@ different, we have a function factory for that!
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
     ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
     ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
-||||||| 074688d
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 13%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name Number of rows Number of columns</td>
-<td style="text-align: left;">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Column type frequency: numeric</td>
-<td style="text-align: left;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-
-**Variable type: numeric**
-
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-<th style="text-align: right;">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">eruptions</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3.49</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: left;">▇▂▂▇▇</td>
-<td style="text-align: right;">2.29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">waiting</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">70.90</td>
-<td style="text-align: right;">13.59</td>
-<td style="text-align: right;">43.0</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">96.0</td>
-<td style="text-align: left;">▃▃▂▇▂</td>
-<td style="text-align: right;">24.00</td>
-</tr>
-</tbody>
-</table>
-=======
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-    ## ── Data Summary ────────────────────────
-    ##                            Value
-    ## Name                    faithful
-    ## Number of rows               272
-    ## Number of columns              2
-    ##                                 
-    ## Column type frequency:          
-    ##   numeric                      2
-    ##                                 
-    ## Group variables             None
-    ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
-    ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
-    ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
->>>>>>> 8512ca4eedc6304469fb56f763917978e390b236
 
 Those of you familiar with customizing `skim()` in v1 will notice a
 couple differences:
@@ -406,10 +314,10 @@ advantages over the previous approach.
 
 The other big change is how we now handle different data types. Although
 many will never see it, a key piece of `skimr` customization comes from
-the `get_skimmers()` generic. It’s used to detect different column types
+the `get_skimmers()` generic. It's used to detect different column types
 in your data and set the appropriate summary functions for that type.
-It’s also designed to work with `sfl()`. Here’s an example from the
-“Supporting additional objects” vignette. Here, we’ll create some
+It's also designed to work with `sfl()`. Here's an example from the
+"Supporting additional objects" vignette. Here, we'll create some
 skimmers for
 [`sf`](https://cran.r-project.org/web/packages/sf/index.html) data
 types:
@@ -453,40 +361,40 @@ produce something nice by default.
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Name</td>
-<td style="text-align: left;">chickwts</td>
+<td align="left">Name</td>
+<td align="left">chickwts</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">71</td>
+<td align="left">Number of rows</td>
+<td align="left">71</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">2</td>
+<td align="left">Number of columns</td>
+<td align="left">2</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">_______________________</td>
-<td style="text-align: left;"></td>
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Column type frequency:</td>
-<td style="text-align: left;"></td>
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">factor</td>
-<td style="text-align: left;">1</td>
+<td align="left">factor</td>
+<td align="left">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">1</td>
+<td align="left">numeric</td>
+<td align="left">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">________________________</td>
-<td style="text-align: left;"></td>
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
@@ -496,22 +404,22 @@ produce something nice by default.
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: left;">ordered</th>
-<th style="text-align: right;">n_unique</th>
-<th style="text-align: left;">top_counts</th>
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">feed</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">soy: 14, cas: 12, lin: 12, sun: 12</td>
+<td align="left">feed</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">6</td>
+<td align="left">soy: 14, cas: 12, lin: 12, sun: 12</td>
 </tr>
 </tbody>
 </table>
@@ -521,32 +429,32 @@ produce something nice by default.
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p25</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p75</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">weight</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">261.31</td>
-<td style="text-align: right;">78.07</td>
-<td style="text-align: right;">108</td>
-<td style="text-align: right;">204.5</td>
-<td style="text-align: right;">258</td>
-<td style="text-align: right;">323.5</td>
-<td style="text-align: right;">423</td>
-<td style="text-align: left;">▆▆▇▇▃</td>
+<td align="left">weight</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">261.31</td>
+<td align="right">78.07</td>
+<td align="right">108</td>
+<td align="right">204.5</td>
+<td align="right">258</td>
+<td align="right">323.5</td>
+<td align="right">423</td>
+<td align="left">▆▆▇▇▃</td>
 </tr>
 </tbody>
 </table>
@@ -554,36 +462,38 @@ produce something nice by default.
 In this context, you configure the output the same way you handle other
 `knitr` code chunks.
 
-This means that we’re dropping support for `kable.skim_df()` and
+This means that we're dropping support for `kable.skim_df()` and
 `pander.skim_df()`. But you can still get pretty similar results to
 these functions by using the reshaping functions described above to get
-subtables.
+subtables. You can also still use `Pander` and other nice rendering
+packages on an ad hoc basis as you would for other data frames or
+tibbles.
 
 We also have a similarly-nice rendered output in
 [Jupyter](https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
 and RMarkdown notebooks. In the latter, the summary is separated from
 the rest of the output when working interactively. We like it that way,
-but we’d be happy to hear what the rest of you think!
+but we'd be happy to hear what the rest of you think!
 
 Wait, that took over a year?
 ============================
 
-Well, we think that’s a lot! But to be fair, it wasn’t exactly simple to
+Well, we think that's a lot! But to be fair, it wasn't exactly simple to
 keep up with `skimr`. Real talk, open source development takes up a lot
-of time, and the `skimr` developers have other priorities. Michael’s
-family added a new baby, and despite swearing up and down otherwise, he
-got absolutely nothing not-baby-related done during his paternity leave
-(take note new dads!). Elin ended up taking a much bigger role on at
-Lehman, really limiting time for any other work.
+of time, and the `skimr` developers have additional important
+priorities. Michael's family added a new baby, and despite swearing up
+and down otherwise, he got absolutely nothing not-baby-related done
+during his paternity leave (take note new dads!). Elin ended up taking a
+much bigger role on at Lehman, really limiting time for any other work.
 
 Even so, these are just the highlights in the normal ebb and flow of
-this sort of work. Since it’s no one’s real job, it might not always be
-the first focus. And that’s OK! We’ve been really lucky to have a group
+this sort of work. Since it's no one's real job, it might not always be
+the first focus. And that's OK! We've been really lucky to have a group
 of new users that have been very patient with this slow development
 cycle while still providing really good feedback throughout. Thank you
 all!
 
-We’re really excited about this next step in the `skimr` journey. We’ve
+We're really excited about this next step in the `skimr` journey. We've
 put a huge amount of work into this new version. Hopefully it shows. And
 hopefully it inspires some of you to send more feedback and help us find
 even more ways to improve!
