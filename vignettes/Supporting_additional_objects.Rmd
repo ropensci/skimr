@@ -33,6 +33,17 @@ library(sf)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
 
+```
+Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0
+Reading layer `nc' from data source `/Users/elinwaring/Library/R/3.6/library/sf/shape/nc.shp' using driver `ESRI Shapefile'
+Simple feature collection with 100 features and 14 fields
+geometry type:  MULTIPOLYGON
+dimension:      XY
+bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+epsg (SRID):    4267
+proj4string:    +proj=longlat +datum=NAD27 +no_defs
+```
+
 ## Experiment interactively
 
 `skimr` has an opinionated list of functions for each class (e.g. numeric,
@@ -80,8 +91,6 @@ others if we want to fully support `sf`.
 ```{r, eval = FALSE}
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
-    missing = n_missing,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
     funny = funny_sf
@@ -89,19 +98,28 @@ skim_sf <- skim_with(
 )
 ```
 
+
 The example above creates a new *function*, and you can call that function on
 data frames with `sfc_POINT` data to get the appropriate summary statistics.
 
 ```{r, eval = FALSE}
-skim_sf(nc)
+skim_sf(nc$geometry)
 ```
+```
+── Data Summary ────────────────────────
+                           Values                      
+Name                       structure(list(geometry =...
+Number of rows             100                         
+Number of columns          1                           
+_______________________                                
+Column type frequency:                                 
+  sfc_MULTIPOLYGON         1                           
+________________________                               
+Group variables            None                        
 
-```
-Sfc_multipolygon Variables
-# A tibble: 1 x 7
-       var missing complete     n n_unique valid funny
-     <chr>   <chr>    <chr> <chr>    <chr> <chr> <chr>
-1 geometry       0      100   100        1   100   101
+── Variable type: sfc_MULTIPOLYGON ──────────────────────────────────────────────────────
+  skim_variable n_missing complete_rate n_unique valid funny missing     n
+1 geometry              0             1      100   100   101       0   100
 ```
 
 Sharing this function within a separate package requires an export. The simplest
@@ -143,8 +161,6 @@ a generic we also want to identify the `skim_type` in the `sfl`.
 get_skimmers.sfc_MULTIPOLYGON <- function(column) {
   sfl(
     skim_type = "sfc_MULTIPOLYGON",
-    missing = n_missing,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
     funny = funny_sf
@@ -163,8 +179,6 @@ The same strategy follows for other data types.
 get_skimmers.sfc_POINT <- function(column) {
   sfl(
     skim_type = "sfc_POINT",
-    missing = n_missing,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.))
   )
@@ -182,10 +196,10 @@ get_default_skimmer_names()
 ```
 ...
 $sfc_MULTIPOLYGON
-[1] "missing"  "complete" "n"        "n_unique" "valid"    "funny"
+[1] "n_unique" "valid"    "funny" 
 
 $sfc_POINT
-[1] "missing"  "complete" "n"        "n_unique" "valid"  ...
+[1] "n_unique" "valid"  
 ```
 ## Conclusion
 
