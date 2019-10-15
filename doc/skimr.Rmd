@@ -2,7 +2,9 @@
 title: "Using Skimr"
 author: "Elin Waring"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    latex_engine: xelatex
 vignette: >
   %\VignetteIndexEntry{get-started}
   %\VignetteEngine{knitr::rmarkdown}
@@ -48,15 +50,15 @@ extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 
 Results of `skim()` are *printed* horizontally, with one section per variable
-type and one row per variable.
+type and one row per variable. 
 
 ```{r, render = knitr::normal_print}
 library(skimr)
 skim(iris)
 ```
 
-The format of the results are a similar data frame, with some additional
-attributes and two metadata columns:
+The format of the results are a similar data frame, with some additional 
+attributes and two metadata columns: 
 
 - `skim_variable`: name of the original variable
 - `skim_type`: class of the variable
@@ -71,7 +73,7 @@ skim(iris) %>%
 ```
 
 In order to avoid type coercion, columns for summary statistics for different
-types are prefixed with the corresponding `skim_type`. This means that the
+types are prefixed with the corresponding `skim_type`. This means that the 
 columns of the `skim_df` are somewhat sparse, with quite a few missing
 variables.
 
@@ -128,7 +130,7 @@ Or with common `select` helpers.
 skim(iris, starts_with("Sepal"))
 ```
 
-If an individual column is of an unsupported class, it is treated as a
+If an individual column is of an unsuppported class, it is treated as a
 character variable with a warning.
 
 ## Skimming vectors
@@ -152,7 +154,7 @@ all.equal(skim(lynx), skim(as.data.frame(lynx)))
 ## Skimming matrices
 
 `skimr` does not support skimming matrices directly but coerces them to data
-frames. Columns in the matrix become variables. This behavior is similar to
+frames. Columns in the matrix become variables. This behavior is similar to 
 `summary.matrix()`). Three possible ways to handle matrices  with `skim()`
 parallel the three variations of the mean function for matrices.
 
@@ -165,10 +167,10 @@ Skimming the matrix produces similar results to `colMeans()`.
 
 ```{r, render = knitr::normal_print}
 colMeans(m)
-skim(m) # Similar to summary.matrix and colMeans()
+skim(m)    # Similar to summary.matrix and colMeans()
 ```
 
-Skimming the transpose of the matrix will give row-wise results.
+Skimming the transpose of the matrix will give rowwise results.
 
 ```{r, render = knitr::normal_print}
 rowMeans(m)
@@ -204,7 +206,7 @@ sensible format for the majority of operations when investigating data, but
 the package has some other functions to help with edge cases.
 
 First, `partition()` returns a named list of the wide data frames for each data
-type. Unlike the original data the partitioned data only has columns
+type. Unlike the original data the parititioned data only has columns
 corresponding to the skimming functions use for this data type.
 
 ```{r, render = knitr::normal_print}
@@ -283,7 +285,7 @@ by changing the `skimr_digits` chunk option.
 
 `skimr` is opinionated in its choice of defaults, but users can easily add,
 replace, or remove the statistics for a class. For interactive use, you can
-create your own skimming function with the `skim_with()` factory. `skimr` also
+create your own skimming function with the `skim_with()` factory. `skimr` also 
 has an API for extensions in other packages. Working with that is covered later.
 
 To add a statistic for a data type, create an `sfl()` (a `skimr` function list)
@@ -296,7 +298,7 @@ my_skim(faithful)
 
 As the previous example suggests, the default is to append *new* summary
 statistics to the preexisting set. This behavior isn't always desirable,
-especially when you want lots of changes. To stop appending, set
+expecially when you want lots of changes. To stop appending, set
 `append = FALSE`.
 
 ```{r}
@@ -314,7 +316,7 @@ no_hist(Nile)
 
 The same pattern applies to changing skimmers for multiple classes
 simultaneously. If you want to partially-apply function arguments, use the
-Tidyverse lambda syntax.
+tidyverse lambda syntax.
 
 ```{r}
 my_skim <- skim_with(

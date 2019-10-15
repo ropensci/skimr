@@ -13,7 +13,7 @@
 
 <meta name="author" content="Elin Waring" />
 
-<meta name="date" content="2019-10-10" />
+<meta name="date" content="2019-10-14" />
 
 <title>Using Skimr</title>
 
@@ -304,7 +304,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Using Skimr</h1>
 <h4 class="author">Elin Waring</h4>
-<h4 class="date">2019-10-10</h4>
+<h4 class="date">2019-10-14</h4>
 
 
 
@@ -345,10 +345,6 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Results of <code>skim()</code> are <em>printed</em> horizontally, with one section per variable type and one row per variable.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(skimr)</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="kw">skim</span>(iris)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -384,12 +380,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><code>skim_type</code>: class of the variable</li>
 </ul>
 <p>Unlike many other objects within <code>R</code>, these columns are intrinsic to the <code>skim_df</code> class. Dropping these variables will result in a coercion to a <code>tibble</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type)</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 1
 ##   skim_type
 ## * &lt;chr&gt;    
@@ -399,12 +391,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 4 numeric  
 ## 5 numeric</code></pre>
 <p>In order to avoid type coercion, columns for summary statistics for different types are prefixed with the corresponding <code>skim_type</code>. This means that the columns of the <code>skim_df</code> are somewhat sparse, with quite a few missing variables.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>()</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 15
 ##   skim_type skim_variable n_missing complete_rate factor.ordered
 ##   &lt;chr&gt;     &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt; &lt;lgl&gt;         
@@ -418,12 +406,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## #   numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;,
 ## #   numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</code></pre>
 <p>This is in contrast to <code>summary.data.frame()</code>, which stores statistics in a <code>table</code>. The distinction is important, because the <code>skim_df</code> object is pipeable and easy to use for additional manipulation: for example, the user could select all of the variable means, or all summary statistics for a specific variable.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(skim_variable <span class="op">==</span><span class="st"> &quot;Petal.Length&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(skim_variable <span class="op">==</span><span class="st"> &quot;Petal.Length&quot;</span>)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -441,12 +425,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##    p100 hist 
 ## 1   6.9 ▇▁▆▇▂</code></pre>
 <p>Most <code>dplyr</code> verbs should work as expected.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type, skim_variable, n_missing)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type, skim_variable, n_missing)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -470,12 +450,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 3 Petal.Length          0
 ## 4 Petal.Width           0</code></pre>
 <p>The base skimmers <code>n_missing</code> and <code>complete_rate</code> are computed for all of the columns in the data. But all other type-based skimmers have a namespace. You need to use a <code>skim_type</code> prefix to refer to correct column.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type, skim_variable, numeric.mean)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(skim_type, skim_variable, numeric.mean)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -499,13 +475,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 3 Petal.Length   3.76
 ## 4 Petal.Width    1.20</code></pre>
 <p><code>skim()</code> also supports grouped data. In this case, one additional column for each grouping variable is added to the <code>skim_df</code> object.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">skim</span>()</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">skim</span>()</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values    
 ## Name                       Piped data
@@ -545,9 +517,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 11  1.3   1.5    1.8 ▅▇▃▆▁
 ## 12  2     2.3    2.5 ▂▇▆▅▇</code></pre>
 <p>Individual columns from a data frame may be selected using tidyverse-style selectors.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">skim</span>(iris, Sepal.Length, Species)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">skim</span>(iris, Sepal.Length, Species)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -572,11 +542,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##    p100 hist 
 ## 1   7.9 ▆▇▇▅▂</code></pre>
 <p>Or with common <code>select</code> helpers.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">skim</span>(iris, <span class="kw">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">skim</span>(iris, <span class="kw">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       iris  
@@ -595,15 +561,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##    p100 hist 
 ## 1   7.9 ▆▇▇▅▂
 ## 2   4.4 ▁▆▇▂▁</code></pre>
-<p>If an individual column is of an unsupported class, it is treated as a character variable with a warning.</p>
+<p>If an individual column is of an unsuppported class, it is treated as a character variable with a warning.</p>
 </div>
 <div id="skimming-vectors" class="section level2">
 <h2>Skimming vectors</h2>
 <p>In <code>skimr</code> v2, <code>skim()</code> will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in <code>as.data.frame()</code>.</p>
 <p>For example, the <code>lynx</code> data set is class <code>ts</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">skim</span>(lynx)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">skim</span>(lynx)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values                      
 ## Name                       structure(list(x = struct...
@@ -621,32 +585,23 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ##      sd   min   max median line_graph
 ## 1 1586.    39  6991    771 ⡈⢄⡠⢁⣀⠒⣀⠔</code></pre>
 <p>Which is the same as</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">all.equal</span>(<span class="kw">skim</span>(lynx), <span class="kw">skim</span>(<span class="kw">as.data.frame</span>(lynx)))</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`
-
-## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">all.equal</span>(<span class="kw">skim</span>(lynx), <span class="kw">skim</span>(<span class="kw">as.data.frame</span>(lynx)))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="skimming-matrices" class="section level2">
 <h2>Skimming matrices</h2>
 <p><code>skimr</code> does not support skimming matrices directly but coerces them to data frames. Columns in the matrix become variables. This behavior is similar to <code>summary.matrix()</code>). Three possible ways to handle matrices with <code>skim()</code> parallel the three variations of the mean function for matrices.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb50-2" title="2">m</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb31-2" title="2">m</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    5    9
 ## [2,]    2    6   10
 ## [3,]    3    7   11
 ## [4,]    4    8   12</code></pre>
 <p>Skimming the matrix produces similar results to <code>colMeans()</code>.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">colMeans</span>(m)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">colMeans</span>(m)</a></code></pre></div>
 <pre><code>## [1]  2.5  6.5 10.5</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">skim</span>(m) <span class="co"># Similar to summary.matrix and colMeans()</span></a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">skim</span>(m)    <span class="co"># Similar to summary.matrix and colMeans()</span></a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values                      
 ## Name                       structure(list(V1 = c(1, ...
@@ -667,14 +622,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 1     4 ▇▇▁▇▇
 ## 2     8 ▇▇▁▇▇
 ## 3    12 ▇▇▁▇▇</code></pre>
-<p>Skimming the transpose of the matrix will give row-wise results.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">rowMeans</span>(m)</a></code></pre></div>
+<p>Skimming the transpose of the matrix will give rowwise results.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">rowMeans</span>(m)</a></code></pre></div>
 <pre><code>## [1] 5 6 7 8</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">skim</span>(<span class="kw">t</span>(m))</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">skim</span>(<span class="kw">t</span>(m))</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values                      
 ## Name                       structure(list(V1 = c(1, ...
@@ -698,9 +649,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 3    11 ▇▁▇▁▇
 ## 4    12 ▇▁▇▁▇</code></pre>
 <p>And call <code>c()</code> on the matrix to get results across all columns.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">skim</span>(<span class="kw">c</span>(m))</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">skim</span>(<span class="kw">c</span>(m))</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values                      
 ## Name                       structure(list(data = c(1...
@@ -717,19 +666,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 1 data                  0             1   6.5  3.61     1  3.75   6.5  9.25
 ##    p100 hist 
 ## 1    12 ▇▅▅▅▇</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">mean</span>(m)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">mean</span>(m)</a></code></pre></div>
 <pre><code>## [1] 6.5</code></pre>
 </div>
 <div id="skimming-without-modification" class="section level2">
 <h2>Skimming without modification</h2>
 <p><code>skim_tee()</code> produces the same printed version as <code>skim()</code> but returns the original, unmodified data frame. This allows for continued piping of the original data.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">iris_setosa &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb69-2" title="2"><span class="st">  </span><span class="kw">skim_tee</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb69-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">iris_setosa &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="st">  </span><span class="kw">skim_tee</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values
 ## Name                       .data 
@@ -765,14 +710,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="reshaping-the-results-from-skim" class="section level1">
 <h1>Reshaping the results from <code>skim()</code></h1>
 <p>As noted above, <code>skim()</code> returns a wide data frame. This is usually the most sensible format for the majority of operations when investigating data, but the package has some other functions to help with edge cases.</p>
-<p>First, <code>partition()</code> returns a named list of the wide data frames for each data type. Unlike the original data the partitioned data only has columns corresponding to the skimming functions use for this data type.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb73-3" title="3"><span class="st">  </span><span class="kw">partition</span>()</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<p>First, <code>partition()</code> returns a named list of the wide data frames for each data type. Unlike the original data the parititioned data only has columns corresponding to the skimming functions use for this data type.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="st">  </span><span class="kw">partition</span>()</a></code></pre></div>
 <pre><code>## $factor
 ## 
 ## ── Variable type: factor ──────────────────────────────────────────────────
@@ -795,13 +736,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 3   6.9 ▇▁▆▇▂
 ## 4   2.5 ▇▁▇▅▃</code></pre>
 <p>Alternatively, <code>yank()</code> selects only the subtable for a specific type. Think of it like <code>dplyr::filter</code> on column types in the original data. Again, unsuitable columns are dropped.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="st">  </span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="st">  </span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)</a></code></pre></div>
 <pre><code>## 
 ## ── Variable type: numeric ─────────────────────────────────────────────────
 ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
@@ -815,20 +752,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 3   6.9 ▇▁▆▇▂
 ## 4   2.5 ▇▁▇▅▃</code></pre>
 <p><code>to_long()</code> returns a single long data frame with columns <code>variable</code>, <code>type</code>, <code>statistic</code> and <code>formatted</code>. This is similar but not identical to the <code>skim_df</code> object in <code>skimr</code> v1.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-3" title="3"><span class="st">  </span><span class="kw">to_long</span>()</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`
-
-## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="st">  </span><span class="kw">to_long</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 131 x 4
 ##    skim_type skim_variable     stat      formatted
 ##    &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;    
@@ -844,13 +770,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## 10 numeric   numeric.sd        n_missing 1        
 ## # … with 121 more rows</code></pre>
 <p>Since the <code>skim_variable</code> and <code>skim_type</code> columns are a core component of the <code>skim_df</code> class, it’s possible to get unwanted side effects when using <code>dplyr::select()</code>. Instead, use <code>focus()</code> to select columns of the skimmed results; it always keeps the metadata column.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb87-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb87-3" title="3"><span class="st">  </span><span class="kw">focus</span>(n_missing, numeric.mean)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="st">  </span><span class="kw">focus</span>(n_missing, numeric.mean)</a></code></pre></div>
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values    
 ## Name                       Piped data
@@ -878,11 +800,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h1>Rendering the results of <code>skim()</code></h1>
 <p>The <code>skim_df</code> object is a long data frame with one row for each combination of variable and statistic (and optionally for group). The horizontal display is created by default using <code>print.skim_df()</code>; users can specify additional options by explicitly calling <code>print([skim_df object], ...)</code>.</p>
 <p>For documents rendered by <code>knitr</code>, the package provides a custom <code>knit_print</code> method. To use it, the final line of your code chunk should have a <code>skim_df</code> object.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="kw">skim</span>(Orange)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">skim</span>(Orange)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -994,12 +912,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tbody>
 </table>
 <p>The same type of rendering is available from reshaped <code>skim_df</code> objects, those generated by <code>partition()</code> and <code>yank()</code> in particular.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">skim</span>(Orange) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-2" title="2"><span class="st">  </span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">skim</span>(Orange) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="st">  </span><span class="kw">yank</span>(<span class="st">&quot;numeric&quot;</span>)</a></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
@@ -1057,12 +971,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h1>Modifying <code>skim()</code></h1>
 <p><code>skimr</code> is opinionated in its choice of defaults, but users can easily add, replace, or remove the statistics for a class. For interactive use, you can create your own skimming function with the <code>skim_with()</code> factory. <code>skimr</code> also has an API for extensions in other packages. Working with that is covered later.</p>
 <p>To add a statistic for a data type, create an <code>sfl()</code> (a <code>skimr</code> function list) for each class that you want to change:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">new_mad =</span> mad))</a>
-<a class="sourceLine" id="cb97-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">new_mad =</span> mad))</a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -1149,13 +1059,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tr>
 </tbody>
 </table>
-<p>As the previous example suggests, the default is to append <em>new</em> summary statistics to the preexisting set. This behavior isn’t always desirable, especially when you want lots of changes. To stop appending, set <code>append = FALSE</code>.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">new_mad =</span> mad), <span class="dt">append =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb100-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<p>As the previous example suggests, the default is to append <em>new</em> summary statistics to the preexisting set. This behavior isn’t always desirable, expecially when you want lots of changes. To stop appending, set <code>append = FALSE</code>.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">new_mad =</span> mad), <span class="dt">append =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -1219,10 +1125,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tbody>
 </table>
 <p>You can also use <code>skim_with()</code> to remove specific statistics by setting them to <code>NULL</code>. This is commonly used to disable the inline histograms and spark graphs.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1">no_hist &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">ts =</span> <span class="kw">sfl</span>(<span class="dt">line_graph =</span> <span class="ot">NULL</span>))</a>
-<a class="sourceLine" id="cb103-2" title="2"><span class="kw">no_hist</span>(Nile)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">no_hist &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">ts =</span> <span class="kw">sfl</span>(<span class="dt">line_graph =</span> <span class="ot">NULL</span>))</a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="kw">no_hist</span>(Nile)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -1295,18 +1199,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tr>
 </tbody>
 </table>
-<p>The same pattern applies to changing skimmers for multiple classes simultaneously. If you want to partially-apply function arguments, use the Tidyverse lambda syntax.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(</a>
-<a class="sourceLine" id="cb105-2" title="2">  <span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">total =</span> <span class="op">~</span><span class="st"> </span><span class="kw">sum</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)),</a>
-<a class="sourceLine" id="cb105-3" title="3">  <span class="dt">factor =</span> <span class="kw">sfl</span>(<span class="dt">missing =</span> <span class="op">~</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(.))),</a>
-<a class="sourceLine" id="cb105-4" title="4">  <span class="dt">append =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb105-5" title="5">)</a>
-<a class="sourceLine" id="cb105-6" title="6"></a>
-<a class="sourceLine" id="cb105-7" title="7"><span class="kw">my_skim</span>(iris)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<p>The same pattern applies to changing skimmers for multiple classes simultaneously. If you want to partially-apply function arguments, use the tidyverse lambda syntax.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(</a>
+<a class="sourceLine" id="cb60-2" title="2">  <span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">total =</span> <span class="op">~</span><span class="st"> </span><span class="kw">sum</span>(., <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)),</a>
+<a class="sourceLine" id="cb60-3" title="3">  <span class="dt">factor =</span> <span class="kw">sfl</span>(<span class="dt">missing =</span> <span class="op">~</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(.))),</a>
+<a class="sourceLine" id="cb60-4" title="4">  <span class="dt">append =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb60-5" title="5">)</a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="kw">my_skim</span>(iris)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -1405,12 +1305,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </tbody>
 </table>
 <p>To modify the “base” skimmers, refer to them in a similar manner. Since base skimmers are usually a small group, they must return the same type for all data types in R, <code>append</code> doesn’t apply here.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">base =</span> <span class="kw">sfl</span>(<span class="dt">length =</span> length))</a>
-<a class="sourceLine" id="cb108-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">base =</span> <span class="kw">sfl</span>(<span class="dt">length =</span> length))</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="kw">my_skim</span>(faithful)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -1495,22 +1391,20 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="extending-skimr" class="section level1">
 <h1>Extending <code>skimr</code></h1>
 <p>Packages may wish to export their own <code>skim()</code> functions. Use <code>skim_with()</code> for this. In fact, this is how <code>skimr</code> generates its version of <code>skim()</code>.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="co">#' @export</span></a>
-<a class="sourceLine" id="cb111-2" title="2">my_package_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co">#' @export</span></a>
+<a class="sourceLine" id="cb62-2" title="2">my_package_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>()</a></code></pre></div>
 <p>Alternatively, defaults for another data types can be added to <code>skimr</code> with the <code>get_skimmers</code> generic. The method for your data type should return an <code>sfl()</code>. Unlike the <code>sfl()</code> used interactively, you also need to set the <code>skim_type</code> argument. It should match the method type in the function signature.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">get_skimmers.my_type &lt;-<span class="st"> </span><span class="cf">function</span>(column) {</a>
-<a class="sourceLine" id="cb112-2" title="2">  <span class="kw">sfl</span>(</a>
-<a class="sourceLine" id="cb112-3" title="3">    <span class="dt">skim_type =</span> <span class="st">&quot;my_type&quot;</span>,</a>
-<a class="sourceLine" id="cb112-4" title="4">    <span class="dt">total =</span> sum</a>
-<a class="sourceLine" id="cb112-5" title="5">  )</a>
-<a class="sourceLine" id="cb112-6" title="6">}</a>
-<a class="sourceLine" id="cb112-7" title="7"></a>
-<a class="sourceLine" id="cb112-8" title="8">my_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb112-9" title="9">  <span class="dt">my_type =</span> <span class="kw">structure</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">class =</span> <span class="kw">c</span>(<span class="st">&quot;my_type&quot;</span>, <span class="st">&quot;integer&quot;</span>))</a>
-<a class="sourceLine" id="cb112-10" title="10">)</a>
-<a class="sourceLine" id="cb112-11" title="11"><span class="kw">skim</span>(my_data)</a></code></pre></div>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">get_skimmers.my_type &lt;-<span class="st"> </span><span class="cf">function</span>(column) {</a>
+<a class="sourceLine" id="cb63-2" title="2">  <span class="kw">sfl</span>(</a>
+<a class="sourceLine" id="cb63-3" title="3">    <span class="dt">skim_type =</span> <span class="st">&quot;my_type&quot;</span>,</a>
+<a class="sourceLine" id="cb63-4" title="4">    <span class="dt">total =</span> sum</a>
+<a class="sourceLine" id="cb63-5" title="5">  )</a>
+<a class="sourceLine" id="cb63-6" title="6">}</a>
+<a class="sourceLine" id="cb63-7" title="7"></a>
+<a class="sourceLine" id="cb63-8" title="8">my_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb63-9" title="9">  <span class="dt">my_type =</span> <span class="kw">structure</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">class =</span> <span class="kw">c</span>(<span class="st">&quot;my_type&quot;</span>, <span class="st">&quot;integer&quot;</span>))</a>
+<a class="sourceLine" id="cb63-10" title="10">)</a>
+<a class="sourceLine" id="cb63-11" title="11"><span class="kw">skim</span>(my_data)</a></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>

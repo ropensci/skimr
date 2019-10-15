@@ -57,7 +57,7 @@ m
 
 ## ---- render = knitr::normal_print---------------------------------------
 colMeans(m)
-skim(m) # Similar to summary.matrix and colMeans()
+skim(m)    # Similar to summary.matrix and colMeans()
 
 ## ---- render = knitr::normal_print---------------------------------------
 rowMeans(m)

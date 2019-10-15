@@ -1,9 +1,7 @@
 ---
 title: "Supporting additional objects"
 date: "`r Sys.Date()`"
-output: 
-  rmarkdown::html_vignette:
-    latex_engine: xelatex
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Supporting additional objects}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,7 +16,7 @@ defaults in their own summary functions.
 
 This example will illustrate this by creating support for the `sf` object
 produced by the  "sf: Simple Features for R" package. For any object this
-involves two required elements and one optional element. 
+involves two required elements and one optional element.
 
 - experiment with interactive changes
 - create methods to `get_skimmers` for different objects within this package
@@ -45,7 +43,7 @@ What if your data type isn't covered by defaults? `skimr` usually falls
 back to treating the type as a character, which isn't necessarily helpful. In
 this case, you're best off adding your data type with `skim_with()`.
 
-Before we begin, we'll be using the following custom summary statistic 
+Before we begin, we'll be using the following custom summary statistic
 throughout. It's a naive example, but covers the requirements of what we need.
 
 ```{r, eval = FALSE}
@@ -54,7 +52,7 @@ funny_sf <- function(x) {
 }
 ```
 
-This function, like all summary functions used by `skimr` has two notable 
+This function, like all summary functions used by `skimr` has two notable
 features.
 
 *  It accepts a vector as its single argument
@@ -62,13 +60,13 @@ features.
 
 There are a lot of functions that fulfill these criteria:
 
-* exisitng functions from base, stats, or other packages, 
+* exisitng functions from base, stats, or other packages,
 * lambda's created using the tidyverse-style syntax
 * custom functions that have been defined in the `skimr` package
 * custom functions that you have defined.
 
 Not fulfilling the two criteria can lead to some very confusing behavior within
-`skimr`. Beware! 
+`skimr`. Beware!
 
 Next, we create a custom skimming function. To do this, we need to think about
 the many specific classes of data in the `sf` package.  The following example
@@ -79,9 +77,6 @@ others if we want to fully support `sf`.
 ```{r, eval = FALSE}
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
     funny = funny_sf
@@ -99,9 +94,9 @@ skim_sf(nc)
 ```
 Sfc_multipolygon Variables
 # A tibble: 1 x 7
-       var missing complete     n n_unique valid funny
-     <chr>   <chr>    <chr> <chr>    <chr> <chr> <chr>
-1 geometry       0      100   100        1   100   101
+       var n_missing complete_rate  n_unique valid funny
+     <chr>     <chr>         <chr>     <chr> <chr> <chr>
+1 geometry         0             1         1   100   101
 ```
 
 Sharing this function within a separate package requires an export. The simplest
@@ -112,9 +107,6 @@ way to do this is with roxygen.
 #' @export
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
     funny = funny_sf
@@ -144,9 +136,6 @@ a generic we also want to identify the `skim_type` in the `sfl`.
 get_skimmers.sfc_MULTIPOLYGON <- function(column) {
   sfl(
     skim_type = "sfc_MULTIPOLYGON",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
     funny = funny_sf
@@ -154,7 +143,7 @@ get_skimmers.sfc_MULTIPOLYGON <- function(column) {
 }
 ```
 
-The same strategy follows for other data types. 
+The same strategy follows for other data types.
 
 * Create a method
 * return an `sfl`
@@ -165,9 +154,6 @@ The same strategy follows for other data types.
 get_skimmers.sfc_POINT <- function(column) {
   sfl(
     skim_type = "sfc_POINT",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.))
   )
@@ -185,11 +171,10 @@ get_default_skimmer_names()
 ```
 ...
 $sfc_MULTIPOLYGON
-[1] "missing"  "complete" "n"        "n_unique" "valid"    "funny"   
+[1] "n_unique" "valid"    "funny"
 
 $sfc_POINT
-[1] "missing"  "complete" "n"        "n_unique" "valid"  
-...
+[1] "n_unique" "valid"  ...
 ```
 # Conclusion
 
@@ -198,4 +183,4 @@ will likely  be much more complex. The flexibility of `skimr` allows you to
 manage that.
 
 Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma and Michael Sumner for
-inspiring and  helping with the development of this code. 
+inspiring and  helping with the development of this code.
