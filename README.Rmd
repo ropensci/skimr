@@ -1,6 +1,5 @@
 ---
-output: 
- md_document
+output: md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
@@ -181,8 +180,6 @@ provide a value for the `class` argument. Here's an example.
 get_skimmers.my_data_type <- function(column) {
   sfl(
     .class = "my_data_type",
-    missing = n_missing,
-    complete = n_complete,
     p99 = quantile(., probs = .99))
 }
 ```
