@@ -174,7 +174,12 @@ yank(skimmed, "numeric")
 ```
 
 Last, with support something close to the older format with the `to_long()`
-function. This can be added for backwards compatibility.
+function. This can be added for something close to backwards compatibility. 
+Being realistic on open source sustainability means that we are not 
+able to support 100% backward compatibility in v2 even with new functions. 
+Meanwhile you can keep using v1 if you are happy with it.  However,
+because `skimr`'s dependencies are under ongoing development, 
+sooner or later skimr v1 will no longer work with updates to them.
 
 ### Working with dplyr
 
@@ -291,7 +296,9 @@ code chunks.
 
 This means that we're dropping support for `kable.skim_df()` and
 `pander.skim_df()`. But you can still get pretty similar results to these
-functions by using the reshaping functions described above to get subtables.
+functions by using the reshaping functions described above to get subtables. You
+can also still use `Pander` and other nice rendering packages on an ad hoc 
+basis as you would for other data frames or tibbles.
 
 We also have a similarly-nice rendered output in
 [Jupyter](https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
@@ -303,11 +310,12 @@ to hear what the rest of you think!
 
 Well, we think that's a lot! But to be fair, it wasn't exactly simple to keep up
 with `skimr`. Real talk, open source development takes up a lot of time, and
-the `skimr` developers have other priorities. Michael's family added a new baby,
-and despite swearing up and down otherwise, he got absolutely nothing
-not-baby-related done during his paternity leave (take note new dads!). Elin
+the `skimr` developers have additional important priorities. 
+Michael's family added a new baby, and despite swearing up and down otherwise,
+he got absolutely nothing not-baby-related done during 
+his paternity leave (take note new dads!). Elin
 ended up taking a much bigger role on at Lehman, really limiting time for any
-other work.
+other work. 
 
 Even so, these are just the highlights in the normal ebb and flow of this sort
 of work. Since it's no one's real job, it might not always be the first focus.
