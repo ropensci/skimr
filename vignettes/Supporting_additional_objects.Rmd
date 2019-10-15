@@ -7,6 +7,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+## Introduction
 
 The `skim()` function summarizes data types contained within data frames. It
 comes with a set of default summary functions for a wide variety of data types,
@@ -32,7 +33,7 @@ library(sf)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
 
-# Experiment interactively
+## Experiment interactively
 
 `skimr` has an opinionated list of functions for each class (e.g. numeric,
 factor)  of data. The core package supports many commonly used classes,
@@ -66,7 +67,9 @@ There are a lot of functions that fulfill these criteria:
 * custom functions that you have defined.
 
 Not fulfilling the two criteria can lead to some very confusing behavior within
-`skimr`. Beware!
+`skimr`. Beware! An example of this issue is the base `quantile()` function in
+default `skimr` percentiles are returned by using `quantile()` five 
+times.
 
 Next, we create a custom skimming function. To do this, we need to think about
 the many specific classes of data in the `sf` package.  The following example
@@ -78,7 +81,6 @@ others if we want to fully support `sf`.
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
     missing = n_missing,
-    complete = n_complete,
     n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
@@ -111,7 +113,6 @@ way to do this is with Roxygen.
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
     missing = n_missing,
-    complete = n_complete,
     n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
@@ -123,7 +124,7 @@ skim_sf <- skim_with(
 While this works within any package, there is an even better approach in this
 case. To take full advantage of `skimr`, we'll dig a bit into its API.
 
-# Adding new methods
+## Adding new methods
 
 `skimr` has a lookup mechanism, based on the function `get_skimmers()`, to
 find default summary functions for each class. This is based on the S3 class
@@ -143,7 +144,6 @@ get_skimmers.sfc_MULTIPOLYGON <- function(column) {
   sfl(
     skim_type = "sfc_MULTIPOLYGON",
     missing = n_missing,
-    complete = n_complete,
     n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
@@ -164,7 +164,6 @@ get_skimmers.sfc_POINT <- function(column) {
   sfl(
     skim_type = "sfc_POINT",
     missing = n_missing,
-    complete = n_complete,
     n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.))
@@ -188,7 +187,7 @@ $sfc_MULTIPOLYGON
 $sfc_POINT
 [1] "missing"  "complete" "n"        "n_unique" "valid"  ...
 ```
-# Conclusion
+## Conclusion
 
 This is a very simple example. For a package such as sf the custom statistics
 will likely  be much more complex. The flexibility of `skimr` allows you to
