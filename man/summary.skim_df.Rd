@@ -18,8 +18,6 @@ A summary of the skim data frame.
 This is a method of the generic function \code{\link[=summary]{summary()}}.
 }
 \examples{
-\dontrun{
 a <- skim(mtcars)
 summary(a)
-}
 }

@@ -5,7 +5,9 @@ test_that("Skim prints a header for the entire output and each type", {
   expect_print_matches_file(input, "print/default.txt")
 
   input$numeric.hist <- NULL
-  expect_print_matches_file(input, "print/no-hist.txt", skip_on_windows = FALSE)
+  expect_print_matches_file(input, "print/no-hist.txt",
+    skip_on_windows = FALSE
+  )
 })
 
 test_that("Skim prints a special header for grouped data frames", {
@@ -94,7 +96,10 @@ test_that("Crayon is supported", {
   withr::with_options(list(crayon.enabled = TRUE), {
     with_mock(
       .env = "skimr",
-      render_skim_body = function(...) paste0(..., sep = "\n", collapse = "\n"), {
+      render_skim_body = function(...) {
+        paste0(..., sep = "\n", collapse = "\n")
+      },
+      {
         skimmed <- skim(iris)
         numeric <- yank(skimmed, "numeric")
         rendered <- print(numeric)
