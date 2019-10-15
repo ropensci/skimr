@@ -12,3 +12,5 @@
 ^appveyor\.yml$
 ^codemeta\.json$
 ^.*\.ipynb$
+^doc$
+^Meta$
