@@ -52,6 +52,9 @@ Skim statistics in the console
 
     skim(chickwts)
 
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
+
     ## ── Data Summary ────────────────────────
     ##                            Values  
     ## Name                       chickwts
@@ -75,6 +78,12 @@ Skim statistics in the console
 ### Presentation is in a compact horizontal format:
 
     skim(iris)
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
 
     ## ── Data Summary ────────────────────────
     ##                            Values
@@ -102,6 +111,18 @@ Skim statistics in the console
 ### Built in support for strings, lists and other column classes
 
     skim(dplyr::starwars)
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
 
     ## ── Data Summary ────────────────────────
     ##                            Values         
@@ -143,6 +164,12 @@ Skim statistics in the console
     skim(iris) %>%
       summary()
 
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
+
     ## ── Data Summary ────────────────────────
     ##                            Values
     ## Name                       iris  
@@ -158,6 +185,12 @@ Skim statistics in the console
 ### Individual columns can be selected using tidyverse-style selectors
 
     skim(iris, Sepal.Length, Petal.Length)
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
 
     ## ── Data Summary ────────────────────────
     ##                            Values
@@ -183,6 +216,12 @@ Skim statistics in the console
     iris %>%
       dplyr::group_by(Species) %>%
       skim()
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
 
     ## ── Data Summary ────────────────────────
     ##                            Values    
@@ -215,6 +254,12 @@ Skim statistics in the console
     iris %>%
       skim() %>%
       dplyr::filter(numeric.sd > 1)
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(by_variable)`
+
+    ## Warning: `cols` is now required.
+    ## Please use `cols = c(skimmed)`
 
     ## ── Data Summary ────────────────────────
     ##                            Values    
@@ -435,7 +480,8 @@ set particular function arguments. Setting the `append = FALSE` argument
 uses only those functions that you’ve provided.
 
     my_skim <- skim_with(
-      numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE)
+      numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE
+    )
     my_skim(iris, Sepal.Length)
 
 <table>
@@ -600,7 +646,8 @@ example.
     get_skimmers.my_data_type <- function(column) {
       sfl(
         .class = "my_data_type",
-        p99 = quantile(., probs = .99))
+        p99 = quantile(., probs = .99)
+      )
     }
 
 Limitations of current version

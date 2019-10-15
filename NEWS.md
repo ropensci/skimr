@@ -1,7 +1,7 @@
+# skimr 2.0.0 (2019-xx-xx)
 
-skimr 2.0.0 (2019-xx-xx)
-========================
 ### Welcome to skimr V2
+
 V2 is a complete rewrite of `skimr`, incorporating all of the great feedback the
 developers have received over the last year. A big thank you goes to @GShotwell,
 @akraemer007, @puterleat, @tonyfischetti, @Nowosad, @rgayler, @jrosen48,
@@ -11,8 +11,8 @@ of the great support and feedback over the last year. We couldn't have done this
 without you.
 
 For most users using `skimr` will not change in terms of visual outputs. However
-for users who use `skimr` outputs as part of a larger workflow the differences are 
-substantial. 
+for users who use `skimr` outputs as part of a larger workflow the differences
+are substantial.
 
 ### Breaking changes
 
@@ -59,162 +59,168 @@ The fundamental tool for customization is the `sfl` object, a skimmer function
 list. It is used within `skim_with()` and also within our new API for adding
 default functions for new data types, the generic `get_skimmers()`.
 
-Most of the options set in `skim_format` are now either in function arguments
-or print arguments. The former can be updated using `skim_with`, the latter in
-a call to `print()`. In RMarkdown documents, you can change the number of
+Most of the options set in `skim_format` are now either in function arguments or
+print arguments. The former can be updated using `skim_with`, the latter in a
+call to `print()`. In RMarkdown documents, you can change the number of
 displayed digits by adding the `skimr_digits` option to your code chunk.
 
 ### OTHER NEW FEATURES
-  * Substantial improvements to `summary()`, and it is now incorporated into
+
+*   Substantial improvements to `summary()`, and it is now incorporated into
     `print()` methods.
-  * `focus()` is like `dplyr::select()`, but it keeps around the columns
+*   `focus()` is like `dplyr::select()`, but it keeps around the columns
     `skim_type` and `skim_variable`.
-  * We are also evaluating the behavior of different `dplyr` verbs to make sure
+*   We are also evaluating the behavior of different `dplyr` verbs to make sure
     that they place nice with `skimr` objects.
-  * While `skimr` has never really focused on performance, it should do a better
+*   While `skimr` has never really focused on performance, it should do a better
     job on big data sets with lots of different columns.
-  * New statistic for character variables counting the number of rows
-    that are completely made up of white space.
+*   New statistic for character variables counting the number of rows that are
+    completely made up of white space.
 
 ### BUG FIXES
-  * Adjust code for several tidyverse soft deprecations.
-  * Fix isue where multibyte characters were causing an error.
+
+*   Adjust code for several tidyverse soft deprecations.
+*   Fix issue where multibyte characters were causing an error.
 
 ### MINOR IMPROVEMENTS
-  * Change top_counts to use useNA = "no".
 
-skimr 1.0.6 (xxx-xx-xx)
-=======================
-### BUG FIXES
-  * Fix issue where skim_tee() was not respecting ... options.
-  * Fix issue where all NA character vectors were not returning NA for 
-    max() and min()
+*   Change top_counts to use useNA = "no".
 
-skimr 1.0.5 (2019-01-05)
-========================
-This is likely to be the last release of skimr version 1.  Version 2
-has major changes to the API. Users should review and prepare for 
-those changes now. 
+# skimr 1.0.6 (xxx-xx-xx)
 
 ### BUG FIXES
-  * Fix issue where multibyte characters were causing an error.
-  * Fix problem in which purrr cannot find mean.default.
 
-skimr 1.0.4 (2018-01-12)
-========================
-This is likely to be the last release of skimr version 1.  Version 2
-has major changes to the API. Users should review and prepare for 
-those changes now. 
+*   Fix issue where skim_tee() was not respecting ... options.
+*   Fix issue where all NA character vectors were not returning NA for max() and
+    min()
+
+# skimr 1.0.5 (2019-01-05)
+
+This is likely to be the last release of skimr version 1. Version 2 has major
+changes to the API. Users should review and prepare for those changes now.
 
 ### BUG FIXES
-  * Fix failures in handling dplyr verbs related to upcoming release
-     of dplyr 0.8.0.
 
-skimr 1.0.3 (2018-06-06)
-========================
+*   Fix issue where multibyte characters were causing an error.
+*   Fix problem in which purrr cannot find mean.default.
+
+# skimr 1.0.4 (2018-01-12)
+
+This is likely to be the last release of skimr version 1. Version 2 has major
+changes to the API. Users should review and prepare for those changes now.
+
+### BUG FIXES
+
+*   Fix failures in handling dplyr verbs related to upcoming release of dplyr
+    0.8.0.
+
+# skimr 1.0.3 (2018-06-06)
+
 ### NEW FEATURES
-  * You can use skim_with() with a nest list of functions:
-     `skim_with(.list = mylist)` or `skim_with(!!!mylist)`
-  * More polished display of subtables in default printing.
+
+*   You can use skim_with() with a nest list of functions: `skim_with(.list =
+    mylist)` or `skim_with(!!!mylist)`
+*   More polished display of subtables in default printing.
 
 ### BUG FIXES
-  * Fix issue with conflict between knitr and skimr versions 
-     of kable() that occurred intermittently.
-  * Do not skim a class when the skimmer list is empty for that class.
-  * Fix a mistake in a test of skim_print for top counts.
 
-skimr 1.0.2 (2018-04-04)
-========================
+*   Fix issue with conflict between knitr and skimr versions of kable() that
+    occurred intermittently.
+*   Do not skim a class when the skimmer list is empty for that class.
+*   Fix a mistake in a test of skim_print for top counts.
+
+# skimr 1.0.2 (2018-04-04)
+
 ### NEW FEATURES
-  * You can create skimmers with the formula syntax from `rlang`:
+
+*   You can create skimmers with the formula syntax from `rlang`:
     `skim_with(iqr = ~IQR(.x, na.rm = TRUE))`.
 
 ### MAJOR CHANGES
-  * The median label has been changed to p50 for consistency with 
-     the previous changes to p0 and p100. 
+
+*   The median label has been changed to p50 for consistency with the previous
+    changes to p0 and p100.
 
 ### MINOR IMPROVEMENTS
-   * Impovements and corrections to to readme and other documentation.
-   * New vignette showing defaults for skimmers and formats.
-   * Vector output match data frame output more closely.
-   * Add minimum required version for testhat.
-   * Add minimum requred version for knitr.
+
+*   Improvements and corrections to to README and other documentation.
+*   New vignette showing defaults for skimmers and formats.
+*   Vector output match data frame output more closely.
+*   Add minimum required version for testhat.
+*   Add minimum required version for knitr.
 
 ### BUG FIXES
-  * You can use `skim_with()` to add and remove skimmers at the same time, i.e.
-    `skim_with(iqr = IQR, hist = NULL)` works as expected.
-  * Histograms work when Inf or -Inf are present.
-  * Change seq( ) parameter to length.out to avoid problems with name matching.
-  * Summary should not display a data frame name of "." 
-    (which occurs when piping begins with the data frame).
 
-skimr 1.0.1 (2018-01-09)
-========================
+*   You can use `skim_with()` to add and remove skimmers at the same time, i.e.
+    `skim_with(iqr = IQR, hist = NULL)` works as expected.
+*   Histograms work when Inf or -Inf are present.
+*   Change seq( ) parameter to length.out to avoid problems with name matching.
+*   Summary should not display a data frame name of "." (which occurs when
+    piping begins with the data frame).
+
+# skimr 1.0.1 (2018-01-09)
+
 ### NEW FEATURES
-  * Add support for spark plots on Windows
+
+*   Add support for spark plots on Windows
 
 ### MAJOR CHANGES
-  * `spark_line()` and `spark_bar()` are no longer exported
-  * Default statistics for numeric changed from `min(x)` and `max(x)` to 
-    `quantile(x, probs = 0)` and `quantile(x, probs = 1)`. These changes
-    lead to more predictable behaviors when a column is all NA values.
+
+*   `spark_line()` and `spark_bar()` are no longer exported
+*   Default statistics for numeric changed from `min(x)` and `max(x)` to
+    `quantile(x, probs = 0)` and `quantile(x, probs = 1)`. These changes lead to
+    more predictable behaviors when a column is all NA values.
 
 #### MINOR IMPROVEMENTS
-  * Add minimimum required version for stringr
-  * Improve documentation in general, especially those related to fonts
+
+*   Add minimimum required version for stringr
+*   Improve documentation in general, especially those related to fonts
 
 ### BUG FIXES
-  * Fix issue where a histogram for data with all `NA`s threw an error
-  * Suppress progress bars from `dplyr::do()`
 
-skimr 0.92 (2017-12-19)
-=======================
+*   Fix issue where a histogram for data with all `NA`s threw an error
+*   Suppress progress bars from `dplyr::do()`
+
+# skimr 0.92 (2017-12-19)
 
 ### MAJOR CHANGES
-  * `skim_v()` is no longer exported. Vectors are now directly supported via
+
+*   `skim_v()` is no longer exported. Vectors are now directly supported via
     `skim.default()`.
-  * Change license to GPL 3
+*   Change license to GPL 3
 
 ### NEW FEATURES
 
-  * Add support for `kable()` and `pander()` for `skim_df` objects. 
-  * Add summary method for `skim_df` objects.  
-  * Add support for tidy select to skim specific columns of a data frame.
-  * Add support for skimming individual vectors via `skim.default()`. 
+*   Add support for `kable()` and `pander()` for `skim_df` objects.
+*   Add summary method for `skim_df` objects.
+*   Add support for tidy select to skim specific columns of a data frame.
+*   Add support for skimming individual vectors via `skim.default()`.
 
-
-skimr 0.91 (2017-10-14)
-=========================
+# skimr 0.91 (2017-10-14)
 
 ### NEW FEATURES
 
-  * Handling of grouped data (generated by `dplyr::group_by()`)
-  * Printing for all column classes
-  * Add indicator of if a factor is ordered to skim object for factor
-  * Introduction of flexible formatting
-  * Easy dropping of individual functions
-  * Vignettes for basic use and use with specialized object types
-  * Updated readme and added CONTRIBUTING.md and CONDUCT.md
-  * New public get_skimmers function to access skim functions
-  * Support for difftime class
-  
+*   Handling of grouped data (generated by `dplyr::group_by()`)
+*   Printing for all column classes
+*   Add indicator of if a factor is ordered to skim object for factor
+*   Introduction of flexible formatting
+*   Easy dropping of individual functions
+*   Vignettes for basic use and use with specialized object types
+*   Updated README and added CONTRIBUTING.md and CONDUCT.md
+*   New public get_skimmers function to access skim functions
+*   Support for difftime class
 
 ### MINOR IMPROVEMENTS
 
-  * Add header to print providing summary information about data.
+*   Add header to print providing summary information about data.
 
 ### BUG FIXES
 
-  * Change from Colformat to Pillar.
+*   Change from Colformat to Pillar.
 
-
-skimr 0.900 (2017-07-16)
-=========================
-
+# skimr 0.900 (2017-07-16)
 
 ### BUG FIXES
 
-  * Fix documentation for get_fun_names()
-  * Fix test and build errors and notes
-
-  
+*   Fix documentation for get_fun_names()
+*   Fix test and build errors and notes

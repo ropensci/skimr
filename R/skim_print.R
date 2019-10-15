@@ -93,7 +93,7 @@ print.summary_skim_df <- function(x, ...) {
 #'
 #' @seealso [knitr::kable()]
 #' @inheritParams knitr::knit_print
-#' @return A `knit_asis` object. Which is used by `knitr` when renderind.
+#' @return A `knit_asis` object. Which is used by `knitr` when rendered.
 #' @importFrom knitr knit_print
 #' @name knit_print
 NULL
@@ -161,7 +161,6 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
-
   kabled <- knitr::kable(
     x,
     table.attr = "style='width: auto;'

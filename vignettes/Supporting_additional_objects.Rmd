@@ -29,7 +29,7 @@ example.  However to run it on your own you can install `sf` and then run
 
 ```{r, eval = FALSE}
 library(sf)
-nc <- st_read(system.file("shape/nc.shp", package="sf"))
+nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
 
 # Experiment interactively
@@ -100,7 +100,7 @@ Sfc_multipolygon Variables
 ```
 
 Sharing this function within a separate package requires an export. The simplest
-way to do this is with roxygen.
+way to do this is with Roxygen.
 
 ```{r, eval = FALSE}
 #' Skimming functions for `sfc_MULTIPOLYGON` objects.

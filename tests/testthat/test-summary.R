@@ -7,8 +7,7 @@ test_that("Summary creates the correct summary object", {
   expect_equal(rownames(summary_input), c(
     "Name", "Number of rows ", "Number of columns ",
     "_______________________ ",
-    "Column type frequency: ", 
-    "  factor", "  numeric",
+    "Column type frequency: ", "  factor", "  numeric",
     "________________________  ",
     "Group variables"
   ))
@@ -17,17 +16,20 @@ test_that("Summary creates the correct summary object", {
 test_that("The summary print method prints the correct object", {
   skim_summary_input <- summary(skim(iris))
   expect_known_output(
-     skim_summary_input, "summary/summary_iris.txt", 
-    update = FALSE, print = TRUE
+    skim_summary_input, "summary/summary_iris.txt",
+    update = FALSE,
+    print = TRUE
   )
-  #expect_identical(summary(skim_input), summary_input)
 })
 
 test_that("The summary print method prints the correct object when piped", {
   # Test that the correct lines are output, no name should be output.
-  summary_input <- iris %>% skim() %>% summary()
-   expect_known_output(summary_input, "summary/summary_iris_piped.txt",
-                       update = FALSE, print = TRUE)
+  summary_input <- iris %>%
+    skim() %>%
+    summary()
+  expect_known_output(summary_input, "summary/summary_iris_piped.txt",
+    update = FALSE, print = TRUE
+  )
 })
 
 test_that("null object gets expected message", {
