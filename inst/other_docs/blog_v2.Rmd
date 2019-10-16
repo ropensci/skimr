@@ -26,7 +26,7 @@ a year of (admittedly intermittent) work, we're thrilled to be able to say that
 the package is ready to go to CRAN. So, what happened over the last year? And
 why are we so excited for V2?
 
-# Setting the stage
+## Setting the stage
 
 Before we can talk about the last year of `skimr` development, we need to lay
 out the timeline that got us to this point. For those deeply enmeshed in `skimr`
@@ -72,7 +72,7 @@ options(width = 90)
 skim(iris)
 ```
 
-# Getting it right
+## Getting it right
 
 Under normal circumstances (i.e. not during a hackathon), most software
 engineering projects begin with a design phase and series of increasingly
@@ -204,7 +204,7 @@ metadata columns.
 focus(skimmed, numeric.mean)
 ```
 
-# Configuring and extending skimr
+## Configuring and extending skimr
 
 Most of `skimr`'s magic, to [steal a
 term](https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages),
@@ -284,7 +284,7 @@ sfc_point_sfl <- sfl(
 my_skimmer <- skim_with(sfc_POINT = sfc_point_sfl)
 ```
 
-# Using skimr in other contexts
+## Using skimr in other contexts
 
 In `skimr` v1, we developed some slightly hacky approaches to getting nicer
 `skim()` output in RMarkdown docs. These have been removed in favor of the
@@ -319,7 +319,7 @@ and RMarkdown notebooks. In the latter, the summary is separated from the rest
 of the output when working interactively. We like it that way, but we'd be happy
 to hear what the rest of you think!
 
-# Wait, that took over a year?
+## Wait, that took over a year?
 
 Well, we think that's a lot! But to be fair, it wasn't exactly simple to keep up
 with `skimr`. Real talk, open source development takes up a lot of time, and

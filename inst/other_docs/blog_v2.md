@@ -8,7 +8,7 @@ that the package is ready to go to CRAN. So, what happened over the last
 year? And why are we so excited for V2?
 
 Setting the stage
-=================
+-----------------
 
 Before we can talk about the last year of `skimr` development, we need
 to lay out the timeline that got us to this point. For those deeply
@@ -53,18 +53,6 @@ package typically boils down to a single function call:
 
     library(skimr)
     library(dplyr)
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
     options(width = 90)
 
     skim(iris)
@@ -93,7 +81,7 @@ package typically boils down to a single function call:
     ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
 
 Getting it right
-================
+----------------
 
 Under normal circumstances (i.e. not during a hackathon), most software
 engineering projects begin with a design phase and series of
@@ -276,7 +264,7 @@ preserves metadata columns.
     ## 1 Petal.Length   3.76
 
 Configuring and extending skimr
-===============================
+-------------------------------
 
 Most of `skimr`’s magic, to [steal a
 term](https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages),
@@ -367,7 +355,7 @@ configure `skimr` interactively.
     my_skimmer <- skim_with(sfc_POINT = sfc_point_sfl)
 
 Using skimr in other contexts
-=============================
+-----------------------------
 
 In `skimr` v1, we developed some slightly hacky approaches to getting
 nicer `skim()` output in RMarkdown docs. These have been removed in
@@ -500,7 +488,7 @@ the rest of the output when working interactively. We like it that way,
 but we’d be happy to hear what the rest of you think!
 
 Wait, that took over a year?
-============================
+----------------------------
 
 Well, we think that’s a lot! But to be fair, it wasn’t exactly simple to
 keep up with `skimr`. Real talk, open source development takes up a lot
