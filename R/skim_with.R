@@ -281,7 +281,7 @@ mangle_names <- function(skimmers, base_names) {
 #'
 #' To avoid inappropriately assigning the columns to the wrong variable, we
 #' mangle the function names. That way, each set of relevant columns begin
-#' with the column name + `_` + our internal delimeter.
+#' with the column name + `_` + our internal delimiter.
 #'
 #' @keywords internal
 #' @noRd

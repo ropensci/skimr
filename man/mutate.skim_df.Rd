@@ -28,8 +28,8 @@ data. In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble:
 }
 \description{
 \code{\link[dplyr:mutate]{dplyr::mutate()}} currently drops attributes, but we need to keep them around
-for #' other skim behaviors. Otherwise the behavior is exactly the same. For
-more information, see https://github.com/tidyverse/dplyr/issues/3429. #'
+for other skim behaviors. Otherwise the behavior is exactly the same. For
+more information, see https://github.com/tidyverse/dplyr/issues/3429.
 }
 \seealso{
 \code{\link[dplyr:mutate]{dplyr::mutate()}} for the function's expected behavior.

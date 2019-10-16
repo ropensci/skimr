@@ -28,8 +28,8 @@ complete_rate <- function(x) {
   1 - n_missing(x) / length(x)
 }
 
-#' @describeIn stats Calculate the number of rows containing only whitespace values
-#'    using s+ regex.
+#' @describeIn stats Calculate the number of rows containing only whitespace
+#'   values using s+ regex.
 #' @export
 n_whitespace <- function(x) {
   whitespace <- grepl("^\\s+", x)
@@ -143,8 +143,8 @@ spark_bar <- function(x, safe = TRUE) {
 #'   A "blank" is equal to "".
 #' @export
 n_empty <- function(x) {
-  empty.strings <- c("")
-  sum(x %in% empty.strings)
+  empty_strings <- c("")
+  sum(x %in% empty_strings)
 }
 
 #' @describeIn stats Calculate the minimum number of characters within a
@@ -233,7 +233,6 @@ braille <- function(x) {
   x <- c(7L, 3L, 2L, 1L, 8L, 6L, 5L, 4L)[x]
 
   raised <- 1:8 %in% x
-  binary <- raised * 2^(0:7)
 
   # offset in hex is 2800
   val <- 10240 + sum(raised * 2^(0:7))

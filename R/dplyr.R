@@ -1,8 +1,8 @@
 #' Mutate a skim_df
 #'
 #' [dplyr::mutate()] currently drops attributes, but we need to keep them around
-#' for #' other skim behaviors. Otherwise the behavior is exactly the same. For
-#' more information, see https://github.com/tidyverse/dplyr/issues/3429. #'
+#' for other skim behaviors. Otherwise the behavior is exactly the same. For
+#' more information, see https://github.com/tidyverse/dplyr/issues/3429.
 #'
 #' @param .data A `skim_df`, which behaves like a `tbl.`
 #' @param ... Name-value pairs of expressions, each with length 1 or the same

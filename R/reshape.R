@@ -32,7 +32,6 @@
 partition <- function(data) {
   assert_is_skim_df(data)
   data_as_list <- split(data, data$skim_type)
-  types <- names(data_as_list)
   groups <- attr(data, "groups")
   base <- attr(data, "base_skimmers")
 
