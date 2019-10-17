@@ -1,0 +1,186 @@
+---
+title: "Supporting additional objects"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Supporting additional objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `skim()` function summarizes data types contained within data frames. It
+comes with a set of default summary functions for a wide variety of data types,
+but this is not comprehensive. Package authors can add support for skimming
+their specific data types in their packages, and they can provide different
+defaults in their own summary functions.
+
+This example will illustrate this by creating support for the `sf` object
+produced by the  "sf: Simple Features for R" package. For any object this
+involves two required elements and one optional element.
+
+- experiment with interactive changes
+- create methods to `get_skimmers` for different objects within this package
+- if needed, define any custom statistics
+
+If you are adding skim support to a package you will also need to add `skimr`
+to the list of imports. Note that in this vignette the actual analysis will
+not be run because that would require importing the `sf` package just for this
+example.  However to run it on your own you can install `sf` and then run
+
+```{r, eval = FALSE}
+library(sf)
+nc <- st_read(system.file("shape/nc.shp", package="sf"))
+```
+
+# Experiment interactively
+
+`skimr` has an opinionated list of functions for each class (e.g. numeric,
+factor)  of data. The core package supports many commonly used classes,
+but there are many others. You can investigate these defaults by calling
+`get_default_skimmer_names()`.
+
+What if your data type isn't covered by defaults? `skimr` usually falls
+back to treating the type as a character, which isn't necessarily helpful. In
+this case, you're best off adding your data type with `skim_with()`.
+
+Before we begin, we'll be using the following custom summary statistic
+throughout. It's a naive example, but covers the requirements of what we need.
+
+```{r, eval = FALSE}
+funny_sf <- function(x) {
+  length(x) + 1
+}
+```
+
+This function, like all summary functions used by `skimr` has two notable
+features.
+
+*  It accepts a vector as its single argument
+*  It returns a scalar
+
+There are a lot of functions that fulfill these criteria:
+
+* exisitng functions from base, stats, or other packages,
+* lambda's created using the tidyverse-style syntax
+* custom functions that have been defined in the `skimr` package
+* custom functions that you have defined.
+
+Not fulfilling the two criteria can lead to some very confusing behavior within
+`skimr`. Beware!
+
+Next, we create a custom skimming function. To do this, we need to think about
+the many specific classes of data in the `sf` package.  The following example
+will build  support for `sfc_MULTIPOLYGON`, but note that we'll have to
+eventually think about `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT` and
+others if we want to fully support `sf`.
+
+```{r, eval = FALSE}
+skim_sf <- skim_with(
+  sfc_MULTIPOLYGON = sfl(
+    n_unique = n_unique,
+    valid = ~ sum(sf::st_is_valid(.)),
+    funny = funny_sf
+  )
+)
+```
+
+The example above creates a new *function*, and you can call that function on
+data frames with `sfc_POINT` data to get the appropriate summary statistics.
+
+```{r, eval = FALSE}
+skim_sf(nc)
+```
+
+```
+Sfc_multipolygon Variables
+# A tibble: 1 x 7
+       var n_missing complete_rate  n_unique valid funny
+     <chr>     <chr>         <chr>     <chr> <chr> <chr>
+1 geometry         0             1         1   100   101
+```
+
+Sharing this function within a separate package requires an export. The simplest
+way to do this is with roxygen.
+
+```{r, eval = FALSE}
+#' Skimming functions for `sfc_MULTIPOLYGON` objects.
+#' @export
+skim_sf <- skim_with(
+  sfc_MULTIPOLYGON = sfl(
+    n_unique = n_unique,
+    valid = ~ sum(sf::st_is_valid(.)),
+    funny = funny_sf
+  )
+)
+```
+
+While this works within any package, there is an even better approach in this
+case. To take full advantage of `skimr`, we'll dig a bit into its API.
+
+# Adding new methods
+
+`skimr` has a lookup mechanism, based on the function `get_skimmers()`, to
+find default summary functions for each class. This is based on the S3 class
+system. You can learn more about it in
+[*Advanced R*](https://adv-r.hadley.nz/s3.html).
+
+To export a new set of defaults for a data type, create a method for the generic
+function `get_skimmers`. Each of those methods returns an `sfl`, a `skimr`
+function list. This is the same list-like data structure used in the
+`skim_with()` example above. But note! There is one key difference. When adding
+a generic we also want to identify the `skim_type` in the `sfl`.
+
+```{r, eval = FALSE}
+#' @importFrom skimr get_skimmers
+#' @export
+get_skimmers.sfc_MULTIPOLYGON <- function(column) {
+  sfl(
+    skim_type = "sfc_MULTIPOLYGON",
+    n_unique = n_unique,
+    valid = ~ sum(sf::st_is_valid(.)),
+    funny = funny_sf
+  )
+}
+```
+
+The same strategy follows for other data types.
+
+* Create a method
+* return an `sfl`
+* make sure that the `skim_type` is there
+
+```{r, eval = FALSE}
+#' @export
+get_skimmers.sfc_POINT <- function(column) {
+  sfl(
+    skim_type = "sfc_POINT",
+    n_unique = n_unique,
+    valid = ~ sum(sf::st_is_valid(.))
+  )
+}
+```
+
+Users of your package should load `skimr` to get the `skim()` function. Once
+loaded, a call to `get_default_skimmer_names()` will return defaults for your
+data types as well!
+
+```{r, eval = FALSE}
+get_default_skimmer_names()
+```
+
+```
+...
+$sfc_MULTIPOLYGON
+[1] "n_unique" "valid"    "funny"
+
+$sfc_POINT
+[1] "n_unique" "valid"  ...
+```
+# Conclusion
+
+This is a very simple example. For a package such as sf the custom statistics
+will likely  be much more complex. The flexibility of `skimr` allows you to
+manage that.
+
+Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma and Michael Sumner for
+inspiring and  helping with the development of this code.

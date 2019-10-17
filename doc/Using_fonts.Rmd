@@ -1,0 +1,61 @@
+---
+title: "Using Fonts"
+output: 
+  rmarkdown::html_vignette:
+    latex_engine: xelatex
+vignette: >
+  %\VignetteIndexEntry{Using Fonts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+One of the features of skim is the production of spark graphs for numeric data.
+However these graphs may not render properly because of lack of font support or for other
+reasons. In your specific environment this may depend on the fonts installed and the operating
+system and may occur for only specific types of documents such as PDF documents.
+Skimr supports kable() formatted tables, which used in conjunction with 
+fonts to render the spark graphs.
+
+To produce spark histograms a font that supports block elements must be used. To
+support the spark line graphs a font with Braille support must be used. 
+
+Well-known fonts that support block elements include _DejaVu Sans_ and _Arial_. 
+Their availability depends on your operating system. 
+
+The yaml at the beginning of a document using custom fonts will generally be
+similar to that shown below.
+
+```
+---
+title: "Untitled"
+mainfont: DejaVu Sans
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+  word_document: default
+font-family: Times New Roman
+---
+```
+
+
+A further discussion of this (with examples) is available in the "Using fonts" template for
+skimr.  If you are using RStudio you can open that template by opening a new markdown
+file and selecting "From template" and then choosing it.  Alternatively this file 
+is available inside the skimr folder or repository at 
+inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd. 
+
+If you are having difficulties making the spark graphs work, you can opt to turn 
+them off using the code below.
+
+```
+no_sparks <- skim_with(numeric = sfl(hist = NULL), ts = sfl(line_graph = NULL))
+
+```
