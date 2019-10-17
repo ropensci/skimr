@@ -17,10 +17,12 @@ knitr::opts_chunk$set(
 ```
 
 One of the features of skim is the production of spark graphs for numeric data.
-However these graphs may not render properly because of lack of font support or for other
-reasons. In your specific environment this may depend on the fonts installed and the operating
-system and may occur for only specific types of documents such as PDF documents.
-Skimr supports kable() formatted tables, which used in conjunction with 
+However these graphs may not render properly because of lack of font support 
+or for other reasons, such as an operating system that does not support UTF-8. 
+In your specific environment this may depend on the fonts 
+installed and the operating system and may occur for only 
+specific types of documents such as PDF documents.
+Skimr supports kable() formatted tables, which is used in conjunction with 
 fonts to render the spark graphs.
 
 To produce spark histograms a font that supports block elements must be used. To
@@ -46,10 +48,11 @@ font-family: Times New Roman
 ```
 
 
-A further discussion of this (with examples) is available in the "Using fonts" template for
-skimr.  If you are using RStudio you can open that template by opening a new markdown
-file and selecting "From template" and then choosing it.  Alternatively this file 
-is available inside the skimr folder or repository at 
+A further discussion of this (with examples) is available in the 
+"Using fonts" template for skimr.  If you are using RStudio you can open that 
+template by opening a new markdown file and selecting "From template"
+and then choosing it.  Alternatively this file is available inside the 
+skimr folder or repository at 
 inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd. 
 
 If you are having difficulties making the spark graphs work, you can opt to turn 
