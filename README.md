@@ -288,12 +288,6 @@ chunk.
     faithful %>%
       skim()
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -406,9 +400,6 @@ skimmers.
     my_skim <- skim_with(numeric = sfl(mad))
     my_skim(iris, Sepal.Length)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -493,9 +484,6 @@ uses only those functions that you’ve provided.
     )
     my_skim(iris, Sepal.Length)
 
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
 <table>
 <caption>Data summary</caption>
 <tbody>
@@ -561,9 +549,6 @@ And you can default skimmers by setting them to `NULL`.
 
     my_skim <- skim_with(numeric = sfl(hist = NULL))
     my_skim(iris, Sepal.Length)
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
 
 <table>
 <caption>Data summary</caption>
@@ -661,8 +646,6 @@ example.
     get_skimmers.my_data_type <- function(column) {
       sfl(
         .class = "my_data_type",
-        missing = n_missing,
-        complete = n_complete,
         p99 = quantile(., probs = .99)
       )
     }
