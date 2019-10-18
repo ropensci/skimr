@@ -2,14 +2,14 @@
 title: "Untitled"
 mainfont: DejaVu Sans
 output:
+  html_document: default
   pdf_document:
     latex_engine: xelatex
-  html_document: default
   word_document: default
 font-family: Times New Roman
 ---
 
-# Getting ready for fonts
+## Getting ready for fonts
 
 Notice that the yaml at the beginning of this file includes a latex_engine which will be used 
 when creating a pdf document.
@@ -29,6 +29,7 @@ font_install("DejaVu Sans")
 
 If there are any difficulties please read the extrafont documentation.
 
+## Experimenting with rendering
  
 ```{r, message=FALSE}
 library(knitr)
@@ -40,10 +41,8 @@ Try knitting this document to PDF, HTML, doc or any other format you wish to try
 will notice that there are slight differences between them.  To understand the impact
 of the engine and font choices you should experiment with different options.
 
-## Plain printing
-
-The first example shows what printing the basic skim function looks like.  You can try 
-knitting to different formats to see how it changes.
+The first example shows what printing the basic skim function looks like. 
+You can try knitting to different formats to see how it changes.
 
 ```{r }
 skim(iris)
@@ -51,14 +50,7 @@ skim(iris)
 
 It is possible that the histograms will not print in all of the formats.
 
-## Kable example
-
-Kable is a function from the knitr package that provides formatting of tables.
-To use kable() you should add `results='asis'` as a code chunk option.
-
-````{r results='asis'}
-
-skim(iris) %>% kable()
-
-````
+Unfortunately this is outside the control of the skimr team because 
+it relates to the operating system you are using, fonts installed, 
+and locale. 
 

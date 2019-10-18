@@ -26,7 +26,7 @@ a year of (admittedly intermittent) work, we're thrilled to be able to say that
 the package is ready to go to CRAN. So, what happened over the last year? And
 why are we so excited for V2?
 
-# Setting the stage
+## Setting the stage
 
 Before we can talk about the last year of `skimr` development, we need to lay
 out the timeline that got us to this point. For those deeply enmeshed in `skimr`
@@ -72,7 +72,7 @@ options(width = 90)
 skim(iris)
 ```
 
-# Getting it right
+## Getting it right
 
 Under normal circumstances (i.e. not during a hackathon), most software
 engineering projects begin with a design phase and series of increasingly
@@ -174,7 +174,12 @@ yank(skimmed, "numeric")
 ```
 
 Last, with support something close to the older format with the `to_long()`
-function. This can be added for backwards compatibility.
+function. This can be added for something close to backwards compatibility.
+Being realistic on open source sustainability means that we are not able to
+support 100% backward compatibility in v2 even with new functions.  Meanwhile
+you can keep using v1 if you are happy with it.  However,
+because `skimr`'s dependencies are under ongoing development, sooner or later
+skimr v1 will no longer work with updates to them.
 
 ### Working with dplyr
 
@@ -199,7 +204,7 @@ metadata columns.
 focus(skimmed, numeric.mean)
 ```
 
-# Configuring and extending skimr
+## Configuring and extending skimr
 
 Most of `skimr`'s magic, to [steal a
 term](https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages),
@@ -245,9 +250,6 @@ objects" vignette. Here, we'll create some skimmers for
 get_skimmers.sfc_POINT <- function(column) {
   sfl(
     skim_type = "sfc_POINT",
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.))
   )
@@ -269,7 +271,20 @@ $sfc_POINT
 ...
 ```
 
-# Using skimr in other contexts
+Even if you don't go the full route of supporting a new data type, creating a
+couple of `skimr` function lists has other benefits. For example, you can add
+some to your `.Rprofile` as a way to quickly configure `skimr` interactively.
+
+```{r eval = FALSE}
+sfc_point_sfl <- sfl(
+  n_unique = n_unique,
+  valid = ~ sum(sf::st_is_valid(.))
+)
+
+my_skimmer <- skim_with(sfc_POINT = sfc_point_sfl)
+```
+
+## Using skimr in other contexts
 
 In `skimr` v1, we developed some slightly hacky approaches to getting nicer
 `skim()` output in RMarkdown docs. These have been removed in favor of the
@@ -281,6 +296,9 @@ nice by default.
 skim(chickwts)
 ```
 
+You get a nice html version of both the summary header and the `skimr` subtables
+for each type of data.
+
 In this context, you configure the output the same way you handle other `knitr`
 code chunks.
 
@@ -289,9 +307,11 @@ code chunks.
 ```
 ~~~
 
-This means that we're dropping support for `kable.skim_df()` and
+This means that we're dropping direct support for `kable.skim_df()` and
 `pander.skim_df()`. But you can still get pretty similar results to these
-functions by using the reshaping functions described above to get subtables.
+functions by using the reshaping functions described above to get subtables. You
+can also still use `Pander` and other nice rendering packages on an ad hoc basis
+as you would for other data frames or tibbles.
 
 We also have a similarly-nice rendered output in
 [Jupyter](https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
@@ -299,13 +319,14 @@ and RMarkdown notebooks. In the latter, the summary is separated from the rest
 of the output when working interactively. We like it that way, but we'd be happy
 to hear what the rest of you think!
 
-# Wait, that took over a year?
+## Wait, that took over a year?
 
 Well, we think that's a lot! But to be fair, it wasn't exactly simple to keep up
 with `skimr`. Real talk, open source development takes up a lot of time, and
-the `skimr` developers have other priorities. Michael's family added a new baby,
-and despite swearing up and down otherwise, he got absolutely nothing
-not-baby-related done during his paternity leave (take note new dads!). Elin
+the `skimr` developers have additional important priorities.  Michael's family
+added a new baby, and despite swearing up and down otherwise,
+he got absolutely nothing not-baby-related done during his paternity leave (take
+note new dads!). Elin
 ended up taking a much bigger role on at Lehman, really limiting time for any
 other work.
 

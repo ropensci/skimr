@@ -8,7 +8,7 @@ that the package is ready to go to CRAN. So, what happened over the last
 year? And why are we so excited for V2?
 
 Setting the stage
-=================
+-----------------
 
 Before we can talk about the last year of `skimr` development, we need
 to lay out the timeline that got us to this point. For those deeply
@@ -81,7 +81,7 @@ package typically boils down to a single function call:
     ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
 
 Getting it right
-================
+----------------
 
 Under normal circumstances (i.e. not during a hackathon), most software
 engineering projects begin with a design phase and series of
@@ -217,7 +217,12 @@ partition and pulls out a particular subtable
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
 Last, with support something close to the older format with the
-`to_long()` function. This can be added for backwards compatibility.
+`to_long()` function. This can be added for something close to backwards
+compatibility. Being realistic on open source sustainability means that
+we are not able to support 100% backward compatibility in v2 even with
+new functions. Meanwhile you can keep using v1 if you are happy with it.
+However, because `skimr`’s dependencies are under ongoing development,
+sooner or later skimr v1 will no longer work with updates to them.
 
 ### Working with dplyr
 
@@ -259,7 +264,7 @@ preserves metadata columns.
     ## 1 Petal.Length   3.76
 
 Configuring and extending skimr
-===============================
+-------------------------------
 
 Most of `skimr`’s magic, to [steal a
 term](https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages),
@@ -273,7 +278,6 @@ different, we have a function factory for that!
     my_skim <- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
     my_skim(faithful)
 
-<<<<<<< HEAD
     ## ── Data Summary ────────────────────────
     ##                            Values  
     ## Name                       faithful
@@ -289,102 +293,6 @@ different, we have a function factory for that!
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
     ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
     ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
-||||||| 074688d
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 13%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name Number of rows Number of columns</td>
-<td style="text-align: left;">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Column type frequency: numeric</td>
-<td style="text-align: left;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-
-**Variable type: numeric**
-
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-<th style="text-align: right;">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">eruptions</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3.49</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: left;">▇▂▂▇▇</td>
-<td style="text-align: right;">2.29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">waiting</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">70.90</td>
-<td style="text-align: right;">13.59</td>
-<td style="text-align: right;">43.0</td>
-<td style="text-align: right;">76</td>
-<td style="text-align: right;">96.0</td>
-<td style="text-align: left;">▃▃▂▇▂</td>
-<td style="text-align: right;">24.00</td>
-</tr>
-</tbody>
-</table>
-=======
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(by_variable)`
-
-    ## Warning: `cols` is now required.
-    ## Please use `cols = c(skimmed)`
-
-    ## ── Data Summary ────────────────────────
-    ##                            Value
-    ## Name                    faithful
-    ## Number of rows               272
-    ## Number of columns              2
-    ##                                 
-    ## Column type frequency:          
-    ##   numeric                      2
-    ##                                 
-    ## Group variables             None
-    ## 
-    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
-    ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
-    ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24
->>>>>>> 8512ca4eedc6304469fb56f763917978e390b236
 
 Those of you familiar with customizing `skim()` in v1 will notice a
 couple differences:
@@ -417,9 +325,6 @@ types:
     get_skimmers.sfc_POINT <- function(column) {
       sfl(
         skim_type = "sfc_POINT",
-        missing = n_missing,
-        complete = n_complete,
-        n = length,
         n_unique = n_unique,
         valid = ~ sum(sf::st_is_valid(.))
       )
@@ -437,8 +342,20 @@ skimmer is added when you load the package.
     [1] "missing"  "complete" "n"        "n_unique" "valid"
     ...
 
+Even if you don’t go the full route of supporting a new data type,
+creating a couple of `skimr` function lists has other benefits. For
+example, you can add some to your `.Rprofile` as a way to quickly
+configure `skimr` interactively.
+
+    sfc_point_sfl <- sfl(
+      n_unique = n_unique,
+      valid = ~ sum(sf::st_is_valid(.))
+    )
+
+    my_skimmer <- skim_with(sfc_POINT = sfc_point_sfl)
+
 Using skimr in other contexts
-=============================
+-----------------------------
 
 In `skimr` v1, we developed some slightly hacky approaches to getting
 nicer `skim()` output in RMarkdown docs. These have been removed in
@@ -551,13 +468,18 @@ produce something nice by default.
 </tbody>
 </table>
 
+You get a nice html version of both the summary header and the `skimr`
+subtables for each type of data.
+
 In this context, you configure the output the same way you handle other
 `knitr` code chunks.
 
-This means that we’re dropping support for `kable.skim_df()` and
+This means that we’re dropping direct support for `kable.skim_df()` and
 `pander.skim_df()`. But you can still get pretty similar results to
 these functions by using the reshaping functions described above to get
-subtables.
+subtables. You can also still use `Pander` and other nice rendering
+packages on an ad hoc basis as you would for other data frames or
+tibbles.
 
 We also have a similarly-nice rendered output in
 [Jupyter](https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
@@ -566,15 +488,15 @@ the rest of the output when working interactively. We like it that way,
 but we’d be happy to hear what the rest of you think!
 
 Wait, that took over a year?
-============================
+----------------------------
 
 Well, we think that’s a lot! But to be fair, it wasn’t exactly simple to
 keep up with `skimr`. Real talk, open source development takes up a lot
-of time, and the `skimr` developers have other priorities. Michael’s
-family added a new baby, and despite swearing up and down otherwise, he
-got absolutely nothing not-baby-related done during his paternity leave
-(take note new dads!). Elin ended up taking a much bigger role on at
-Lehman, really limiting time for any other work.
+of time, and the `skimr` developers have additional important
+priorities. Michael’s family added a new baby, and despite swearing up
+and down otherwise, he got absolutely nothing not-baby-related done
+during his paternity leave (take note new dads!). Elin ended up taking a
+much bigger role on at Lehman, really limiting time for any other work.
 
 Even so, these are just the highlights in the normal ebb and flow of
 this sort of work. Since it’s no one’s real job, it might not always be

@@ -589,8 +589,6 @@ value for the `class` argument. Here’s an example.
     get_skimmers.my_data_type <- function(column) {
       sfl(
         .class = "my_data_type",
-        missing = n_missing,
-        complete = n_complete,
         p99 = quantile(., probs = .99)
       )
     }

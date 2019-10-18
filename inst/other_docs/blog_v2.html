@@ -371,8 +371,8 @@ summary {
 
 <p><a href="https://www.youtube.com/watch?v=-LzdKH1naok">Theme song: <em>PSA</em> by Jay-Z</a></p>
 <p>We announced the testing version of <code>skimr</code> v2 on <a href="https://github.com/ropensci/skimr/issues/341">June 19, 2018</a>. After more than a year of (admittedly intermittent) work, we’re thrilled to be able to say that the package is ready to go to CRAN. So, what happened over the last year? And why are we so excited for V2?</p>
-<div id="setting-the-stage" class="section level1">
-<h1>Setting the stage</h1>
+<div id="setting-the-stage" class="section level2">
+<h2>Setting the stage</h2>
 <p>Before we can talk about the last year of <code>skimr</code> development, we need to lay out the timeline that got us to this point. For those deeply enmeshed in <code>skimr</code> lore, all <a href="https://imgur.com/gallery/R1fdEt3">dozens</a> of you, bear with.</p>
 <p><code>skimr</code> was originally an <a href="https://ropensci.org/blog/2017/07/11/skimr/">rOpenSci unconf17</a> project, a big collaboration between eight different participants that resulted in a conceptual outline of the package and a basic working version. Participating in the unconf was a truly magical experience, with everyone bringing a tremendous amount of energy and ideas to the project, and implementation happening over a flurry of <a href="https://twitter.com/AmeliaMN/status/867818976666976256">“fancy git commits”</a>.</p>
 <p>About six months later, we released our first version on CRAN. The time between these two milestones was mostly spent on fleshing out all of the different ideas that were generated during the unconf (like handling grouped data frames) and fixing all the bugs we discovered along the way.</p>
@@ -415,8 +415,8 @@ skim(iris)</code></pre>
 ## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
 ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃</code></pre>
 </div>
-<div id="getting-it-right" class="section level1">
-<h1>Getting it right</h1>
+<div id="getting-it-right" class="section level2">
+<h2>Getting it right</h2>
 <p>Under normal circumstances (i.e. not during a hackathon), most software engineering projects begin with a design phase and series of increasingly detailed design docs. <code>skimr</code> is only a few hundred lines of code, which means “increasingly detailed design docs” translates to one doc. But we did actually write it! <a href="https://docs.google.com/document/d/18lBStDZzd1rJq08O-4Sw2qHhuHEZ79QX4sBkeyzWNFY/edit#heading=h.5x0d5h95i329">It’s here</a>. And it still goes a good job of laying out some of the big ideas we were interested in taking on for v2.</p>
 <ul>
 <li>Eliminating frictions that resulted from differences in the way we stored data vs how it was displayed to users</li>
@@ -424,6 +424,7 @@ skim(iris)</code></pre>
 <li>Making it easier for others to extend <code>skimr</code></li>
 <li>Create more useful ways to use <code>skimr</code></li>
 </ul>
+</div>
 <div id="better-internal-data-structures" class="section level2">
 <h2>Better internal data structures</h2>
 <p>In v1, <code>skimr</code> stored all of its data in a “long format”, data frame. Although hidden from the user by its print methods, this format would appear any time you’d try do something with the results of a <code>skim()</code> call. It looked something like this:</p>
@@ -503,7 +504,7 @@ skimmed</code></pre>
 ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
 ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
 ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂</code></pre>
-<p>Last, with support something close to the older format with the <code>to_long()</code> function. This can be added for backwards compatibility.</p>
+<p>Last, with support something close to the older format with the <code>to_long()</code> function. This can be added for something close to backwards compatibility. Being realistic on open source sustainability means that we are not able to support 100% backward compatibility in v2 even with new functions. Meanwhile you can keep using v1 if you are happy with it. However, because <code>skimr</code>’s dependencies are under ongoing development, sooner or later skimr v1 will no longer work with updates to them.</p>
 </div>
 <div id="working-with-dplyr" class="section level3">
 <h3>Working with dplyr</h3>
@@ -532,14 +533,12 @@ skimmed</code></pre>
 ## 1 Petal.Length   3.76</code></pre>
 </div>
 </div>
-</div>
-<div id="configuring-and-extending-skimr" class="section level1">
-<h1>Configuring and extending skimr</h1>
+<div id="configuring-and-extending-skimr" class="section level2">
+<h2>Configuring and extending skimr</h2>
 <p>Most of <code>skimr</code>’s magic, to <a href="https://resources.rstudio.com/rstudio-conf-2019/our-colour-of-magic-the-open-sourcery-of-fantastic-r-packages">steal a term</a>, comes from the fact that you can do most everything with one function. But believe it or not, there’s actually a bit more to the package.</p>
 <p>One big one is customization. We like the <code>skimr</code> defaults, but that doesn’t guarantee you will. So what if you want to do something different, we have a function factory for that!</p>
 <pre class="r"><code>my_skim &lt;- skim_with(numeric = sfl(iqr = IQR, p25 = NULL, p75 = NULL))
 my_skim(faithful)</code></pre>
-<<<<<<< HEAD
 <pre><code>## ── Data Summary ────────────────────────
 ##                            Values  
 ## Name                       faithful
@@ -555,96 +554,6 @@ my_skim(faithful)</code></pre>
 ##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
 ## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
 ## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24</code></pre>
-||||||| 074688d
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
-<table style="width:49%;">
-<caption>Data summary</caption>
-<colgroup>
-<col width="34%"></col>
-<col width="13%"></col>
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name Number of rows Number of columns</td>
-<td align="left">faithful 272 2</td>
-</tr>
-<tr class="even">
-<td align="left">Column type frequency: numeric</td>
-<td align="left">2</td>
-</tr>
-<tr class="odd">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p50</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-<th align="right">iqr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">eruptions</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.49</td>
-<td align="right">1.14</td>
-<td align="right">1.6</td>
-<td align="right">4</td>
-<td align="right">5.1</td>
-<td align="left">▇▂▂▇▇</td>
-<td align="right">2.29</td>
-</tr>
-<tr class="even">
-<td align="left">waiting</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">70.90</td>
-<td align="right">13.59</td>
-<td align="right">43.0</td>
-<td align="right">76</td>
-<td align="right">96.0</td>
-<td align="left">▃▃▂▇▂</td>
-<td align="right">24.00</td>
-</tr>
-</tbody>
-</table>
-=======
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(by_variable)`</code></pre>
-<pre><code>## Warning: `cols` is now required.
-## Please use `cols = c(skimmed)`</code></pre>
-<pre><code>## ── Data Summary ────────────────────────
-##                            Value
-## Name                    faithful
-## Number of rows               272
-## Number of columns              2
-##                                 
-## Column type frequency:          
-##   numeric                      2
-##                                 
-## Group variables             None
-## 
-## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-##   skim_variable n_missing complete_rate  mean    sd    p0   p50  p100 hist    iqr
-## 1 eruptions             0             1  3.49  1.14   1.6     4   5.1 ▇▂▂▇▇  2.29
-## 2 waiting               0             1 70.9  13.6   43      76  96   ▃▃▂▇▂ 24</code></pre>
->>>>>>> 8512ca4eedc6304469fb56f763917978e390b236
 <p>Those of you familiar with customizing <code>skim()</code> in v1 will notice a couple differences:</p>
 <ul>
 <li>we now has an object called <code>sfl()</code> for managing <code>skimr</code> function lists; more below</li>
@@ -659,9 +568,6 @@ my_skim(faithful)</code></pre>
 <pre class="r"><code>get_skimmers.sfc_POINT &lt;- function(column) {
   sfl(
     skim_type = &quot;sfc_POINT&quot;,
-    missing = n_missing,
-    complete = n_complete,
-    n = length,
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.))
   )
@@ -672,9 +578,16 @@ my_skim(faithful)</code></pre>
 $sfc_POINT
 [1] &quot;missing&quot;  &quot;complete&quot; &quot;n&quot;        &quot;n_unique&quot; &quot;valid&quot;
 ...</code></pre>
+<p>Even if you don’t go the full route of supporting a new data type, creating a couple of <code>skimr</code> function lists has other benefits. For example, you can add some to your <code>.Rprofile</code> as a way to quickly configure <code>skimr</code> interactively.</p>
+<pre class="r"><code>sfc_point_sfl &lt;- sfl(
+  n_unique = n_unique,
+  valid = ~ sum(sf::st_is_valid(.))
+)
+
+my_skimmer &lt;- skim_with(sfc_POINT = sfc_point_sfl)</code></pre>
 </div>
-<div id="using-skimr-in-other-contexts" class="section level1">
-<h1>Using skimr in other contexts</h1>
+<div id="using-skimr-in-other-contexts" class="section level2">
+<h2>Using skimr in other contexts</h2>
 <p>In <code>skimr</code> v1, we developed some slightly hacky approaches to getting nicer <code>skim()</code> output in RMarkdown docs. These have been removed in favor of the <a href="https://github.com/yihui/knitr/issues/1493">actually-supported</a> <code>knit_print</code> API. Now, calling <code>skim()</code>, within an RMarkdown doc should produce something nice by default.</p>
 <pre class="r"><code>skim(chickwts)</code></pre>
 <table>
@@ -774,14 +687,15 @@ $sfc_POINT
 </tr>
 </tbody>
 </table>
+<p>You get a nice html version of both the summary header and the <code>skimr</code> subtables for each type of data.</p>
 <p>In this context, you configure the output the same way you handle other <code>knitr</code> code chunks.</p>
 <pre><code></code></pre>
-<p>This means that we’re dropping support for <code>kable.skim_df()</code> and <code>pander.skim_df()</code>. But you can still get pretty similar results to these functions by using the reshaping functions described above to get subtables.</p>
+<p>This means that we’re dropping direct support for <code>kable.skim_df()</code> and <code>pander.skim_df()</code>. But you can still get pretty similar results to these functions by using the reshaping functions described above to get subtables. You can also still use <code>Pander</code> and other nice rendering packages on an ad hoc basis as you would for other data frames or tibbles.</p>
 <p>We also have a similarly-nice rendered output in <a href="https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb">Jupyter</a> and RMarkdown notebooks. In the latter, the summary is separated from the rest of the output when working interactively. We like it that way, but we’d be happy to hear what the rest of you think!</p>
 </div>
-<div id="wait-that-took-over-a-year" class="section level1">
-<h1>Wait, that took over a year?</h1>
-<p>Well, we think that’s a lot! But to be fair, it wasn’t exactly simple to keep up with <code>skimr</code>. Real talk, open source development takes up a lot of time, and the <code>skimr</code> developers have other priorities. Michael’s family added a new baby, and despite swearing up and down otherwise, he got absolutely nothing not-baby-related done during his paternity leave (take note new dads!). Elin ended up taking a much bigger role on at Lehman, really limiting time for any other work.</p>
+<div id="wait-that-took-over-a-year" class="section level2">
+<h2>Wait, that took over a year?</h2>
+<p>Well, we think that’s a lot! But to be fair, it wasn’t exactly simple to keep up with <code>skimr</code>. Real talk, open source development takes up a lot of time, and the <code>skimr</code> developers have additional important priorities. Michael’s family added a new baby, and despite swearing up and down otherwise, he got absolutely nothing not-baby-related done during his paternity leave (take note new dads!). Elin ended up taking a much bigger role on at Lehman, really limiting time for any other work.</p>
 <p>Even so, these are just the highlights in the normal ebb and flow of this sort of work. Since it’s no one’s real job, it might not always be the first focus. And that’s OK! We’ve been really lucky to have a group of new users that have been very patient with this slow development cycle while still providing really good feedback throughout. Thank you all!</p>
 <p>We’re really excited about this next step in the <code>skimr</code> journey. We’ve put a huge amount of work into this new version. Hopefully it shows. And hopefully it inspires some of you to send more feedback and help us find even more ways to improve!</p>
 </div>
