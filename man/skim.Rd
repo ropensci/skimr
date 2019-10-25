@@ -3,15 +3,16 @@
 \name{skim}
 \alias{skim}
 \alias{skim_tee}
+\alias{skim_without_charts}
 \title{Skim a data frame, getting useful summary statistics}
 \usage{
 skim(data, ...)
 
 skim_tee(.data, ..., skim_fun = skim)
+
+skim_without_charts(data, ...)
 }
 \arguments{
-\item{data}{The data frame that is skimmed and returned.}
-
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
 
@@ -71,6 +72,9 @@ If the rendered examples show unencoded values such as \code{<U+2587>} you will
 need to change your locale to allow proper rendering. Please review the
 \emph{Using Skimr} vignette for more information
 (\code{vignette("Using_skimr", package = "skimr")}).
+
+Otherwise, we export \code{skim_without_charts()} to produce summaries without the
+spark graphs. These are the source of the unicode dependency.
 }
 
 \examples{
@@ -96,4 +100,8 @@ iris \%>\%
 chickwts \%>\%
   skim_tee() \%>\%
   dplyr::filter(feed == "sunflower")
+
+# Produce a summary without spark graphs
+iris \%>\%
+  skim_without_charts()
 }

@@ -42,6 +42,9 @@
 #' *Using Skimr* vignette for more information
 #' (`vignette("Using_skimr", package = "skimr")`).
 #'
+#' Otherwise, we export `skim_without_charts()` to produce summaries without the
+#' spark graphs. These are the source of the unicode dependency.
+#'
 #' @param .data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
@@ -71,11 +74,14 @@
 #' chickwts %>%
 #'   skim_tee() %>%
 #'   dplyr::filter(feed == "sunflower")
+#'
+#' # Produce a summary without spark graphs
+#' iris %>%
+#'   skim_without_charts()
 #' @export
 skim <- skim_with()
 
 #' @rdname skim
-#' @param data The data frame that is skimmed and returned.
 #' @param skim_fun The skim function used.
 #' @export
 skim_tee <- function(.data, ..., skim_fun = skim) {
@@ -83,3 +89,10 @@ skim_tee <- function(.data, ..., skim_fun = skim) {
   print(skimmed)
   invisible(.data)
 }
+
+#' @rdname skim
+#' @export
+skim_without_charts <- skim_with(
+  numeric = sfl(hist = NULL),
+  ts = sfl(line_graph = NULL)
+)
