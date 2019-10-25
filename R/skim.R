@@ -45,7 +45,7 @@
 #' Otherwise, we export `skim_without_charts()` to produce summaries without the
 #' spark graphs. These are the source of the unicode dependency.
 #'
-#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
 #' @param skim  The skimming function to use in `skim_tee()`.
@@ -84,10 +84,10 @@ skim <- skim_with()
 #' @rdname skim
 #' @param skim_fun The skim function used.
 #' @export
-skim_tee <- function(.data, ..., skim_fun = skim) {
-  skimmed <- skim_fun(.data, ...)
+skim_tee <- function(data, ..., skim_fun = skim) {
+  skimmed <- skim_fun(data, ...)
   print(skimmed)
-  invisible(.data)
+  invisible(data)
 }
 
 #' @rdname skim

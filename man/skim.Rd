@@ -8,15 +8,15 @@
 \usage{
 skim(data, ...)
 
-skim_tee(.data, ..., skim_fun = skim)
+skim_tee(data, ..., skim_fun = skim)
 
 skim_without_charts(data, ...)
 }
 \arguments{
+\item{data}{A tibble, or an object that can be coerced into a tibble.}
+
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
-
-\item{.data}{A tibble, or an object that can be coerced into a tibble.}
 
 \item{skim_fun}{The skim function used.}
 
