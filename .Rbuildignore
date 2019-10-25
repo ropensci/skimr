@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.pre-commit-config\.yaml$
 ^\.travis\.yml$
 ^\\inst\\doc\\other_docs\\blog\.html$
 ^\\inst\\doc\\other_docs\\blog\.Rmd$
