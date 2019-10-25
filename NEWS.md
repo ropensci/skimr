@@ -76,6 +76,8 @@ displayed digits by adding the `skimr_digits` option to your code chunk.
     job on big data sets with lots of different columns.
 *   New statistic for character variables counting the number of rows that are
     completely made up of white space.
+*   We now export `skim_without_charts()` as a fallback for when unicode support
+    is not possible.
 
 ### BUG FIXES
 
