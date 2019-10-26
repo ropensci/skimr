@@ -64,7 +64,7 @@ Just kidding! We love our little histograms, even when they don't love us back!
 For those of you that might have never seen `skimr`, using the package typically
 boils down to a single function call:
 
-```{r render = knitr::normal_print}
+```{r render = knitr::normal_print, message=FALSE}
 library(skimr)
 library(dplyr)
 options(width = 90)
