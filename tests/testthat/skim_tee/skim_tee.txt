@@ -1,6 +1,6 @@
 ── Data Summary ────────────────────────
                            Values
-Name                       .data 
+Name                       data  
 Number of rows             71    
 Number of columns          2     
 _______________________          

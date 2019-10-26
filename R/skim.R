@@ -1,6 +1,6 @@
 #' Skim a data frame, getting useful summary statistics
 #'
-#' `skim()` is an alternative to [`summary()`], quickly providing a broad
+#' `skim()` is an alternative to [summary()], quickly providing a broad
 #' overview of a data frame. It handles data of all types, dispatching a
 #' different set of summary functions based on the types of columns in the data
 #' frame.
@@ -32,9 +32,9 @@
 #'
 #' @section Customizing skim:
 #' `skim()` is an intentionally simple function, with minimal arguments like
-#' [`summary()`]. Nonetheless, this package provides two broad approaches to
+#' [summary()]. Nonetheless, this package provides two broad approaches to
 #' how you can customize `skim()`'s behavior. You can customize the functions
-#' that are called to produce summary statistics with [`skim_with()`].
+#' that are called to produce summary statistics with [skim_with()].
 #'
 #' @section Unicode rendering:
 #' If the rendered examples show unencoded values such as `<U+2587>` you will
@@ -42,7 +42,10 @@
 #' *Using Skimr* vignette for more information
 #' (`vignette("Using_skimr", package = "skimr")`).
 #'
-#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' Otherwise, we export `skim_without_charts()` to produce summaries without the
+#' spark graphs. These are the source of the unicode dependency.
+#'
+#' @param data A tibble, or an object that can be coerced into a tibble.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
 #' @param skim  The skimming function to use in `skim_tee()`.
@@ -71,15 +74,25 @@
 #' chickwts %>%
 #'   skim_tee() %>%
 #'   dplyr::filter(feed == "sunflower")
+#'
+#' # Produce a summary without spark graphs
+#' iris %>%
+#'   skim_without_charts()
 #' @export
 skim <- skim_with()
 
 #' @rdname skim
-#' @param data The data frame that is skimmed and returned.
 #' @param skim_fun The skim function used.
 #' @export
-skim_tee <- function(.data, ..., skim_fun = skim) {
-  skimmed <- skim_fun(.data, ...)
+skim_tee <- function(data, ..., skim_fun = skim) {
+  skimmed <- skim_fun(data, ...)
   print(skimmed)
-  invisible(.data)
+  invisible(data)
 }
+
+#' @rdname skim
+#' @export
+skim_without_charts <- skim_with(
+  numeric = sfl(hist = NULL),
+  ts = sfl(line_graph = NULL)
+)

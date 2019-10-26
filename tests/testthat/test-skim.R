@@ -850,3 +850,13 @@ test_that("Skimming a grouped df works when selecting exactly one variable", {
   ))
   expect_true(all(input$skim_variable == "mpg"))
 })
+
+test_that("Skimming without charts produces no histograms", {
+  input <- skim_without_charts(iris, Sepal.Width)
+  expect_null(iris$numeric.hist)
+})
+
+test_that("Skimming without charts produces no ts line charts", {
+  input <- skim_without_charts(freeny, y)
+  expect_null(iris$ts.line_graph)
+})

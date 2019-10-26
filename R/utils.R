@@ -31,6 +31,8 @@ is_windows <- function() {
 #' printing a data frame, appearing like this: "<U+2582><U+2585><U+2587>".
 #' This longstanding problem originates in the low-level code for printing
 #' dataframes.
+#'
+#' @seealso [skim_without_charts()]
 #' @export
 fix_windows_histograms <- function() {
   message(

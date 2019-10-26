@@ -16,3 +16,6 @@ printing a data frame, appearing like this: "<U+2582><U+2585><U+2587>".
 This longstanding problem originates in the low-level code for printing
 dataframes.
 }
+\seealso{
+\code{\link[=skim_without_charts]{skim_without_charts()}}
+}

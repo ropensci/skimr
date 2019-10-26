@@ -21,7 +21,7 @@
 #' @name print
 NULL
 
-#' @describeIn print Print a skimmed data frame (`skim_df` from [`skim()`]).
+#' @describeIn print Print a skimmed data frame (`skim_df` from [skim()]).
 #' @export
 print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
                           n_extra = NULL, ...) {
