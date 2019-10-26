@@ -641,10 +641,9 @@ includes:
 -   in the context of rendering to a pdf using an engine that does not
     support utf-8.
 
-One workaround for showing these characters in Windows is to set the
-CTYPE part of your locale to Chinese/Japanese/Korean with
-`Sys.setlocale("LC_CTYPE", "Chinese"). The helper function`fix\_windows\_histograms()\`
-does this for you.
+One workaround for showing these characters in Windows is to set the CTYPE part
+of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE",
+"Chinese")`. The helper function `fix_windows_histograms()` does this for you.
 
 And last but not least, we provide `skim_without_charts()` as a
 fallback. This makes it easy to still get summaries of your data, even
