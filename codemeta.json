@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.3",
+    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.3 (2017-11-30)",
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -48,6 +48,12 @@
       "givenName": "Shannon",
       "familyName": "Ellis",
       "email": "sellis18@jhmi.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Elin",
+      "familyName": "Waring",
+      "email": "elin.waring@gmail.com"
     },
     {
       "@type": "Person",
@@ -223,7 +229,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 3.1.2"
+      "version": ">= 3.5.0"
     },
     {
       "@type": "SoftwareApplication",
@@ -360,7 +366,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
-      "version": ">= 0.7",
+      "version": ">= 1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -385,7 +391,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "3250.308KB",
+  "fileSize": "4123.815KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -404,5 +410,6 @@
     "r-package",
     "rstats",
     "peer-reviewed"
-  ]
+  ],
+  "funder": {}
 }

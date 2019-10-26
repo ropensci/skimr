@@ -33,7 +33,7 @@ Description: A simple to use summary function that can be used with pipes
     specific operating systems are given in the "Using skimr" vignette and the
     README.
 Depends:
-    R (>= 3.1.2)
+    R (>= 3.5.0)
 Imports:
     cli,
     crayon,
