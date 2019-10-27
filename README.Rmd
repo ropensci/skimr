@@ -220,7 +220,7 @@ RMarkdown documents, it cannot in other circumstances. This includes:
 
 One workaround for showing these characters in Windows is to set the CTYPE part
 of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE",
-"Chinese"). The helper function `fix_windows_histograms()` does this for you.
+"Chinese")`. The helper function `fix_windows_histograms()` does this for you.
 
 And last but not least, we provide `skim_without_charts()` as a fallback.
 This makes it easy to still get summaries of your data, even if unicode issues
