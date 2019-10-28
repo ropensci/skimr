@@ -145,7 +145,8 @@ validate_assignment <- function(...) {
 
   defaults <- get_default_skimmers()
   existing <- proposed_names %in% names(defaults)
-  if (!all(existing)) {
+
+  if (!all(existing) & length(defaults) > 0 ) {
     collapsed <- paste(proposed_names[!existing], collapse = ", ")
     message(
       "Creating new skimming functions for the following classes: ",
