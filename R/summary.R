@@ -13,7 +13,7 @@ summary.skim_df <- function(object, ...) {
   if (is.null(object)) {
     stop("dataframe is null.")
   }
-  df_name <- attr(object, "df_name")
+  df_name <- df_name(object)
   df_name <- ifelse(df_name %in% c("`.`", ".data"), "Piped data", df_name)
   df_name <- gsub("`", "", df_name)
   df_name <- ifelse(nchar(df_name) > 25,
@@ -25,17 +25,16 @@ summary.skim_df <- function(object, ...) {
   counts <- table(type = object$skim_type[!duplicated])
   types <- dimnames(counts)[[1]]
   types <- paste0("  ", types)
-  possible_groups <- ifelse(is.null(attr(object, "groups")),
+  possible_groups <- ifelse(
+    is.null(possible_names <- group_names(object)),
     "None",
-    paste(as.character(attr(object, "groups")),
-      collapse = ", "
-    )
+    paste(possible_names, collapse = ", ")
   )
 
   summary_object <- c(
     df_name,
-    attr(object, "data_rows"),
-    attr(object, "data_cols"),
+    data_rows(object),
+    data_cols(object),
     " ",
     " ",
     unname(counts),

@@ -1,3 +1,56 @@
+#' Functions for accessing skim_df attributes
+#'
+#' These functions simplify access to attributes contained within a `skim_df`.
+#' While all attributes are read-only, being able to extract this information
+#' is useful for different analyses. These functions should always be preferred
+#' over calling base R's attribute functions.
+#'
+#' @param object A `skim_df` or `skim_list`.
+#' @return Data contained within the requested `skimr` attribute.
+#' @name skim-attr
+NULL
+
+#' @describeIn skim-attr Get the number of rows in the skimmed data frame.
+#' @export
+data_rows <- function(object) {
+  attr(object, "data_rows")
+}
+
+#' @describeIn skim-attr Get the number of columns in the skimmed data frame.
+#' @export
+data_cols <- function(object) {
+  attr(object, "data_cols")
+}
+
+#' @describeIn skim-attr Get the name of the skimmed data frame. This is only
+#'   available in contexts where the name can be looked up. This is often not
+#'   the case within a pipeline.
+#' @export
+df_name <- function(object) {
+  attr(object, "df_name")
+}
+
+#' @describeIn skim-attr Get the names of the groups in the original data frame.
+#'   Only available if the data was grouped. Otherwise, `NULL`.
+#' @export
+group_names <- function(object) {
+  attr(object, "groups")
+}
+
+#' @describeIn skim-attr Get the names of the base skimming functions used.
+#' @export
+base_skimmers <- function(object) {
+  attr(object, "base_skimmers")
+}
+
+#' @describeIn skim-attr Get the names of the skimming functions used, separated
+#'   by data type.
+#' @export
+skimmers_used <- function(object) {
+  attr(object, "skimmers_used")
+}
+
+
 #' Test if an object is compatible with `skimr`
 #'
 #' Objects within `skimr` are identified by a class, but they require additional
@@ -107,12 +160,12 @@ strip_skim_attrs <- function(object) {
 reassign_skim_attrs <- function(object, skim_df, ...) {
   defaults <- list(
     class = c("skim_df", "tbl_df", "tbl", "data.frame"),
-    data_rows = attr(skim_df, "data_rows"),
-    data_cols = attr(skim_df, "data_cols"),
-    df_name = attr(skim_df, "df_name"),
-    groups = attr(skim_df, "groups"),
-    base_skimmers = attr(skim_df, "base_skimmers"),
-    skimmers_used = attr(skim_df, "skimmers_used")
+    data_rows = data_rows(skim_df),
+    data_cols = data_cols(skim_df),
+    df_name = df_name(skim_df),
+    groups = group_names(skim_df),
+    base_skimmers = base_skimmers(skim_df),
+    skimmers_used = skimmers_used(skim_df)
   )
   updated <- purrr::list_modify(defaults, ...)
   assign_new_attributes(object, !!!updated)
