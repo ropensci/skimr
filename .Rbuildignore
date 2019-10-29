@@ -6,6 +6,7 @@
 ^\\inst\\doc\\other_docs\\blog\.Rmd$
 ^\\inst\\figures
 ^\\inst\\rmarkdown\\other
+^revdep$
 ^README\.Rmd
 ^README\.html
 ^CONTRIBUTING.md
