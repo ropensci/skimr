@@ -32,8 +32,8 @@
 partition <- function(data) {
   assert_is_skim_df(data)
   data_as_list <- split(data, data$skim_type)
-  groups <- attr(data, "groups")
-  base <- attr(data, "base_skimmers")
+  groups <- group_names(data)
+  base <- base_skimmers(data)
 
   skimmers <- reconcile_skimmers(data, groups, base)
   reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups, base)
@@ -53,7 +53,7 @@ partition <- function(data) {
 #' @noRd
 reconcile_skimmers <- function(data, groups, base) {
   all_columns <- names(data)
-  skimmers_used <- attr(data, "skimmers_used")
+  skimmers_used <- skimmers_used(data)
   with_base_columns <- c(
     "skim_variable",
     "skim_type",
@@ -121,7 +121,7 @@ bind <- function(data) {
 }
 
 add_namespaces <- function(data, skim_type) {
-  base <- attr(data, "base_skimmers")
+  base <- base_skimmers(data)
   meta_columns <- c("skim_variable", dplyr::group_vars(data), base)
   no_meta_columns <- dplyr::setdiff(names(data), meta_columns)
   with_namespace <- paste(skim_type, no_meta_columns, sep = ".")
