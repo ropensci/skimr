@@ -59,7 +59,7 @@ Do not rely on APIs from the develop branch, as they are likely to change.
 - reports each data types separately
 - handles dates, logicals, and a variety of other types
 - supports spark-bar and spark-line based on
-  [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
+  [The pillar package](https://github.com/r-lib/pillar).
 
 ### Separates variables by class:
 
