@@ -56,8 +56,8 @@ Skim statistics in the console
     missing, complete, n, and sd.
 -   reports each data types separately
 -   handles dates, logicals, and a variety of other types
--   supports spark-bar and spark-line based on [Hadley Wickham's pillar
-    package](https://github.com/hadley/pillar).
+-   supports spark-bar and spark-line based on [The pillar
+    package](https://github.com/r-lib/pillar).
 
 ### Separates variables by class:
 
@@ -75,11 +75,11 @@ Skim statistics in the console
     ## ________________________           
     ## Group variables            None    
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts                        
     ## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
@@ -99,11 +99,11 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
     ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -127,7 +127,7 @@ Skim statistics in the console
     ## ________________________                  
     ## Group variables            None           
     ## 
-    ## ── Variable type: character ─────────────────────────────────────────────────────────────
+    ## ── Variable type: character ──────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
     ## 1 name                  0         1         3    21     0       87          0
     ## 2 hair_color            5         0.943     4    13     0       12          0
@@ -137,13 +137,13 @@ Skim statistics in the console
     ## 6 homeworld            10         0.885     4    14     0       48          0
     ## 7 species               5         0.943     3    14     0       37          0
     ## 
-    ## ── Variable type: list ──────────────────────────────────────────────────────────────────
+    ## ── Variable type: list ───────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
     ## 1 films                 0             1       24          1          7
     ## 2 vehicles              0             1       11          0          2
     ## 3 starships             0             1       17          0          5
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
     ## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
@@ -181,7 +181,7 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
@@ -206,7 +206,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            Species   
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
     ##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
@@ -238,7 +238,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            None      
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -364,6 +364,324 @@ By default, functions in the `sfl` call are appended to the default
 skimmers.
 
     my_skim <- skim_with(numeric = sfl(mad))
+
+    ## $AsIs
+    ## $AsIs$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $character
+    ## $character$min
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   min(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df26260>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$max
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   max(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df2cab0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$empty
+    ## function(x) {
+    ##   empty_strings <- c("")
+    ##   sum(x %in% empty_strings)
+    ## }
+    ## <bytecode: 0x10df35370>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$whitespace
+    ## function(x) {
+    ##   whitespace <- grepl("^\\s+", x)
+    ##   sum(whitespace)
+    ## }
+    ## <bytecode: 0x10df3b728>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $complex
+    ## $complex$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x1081e4238>
+    ## 
+    ## 
+    ## $Date
+    ## $Date$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x104775e58>
+    ## 
+    ## $Date$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x104775e58>
+    ## 
+    ## $Date$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x104775e58>
+    ## 
+    ## $Date$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $difftime
+    ## $difftime$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x104749988>
+    ## 
+    ## $difftime$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x104749988>
+    ## 
+    ## $difftime$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x104749988>
+    ## 
+    ## $difftime$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $factor
+    ## $factor$ordered
+    ## function (x) 
+    ## inherits(x, "ordered")
+    ## <bytecode: 0x103a7ca20>
+    ## <environment: namespace:base>
+    ## 
+    ## $factor$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $factor$top_counts
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $list
+    ## $list$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $logical
+    ## $logical$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x107ae0fb8>
+    ## 
+    ## $logical$count
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $numeric
+    ## $numeric$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$p0
+    ## ~stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$p25
+    ## ~stats::quantile(., probs = 0.25, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$p50
+    ## ~stats::quantile(., probs = 0.5, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$p75
+    ## ~stats::quantile(., probs = 0.75, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$p100
+    ## ~stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## $numeric$hist
+    ## ~inline_hist(., 5)
+    ## <environment: 0x1081cc238>
+    ## 
+    ## 
+    ## $POSIXct
+    ## $POSIXct$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x1081a0f90>
+    ## 
+    ## $POSIXct$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x1081a0f90>
+    ## 
+    ## $POSIXct$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x1081a0f90>
+    ## 
+    ## $POSIXct$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $ts
+    ## $ts$start
+    ## function(x) {
+    ##   stats::start(x)[1]
+    ## }
+    ## <bytecode: 0x10473bb18>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$end
+    ## function(x) {
+    ##   stats::end(x)[1]
+    ## }
+    ## <bytecode: 0x10473a6b0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$frequency
+    ## function (x, ...) 
+    ## UseMethod("frequency")
+    ## <bytecode: 0x1038cb770>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$deltat
+    ## function (x, ...) 
+    ## UseMethod("deltat")
+    ## <bytecode: 0x103df2698>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x107a64738>
+    ## 
+    ## $ts$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x107a64738>
+    ## 
+    ## $ts$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x107a64738>
+    ## 
+    ## $ts$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x107a64738>
+    ## 
+    ## $ts$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x107a64738>
+    ## 
+    ## $ts$line_graph
+    ## ~inline_linegraph(., 16)
+    ## <environment: 0x107a64738>
+    ## 
+    ## 
+    ## [1] TRUE
+
     my_skim(iris, Sepal.Length)
 
 <table>
@@ -448,6 +766,324 @@ uses only those functions that you've provided.
     my_skim <- skim_with(
       numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE
     )
+
+    ## $AsIs
+    ## $AsIs$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $character
+    ## $character$min
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   min(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df26260>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$max
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   max(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df2cab0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$empty
+    ## function(x) {
+    ##   empty_strings <- c("")
+    ##   sum(x %in% empty_strings)
+    ## }
+    ## <bytecode: 0x10df35370>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$whitespace
+    ## function(x) {
+    ##   whitespace <- grepl("^\\s+", x)
+    ##   sum(whitespace)
+    ## }
+    ## <bytecode: 0x10df3b728>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $complex
+    ## $complex$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x10dc30eb0>
+    ## 
+    ## 
+    ## $Date
+    ## $Date$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x10dc3f5c0>
+    ## 
+    ## $Date$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x10dc3f5c0>
+    ## 
+    ## $Date$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x10dc3f5c0>
+    ## 
+    ## $Date$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $difftime
+    ## $difftime$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x10dc58f58>
+    ## 
+    ## $difftime$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x10dc58f58>
+    ## 
+    ## $difftime$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x10dc58f58>
+    ## 
+    ## $difftime$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $factor
+    ## $factor$ordered
+    ## function (x) 
+    ## inherits(x, "ordered")
+    ## <bytecode: 0x103a7ca20>
+    ## <environment: namespace:base>
+    ## 
+    ## $factor$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $factor$top_counts
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $list
+    ## $list$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $logical
+    ## $logical$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x10dca53c8>
+    ## 
+    ## $logical$count
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $numeric
+    ## $numeric$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$p0
+    ## ~stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$p25
+    ## ~stats::quantile(., probs = 0.25, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$p50
+    ## ~stats::quantile(., probs = 0.5, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$p75
+    ## ~stats::quantile(., probs = 0.75, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$p100
+    ## ~stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## $numeric$hist
+    ## ~inline_hist(., 5)
+    ## <environment: 0x10dcb7630>
+    ## 
+    ## 
+    ## $POSIXct
+    ## $POSIXct$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x10c9345b0>
+    ## 
+    ## $POSIXct$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x10c9345b0>
+    ## 
+    ## $POSIXct$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x10c9345b0>
+    ## 
+    ## $POSIXct$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $ts
+    ## $ts$start
+    ## function(x) {
+    ##   stats::start(x)[1]
+    ## }
+    ## <bytecode: 0x10473bb18>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$end
+    ## function(x) {
+    ##   stats::end(x)[1]
+    ## }
+    ## <bytecode: 0x10473a6b0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$frequency
+    ## function (x, ...) 
+    ## UseMethod("frequency")
+    ## <bytecode: 0x1038cb770>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$deltat
+    ## function (x, ...) 
+    ## UseMethod("deltat")
+    ## <bytecode: 0x103df2698>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## $ts$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## $ts$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## $ts$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## $ts$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## $ts$line_graph
+    ## ~inline_linegraph(., 16)
+    ## <environment: 0x10d44a9b8>
+    ## 
+    ## 
+    ## [1] TRUE
+
     my_skim(iris, Sepal.Length)
 
 <table>
@@ -514,6 +1150,324 @@ uses only those functions that you've provided.
 And you can default skimmers by setting them to `NULL`.
 
     my_skim <- skim_with(numeric = sfl(hist = NULL))
+
+    ## $AsIs
+    ## $AsIs$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $AsIs$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $character
+    ## $character$min
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   min(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df26260>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$max
+    ## function(x) {
+    ##   if (all(is.na(x))) {
+    ##     return(NA)
+    ##   }
+    ##   characters <- nchar(x, allowNA = TRUE)
+    ##   max(characters, na.rm = TRUE)
+    ## }
+    ## <bytecode: 0x10df2cab0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$empty
+    ## function(x) {
+    ##   empty_strings <- c("")
+    ##   sum(x %in% empty_strings)
+    ## }
+    ## <bytecode: 0x10df35370>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $character$whitespace
+    ## function(x) {
+    ##   whitespace <- grepl("^\\s+", x)
+    ##   sum(whitespace)
+    ## }
+    ## <bytecode: 0x10df3b728>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $complex
+    ## $complex$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x10dfe0ca8>
+    ## 
+    ## 
+    ## $Date
+    ## $Date$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x10dff52c8>
+    ## 
+    ## $Date$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x10dff52c8>
+    ## 
+    ## $Date$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x10dff52c8>
+    ## 
+    ## $Date$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $difftime
+    ## $difftime$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x1118130a8>
+    ## 
+    ## $difftime$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x1118130a8>
+    ## 
+    ## $difftime$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x1118130a8>
+    ## 
+    ## $difftime$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $factor
+    ## $factor$ordered
+    ## function (x) 
+    ## inherits(x, "ordered")
+    ## <bytecode: 0x103a7ca20>
+    ## <environment: namespace:base>
+    ## 
+    ## $factor$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $factor$top_counts
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $list
+    ## $list$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$min_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   min(l)
+    ## }
+    ## <bytecode: 0x10c524860>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $list$max_length
+    ## function(x) {
+    ##   l <- lengths(x)
+    ##   max(l)
+    ## }
+    ## <bytecode: 0x10cc2d6a8>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $logical
+    ## $logical$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x111865380>
+    ## 
+    ## $logical$count
+    ## function(x, max_char = 3, max_levels = 4) {
+    ##   counts <- sorted_count(x)
+    ##   if (length(counts) > max_levels) {
+    ##     top <- counts[seq_len(max_levels)]
+    ##   } else {
+    ##     top <- counts
+    ##   }
+    ##   top_names <- substr(names(top), 1, max_char)
+    ##   paste0(top_names, ": ", top, collapse = ", ")
+    ## }
+    ## <bytecode: 0x10393a650>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $numeric
+    ## $numeric$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$p0
+    ## ~stats::quantile(., probs = 0, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$p25
+    ## ~stats::quantile(., probs = 0.25, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$p50
+    ## ~stats::quantile(., probs = 0.5, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$p75
+    ## ~stats::quantile(., probs = 0.75, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$p100
+    ## ~stats::quantile(., probs = 1, na.rm = TRUE, names = FALSE)
+    ## <environment: 0x111876970>
+    ## 
+    ## $numeric$hist
+    ## ~inline_hist(., 5)
+    ## <environment: 0x111876970>
+    ## 
+    ## 
+    ## $POSIXct
+    ## $POSIXct$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x111896270>
+    ## 
+    ## $POSIXct$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x111896270>
+    ## 
+    ## $POSIXct$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x111896270>
+    ## 
+    ## $POSIXct$n_unique
+    ## function(x) {
+    ##   un <- x[!is.na(x)]
+    ##   un <- unique(un)
+    ##   length(un)
+    ## }
+    ## <bytecode: 0x10393ef90>
+    ## <environment: namespace:skimr>
+    ## 
+    ## 
+    ## $ts
+    ## $ts$start
+    ## function(x) {
+    ##   stats::start(x)[1]
+    ## }
+    ## <bytecode: 0x10473bb18>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$end
+    ## function(x) {
+    ##   stats::end(x)[1]
+    ## }
+    ## <bytecode: 0x10473a6b0>
+    ## <environment: namespace:skimr>
+    ## 
+    ## $ts$frequency
+    ## function (x, ...) 
+    ## UseMethod("frequency")
+    ## <bytecode: 0x1038cb770>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$deltat
+    ## function (x, ...) 
+    ## UseMethod("deltat")
+    ## <bytecode: 0x103df2698>
+    ## <environment: namespace:stats>
+    ## 
+    ## $ts$mean
+    ## ~mean(., na.rm = TRUE)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## $ts$sd
+    ## ~stats::sd(., na.rm = TRUE)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## $ts$min
+    ## ~min(., na.rm = TRUE)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## $ts$max
+    ## ~max(., na.rm = TRUE)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## $ts$median
+    ## ~stats::median(., na.rm = TRUE)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## $ts$line_graph
+    ## ~inline_linegraph(., 16)
+    ## <environment: 0x1118c1e70>
+    ## 
+    ## 
+    ## [1] TRUE
+
     my_skim(iris, Sepal.Length)
 
 <table>
@@ -641,9 +1595,10 @@ includes:
 -   in the context of rendering to a pdf using an engine that does not
     support utf-8.
 
-One workaround for showing these characters in Windows is to set the CTYPE part
-of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE",
-"Chinese")`. The helper function `fix_windows_histograms()` does this for you.
+One workaround for showing these characters in Windows is to set the
+CTYPE part of your locale to Chinese/Japanese/Korean with
+`Sys.setlocale("LC_CTYPE", "Chinese")`. The helper function
+`fix_windows_histograms()` does this for you.
 
 And last but not least, we provide `skim_without_charts()` as a
 fallback. This makes it easy to still get summaries of your data, even
