@@ -5,12 +5,6 @@
 #' different set of summary functions based on the types of columns in the data
 #' frame.
 #'
-#' Each call produces a `skim_df`, which is a fundamentally a tibble with a
-#' special print method. Instead of showing the result in a long format, `skim`
-#' prints a wide version of your data with formatting applied to each column.
-#' Printing does not change the structure of the `skim_df`, which remains a long
-#' tibble.
-#'
 #' If you just want to see the printed output, call `skim_tee()` instead.
 #' This function returns the original data. `skim_tee()` uses the default
 #' `skim()`, but you can replace it with the `skim` argument.

@@ -107,9 +107,6 @@ skim_sf(nc$geometry)
 ```
 
 
-```{}
-skim(nc)
-```
 
 Sharing these functions within a separate package requires an export. 
 The simplest way to do this is with Roxygen.
@@ -136,7 +133,7 @@ skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
 ```
 
 ```{}
-skim(nc)
+skim_sf(nc)
 ```
 
 While this works within any package, there is an even better approach in this
