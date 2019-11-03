@@ -6,6 +6,10 @@ warnings_are_errors: true
 env:
   global:
     - NOT_CRAN=false
+addons:
+  apt:
+    packages:
+      - libudunits2-dev
 before_install:
   - echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
 r_github_packages:
