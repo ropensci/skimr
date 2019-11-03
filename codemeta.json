@@ -164,6 +164,18 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "extrafont",
       "name": "extrafont",
       "provider": {
@@ -185,6 +197,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sf"
     },
     {
       "@type": "SoftwareApplication",
@@ -210,18 +234,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
     }
   ],
   "softwareRequirements": [
@@ -391,7 +403,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "4120.816KB",
+  "fileSize": "3788.166KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"

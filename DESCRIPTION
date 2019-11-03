@@ -49,11 +49,12 @@ Imports:
     tidyr (>= 1.0),
     tidyselect (>= 0.2.5)
 Suggests:
+    covr,
     extrafont,
     rmarkdown,
+    sf,
     testthat (>= 2.0.0),
-    withr,
-    covr
+    withr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
