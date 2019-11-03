@@ -11,6 +11,7 @@ test_that("Skim prints a header for the entire output and each type", {
 })
 
 test_that("Skim prints a special header for grouped data frames", {
+  options(width=80)
   input <- skim(dplyr::group_by(iris, Species))
   expect_print_matches_file(input, "print/groups.txt")
 })

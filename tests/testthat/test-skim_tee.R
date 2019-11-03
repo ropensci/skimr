@@ -22,6 +22,7 @@ test_that("skim_tee supports dplyr helpers", {
 })
 
 test_that("Skim_tee works with groups", {
+  options(width=80)
   iris_grouped <- dplyr::group_by(iris, Species)
   my_skim <- skim_with(numeric = sfl(hist = NULL))
   expect_known_output(
