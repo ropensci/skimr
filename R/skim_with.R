@@ -68,7 +68,7 @@ skim_with <- function(...,
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
-    if (!is.data.frame(data)) {
+    if (!is.data.frame(data) | length(class(data)) > 1) {
       data <- as.data.frame(data)
     }
     stopifnot(is.data.frame(data))
@@ -306,6 +306,7 @@ skim_by_type.data.frame <- function(mangled, columns, data) {
 
 #' Summarize returns a single row data frame, make it tall.
 #' @noRd
+#' @export
 build_results <- function(skimmed, data_cols, groups) {
   if (length(data_cols) > 1) {
     out <- tibble::tibble(
