@@ -32,6 +32,7 @@ following code.  Note that code in this vignette was not evaluated when
 rendering the vignette in order to avoid forcing installation of sf.
 
 ```{r}
+library(skimr)
 library(sf)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
