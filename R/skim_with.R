@@ -305,7 +305,11 @@ skim_by_type.data.frame <- function(mangled, columns, data) {
 }
 
 #' Summarize returns a single row data frame, make it tall.
-#' @noRd
+#' 
+#' @param skimmed Single row data frame returned by summarize
+#' @param data_cols Names of the columns for a specific type
+#' @param groups Vector of group names from the data frame if present.
+#' 
 #' @export
 build_results <- function(skimmed, data_cols, groups) {
   if (length(data_cols) > 1) {
