@@ -31,6 +31,7 @@ following code.  Note that code in this vignette was not evaluated when
 rendering the vignette in order to avoid forcing installation of sf.
 
 ```{r}
+library(skimr)
 library(sf)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
@@ -150,7 +151,7 @@ skim_sf <- skim_with(
 #' @export
 skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
   skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
-  build_results(skimmed, columns, NULL)
+  skimr::build_results(skimmed, columns, NULL)
 }
 ```
 
