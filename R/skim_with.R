@@ -69,7 +69,7 @@ skim_with <- function(...,
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
-    if (!is.data.frame(data) | length(class(data)) > 1) {
+    if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
     stopifnot(is.data.frame(data))
@@ -319,9 +319,14 @@ build_results <- function(skimmed, variable_names, groups) {
     )
     tidyr::unnest(out, .data$by_variable)
   } else {
+    out <- dplyr::select(
+      as.data.frame(skimmed),
+      !!!groups,
+      tidyselect::contains(NAME_DELIMETER)
+    )
     tibble::tibble(
       skim_variable = variable_names,
-      !!!set_clean_names(skimmed)
+      !!!set_clean_names(out)
     )
   }
 }
@@ -329,7 +334,7 @@ build_results <- function(skimmed, variable_names, groups) {
 reshape_skimmed <- function(column, skimmed, groups) {
   delim_name <- paste0(column, "_", NAME_DELIMETER)
   out <- dplyr::select(
-    skimmed,
+    as.data.frame(skimmed),
     !!!groups,
     tidyselect::starts_with(delim_name)
   )
