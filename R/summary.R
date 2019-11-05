@@ -13,12 +13,12 @@ summary.skim_df <- function(object, ...) {
   if (is.null(object)) {
     stop("dataframe is null.")
   }
-  df_name <- df_name(object)
-  df_name <- ifelse(df_name %in% c("`.`", ".data"), "Piped data", df_name)
-  df_name <- gsub("`", "", df_name)
-  df_name <- ifelse(nchar(df_name) > 25,
-    paste0(substring(df_name, 1, 25), "..."),
-    df_name
+  data_name <- df_name(object)
+  data_name <- ifelse(data_name %in% c("`.`", ".data"), "Piped data", data_name)
+  data_name <- gsub("`", "", data_name)
+  data_name <- ifelse(nchar(data_name) > 25,
+    paste0(substring(data_name, 1, 25), "..."),
+    data_name
   )
 
   duplicated <- duplicated(object$skim_variable)
@@ -32,7 +32,7 @@ summary.skim_df <- function(object, ...) {
   )
 
   summary_object <- c(
-    df_name,
+    data_name,
     data_rows(object),
     data_cols(object),
     " ",
