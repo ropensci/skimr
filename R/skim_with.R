@@ -69,6 +69,7 @@ skim_with <- function(...,
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
+    data_name <- rlang::expr_label(substitute(data))
     if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
@@ -111,7 +112,7 @@ skim_with <- function(...,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
-      df_name = rlang::expr_label(substitute(data)),
+      df_name = data_name,
       groups = dplyr::groups(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
