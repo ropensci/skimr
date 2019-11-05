@@ -194,8 +194,12 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
 
   if (is.null(locals$funs)) {
     if (defaults$skim_type == "default") {
-      warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
-        "provided. Falling back to `character`.",
+      msg <- sprintf(
+        "Couldn't find skimmers for class: %s;",
+        paste(all_classes, collapse = ", ")
+      )
+      warning(msg,
+        " No user-defined `sfl` provided. Falling back to `character`.",
         call. = FALSE
       )
       data[[column]] <- as.character(data[[column]])
@@ -319,9 +323,14 @@ build_results <- function(skimmed, variable_names, groups) {
     )
     tidyr::unnest(out, .data$by_variable)
   } else {
+    out <- dplyr::select(
+      as.data.frame(skimmed),
+      !!!groups,
+      tidyselect::contains(NAME_DELIMETER)
+    )
     tibble::tibble(
       skim_variable = variable_names,
-      !!!set_clean_names(skimmed)
+      !!!set_clean_names(out)
     )
   }
 }
@@ -329,7 +338,7 @@ build_results <- function(skimmed, variable_names, groups) {
 reshape_skimmed <- function(column, skimmed, groups) {
   delim_name <- paste0(column, "_", NAME_DELIMETER)
   out <- dplyr::select(
-    skimmed,
+    as.data.frame(skimmed),
     !!!groups,
     tidyselect::starts_with(delim_name)
   )
