@@ -30,14 +30,15 @@ expect_NA <- function(object) {
 
 expect_print_matches_file <- function(object,
                                       filename,
-                                      skip_on_windows = TRUE) {
+                                      skip_on_windows = TRUE,
+                                      width = 100) {
   if (skip_on_windows) testthat::skip_on_os("windows")
-  withr::with_options(list(crayon.enabled = FALSE), {
+  withr::with_options(list(crayon.enabled = FALSE, width = width), {
     testthat::expect_known_output(
       print(object),
       filename,
       update = FALSE,
-      width = 100
+      width = width
     )
   })
 }

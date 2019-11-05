@@ -11,7 +11,6 @@ test_that("Skim prints a header for the entire output and each type", {
 })
 
 test_that("Skim prints a special header for grouped data frames", {
-  options(width=80)
   input <- skim(dplyr::group_by(iris, Species))
   expect_print_matches_file(input, "print/groups.txt")
 })
@@ -87,10 +86,8 @@ test_that("Print focused objects appropriately", {
 })
 
 test_that("Metadata is stripped from smaller consoles", {
-  withr::with_options(list(width = 50), {
-    skimmed <- skim(iris)
-    expect_print_matches_file(skimmed, "print/smaller.txt")
-  })
+  skimmed <- skim(iris)
+  expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
 })
 
 test_that("Crayon is supported", {

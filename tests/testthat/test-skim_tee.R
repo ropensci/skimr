@@ -22,12 +22,12 @@ test_that("skim_tee supports dplyr helpers", {
 })
 
 test_that("Skim_tee works with groups", {
-  options(width=80)
   iris_grouped <- dplyr::group_by(iris, Species)
   my_skim <- skim_with(numeric = sfl(hist = NULL))
   expect_known_output(
     obj <- skim_tee(iris_grouped, Sepal.Length, skim_fun = my_skim),
-    "skim_tee/grouped.txt"
+    "skim_tee/grouped.txt",
+    width = 80
   )
   expect_identical(obj, iris_grouped)
 })
