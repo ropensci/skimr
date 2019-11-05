@@ -194,8 +194,12 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
 
   if (is.null(locals$funs)) {
     if (defaults$skim_type == "default") {
-      warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
-        "provided. Falling back to `character`.",
+      msg <- sprintf(
+        "Couldn't find skimmers for class: %s;",
+        paste(all_classes, collapse = ", ")
+      )
+      warning(msg,
+        " No user-defined `sfl` provided. Falling back to `character`.",
         call. = FALSE
       )
       data[[column]] <- as.character(data[[column]])
