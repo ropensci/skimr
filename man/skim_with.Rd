@@ -22,10 +22,7 @@ more details.
 }
 \description{
 While skim is designed around having an opinionated set of defaults, you
-can use these functions to change the summary statistics that it returns.
-To do that, provide type you wish to change as an argument to this function,
-along with a list of named functions that you want to use instead of the
-defaults.
+can use this function to change the summary statistics that it returns.
 }
 \details{
 \code{skim_with()} is a closure: a function that returns a new function. This
@@ -36,7 +33,11 @@ you can use it.
 You assign values within \code{skim_with} by using the \code{\link[=sfl]{sfl()}} helper (\code{skimr}
 function list). This helper behaves mostly like \code{\link[dplyr:funs]{dplyr::funs()}}, but lets
 you also identify which skimming functions you want to remove, by setting
-them to \code{NULL}.
+them to \code{NULL}. Assign an \code{sfl} to each column type that you wish to modify.
+Functions that summarize all data types, and always return the same type
+of value, can be assigned to the \code{base} argument. The default base skimmers
+compute the number of missing values \code{n_missing} and the rate of values being
+complete, i.e. not missing.
 
 When \code{append = TRUE} and local skimmers have names matching the names of
 entries in the default \code{skim_function_list}, the values in the default list
