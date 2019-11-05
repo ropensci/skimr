@@ -6,10 +6,13 @@
 #' frame.
 #'
 #' Each call produces a `skim_df`, which is a fundamentally a tibble with a
-#' special print method. Instead of showing the result in a long format, `skim`
-#' prints a wide version of your data with formatting applied to each column.
-#' Printing does not change the structure of the `skim_df`, which remains a long
-#' tibble.
+#' special print method. One unusual feature of this data frame is pseudo-
+#' namespace for columns. `skim()` computes statistics by data type, and it
+#' stores them in the data frame as `<type>.<statistic>`. These types are
+#' stripped when printing the results. The "base" skimmers (`n_missing` and
+#' `complete_rate`) are the only columns that don't follow this behavior.
+#' See [skim_with()] for more details on customizing `skim()` and
+#' [get_default_skimmers()] for a list of default functions.
 #'
 #' If you just want to see the printed output, call `skim_tee()` instead.
 #' This function returns the original data. `skim_tee()` uses the default
@@ -64,10 +67,16 @@
 #'   skim()
 #'
 #' # Which five numeric columns have the greatest mean value?
+#' # Look in the `numeric.mean` column.
 #' iris %>%
 #'   skim() %>%
 #'   dplyr::select(numeric.mean) %>%
 #'   dplyr::top_n(5)
+#'
+#' # Which of my columns have missing values? Use the base skimmer n_missing.
+#' iris %>%
+#'   skim() %>%
+#'   dplyr::filter(n_missing > 0)
 #'
 #' # Use skim_tee to view the skim results and
 #' # continue using the original data.
