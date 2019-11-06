@@ -86,10 +86,8 @@ test_that("Print focused objects appropriately", {
 })
 
 test_that("Metadata is stripped from smaller consoles", {
-  withr::with_options(list(width = 50), {
-    skimmed <- skim(iris)
-    expect_print_matches_file(skimmed, "print/smaller.txt")
-  })
+  skimmed <- skim(iris)
+  expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
 })
 
 test_that("Crayon is supported", {

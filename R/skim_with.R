@@ -1,10 +1,7 @@
 #' Set or add the summary functions for a particular type of data
 #'
 #' While skim is designed around having an opinionated set of defaults, you
-#' can use these functions to change the summary statistics that it returns.
-#' To do that, provide type you wish to change as an argument to this function,
-#' along with a list of named functions that you want to use instead of the
-#' defaults.
+#' can use this function to change the summary statistics that it returns.
 #'
 #' `skim_with()` is a closure: a function that returns a new function. This
 #' lets you have several skimming functions in a single R session, but it
@@ -14,7 +11,11 @@
 #' You assign values within `skim_with` by using the [sfl()] helper (`skimr`
 #' function list). This helper behaves mostly like [dplyr::funs()], but lets
 #' you also identify which skimming functions you want to remove, by setting
-#' them to `NULL`.
+#' them to `NULL`. Assign an `sfl` to each column type that you wish to modify.
+#' Functions that summarize all data types, and always return the same type
+#' of value, can be assigned to the `base` argument. The default base skimmers
+#' compute the number of missing values `n_missing` and the rate of values being
+#' complete, i.e. not missing.
 #'
 #' When `append = TRUE` and local skimmers have names matching the names of
 #' entries in the default `skim_function_list`, the values in the default list
@@ -68,6 +69,7 @@ skim_with <- function(...,
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
+    data_name <- rlang::expr_label(substitute(data))
     if (!is.data.frame(data)) {
       data <- as.data.frame(data)
     }
@@ -110,7 +112,7 @@ skim_with <- function(...,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
-      df_name = rlang::expr_label(substitute(data)),
+      df_name = data_name,
       groups = dplyr::groups(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
@@ -193,8 +195,12 @@ get_final_skimmers <- function(column, data, local_skimmers, append) {
 
   if (is.null(locals$funs)) {
     if (defaults$skim_type == "default") {
-      warning("Couldn't find skimmers for class: %s; No user-defined `sfl` ",
-        "provided. Falling back to `character`.",
+      msg <- sprintf(
+        "Couldn't find skimmers for class: %s;",
+        paste(all_classes, collapse = ", ")
+      )
+      warning(msg,
+        " No user-defined `sfl` provided. Falling back to `character`.",
         call. = FALSE
       )
       data[[column]] <- as.character(data[[column]])
@@ -284,39 +290,48 @@ mangle_names <- function(skimmers, base_names) {
 #' mangle the function names. That way, each set of relevant columns begin
 #' with the column name + `_` + our internal delimiter.
 #'
+#' @param mangled_skimmers The `sfl`'s whose function names have been mangled.
+#' @param variable_names The names of columns in the original data, matching a
+#'   data type, that will be summarized.
+#' @param data The original data.
 #' @keywords internal
 #' @noRd
-skim_by_type <- function(mangled, columns, data) {
+skim_by_type <- function(mangled_skimmers, variable_names, data) {
   UseMethod("skim_by_type", data)
 }
 
 #' @export
-skim_by_type.grouped_df <- function(mangled, columns, data) {
+skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
   group_columns <- dplyr::groups(data)
   grouped <- dplyr::group_by(data, !!!group_columns)
-  skimmed <- dplyr::summarize_at(grouped, columns, mangled$funs)
-  build_results(skimmed, columns, group_columns)
+  skimmed <- dplyr::summarize_at(grouped, variable_names, mangled_skimmers$funs)
+  build_results(skimmed, variable_names, group_columns)
 }
 
 #' @export
-skim_by_type.data.frame <- function(mangled, columns, data) {
-  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
-  build_results(skimmed, columns, NULL)
+skim_by_type.data.frame <- function(mangled_skimmers, variable_names, data) {
+  skimmed <- dplyr::summarize_at(data, variable_names, mangled_skimmers$funs)
+  build_results(skimmed, variable_names, NULL)
 }
 
 #' Summarize returns a single row data frame, make it tall.
 #' @noRd
-build_results <- function(skimmed, data_cols, groups) {
-  if (length(data_cols) > 1) {
+build_results <- function(skimmed, variable_names, groups) {
+  if (length(variable_names) > 1) {
     out <- tibble::tibble(
-      skim_variable = data_cols,
-      by_variable = purrr::map(data_cols, reshape_skimmed, skimmed, groups)
+      skim_variable = variable_names,
+      by_variable = purrr::map(variable_names, reshape_skimmed, skimmed, groups)
     )
     tidyr::unnest(out, .data$by_variable)
   } else {
+    out <- dplyr::select(
+      as.data.frame(skimmed),
+      !!!groups,
+      tidyselect::contains(NAME_DELIMETER)
+    )
     tibble::tibble(
-      skim_variable = data_cols,
-      !!!set_clean_names(skimmed)
+      skim_variable = variable_names,
+      !!!set_clean_names(out)
     )
   }
 }
@@ -324,7 +339,7 @@ build_results <- function(skimmed, data_cols, groups) {
 reshape_skimmed <- function(column, skimmed, groups) {
   delim_name <- paste0(column, "_", NAME_DELIMETER)
   out <- dplyr::select(
-    skimmed,
+    as.data.frame(skimmed),
     !!!groups,
     tidyselect::starts_with(delim_name)
   )
