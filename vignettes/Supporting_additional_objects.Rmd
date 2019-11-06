@@ -30,31 +30,28 @@ example.  However to run it on your own you can install `sf` and then run the
 following code.  Note that code in this vignette was not evaluated when
 rendering the vignette in order to avoid forcing installation of sf.
 
-```{r, eval = FALSE}
+```{r}
+library(skimr)
 library(sf)
 nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 ```
 
-```
-Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0
-Reading layer `nc' from data source 
-`/path/to/library/sf/shape/nc.shp' using driver `ESRI Shapefile'
-Simple feature collection with 100 features and 14 fields
-geometry type:  MULTIPOLYGON
-dimension:      XY
-bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-epsg (SRID):    4267
-proj4string:    +proj=longlat +datum=NAD27 +no_defs
-```
-```{r, eval=FALSE}
+
+```{r}
 class(nc)
 ```
-```
-[1] "sf"         "data.frame"
-```
+
 Unlike the example of having a new type of data in a column of a simple data 
 frame in the "Using skimr" vignette, this is a different type of object 
-with special attributes .
+with special attributes.
+
+In this object there is also a column of a class that does not have default
+skimmers. By default, skimr falls back to use the sfl for character variables.
+
+```{r}
+skim(nc$geometry)
+```
+
 
 ## Experiment interactively
 
@@ -70,7 +67,7 @@ this case, you're best off adding your data type with `skim_with()`.
 Before we begin, we'll be using the following custom summary statistic
 throughout. It's a naive example, but covers the requirements of what we need.
 
-```{r, eval = FALSE}
+```{r}
 funny_sf <- function(x) {
   length(x) + 1
 }
@@ -100,7 +97,7 @@ will build  support for `sfc_MULTIPOLYGON`, but note that we'll have to
 eventually think about `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT` and
 others if we want to fully support `sf`.
 
-```{r, eval = FALSE}
+```{r}
 skim_sf <- skim_with(
   sfc_MULTIPOLYGON = sfl(
     n_unique = n_unique,
@@ -114,96 +111,30 @@ The example above creates a new *function*, and you can call that function on
 a specific column with `sfc_MULTIPOLYGON` data to get the appropriate summary 
 statistics.
 
-```{r, eval = FALSE}
+```{r}
 skim_sf(nc$geometry)
 ```
-```
-── Data Summary ────────────────────────
-                           Values                      
-Name                       structure(list(geometry =...
-Number of rows             100                         
-Number of columns          1                           
-_______________________                                
-Column type frequency:                                 
-  sfc_MULTIPOLYGON         1                           
-________________________                               
-Group variables            None                        
 
-── Variable type: sfc_MULTIPOLYGON ──────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate n_unique valid funny missing     n
-1 geometry              0             1      100   100   101       0   100
-```
 Creating a function that is a method of the skim_by_type generic
 for the data type allows skimming of an entire data frame that contains some 
 columns of that type.
 
-```{r, eval = FALSE}
+```{r}
 skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
   skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
   build_results(skimmed, columns, NULL)
 }
 ```
 
-```{r, eval = FALSE}
-skim(nc)
+```{r}
+skim_sf(nc)
 ```
 
-```
-── Data Summary ────────────────────────
-                           Values
-Name                       nc    
-Number of rows             100   
-Number of columns          15    
-_______________________          
-Column type frequency:           
-  factor                   2     
-  numeric                  12    
-  sfc_MULTIPOLYGON         1     
-________________________         
-Group variables            None  
-
-── Variable type: factor ────────────────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate ordered n_unique top_counts                    
-1 NAME                  0             1 FALSE        100 Ala: 1, Ale: 1, All: 1, Ans: 1
-2 FIPS                  0             1 FALSE        100 370: 1, 370: 1, 370: 1, 370: 1
-
-── Variable type: numeric───────────────────────────────────────────────────────
-   skim_variable n_missing complete_rate      mean        sd        p0       p25
- 1 AREA                  0             1     0.126    0.0492     0.042     0.091
- 2 PERIMETER             0             1     1.67     0.482      0.999     1.32 
- 3 CNTY_                 0             1  1986.     107.      1825      1902.   
- 4 CNTY_ID               0             1  1986.     107.      1825      1902.   
- 5 FIPSNO                0             1 37100       58.0    37001     37050.   
- 6 CRESS_ID              0             1    50.5     29.0        1        25.8  
- 7 BIR74                 0             1  3300.    3848.       248      1077    
- 8 SID74                 0             1     6.67     7.78       0         2    
- 9 NWBIR74               0             1  1051.    1433.         1       190    
-10 BIR79                 0             1  4224.    5179.       319      1336.   
-11 SID79                 0             1     8.36     9.43       0         2    
-12 NWBIR79               0             1  1353.    1976.         3       250.   
-         p50       p75      p100 hist 
- 1     0.120     0.154     0.241 ▆▇▆▃▂
- 2     1.61      1.86      3.64  ▇▇▂▁▁
- 3  1982      2067.     2241     ▇▆▆▅▁
- 4  1982      2067.     2241     ▇▆▆▅▁
- 5 37100     37150.    37199     ▇▇▇▇▇
- 6    50.5      75.2     100     ▇▇▇▇▇
- 7  2180.     3936     21588     ▇▁▁▁▁
- 8     4         8.25     44     ▇▂▁▁▁
- 9   698.     1168.     8027     ▇▁▁▁▁
-10  2636      4889     30757     ▇▁▁▁▁
-11     5        10.2      57     ▇▂▁▁▁
-12   874.     1407.    11631     ▇▁▁▁▁
-
-── Variable type: sfc_MULTIPOLYGON──────────────────────────────────────────────
-  skim_variable n_missing complete_rate n_unique valid funny
-1 geometry              0             1      100   100   101
-```
 
 Sharing these functions within a separate package requires an export. 
 The simplest way to do this is with Roxygen.
 
-```{r, eval = FALSE}
+```{r}
 #' Skimming functions for `sfc_MULTIPOLYGON` objects.
 #' @export
 skim_sf <- skim_with(
@@ -220,7 +151,7 @@ skim_sf <- skim_with(
 #' @export
 skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
   skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
-  build_results(skimmed, columns, NULL)
+  skimr::build_results(skimmed, columns, NULL)
 }
 ```
 
@@ -240,7 +171,7 @@ function list. This is the same list-like data structure used in the
 `skim_with()` example above. But note! There is one key difference. When adding
 a generic we also want to identify the `skim_type` in the `sfl`.
 
-```{r, eval = FALSE}
+```{r}
 #' @importFrom skimr get_skimmers
 #' @export
 get_skimmers.sfc_MULTIPOLYGON <- function(column) {
@@ -259,7 +190,7 @@ The same strategy follows for other data types.
 * return an `sfl`
 * make sure that the `skim_type` is there
 
-```{r, eval = FALSE}
+```{r}
 #' @export
 get_skimmers.sfc_POINT <- function(column) {
   sfl(
@@ -274,18 +205,12 @@ Users of your package should load `skimr` to get the `skim()` function. Once
 loaded, a call to `get_default_skimmer_names()` will return defaults for your
 data types as well!
 
-```{r, eval = FALSE}
+```{r}
 get_default_skimmer_names()
 ```
 
 ```
-...
-$sfc_MULTIPOLYGON
-[1] "n_unique" "valid"    "funny" 
 
-$sfc_POINT
-[1] "n_unique" "valid"  
-```
 ## Conclusion
 
 This is a very simple example. For a package such as sf the custom statistics
