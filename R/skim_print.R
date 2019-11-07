@@ -18,17 +18,25 @@
 #'
 #' @inheritParams tibble:::print.tbl
 #' @param include_summary Whether a summary of the data frame should be printed
+#' @param strip_metadata Whether tibble metadata should be removed.
 #' @name print
 NULL
 
 #' @describeIn print Print a skimmed data frame (`skim_df` from [skim()]).
 #' @export
-print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
-                          n_extra = NULL, ...) {
+print.skim_df <- function(x,
+                          include_summary = TRUE,
+                          n = Inf,
+                          width = Inf,
+                          n_extra = NULL,
+                          strip_metadata = TRUE,
+                          ...) {
   if (is_skim_df(x)) {
-    if (include_summary) print(summary(x))
+    if (include_summary) {
+      print(summary(x))
+    }
     by_type <- partition(x)
-    purrr::imap(by_type, print, n, width, n_extra)
+    purrr::map(by_type, print, n, width, n_extra, strip_metadata, ...)
     invisible(NULL)
   } else {
     NextMethod("print")
@@ -37,12 +45,20 @@ print.skim_df <- function(x, include_summary = TRUE, n = Inf, width = Inf,
 
 #' @describeIn print Print an entry within a partitioned `skim_df`.
 #' @export
-print.one_skim_df <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
+print.one_skim_df <- function(x,
+                              n = Inf,
+                              width = Inf,
+                              n_extra = NULL,
+                              strip_metadata = TRUE,
+                              ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
   top_line <- cli::rule(line = 1, left = variable_type)
-  dots <- list(...)
-  out <- format(x, n = n, width = width, n_extra = n_extra, dots)
-  metadata <- grab_tibble_metadata(out)
+  out <- format(x, ..., n = n, width = width, n_extra = n_extra, dots)
+  if (strip_metadata) {
+    metadata <- -1 * grab_tibble_metadata(out)
+  } else {
+    metadata <- seq_along(out)
+  }
   render_skim_body(top_line, out, metadata)
 }
 
@@ -54,8 +70,8 @@ grab_tibble_metadata <- function(x) {
   }
 }
 
-render_skim_body <- function(top_line, out, metadata) {
-  cat(paste0("\n", top_line), out[-metadata], sep = "\n")
+render_skim_body <- function(top_line, out, metadata_to_remove) {
+  cat(paste0("\n", top_line), out[metadata_to_remove], sep = "\n")
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
