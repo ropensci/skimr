@@ -3,6 +3,10 @@
 language: r
 sudo: required
 warnings_are_errors: true
+r:
+  - oldrel
+  - release
+  - devel
 env:
   global:
     - NOT_CRAN=false
@@ -20,3 +24,9 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'covr::codecov(line_exclusions = list("R/skim_print.R" = c(147, 167, 178:180, 190)))'
+deploy:
+  provider: script
+  script: Rscript -e 'pkgdown::deploy_site_github()'
+  skip_cleanup: true
+  on:
+    tags: true
