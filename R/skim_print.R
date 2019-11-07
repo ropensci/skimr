@@ -53,7 +53,7 @@ print.one_skim_df <- function(x,
                               ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
   top_line <- cli::rule(line = 1, left = variable_type)
-  out <- format(x, ..., n = n, width = width, n_extra = n_extra, dots)
+  out <- format(x, ..., n = n, width = width, n_extra = n_extra)
   if (strip_metadata) {
     metadata <- -1 * grab_tibble_metadata(out)
   } else {

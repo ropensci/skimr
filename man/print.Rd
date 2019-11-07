@@ -38,7 +38,7 @@ default and always print all columns.}
 if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
 
-\item{strip_metadata}{Whether tbl metadata should be removed.}
+\item{strip_metadata}{Whether tibble metadata should be removed.}
 
 \item{...}{Other arguments passed on to individual methods.}
 }
