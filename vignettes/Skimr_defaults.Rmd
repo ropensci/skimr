@@ -5,7 +5,7 @@ output:
   rmarkdown::html_vignette:
     latex_engine: xelatex
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Skimr defaults}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
