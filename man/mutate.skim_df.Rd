@@ -10,15 +10,15 @@
 \item{.data}{A \code{skim_df}, which behaves like a \code{tbl.}}
 
 \item{...}{Name-value pairs of expressions, each with length 1 or the same
-length as the number of rows in the group (if using \code{\link[=group_by]{group_by()}} or in the
-entire input (if not using groups). The name of each argument will be the
-name of a new variable, and the value will be its corresponding value.  Use
-\code{NULL} value in \code{mutate} to drop a variable.  New variables overwrite
-existing variables of the same name.
+length as the number of rows in the group (if using \code{\link[dplyr:group_by]{dplyr::group_by()}} or
+in the entire input (if not using groups). The name of each argument will
+be the name of a new variable, and the value will be its corresponding
+value. Use \code{NULL} value in \code{mutate} to drop a variable. New variables
+overwrite existing variables of the same name.
 
-The arguments in \code{...} are automatically \href{rlang::quo}{quoted} and
-\href{rlang::eval_tidy}{evaluated} in the context of the data frame. They
-support \href{rlang::quasiquotation}{unquoting} and splicing. See
+The arguments in \code{...} are automatically \link[rlang:quo]{quoted} and
+\link[rlang:eval_tidy]{evaluated} in the context of the data frame. They
+support \link[rlang:quasiquotation]{unquoting} and splicing. See
 \code{vignette("programming", package = "dplyr")} for an introduction to these
 concepts.}
 }

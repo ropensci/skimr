@@ -6,15 +6,15 @@
 #'
 #' @param .data A `skim_df`, which behaves like a `tbl.`
 #' @param ... Name-value pairs of expressions, each with length 1 or the same
-#'   length as the number of rows in the group (if using [group_by()] or in the
-#'   entire input (if not using groups). The name of each argument will be the
-#'   name of a new variable, and the value will be its corresponding value.  Use
-#'   `NULL` value in `mutate` to drop a variable.  New variables overwrite
-#'   existing variables of the same name.
+#'   length as the number of rows in the group (if using [dplyr::group_by()] or
+#'   in the entire input (if not using groups). The name of each argument will
+#'   be the name of a new variable, and the value will be its corresponding
+#'   value. Use `NULL` value in `mutate` to drop a variable. New variables
+#'   overwrite existing variables of the same name.
 #'
-#'   The arguments in `...` are automatically [quoted](rlang::quo) and
-#'   [evaluated](rlang::eval_tidy) in the context of the data frame. They
-#'   support [unquoting](rlang::quasiquotation) and splicing. See
+#'   The arguments in `...` are automatically [quoted][rlang::quo] and
+#'   [evaluated][rlang::eval_tidy] in the context of the data frame. They
+#'   support [unquoting][rlang::quasiquotation] and splicing. See
 #'   `vignette("programming", package = "dplyr")` for an introduction to these
 #'   concepts.
 #' @return A `skim_df` object, which also inherits the class(es) of the input
