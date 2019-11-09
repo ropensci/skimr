@@ -9,10 +9,10 @@
 \title{Print \code{skim} objects}
 \usage{
 \method{print}{skim_df}(x, include_summary = TRUE, n = Inf,
-  width = Inf, n_extra = NULL, ...)
+  width = Inf, n_extra = NULL, strip_metadata = TRUE, ...)
 
 \method{print}{one_skim_df}(x, n = Inf, width = Inf, n_extra = NULL,
-  ...)
+  strip_metadata = TRUE, ...)
 
 \method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL,
   ...)
@@ -37,6 +37,8 @@ default and always print all columns.}
 \item{n_extra}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL}, the default,
 will print information about at most \code{tibble.max_extra_cols} extra columns.}
+
+\item{strip_metadata}{Whether tibble metadata should be removed.}
 
 \item{...}{Other arguments passed on to individual methods.}
 }
