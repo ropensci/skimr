@@ -58,8 +58,9 @@ Suggests:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/ropenscilabs/skimr
-BugReports: https://github.com/ropenscilabs/skimr/issues
+URL: https://docs.ropensci.org/skimr (website), 
+    https://github.com/ropensci/skimr
+BugReports: https://github.com/ropensci/skimr/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

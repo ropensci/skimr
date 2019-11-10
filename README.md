@@ -75,11 +75,11 @@ Skim statistics in the console
     ## ________________________           
     ## Group variables            None    
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts                        
     ## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
@@ -99,11 +99,11 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ─────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
     ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -127,7 +127,7 @@ Skim statistics in the console
     ## ________________________                  
     ## Group variables            None           
     ## 
-    ## ── Variable type: character ─────────────────────────────────────────────────────────────
+    ## ── Variable type: character ──────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
     ## 1 name                  0         1         3    21     0       87          0
     ## 2 hair_color            5         0.943     4    13     0       12          0
@@ -137,13 +137,13 @@ Skim statistics in the console
     ## 6 homeworld            10         0.885     4    14     0       48          0
     ## 7 species               5         0.943     3    14     0       37          0
     ## 
-    ## ── Variable type: list ──────────────────────────────────────────────────────────────────
+    ## ── Variable type: list ───────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
     ## 1 films                 0             1       24          1          7
     ## 2 vehicles              0             1       11          0          2
     ## 3 starships             0             1       17          0          5
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
     ## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
@@ -181,7 +181,7 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
@@ -206,7 +206,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            Species   
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
     ##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
@@ -238,7 +238,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            None      
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -641,9 +641,10 @@ includes:
 -   in the context of rendering to a pdf using an engine that does not
     support utf-8.
 
-One workaround for showing these characters in Windows is to set the CTYPE part
-of your locale to Chinese/Japanese/Korean with `Sys.setlocale("LC_CTYPE",
-"Chinese")`. The helper function `fix_windows_histograms()` does this for you.
+One workaround for showing these characters in Windows is to set the
+CTYPE part of your locale to Chinese/Japanese/Korean with
+`Sys.setlocale("LC_CTYPE", "Chinese")`. The helper function
+`fix_windows_histograms()` does this for you.
 
 And last but not least, we provide `skim_without_charts()` as a
 fallback. This makes it easy to still get summaries of your data, even
@@ -671,7 +672,8 @@ Contributing
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr's flexibility to add their
-own customized classes. Please see the [contributing](CONTRIBUTING.md)
-and [conduct](CONDUCT.md) documents.
+own customized classes. Please see the
+[contributing](https://ropensci.github.io/skimr/CONTRIBUTING.html) and
+[conduct](https://ropensci.github.io/skimr/CONDUCT.html) documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
