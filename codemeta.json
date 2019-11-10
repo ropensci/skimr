@@ -7,8 +7,8 @@
   "identifier": "skimr",
   "description": "A simple to use summary function that can be used with pipes\n    and displays nicely in the console. The default summary statistics may be\n    modified by the user as can the default formatting. Support for data frames\n    and vectors is included, and users can implement their own skim methods for\n    specific object types as described in a vignette. Default summaries include\n    support for inline spark graphs. Instructions for managing these on\n    specific operating systems are given in the \"Using skimr\" vignette and the\n    README.",
   "name": "skimr: Compact and Flexible Summaries of Data",
-  "codeRepository": "https://github.com/ropenscilabs/skimr",
-  "issueTracker": "https://github.com/ropenscilabs/skimr/issues",
+  "codeRepository": "https://github.com/ropensci/skimr",
+  "issueTracker": "https://github.com/ropensci/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "2.0",
   "programmingLanguage": {
@@ -25,6 +25,18 @@
     "url": "https://cran.r-project.org"
   },
   "author": [
+    {
+      "@type": "Person",
+      "givenName": "Elin",
+      "familyName": "Waring",
+      "email": "elin.waring@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Michael",
+      "familyName": "Quinn",
+      "email": "msquinn@google.com"
+    },
     {
       "@type": "Person",
       "givenName": "Amelia",
@@ -48,18 +60,6 @@
       "givenName": "Shannon",
       "familyName": "Ellis",
       "email": "sellis18@jhmi.edu"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Elin",
-      "familyName": "Waring",
-      "email": "elin.waring@gmail.com"
-    },
-    {
-      "@type": "Person",
-      "givenName": "Michael",
-      "familyName": "Quinn",
-      "email": "msquinn@google.com"
     }
   ],
   "contributor": [
@@ -403,7 +403,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "3788.726KB",
+  "fileSize": "681.052KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -423,5 +423,6 @@
     "rstats",
     "peer-reviewed"
   ],
-  "funder": {}
+  "funder": {},
+  "relatedLink": "https://docs.ropensci.org/skimr"
 }

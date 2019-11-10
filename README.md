@@ -1,6 +1,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
-===========================================================================
+skimr <a href='https://ropensci.github.io/skimr'>
+=================================================
+
+<img 
+src='https://docs.ropensci.org/skimr/reference/skimr/reference/figures/logo.png' 
+align="right" height="139" /></a>
 
 [![Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
