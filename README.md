@@ -60,8 +60,8 @@ Skim statistics in the console
     missing, complete, n, and sd.
 -   reports each data types separately
 -   handles dates, logicals, and a variety of other types
--   supports spark-bar and spark-line based on [Hadley Wickham's pillar
-    package](https://github.com/hadley/pillar).
+-   supports spark-bar and spark-line based on the [pillar
+    package](https://github.com/r-lib/pillar).
 
 ### Separates variables by class:
 
