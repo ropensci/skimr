@@ -9,10 +9,11 @@
 \title{Print \code{skim} objects}
 \usage{
 \method{print}{skim_df}(x, include_summary = TRUE, n = Inf,
-  width = Inf, n_extra = NULL, strip_metadata = TRUE, ...)
+  width = Inf, n_extra = NULL,
+  strip_metadata = getOption("skimr_strip_metadata", TRUE), ...)
 
 \method{print}{one_skim_df}(x, n = Inf, width = Inf, n_extra = NULL,
-  strip_metadata = TRUE, ...)
+  strip_metadata = getOption("skimr_strip_metadata", TRUE), ...)
 
 \method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL,
   ...)
@@ -72,5 +73,14 @@ and Jupyter support more than 80 character outputs. Call
 Printing a \code{skim_df} requires specific columns that might be dropped when
 using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarize]{dplyr::summarize()}} on a \code{skim_df}. In those
 cases, this method falls back to \code{\link[tibble:print.tbl]{tibble::print.tbl()}}.
+}
+
+\section{Controlling metadata behavior}{
+
+
+By default, \code{skimr} removes the tibble metadata when generating output. On
+some platforms, this can lead to all output getting removed. To disable that
+behavior, set either \code{strip_metadata = FALSE} when calling print or use
+\code{options(skimr_strip_metadata = FALSE)}.
 }
 
