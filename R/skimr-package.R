@@ -16,6 +16,12 @@
 #' @docType package
 NULL
 
+.onLoad <- function(libname, pkgname) {
+  options(
+    skimr_strip_metadata = TRUE
+  )
+}
+
 
 # Imports -----------------------------------------------------------------
 

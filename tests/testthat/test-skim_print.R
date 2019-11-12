@@ -111,3 +111,16 @@ test_that("skimr creates appropriate output for Jupyter", {
   skimmed <- skim(iris)
   expect_known_output(repr_text(skimmed), "print/repr.txt")
 })
+
+test_that("Metadata can be included: print", {
+  skimmed <- skim(iris)
+  expect_known_output(print(skimmed, strip_metadata = FALSE), "print/strip.txt")
+})
+
+
+test_that("Metadata can be included: option", {
+  skimmed <- skim(iris)
+  withr::with_options(list(skimr_strip_metadata = FALSE), {
+    expect_known_output(print(skimmed), "print/strip-opt.txt")
+  })
+})

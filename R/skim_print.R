@@ -16,6 +16,13 @@
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
 #' cases, this method falls back to [tibble::print.tbl()].
 #'
+#' @section Controlling metadata behavior:
+#'
+#' By default, `skimr` removes the tibble metadata when generating output. On
+#' some platforms, this can lead to all output getting removed. To disable that
+#' behavior, set either `strip_metadata = FALSE` when calling print or use
+#' `options(skimr_strip_metadata = FALSE)`.
+#'
 #' @inheritParams tibble:::print.tbl
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
@@ -29,7 +36,9 @@ print.skim_df <- function(x,
                           n = Inf,
                           width = Inf,
                           n_extra = NULL,
-                          strip_metadata = TRUE,
+                          strip_metadata = getOption(
+                            "skimr_strip_metadata", TRUE
+                          ),
                           ...) {
   if (is_skim_df(x)) {
     if (include_summary) {
@@ -49,7 +58,9 @@ print.one_skim_df <- function(x,
                               n = Inf,
                               width = Inf,
                               n_extra = NULL,
-                              strip_metadata = TRUE,
+                              strip_metadata = getOption(
+                                "skimr_strip_metadata", TRUE
+                              ),
                               ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
   top_line <- cli::rule(line = 1, left = variable_type)
