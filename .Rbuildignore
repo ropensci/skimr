@@ -16,3 +16,4 @@
 ^.*\.ipynb$
 ^doc$
 ^Meta$
+^pkgdown$

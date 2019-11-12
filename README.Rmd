@@ -2,7 +2,10 @@
 output: md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr <img src="inst/figures/skimmer_hex.png" align="right" height="139" />
+# skimr <a href='https://ropensci.github.io/skimr'>
+<img 
+src='https://docs.ropensci.org/skimr/reference/skimr/reference/figures/logo.png' 
+align="right" height="139" /></a>
 ```{r set-options, echo=FALSE, message=FALSE}
 library(skimr)
 options(tibble.width = Inf)
@@ -58,8 +61,8 @@ Do not rely on APIs from the develop branch, as they are likely to change.
   complete, n, and sd.
 - reports each data types separately
 - handles dates, logicals, and a variety of other types
-- supports spark-bar and spark-line based on
-  [Hadley Wickham's pillar package](https://github.com/hadley/pillar).
+- supports spark-bar and spark-line based on the
+  [pillar package](https://github.com/r-lib/pillar).
 
 ### Separates variables by class:
 
@@ -246,7 +249,8 @@ Microsoft Word and Libre Office Write.
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we encourage
 users to take advantage of skimr's flexibility to add their own customized
-classes. Please see the [contributing](CONTRIBUTING.md) and
-[conduct](CONDUCT.md) documents.
+classes. Please see the
+[contributing](https://ropensci.github.io/skimr/CONTRIBUTING.html) and
+[conduct](https://ropensci.github.io/skimr/CONDUCT.html) documents.
 
 [![ropenci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
