@@ -78,6 +78,10 @@ displayed digits by adding the `skimr_digits` option to your code chunk.
     completely made up of white space.
 *   We now export `skim_without_charts()` as a fallback for when unicode support
     is not possible.
+*   While `print()` for `skimr` objects mostly wraps the tibble print methods,
+    we have added an option for removing tibble metadata. It's on by default.
+    Set `options(skimr_strip_metadata = FALSE)` to include the tibble metdata
+    when printing.
 
 ### BUG FIXES
 
