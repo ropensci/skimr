@@ -10,6 +10,9 @@
 #' and Jupyter support more than 80 character outputs. Call
 #' `options(width = 90)` to get a better experience with `skimr`.
 #'
+#' The print methods in `skimr` wrap those in the [tibble][tibble::formatting]
+#' package. You can control printing behavior using the same global options.
+#'
 #' @section Behavior in `dplyr` pipelines:
 #'
 #' Printing a `skim_df` requires specific columns that might be dropped when
@@ -24,6 +27,8 @@
 #' `options(skimr_strip_metadata = FALSE)`.
 #'
 #' @inheritParams tibble:::print.tbl
+#' @seealso [tibble::trunc_mat()] For a list of global options for customizing
+#'   print formatting.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
 #' @name print
