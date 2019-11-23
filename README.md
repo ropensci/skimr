@@ -13,15 +13,6 @@ Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-
 [![cran
 checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
 
-This is a release candidate for skimr version 2.
-------------------------------------------------
-
-Warning: There are important differences between this and version 1.
---------------------------------------------------------------------
-
-Use caution if updating a version 1 instance used programmatically.
--------------------------------------------------------------------
-
 `skimr` provides a frictionless approach to summary statistics which
 conforms to the [principle of least
 surprise](https://en.wikipedia.org/wiki/Principle_of_least_astonishment),
@@ -29,6 +20,10 @@ displaying summary statistics the user can skim quickly to understand
 their data. It handles different data types and returns a `skim_df`
 object which can be included in a pipeline or displayed nicely for the
 human reader.
+
+**Note: `skimr` version 2 has major changes when skimr is used
+programmatically. Upgraders should revie. this document, the release
+notes, and vignettes carefully.**
 
 Installation
 ------------

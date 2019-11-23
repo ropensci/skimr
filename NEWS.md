@@ -1,4 +1,4 @@
-# skimr 2.0.0 (2019-xx-xx)
+# skimr 2.0.0 (2019-11-12)
 
 ### Welcome to skimr V2
 
@@ -78,10 +78,10 @@ displayed digits by adding the `skimr_digits` option to your code chunk.
     completely made up of white space.
 *   We now export `skim_without_charts()` as a fallback for when unicode support
     is not possible.
-*   While `print()` for `skimr` objects mostly wraps the tibble print methods,
-    we have added an option for removing tibble metadata. It's on by default.
-    Set `options(skimr_strip_metadata = FALSE)` to include the tibble metdata
-    when printing.
+*   By default, `skimr` removes the tibble metadata when generating output. On
+    some platforms, this can lead to all output getting removed. To disable that
+    behavior, set either `strip_metadata = FALSE` when calling print or use
+    `options(skimr_strip_metadata = FALSE)`.
 
 ### BUG FIXES
 
@@ -92,7 +92,7 @@ displayed digits by adding the `skimr_digits` option to your code chunk.
 
 *   Change top_counts to use useNA = "no".
 
-# skimr 1.0.6 (xxx-xx-xx)
+# skimr 1.0.6 (2019-05-27)
 
 ### BUG FIXES
 

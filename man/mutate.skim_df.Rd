@@ -18,7 +18,7 @@ overwrite existing variables of the same name.
 
 The arguments in \code{...} are automatically quoted with \code{\link[rlang:quo]{rlang::quo()}} and
 evaluated with \code{\link[rlang:eval_tidy]{rlang::eval_tidy()}} in the context of the data frame. They
-support unquoting \link[rlang:quasiquotation]{rlang::quasiquotation} and splicing. See
+support unquoting \code{\link[rlang:quasiquotation]{rlang::quasiquotation}} and splicing. See
 \code{vignette("programming", package = "dplyr")} for an introduction to these
 concepts.}
 }

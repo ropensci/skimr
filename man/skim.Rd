@@ -36,7 +36,7 @@ frame.
 Each call produces a \code{skim_df}, which is a fundamentally a tibble with a
 special print method. One unusual feature of this data frame is pseudo-
 namespace for columns. \code{skim()} computes statistics by data type, and it
-stores them in the data frame as \code{<type>.<statistic>}. These types are
+stores them in the data frame as \verb{<type>.<statistic>}. These types are
 stripped when printing the results. The "base" skimmers (\code{n_missing} and
 \code{complete_rate}) are the only columns that don't follow this behavior.
 See \code{\link[=skim_with]{skim_with()}} for more details on customizing \code{skim()} and
@@ -71,7 +71,7 @@ that are called to produce summary statistics with \code{\link[=skim_with]{skim_
 
 \section{Unicode rendering}{
 
-If the rendered examples show unencoded values such as \code{<U+2587>} you will
+If the rendered examples show unencoded values such as \verb{<U+2587>} you will
 need to change your locale to allow proper rendering. Please review the
 \emph{Using Skimr} vignette for more information
 (\code{vignette("Using_skimr", package = "skimr")}).
