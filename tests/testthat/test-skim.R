@@ -42,6 +42,7 @@ test_that("skim returns expected response for numeric vectors", {
   expect_equal(input$numeric.p75, 22.8, tolerance = 0.1)
   expect_equal(input$numeric.p100, 33.9, tolerance = 0.1)
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$numeric.hist, "▃▇▅▁▂")
 })
 
@@ -71,6 +72,7 @@ test_that("skim handles numeric vectors with NAs and extreme numbers", {
   expect_equal(input$numeric.p75, 4.5e+15, tolerance = 1e14)
   expect_equal(input$numeric.p100, 9.01e+15, tolerance = 1e14)
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$numeric.hist, "▇▁▁▁▇")
 })
 
@@ -98,6 +100,7 @@ test_that("numeric skim is calculated correctly when x is all NAs.", {
   expect_NA(input$numeric.p75)
   expect_NA(input$numeric.p100)
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$numeric.hist, " ")
 })
 
@@ -125,6 +128,7 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
   expect_equal(input$numeric.p75, 0)
   expect_equal(input$numeric.p100, 0)
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$numeric.hist, "▁▁▇▁▁")
 })
 
@@ -145,6 +149,7 @@ test_that("Skimming with non-finite values works", {
   expect_equal(input$numeric.p75, Inf)
   expect_equal(input$numeric.p100, Inf)
   skip_on_os("windows")
+  skip_if_not( l10n_info()$`UTF-8` )
   expect_identical(input$numeric.hist, "▁▁▇▁▁")
 })
 
