@@ -1,7 +1,7 @@
 context("Reshaping a skim_df")
 
 test_that("You can parition a skim_df", {
-  skimmed <- skimr::skim(iris)
+  skimmed <- skim_without_charts(iris)
   input <- partition(skimmed)
   expect_is(input, "skim_list")
   expect_length(input, 2)
@@ -14,7 +14,7 @@ test_that("You can parition a skim_df", {
   expect_identical(
     attrs$skimmers_used,
     list(
-      numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"),
+      numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100"),
       factor = c("ordered", "n_unique", "top_counts")
     )
   )
@@ -30,11 +30,10 @@ test_that("You can parition a skim_df", {
 
   expect_is(input$numeric, c("one_skim_df", "tbl_df", "tbl", "data.frame"))
   expect_n_rows(input$numeric, 4)
-  expect_n_columns(input$numeric, 11)
+  expect_n_columns(input$numeric, 10)
   expect_named(input$numeric, c(
     "skim_variable", "n_missing", "complete_rate", "mean",
-    "sd", "p0", "p25", "p50", "p75", "p100",
-    "hist"
+    "sd", "p0", "p25", "p50", "p75", "p100"
   ))
 })
 
