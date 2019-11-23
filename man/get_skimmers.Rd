@@ -7,8 +7,7 @@
 \usage{
 get_skimmers(column)
 
-modify_default_skimmers(skim_type, new_skim_type = NULL,
-  new_funs = list())
+modify_default_skimmers(skim_type, new_skim_type = NULL, new_funs = list())
 }
 \arguments{
 \item{column}{An atomic vector or list. A column from a data frame.}
