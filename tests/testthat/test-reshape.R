@@ -1,7 +1,7 @@
 context("Reshaping a skim_df")
 
 test_that("You can parition a skim_df", {
-  skimmed <- skim(iris)
+  skimmed <- skimr::skim(iris)
   input <- partition(skimmed)
   expect_is(input, "skim_list")
   expect_length(input, 2)
