@@ -125,15 +125,13 @@ print.summary_skim_df <- function(x, ...) {
 #'
 #' @seealso [knitr::kable()]
 #' @inheritParams knitr::knit_print
+#' @param options Options passed into the print function.
 #' @return A `knit_asis` object. Which is used by `knitr` when rendered.
 #' @importFrom knitr knit_print
 #' @name knit_print
 NULL
 
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
-#' @param x A skim_df object.
-#' @param options Options passed into the print function.
-#' @param ... Additional arguments passed to method
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
   if (is_skim_df(x)) {

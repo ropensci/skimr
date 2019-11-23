@@ -8,15 +8,26 @@
 \alias{print.summary_skim_df}
 \title{Print \code{skim} objects}
 \usage{
-\method{print}{skim_df}(x, include_summary = TRUE, n = Inf,
-  width = Inf, n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", TRUE), ...)
+\method{print}{skim_df}(
+  x,
+  include_summary = TRUE,
+  n = Inf,
+  width = Inf,
+  n_extra = NULL,
+  strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  ...
+)
 
-\method{print}{one_skim_df}(x, n = Inf, width = Inf, n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", TRUE), ...)
+\method{print}{one_skim_df}(
+  x,
+  n = Inf,
+  width = Inf,
+  n_extra = NULL,
+  strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  ...
+)
 
-\method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL,
-  ...)
+\method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL, ...)
 
 \method{print}{summary_skim_df}(x, ...)
 }

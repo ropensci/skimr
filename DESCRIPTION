@@ -63,7 +63,7 @@ URL: https://docs.ropensci.org/skimr (website),
 BugReports: https://github.com/ropensci/skimr/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
 Collate:
     'deprecated.R'
     'dplyr.R'
