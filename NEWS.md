@@ -1,3 +1,9 @@
+# skimr 2.0.1 (2019-11-23)
+
+### BUG FIXES
+
+Address failed build in CRAN due to lack of UTF-8 support in some platforms.
+
 # skimr 2.0.0 (2019-11-12)
 
 ### Welcome to skimr V2
