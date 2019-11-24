@@ -3,7 +3,7 @@ skimr <a href='https://ropensci.github.io/skimr'>
 =================================================
 
 <img 
-src='https://docs.ropensci.org/skimr/reference/skimr/reference/figures/logo.png' 
+src='https://ropensci.github.io/skimr/reference/figures/logo.png' 
 align="right" height="139" /></a>
 
 [![Build
