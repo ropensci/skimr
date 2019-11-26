@@ -1,6 +1,7 @@
 context("Print a skim_df object")
 
 test_that("Skim prints a header for the entire output and each type", {
+  skip_if_not( l10n_info()$`UTF-8` )
   input <- skim(iris)
   expect_print_matches_file(input, "print/default.txt")
 
@@ -11,17 +12,20 @@ test_that("Skim prints a header for the entire output and each type", {
 })
 
 test_that("Skim prints a special header for grouped data frames", {
+  skip_if_not( l10n_info()$`UTF-8` )
   input <- skim(dplyr::group_by(iris, Species))
   expect_print_matches_file(input, "print/groups.txt")
 })
 
 test_that("Skim lists print as expected", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   input <- partition(skimmed)
   expect_print_matches_file(input, "print/list.txt")
 })
 
 test_that("knit_print produces expected results", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
@@ -47,6 +51,7 @@ test_that("knit_print appropriately falls back to tibble printing", {
 })
 
 test_that("Summaries can be suppressed within knitr", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
   input <- knitr::knit_print(skimmed, options = options)
@@ -54,6 +59,7 @@ test_that("Summaries can be suppressed within knitr", {
 })
 
 test_that("Skim lists have a separate knit_print method", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   skim_list <- partition(skimmed)
   input <- knit_print(skim_list)
@@ -80,12 +86,14 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
 })
 
 test_that("Print focused objects appropriately", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   input <- focus(skimmed, n_missing)
   expect_print_matches_file(input, "print/focus.txt")
 })
 
 test_that("Metadata is stripped from smaller consoles", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
 })
@@ -108,17 +116,20 @@ test_that("Crayon is supported", {
 })
 
 test_that("skimr creates appropriate output for Jupyter", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   expect_known_output(repr_text(skimmed), "print/repr.txt")
 })
 
 test_that("Metadata can be included: print", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   expect_known_output(print(skimmed, strip_metadata = FALSE), "print/strip.txt")
 })
 
 
 test_that("Metadata can be included: option", {
+  skip_if_not( l10n_info()$`UTF-8` )
   skimmed <- skim(iris)
   withr::with_options(list(skimr_strip_metadata = FALSE), {
     expect_known_output(print(skimmed), "print/strip-opt.txt")

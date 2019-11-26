@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.0.1
+Version: 2.0.2
 Authors@R: c(
   person("Elin", "Waring", email="elin.waring@gmail.com", role = c("cre", "aut")),
   person("Michael", "Quinn", email="msquinn@google.com", role = "aut"),
