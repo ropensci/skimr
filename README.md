@@ -22,7 +22,7 @@ object which can be included in a pipeline or displayed nicely for the
 human reader.
 
 **Note: `skimr` version 2 has major changes when skimr is used
-programmatically. Upgraders should revie. this document, the release
+programmatically. Upgraders should review this document, the release
 notes, and vignettes carefully.**
 
 Installation
