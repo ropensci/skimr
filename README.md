@@ -1,9 +1,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-skimr <a href='https://ropensci.github.io/skimr'>
+skimr <a href='https://docs.ropensci.org/skimr'>
 =================================================
 
 <img 
-src='https://ropensci.github.io/skimr/reference/figures/logo.png' 
+src='https://docs.ropensci.org/skimr/reference/figures/logo.png' 
 align="right" height="139" /></a>
 
 [![Build
@@ -22,7 +22,7 @@ object which can be included in a pipeline or displayed nicely for the
 human reader.
 
 **Note: `skimr` version 2 has major changes when skimr is used
-programmatically. Upgraders should revie. this document, the release
+programmatically. Upgraders should review this document, the release
 notes, and vignettes carefully.**
 
 Installation
@@ -672,7 +672,7 @@ We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr's flexibility to add their
 own customized classes. Please see the
-[contributing](https://ropensci.github.io/skimr/CONTRIBUTING.html) and
-[conduct](https://ropensci.github.io/skimr/CONDUCT.html) documents.
+[contributing](https://docs.ropensci.org/skimr/CONTRIBUTING.html) and
+[conduct](https://docs.ropensci.org/skimr/CONDUCT.html) documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
