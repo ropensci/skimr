@@ -1,11 +1,24 @@
-# Configuration of project precommits
+# All available hooks: https://pre-commit.com/hooks.html
+# R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
--   repo: https://github.com/lorenzwalthert/pre-commit-hooks
-    rev: v0.0.0.9016
+-   repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.0.0.9027
     hooks:
+    # any R project
     -   id: style-files
+        args: [--style_pkg=styler, --style_fun=tidyverse_style]
+    -   id: lintr
+        args: [--warning_only]
+        verbose: True
     -   id: parsable-R
     -   id: no-browser-statement
     -   id: readme-rmd-rendered
     -   id: roxygenize
     -   id: use-tidy-description
+    -   id: deps-in-desc
+    -   id: codemeta-description-updated
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+    -   id: check-added-large-files
+        args: ['--maxkb=200']
