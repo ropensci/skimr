@@ -48,13 +48,22 @@ We follow the [tidyverse style guide](http://style.tidyverse.org/).
 
 ## Pre commits
 
-To enforce coding style and support development, we rely on [pre-commit.com].
-This tool runs a series of additional checks for your code before `git commit`
-completes. Install the tool with `pip`.
+To enforce coding style and support development, we rely on [pre-commit.com],
+and the [R precommit package](https://github.com/lorenzwalthert/precommit). This
+tool runs a series of additional checks for your code before `git commit`
+completes.
+
+To install the package and enable precommits, run the following:
 
 ```
-pip install pre-commit
-pre-commit install
+# once on your system
+remotes::install_github("lorenzwalthert/precommit")
+precommit::install_precommit()
+
+# once in every git repo either
+# * after cloning a repo that already uses pre-commit or
+# * if you want introduce pre-commit to this repo
+precommit::use_precommit()
 ```
 
 The checks will run automatically from there.

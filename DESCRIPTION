@@ -20,7 +20,7 @@ Authors@R: c(
   person("Mikko","Korpela", email="mvkorpel@iki.fi", role='ctb'),
   person("Jennifer","Thompson", email="thompson.jennifer@gmail.com", role='ctb'),
   person("Harris","McGehee", email="mcgehee.harris@gmail.com", role='ctb'),
-  person("Roepke","Mark",email="mroepke5@gmail.com",role='ctb'),
+  person("Mark","Roepke",email="mroepke5@gmail.com",role='ctb'),
   person("Patrick", "Kennedy", email="pkqstr@protonmail.com", role='ctb'),
   person("Daniel", "Possenriede", email="possenriede@gmail.com", role='ctb')
   )
