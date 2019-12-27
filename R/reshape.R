@@ -174,7 +174,8 @@ focus <- function(.data, ...) {
 #' Skim results returned as a tidy long data frame with four columns:
 #' variable, type, stat and formatted.
 #'
-#' @param .data A tibble, or an object that can be coerced into a tibble.
+#' @param .data A tibble, or an object that can be coerced into a tibble. Could be already skimmed or not skimmed.
+#' @param skim_it a logical, 1 indicates .data is not yet skimmed, 0 indicates already skimmed.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
 #' @return A `skim_df` object, which also inherits the class(es) of the input
@@ -182,8 +183,10 @@ focus <- function(.data, ...) {
 #' @examples
 #' to_long(iris)
 #' @export
-to_long <- function(.data, ...) {
-  skimmed <- skim(.data, ...)
+to_long <- function(.data, skim_it = T, ...) {
+  if(skim_it){
+    skimmed <- skim(.data, ...)
+    } else skimmed = .data
   tidyr::gather(
     skimmed,
     key = "stat",
