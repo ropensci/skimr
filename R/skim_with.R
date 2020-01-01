@@ -98,7 +98,7 @@ skim_with <- function(...,
     ready_to_skim <- tibble::tibble(
       skim_type = unique(types),
       skimmers = purrr::map(combined_skimmers, mangle_names, names(base$funs)),
-      skim_variable = split(selected, types)[.data$skim_type]
+      skim_variable = split(selected, types)[skim_type]
     )
     grouped <- dplyr::group_by(ready_to_skim, .data$skim_type)
     nested <- dplyr::summarize(
