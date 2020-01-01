@@ -39,11 +39,10 @@ test_that("You can parition a skim_df", {
 })
 
 test_that("Partitioning works in a round trip", {
-  skip("Temporary skip due to changes in tibble.")
   skimmed <- skim(iris)
   partitioned <- partition(skimmed)
   input <- bind(partitioned)
-  expect_equal(input, skimmed)
+  expect_identical(input, skimmed)
 })
 
 test_that("You can yank a subtable from a skim_df", {
