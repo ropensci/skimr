@@ -31,7 +31,7 @@ test_that("skim returns expected response for numeric vectors", {
   )
 
   # values
-  expect_identical(input$skim_variable, "mpg")
+  expect_identical(unname(input$skim_variable), "mpg")
   expect_identical(input$skim_type, "numeric")
   expect_identical(input$n_missing, 0L)
   expect_equal(input$complete_rate, 1)
@@ -175,7 +175,7 @@ test_that("skim returns expected response for factor vectors", {
   )
 
   # values
-  expect_identical(input$skim_variable, "Species")
+  expect_identical(unname(input$skim_variable), "Species")
   expect_identical(input$skim_type, "factor")
   expect_identical(input$n_missing, 0L)
   expect_equal(input$complete_rate, 1)
@@ -264,7 +264,7 @@ test_that("skim returns expected response for logical vectors", {
   )
 
   # values
-  expect_identical(input$skim_variable, "log_col")
+  expect_identical(unname(input$skim_variable), "log_col")
   expect_identical(input$skim_type, "logical")
   expect_identical(input$n_missing, 0L)
   expect_equal(input$complete_rate, 1)
@@ -316,7 +316,7 @@ test_that("skim returns expected response for complex vectors", {
   )
 
   # values
-  expect_identical(input$skim_variable, "test_complex")
+  expect_identical(unname(input$skim_variable), "test_complex")
   expect_identical(input$skim_type, "complex")
   expect_identical(input$n_missing, 4L)
   expect_equal(input$complete_rate, .944, tolerance = .001)
@@ -395,7 +395,7 @@ test_that("skim returns expected response for ts vectors", {
   )
 
   # values
-  expect_identical(input$skim_variable, "y")
+  expect_identical(unname(input$skim_variable), "y")
   expect_identical(input$skim_type, "ts")
   expect_identical(input$n_missing, 0L)
   expect_equal(input$complete_rate, 1)
@@ -792,7 +792,7 @@ test_that("You can use tidyselect negation", {
   expect_n_columns(input, 7)
 
   # values
-  expect_identical(input$skim_variable, "feed")
+  expect_identical(unname(input$skim_variable), "feed")
   expect_identical(input$skim_type, "factor")
 })
 
@@ -801,7 +801,8 @@ test_that("Tidyselect helpers work as expected", {
 
   expect_n_rows(input, 2)
   expect_n_columns(input, 12)
-  expect_identical(input$skim_variable, c("Sepal.Length", "Sepal.Width"))
+  expect_identical(unname(input$skim_variable), 
+                   c("Sepal.Length", "Sepal.Width"))
 })
 
 test_that("Skimming a grouped df works as expected", {

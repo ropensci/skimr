@@ -15,21 +15,31 @@
   width = Inf,
   n_extra = NULL,
   strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  rule_width = base::options()$width,
+  summary_rule_width = 40,
   ...
 )
 
 \method{print}{one_skim_df}(
   x,
   n = Inf,
-  width = Inf,
+  .width = Inf,
   n_extra = NULL,
   strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  .rule_width = base::options()$width,
   ...
 )
 
-\method{print}{skim_list}(x, n = Inf, width = Inf, n_extra = NULL, ...)
+\method{print}{skim_list}(
+  x,
+  n = Inf,
+  width = Inf,
+  n_extra = NULL,
+  .rule_width = base::options()$width,
+  ...
+)
 
-\method{print}{summary_skim_df}(x, ...)
+\method{print}{summary_skim_df}(x, .summary_rule_width = 40, ...)
 }
 \arguments{
 \item{x}{Object to format or print.}
@@ -52,7 +62,18 @@ will print information about at most \code{tibble.max_extra_cols} extra columns.
 
 \item{strip_metadata}{Whether tibble metadata should be removed.}
 
+\item{rule_width}{Width of the cli rules in printed skim object. Defaults
+to base::options()$width}
+
+\item{summary_rule_width}{Width of Data Summary cli rule, defaults to 40.}
+
 \item{...}{Other arguments passed on to individual methods.}
+
+\item{.width}{Width for the tibble for each type.}
+
+\item{.rule_width}{Width for the rule above the skim results for each type.}
+
+\item{.summary_rule_width}{the width for the main rule above the summary.}
 }
 \description{
 \code{skimr} has custom print methods for all supported objects. Default printing
