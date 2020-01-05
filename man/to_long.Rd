@@ -7,14 +7,13 @@
 to_long(.data, ...)
 }
 \arguments{
-\item{.data}{A tibble, or an object that can be coerced into a tibble.}
+\item{.data}{A data frame or an object that can be coerced into a data frame.}
 
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
 }
 \value{
-A \code{skim_df} object, which also inherits the class(es) of the input
-data. The result is usually a data frame or tibble.
+A tibble
 }
 \description{
 Skim results returned as a tidy long data frame with four columns:
@@ -22,4 +21,5 @@ variable, type, stat and formatted.
 }
 \examples{
 to_long(iris)
+to_long(skim(iris))
 }
