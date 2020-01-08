@@ -177,20 +177,20 @@ focus <- function(.data, ...) {
 #' @param .data A data frame or an object that can be coerced into a data frame.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
+#' @param skim_fun The skim function used.
 #' @return A tibble 
 #' @examples
 #' to_long(iris)
 #' to_long(skim(iris))
 #' @export
-to_long <- function(.data, ...){
+to_long <- function(.data, ..., skim_fun = skim){
   UseMethod("to_long")
 }
 
-
 #' @export
-to_long.default <- function(.data, ...) {
-  skimmed <- skim(.data, ...)
-  to_long.skim_df(skimmed, ...)
+to_long.default <- function(.data, ..., skim_fun = skim) {
+  skimmed <- skim_fun(.data, ...)
+  to_long(skimmed, ...)
 }
 
 #' @export

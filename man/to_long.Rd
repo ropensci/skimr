@@ -4,7 +4,7 @@
 \alias{to_long}
 \title{Create "long" skim output}
 \usage{
-to_long(.data, ...)
+to_long(.data, ..., skim_fun = skim)
 }
 \arguments{
 \item{.data}{A data frame or an object that can be coerced into a data frame.}
