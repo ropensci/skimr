@@ -187,14 +187,17 @@ to_long <- function(.data, ..., skim_fun = skim){
   UseMethod("to_long")
 }
 
+#' @describeIn to_long Skim a data frame and convert the results to a 
+#'   long data frame.
 #' @export
 to_long.default <- function(.data, ..., skim_fun = skim) {
   skimmed <- skim_fun(.data, ...)
-  to_long(skimmed, ...)
+  to_long(skimmed, ..., skim_fun)
 }
 
+#' @describeIn  to_long Transform a skim_df to a long data frame.
 #' @export
-to_long.skim_df <- function(.data, ...) {
+to_long.skim_df <- function(.data, ..., skim_fun= skim) {
   tidyr::gather(
     .data,
     key = "stat",

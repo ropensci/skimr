@@ -2,15 +2,23 @@
 % Please edit documentation in R/reshape.R
 \name{to_long}
 \alias{to_long}
+\alias{to_long.default}
+\alias{to_long.skim_df}
 \title{Create "long" skim output}
 \usage{
 to_long(.data, ..., skim_fun = skim)
+
+\method{to_long}{default}(.data, ..., skim_fun = skim)
+
+\method{to_long}{skim_df}(.data, ..., skim_fun = skim)
 }
 \arguments{
 \item{.data}{A data frame or an object that can be coerced into a data frame.}
 
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
+
+\item{skim_fun}{The skim function used.}
 }
 \value{
 A tibble
@@ -19,6 +27,14 @@ A tibble
 Skim results returned as a tidy long data frame with four columns:
 variable, type, stat and formatted.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Skim a data frame and convert the results to a
+long data frame.
+
+\item \code{skim_df}: Transform a skim_df to a long data frame.
+}}
+
 \examples{
 to_long(iris)
 to_long(skim(iris))
