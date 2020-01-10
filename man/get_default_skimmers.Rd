@@ -29,16 +29,16 @@ well as the defaults in any package that extends \code{skimr}. See
 }
 \details{
 The functions differ in return type and whether or not the result is in
-a list. \code{get_default_skimmers()} and \code{get_one_default_skimmer()} return
+a list. \code{\link[=get_default_skimmers]{get_default_skimmers()}} and \code{\link[=get_one_default_skimmer]{get_one_default_skimmer()}} return
 functions. The former returns functions within a typed list, i.e.
 \code{list(numeric = list(...functions...))}.
 
 The functions differ in return type and whether or not the result is in
-a list. \code{get_default_skimmer_names()} and \code{get_one_default_skimmer_names()}
+a list. \code{\link[=get_default_skimmer_names]{get_default_skimmer_names()}} and \code{\link[=get_one_default_skimmer_names]{get_one_default_skimmer_names()}}
 return a list of character vectors or a single character vector.
 
-\code{get_sfl} returns the skimmer function list for a particular \code{skim_type}.
-It differs from \code{get_default_skimmers} in that the returned \code{sfl} contains
+\code{\link[=get_sfl]{get_sfl()}} returns the skimmer function list for a particular \code{skim_type}.
+It differs from \code{\link[=get_default_skimmers]{get_default_skimmers()}} in that the returned \code{sfl} contains
 a list of functions and a \code{skim_type}.
 }
 \section{Functions}{

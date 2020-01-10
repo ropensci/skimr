@@ -403,7 +403,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "1026.537KB",
+  "fileSize": "1026.743KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
@@ -424,5 +424,9 @@
     "peer-reviewed"
   ],
   "funder": {},
-  "relatedLink": "https://docs.ropensci.org/skimr"
+  "relatedLink": [
+    "https://docs.ropensci.org/skimr",
+    "https://CRAN.R-project.org/package=skimr"
+  ],
+  "developmentStatus": "http://www.repostatus.org/#active"
 }

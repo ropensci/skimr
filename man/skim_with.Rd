@@ -37,10 +37,11 @@ You assign values within \code{skim_with} by using the \code{\link[=sfl]{sfl()}}
 function list). This helper behaves mostly like \code{\link[dplyr:funs]{dplyr::funs()}}, but lets
 you also identify which skimming functions you want to remove, by setting
 them to \code{NULL}. Assign an \code{sfl} to each column type that you wish to modify.
+
 Functions that summarize all data types, and always return the same type
 of value, can be assigned to the \code{base} argument. The default base skimmers
-compute the number of missing values \code{n_missing} and the rate of values being
-complete, i.e. not missing.
+compute the number of missing values \code{\link[=n_missing]{n_missing()}} and the rate of values
+being complete, i.e. not missing, \code{\link[=complete_rate]{complete_rate()}}.
 
 When \code{append = TRUE} and local skimmers have names matching the names of
 entries in the default \code{skim_function_list}, the values in the default list

@@ -12,10 +12,11 @@
 #' function list). This helper behaves mostly like [dplyr::funs()], but lets
 #' you also identify which skimming functions you want to remove, by setting
 #' them to `NULL`. Assign an `sfl` to each column type that you wish to modify.
+#'
 #' Functions that summarize all data types, and always return the same type
 #' of value, can be assigned to the `base` argument. The default base skimmers
-#' compute the number of missing values `n_missing` and the rate of values being
-#' complete, i.e. not missing.
+#' compute the number of missing values [n_missing()] and the rate of values
+#' being complete, i.e. not missing, [complete_rate()].
 #'
 #' When `append = TRUE` and local skimmers have names matching the names of
 #' entries in the default `skim_function_list`, the values in the default list

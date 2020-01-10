@@ -5,6 +5,7 @@ repos:
     rev: v0.0.0.9027
     hooks:
     # any R project
+    -   id: codemeta-description-updated
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
     -   id: lintr
@@ -16,7 +17,6 @@ repos:
     -   id: roxygenize
     -   id: use-tidy-description
     -   id: deps-in-desc
-    -   id: codemeta-description-updated
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
     hooks:
