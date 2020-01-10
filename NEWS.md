@@ -1,3 +1,11 @@
+# skimr 2.0.2 (2020-01-10)
+
+### BUG FIXES
+
+*   Update package to work with new version of `tibble`.
+*   Adds more flexibility in the rule width for `skimr::summarize()`.
+*   More README badges and documentation crosslinks
+
 # skimr 2.0.1 (2019-11-23)
 
 ### BUG FIXES
