@@ -8,7 +8,7 @@ repos:
     -   id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
     -   id: lintr
-        args: [--warning_only]
+        args: [--warn_only]
         verbose: True
     -   id: parsable-R
     -   id: no-browser-statement
