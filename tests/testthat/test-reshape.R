@@ -118,8 +118,7 @@ test_that("to_long() returns a long tidy data frame with 4 columns", {
   expect_equal(length(unique(skimmed_long$skim_variable)), 5)
 })
 
-test_that("to_long() on a skim_df returns a long tidy data frame with 4 
-          columns", {
+test_that("to_long() on a skim_df returns a long tidy df with 4 columns", {
   skimmed_long <- to_long(skim(iris))
   # Statistics from the skim_df  with values of NA are not included
   expect_n_rows(skimmed_long, 45)
@@ -132,7 +131,6 @@ test_that("to_long() on a skim_df returns a long tidy data frame with 4
   expect_equal(length(unique(skimmed_long$skim_variable)), 5)
 })
 
-test_that("to_long() on a data frame and a skim_df created from that 
-          data frame are identical", {
+test_that("to_long() on a df and a skim_df from same df are identical", {
   expect_identical(to_long(skim(chickwts)), to_long(chickwts))
 })
