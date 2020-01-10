@@ -3,19 +3,26 @@ output: md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # skimr <a href='https://docs.ropensci.org/skimr'>
-<img 
-src='https://docs.ropensci.org/skimr/reference/figures/logo.png' 
+<img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
+
 ```{r set-options, echo=FALSE, message=FALSE}
 library(skimr)
 options(tibble.width = Inf)
 options(width = 120)
 ```
 
-[![Build
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Travis-CI Build
 Status](https://travis-ci.org/ropensci/skimr.svg?branch=master)](https://travis-ci.org/ropensci/skimr)
+[![Appveyor Build
+status](https://ci.appveyor.com/api/projects/status/8p93v3t949ubyl06?svg=true)](https://ci.appveyor.com/project/michaelquinn32/skimr)
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
-[![](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+[![This is an ROpenSci Peer reviewed
+package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
 [![cran
 checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
 
@@ -28,7 +35,7 @@ data. It handles different data types and returns a `skim_df` object which can
 be included in a pipeline or displayed nicely for the human reader.
 
 **Note: `skimr` version 2 has major changes when skimr is used programmatically.
-Upgraders should revie. this document, the release notes, and vignettes 
+Upgraders should review this document, the release notes and vignettes
 carefully.**
 
 ## Installation
