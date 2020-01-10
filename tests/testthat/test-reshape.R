@@ -133,6 +133,6 @@ test_that("to_long() on a skim_df returns a long tidy data frame with 4
 })
 
 test_that("to_long() on a data frame and a skim_df created from that 
-          data frame are identical" ,{
+          data frame are identical", {
   expect_identical(to_long(skim(chickwts)), to_long(chickwts))
 })

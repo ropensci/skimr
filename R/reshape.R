@@ -178,16 +178,16 @@ focus <- function(.data, ...) {
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
 #' @param skim_fun The skim function used.
-#' @return A tibble 
+#' @return A tibble
 #' @examples
 #' to_long(iris)
 #' to_long(skim(iris))
 #' @export
-to_long <- function(.data, ..., skim_fun = skim){
+to_long <- function(.data, ..., skim_fun = skim) {
   UseMethod("to_long")
 }
 
-#' @describeIn to_long Skim a data frame and convert the results to a 
+#' @describeIn to_long Skim a data frame and convert the results to a
 #'   long data frame.
 #' @export
 to_long.default <- function(.data, ..., skim_fun = skim) {
@@ -197,7 +197,7 @@ to_long.default <- function(.data, ..., skim_fun = skim) {
 
 #' @describeIn  to_long Transform a skim_df to a long data frame.
 #' @export
-to_long.skim_df <- function(.data, ..., skim_fun= skim) {
+to_long.skim_df <- function(.data, ..., skim_fun = skim) {
   tidyr::gather(
     .data,
     key = "stat",
