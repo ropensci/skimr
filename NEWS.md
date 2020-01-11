@@ -8,6 +8,8 @@ We've made `to_long()` generic, supporting a more intuitive interface.
 *   Called on other tibble-like objects, it first skims then produces the long
     output. You can pass a custom skim function, like `skim_tee()`
 
+Thanks @sethlatimer for suggesting this feature.
+
 ### BUG FIXES
 
 *   Update package to work with new version of `tibble`.
