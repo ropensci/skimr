@@ -4,30 +4,20 @@ NULL
 #' Retrieve the summary functions for a specific data type
 #'
 #' These functions are used to set the default skimming functions for a data
-#' type.  When creating your own set of skimming functions, call [sfl()]
-#' within a [get_skimmers()] method for your particular type. Your call to
-#' [sfl()] should also provide a matching class in the `skim_type` argument.
-#' Otherwise, it will not be possible to dynamically reassign your default
-#' functions when working interactively.
+#' type. They are combined with the base skim function list (`sfl`) in
+#' [skim_with()], to create the summary tibble for each type.
 #'
-#' Summary functions are provided for the following classes:
+#' When creating your own set of skimming functions, call [sfl()] within a
+#' [get_skimmers()] method for your particular type. Your call to [sfl()] should
+#' also provide a matching class in the `skim_type` argument.  Otherwise, it
+#' will not be possible to dynamically reassign your default functions when
+#' working interactively.
 #'
-#'  - `numeric`
-#'  - `character`
-#'  - `factor`
-#'  - `logical`
-#'  - `complex`
-#'  - `Date`
-#'  - `POSIXct`
-#'  - `difftime`
-#'  - `ts`
-#'  - `AsIs`
-#'
-#' Call [get_default_skimmers()] to see the functions for each. Call
-#' [get_default_skimmer_names()] to just see the names of these functions. Use
-#' [modify_default_skimmers()] for a method for changing the `skim_type` or
-#' functions for a default `sfl`. This is useful for creating new default
-#' `sfl`'s.
+#' Call [get_default_skimmers()] to see the functions for each type of summary
+#' function currently supported. Call [get_default_skimmer_names()] to just see
+#' the names of these functions. Use [modify_default_skimmers()] for a method
+#' for changing the `skim_type` or functions for a default `sfl`. This is useful
+#' for creating new default `sfl`'s.
 #'
 #' @param column An atomic vector or list. A column from a data frame.
 #' @param skim_type A character scalar. The class of the object with default
@@ -45,7 +35,7 @@ NULL
 #'   )
 #' }
 #'
-#' # Integer and float columns are both "numeric" and are treated the same
+#' # Integer and double columns are both "numeric" and are treated the same
 #' # by default. To switch this behavior in another package, add a method.
 #' get_skimmers.integer <- function(column) {
 #'   sfl(
@@ -77,11 +67,17 @@ get_skimmers <- function(column) {
   UseMethod("get_skimmers")
 }
 
+#' @describeIn get_skimmers The default method for skimming data. Only used when
+#'   a column's data type doesn't match currently installed types. Call
+#'   [get_default_skimmer_names] to see these defaults.
 #' @export
 get_skimmers.default <- function(column) {
   modify_default_skimmers("character", new_skim_type = "default")
 }
 
+#' @describeIn get_skimmers Summary functions for numeric columns, covering both
+#'   [double()] and [integer()] classes: [mean()], [sd()], [quantile()] and
+#'   [inline_hist()].
 #' @export
 get_skimmers.numeric <- function(column) {
   sfl(
@@ -97,6 +93,8 @@ get_skimmers.numeric <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for factor columns:
+#'   [is.ordered()], [n_unique()] and [top_counts()].
 #' @export
 get_skimmers.factor <- function(column) {
   sfl(
@@ -107,6 +105,9 @@ get_skimmers.factor <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for character columns. Also, the
+#'   default for unknown columns: [min_char()], [max_char()], [n_empty()],
+#'   [n_unique()] and [n_whitespace()].
 #' @export
 get_skimmers.character <- function(column) {
   sfl(
@@ -119,6 +120,8 @@ get_skimmers.character <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for logical/ boolean columns:
+#'   [mean()], which produces rates for each value, and [top_counts()].
 #' @export
 get_skimmers.logical <- function(column) {
   sfl(
@@ -128,6 +131,7 @@ get_skimmers.logical <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for complex columns: [mean()].
 #' @export
 get_skimmers.complex <- function(column) {
   sfl(
@@ -136,6 +140,8 @@ get_skimmers.complex <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for `Date` columns: [min()],
+#'   [max()], [median()] and [n_unique()].
 #' @export
 get_skimmers.Date <- function(column) {
   sfl(
@@ -147,16 +153,22 @@ get_skimmers.Date <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for `POSIXct` columns: [min()],
+#'   [max()], [median()] and [n_unique()].
 #' @export
 get_skimmers.POSIXct <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "POSIXct")
 }
 
+#' @describeIn get_skimmers Summary functions for `difftime` columns: [min()],
+#'   [max()], [median()] and [n_unique()].
 #' @export
 get_skimmers.difftime <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "difftime")
 }
 
+#' @describeIn get_skimmers Summary functions for `ts` columns: [min()],
+#'   [max()], [median()] and [n_unique()].
 #' @export
 get_skimmers.ts <- function(column) {
   sfl(
@@ -174,6 +186,8 @@ get_skimmers.ts <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for `list` columns: [n_unique()],
+#'  [list_min_length()] and [list_max_length()].
 #' @export
 get_skimmers.list <- function(column) {
   sfl(
@@ -184,6 +198,8 @@ get_skimmers.list <- function(column) {
   )
 }
 
+#' @describeIn get_skimmers Summary functions for `AsIs` columns: [n_unique()],
+#'  [list_min_length()] and [list_max_length()].
 #' @export
 get_skimmers.AsIs <- function(column) {
   modify_default_skimmers("list", new_skim_type = "AsIs")
@@ -209,16 +225,16 @@ modify_default_skimmers <- function(skim_type,
 #' [get_skimmers()] for writing lookup methods for different.
 #'
 #' The functions differ in return type and whether or not the result is in
-#' a list. `get_default_skimmers()` and `get_one_default_skimmer()` return
+#' a list. [get_default_skimmers()] and [get_one_default_skimmer()] return
 #' functions. The former returns functions within a typed list, i.e.
 #' `list(numeric = list(...functions...))`.
 #'
 #' The functions differ in return type and whether or not the result is in
-#' a list. `get_default_skimmer_names()` and `get_one_default_skimmer_names()`
+#' a list. [get_default_skimmer_names()] and [get_one_default_skimmer_names()]
 #' return a list of character vectors or a single character vector.
 #'
-#' `get_sfl` returns the skimmer function list for a particular `skim_type`.
-#' It differs from `get_default_skimmers` in that the returned `sfl` contains
+#' [get_sfl()] returns the skimmer function list for a particular `skim_type`.
+#' It differs from [get_default_skimmers()] in that the returned `sfl` contains
 #' a list of functions and a `skim_type`.
 #'
 #' @param skim_type The class of the column being skimmed.

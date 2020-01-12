@@ -1,3 +1,21 @@
+# skimr 2.1.0 (2020-01-10)
+
+### NEW FEATURES
+
+We've made `to_long()` generic, supporting a more intuitive interface.
+
+*   Called on a `skim_df`, it reshapes the output into the V1 long style.
+*   Called on other tibble-like objects, it first skims then produces the long
+    output. You can pass a custom skim function, like `skim_tee()`
+
+Thanks @sethlatimer for suggesting this feature.
+
+### BUG FIXES
+
+*   Update package to work with new version of `tibble`.
+*   Adds more flexibility in the rule width for `skimr::summarize()`.
+*   More README badges and documentation crosslinks
+
 # skimr 2.0.1 (2019-11-23)
 
 ### BUG FIXES

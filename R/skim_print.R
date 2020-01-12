@@ -31,7 +31,7 @@
 #'   print formatting.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
-#' @param rule_width  Width of the cli rules in printed skim object. Defaults 
+#' @param rule_width  Width of the cli rules in printed skim object. Defaults
 #'     to base::options()$width
 #' @param summary_rule_width Width of Data Summary cli rule, defaults to 40.
 #' @name print
@@ -52,11 +52,12 @@ print.skim_df <- function(x,
                           ...) {
   if (is_skim_df(x)) {
     if (include_summary) {
-      print(summary(x),  .summary_rule_width = summary_rule_width, ...)
+      print(summary(x), .summary_rule_width = summary_rule_width, ...)
     }
     by_type <- partition(x)
-    purrr::map(by_type, print, n, width, n_extra, strip_metadata, 
-               .rule_width = rule_width, ...)
+    purrr::map(by_type, print, n, width, n_extra, strip_metadata,
+      .rule_width = rule_width, ...
+    )
     invisible(NULL)
   } else {
     NextMethod("print")
@@ -113,8 +114,10 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL,
 #' @param .summary_rule_width the width for the main rule above the summary.
 #' @export
 print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
-  cat(paste0(cli::rule(line = 1, left = "Data Summary", 
-                       width = .summary_rule_width), "\n"))
+  cat(paste0(cli::rule(
+    line = 1, left = "Data Summary",
+    width = .summary_rule_width
+  ), "\n"))
   print.table(x)
 }
 

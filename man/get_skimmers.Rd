@@ -2,10 +2,46 @@
 % Please edit documentation in R/get_skimmers.R
 \name{get_skimmers}
 \alias{get_skimmers}
+\alias{get_skimmers.default}
+\alias{get_skimmers.numeric}
+\alias{get_skimmers.factor}
+\alias{get_skimmers.character}
+\alias{get_skimmers.logical}
+\alias{get_skimmers.complex}
+\alias{get_skimmers.Date}
+\alias{get_skimmers.POSIXct}
+\alias{get_skimmers.difftime}
+\alias{get_skimmers.ts}
+\alias{get_skimmers.list}
+\alias{get_skimmers.AsIs}
 \alias{modify_default_skimmers}
 \title{Retrieve the summary functions for a specific data type}
 \usage{
 get_skimmers(column)
+
+\method{get_skimmers}{default}(column)
+
+\method{get_skimmers}{numeric}(column)
+
+\method{get_skimmers}{factor}(column)
+
+\method{get_skimmers}{character}(column)
+
+\method{get_skimmers}{logical}(column)
+
+\method{get_skimmers}{complex}(column)
+
+\method{get_skimmers}{Date}(column)
+
+\method{get_skimmers}{POSIXct}(column)
+
+\method{get_skimmers}{difftime}(column)
+
+\method{get_skimmers}{ts}(column)
+
+\method{get_skimmers}{list}(column)
+
+\method{get_skimmers}{AsIs}(column)
 
 modify_default_skimmers(skim_type, new_skim_type = NULL, new_funs = list())
 }
@@ -24,33 +60,63 @@ A \code{skim_function_list} object.
 }
 \description{
 These functions are used to set the default skimming functions for a data
-type.  When creating your own set of skimming functions, call \code{\link[=sfl]{sfl()}}
-within a \code{\link[=get_skimmers]{get_skimmers()}} method for your particular type. Your call to
-\code{\link[=sfl]{sfl()}} should also provide a matching class in the \code{skim_type} argument.
-Otherwise, it will not be possible to dynamically reassign your default
-functions when working interactively.
+type. They are combined with the base skim function list (\code{sfl}) in
+\code{\link[=skim_with]{skim_with()}}, to create the summary tibble for each type.
 }
 \details{
-Summary functions are provided for the following classes:
-\itemize{
-\item \code{numeric}
-\item \code{character}
-\item \code{factor}
-\item \code{logical}
-\item \code{complex}
-\item \code{Date}
-\item \code{POSIXct}
-\item \code{difftime}
-\item \code{ts}
-\item \code{AsIs}
-}
+When creating your own set of skimming functions, call \code{\link[=sfl]{sfl()}} within a
+\code{\link[=get_skimmers]{get_skimmers()}} method for your particular type. Your call to \code{\link[=sfl]{sfl()}} should
+also provide a matching class in the \code{skim_type} argument.  Otherwise, it
+will not be possible to dynamically reassign your default functions when
+working interactively.
 
-Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the functions for each. Call
-\code{\link[=get_default_skimmer_names]{get_default_skimmer_names()}} to just see the names of these functions. Use
-\code{\link[=modify_default_skimmers]{modify_default_skimmers()}} for a method for changing the \code{skim_type} or
-functions for a default \code{sfl}. This is useful for creating new default
-\code{sfl}'s.
+Call \code{\link[=get_default_skimmers]{get_default_skimmers()}} to see the functions for each type of summary
+function currently supported. Call \code{\link[=get_default_skimmer_names]{get_default_skimmer_names()}} to just see
+the names of these functions. Use \code{\link[=modify_default_skimmers]{modify_default_skimmers()}} for a method
+for changing the \code{skim_type} or functions for a default \code{sfl}. This is useful
+for creating new default \code{sfl}'s.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: The default method for skimming data. Only used when
+a column's data type doesn't match currently installed types. Call
+\link{get_default_skimmer_names} to see these defaults.
+
+\item \code{numeric}: Summary functions for numeric columns, covering both
+\code{\link[=double]{double()}} and \code{\link[=integer]{integer()}} classes: \code{\link[=mean]{mean()}}, \code{\link[=sd]{sd()}}, \code{\link[=quantile]{quantile()}} and
+\code{\link[=inline_hist]{inline_hist()}}.
+
+\item \code{factor}: Summary functions for factor columns:
+\code{\link[=is.ordered]{is.ordered()}}, \code{\link[=n_unique]{n_unique()}} and \code{\link[=top_counts]{top_counts()}}.
+
+\item \code{character}: Summary functions for character columns. Also, the
+default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=max_char]{max_char()}}, \code{\link[=n_empty]{n_empty()}},
+\code{\link[=n_unique]{n_unique()}} and \code{\link[=n_whitespace]{n_whitespace()}}.
+
+\item \code{logical}: Summary functions for logical/ boolean columns:
+\code{\link[=mean]{mean()}}, which produces rates for each value, and \code{\link[=top_counts]{top_counts()}}.
+
+\item \code{complex}: Summary functions for complex columns: \code{\link[=mean]{mean()}}.
+
+\item \code{Date}: Summary functions for \code{Date} columns: \code{\link[=min]{min()}},
+\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+
+\item \code{POSIXct}: Summary functions for \code{POSIXct} columns: \code{\link[=min]{min()}},
+\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+
+\item \code{difftime}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
+\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+
+\item \code{ts}: Summary functions for \code{ts} columns: \code{\link[=min]{min()}},
+\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+
+\item \code{list}: Summary functions for \code{list} columns: \code{\link[=n_unique]{n_unique()}},
+\code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.
+
+\item \code{AsIs}: Summary functions for \code{AsIs} columns: \code{\link[=n_unique]{n_unique()}},
+\code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.
+}}
+
 \examples{
 # Defining default skimming functions for a new class, `my_class`.
 # Note that the class argument is required for dynamic reassignment.
@@ -62,7 +128,7 @@ get_skimmers.my_class <- function(column) {
   )
 }
 
-# Integer and float columns are both "numeric" and are treated the same
+# Integer and double columns are both "numeric" and are treated the same
 # by default. To switch this behavior in another package, add a method.
 get_skimmers.integer <- function(column) {
   sfl(
