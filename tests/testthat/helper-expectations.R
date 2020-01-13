@@ -33,7 +33,7 @@ expect_print_matches_file <- function(object,
                                       skip_on_windows = TRUE,
                                       width = 100) {
   if (skip_on_windows) testthat::skip_on_os("windows")
-  if (skip_on_windows) testthat::skip_if_not( l10n_info()$`UTF-8` )
+  if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   withr::with_options(list(crayon.enabled = FALSE, width = width), {
     testthat::expect_known_output(
       print(object),
@@ -47,7 +47,7 @@ expect_print_matches_file <- function(object,
 expect_matches_file <- function(object, file, update = FALSE,
                                 skip_on_windows = TRUE, ...) {
   if (skip_on_windows) testthat::skip_on_os("windows")
-  if (skip_on_windows) testthat::skip_if_not( l10n_info()$`UTF-8` )
+  if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   act <- testthat::quasi_label(rlang::enquo(object), NULL)
 
   if (!file.exists(file)) {

@@ -31,6 +31,9 @@
 #'   print formatting.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
+#' @param rule_width  Width of the cli rules in printed skim object. Defaults
+#'     to base::options()$width
+#' @param summary_rule_width Width of Data Summary cli rule, defaults to 40.
 #' @name print
 NULL
 
@@ -44,13 +47,17 @@ print.skim_df <- function(x,
                           strip_metadata = getOption(
                             "skimr_strip_metadata", TRUE
                           ),
+                          rule_width = base::options()$width,
+                          summary_rule_width = 40,
                           ...) {
   if (is_skim_df(x)) {
     if (include_summary) {
-      print(summary(x))
+      print(summary(x), .summary_rule_width = summary_rule_width, ...)
     }
     by_type <- partition(x)
-    purrr::map(by_type, print, n, width, n_extra, strip_metadata, ...)
+    purrr::map(by_type, print, n, width, n_extra, strip_metadata,
+      .rule_width = rule_width, ...
+    )
     invisible(NULL)
   } else {
     NextMethod("print")
@@ -58,18 +65,21 @@ print.skim_df <- function(x,
 }
 
 #' @describeIn print Print an entry within a partitioned `skim_df`.
+#' @param .rule_width Width for the rule above the skim results for each type.
+#' @param .width Width for the tibble for each type.
 #' @export
 print.one_skim_df <- function(x,
                               n = Inf,
-                              width = Inf,
+                              .width = Inf,
                               n_extra = NULL,
                               strip_metadata = getOption(
                                 "skimr_strip_metadata", TRUE
                               ),
+                              .rule_width = base::options()$width,
                               ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
-  top_line <- cli::rule(line = 1, left = variable_type)
-  out <- format(x, ..., n = n, width = width, n_extra = n_extra)
+  top_line <- cli::rule(line = 1, left = variable_type, width = .rule_width)
+  out <- format(x, ..., n = n, width = .width, n_extra = n_extra)
   if (strip_metadata) {
     metadata <- -1 * grab_tibble_metadata(out)
   } else {
@@ -92,17 +102,22 @@ render_skim_body <- function(top_line, out, metadata_to_remove) {
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
 #' @export
-print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL, ...) {
+print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL,
+                            .rule_width = base::options()$width, ...) {
   nms <- names(x)
   attributes(x) <- NULL
-  print(rlang::set_names(x, nms))
+  print(rlang::set_names(x, nms), rule_width = .rule_width)
 }
 
 
 #' @describeIn print Print method for a `summary_skim_df` object.
+#' @param .summary_rule_width the width for the main rule above the summary.
 #' @export
-print.summary_skim_df <- function(x, ...) {
-  cat(paste0(cli::rule(line = 1, left = "Data Summary", width = 40), "\n"))
+print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
+  cat(paste0(cli::rule(
+    line = 1, left = "Data Summary",
+    width = .summary_rule_width
+  ), "\n"))
   print.table(x)
 }
 
