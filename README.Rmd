@@ -252,6 +252,15 @@ Displays in documents of different types will vary. For example, one user found
 that the font "Yu Gothic UI Semilight" produced consistent results for
 Microsoft Word and Libre Office Write.
 
+### Empty results tables
+
+If your skimr results tables are empty you may need to run the following
+
+```
+   options(crayon.enabled = FALSE)
+```
+one time per session.  
+
 ## Contributing
 
 We welcome issue reports and pull requests, including potentially adding
