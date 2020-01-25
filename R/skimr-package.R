@@ -25,14 +25,11 @@ NULL
 
 #' @importFrom rlang %||%
 
-#' @importFrom knitr knit_print
-
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
 
 #' @importFrom tidyselect contains
-#' @aliases select_helpers
 #' @export
 tidyselect::contains
 
