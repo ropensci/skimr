@@ -14,7 +14,7 @@
   n = Inf,
   width = Inf,
   n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  strip_metadata = getOption("skimr_strip_metadata", FALSE),
   rule_width = base::options()$width,
   summary_rule_width = 40,
   ...
@@ -25,7 +25,7 @@
   n = Inf,
   .width = Inf,
   n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", TRUE),
+  strip_metadata = getOption("skimr_strip_metadata", FALSE),
   .rule_width = base::options()$width,
   ...
 )
@@ -113,13 +113,16 @@ cases, this method falls back to \code{\link[tibble:print.tbl]{tibble::print.tbl
 \section{Controlling metadata behavior}{
 
 
-By default, \code{skimr} removes the tibble metadata when generating output. On
-some platforms, this can lead to all output getting removed. To disable that
-behavior, set either \code{strip_metadata = FALSE} when calling print or use
-\code{options(skimr_strip_metadata = FALSE)}.
+On POSIX systems, \code{skimr} removes the tibble metadata when generating output.
+On some platforms, this can lead to all output getting removed. To disable
+that behavior, set either \code{strip_metadata = FALSE} when calling print or use
+\code{options(skimr_strip_metadata = FALSE)}. The \code{crayon} package and the color
+support within \code{tibble} is also a factor. If your \code{skimr} results tables are
+empty you may need to run the following \code{options(crayon.enabled = FALSE)}.
 }
 
 \seealso{
 \code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
-print formatting.
+print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that
+affect tibble's color support.
 }

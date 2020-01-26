@@ -21,14 +21,17 @@
 #'
 #' @section Controlling metadata behavior:
 #'
-#' By default, `skimr` removes the tibble metadata when generating output. On
-#' some platforms, this can lead to all output getting removed. To disable that
-#' behavior, set either `strip_metadata = FALSE` when calling print or use
-#' `options(skimr_strip_metadata = FALSE)`.
+#' On POSIX systems, `skimr` removes the tibble metadata when generating output.
+#' On some platforms, this can lead to all output getting removed. To disable
+#' that behavior, set either `strip_metadata = FALSE` when calling print or use
+#' `options(skimr_strip_metadata = FALSE)`. The `crayon` package and the color
+#' support within `tibble` is also a factor. If your `skimr` results tables are
+#' empty you may need to run the following `options(crayon.enabled = FALSE)`.
 #'
 #' @inheritParams tibble:::print.tbl
 #' @seealso [tibble::trunc_mat()] For a list of global options for customizing
-#'   print formatting.
+#'   print formatting. [crayon::has_color()] for the variety of issues that
+#'   affect tibble's color support.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
 #' @param rule_width  Width of the cli rules in printed skim object. Defaults
@@ -45,7 +48,7 @@ print.skim_df <- function(x,
                           width = Inf,
                           n_extra = NULL,
                           strip_metadata = getOption(
-                            "skimr_strip_metadata", TRUE
+                            "skimr_strip_metadata", FALSE
                           ),
                           rule_width = base::options()$width,
                           summary_rule_width = 40,
@@ -73,7 +76,7 @@ print.one_skim_df <- function(x,
                               .width = Inf,
                               n_extra = NULL,
                               strip_metadata = getOption(
-                                "skimr_strip_metadata", TRUE
+                                "skimr_strip_metadata", FALSE
                               ),
                               .rule_width = base::options()$width,
                               ...) {
