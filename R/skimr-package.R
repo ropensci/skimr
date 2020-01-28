@@ -17,7 +17,7 @@
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  options(skimr_strip_metadata = .Platform$OS.type != "windows")
+  options(skimr_strip_metadata = crayon::has_color())
 }
 
 

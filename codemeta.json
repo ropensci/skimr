@@ -403,7 +403,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "1083.053KB",
+  "fileSize": "1027.472KB",
   "contIntegration": [
     "https://travis-ci.org/ropenscilabs/skimr",
     "https://codecov.io/gh/ropenscilabs/skimr"
