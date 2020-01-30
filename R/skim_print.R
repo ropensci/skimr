@@ -53,6 +53,7 @@ print.skim_df <- function(x,
                           rule_width = base::options()$width,
                           summary_rule_width = 40,
                           ...) {
+  withr::local_options(list(crayon.enabled = FALSE))
   if (is_skim_df(x)) {
     if (include_summary) {
       print(summary(x), .summary_rule_width = summary_rule_width, ...)

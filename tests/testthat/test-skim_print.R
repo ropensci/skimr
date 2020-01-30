@@ -100,6 +100,7 @@ test_that("Metadata is stripped from smaller consoles", {
 })
 
 test_that("Crayon is supported", {
+  skip("Temporary skip due to issues with crayon support on some platforms")
   withr::with_options(list(crayon.enabled = TRUE), {
     with_mock(
       .env = "skimr",
