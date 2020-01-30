@@ -3,6 +3,7 @@
 \name{stats}
 \alias{stats}
 \alias{n_missing}
+\alias{n_complete}
 \alias{complete_rate}
 \alias{n_whitespace}
 \alias{sorted_count}
@@ -23,6 +24,8 @@
 \title{Summary statistic functions}
 \usage{
 n_missing(x)
+
+n_complete(x)
 
 complete_rate(x)
 
@@ -81,6 +84,9 @@ a given data type.
 \section{Functions}{
 \itemize{
 \item \code{n_missing}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
+
+\item \code{n_complete}: Calculate the sum of not \code{NA} and \code{NULL} (i.e. missing)
+values.
 
 \item \code{complete_rate}: Calculate complete values; complete values are not missing.
 
