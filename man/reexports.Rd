@@ -5,7 +5,6 @@
 \alias{reexports}
 \alias{\%>\%}
 \alias{contains}
-\alias{select_helpers}
 \alias{ends_with}
 \alias{everything}
 \alias{matches}

@@ -80,11 +80,11 @@ Skim statistics in the console
     ## ________________________           
     ## Group variables            None    
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts                        
     ## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
 
@@ -104,11 +104,11 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: factor ────────────────────────────────────────────────────────────────
+    ## ── Variable type: factor ───────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate ordered n_unique top_counts               
     ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
@@ -132,7 +132,7 @@ Skim statistics in the console
     ## ________________________                  
     ## Group variables            None           
     ## 
-    ## ── Variable type: character ─────────────────────────────────────────────────────────────
+    ## ── Variable type: character ────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
     ## 1 name                  0         1         3    21     0       87          0
     ## 2 hair_color            5         0.943     4    13     0       12          0
@@ -142,13 +142,13 @@ Skim statistics in the console
     ## 6 homeworld            10         0.885     4    14     0       48          0
     ## 7 species               5         0.943     3    14     0       37          0
     ## 
-    ## ── Variable type: list ──────────────────────────────────────────────────────────────────
+    ## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
     ## 1 films                 0             1       24          1          7
     ## 2 vehicles              0             1       11          0          2
     ## 3 starships             0             1       17          0          5
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
     ## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
@@ -186,7 +186,7 @@ Skim statistics in the console
     ## ________________________         
     ## Group variables            None  
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
     ## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
@@ -211,7 +211,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            Species   
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
     ##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
@@ -243,7 +243,7 @@ Skim statistics in the console
     ## ________________________             
     ## Group variables            None      
     ## 
-    ## ── Variable type: numeric ───────────────────────────────────────────────────────────────
+    ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
@@ -263,36 +263,36 @@ chunk.
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td align="left">Name</td>
-<td align="left">Piped data</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
 </tr>
 <tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">272</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">272</td>
 </tr>
 <tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">2</td>
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">numeric</td>
-<td align="left">2</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -302,45 +302,45 @@ chunk.
 <table>
 <thead>
 <tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">eruptions</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">3.49</td>
-<td align="right">1.14</td>
-<td align="right">1.6</td>
-<td align="right">2.16</td>
-<td align="right">4</td>
-<td align="right">4.45</td>
-<td align="right">5.1</td>
-<td align="left">▇▂▂▇▇</td>
+<td style="text-align: left;">eruptions</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">1.6</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4.45</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: left;">▇▂▂▇▇</td>
 </tr>
 <tr class="even">
-<td align="left">waiting</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">70.90</td>
-<td align="right">13.59</td>
-<td align="right">43.0</td>
-<td align="right">58.00</td>
-<td align="right">76</td>
-<td align="right">82.00</td>
-<td align="right">96.0</td>
-<td align="left">▃▃▂▇▂</td>
+<td style="text-align: left;">waiting</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">70.90</td>
+<td style="text-align: right;">13.59</td>
+<td style="text-align: right;">43.0</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">82.00</td>
+<td style="text-align: right;">96.0</td>
+<td style="text-align: left;">▃▃▂▇▂</td>
 </tr>
 </tbody>
 </table>
@@ -375,36 +375,36 @@ skimmers.
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">iris</td>
 </tr>
 <tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">150</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">150</td>
 </tr>
 <tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">5</td>
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">5</td>
 </tr>
 <tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">numeric</td>
-<td align="left">1</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
 </tr>
 <tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -414,41 +414,41 @@ skimmers.
 <table>
 <thead>
 <tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-<th align="right">mad</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+<th style="text-align: right;">mad</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.84</td>
-<td align="right">0.83</td>
-<td align="right">4.3</td>
-<td align="right">5.1</td>
-<td align="right">5.8</td>
-<td align="right">6.4</td>
-<td align="right">7.9</td>
-<td align="left">▆▇▇▅▂</td>
-<td align="right">1.04</td>
+<td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">7.9</td>
+<td style="text-align: left;">▆▇▇▅▂</td>
+<td style="text-align: right;">1.04</td>
 </tr>
 </tbody>
 </table>
 
 But you can also use the dummy argument pattern from `dplyr::funs` to
 set particular function arguments. Setting the `append = FALSE` argument
-uses only those functions that you've provided.
+uses only those functions that you’ve provided.
 
     my_skim <- skim_with(
       numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE
@@ -459,36 +459,36 @@ uses only those functions that you've provided.
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">iris</td>
 </tr>
 <tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">150</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">150</td>
 </tr>
 <tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">5</td>
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">5</td>
 </tr>
 <tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">numeric</td>
-<td align="left">1</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
 </tr>
 <tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -498,20 +498,20 @@ uses only those functions that you've provided.
 <table>
 <thead>
 <tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">iqr</th>
-<th align="right">p99</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">iqr</th>
+<th style="text-align: right;">p99</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1.3</td>
-<td align="right">7.7</td>
+<td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">7.7</td>
 </tr>
 </tbody>
 </table>
@@ -525,36 +525,36 @@ And you can default skimmers by setting them to `NULL`.
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td align="left">Name</td>
-<td align="left">iris</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">iris</td>
 </tr>
 <tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">150</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">150</td>
 </tr>
 <tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">5</td>
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">5</td>
 </tr>
 <tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">numeric</td>
-<td align="left">1</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
 </tr>
 <tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
@@ -564,30 +564,30 @@ And you can default skimmers by setting them to `NULL`.
 <table>
 <thead>
 <tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Sepal.Length</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">5.84</td>
-<td align="right">0.83</td>
-<td align="right">4.3</td>
-<td align="right">5.1</td>
-<td align="right">5.8</td>
-<td align="right">6.4</td>
-<td align="right">7.9</td>
+<td style="text-align: left;">Sepal.Length</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">4.3</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">7.9</td>
 </tr>
 </tbody>
 </table>
@@ -611,7 +611,7 @@ default:
 their own default summary functions for data types not covered above. It
 relies on R S3 methods for the `get_skimmers` function. This function
 should return a `sfl`, similar to customization within `skim_with()`,
-but you should also provide a value for the `class` argument. Here's an
+but you should also provide a value for the `class` argument. Here’s an
 example.
 
     get_skimmers.my_data_type <- function(column) {
@@ -662,29 +662,43 @@ knit them to a specific document format. The same session that produces
 a correctly rendered HTML document may produce an incorrectly rendered
 PDF, for example. This issue can generally be addressed by changing
 fonts to one with good building block (for histograms) and Braille
-support (for line graphs). For example, the open font "DejaVu Sans" from
+support (for line graphs). For example, the open font “DejaVu Sans” from
 the `extrafont` package supports these. You may also want to try
 wrapping your results in `knitr::kable()`. Please see the vignette on
 using fonts for details.
 
 Displays in documents of different types will vary. For example, one
-user found that the font "Yu Gothic UI Semilight" produced consistent
+user found that the font “Yu Gothic UI Semilight” produced consistent
 results for Microsoft Word and Libre Office Write.
 
-### Empty results tables
+### Stripping metadata and empty results tables
 
-If your skimr results tables are empty you may need to run the following
+In POSIX systems, `skimr` tries to remove the tibble metadata when
+producing the results. A complicating factor is tibble’s color support,
+which depends on environment settings. In particular, not all Windows
+terminals support colors in the way that tibble expects.
 
-       options(crayon.enabled = FALSE)
+So, by default, we disable removing metadata on windows. You can turn
+this feature on with an option. Either set it when calling print or
+globally.
 
-one time per session.
+    print(skimmed, strip_metadata = TRUE)
+    options(skimr_strip_metadata = TRUE)
+
+Separately, you might need to check the option `crayon.enabled`.
+Similarly, if your skimr results tables are empty you may need to run
+the following
+
+    options(crayon.enabled = FALSE)
+
+You need to do this one time per session.
 
 Contributing
 ------------
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
-encourage users to take advantage of skimr's flexibility to add their
+encourage users to take advantage of skimr’s flexibility to add their
 own customized classes. Please see the
 [contributing](https://docs.ropensci.org/skimr/CONTRIBUTING.html) and
 [conduct](https://docs.ropensci.org/skimr/CONDUCT.html) documents.

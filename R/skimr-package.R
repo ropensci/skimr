@@ -17,9 +17,7 @@
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  options(
-    skimr_strip_metadata = TRUE
-  )
+  options(skimr_strip_metadata = .Platform$OS.type != "windows")
 }
 
 
@@ -27,14 +25,11 @@ NULL
 
 #' @importFrom rlang %||%
 
-#' @importFrom knitr knit_print
-
 #' @importFrom magrittr %>%
 #' @export
 magrittr::`%>%`
 
 #' @importFrom tidyselect contains
-#' @aliases select_helpers
 #' @export
 tidyselect::contains
 

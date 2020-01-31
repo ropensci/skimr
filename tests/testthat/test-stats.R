@@ -32,6 +32,12 @@ test_that("n_missing is calculated correctly.", {
 })
 
 test_that("n_complete is calculated correctly.", {
+  data <- c("a", "b", "c", NA)
+  input <- n_complete(data)
+  expect_identical(input, 3L)
+})
+
+test_that("complete_rate is calculated correctly.", {
   data <- c("a", "b", "c", NA, " ")
   input <- complete_rate(data)
   expect_equal(input, .8, tolerance = .001)
