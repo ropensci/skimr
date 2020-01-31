@@ -77,4 +77,11 @@ my_skim <- skim_with(numeric = sfl(mean), character = sfl(length))
 # Or pass the same as a list, unquoting the input.
 my_skimmers <- list(numeric = sfl(mean), character = sfl(length))
 my_skim <- skim_with(!!!my_skimmers)
+
+# Use the v1 base skimmers instead.
+my_skim <- skim_with(base = sfl(
+  missing = n_missing,
+  complete = n_complete,
+  n = length
+))
 }

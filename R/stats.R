@@ -22,6 +22,13 @@ n_missing <- function(x) {
   sum(is.na(x) | is.null(x))
 }
 
+#' @describeIn stats Calculate the sum of not `NA` and `NULL` (i.e. missing)
+#'   values.
+#' @export
+n_complete <- function(x) {
+  sum(!is.na(x) & !is.null(x))
+}
+
 #' @describeIn stats Calculate complete values; complete values are not missing.
 #' @export
 complete_rate <- function(x) {
