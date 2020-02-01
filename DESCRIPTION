@@ -118,8 +118,7 @@ Suggests:
     extrafont,
     rmarkdown,
     sf,
-    testthat (>= 2.0.0),
-    withr
+    testthat (>= 2.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
