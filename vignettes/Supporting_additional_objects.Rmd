@@ -52,7 +52,6 @@ skimmers. By default, skimr falls back to use the sfl for character variables.
 
 ```{r}
 skim(nc$geometry)
-
 ```
 
 
@@ -71,9 +70,9 @@ Before we begin, we'll be using the following custom summary statistic
 throughout. The function gets the geometry's crs and combines it into a string.
 
 ```{r}
-get_crs <- function(column){
+get_crs <- function(column) {
   crs <- sf::st_crs(column)
-  
+
   paste0("epsg: ", crs[["epsg"]], " proj4string: '", crs[["proj4string"]], "'")
 }
 ```
@@ -101,7 +100,7 @@ the many specific classes of data in the `sf` package.  From above, you can see
 the geometry column has two classes: 1st the specific geometry type (e.g. 
 `sfc_MULTIPOLYGON` `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT`) and 2nd the 
 general sfc class. Skimr will try to find a sfl() helper function for the classes 
-in the order they appear in class(.) (see S3 classes for more detail 
+in the order they appear in `class(.)` (see S3 classes for more detail 
 [*Advanced R*](https://adv-r.hadley.nz/s3.html)). The following example will build  
 support for `sfc`, which encompasses all `sf` objects: `sfc_MULTIPOLYGON` 
 `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT`. If we want custom skim_with 
@@ -113,7 +112,7 @@ skim_sf <- skim_with(
   sfc = sfl(
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
-    crs= get_crs
+    crs = get_crs
   )
 )
 ```
@@ -127,6 +126,24 @@ like factors, characters, numerics, etc. Therefore our `skim_sf` is like the reg
 ```{r}
 skim_sf(nc)
 ```
+
+** This seems unnecessary, but maybe I'm misunderstanding something. I think the skim_with function already creates 
+
+Creating a function that is a method of the skim_by_type generic
+for the data type allows skimming of an entire data frame that contains some 
+columns of that type.
+
+```{r}
+skim_by_type.sfc <- function(mangled, columns, data) {
+  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
+  build_results(skimmed, columns, NULL)
+}
+```
+
+```{r}
+skim_sf(nc)
+```
+
 
 Sharing these functions within a separate package requires an export. 
 The simplest way to do this is with Roxygen.
@@ -143,6 +160,15 @@ skim_sf <- skim_with(
     crs = get_crs
   )
 )
+
+### This also seems unnecessary
+
+#' A skim_by_type function for `sfc_MULTIPOLYGON` objects.
+#' @export
+skim_by_type.sfc <- function(mangled, columns, data) {
+  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
+  skimr::build_results(skimmed, columns, NULL)
+}
 ```
 
 While this works within any package, there is an even better approach in this
@@ -164,7 +190,7 @@ a generic we also want to identify the `skim_type` in the `sfl`.
 ```{r}
 #' @importFrom skimr get_skimmers
 #' @export
-get_skimmers.sfc<- function(column) {
+get_skimmers.sfc <- function(column) {
   sfl(
     skim_type = "sfc",
     n_unique = n_unique,
