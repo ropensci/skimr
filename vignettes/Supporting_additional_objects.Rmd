@@ -231,5 +231,5 @@ This is a very simple example. For a package such as sf the custom statistics
 will likely  be much more complex. The flexibility of `skimr` allows you to
 manage that.
 
-Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma and Michael Sumner for
+Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma, Michael Sumner, and Kyle Butts for
 inspiring and helping with the development of this code.
