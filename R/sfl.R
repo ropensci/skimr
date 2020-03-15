@@ -36,9 +36,6 @@
 sfl <- function(..., skim_type = "") {
   stopifnot(length(skim_type) == 1, is.character(skim_type))
   funs <- build_sfl_names(...)
-  if (length(funs) < 1) {
-    stop("Please provide one or more skimming functions.")
-  }
   structure(
     list(funs = funs, skim_type = skim_type),
     class = "skimr_function_list"

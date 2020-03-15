@@ -5,6 +5,7 @@ test_that("Only string scalars for types", {
 })
 
 test_that("sfl's require at least one function", {
+  skip("Skip to test option of allowing 0 length sfls.")
   expect_error(sfl(skim_type = "numeric"))
 })
 
