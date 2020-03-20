@@ -78,10 +78,10 @@ skim_with <- function(...,
 
   function(data, ...) {
     data_name <- rlang::expr_label(substitute(data))
-    if (!is.data.frame(data)) {
+    if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
-    stopifnot(is.data.frame(data))
+    stopifnot(inherits(data, "data.frame"))
 
     .vars <- rlang::quos(...)
     cols <- names(data)
