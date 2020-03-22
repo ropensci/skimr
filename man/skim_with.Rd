@@ -20,8 +20,8 @@ argument name that matches a particular data type.}
 defaults already in \code{skim}. Default is \code{TRUE}.}
 }
 \value{
-A new \code{skim()} function. This is callable. See \code{\link[=skim]{skim()}} for
-more details.
+A new \code{skim()} function. This is callable. See \code{\link[=skim]{skim()}} for more
+details.
 }
 \description{
 While skim is designed around having an opinionated set of defaults, you
@@ -48,6 +48,9 @@ entries in the default \code{skim_function_list}, the values in the default list
 are overwritten. Similarly, if \code{NULL} values are passed within \code{sfl()}, these
 default skimmers are dropped. Otherwise, if \code{append = FALSE}, only the
 locally-provided skimming functions are used.
+
+Note that \code{append} only applies to the \code{typed} skimmers (i.e. non-base).
+See \code{\link[=get_default_skimmer_names]{get_default_skimmer_names()}} for a list of defaults.
 }
 \examples{
 # Use new functions for numeric functions. If you don't provide a name,
@@ -84,4 +87,7 @@ my_skim <- skim_with(base = sfl(
   complete = n_complete,
   n = length
 ))
+
+# Remove the base skimmers entirely
+my_skim <- skim_with(base = NULL)
 }

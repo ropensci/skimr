@@ -197,3 +197,9 @@ test_that("Base skimmers can be changed", {
 test_that("Base skimmers require an sfl", {
   expect_error(skim_with(base = list(length = length)))
 })
+
+test_that("Base skimmers can be removed", {
+  my_skim <- skim_with(base = NULL)
+  skimmed <- my_skim(iris)
+  str(skimmed)
+})

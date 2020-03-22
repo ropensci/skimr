@@ -24,13 +24,16 @@
 #' default skimmers are dropped. Otherwise, if `append = FALSE`, only the
 #' locally-provided skimming functions are used.
 #'
+#' Note that `append` only applies to the `typed` skimmers (i.e. non-base).
+#' See [get_default_skimmer_names()] for a list of defaults.
+#'
 #' @param ... One or more (`sfl`) `skimmer_function_list` objects, with an
-#'  argument name that matches a particular data type.
+#'   argument name that matches a particular data type.
 #' @param base An `sfl` that sets skimmers for all column types.
 #' @param append Whether the provided options should be in addition to the
-#'  defaults already in `skim`. Default is `TRUE`.
-#' @return A new `skim()` function. This is callable. See [skim()] for
-#'  more details.
+#'   defaults already in `skim`. Default is `TRUE`.
+#' @return A new `skim()` function. This is callable. See [skim()] for more
+#'   details.
 #' @examples
 #' # Use new functions for numeric functions. If you don't provide a name,
 #' # one will be automatically generated.
@@ -66,6 +69,9 @@
 #'   complete = n_complete,
 #'   n = length
 #' ))
+#'
+#' # Remove the base skimmers entirely
+#' my_skim <- skim_with(base = NULL)
 #' @export
 skim_with <- function(...,
                       base = sfl(
@@ -73,7 +79,7 @@ skim_with <- function(...,
                         complete_rate = complete_rate
                       ),
                       append = TRUE) {
-  stopifnot(inherits(base, "skimr_function_list"))
+  stopifnot(is.null(base) || inherits(base, "skimr_function_list"))
   local_skimmers <- validate_assignment(...)
 
   function(data, ...) {
