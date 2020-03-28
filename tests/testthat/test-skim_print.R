@@ -83,7 +83,7 @@ test_that("make_utf8 produces the correct result ", {
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
   input <- skim(iris)
   mean_only <- dplyr::select(input, numeric.mean)
-  if (packageVersion("dplyr") < 0.8) {
+  if (packageVersion("dplyr") <= "0.8.5") {
     expect_print_matches_file(mean_only, "print/fallback.txt")
   } else {
     expect_print_matches_file(mean_only, "print/fallback_dplyrv1.txt")
