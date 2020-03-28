@@ -5,8 +5,10 @@ skimmed_iris <- skim(iris)
 test_that("dplyr::filter works as expected", {
   skip_if_not(l10n_info()$`UTF-8`)
   input <- dplyr::filter(skimmed_iris, skim_type == "numeric")
+  #if (packageVersion("dplyr") < 1){
   expect_print_matches_file(input, "dplyr/filter-skim.txt")
-
+  #} else
+  #{}
   no_rows <- dplyr::filter(skimmed_iris, skim_type == "no_type")
   expect_print_matches_file(no_rows, "dplyr/filter-no-skim.txt")
 })
@@ -17,7 +19,12 @@ test_that("dplyr::select works as expected", {
   expect_print_matches_file(with_type, "dplyr/select-skim.txt")
 
   without_type <- dplyr::select(skimmed_iris, numeric.mean)
-  expect_print_matches_file(without_type, "dplyr/select-no-skim.txt")
+  if (packageVersion("dplyr") < 0.8){
+      expect_print_matches_file(without_type, "dplyr/select-no-skim.txt")
+  } else 
+  {
+    expect_print_matches_file(without_type, "dplyr/select-no-skim_dplyrv1.txt")
+  }
 })
 
 test_that("dplyr::mutate works as expected", {

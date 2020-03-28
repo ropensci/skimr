@@ -28,7 +28,10 @@ summary.skim_df <- function(object, ...) {
   possible_groups <- ifelse(
     is.null(possible_names <- group_names(object)),
     "None",
+    ifelse(length(possible_names) == 0,
+    "None",
     paste(possible_names, collapse = ", ")
+    )
   )
 
   summary_object <- c(
