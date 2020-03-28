@@ -19,7 +19,7 @@ test_that("dplyr::select works as expected", {
   expect_print_matches_file(with_type, "dplyr/select-skim.txt")
 
   without_type <- dplyr::select(skimmed_iris, numeric.mean)
-  if (packageVersion("dplyr") < "0.8.5"){
+  if (packageVersion("dplyr") <= "0.8.5"){
       expect_print_matches_file(without_type, "dplyr/select-no-skim.txt")
   } else 
   {
