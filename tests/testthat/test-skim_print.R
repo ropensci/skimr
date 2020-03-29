@@ -41,13 +41,21 @@ test_that("knit_print works with skim summaries", {
 })
 
 test_that("knit_print appropriately falls back to tibble printing", {
-  skip("Temporary skip due to changes in tibble printing")
+  #skip("Temporary skip due to changes in tibble printing")
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
-  expect_known_output(
-    input <- knitr::knit_print(reduced),
-    "print/knit_print-fallback.txt"
-  )
+  if (packageVersion("dplyr") <= "0.8.5"){
+    expect_known_output(
+      input <- knitr::knit_print(reduced),
+      "print/knit_print-fallback.txt"
+    )
+  } else 
+  {
+    expect_known_output(
+      input <- knitr::knit_print(reduced),
+      "print/knit_print-fallback-dplyrv1.txt"
+    )
+  }
   expect_is(input, "data.frame")
 })
 
