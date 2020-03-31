@@ -1,6 +1,6 @@
 # A tibble: 5 x 2
   skim_variable numeric.mean
-  <chr>                <dbl>
+* <chr>                <dbl>
 1 Species              NA   
 2 Sepal.Length          5.84
 3 Sepal.Width           3.06
