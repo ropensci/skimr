@@ -54,12 +54,13 @@ print.skim_df <- function(x,
                           summary_rule_width = 40,
                           ...) {
   withr::local_options(list(crayon.enabled = FALSE))
-  if (is_skim_df(x)) {
+  if (is_skim_df(x) && nrow(x) > 0) {
     if (include_summary) {
       print(summary(x), .summary_rule_width = summary_rule_width, ...)
     }
     by_type <- partition(x)
-    purrr::map(by_type, print, n, width, n_extra, strip_metadata,
+    purrr::map(
+      by_type, print, n, width, n_extra, strip_metadata,
       .rule_width = rule_width, ...
     )
     invisible(NULL)
@@ -153,7 +154,7 @@ NULL
 #' @describeIn knit_print Default `knitr` print for `skim_df` objects.
 #' @export
 knit_print.skim_df <- function(x, options = NULL, ...) {
-  if (is_skim_df(x)) {
+  if (is_skim_df(x) && nrow(x) > 0) {
     if (options$skimr_include_summary %||% TRUE) {
       summary_stats <- summary(x)
 

@@ -5,11 +5,15 @@
 \alias{has_type_column}
 \alias{has_variable_column}
 \alias{has_skimr_attributes}
+\alias{has_skim_type_attribute}
+\alias{is_data_frame}
 \alias{is_skim_df}
-\alias{assert_is_skim_df}
+\alias{is_one_skim_df}
 \alias{is_skim_list}
-\alias{assert_is_skim_list}
 \alias{could_be_skim_df}
+\alias{assert_is_skim_df}
+\alias{assert_is_skim_list}
+\alias{assert_is_one_skim_df}
 \title{Test if an object is compatible with \code{skimr}}
 \usage{
 has_type_column(object)
@@ -18,15 +22,23 @@ has_variable_column(object)
 
 has_skimr_attributes(object)
 
+has_skim_type_attribute(object)
+
+is_data_frame(object)
+
 is_skim_df(object)
 
-assert_is_skim_df(object)
+is_one_skim_df(object)
 
 is_skim_list(object)
 
+could_be_skim_df(object)
+
+assert_is_skim_df(object)
+
 assert_is_skim_list(object)
 
-could_be_skim_df(object)
+assert_is_one_skim_df(object)
 }
 \arguments{
 \item{object}{Any \code{R} object.}
@@ -38,13 +50,8 @@ ensure this. While they have some application externally, they are mostly
 used internally.
 }
 \details{
-Most notably, a \code{skim_df}
-\itemize{
-\item has columns \code{skim_type} and \code{skim_variable}
-\item has more than zero rows
-}
-
-And has the following special attributes
+Most notably, a \code{skim_df} has columns \code{skim_type} and \code{skim_variable}. And
+has the following special attributes
 \itemize{
 \item \code{data_rows}: n rows in the original data
 \item \code{data_cols}: original number of columns
@@ -53,6 +60,10 @@ And has the following special attributes
 \item \code{base_skimmers}: names of functions applied to all skim types
 \item \code{skimmers_used}: names of functions used to skim each type
 }
+
+The functions in these checks work like \code{\link[=all.equal]{all.equal()}}. The return \code{TRUE} if
+the check passes, or otherwise notifies why the check failed. This makes them
+more useful when throwing errors.
 }
 \section{Functions}{
 \itemize{
@@ -62,15 +73,26 @@ And has the following special attributes
 
 \item \code{has_skimr_attributes}: Does the object have the appropriate \code{skimr} attributes?
 
+\item \code{has_skim_type_attribute}: Does the object have a \code{skim_type} attribute? This makes
+it a \code{one_skim_df}.
+
+\item \code{is_data_frame}: Is the object a data frame?
+
 \item \code{is_skim_df}: Is the object a \code{skim_df}?
 
-\item \code{assert_is_skim_df}: Stop if the object is not a \code{skim_df}.
+\item \code{is_one_skim_df}: Is the object a \code{one_skim_df}? This is similar to a
+\code{skim_df}, but does not have the \code{type} column. That is stored as an
+attribute instead.
 
 \item \code{is_skim_list}: Is the object a \code{skim_list}?
 
-\item \code{assert_is_skim_list}: Stop if the object is not a \code{skim_list}.
-
 \item \code{could_be_skim_df}: Is this a data frame with \code{skim_variable} and
 \code{skim_type} columns?
+
+\item \code{assert_is_skim_df}: Stop if the object is not a \code{skim_df}.
+
+\item \code{assert_is_skim_list}: Stop if the object is not a \code{skim_list}.
+
+\item \code{assert_is_one_skim_df}: Stop if the object is not a \code{one_skim_df}.
 }}
 
