@@ -39,7 +39,7 @@ summary.skim_df <- function(object, ...) {
     " ",
     " ",
     unname(counts),
-    "  ",
+    " ",
     possible_groups
   )
 
@@ -50,7 +50,7 @@ summary.skim_df <- function(object, ...) {
     "Group variables"
   )
 
-  summary_object <- as.table(as.array(summary_object))
+  summary_object <- as.table(summary_object)
   dimnames(summary_object) <- list(dnames, c("Values"))
   class(summary_object) <- c("summary_skim_df", "table")
   summary_object
