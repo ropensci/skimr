@@ -101,7 +101,10 @@ skim_with <- function(...,
     if (length(grps) > 0) {
       group_variables <- selected %in% as.character(grps)
       selected <- selected[!group_variables]
+    } else {
+      attr(data, "groups") <- list()
     }
+
 
     skimmers <- purrr::map(
       selected, get_final_skimmers, data, local_skimmers, append
