@@ -125,7 +125,11 @@ add_namespaces <- function(data, skim_type) {
   meta_columns <- c("skim_variable", dplyr::group_vars(data), base)
   no_meta_columns <- dplyr::setdiff(names(data), meta_columns)
   with_namespace <- paste(skim_type, no_meta_columns, sep = ".")
-  rlang::set_names(data, c(meta_columns, with_namespace))
+
+  # TODO(michaelquinn32): Drop this when vctrs interface works correctly.
+  names(data) <- c(meta_columns, with_namespace)
+  attr(data, "skim_type") <- NULL
+  tibble::as_tibble(data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
