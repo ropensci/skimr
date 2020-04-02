@@ -84,14 +84,14 @@ Authors@R:
              family = "Possenriede",
              role = "ctb",
              email = "possenriede@gmail.com"))
-Description: A simple to use summary function that can be used with pipes
-    and displays nicely in the console. The default summary statistics may
-    be modified by the user as can the default formatting.  Support for
-    data frames and vectors is included, and users can implement their own
-    skim methods for specific object types as described in a vignette.
-    Default summaries include support for inline spark graphs.
-    Instructions for managing these on specific operating systems are
-    given in the "Using skimr" vignette and the README.
+Description: A simple to use summary function that can be used
+    with pipes and displays nicely in the console. The default summary
+    statistics may be modified by the user as can the default formatting.
+    Support for data frames and vectors is included, and users can
+    implement their own skim methods for specific object types as
+    described in a vignette.  Default summaries include support for inline
+    spark graphs.  Instructions for managing these on specific operating
+    systems are given in the "Using skimr" vignette and the README.
 License: GPL-3
 URL: https://docs.ropensci.org/skimr (website),
     https://github.com/ropensci/skimr
@@ -140,3 +140,4 @@ Collate:
     'skimr-package.R'
     'summary.R'
     'utils.R'
+    'vctrs.R'
