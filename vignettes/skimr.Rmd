@@ -223,7 +223,7 @@ the package has some other functions to help with edge cases.
 
 First, `partition()` returns a named list of the wide data frames for each data
 type. Unlike the original data the partitioned data only has columns
-corresponding to the skimming functions use for this data type. These data 
+corresponding to the skimming functions used for this data type. These data 
 frames are, therefore, not `skim_df` objects.
 
 ```{r, render = knitr::normal_print}

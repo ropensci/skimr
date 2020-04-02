@@ -94,7 +94,7 @@ has_variable_column <- function(object) {
 #' @export
 has_skimr_attributes <- function(object) {
   skimr_attrs <- c(
-    "data_rows", "data_cols", "df_name", "groups", "base_skimmers",
+    "data_rows", "data_cols", "df_name",  "base_skimmers",
     "skimmers_used"
   )
   missing <- !(skimr_attrs %in% names(attributes(object)))
