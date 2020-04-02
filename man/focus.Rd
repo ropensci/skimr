@@ -15,10 +15,7 @@ were positions in the data frame, so expressions like \code{x:y} can
 be used to select a range of variables.}
 }
 \description{
-This function is a variant of \code{\link[dplyr:select]{dplyr::select()}} designed to work with
-\code{skim_df} objects. When using \code{focus()}, \code{skimr} metadata columns are kept,
-and \code{skimr} print methods are still utilized. Otherwise, the signature and
-behavior is identical to \code{\link[dplyr:select]{dplyr::select()}}.
+This function is a variant of \verb{dplyr::select()`` designed to work with }skim_df\verb{objects. When using}focus()\verb{, }skimr\verb{metadata columns are kept, and}skimr\verb{print methods are still utilized. Otherwise, the signature and behavior is identical to}dplyr::select()`.
 }
 \examples{
 # Compare

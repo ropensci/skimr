@@ -27,7 +27,7 @@ skimmers with defaults. See \code{\link[=get_skimmers]{get_skimmers()}} for more
 }
 \value{
 A \code{skimr_function_list}, which contains a list of \code{fun_calls},
-returned by \code{\link[dplyr:funs]{dplyr::funs()}} and a list of skimming functions to drop.
+returned by \code{dplyr::funs()} and a list of skimming functions to drop.
 }
 \description{
 This constructor is used to create a named list of functions. It also you
@@ -59,5 +59,5 @@ get_skimmers.my_new_class <- function(column) {
 }
 }
 \seealso{
-\code{\link[dplyr:funs]{dplyr::funs()}}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
+\code{dplyr::funs()}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
 }

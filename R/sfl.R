@@ -13,8 +13,8 @@
 #' @param skim_type A character scalar. This is used to match locally-provided
 #'   skimmers with defaults. See [get_skimmers()] for more detail.
 #' @return A `skimr_function_list`, which contains a list of `fun_calls`,
-#'   returned by [dplyr::funs()] and a list of skimming functions to drop.
-#' @seealso [dplyr::funs()], [skim_with()] and [get_skimmers()].
+#'   returned by `dplyr::funs()` and a list of skimming functions to drop.
+#' @seealso `dplyr::funs()`, [skim_with()] and [get_skimmers()].
 #' @examples
 #' # sfl's can take a variety of input formats and will generate names
 #' # if not provided.
