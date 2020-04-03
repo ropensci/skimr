@@ -7,7 +7,9 @@
 sfl(..., skim_type = "")
 }
 \arguments{
-\item{...}{<\code{\link[dplyr:dplyr_data_masking]{data-masking}}> A list of functions
+\item{...}{Inherited from dplyr::data_masking() for dplyr version 1 or later
+or dplyr::funs() for older versions of dplyr.
+A list of functions
 specified by:
 \itemize{
 \item Their name, \code{"mean"}
@@ -59,5 +61,5 @@ get_skimmers.my_new_class <- function(column) {
 }
 }
 \seealso{
-\code{dplyr::funs()}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
+\code{\link[dplyr:funs]{dplyr::funs()}}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
 }
