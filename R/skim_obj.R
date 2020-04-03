@@ -58,12 +58,8 @@ skimmers_used <- function(object) {
 #' ensure this. While they have some application externally, they are mostly
 #' used internally.
 #'
-#' Most notably, a `skim_df`
-#'
-#' * has columns `skim_type` and `skim_variable`
-#' * has more than zero rows
-#'
-#' And has the following special attributes
+#' Most notably, a `skim_df` has columns `skim_type` and `skim_variable`. And
+#' has the following special attributes
 #'
 #' * `data_rows`: n rows in the original data
 #' * `data_cols`: original number of columns
@@ -72,6 +68,10 @@ skimmers_used <- function(object) {
 #' * `base_skimmers`: names of functions applied to all skim types
 #' * `skimmers_used`: names of functions used to skim each type
 #'
+#' The functions in these checks work like [all.equal()]. The return `TRUE` if
+#' the check passes, or otherwise notifies why the check failed. This makes them
+#' more useful when throwing errors.
+#'
 #' @param object Any `R` object.
 #' @name skim-obj
 NULL
@@ -79,63 +79,141 @@ NULL
 #' @describeIn skim-obj Does the object have the `skim_type` column?
 #' @export
 has_type_column <- function(object) {
-  "skim_type" %in% names(object)
+  make_issue("skim_type" %in% names(object), "missing column `skim_type`")
 }
 
 #' @describeIn skim-obj Does the object have the `skim_variable` column?
 #' @export
 has_variable_column <- function(object) {
-  "skim_variable" %in% names(object)
+  make_issue(
+    "skim_variable" %in% names(object), "missing column `skim_variable`"
+  )
 }
 
 #' @describeIn skim-obj Does the object have the appropriate `skimr` attributes?
 #' @export
 has_skimr_attributes <- function(object) {
   skimr_attrs <- c(
-    "data_rows", "data_cols", "df_name", "groups", "base_skimmers",
+    "data_rows", "data_cols", "df_name",  "base_skimmers",
     "skimmers_used"
   )
-  all(skimr_attrs %in% skimr_attrs)
+  missing <- !(skimr_attrs %in% names(attributes(object)))
+  make_issue(!any(missing), show_missing_attributes(skimr_attrs, missing))
+}
+
+show_missing_attributes <- function(attributes, missing) {
+  missing_msg <- if (length(missing) > 0) {
+    paste0(attributes[missing], collapse = ", ")
+  } else {
+    ""
+  }
+  paste("missing attributes:", missing_msg)
+}
+
+#' @describeIn skim-obj Does the object have a `skim_type` attribute? This makes
+#'   it a `one_skim_df`.
+#' @export
+has_skim_type_attribute <- function(object) {
+  make_issue(
+    "skim_type" %in% names(attributes(object)),
+    "missing attribute: `skim_type`"
+  )
+}
+
+#' @describeIn skim-obj Is the object a data frame?
+#' @export
+is_data_frame <- function(object) {
+  make_issue(inherits(object, "data.frame"), "not a data.frame")
+}
+
+make_issue <- function(check, message) {
+  structure(check, message = if (!check) message else character())
 }
 
 #' @describeIn skim-obj Is the object a `skim_df`?
 #' @export
 is_skim_df <- function(object) {
-  has_type_column(object) && has_variable_column(object) &&
-    has_skimr_attributes(object) && nrow(object) > 0
+  check_issues(
+    "Object is not a `skim_df`",
+    is_data_frame(object),
+    has_type_column(object),
+    has_variable_column(object),
+    has_skimr_attributes(object)
+  )
 }
 
-#' @describeIn skim-obj Stop if the object is not a `skim_df`.
+#' @describeIn skim-obj Is the object a `one_skim_df`? This is similar to a
+#'   `skim_df`, but does not have the `type` column. That is stored as an
+#'   attribute instead.
 #' @export
-assert_is_skim_df <- function(object) {
-  stopifnot(
-    has_type_column(object), has_variable_column(object),
-    has_skimr_attributes(object), nrow(object) > 0
+is_one_skim_df <- function(object) {
+  check_issues(
+    "Object is not a `one_skim_df`",
+    is_data_frame(object),
+    has_skim_type_attribute(object),
+    has_variable_column(object),
+    has_skimr_attributes(object)
   )
-  object
 }
 
 #' @describeIn skim-obj Is the object a `skim_list`?
 #' @export
 is_skim_list <- function(object) {
-  have_variable_column <- purrr::map_lgl(object, has_variable_column)
-  all(have_variable_column) && has_skimr_attributes(object)
-}
-
-#' @describeIn skim-obj Stop if the object is not a `skim_list`.
-#' @export
-assert_is_skim_list <- function(object) {
-  have_variable_column <- purrr::map_lgl(object, has_variable_column)
-  stopifnot(all(have_variable_column), has_skimr_attributes(object))
-  object
+  check_issues(
+    "Object is not a `skim_list`",
+    has_skimr_attributes(object),
+    !!!purrr::map(object, is_one_skim_df)
+  )
 }
 
 #' @describeIn skim-obj Is this a data frame with `skim_variable` and
 #'  `skim_type` columns?
 #' @export
 could_be_skim_df <- function(object) {
-  is.data.frame(object) && has_variable_column(object) &&
-    has_type_column(object) && nrow(object) > 0
+  check_issues(
+    "Object cannot behave like a `skim_df`",
+    is_data_frame(object),
+    has_variable_column(object),
+    has_type_column(object)
+  )
+}
+
+check_issues <- function(condition, ...) {
+  issues <- rlang::list2(...)
+  msgs <- purrr::map(issues, ~ attr(.x, "message"))
+  check <- all(purrr::flatten_lgl(issues))
+  message <- if (check) {
+    character()
+  } else {
+    paste0(condition, ": ", paste0(unlist(msgs), collapse = "; "))
+  }
+  structure(check, message = message)
+}
+
+#' @describeIn skim-obj Stop if the object is not a `skim_df`.
+#' @export
+assert_is_skim_df <- function(object) {
+  assert(is_skim_df(object))
+}
+
+#' @describeIn skim-obj Stop if the object is not a `skim_list`.
+#' @export
+assert_is_skim_list <- function(object) {
+  assert(is_skim_list(object))
+}
+
+#' @describeIn skim-obj Stop if the object is not a `one_skim_df`.
+#' @export
+assert_is_one_skim_df <- function(object) {
+  assert(is_one_skim_df(object))
+}
+
+assert <- function(check) {
+  if (check) {
+    invisible(NULL)
+  } else {
+    stop(attr(check, "message"))
+  }
 }
 
 #' Remove `skimr` class if not needed.

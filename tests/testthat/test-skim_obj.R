@@ -13,8 +13,17 @@ test_that("Partition produces skim_list objects", {
   split <- partition(skimmed)
   expect_false(is_skim_df(split))
   expect_true(is_skim_list(split))
-  expect_error(assert_is_skim_df(split))
+  expect_error(assert_is_skim_df(split), "not a data.frame")
   expect_error(assert_is_skim_list(split), NA)
+
+  expect_true(is_one_skim_df(split[[1]]))
+  expect_error(assert_is_one_skim_df(split[[1]]), NA)
+})
+
+test_that("Error messages are correct", {
+  expect_error(assert_is_skim_df(iris), "missing column `skim_type`")
+  expect_error(assert_is_skim_df(iris), "missing column `skim_variable`")
+  expect_error(assert_is_skim_df(iris), "missing attributes:")
 })
 
 test_that("Bind produces skim_df objects", {

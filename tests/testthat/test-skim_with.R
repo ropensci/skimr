@@ -201,5 +201,6 @@ test_that("Base skimmers require an sfl", {
 test_that("Base skimmers can be removed", {
   my_skim <- skim_with(base = NULL)
   skimmed <- my_skim(iris)
-  str(skimmed)
+  used <- attr(skimmed, "skimmers_used")
+  expect_false("base" %in% names(used))
 })
