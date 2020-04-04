@@ -4,8 +4,9 @@ test_that("Only string scalars for types", {
   expect_error(sfl(mad, skim_type = c("1", "2")))
 })
 
-test_that("sfl's require at least one function", {
-  expect_error(sfl(skim_type = "numeric"))
+test_that("Zero-length sfl's supported", {
+  input <- sfl(skim_type = "numeric")
+  expect_length(input$funs, 0)
 })
 
 test_that("The interface for sfl's separates keep and drop functions", {

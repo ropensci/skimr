@@ -1,0 +1,8 @@
+# A tibble: 5 x 1
+  numeric.mean
+         <dbl>
+1        NA   
+2         5.84
+3         3.06
+4         3.76
+5         1.20

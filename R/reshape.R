@@ -125,7 +125,11 @@ add_namespaces <- function(data, skim_type) {
   meta_columns <- c("skim_variable", dplyr::group_vars(data), base)
   no_meta_columns <- dplyr::setdiff(names(data), meta_columns)
   with_namespace <- paste(skim_type, no_meta_columns, sep = ".")
-  rlang::set_names(data, c(meta_columns, with_namespace))
+
+  # TODO(michaelquinn32): Drop this when vctrs interface works correctly.
+  names(data) <- c(meta_columns, with_namespace)
+  attr(data, "skim_type") <- NULL
+  tibble::as_tibble(data)
 }
 
 #' @describeIn partition Extract a subtable from a `skim_df` with a particular
@@ -143,7 +147,9 @@ yank <- function(data, skim_type) {
 #' behavior is identical to [dplyr::select()].
 #'
 #' @param .data A `skim_df` object.
-#' @inheritParams dplyr::select
+#' @param ...  One or more unquoted expressions separated by commas. Variable
+#'   names can be used as if they were positions in the data frame, so 
+#'   expressions like x:y can be used to select a range of variables. 
 #' @examples
 #' # Compare
 #' iris %>%

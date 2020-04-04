@@ -25,11 +25,12 @@ summary.skim_df <- function(object, ...) {
   counts <- table(type = object$skim_type[!duplicated])
   types <- dimnames(counts)[[1]]
   types <- paste0("  ", types)
-  possible_groups <- ifelse(
-    is.null(possible_names <- group_names(object)),
-    "None",
+  possible_names <- group_names(object)
+  possible_groups <- if (length(possible_names) > 0) {
     paste(possible_names, collapse = ", ")
-  )
+  } else {
+    "None"
+  }
 
   summary_object <- c(
     data_name,
@@ -38,7 +39,7 @@ summary.skim_df <- function(object, ...) {
     " ",
     " ",
     unname(counts),
-    "  ",
+    " ",
     possible_groups
   )
 
@@ -49,7 +50,7 @@ summary.skim_df <- function(object, ...) {
     "Group variables"
   )
 
-  summary_object <- as.table(as.array(summary_object))
+  summary_object <- as.table(summary_object)
   dimnames(summary_object) <- list(dnames, c("Values"))
   class(summary_object) <- c("summary_skim_df", "table")
   summary_object
