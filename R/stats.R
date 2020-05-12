@@ -39,7 +39,7 @@ complete_rate <- function(x) {
 #'   values using s+ regex.
 #' @export
 n_whitespace <- function(x) {
-  whitespace <- grepl("^\\s+", x)
+  whitespace <- grepl("^\\s+$", x)
   sum(whitespace)
 }
 
