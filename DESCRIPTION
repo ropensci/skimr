@@ -83,7 +83,11 @@ Authors@R:
       person(given = "Daniel",
              family = "Possenriede",
              role = "ctb",
-             email = "possenriede@gmail.com"))
+             email = "possenriede@gmail.com"),
+      person(given = "David",
+             family = "Zimmermann",
+             role = "ctb",
+             email = "david_j_zimmermann@hotmail.com"))
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
     be modified by the user as can the default formatting.  Support for
