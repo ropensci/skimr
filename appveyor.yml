@@ -19,6 +19,7 @@ build_script:
   - travis-tool.sh install_github r-lib/devtools
   - travis-tool.sh install_deps
   - travis-tool.sh install_github tidyverse/dplyr
+  - Rscript -e 'update.packages(ask = FALSE, checkBuilt = TRUE)'
   
 environment:
   global:
