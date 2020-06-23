@@ -102,7 +102,7 @@ Imports:
     cli,
     crayon,
     dplyr (>= 0.8.0),
-    knitr (>= 1.2),
+    knitr (>= 1.29),
     magrittr (>= 1.5),
     purrr,
     repr,
@@ -126,7 +126,6 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
-Remotes: yihui/knitr
 Collate:
     'deprecated.R'
     'dplyr.R'
