@@ -30,14 +30,23 @@ test_that("knit_print produces expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  expect_matches_file(input, "print/knit_print.txt")
+  if (packageVersion("knitr") <= "1.28") {
+    expect_matches_file(input, "print/knit_print-knitr_old.txt")
+  } else {
+    expect_matches_file(input, "print/knit_print.txt")
+  }
 })
 
 test_that("knit_print works with skim summaries", {
-  skimmed <- skim(iris)
-  summarized <- summary(skimmed)
-  input <- knitr::knit_print(summarized)
+
+    skimmed <- skim(iris)
+    summarized <- summary(skimmed)
+    input <- knitr::knit_print(summarized)
+    if (packageVersion("knitr") <= "1.28") {
+      expect_matches_file(input, "print/knit_print-summary-knitr_old.txt")
+    } else {
   expect_matches_file(input, "print/knit_print-summary.txt")
+  }
 })
 
 test_that("knit_print appropriately falls back to tibble printing", {
