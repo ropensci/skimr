@@ -17,7 +17,7 @@ test_that("get_default_skimmer_names() has a correct list of defaults", {
     names(defaults),
     c(
       "AsIs", "character", "complex", "Date", "difftime", "factor", "list",
-      "logical", "numeric", "POSIXct", "ts"
+      "logical", "numeric", "POSIXct", "Timespan", "ts"
     )
   )
   expect_identical(defaults$AsIs, c("n_unique", "min_length", "max_length"))
@@ -27,6 +27,7 @@ test_that("get_default_skimmer_names() has a correct list of defaults", {
   expect_identical(defaults$complex, c("mean"))
   expect_identical(defaults$Date, c("min", "max", "median", "n_unique"))
   expect_identical(defaults$difftime, c("min", "max", "median", "n_unique"))
+  expect_identical(defaults$Timespan, c("min", "max", "median", "n_unique"))
   expect_identical(defaults$factor, c("ordered", "n_unique", "top_counts"))
   expect_identical(defaults$list, c("n_unique", "min_length", "max_length"))
   expect_identical(defaults$logical, c("mean", "count"))
