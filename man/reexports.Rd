@@ -18,8 +18,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
+  \item{magrittr}{\code{\link{magrittr}}}
 
-   \item{tidyselect}{\code{\link[tidyselect:contains]{contains}}, \code{\link[tidyselect:ends_with]{ends_with}}, \code{\link[tidyselect:everything]{everything}}, \code{\link[tidyselect:matches]{matches}}, \code{\link[tidyselect:num_range]{num_range}}, \code{\link[tidyselect:one_of]{one_of}}, \code{\link[tidyselect:starts_with]{starts_with}}}
+   \item{tidyselect}{\code{\link{tidyselect:contains}}, \code{\link{tidyselect:ends_with}}, \code{\link{tidyselect:everything}}, \code{\link{tidyselect:matches}}, \code{\link{tidyselect;num_range}}, \code{\link{tidyselect:one_of}}, \code{\link{tidyselect:starts_with}}}
 }}
 
