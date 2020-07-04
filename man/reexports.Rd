@@ -20,6 +20,6 @@ below to see their documentation.
 \describe{
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
-  \item{tidyselect}{\code{\link[tidyselect]{contains}}, \code{\link[tidyselect]{ends_with}}, \code{\link[tidyselect]{everything}}, \code{\link[tidyselect]{matches}}, \code{\link[tidyselect]{num_range}}, \code{\link[tidyselect]{one_of}}, \code{\link[tidyselect]{starts_with}}}
+  \item{tidyselect}{\code{\link[tidyselect]{tidyselect::contains}}, \code{\link[tidyselect]{tidyselect::ends_with}}, \code{\link[tidyselect]{tidyselect::everything}}, \code{\link[tidyselect]{tidyselect::matches}}, \code{\link[tidyselect]{tidyselect::num_range}}, \code{\link[tidyselect]{tidyselect::one_of}}, \code{\link[tidyselect]{tidyselect::starts_with}}}
 }}
 
