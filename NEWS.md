@@ -1,3 +1,9 @@
+# skimr 2.1.2
+
+### BUG FIXES
+
+*   Update package to work with new version of `knitr`.
+
 # skimr 2.1.1 (2020-04-15)
 
 ### MINOR IMPROVEMENTS

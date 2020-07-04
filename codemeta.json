@@ -289,7 +289,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.29",
+      "version": ">= 1.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -432,7 +432,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "364528.594KB",
+  "fileSize": "364531.118KB",
   "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",
