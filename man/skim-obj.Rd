@@ -61,7 +61,7 @@ has the following special attributes
 \item \code{skimmers_used}: names of functions used to skim each type
 }
 
-The functions in these checks work like \code{\link[=all.equal]{all.equal()}}. The return \code{TRUE} if
+The functions in these checks work like all.equal(). The return \code{TRUE} if
 the check passes, or otherwise notifies why the check failed. This makes them
 more useful when throwing errors.
 }

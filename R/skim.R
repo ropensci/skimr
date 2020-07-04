@@ -1,6 +1,6 @@
 #' Skim a data frame, getting useful summary statistics
 #'
-#' `skim()` is an alternative to [summary()], quickly providing a broad
+#' `skim()` is an alternative to summary(), quickly providing a broad
 #' overview of a data frame. It handles data of all types, dispatching a
 #' different set of summary functions based on the types of columns in the data
 #' frame.
@@ -35,7 +35,7 @@
 #'
 #' @section Customizing skim:
 #' `skim()` is an intentionally simple function, with minimal arguments like
-#' [summary()]. Nonetheless, this package provides two broad approaches to
+#' summary(). Nonetheless, this package provides two broad approaches to
 #' how you can customize `skim()`'s behavior. You can customize the functions
 #' that are called to produce summary statistics with [skim_with()].
 #'
@@ -53,7 +53,7 @@
 #'   default is to skim all columns.
 #' @param skim  The skimming function to use in `skim_tee()`.
 #' @return A `skim_df` object, which also inherits the class(es) of the input
-#'   data. In many ways, the object behaves like a [tibble::tibble()].
+#'   data. In many ways, the object behaves like a tibble::tibble().
 #' @examples
 #' skim(iris)
 #'

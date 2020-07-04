@@ -9,7 +9,7 @@
 #' you can use it.
 #'
 #' You assign values within `skim_with` by using the [sfl()] helper (`skimr`
-#' function list). This helper behaves mostly like [dplyr::funs()], but lets
+#' function list). This helper behaves mostly like dplyr::funs(), but lets
 #' you also identify which skimming functions you want to remove, by setting
 #' them to `NULL`. Assign an `sfl` to each column type that you wish to modify.
 #'

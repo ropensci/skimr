@@ -34,7 +34,7 @@ also means that you need to assign the return of \code{skim_with()} before
 you can use it.
 
 You assign values within \code{skim_with} by using the \code{\link[=sfl]{sfl()}} helper (\code{skimr}
-function list). This helper behaves mostly like \code{\link[dplyr:funs]{dplyr::funs()}}, but lets
+function list). This helper behaves mostly like dplyr::funs(), but lets
 you also identify which skimming functions you want to remove, by setting
 them to \code{NULL}. Assign an \code{sfl} to each column type that you wish to modify.
 

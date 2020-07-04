@@ -30,16 +30,16 @@ A \code{knit_asis} object. Which is used by \code{knitr} when rendered.
 }
 \description{
 Instead of standard R output, \code{knitr} and \code{RMarkdown} documents will have
-formatted \code{\link[knitr:kable]{knitr::kable()}} output on return. You can disable this by setting
+formatted knitr::kable() output on return. You can disable this by setting
 the chunk option \code{render = normal_print}.
 }
 \details{
 The summary statistics for the original data frame can be disabled by setting
 the \code{knitr} chunk option \code{skimr_include_summary = FALSE}. See
-\link[knitr:opts_chunk]{knitr::opts_chunk} for more information. You can change the number of digits
+knitr::opts_chunk for more information. You can change the number of digits
 shown in the printed table with the \code{skimr_digits} chunk option.
 
-Alternatively, you can call \code{\link[=collapse]{collapse()}} or \code{\link[=yank]{yank()}} to get the particular
+Alternatively, you can call collapse() or yank() to get the particular
 \code{skim_df} objects and format them however you like. One warning though.
 Because histograms contain unicode characters, they can have unexpected
 print results, as R as varying levels of unicode support. This affects
@@ -57,5 +57,5 @@ Windows users most commonly. Call \code{vignette("Using_fonts")} for more detail
 }}
 
 \seealso{
-\code{\link[knitr:kable]{knitr::kable()}}
+knitr::kable()
 }

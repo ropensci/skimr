@@ -83,11 +83,11 @@ a column's data type doesn't match currently installed types. Call
 \link{get_default_skimmer_names} to see these defaults.
 
 \item \code{numeric}: Summary functions for numeric columns, covering both
-\code{\link[=double]{double()}} and \code{\link[=integer]{integer()}} classes: \code{\link[=mean]{mean()}}, \code{\link[=sd]{sd()}}, \code{\link[=quantile]{quantile()}} and
+double() and integer() classes: mean(), sd(), quantile() and
 \code{\link[=inline_hist]{inline_hist()}}.
 
 \item \code{factor}: Summary functions for factor columns:
-\code{\link[=is.ordered]{is.ordered()}}, \code{\link[=n_unique]{n_unique()}} and \code{\link[=top_counts]{top_counts()}}.
+is.ordered(), \code{\link[=n_unique]{n_unique()}} and \code{\link[=top_counts]{top_counts()}}.
 
 \item \code{character}: Summary functions for character columns. Also, the
 default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=max_char]{max_char()}}, \code{\link[=n_empty]{n_empty()}},
@@ -98,17 +98,17 @@ default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=m
 
 \item \code{complex}: Summary functions for complex columns: \code{\link[=mean]{mean()}}.
 
-\item \code{Date}: Summary functions for \code{Date} columns: \code{\link[=min]{min()}},
-\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+\item \code{Date}: Summary functions for \code{Date} columns: min(),
+max(), median() and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{POSIXct}: Summary functions for \code{POSIXct} columns: \code{\link[=min]{min()}},
-\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+\item \code{POSIXct}: Summary functions for \code{POSIXct} columns: min(),
+max(), median() and n_unique().
 
 \item \code{difftime}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
-\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+max(), median() and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{ts}: Summary functions for \code{ts} columns: \code{\link[=min]{min()}},
-\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+\item \code{ts}: Summary functions for \code{ts} columns: min(),
+max(), median() and \code{\link[=n_unique]{n_unique()}}.
 
 \item \code{list}: Summary functions for \code{list} columns: \code{\link[=n_unique]{n_unique()}},
 \code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.

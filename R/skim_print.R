@@ -16,8 +16,8 @@
 #' @section Behavior in `dplyr` pipelines:
 #'
 #' Printing a `skim_df` requires specific columns that might be dropped when
-#' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
-#' cases, this method falls back to [tibble::print.tbl()].
+#' using dplyr::select() or dplyr::summarize() on a `skim_df`. In those
+#' cases, this method falls back to tibble::print.tbl().
 #'
 #' @section Controlling metadata behavior:
 #'
@@ -29,8 +29,8 @@
 #' empty you may need to run the following `options(crayon.enabled = FALSE)`.
 #'
 #' @inheritParams tibble:::print.tbl
-#' @seealso [tibble::trunc_mat()] For a list of global options for customizing
-#'   print formatting. [crayon::has_color()] for the variety of issues that
+#' @seealso tibble::trunc_mat() For a list of global options for customizing
+#'   print formatting. crayon::has_color()]for the variety of issues that
 #'   affect tibble's color support.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param strip_metadata Whether tibble metadata should be removed.
@@ -129,21 +129,21 @@ print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
 #' Provide a default printing method for knitr.
 #'
 #' Instead of standard R output, `knitr` and `RMarkdown` documents will have
-#' formatted [knitr::kable()] output on return. You can disable this by setting
+#' formatted knitr::kable() output on return. You can disable this by setting
 #' the chunk option `render = normal_print`.
 #'
 #' The summary statistics for the original data frame can be disabled by setting
 #' the `knitr` chunk option `skimr_include_summary = FALSE`. See
-#' [knitr::opts_chunk] for more information. You can change the number of digits
+#' knitr::opts_chunk for more information. You can change the number of digits
 #' shown in the printed table with the `skimr_digits` chunk option.
 #'
-#' Alternatively, you can call [collapse()] or [yank()] to get the particular
+#' Alternatively, you can call collapse() or yank() to get the particular
 #' `skim_df` objects and format them however you like. One warning though.
 #' Because histograms contain unicode characters, they can have unexpected
 #' print results, as R as varying levels of unicode support. This affects
 #' Windows users most commonly. Call `vignette("Using_fonts")` for more details.
 #'
-#' @seealso [knitr::kable()]
+#' @seealso knitr::kable()
 #' @inheritParams knitr::knit_print
 #' @param options Options passed into the print function.
 #' @return A `knit_asis` object. Which is used by `knitr` when rendered.

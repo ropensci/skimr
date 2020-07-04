@@ -15,7 +15,7 @@
 A summary of the skim data frame.
 }
 \description{
-This is a method of the generic function \code{\link[=summary]{summary()}}.
+This is a method of the generic function summary().
 }
 \examples{
 a <- skim(mtcars)

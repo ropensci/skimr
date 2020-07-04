@@ -24,10 +24,10 @@ default is to skim all columns.}
 }
 \value{
 A \code{skim_df} object, which also inherits the class(es) of the input
-data. In many ways, the object behaves like a \code{\link[tibble:tibble]{tibble::tibble()}}.
+data. In many ways, the object behaves like a tibble::tibble().
 }
 \description{
-\code{skim()} is an alternative to \code{\link[=summary]{summary()}}, quickly providing a broad
+\code{skim()} is an alternative to summary(), quickly providing a broad
 overview of a data frame. It handles data of all types, dispatching a
 different set of summary functions based on the types of columns in the data
 frame.
@@ -64,7 +64,7 @@ further work with a \code{skim_df} using \code{dplyr} functions in a pipeline.
 \section{Customizing skim}{
 
 \code{skim()} is an intentionally simple function, with minimal arguments like
-\code{\link[=summary]{summary()}}. Nonetheless, this package provides two broad approaches to
+summary(). Nonetheless, this package provides two broad approaches to
 how you can customize \code{skim()}'s behavior. You can customize the functions
 that are called to produce summary statistics with \code{\link[=skim_with]{skim_with()}}.
 }

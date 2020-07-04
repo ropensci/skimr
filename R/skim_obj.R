@@ -68,7 +68,7 @@ skimmers_used <- function(object) {
 #' * `base_skimmers`: names of functions applied to all skim types
 #' * `skimmers_used`: names of functions used to skim each type
 #'
-#' The functions in these checks work like [all.equal()]. The return `TRUE` if
+#' The functions in these checks work like all.equal(). The return `TRUE` if
 #' the check passes, or otherwise notifies why the check failed. This makes them
 #' more useful when throwing errors.
 #'

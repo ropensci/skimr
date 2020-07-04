@@ -141,10 +141,10 @@ yank <- function(data, skim_type) {
 
 #' Only show a subset of summary statistics after skimming
 #'
-#' This function is a variant of [dplyr::select()] designed to work with
+#' This function is a variant of dplyr::select() designed to work with
 #' `skim_df` objects. When using `focus()`, `skimr` metadata columns are kept,
 #' and `skimr` print methods are still utilized. Otherwise, the signature and
-#' behavior is identical to [dplyr::select()].
+#' behavior is identical to dplyr::select().
 #'
 #' @param .data A `skim_df` object.
 #' @param ...  One or more unquoted expressions separated by commas. Variable

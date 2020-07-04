@@ -34,7 +34,7 @@ returned by \code{dplyr::funs()} and a list of skimming functions to drop.
 \description{
 This constructor is used to create a named list of functions. It also you
 also pass \code{NULL} to identify a skimming function that you wish to remove.
-Only functions that return a single value, working with \code{\link[dplyr:summarize]{dplyr::summarize()}},
+Only functions that return a single value, working with dplyr::summarize(),
 can be used within \code{sfl}.
 }
 \details{
@@ -61,5 +61,5 @@ get_skimmers.my_new_class <- function(column) {
 }
 }
 \seealso{
-\code{\link[dplyr:funs]{dplyr::funs()}}, \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
+dplyr::funs(), \code{\link[=skim_with]{skim_with()}} and \code{\link[=get_skimmers]{get_skimmers()}}.
 }

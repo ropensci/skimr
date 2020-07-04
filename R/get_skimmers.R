@@ -76,7 +76,7 @@ get_skimmers.default <- function(column) {
 }
 
 #' @describeIn get_skimmers Summary functions for numeric columns, covering both
-#'   [double()] and [integer()] classes: [mean()], [sd()], [quantile()] and
+#'   double() and integer() classes: mean(), sd(), quantile() and
 #'   [inline_hist()].
 #' @export
 get_skimmers.numeric <- function(column) {
@@ -94,7 +94,7 @@ get_skimmers.numeric <- function(column) {
 }
 
 #' @describeIn get_skimmers Summary functions for factor columns:
-#'   [is.ordered()], [n_unique()] and [top_counts()].
+#'   is.ordered(), [n_unique()] and [top_counts()].
 #' @export
 get_skimmers.factor <- function(column) {
   sfl(
@@ -140,8 +140,8 @@ get_skimmers.complex <- function(column) {
   )
 }
 
-#' @describeIn get_skimmers Summary functions for `Date` columns: [min()],
-#'   [max()], [median()] and [n_unique()].
+#' @describeIn get_skimmers Summary functions for `Date` columns: min(),
+#'   max(), median() and [n_unique()].
 #' @export
 get_skimmers.Date <- function(column) {
   sfl(
@@ -153,22 +153,22 @@ get_skimmers.Date <- function(column) {
   )
 }
 
-#' @describeIn get_skimmers Summary functions for `POSIXct` columns: [min()],
-#'   [max()], [median()] and [n_unique()].
+#' @describeIn get_skimmers Summary functions for `POSIXct` columns: min(),
+#'   max(), median() and n_unique().
 #' @export
 get_skimmers.POSIXct <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "POSIXct")
 }
 
 #' @describeIn get_skimmers Summary functions for `difftime` columns: [min()],
-#'   [max()], [median()] and [n_unique()].
+#'   max(), median() and [n_unique()].
 #' @export
 get_skimmers.difftime <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "difftime")
 }
 
-#' @describeIn get_skimmers Summary functions for `ts` columns: [min()],
-#'   [max()], [median()] and [n_unique()].
+#' @describeIn get_skimmers Summary functions for `ts` columns: min(),
+#'   max(), median() and [n_unique()].
 #' @export
 get_skimmers.ts <- function(column) {
   sfl(

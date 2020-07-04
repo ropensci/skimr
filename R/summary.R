@@ -1,6 +1,6 @@
 #' Summary function for skim_df
 #'
-#' This is a method of the generic function [summary()].
+#' This is a method of the generic function summary().
 #'
 #' @param object a skim dataframe.
 #' @param ... Additional arguments affecting the summary produced. Not used.
