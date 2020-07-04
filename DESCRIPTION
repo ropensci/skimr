@@ -121,6 +121,7 @@ Imports:
 Suggests:
     covr,
     extrafont,
+    lubridate,
     rmarkdown,
     sf,
     testthat (>= 2.0.0)

@@ -10,14 +10,13 @@
   "codeRepository": "https://github.com/ropensci/skimr",
   "issueTracker": "https://github.com/ropensci/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 4.0.1 (2020-06-06)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -145,6 +144,12 @@
       "givenName": "Daniel",
       "familyName": "Possenriede",
       "email": "possenriede@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "David",
+      "familyName": "Zimmermann",
+      "email": "david_j_zimmermann@hotmail.com"
     }
   ],
   "copyrightHolder": [
@@ -185,6 +190,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=extrafont"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lubridate"
     },
     {
       "@type": "SoftwareApplication",
@@ -415,15 +432,12 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "1102.508KB",
-  "contIntegration": [
-    "https://travis-ci.org/ropenscilabs/skimr",
-    "https://codecov.io/gh/ropenscilabs/skimr"
-  ],
+  "fileSize": "364531.118KB",
+  "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",
-    "url": "https://github.com/ropensci/onboarding/issues/175",
-    "provider": "http://ropensci.org"
+    "url": "https://github.com/ropensci/software-review/issues/175",
+    "provider": "https://ropensci.org"
   },
   "keywords": [
     "unconf17",
