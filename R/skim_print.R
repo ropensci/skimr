@@ -10,7 +10,7 @@
 #' and Jupyter support more than 80 character outputs. Call
 #' `options(width = 90)` to get a better experience with `skimr`.
 #'
-#' The print methods in `skimr` wrap those in the [tibble][tibble::formatting]
+#' The print methods in `skimr` wrap those in the [tibble:formatting][tibble]
 #' package. You can control printing behavior using the same global options.
 #'
 #' @section Behavior in `dplyr` pipelines:

@@ -98,7 +98,7 @@ the standard R console. Fortunately, most modern environments like RStudio
 and Jupyter support more than 80 character outputs. Call
 \code{options(width = 90)} to get a better experience with \code{skimr}.
 
-The print methods in \code{skimr} wrap those in the \link[tibble:formatting]{tibble}
+The print methods in \code{skimr} wrap those in the \link[=tibble]{tibble}
 package. You can control printing behavior using the same global options.
 }
 
