@@ -94,9 +94,9 @@ default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=m
 \code{\link[=n_unique]{n_unique()}} and \code{\link[=n_whitespace]{n_whitespace()}}.
 
 \item \code{logical}: Summary functions for logical/ boolean columns:
-\code{\link[=mean]{mean()}}, which produces rates for each value, and \code{\link[=top_counts]{top_counts()}}.
+mean(), which produces rates for each value, and \code{\link[=top_counts]{top_counts()}}.
 
-\item \code{complex}: Summary functions for complex columns: \code{\link[=mean]{mean()}}.
+\item \code{complex}: Summary functions for complex columns: mean().
 
 \item \code{Date}: Summary functions for \code{Date} columns: min(),
 max(), median() and \code{\link[=n_unique]{n_unique()}}.
@@ -104,7 +104,7 @@ max(), median() and \code{\link[=n_unique]{n_unique()}}.
 \item \code{POSIXct}: Summary functions for \code{POSIXct} columns: min(),
 max(), median() and n_unique().
 
-\item \code{difftime}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
+\item \code{difftime}: Summary functions for \code{difftime} columns: min(),
 max(), median() and \code{\link[=n_unique]{n_unique()}}.
 
 \item \code{ts}: Summary functions for \code{ts} columns: min(),

@@ -121,7 +121,7 @@ get_skimmers.character <- function(column) {
 }
 
 #' @describeIn get_skimmers Summary functions for logical/ boolean columns:
-#'   [mean()], which produces rates for each value, and [top_counts()].
+#'   mean(), which produces rates for each value, and [top_counts()].
 #' @export
 get_skimmers.logical <- function(column) {
   sfl(
@@ -131,7 +131,7 @@ get_skimmers.logical <- function(column) {
   )
 }
 
-#' @describeIn get_skimmers Summary functions for complex columns: [mean()].
+#' @describeIn get_skimmers Summary functions for complex columns: mean().
 #' @export
 get_skimmers.complex <- function(column) {
   sfl(
@@ -160,7 +160,7 @@ get_skimmers.POSIXct <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "POSIXct")
 }
 
-#' @describeIn get_skimmers Summary functions for `difftime` columns: [min()],
+#' @describeIn get_skimmers Summary functions for `difftime` columns: min(),
 #'   max(), median() and [n_unique()].
 #' @export
 get_skimmers.difftime <- function(column) {
