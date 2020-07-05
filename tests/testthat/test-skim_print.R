@@ -30,24 +30,39 @@ test_that("knit_print produces expected results", {
   input <- knit_print(skimmed)
   expect_is(input, "knit_asis")
   expect_length(input, 1)
-  expect_matches_file(input, "print/knit_print.txt")
+  if (packageVersion("knitr") <= "1.28") {
+    expect_matches_file(input, "print/knit_print-knitr_old.txt")
+  } else {
+    expect_matches_file(input, "print/knit_print.txt")
+  }
 })
 
 test_that("knit_print works with skim summaries", {
-  skimmed <- skim(iris)
-  summarized <- summary(skimmed)
-  input <- knitr::knit_print(summarized)
+
+    skimmed <- skim(iris)
+    summarized <- summary(skimmed)
+    input <- knitr::knit_print(summarized)
+    if (packageVersion("knitr") <= "1.28") {
+      expect_matches_file(input, "print/knit_print-summary-knitr_old.txt")
+    } else {
   expect_matches_file(input, "print/knit_print-summary.txt")
+  }
 })
 
 test_that("knit_print appropriately falls back to tibble printing", {
-  skip("Temporary skip due to changes in tibble printing")
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
-  expect_known_output(
-    input <- knitr::knit_print(reduced),
-    "print/knit_print-fallback.txt"
-  )
+  if (packageVersion("dplyr") <= "0.8.5") {
+    expect_known_output(
+      input <- knitr::knit_print(reduced),
+      "print/knit_print-fallback.txt"
+    )
+  } else {
+    expect_known_output(
+      input <- knitr::knit_print(reduced),
+      "print/knit_print-fallback-dplyrv1.txt"
+    )
+  }
   expect_is(input, "data.frame")
 })
 
@@ -83,7 +98,11 @@ test_that("make_utf8 produces the correct result ", {
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
   input <- skim(iris)
   mean_only <- dplyr::select(input, numeric.mean)
-  expect_print_matches_file(mean_only, "print/fallback.txt")
+  if (packageVersion("dplyr") <= "0.8.5") {
+    expect_print_matches_file(mean_only, "print/fallback.txt")
+  } else {
+    expect_print_matches_file(mean_only, "print/fallback_dplyrv1.txt")
+  }
 })
 
 test_that("Print focused objects appropriately", {

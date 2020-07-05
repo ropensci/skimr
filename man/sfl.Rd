@@ -7,17 +7,16 @@
 sfl(..., skim_type = "")
 }
 \arguments{
-\item{...}{A list of functions specified by:
+\item{...}{Inherited from dplyr::data_masking() for dplyr version 1 or later
+or dplyr::funs() for older versions of dplyr.
+A list of functions
+specified by:
 \itemize{
 \item Their name, \code{"mean"}
 \item The function itself, \code{mean}
 \item A call to the function with \code{.} as a dummy argument,
 \code{mean(., na.rm = TRUE)}
 }
-
-These arguments are automatically \link[rlang:quo]{quoted}. They
-support \link[rlang:quasiquotation]{unquoting} and splicing. See
-\code{vignette("programming")} for an introduction to these concepts.
 
 The following notations are \strong{not} supported, see examples:
 \itemize{
@@ -30,12 +29,12 @@ skimmers with defaults. See \code{\link[=get_skimmers]{get_skimmers()}} for more
 }
 \value{
 A \code{skimr_function_list}, which contains a list of \code{fun_calls},
-returned by \code{\link[dplyr:funs]{dplyr::funs()}} and a list of skimming functions to drop.
+returned by \code{dplyr::funs()} and a list of skimming functions to drop.
 }
 \description{
 This constructor is used to create a named list of functions. It also you
 also pass \code{NULL} to identify a skimming function that you wish to remove.
-Only functions that return a single value, working with \code{\link[dplyr:summarize]{dplyr::summarize()}},
+Only functions that return a single value, working with \code{\link[dplyr:summarise]{dplyr::summarize()}},
 can be used within \code{sfl}.
 }
 \details{

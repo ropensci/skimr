@@ -629,6 +629,47 @@ test_that("skim returns expected response for difftime vectors", {
   expect_identical(input$difftime.n_unique, 9L)
 })
 
+test_that("skim returns expected response for lubridate Timespan vectors", {
+  dt <- tibble::tibble(x = lubridate::duration(1))
+  input <- skim(dt)
+  
+  # dimensions
+  expect_n_rows(input, 1)
+  expect_n_columns(input, 8)
+  
+  # classes
+  expect_is(input, "skim_df")
+  expect_is(input, "tbl_df")
+  expect_is(input, "tbl")
+  expect_is(input, "data.frame")
+  expect_named(input, c(
+    "skim_type", "skim_variable", "n_missing", "complete_rate",
+    "Timespan.min", "Timespan.max", "Timespan.median",
+    "Timespan.n_unique"
+  ))
+  
+  # attributes
+  attrs <- attributes(input)
+  expect_equal(attrs$data_rows, 1)
+  expect_equal(attrs$data_cols, 1)
+  expect_equal(attrs$df_name, "`dt`")
+  expect_equal(
+    attrs$skimmers_used,
+    list(Timespan = c("min", "max", "median", "n_unique"))
+  )
+  
+  # values
+  expect_identical(input$skim_variable, "x")
+  expect_identical(input$skim_type, "Timespan")
+  expect_identical(input$n_missing, 0L)
+  expect_equal(input$complete_rate, 1, tolerance = .001)
+  expect_identical(input$Timespan.min, 1)
+  expect_identical(input$Timespan.max, 1)
+  expect_identical(input$Timespan.median, lubridate::duration(1))
+  expect_identical(input$Timespan.n_unique, 1L)
+})
+
+
 test_that("skim handles objects with multiple classes", {
   dat <- seq(as.Date("2011-07-01"), by = 1, len = 10)
   dat[2] <- NA

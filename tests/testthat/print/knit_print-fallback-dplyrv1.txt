@@ -1,0 +1,8 @@
+# A tibble: 5 x 2
+  skim_variable numeric.mean
+  <chr>                <dbl>
+1 Species              NA   
+2 Sepal.Length          5.84
+3 Sepal.Width           3.06
+4 Petal.Length          3.76
+5 Petal.Width           1.20
