@@ -432,7 +432,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "364531.118KB",
+  "fileSize": "364473.989KB",
   "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",

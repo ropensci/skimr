@@ -106,8 +106,8 @@ package. You can control printing behavior using the same global options.
 
 
 Printing a \code{skim_df} requires specific columns that might be dropped when
-using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarize]{dplyr::summarize()}} on a \code{skim_df}. In those
-cases, this method falls back to \code{\link[tibble:print.tbl]{tibble::print.tbl()}}.
+using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarise]{dplyr::summarize()}} on a \code{skim_df}. In those
+cases, this method falls back to \code{\link[tibble:formatting]{tibble::print.tbl()}}.
 }
 
 \section{Controlling metadata behavior}{
@@ -122,7 +122,7 @@ empty you may need to run the following \code{options(crayon.enabled = FALSE)}.
 }
 
 \seealso{
-\code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
+\code{\link[tibble:formatting]{tibble::trunc_mat()}} For a list of global options for customizing
 print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that
 affect tibble's color support.
 }
