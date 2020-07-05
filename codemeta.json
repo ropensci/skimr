@@ -5,19 +5,18 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "skimr",
-  "description": "A simple to use summary function that can be used\n    with pipes and displays nicely in the console. The default summary\n    statistics may be modified by the user as can the default formatting.\n    Support for data frames and vectors is included, and users can\n    implement their own skim methods for specific object types as\n    described in a vignette. Default summaries include support for inline\n    spark graphs. Instructions for managing these on specific operating\n    systems are given in the \"Using skimr\" vignette and the README.",
+  "description": "A simple to use summary function that can be used buttskyle96@gmail.comwith pipes\n    and displays nicely in the console. The default summary statistics may\n    be modified by the user as can the default formatting.  Support for\n    data frames and vectors is included, and users can implement their own\n    skim methods for specific object types as described in a vignette.\n    Default summaries include support for inline spark graphs.\n    Instructions for managing these on specific operating systems are\n    given in the \"Using skimr\" vignette and the README.",
   "name": "skimr: Compact and Flexible Summaries of Data",
   "codeRepository": "https://github.com/ropensci/skimr",
   "issueTracker": "https://github.com/ropensci/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.1",
+  "version": "2.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 4.0.1 (2020-06-06)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -145,6 +144,17 @@
       "givenName": "Daniel",
       "familyName": "Possenriede",
       "email": "possenriede@gmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "David",
+      "familyName": "Zimmermann",
+      "email": "david_j_zimmermann@hotmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Kyle",
+      "familyName": "Butts"
     }
   ],
   "copyrightHolder": [
@@ -185,6 +195,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=extrafont"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lubridate"
     },
     {
       "@type": "SoftwareApplication",
@@ -415,15 +437,12 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "1028.792KB",
-  "contIntegration": [
-    "https://travis-ci.org/ropenscilabs/skimr",
-    "https://codecov.io/gh/ropenscilabs/skimr"
-  ],
+  "fileSize": "364473.922KB",
+  "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",
-    "url": "https://github.com/ropensci/onboarding/issues/175",
-    "provider": "http://ropensci.org"
+    "url": "https://github.com/ropensci/software-review/issues/175",
+    "provider": "https://ropensci.org"
   },
   "keywords": [
     "unconf17",

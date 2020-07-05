@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.1.1
+Version: 2.1.2
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
@@ -83,8 +83,16 @@ Authors@R:
       person(given = "Daniel",
              family = "Possenriede",
              role = "ctb",
-             email = "possenriede@gmail.com"))
-Description: A simple to use summary function that can be used with pipes
+             email = "possenriede@gmail.com"),
+      person(given = "David",
+             family = "Zimmermann",
+             role = "ctb",
+             email = "david_j_zimmermann@hotmail.com"),
+      person(given = "Kyle", 
+             family = "Butts",
+             role ="ctb",
+             email = ""))
+Description: A simple to use summary function that can be used buttskyle96@gmail.comwith pipes
     and displays nicely in the console. The default summary statistics may
     be modified by the user as can the default formatting.  Support for
     data frames and vectors is included, and users can implement their own
@@ -117,6 +125,7 @@ Imports:
 Suggests:
     covr,
     extrafont,
+    lubridate,
     rmarkdown,
     sf,
     testthat (>= 2.0.0)
@@ -125,7 +134,7 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Collate:
     'deprecated.R'
     'dplyr.R'
