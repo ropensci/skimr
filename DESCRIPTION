@@ -116,7 +116,6 @@ Imports:
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 0.2.5),
-    vctrs,
     withr
 Suggests:
     covr,

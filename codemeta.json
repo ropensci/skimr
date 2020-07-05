@@ -407,18 +407,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "vctrs",
-      "name": "vctrs",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=vctrs"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "withr",
       "name": "withr",
       "provider": {
@@ -432,7 +420,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "364473.989KB",
+  "fileSize": "18346.978KB",
   "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",
