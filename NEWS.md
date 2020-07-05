@@ -3,6 +3,7 @@
 ### MINOR IMPROVEMENTS
 
 *   Add support for lubridate Timespan objects.
+*   Improvements to Supporting Additional Objects vignette.
 
 ### BUG FIXES
 

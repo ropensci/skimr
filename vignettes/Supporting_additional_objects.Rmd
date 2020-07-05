@@ -24,11 +24,9 @@ involves two required elements and one optional element.
 - if needed, define any custom statistics
 
 If you are adding skim support to a package you will also need to add `skimr`
-to the list of imports. Note that in this vignette the actual analysis will
-not be run because that would require importing the `sf` package just for this
-example.  However to run it on your own you can install `sf` and then run the
-following code.  Note that code in this vignette was not evaluated when
-rendering the vignette in order to avoid forcing installation of sf.
+to the list of imports. Note that to run the code in this vignette you will
+need to install the `sf` package. We suggest not doing that, and instead
+substitute whatever package you are working with.
 
 ```{r}
 library(skimr)
@@ -39,6 +37,8 @@ nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 
 ```{r}
 class(nc)
+
+class(nc$geometry)
 ```
 
 Unlike the example of having a new type of data in a column of a simple data 
@@ -65,11 +65,13 @@ back to treating the type as a character, which isn't necessarily helpful. In
 this case, you're best off adding your data type with `skim_with()`.
 
 Before we begin, we'll be using the following custom summary statistic
-throughout. It's a naive example, but covers the requirements of what we need.
+throughout. The function gets the geometry's crs and combines it into a string.
 
 ```{r}
-funny_sf <- function(x) {
-  length(x) + 1
+get_crs <- function(column) {
+  crs <- sf::st_crs(column)
+
+  paste0("epsg: ", crs[["epsg"]], " proj4string: '", crs[["proj4string"]], "'")
 }
 ```
 
@@ -92,71 +94,41 @@ default `skimr` percentiles are returned by using `quantile()` five
 times.
 
 Next, we create a custom skimming function. To do this, we need to think about
-the many specific classes of data in the `sf` package.  The following example
-will build  support for `sfc_MULTIPOLYGON`, but note that we'll have to
-eventually think about `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT` and
-others if we want to fully support `sf`.
+the many specific classes of data in the `sf` package.  From above, you can see 
+the geometry column has two classes: 1st the specific geometry type (e.g. 
+`sfc_MULTIPOLYGON` `sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT`) and 2nd 
+the general sfc class. Skimr will try to find a sfl() helper function for the
+classes in the order they appear in `class(.)` (see S3 classes for more detail 
+[*Advanced R*](https://adv-r.hadley.nz/s3.html)). The following example will 
+build  support for `sfc`, which encompasses all `sf` objects: `sfc_MULTIPOLYGON` 
+`sfc_LINESTRING`, `sfc_POLYGON`, `sfc_MULTIPOINT`. If we want custom skim_with 
+functions we can write `sfl()` helper functions for the geometry type. 
+
 
 ```{r}
 skim_sf <- skim_with(
-  sfc_MULTIPOLYGON = sfl(
+  sfc = sfl(
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
-    funny = funny_sf
+    crs = get_crs
   )
 )
 ```
 
 The example above creates a new *function*, and you can call that function on
-a specific column with `sfc_MULTIPOLYGON` data to get the appropriate summary 
-statistics.
+a specific column with `sfc` data to get the appropriate summary 
+statistics. The `skim_with` factory also uses the default skimrs for things 
+like factors, characters, and numerics. Therefore our `skim_sf` is like the regular
+`skim` function with the added ability to summarize `sfc` columns.
 
 ```{r}
 skim_sf(nc$geometry)
 ```
 
-Creating a function that is a method of the skim_by_type generic
-for the data type allows skimming of an entire data frame that contains some 
-columns of that type.
 
-```{r}
-skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
-  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
-  build_results(skimmed, columns, NULL)
-}
-```
-
-```{r}
-skim_sf(nc)
-```
-
-
-Sharing these functions within a separate package requires an export. 
-The simplest way to do this is with Roxygen.
-
-```{r}
-#' Skimming functions for `sfc_MULTIPOLYGON` objects.
-#' @export
-skim_sf <- skim_with(
-  sfc_MULTIPOLYGON = sfl(
-    missing = n_missing,
-    n = length,
-    n_unique = n_unique,
-    valid = ~ sum(sf::st_is_valid(.)),
-    funny = funny_sf
-  )
-)
-
-#' A skim_by_type function for `sfc_MULTIPOLYGON` objects.
-#' @export
-skim_by_type.sfc_MULTIPOLYGON <- function(mangled, columns, data) {
-  skimmed <- dplyr::summarize_at(data, columns, mangled$funs)
-  skimr::build_results(skimmed, columns, NULL)
-}
-```
-
-While this works within any package, there is an even better approach in this
-case. To take full advantage of `skimr`, we'll dig a bit into its API.
+While this works for any data type and you can also include it within any 
+package (assuming your users load skimr), there is an even better approach in 
+this case. To take full advantage of `skimr`, we'll dig a bit into its API.
 
 ## Adding new methods
 
@@ -165,21 +137,25 @@ find default summary functions for each class. This is based on the S3 class
 system. You can learn more about it in
 [*Advanced R*](https://adv-r.hadley.nz/s3.html).
 
+This requires that you add `skimr` to your list of dependencies.
+
 To export a new set of defaults for a data type, create a method for the generic
 function `get_skimmers`. Each of those methods returns an `sfl`, a `skimr`
 function list. This is the same list-like data structure used in the
 `skim_with()` example above. But note! There is one key difference. When adding
-a generic we also want to identify the `skim_type` in the `sfl`.
+a generic we also want to identify the `skim_type` in the `sfl`. You will
+probably want to use `skimr::get_skimmers.sfc()` but that will not work in a
+vignette.
 
 ```{r}
 #' @importFrom skimr get_skimmers
 #' @export
-get_skimmers.sfc_MULTIPOLYGON <- function(column) {
+get_skimmers.sfc <- function(column) {
   sfl(
-    skim_type = "sfc_MULTIPOLYGON",
+    skim_type = "sfc",
     n_unique = n_unique,
     valid = ~ sum(sf::st_is_valid(.)),
-    funny = funny_sf
+    crs = get_crs
   )
 }
 ```
@@ -190,32 +166,27 @@ The same strategy follows for other data types.
 * return an `sfl`
 * make sure that the `skim_type` is there
 
-```{r}
-#' @export
-get_skimmers.sfc_POINT <- function(column) {
-  sfl(
-    skim_type = "sfc_POINT",
-    n_unique = n_unique,
-    valid = ~ sum(sf::st_is_valid(.))
-  )
-}
-```
-
-Users of your package should load `skimr` to get the `skim()` function. Once
+Users of your package should load `skimr` to get the `skim()` function 
+(although you could import and reexport it). Once
 loaded, a call to `get_default_skimmer_names()` will return defaults for your
-data types as well!
+data types as well! 
 
 ```{r}
 get_default_skimmer_names()
 ```
 
+They will then be able to use `skim()` directly.
+
+```{r}
+skim(nc)
 ```
+
 
 ## Conclusion
 
-This is a very simple example. For a package such as sf the custom statistics
+This is a very simple example. For a package such as `sf` the custom statistics
 will likely  be much more complex. The flexibility of `skimr` allows you to
 manage that.
 
-Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma and Michael Sumner for
-inspiring and  helping with the development of this code.
+Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma, Michael Sumner, and 
+Kyle Butts for inspiring and helping with the development of this code.
