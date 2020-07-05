@@ -5,7 +5,7 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "skimr",
-  "description": "A simple to use summary function that can be used with pipes\n    and displays nicely in the console. The default summary statistics may\n    be modified by the user as can the default formatting.  Support for\n    data frames and vectors is included, and users can implement their own\n    skim methods for specific object types as described in a vignette.\n    Default summaries include support for inline spark graphs.\n    Instructions for managing these on specific operating systems are\n    given in the \"Using skimr\" vignette and the README.",
+  "description": "A simple to use summary function that can be used buttskyle96@gmail.comwith pipes\n    and displays nicely in the console. The default summary statistics may\n    be modified by the user as can the default formatting.  Support for\n    data frames and vectors is included, and users can implement their own\n    skim methods for specific object types as described in a vignette.\n    Default summaries include support for inline spark graphs.\n    Instructions for managing these on specific operating systems are\n    given in the \"Using skimr\" vignette and the README.",
   "name": "skimr: Compact and Flexible Summaries of Data",
   "codeRepository": "https://github.com/ropensci/skimr",
   "issueTracker": "https://github.com/ropensci/skimr/issues",
@@ -150,6 +150,11 @@
       "givenName": "David",
       "familyName": "Zimmermann",
       "email": "david_j_zimmermann@hotmail.com"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Kyle",
+      "familyName": "Butts"
     }
   ],
   "copyrightHolder": [
@@ -420,7 +425,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
-  "fileSize": "18346.978KB",
+  "fileSize": "364473.922KB",
   "contIntegration": ["https://travis-ci.org/ropensci/skimr", "https://ci.appveyor.com/project/michaelquinn32/skimr", "https://codecov.io/gh/ropensci/skimr"],
   "review": {
     "@type": "Review",
