@@ -1,4 +1,4 @@
-── Data Summary ────────────────────────
+-- Data Summary ------------------------
                            Values                      
 Name                       dplyr::group_by(iris, Spe...
 Number of rows             150                         
@@ -9,7 +9,7 @@ Column type frequency:
 ________________________                               
 Group variables            Species                     
 
-── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+-- Variable type: numeric --------------------------------------------------------------------------
    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
