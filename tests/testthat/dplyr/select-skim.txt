@@ -1,4 +1,4 @@
-── Data Summary ────────────────────────
+-- Data Summary ------------------------
                            Values
 Name                       iris  
 Number of rows             150   
@@ -10,11 +10,11 @@ Column type frequency:
 ________________________         
 Group variables            None  
 
-── Variable type: factor ───────────────────────────────────────────────────────────────────────────
+-- Variable type: factor ---------------------------------------------------------------------------
   skim_variable
 1 Species      
 
-── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
+-- Variable type: numeric --------------------------------------------------------------------------
   skim_variable
 1 Sepal.Length 
 2 Sepal.Width  
