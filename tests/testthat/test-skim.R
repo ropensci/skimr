@@ -848,6 +848,17 @@ test_that("Tidyselect helpers work as expected", {
   )
 })
 
+test_that("Tidyselect predicates work as expected", {
+  input <- skim(iris, where(is.numeric))
+  
+  expect_n_rows(input, 4)
+  expect_n_columns(input, 12)
+  expect_identical(
+    unname(input$skim_variable),
+    c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")
+  )
+})
+
 test_that("Skimming a grouped df works as expected", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
   input <- skim(grouped, mpg, disp)
