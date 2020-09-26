@@ -91,7 +91,11 @@ Authors@R:
       person(given = "Kyle", 
              family = "Butts",
              role ="ctb",
-             email = "buttskyle96@gmail.com"))
+             email = "buttskyle96@gmail.com"),
+      person(given = "Bastian", 
+             family = "Torges",
+             role ="ctb",
+             email = "bastian.torges@gmail.com"))
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
     be modified by the user as can the default formatting.  Support for
@@ -119,7 +123,7 @@ Imports:
     stringr (>= 1.1),
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
-    tidyselect (>= 0.2.5),
+    tidyselect (>= 1.0.0),
     withr
 Suggests:
     covr,
