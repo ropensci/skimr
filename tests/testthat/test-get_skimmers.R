@@ -2,7 +2,7 @@ context("Get skimmers")
 
 test_that("get_sfl() behaves correctly", {
   my_sfl <- get_sfl("numeric")
-  expect_is(my_sfl, "skimr_function_list")
+  expect_s3_class(my_sfl, "skimr_function_list")
   expect_equal(my_sfl$skim_type, "numeric")
   expect_named(my_sfl$funs, c(
     "mean", "sd", "p0", "p25", "p50", "p75", "p100", "hist"
