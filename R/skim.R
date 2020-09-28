@@ -60,6 +60,7 @@
 #' # Use tidyselect
 #' skim(iris, Species)
 #' skim(iris, starts_with("Sepal"))
+#' skim(iris, where(is.numeric))
 #'
 #' # Skim also works groupwise
 #' iris %>%

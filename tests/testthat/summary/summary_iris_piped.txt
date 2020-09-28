@@ -1,4 +1,4 @@
-── Data Summary ────────────────────────
+-- Data Summary ------------------------
                            Values    
 Name                       Piped data
 Number of rows             150       

@@ -11,6 +11,7 @@
 \alias{get_skimmers.Date}
 \alias{get_skimmers.POSIXct}
 \alias{get_skimmers.difftime}
+\alias{get_skimmers.Timespan}
 \alias{get_skimmers.ts}
 \alias{get_skimmers.list}
 \alias{get_skimmers.AsIs}
@@ -36,6 +37,8 @@ get_skimmers(column)
 \method{get_skimmers}{POSIXct}(column)
 
 \method{get_skimmers}{difftime}(column)
+
+\method{get_skimmers}{Timespan}(column)
 
 \method{get_skimmers}{ts}(column)
 
@@ -105,6 +108,9 @@ default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=m
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
 \item \code{difftime}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
+\code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
+
+\item \code{Timespan}: Summary functions for \code{Timespan} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
 \item \code{ts}: Summary functions for \code{ts} columns: \code{\link[=min]{min()}},

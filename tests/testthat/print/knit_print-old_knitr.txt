@@ -1,6 +1,4 @@
 
-Table: Data summary
-
 |                         |     |
 |:------------------------|:----|
 |Name                     |iris |

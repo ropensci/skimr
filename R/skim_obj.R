@@ -94,7 +94,7 @@ has_variable_column <- function(object) {
 #' @export
 has_skimr_attributes <- function(object) {
   skimr_attrs <- c(
-    "data_rows", "data_cols", "df_name", "groups", "base_skimmers",
+    "data_rows", "data_cols", "df_name",  "base_skimmers",
     "skimmers_used"
   )
   missing <- !(skimr_attrs %in% names(attributes(object)))
@@ -127,7 +127,7 @@ is_data_frame <- function(object) {
 }
 
 make_issue <- function(check, message) {
-  structure(check, message = if (check) message else character())
+  structure(check, message = if (!check) message else character())
 }
 
 #' @describeIn skim-obj Is the object a `skim_df`?
@@ -135,6 +135,7 @@ make_issue <- function(check, message) {
 is_skim_df <- function(object) {
   check_issues(
     "Object is not a `skim_df`",
+    is_data_frame(object),
     has_type_column(object),
     has_variable_column(object),
     has_skimr_attributes(object)
@@ -148,7 +149,8 @@ is_skim_df <- function(object) {
 is_one_skim_df <- function(object) {
   check_issues(
     "Object is not a `one_skim_df`",
-    has_type_attribute(object),
+    is_data_frame(object),
+    has_skim_type_attribute(object),
     has_variable_column(object),
     has_skimr_attributes(object)
   )
@@ -160,7 +162,7 @@ is_skim_list <- function(object) {
   check_issues(
     "Object is not a `skim_list`",
     has_skimr_attributes(object),
-    !!!purrr::map(object, has_variable_column)
+    !!!purrr::map(object, is_one_skim_df)
   )
 }
 
@@ -181,9 +183,9 @@ check_issues <- function(condition, ...) {
   msgs <- purrr::map(issues, ~ attr(.x, "message"))
   check <- all(purrr::flatten_lgl(issues))
   message <- if (check) {
-    paste0(condition, ":", paste0(unlist(msgs), collapse = "; "))
-  } else {
     character()
+  } else {
+    paste0(condition, ": ", paste0(unlist(msgs), collapse = "; "))
   }
   structure(check, message = message)
 }

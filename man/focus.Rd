@@ -9,10 +9,9 @@ focus(.data, ...)
 \arguments{
 \item{.data}{A \code{skim_df} object.}
 
-\item{...}{<\code{\link[dplyr:dplyr_tidy_select]{tidy-select}}> One or more unquoted
-expressions separated by commas. Variable names can be used as if they
-were positions in the data frame, so expressions like \code{x:y} can
-be used to select a range of variables.}
+\item{...}{One or more unquoted expressions separated by commas. Variable
+names can be used as if they were positions in the data frame, so
+expressions like x:y can be used to select a range of variables.}
 }
 \description{
 This function is a variant of \code{\link[dplyr:select]{dplyr::select()}} designed to work with

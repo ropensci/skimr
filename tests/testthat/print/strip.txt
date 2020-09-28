@@ -1,4 +1,4 @@
-── Data Summary ────────────────────────
+-- Data Summary ------------------------
                            Values
 Name                       iris  
 Number of rows             150   
@@ -10,7 +10,7 @@ Column type frequency:
 ________________________         
 Group variables            None  
 
-── Variable type: factor ───────────────────────────────────────────────────────
+-- Variable type: factor -------------------------------------------------------
 # A tibble: 1 x 6
   skim_variable n_missing complete_rate ordered n_unique
 * <chr>             <int>         <dbl> <lgl>      <int>
@@ -19,7 +19,7 @@ Group variables            None
 * <chr>                    
 1 set: 50, ver: 50, vir: 50
 
-── Variable type: numeric ──────────────────────────────────────────────────────
+-- Variable type: numeric ------------------------------------------------------
 # A tibble: 4 x 11
   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
 * <chr>             <int>         <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>

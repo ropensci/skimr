@@ -167,6 +167,13 @@ get_skimmers.difftime <- function(column) {
   modify_default_skimmers("Date", new_skim_type = "difftime")
 }
 
+#' @describeIn get_skimmers Summary functions for `Timespan` columns: [min()],
+#'   [max()], [median()] and [n_unique()].
+#' @export
+get_skimmers.Timespan <- function(column) {
+  modify_default_skimmers("difftime", new_skim_type = "Timespan")
+}
+
 #' @describeIn get_skimmers Summary functions for `ts` columns: [min()],
 #'   [max()], [median()] and [n_unique()].
 #' @export

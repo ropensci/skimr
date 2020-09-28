@@ -44,9 +44,9 @@ test_that("complete_rate is calculated correctly.", {
 })
 
 test_that("n_whitespace is calculated correctly.", {
-  data <- c("a", "b", "c", NA, " ")
+  data <- c("a", "b", "c", NA, " ", "  a", "   ", "   a")
   input <- n_whitespace(data)
-  expect_identical(input, 1L)
+  expect_identical(input, 2L)
 })
 
 test_that("inline histogram is calculated correctly.", {

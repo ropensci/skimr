@@ -88,20 +88,20 @@ skim_with <- function(...,
       data <- as.data.frame(data)
     }
     stopifnot(inherits(data, "data.frame"))
-
-    .vars <- rlang::quos(...)
-    cols <- names(data)
-    if (length(.vars) == 0) {
-      selected <- cols
-    } else {
-      selected <- tidyselect::vars_select(cols, !!!.vars)
-    }
+    
+    selected <- names(tidyselect::eval_select(rlang::expr(c(...)), data))
+    if (length(selected) == 0) {
+      selected <- names(data)
+    } 
 
     grps <- dplyr::groups(data)
     if (length(grps) > 0) {
       group_variables <- selected %in% as.character(grps)
       selected <- selected[!group_variables]
+    } else {
+      attr(data, "groups") <- list()
     }
+
 
     skimmers <- purrr::map(
       selected, get_final_skimmers, data, local_skimmers, append

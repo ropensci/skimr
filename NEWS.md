@@ -1,3 +1,21 @@
+# skimr 2.1.2
+
+### MINOR IMPROVEMENTS
+
+*   Add support for lubridate Timespan objects.
+*   Improvements to Supporting Additional Objects vignette.
+
+### BUG FIXES
+
+*   Update package to work with new version of `knitr`.
+
+# skimr 2.1.1 (2020-04-15)
+
+### MINOR IMPROVEMENTS
+
+*   Prepare for release of dplyr 1.0 and related packages.
+*   0-length sfls are now permitted.
+
 # skimr 2.1.0 (2020-01-10)
 
 ### NEW FEATURES
