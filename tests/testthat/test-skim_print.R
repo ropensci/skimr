@@ -32,7 +32,7 @@ test_that("knit_print produces expected results", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   input <- knit_print(skimmed)
-  expect_is(input, "knit_asis")
+  expect_s3_class(input, "knit_asis")
   expect_length(input, 1)
   if (packageVersion("knitr") <= "1.28") {
     expect_matches_file(input, "print/knit_print-knitr_old.txt")
@@ -68,7 +68,7 @@ test_that("knit_print appropriately falls back to tibble printing", {
       "print/knit_print-fallback-dplyrv1.txt"
     )
   }
-  expect_is(input, "data.frame")
+  expect_s3_class(input, "data.frame")
 })
 
 test_that("Summaries can be suppressed within knitr", {

@@ -11,13 +11,13 @@ test_that("Zero-length sfl's supported", {
 
 test_that("The interface for sfl's separates keep and drop functions", {
   input <- sfl(mad = mad, hist = NULL, skim_type = "test")
-  expect_is(input, "skimr_function_list")
+  expect_s3_class(input, "skimr_function_list")
   expect_length(input, 2)
   expect_named(input, c("funs", "skim_type"))
   expect_identical(input$skim_type, "test")
 
   funs <- input$funs
-  expect_is(funs, "list")
+  expect_type(funs, "list")
   expect_named(funs, c("mad", "hist"))
 })
 
