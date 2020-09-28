@@ -358,7 +358,7 @@ reshape_skimmed <- function(column, skimmed, groups) {
   out <- dplyr::select(
     as.data.frame(skimmed),
     !!!groups,
-    tidyselect::starts_with(delim_name)
+    tidyselect::starts_with(delim_name, ignore.case = FALSE)
   )
   set_clean_names(out)
 }

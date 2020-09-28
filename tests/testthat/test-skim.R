@@ -909,3 +909,12 @@ test_that("Skimming without charts produces no ts line charts", {
   input <- skim_without_charts(freeny, y)
   expect_null(iris$ts.line_graph)
 })
+
+test_that("Skimming succeeds when column names are similar", {
+  input <- data.frame(
+    x = 1:10,
+    X = 11:20
+  )
+  skimmed <- skim(input)
+  expect_s3_class(skimmed, "skim_df")
+})
