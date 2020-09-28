@@ -318,13 +318,19 @@ skim_by_type <- function(mangled_skimmers, variable_names, data) {
 skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
   group_columns <- dplyr::groups(data)
   grouped <- dplyr::group_by(data, !!!group_columns)
-  skimmed <- dplyr::summarize_at(grouped, variable_names, mangled_skimmers$funs)
+  skimmed <- dplyr::summarize(
+    grouped,
+    dplyr::across(variable_names, mangled_skimmers$funs)
+  )
   build_results(skimmed, variable_names, group_columns)
 }
 
 #' @export
 skim_by_type.data.frame <- function(mangled_skimmers, variable_names, data) {
-  skimmed <- dplyr::summarize_at(data, variable_names, mangled_skimmers$funs)
+  skimmed <- dplyr::summarize(
+    data,
+    dplyr::across(variable_names, mangled_skimmers$funs)
+  )
   build_results(skimmed, variable_names, NULL)
 }
 
