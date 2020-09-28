@@ -2,45 +2,35 @@
 % Please edit documentation in R/vctrs.R
 \name{skimr-vctrs}
 \alias{skimr-vctrs}
-\alias{vec_ptype2.skim_df}
 \alias{vec_ptype2.skim_df.skim_df}
-\alias{vec_ptype2.skim_df.data.frame}
 \alias{vec_ptype2.skim_df.tbl_df}
-\alias{vec_ptype2.data.frame.skim_df}
-\alias{vec_cast.skim_df}
+\alias{vec_ptype2.tbl_df.skim_df}
 \alias{vec_cast.skim_df.skim_df}
 \alias{vec_cast.skim_df.tbl_df}
-\alias{vec_cast.skim_df.data.frame}
-\alias{vec_cast.data.frame.skim_df}
+\alias{vec_cast.tbl_df.skim_df}
 \title{Functions for working with the vctrs package}
 \usage{
-\method{vec_ptype2}{skim_df}(x, y, ...)
+\method{vec_ptype2}{skim_df.skim_df}(x, y, ...)
 
-\method{vec_ptype2.skim_df}{skim_df}(x, y, ...)
+\method{vec_ptype2}{skim_df.tbl_df}(x, y, ...)
 
-\method{vec_ptype2.skim_df}{data.frame}(x, y, ...)
+\method{vec_ptype2}{tbl_df.skim_df}(x, y, ...)
 
-\method{vec_ptype2.skim_df}{tbl_df}(x, y, ...)
+\method{vec_cast}{skim_df.skim_df}(x, to, ...)
 
-\method{vec_ptype2.data.frame}{skim_df}(x, y, ...)
+\method{vec_cast}{skim_df.tbl_df}(x, to, ...)
 
-\method{vec_cast}{skim_df}(x, to, ...)
-
-\method{vec_cast.skim_df}{tbl_df}(x, to, ...)
-
-\method{vec_cast.skim_df}{tbl_df}(x, to, ...)
-
-\method{vec_cast.skim_df}{data.frame}(x, to, ...)
-
-\method{vec_cast.data.frame}{skim_df}(x, to, ...)
+\method{vec_cast}{tbl_df.skim_df}(x, to, ...)
 }
 \description{
 These make it clear that we need to use the tibble behavior when joining,
-concating or casting \code{skim_df} objects. For a discussion, see:
+concatenating or casting \code{skim_df} objects. For a discussion, see:
 \url{https://github.com/r-lib/vctrs/issues/982}.
 }
 \details{
-\verb{vec_ptype2.*} handles finding commom prototypes between \code{skim_df} and
-similar objects. \verb{vec_cast.*} handles casting between objects.
+\verb{vec_ptype2.*} handles finding common prototypes between \code{skim_df} and
+similar objects. \verb{vec_cast.*} handles casting between objects. Note that
+as of \verb{dplyr 1.0.2}, \code{\link[dplyr:bind]{dplyr::bind_rows()}} does not full support combining
+attributes and \code{\link[vctrs:vec_bind]{vctrs::vec_rbind()}} is preferred instead.
 }
 \keyword{internal}
