@@ -53,29 +53,29 @@ vec_cast.tbl_df.skim_df <- function(x, to, ...) {
 #' We only combine skim_df's that were built with the same set of skimmers.
 #' @noRd
 has_compatible_skimmers <- function(x, y) {
-  attrs_x <- attributes(x) 
-  attrs_y <- attributes(y)
-
-  base_x <- attrs_x$base_skimmers %||% attrs_y$base_skimmers
-  base_y <- attrs_y$base_skimmers %||% attrs_x$base_skimmers
-  used_x <- attrs_x$skimmers_used %||% attrs_y$skimmers_used
-  used_y <- attrs_y$skimmers_used %||% attrs_x$skimmers_used
-
-  identical(base_x, base_y) && all(identical_skimmers(used_x, used_y))
+  has_identical_base(x, y) && has_identical_skimmers(x, y)
 }
 
-identical_skimmers <- function(skim_list_x, skim_list_y) {
+has_identical_base <- function(x, y) {
+  base_x <- attr(x, "base_skimmers") %||% attr(y, "base_skimmers")
+  base_y <- attr(y, "base_skimmers") %||% attr(x, "base_skimmers")
+  identical(base_x, base_y)
+}
+
+has_identical_skimmers <- function(x, y) {
+  skim_list_x <- attr(x, "skimmers_used") %||% attr(y, "skimmers_used")
+  skim_list_y <- attr(y, "skimmers_used") %||% attr(x, "skimmers_used")
   x_names <- names(skim_list_x)
   y_names <- names(skim_list_y)
   all_names <- union(x_names, y_names)
-  purrr::map_lgl(
+  all(purrr::map_lgl(
     all_names,
     check_identical_skimmers,
     x_names,
     y_names,
     skim_list_x,
     skim_list_y
-  )
+  ))
 }
 
 check_identical_skimmers <- function(name,
