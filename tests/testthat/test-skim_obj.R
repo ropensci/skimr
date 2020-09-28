@@ -1,5 +1,3 @@
-context("Checks for a skimr object")
-
 test_that("skim produces skim_df objects", {
   skimmed <- skim(iris)
   expect_true(is_skim_df(skimmed))

@@ -1,5 +1,3 @@
-context("Test skim function lists")
-
 test_that("Only string scalars for types", {
   expect_error(sfl(mad, skim_type = c("1", "2")))
 })

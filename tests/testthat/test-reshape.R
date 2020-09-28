@@ -1,5 +1,3 @@
-context("Reshaping a skim_df")
-
 test_that("You can parition a skim_df", {
   skimmed <- skim(iris)
   input <- partition(skimmed)

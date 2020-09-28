@@ -1,5 +1,3 @@
-context("Using dplyr verbs on skim objects works as expected")
-
 skimmed_iris <- skim(iris)
 
 test_that("dplyr::filter works as expected", {
