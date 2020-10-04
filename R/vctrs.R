@@ -1,8 +1,9 @@
 #' Functions for working with the vctrs package
 #'
 #' These make it clear that we need to use the tibble behavior when joining,
-#' concatenating or casting `skim_df` objects. For a discussion, see:
-#' <https://github.com/r-lib/vctrs/issues/982>.
+#' concatenating or casting `skim_df` objects. For a better discussion, on
+#' why this is important and how these functions work, see:
+#' <https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html>.
 #'
 #' `vec_ptype2.*` handles finding common prototypes between `skim_df` and
 #' similar objects. `vec_cast.*` handles casting between objects. Note that
