@@ -37,6 +37,9 @@
 #' @param rule_width  Width of the cli rules in printed skim object. Defaults
 #'     to base::options()$width
 #' @param summary_rule_width Width of Data Summary cli rule, defaults to 40.
+#' @param round_early Whether floating point numbers should be displayed with 
+#'   their max precision or be displayed with rounding to 4 decimal places. 
+#'   Defaults to `TRUE`.
 #' @name print
 NULL
 
@@ -52,9 +55,14 @@ print.skim_df <- function(x,
                           ),
                           rule_width = base::options()$width,
                           summary_rule_width = 40,
+                          round_early = TRUE,
                           ...) {
   withr::local_options(list(crayon.enabled = FALSE))
   if (is_skim_df(x) && nrow(x) > 0) {
+    if(round_early) {
+      x <- dplyr::mutate_if(x, is.double, function(y) round(y,4))
+    }
+
     if (include_summary) {
       print(summary(x), .summary_rule_width = summary_rule_width, ...)
     }

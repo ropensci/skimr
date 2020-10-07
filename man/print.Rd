@@ -17,6 +17,7 @@
   strip_metadata = getOption("skimr_strip_metadata", FALSE),
   rule_width = base::options()$width,
   summary_rule_width = 40,
+  round_early = TRUE,
   ...
 )
 
@@ -66,6 +67,10 @@ will print information about at most \code{tibble.max_extra_cols} extra columns.
 to base::options()$width}
 
 \item{summary_rule_width}{Width of Data Summary cli rule, defaults to 40.}
+
+\item{round_early}{Whether floating point numbers should be displayed with
+their max precision or be displayed with rounding to 4 decimal places.
+Defaults to \code{TRUE}.}
 
 \item{...}{Other arguments passed on to individual methods.}
 
