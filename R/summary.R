@@ -36,6 +36,7 @@ summary.skim_df <- function(object, ...) {
     data_name,
     data_rows(object),
     data_cols(object),
+    if (!is.na(dt_key(object))) dt_key(object),
     " ",
     " ",
     unname(counts),
@@ -45,7 +46,7 @@ summary.skim_df <- function(object, ...) {
 
   summary_object <- array(summary_object, dim = c(length(summary_object), 1))
   dnames <- c(
-    "Name", "Number of rows ", "Number of columns ", "_______________________ ",
+    "Name", "Number of rows ", "Number of columns ", if (!is.na(dt_key(object))) "Key", "_______________________ ",
     "Column type frequency: ", types, "________________________  ",
     "Group variables"
   )

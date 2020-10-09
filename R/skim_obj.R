@@ -30,6 +30,13 @@ df_name <- function(object) {
   attr(object, "df_name")
 }
 
+#' @describeIn skim-attr Get the key of the skimmed data.table. This is only
+#'   available in contexts where `data` is of class `data.table`.
+#' @export
+dt_key <- function(object) {
+  attr(object, "dt_key")
+}
+
 #' @describeIn skim-attr Get the names of the groups in the original data frame.
 #'   Only available if the data was grouped. Otherwise, `NULL`.
 #' @export
@@ -64,6 +71,7 @@ skimmers_used <- function(object) {
 #' * `data_rows`: n rows in the original data
 #' * `data_cols`: original number of columns
 #' * `df_name`: name of the original data frame
+#' * `dt_key`: name of the key if original is a data.table
 #' * `groups`: if there were group variables
 #' * `base_skimmers`: names of functions applied to all skim types
 #' * `skimmers_used`: names of functions used to skim each type
@@ -94,7 +102,7 @@ has_variable_column <- function(object) {
 #' @export
 has_skimr_attributes <- function(object) {
   skimr_attrs <- c(
-    "data_rows", "data_cols", "df_name",  "base_skimmers",
+    "data_rows", "data_cols", "df_name", "dt_key", "base_skimmers",
     "skimmers_used"
   )
   missing <- !(skimr_attrs %in% names(attributes(object)))
@@ -226,6 +234,7 @@ strip_skim_attrs <- function(object) {
     data_rows = NULL,
     data_cols = NULL,
     df_name = NULL,
+    dt_key = NULL,
     base_skimmers = NULL,
     skimmers_used = NULL
   )
@@ -241,6 +250,7 @@ reassign_skim_attrs <- function(object, skim_df, ...) {
     data_rows = data_rows(skim_df),
     data_cols = data_cols(skim_df),
     df_name = df_name(skim_df),
+    dt_key = dt_key(skim_df),
     groups = group_names(skim_df),
     base_skimmers = base_skimmers(skim_df),
     skimmers_used = skimmers_used(skim_df)
