@@ -1,5 +1,3 @@
-context("Using skim_tee")
-
 test_that("Using skim_tee prints returns the object", {
   skip_if_not(l10n_info()$`UTF-8`)
   expect_known_output(

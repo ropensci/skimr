@@ -1,5 +1,3 @@
-context("Change functions used by skim")
-
 test_that("Skimmer list is updated correctly when changing functions", {
   funs <- sfl(median = median, mad = mad)
   new_skim <- skim_with(numeric = funs, append = FALSE)

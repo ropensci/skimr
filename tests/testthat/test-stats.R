@@ -1,5 +1,3 @@
-context("Use individual statistics functions on a vector")
-
 test_that("inline_linegraph returns expected response for a ts vector", {
   input <- inline_linegraph(freeny$y)
   expect_identical(input, "⣀⣀⠤⠤⠒⠒⠉⠉")

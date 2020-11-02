@@ -1,5 +1,3 @@
-context("Make and print a summary of a skim object")
-
 test_that("Summary creates the correct summary object", {
   withr::local_options(list(cli.unicode = FALSE))
   # Test it creates the correct 4 parts

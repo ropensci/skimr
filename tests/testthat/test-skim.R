@@ -1,5 +1,3 @@
-context("Skim a data frame")
-
 test_that("skim returns expected response for numeric vectors", {
   input <- skim(mtcars, mpg)
 

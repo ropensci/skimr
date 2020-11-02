@@ -1,5 +1,3 @@
-context("Print a skim_df object")
-
 test_that("Skim prints a header for the entire output and each type", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
