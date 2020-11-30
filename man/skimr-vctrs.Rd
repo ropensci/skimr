@@ -24,8 +24,9 @@
 }
 \description{
 These make it clear that we need to use the tibble behavior when joining,
-concatenating or casting \code{skim_df} objects. For a discussion, see:
-\url{https://github.com/r-lib/vctrs/issues/982}.
+concatenating or casting \code{skim_df} objects. For a better discussion, on
+why this is important and how these functions work, see:
+\url{https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html}.
 }
 \details{
 \verb{vec_ptype2.*} handles finding common prototypes between \code{skim_df} and
