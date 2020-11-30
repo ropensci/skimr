@@ -32,40 +32,25 @@ test_that("knit_print produces expected results", {
   input <- knit_print(skimmed)
   expect_s3_class(input, "knit_asis")
   expect_length(input, 1)
-  if (packageVersion("knitr") <= "1.28") {
-    expect_matches_file(input, "print/knit_print-knitr_old.txt")
-  } else {
-    expect_matches_file(input, "print/knit_print.txt")
-  }
+  expect_matches_file(input, "print/knit_print.txt")
 })
 
 test_that("knit_print works with skim summaries", {
-   withr::local_options(list(cli.unicode = FALSE))
-    skimmed <- skim(iris)
-    summarized <- summary(skimmed)
-    input <- knitr::knit_print(summarized)
-    if (packageVersion("knitr") <= "1.28") {
-      expect_matches_file(input, "print/knit_print-summary-knitr_old.txt")
-    } else {
+  withr::local_options(list(cli.unicode = FALSE))
+  skimmed <- skim(iris)
+  summarized <- summary(skimmed)
+  input <- knitr::knit_print(summarized)
   expect_matches_file(input, "print/knit_print-summary.txt")
-  }
 })
 
 test_that("knit_print appropriately falls back to tibble printing", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
-  if (packageVersion("dplyr") <= "0.8.5") {
-    expect_known_output(
-      input <- knitr::knit_print(reduced),
-      "print/knit_print-fallback.txt"
-    )
-  } else {
-    expect_known_output(
-      input <- knitr::knit_print(reduced),
-      "print/knit_print-fallback-dplyrv1.txt"
-    )
-  }
+  expect_known_output(
+    input <- knitr::knit_print(reduced),
+    "print/knit_print-fallback.txt"
+  )
   expect_s3_class(input, "data.frame")
 })
 
@@ -106,11 +91,7 @@ test_that("Skim falls back to tibble::print.tbl() appropriately", {
   withr::local_options(list(cli.unicode = FALSE))
   input <- skim(iris)
   mean_only <- dplyr::select(input, numeric.mean)
-  if (packageVersion("dplyr") <= "0.8.5") {
-    expect_print_matches_file(mean_only, "print/fallback.txt")
-  } else {
-    expect_print_matches_file(mean_only, "print/fallback_dplyrv1.txt")
-  }
+  expect_print_matches_file(mean_only, "print/fallback.txt")
 })
 
 test_that("Print focused objects appropriately", {
@@ -160,7 +141,6 @@ test_that("Metadata can be included: print", {
   skimmed <- skim(iris)
   expect_known_output(print(skimmed, strip_metadata = FALSE), "print/strip.txt")
 })
-
 
 test_that("Metadata can be included: option", {
   skip_if_not(l10n_info()$`UTF-8`)
