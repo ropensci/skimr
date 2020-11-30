@@ -47,10 +47,8 @@ test_that("knit_print appropriately falls back to tibble printing", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
-  expect_known_output(
-    input <- knitr::knit_print(reduced),
-    "print/knit_print-fallback.txt"
-  )
+  printed <- testthat::capture_output(input <- knitr::knit_print(reduced))
+  expect_matches_file(printed, "print/knit_print-fallback.txt")
   expect_s3_class(input, "data.frame")
 })
 
@@ -132,14 +130,20 @@ test_that("skimr creates appropriate output for Jupyter", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
-  expect_known_output(repr_text(skimmed), "print/repr.txt")
+  input <- testthat::capture_output(repr_text(skimmed))
+  expect_matches_file(input, "print/repr.txt")
 })
 
 test_that("Metadata can be included: print", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
-  expect_known_output(print(skimmed, strip_metadata = FALSE), "print/strip.txt")
+  expect_print_matches_file(
+    skimmed,
+    "print/strip.txt",
+    strip_metadata = FALSE,
+    width = 80
+  )
 })
 
 test_that("Metadata can be included: option", {
@@ -147,6 +151,6 @@ test_that("Metadata can be included: option", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   withr::with_options(list(skimr_strip_metadata = FALSE), {
-    expect_known_output(print(skimmed), "print/strip-opt.txt")
+    expect_print_matches_file(skimmed, "print/strip-opt.txt", width = 80)
   })
 })
