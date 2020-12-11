@@ -1,5 +1,3 @@
-context("Get skimmers")
-
 test_that("get_sfl() behaves correctly", {
   my_sfl <- get_sfl("numeric")
   expect_s3_class(my_sfl, "skimr_function_list")

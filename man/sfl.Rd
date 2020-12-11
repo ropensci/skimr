@@ -16,11 +16,6 @@ specified by:
 \item The function itself, \code{mean}
 \item A call to the function with \code{.} as a dummy argument,
 \code{mean(., na.rm = TRUE)}
-}
-
-The following notations are \strong{not} supported, see examples:
-\itemize{
-\item An anonymous function, \code{function(x) mean(x, na.rm = TRUE)}
 \item An anonymous function in \pkg{purrr} notation, \code{~mean(., na.rm = TRUE)}
 }}
 

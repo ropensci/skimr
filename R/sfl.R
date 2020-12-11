@@ -8,20 +8,18 @@
 #' `sfl()` will automatically generate callables and names for a variety of
 #' inputs, including functions, formulas and strings. Nonetheless, we recommend
 #' providing names when reasonable to get better [skim()] output.
+#' 
 #' @param ... Inherited from dplyr::data_masking() for dplyr version 1 or later 
 #'  or dplyr::funs() for older versions of dplyr.
 #'  A list of functions
 #'   specified by:
 #'
-#'  - Their name, `"mean"`
-#'  - The function itself, `mean`
-#'  - A call to the function with `.` as a dummy argument,
+#'  * Their name, `"mean"`
+#'  * The function itself, `mean`
+#'  * A call to the function with `.` as a dummy argument,
 #'    `mean(., na.rm = TRUE)`
+#'  * An anonymous function in \pkg{purrr} notation, `~mean(., na.rm = TRUE)`
 #'
-#'  The following notations are **not** supported, see examples:
-#'
-#'  - An anonymous function, `function(x) mean(x, na.rm = TRUE)`
-#'  - An anonymous function in \pkg{purrr} notation, `~mean(., na.rm = TRUE)`
 #' @param skim_type A character scalar. This is used to match locally-provided
 #'   skimmers with defaults. See [get_skimmers()] for more detail.
 #' @return A `skimr_function_list`, which contains a list of `fun_calls`,

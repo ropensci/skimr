@@ -1,5 +1,3 @@
-context("Using dplyr verbs on skim objects works as expected")
-
 skimmed_iris <- skim(iris)
 
 test_that("dplyr::filter works as expected", {
@@ -19,11 +17,7 @@ test_that("dplyr::select works as expected", {
 
   without_type <- dplyr::select(skimmed_iris, numeric.mean)
   withr::local_options(list(cli.unicode = FALSE))
-  if (packageVersion("dplyr") <= "0.8.5") {
-    expect_print_matches_file(without_type, "dplyr/select-no-skim.txt")
-  } else {
-    expect_print_matches_file(without_type, "dplyr/select-no-skim_dplyrv1.txt")
-  }
+  expect_print_matches_file(without_type, "dplyr/select-no-skim.txt")
 })
 
 test_that("dplyr::mutate works as expected", {

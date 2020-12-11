@@ -124,6 +124,7 @@ Imports:
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 1.0.0),
+    vctrs,
     withr
 Suggests:
     covr,
@@ -152,3 +153,4 @@ Collate:
     'skimr-package.R'
     'summary.R'
     'utils.R'
+    'vctrs.R'
