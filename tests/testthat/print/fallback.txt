@@ -1,6 +1,6 @@
 # A tibble: 5 x 1
   numeric.mean
-*        <dbl>
+         <dbl>
 1        NA   
 2         5.84
 3         3.06
