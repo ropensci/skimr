@@ -13,12 +13,12 @@
 length as the number of rows in the group, if using \code{\link[dplyr:group_by]{dplyr::group_by()}}, or
 in the entire input (if not using groups). The name of each argument will
 be the name of a new variable, and the value will be its corresponding
-value. Use \code{NULL} value in \code{mutate} to drop a variable. New variables
-overwrite existing variables of the same name.
+value. Use \code{NULL} value in \code{\link[dplyr:mutate]{dplyr::mutate()}} to drop a variable. New
+variables overwrite existing variables of the same name.
 
 The arguments in \code{...} are automatically quoted with \code{\link[rlang:nse-defuse]{rlang::quo()}} and
 evaluated with \code{\link[rlang:eval_tidy]{rlang::eval_tidy()}} in the context of the data frame. They
-support unquoting \code{\link[rlang:nse-force]{rlang::quasiquotation}} and splicing. See
+support unquoting \link[rlang:nse-force]{rlang::quasiquotation} and splicing. See
 \code{vignette("programming", package = "dplyr")} for an introduction to these
 concepts.}
 }
