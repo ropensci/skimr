@@ -1,7 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
 ^\.pre-commit-config\.yaml$
-^\.travis\.yml$
 ^\\inst\\doc\\other_docs\\blog\.html$
 ^\\inst\\doc\\other_docs\\blog\.Rmd$
 ^\\inst\\figures
@@ -9,9 +9,6 @@
 ^revdep$
 ^README\.Rmd
 ^README\.html
-^CONTRIBUTING.md
-^CONDUCT.md
-^appveyor\.yml$
 ^codemeta\.json$
 ^.*\.ipynb$
 ^doc$
