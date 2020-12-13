@@ -927,3 +927,17 @@ test_that("Skimming succeeds when column names are similar", {
   skimmed <- skim(input)
   expect_s3_class(skimmed, "skim_df")
 })
+
+
+test_that("Skim inside a function returns the data name", {
+  nested_skim <- function(df) {
+    skim(df, data_name = deparse(substitute(df)))
+  }  
+  input <- nested_skim(iris)
+  expect_equal(attr(input, "df_name"), "`iris`")
+})
+
+test_that("The data_name parameter can change the data_name attribute", {
+  input <- skim(iris, data_name = "Anderson")
+  expect_equal(attr(input, "df_name"),  "Anderson")
+})

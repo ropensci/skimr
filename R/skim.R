@@ -49,6 +49,7 @@
 #' spark graphs. These are the source of the unicode dependency.
 #'
 #' @param data A tibble, or an object that can be coerced into a tibble.
+#' @param data_name The name to use for the data. Defaults to the same as data.
 #' @param ...  Columns to select for skimming. When none are provided, the
 #'   default is to skim all columns.
 #' @param skim  The skimming function to use in `skim_tee()`.

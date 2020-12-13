@@ -82,8 +82,8 @@ skim_with <- function(...,
   stopifnot(is.null(base) || inherits(base, "skimr_function_list"))
   local_skimmers <- validate_assignment(...)
 
-  function(data, ...) {
-    data_name <- rlang::expr_label(substitute(data))
+  function(data,data_name = rlang::expr_label(substitute(data)), ...) {
+    #data_name <- rlang::expr_label(substitute(data))
     if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
