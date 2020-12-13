@@ -95,7 +95,12 @@ Authors@R:
       person(given = "Bastian", 
              family = "Torges",
              role ="ctb",
-             email = "bastian.torges@gmail.com"))
+             email = "bastian.torges@gmail.com"),
+      person(given = "Rick",
+             family = "Saporta",
+             role = "ctb",
+             email = "Rick@TheFarmersDog.com")
+             )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
     be modified by the user as can the default formatting.  Support for
@@ -127,6 +132,8 @@ Imports:
     withr
 Suggests:
     covr,
+    data.table,
+    dtplyr,
     extrafont,
     lubridate,
     rmarkdown,
