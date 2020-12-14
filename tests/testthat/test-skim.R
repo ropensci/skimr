@@ -1,5 +1,5 @@
 test_that("skim returns expected response for numeric vectors", {
-  input <- skim(mtcars, mpg)
+  input <- skim(mtcars$mpg)
 
   # dimensions
   expect_n_rows(input, 1)
@@ -847,7 +847,7 @@ test_that("Tidyselect helpers work as expected", {
 })
 
 test_that("Tidyselect predicates work as expected", {
-  input <- skim(iris, where(is.numeric))
+  input <- skim(iris, tidyselect::where(is.numeric))
   
   expect_n_rows(input, 4)
   expect_n_columns(input, 12)
@@ -857,7 +857,7 @@ test_that("Tidyselect predicates work as expected", {
   )
 })
 
-test_that("Skimming a grouped df works as expected", {
+test_that("Skimming a grouped df with selections works as expected", {
   grouped <- dplyr::group_by(mtcars, cyl, gear)
   input <- skim(grouped, mpg, disp)
 
@@ -910,7 +910,7 @@ test_that("Skimming a grouped df works when selecting exactly one variable", {
 })
 
 test_that("Skimming without charts produces no histograms", {
-  input <- skim_without_charts(iris, Sepal.Width)
+  input <- skim_without_charts(iris)
   expect_null(iris$numeric.hist)
 })
 
@@ -934,7 +934,7 @@ test_that("Skim inside a function returns the data name", {
     skim(df, data_name = deparse(substitute(df)))
   }  
   input <- nested_skim(iris)
-  expect_equal(attr(input, "df_name"), "`iris`")
+  expect_equal(attr(input, "df_name"), "iris")
 })
 
 test_that("The data_name parameter can change the data_name attribute", {
