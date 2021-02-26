@@ -27,7 +27,8 @@ test_that("dplyr::mutate works as expected", {
   expect_print_matches_file(input, "dplyr/mutate-skim.txt")
 
   no_variable <- dplyr::mutate(skimmed_iris, skim_variable = NULL)
-  identical(print(no_variable), print(tibble::as_tibble(no_variable)))
+  identical(capture.output(print(no_variable)), 
+            capture.output(print(tibble::as_tibble(no_variable))))
 })
 
 test_that("dplyr::slice works as expected", {
