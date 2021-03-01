@@ -3,7 +3,7 @@ title: "Using Skimr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{using-skimr}
+  %\VignetteIndexEntry{Using Skimr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
