@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary function for skim_df — summary.skim_df • skimr</title>
+<title>Only show a subset of summary statistics after skimming — focus • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,11 @@
 
 
 
-<meta property="og:title" content="Summary function for skim_df — summary.skim_df" />
-<meta property="og:description" content="This is a method of the generic function summary()." />
+<meta property="og:title" content="Only show a subset of summary statistics after skimming — focus" />
+<meta property="og:description" content="This function is a variant of dplyr::select() designed to work with
+skim_df objects. When using focus(), skimr metadata columns are kept,
+and skimr print methods are still utilized. Otherwise, the signature and
+behavior is identical to dplyr::select()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -140,48 +143,90 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary function for skim_df</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/summary.R'><code>R/summary.R</code></a></small>
-    <div class="hidden name"><code>summary.skim_df.Rd</code></div>
+    <h1>Only show a subset of summary statistics after skimming</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/reshape.R'><code>R/reshape.R</code></a></small>
+    <div class="hidden name"><code>focus.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a method of the generic function <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>.</p>
+    <p>This function is a variant of <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code> designed to work with
+<code>skim_df</code> objects. When using <code>focus()</code>, <code>skimr</code> metadata columns are kept,
+and <code>skimr</code> print methods are still utilized. Otherwise, the signature and
+behavior is identical to <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for skim_df</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>focus</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>a skim dataframe.</p></td>
+      <th>.data</th>
+      <td><p>A <code>skim_df</code> object.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments affecting the summary produced. Not used.</p></td>
+      <td><p>One or more unquoted expressions separated by commas. Variable
+names can be used as if they were positions in the data frame, so
+expressions like x:y can be used to select a range of variables.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A summary of the skim data frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># Compare</span>
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>n_missing</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 5 x 1</span><span>
+#&gt;   n_missing
+#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>         0
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>         0
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>         0
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>         0
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>         0</div><div class='input'>
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>focus</span><span class='op'>(</span><span class='va'>n_missing</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ── Data Summary ────────────────────────
-#&gt;                            Values
-#&gt; Name                       mtcars
-#&gt; Number of rows             32    
-#&gt; Number of columns          11    
-#&gt; _______________________          
-#&gt; Column type frequency:           
-#&gt;   numeric                  11    
-#&gt; ________________________         
-#&gt; Group variables            None  </div></pre>
+#&gt;                            Values    
+#&gt; Name                       Piped data
+#&gt; Number of rows             150       
+#&gt; Number of columns          5         
+#&gt; _______________________              
+#&gt; Column type frequency:               
+#&gt;   factor                   1         
+#&gt;   numeric                  4         
+#&gt; ________________________             
+#&gt; Group variables            None      
+#&gt; 
+#&gt; ── Variable type: factor ───────────────────────────────────────────────────────
+#&gt; 
+#&gt; 
+#&gt; ── Variable type: numeric ──────────────────────────────────────────────────────
+#&gt; </div><div class='input'>
+<span class='co'># This is equivalent to</span>
+<span class='va'>iris</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>skim_variable</span>, <span class='va'>skim_type</span>, <span class='va'>n_missing</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ── Data Summary ────────────────────────
+#&gt;                            Values    
+#&gt; Name                       Piped data
+#&gt; Number of rows             150       
+#&gt; Number of columns          5         
+#&gt; _______________________              
+#&gt; Column type frequency:               
+#&gt;   factor                   1         
+#&gt;   numeric                  4         
+#&gt; ________________________             
+#&gt; Group variables            None      
+#&gt; 
+#&gt; ── Variable type: factor ───────────────────────────────────────────────────────
+#&gt; 
+#&gt; 
+#&gt; ── Variable type: numeric ──────────────────────────────────────────────────────
+#&gt; </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

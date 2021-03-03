@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • skimr</title>
+<title>View default skimmer names and functions — get_default_skimmers • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="View default skimmer names and functions — get_default_skimmers" />
+<meta property="og:description" content="These utility functions look up the currently-available defaults for one or
+more skim_type's. They work with all defaults in the skimr package, as
+well as the defaults in any package that extends skimr. See
+get_skimmers() for writing lookup methods for different." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +70,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -139,24 +143,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>View default skimmer names and functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/get_skimmers.R'><code>R/get_skimmers.R</code></a></small>
+    <div class="hidden name"><code>get_default_skimmers.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Skimr_defaults.html">Skimr defaults</a></dt>
-        <dd></dt>
-        <dt><a href="Supporting_additional_objects.html">Supporting additional objects</a></dt>
-        <dd></dt>
-        <dt><a href="Using_fonts.html">Using Fonts</a></dt>
-        <dd></dt>
-        <dt><a href="skimr.html">Using Skimr</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>These utility functions look up the currently-available defaults for one or
+more <code>skim_type</code>'s. They work with all defaults in the <code>skimr</code> package, as
+well as the defaults in any package that extends <code>skimr</code>. See
+<code><a href='get_skimmers.html'>get_skimmers()</a></code> for writing lookup methods for different.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>get_default_skimmers</span><span class='op'>(</span>skim_type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>get_one_default_skimmer</span><span class='op'>(</span><span class='va'>skim_type</span><span class='op'>)</span>
+
+<span class='fu'>get_default_skimmer_names</span><span class='op'>(</span>skim_type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>get_one_default_skimmer_names</span><span class='op'>(</span><span class='va'>skim_type</span><span class='op'>)</span>
+
+<span class='fu'>get_sfl</span><span class='op'>(</span><span class='va'>skim_type</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>skim_type</th>
+      <td><p>The class of the column being skimmed.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The functions differ in return type and whether or not the result is in
+a list. <code>get_default_skimmers()</code> and <code>get_one_default_skimmer()</code> return
+functions. The former returns functions within a typed list, i.e.
+<code><a href='https://rdrr.io/r/base/list.html'>list(numeric = list(...functions...))</a></code>.</p>
+<p>The functions differ in return type and whether or not the result is in
+a list. <code>get_default_skimmer_names()</code> and <code>get_one_default_skimmer_names()</code>
+return a list of character vectors or a single character vector.</p>
+<p><code>get_sfl()</code> returns the skimmer function list for a particular <code>skim_type</code>.
+It differs from <code>get_default_skimmers()</code> in that the returned <code>sfl</code> contains
+a list of functions and a <code>skim_type</code>.</p>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>get_one_default_skimmer</code>: Get the functions associated with one
+<code>skim_type</code>.</p></li>
+<li><p><code>get_default_skimmer_names</code>: Get the names of the functions used in one
+or more <code>skim_type</code>'s.</p></li>
+<li><p><code>get_one_default_skimmer_names</code>: Get the names of the functions used in one
+<code>skim_type</code>.</p></li>
+<li><p><code>get_sfl</code>: Get the <code>sfl</code> for a <code>skim_type</code>.</p></li>
+</ul>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

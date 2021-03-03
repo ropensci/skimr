@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • skimr</title>
+<title>Separate a big skim_df into smaller data frames, by type. — partition • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Separate a big skim_df into smaller data frames, by type. — partition" />
+<meta property="og:description" content="The data frames produced by skim() are wide and sparse, filled with
+columns that are mostly NA. For that reason, it can be convenient to
+work with &quot;by type&quot; subsets of the original data frame. These smaller
+subsets have their NA columns removed." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +70,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -139,24 +143,82 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Separate a big <code>skim_df</code> into smaller data frames, by type.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/reshape.R'><code>R/reshape.R</code></a></small>
+    <div class="hidden name"><code>partition.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Skimr_defaults.html">Skimr defaults</a></dt>
-        <dd></dt>
-        <dt><a href="Supporting_additional_objects.html">Supporting additional objects</a></dt>
-        <dd></dt>
-        <dt><a href="Using_fonts.html">Using Fonts</a></dt>
-        <dd></dt>
-        <dt><a href="skimr.html">Using Skimr</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>The data frames produced by <code><a href='skim.html'>skim()</a></code> are wide and sparse, filled with
+columns that are mostly <code>NA</code>. For that reason, it can be convenient to
+work with "by type" subsets of the original data frame. These smaller
+subsets have their <code>NA</code> columns removed.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>partition</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+
+<span class='fu'>bind</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+
+<span class='fu'>yank</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>skim_type</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>A <code>skim_df</code>.</p></td>
+    </tr>
+    <tr>
+      <th>skim_type</th>
+      <td><p>A character scalar. The subtable to extract from a
+<code>skim_df</code>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A <code>skim_list</code> of <code>skim_df</code>'s, by type.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>partition()</code> creates a list of smaller <code>skim_df</code> data frames. Each entry
+in the list is a data type from the original <code>skim_df</code>. The inverse of
+<code>partition()</code> is <code>bind()</code>, which takes the list and produces the original
+<code>skim_df</code>. While <code>partition()</code> keeps all of the subtables as list entries,
+<code>yank()</code> gives you a single subtable for a data type.</p>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>bind</code>: The inverse of a <code>partition()</code>. Rebuild the original
+<code>skim_df</code>.</p></li>
+<li><p><code>yank</code>: Extract a subtable from a <code>skim_df</code> with a particular
+type.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Create a wide skimmed data frame (a skim_df)</span>
+<span class='va'>skimmed</span> <span class='op'>&lt;-</span> <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+
+<span class='co'># Separate into a list of subtables by type</span>
+<span class='va'>separate</span> <span class='op'>&lt;-</span> <span class='fu'>partition</span><span class='op'>(</span><span class='va'>skimmed</span><span class='op'>)</span>
+
+<span class='co'># Put back together</span>
+<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='fu'>bind</span><span class='op'>(</span><span class='va'>separate</span><span class='op'>)</span>, <span class='va'>skimmed</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='co'># &gt; TRUE</span>
+
+<span class='co'># Alternatively, get the subtable of a particular type</span>
+<span class='fu'>yank</span><span class='op'>(</span><span class='va'>skimmed</span>, <span class='st'>"factor"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
+#&gt; ── Variable type: factor ───────────────────────────────────────────────────────
+#&gt;   skim_variable n_missing complete_rate ordered n_unique
+#&gt; <span style='color: #BCBCBC;'>1</span><span> Species               0             1 FALSE          3
+#&gt;   top_counts               
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> set: 50, ver: 50, vir: 50</div></span></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

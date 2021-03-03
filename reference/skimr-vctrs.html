@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • skimr</title>
+<title>Functions for working with the vctrs package — skimr-vctrs • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Functions for working with the vctrs package — skimr-vctrs" />
+<meta property="og:description" content="These make it clear that we need to use the tibble behavior when joining,
+concatenating or casting skim_df objects. For a better discussion, on
+why this is important and how these functions work, see:
+https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +70,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -139,24 +143,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Functions for working with the vctrs package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/vctrs.R'><code>R/vctrs.R</code></a></small>
+    <div class="hidden name"><code>skimr-vctrs.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Skimr_defaults.html">Skimr defaults</a></dt>
-        <dd></dt>
-        <dt><a href="Supporting_additional_objects.html">Supporting additional objects</a></dt>
-        <dd></dt>
-        <dt><a href="Using_fonts.html">Using Fonts</a></dt>
-        <dd></dt>
-        <dt><a href="skimr.html">Using Skimr</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>These make it clear that we need to use the tibble behavior when joining,
+concatenating or casting <code>skim_df</code> objects. For a better discussion, on
+why this is important and how these functions work, see:
+<a href='https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html'>https://vctrs.r-lib.org/reference/howto-faq-coercion-data-frame.html</a>.</p>
     </div>
+
+    <pre class="usage"><span class='co'># S3 method for skim_df.skim_df</span>
+<span class='fu'>vec_ptype2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for skim_df.tbl_df</span>
+<span class='fu'>vec_ptype2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for tbl_df.skim_df</span>
+<span class='fu'>vec_ptype2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for skim_df.skim_df</span>
+<span class='fu'>vec_cast</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>to</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for skim_df.tbl_df</span>
+<span class='fu'>vec_cast</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>to</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for tbl_df.skim_df</span>
+<span class='fu'>vec_cast</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>to</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>vec_ptype2.*</code> handles finding common prototypes between <code>skim_df</code> and
+similar objects. <code>vec_cast.*</code> handles casting between objects. Note that
+as of <code>dplyr 1.0.2</code>, <code><a href='https://dplyr.tidyverse.org/reference/bind.html'>dplyr::bind_rows()</a></code> does not full support combining
+attributes and <code><a href='https://vctrs.r-lib.org/reference/vec_bind.html'>vctrs::vec_rbind()</a></code> is preferred instead.</p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

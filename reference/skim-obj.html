@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • skimr</title>
+<title>Test if an object is compatible with skimr — skim-obj • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Test if an object is compatible with skimr — skim-obj" />
+<meta property="og:description" content="Objects within skimr are identified by a class, but they require additional
+attributes and data columns for all operations to succeed. These checks help
+ensure this. While they have some application externally, they are mostly
+used internally." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +70,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -139,24 +143,94 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Test if an object is compatible with <code>skimr</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/skim_obj.R'><code>R/skim_obj.R</code></a></small>
+    <div class="hidden name"><code>skim-obj.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Skimr_defaults.html">Skimr defaults</a></dt>
-        <dd></dt>
-        <dt><a href="Supporting_additional_objects.html">Supporting additional objects</a></dt>
-        <dd></dt>
-        <dt><a href="Using_fonts.html">Using Fonts</a></dt>
-        <dd></dt>
-        <dt><a href="skimr.html">Using Skimr</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Objects within <code>skimr</code> are identified by a class, but they require additional
+attributes and data columns for all operations to succeed. These checks help
+ensure this. While they have some application externally, they are mostly
+used internally.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>has_type_column</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>has_variable_column</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>has_skimr_attributes</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>has_skim_type_attribute</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>is_data_frame</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>is_skim_df</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>is_one_skim_df</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>is_skim_list</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>could_be_skim_df</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>assert_is_skim_df</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>assert_is_skim_list</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>assert_is_one_skim_df</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>Any <code>R</code> object.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Most notably, a <code>skim_df</code> has columns <code>skim_type</code> and <code>skim_variable</code>. And
+has the following special attributes</p><ul>
+<li><p><code>data_rows</code>: n rows in the original data</p></li>
+<li><p><code>data_cols</code>: original number of columns</p></li>
+<li><p><code>df_name</code>: name of the original data frame</p></li>
+<li><p><code>dt_key</code>: name of the key if original is a data.table</p></li>
+<li><p><code>groups</code>: if there were group variables</p></li>
+<li><p><code>base_skimmers</code>: names of functions applied to all skim types</p></li>
+<li><p><code>skimmers_used</code>: names of functions used to skim each type</p></li>
+</ul>
+
+<p>The functions in these checks work like <code><a href='https://rdrr.io/r/base/all.equal.html'>all.equal()</a></code>. The return <code>TRUE</code> if
+the check passes, or otherwise notifies why the check failed. This makes them
+more useful when throwing errors.</p>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>has_type_column</code>: Does the object have the <code>skim_type</code> column?</p></li>
+<li><p><code>has_variable_column</code>: Does the object have the <code>skim_variable</code> column?</p></li>
+<li><p><code>has_skimr_attributes</code>: Does the object have the appropriate <code>skimr</code> attributes?</p></li>
+<li><p><code>has_skim_type_attribute</code>: Does the object have a <code>skim_type</code> attribute? This makes
+it a <code>one_skim_df</code>.</p></li>
+<li><p><code>is_data_frame</code>: Is the object a data frame?</p></li>
+<li><p><code>is_skim_df</code>: Is the object a <code>skim_df</code>?</p></li>
+<li><p><code>is_one_skim_df</code>: Is the object a <code>one_skim_df</code>? This is similar to a
+<code>skim_df</code>, but does not have the <code>type</code> column. That is stored as an
+attribute instead.</p></li>
+<li><p><code>is_skim_list</code>: Is the object a <code>skim_list</code>?</p></li>
+<li><p><code>could_be_skim_df</code>: Is this a data frame with <code>skim_variable</code> and
+<code>skim_type</code> columns?</p></li>
+<li><p><code>assert_is_skim_df</code>: Stop if the object is not a <code>skim_df</code>.</p></li>
+<li><p><code>assert_is_skim_list</code>: Stop if the object is not a <code>skim_list</code>.</p></li>
+<li><p><code>assert_is_one_skim_df</code>: Stop if the object is not a <code>one_skim_df</code>.</p></li>
+</ul>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

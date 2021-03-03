@@ -15,54 +15,63 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<!-- ropensci -->
-<link href="../ropensci.css" rel="stylesheet">
+
+
 
 <meta property="og:title" content="Summary statistic functions — stats" />
-
-<meta property="og:description" content="Skimr provides extensions to a variety of functions with R's stats package
-to simplify creating summaries of data. All functions are vectorized and take
-a single argument. Other parameters for these functions are set in the
-skim_format() function." />
-
-<meta property="og:image" content="https://ropensci.github.io/skimr/logo.png" />
-<meta name="twitter:card" content="summary" />
-
+<meta property="og:description" content="skimr provides extensions to a variety of functions with R's stats package
+to simplify creating summaries of data. All functions are vectorized over the
+first argument. Additional arguments should be set in the sfl() that sets
+the appropriate skimmers for a data type. You can use these, along with other
+vectorized R functions, for creating custom sets of summary functions for
+a given data type." />
+<meta property="og:image" content="/logo.png" />
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-462421-8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-462421-8');
-</script>
+
+<!-- mathjax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,22 +83,25 @@ skim_format() function." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
-      <div class="navbar-brand-container">
-        <a href="https://ropensci.org"><img src="../hexlogo.png" id="hexlogo" alt="rOpenSci" /></a>
-        <a class="navbar-brand" href="../index.html"><i>skimr <small>v1.0.6</small></i></a>
-      </div>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">skimr</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../articles/skimr.html">Get started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -99,40 +111,24 @@ skim_format() function." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Using_skimr.html">Using skimr</a>
-    </li>
-    <li>
-      <a href="../articles/Using_fonts.html">Using fonts</a>
-    </li>
-    <li>
-      <a href="../articles/Skimr_defaults.html">skimr defaults</a>
+      <a href="../articles/Skimr_defaults.html">Skimr defaults</a>
     </li>
     <li>
       <a href="../articles/Supporting_additional_objects.html">Supporting additional objects</a>
     </li>
+    <li>
+      <a href="../articles/Using_fonts.html">Using Fonts</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Etc
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../CONTRIBUTING.html">Contributing</a>
-    </li>
-    <li>
-      <a href="../CONDUCT.html">Code of Conduct</a>
-    </li>
-  </ul>
-</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/ropensci/skimr">
-    <span class="fa fa-github"></span>
+  <a href="https://github.com/ropensci/skimr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -143,57 +139,64 @@ skim_format() function." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Summary statistic functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropenscilabs/skimr/blob/master/R/stats.R'><code>R/stats.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/stats.R'><code>R/stats.R</code></a></small>
     <div class="hidden name"><code>stats.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Skimr provides extensions to a variety of functions with R's stats package
-to simplify creating summaries of data. All functions are vectorized and take
-a single argument. Other parameters for these functions are set in the
-<code><a href='skim_format.html'>skim_format()</a></code> function.</p>
-    
+    <p><code>skimr</code> provides extensions to a variety of functions with R's stats package
+to simplify creating summaries of data. All functions are vectorized over the
+first argument. Additional arguments should be set in the <code><a href='sfl.html'>sfl()</a></code> that sets
+the appropriate skimmers for a data type. You can use these, along with other
+vectorized R functions, for creating custom sets of summary functions for
+a given data type.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>n_missing</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>n_missing</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>n_complete</span>(<span class='no'>x</span>)
+<span class='fu'>n_complete</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>sorted_count</span>(<span class='no'>x</span>)
+<span class='fu'>complete_rate</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>inline_hist</span>(<span class='no'>x</span>)
+<span class='fu'>n_whitespace</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>n_empty</span>(<span class='no'>x</span>)
+<span class='fu'>sorted_count</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>min_char</span>(<span class='no'>x</span>)
+<span class='fu'>top_counts</span><span class='op'>(</span><span class='va'>x</span>, max_char <span class='op'>=</span> <span class='fl'>3</span>, max_levels <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
 
-<span class='fu'>max_char</span>(<span class='no'>x</span>)
+<span class='fu'>inline_hist</span><span class='op'>(</span><span class='va'>x</span>, n_bins <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span>
 
-<span class='fu'>n_unique</span>(<span class='no'>x</span>)
+<span class='fu'>n_empty</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>ts_start</span>(<span class='no'>x</span>)
+<span class='fu'>min_char</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>ts_end</span>(<span class='no'>x</span>)
+<span class='fu'>max_char</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>inline_linegraph</span>(<span class='no'>x</span>)
+<span class='fu'>n_unique</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>list_lengths_min</span>(<span class='no'>x</span>)
+<span class='fu'>ts_start</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>list_lengths_median</span>(<span class='no'>x</span>)
+<span class='fu'>ts_end</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>list_lengths_max</span>(<span class='no'>x</span>)
+<span class='fu'>inline_linegraph</span><span class='op'>(</span><span class='va'>x</span>, length.out <span class='op'>=</span> <span class='fl'>16</span><span class='op'>)</span>
 
-<span class='fu'>list_min_length</span>(<span class='no'>x</span>)
+<span class='fu'>list_lengths_min</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>list_max_length</span>(<span class='no'>x</span>)</pre>
-    
+<span class='fu'>list_lengths_median</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>list_lengths_max</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>list_min_length</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'>list_max_length</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -201,17 +204,41 @@ a single argument. Other parameters for these functions are set in the
       <th>x</th>
       <td><p>A vector</p></td>
     </tr>
+    <tr>
+      <th>max_char</th>
+      <td><p>In <code>top</code> = 3, max_levels = 4</p></td>
+    </tr>
+    <tr>
+      <th>max_levels</th>
+      <td><p>The maximum number of levels to be displayed.</p></td>
+    </tr>
+    <tr>
+      <th>n_bins</th>
+      <td><p>In <code>inline_hist</code>, the number of histogram bars.</p></td>
+    </tr>
+    <tr>
+      <th>length.out</th>
+      <td><p>In <code>inline_linegraph</code>, the length of the character time
+series.</p></td>
+    </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
-    <ul>
+    
+<ul>
 <li><p><code>n_missing</code>: Calculate the sum of <code>NA</code> and <code>NULL</code> (i.e. missing) values.</p></li>
-<li><p><code>n_complete</code>: Calculate complete values; complete values are not missing.</p></li>
+<li><p><code>n_complete</code>: Calculate the sum of not <code>NA</code> and <code>NULL</code> (i.e. missing)
+values.</p></li>
+<li><p><code>complete_rate</code>: Calculate complete values; complete values are not missing.</p></li>
+<li><p><code>n_whitespace</code>: Calculate the number of rows containing only whitespace
+values using s+ regex.</p></li>
 <li><p><code>sorted_count</code>: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical
 and depends upon the locale. <code>NA</code> is treated as a ordinary value for
 sorting.</p></li>
+<li><p><code>top_counts</code>: Compute and collapse a contingency table into a single
+character scalar. Wraps <code>sorted_count()</code>.</p></li>
 <li><p><code>inline_hist</code>: Generate inline histogram for numeric variables. The
 character length of the histogram is controlled by the formatting options
 for character vectors.</p></li>
@@ -234,43 +261,35 @@ Based on the function in the pillar package.</p></li>
 <li><p><code>list_min_length</code>: Get the length of the shortest list in a vector of lists.</p></li>
 <li><p><code>list_max_length</code>: Get the length of the longest list in a vector of lists.</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='skim_format.html'>skim_format()</a></code> and <code><a href='https://purrr.tidyverse.org/reference/partial.html'>purrr::partial()</a></code> for setting arguments of a
-skimmer function.</p></div>
-    
+    <div class='dont-index'><p><code><a href='get_skimmers.html'>get_skimmers()</a></code> for customizing the functions called by <code><a href='skim.html'>skim()</a></code>.</p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#functions">Functions</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
-      <div style="margin-top:-9px">
-  <p>skimr is a part of <img src='https://github.com/ropensci/logos/raw/master/icon_lettering_color.png' height=40 alt = 'rOpenSci'>. Learn more at <a href="https://ropensci.org">ropensci.org</a>.</p>
+      <div class="copyright">
+  <p>Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.</p>
 </div>
 
-<div class="author">
-  <p>
-    Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a> & <a href="https://docs.ropensci.org/rotemplate/">rotemplate</a>.
-  </p>
+<div class="pkgdown">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

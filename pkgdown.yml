@@ -1,12 +1,10 @@
-pandoc: '2.2'
-pkgdown: 1.3.0
+pandoc: 2.7.3
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   Skimr_defaults: Skimr_defaults.html
   Supporting_additional_objects: Supporting_additional_objects.html
   Using_fonts: Using_fonts.html
-  Using_skimr: Using_skimr.html
-urls:
-  reference: https://ropensci.github.io/skimr/reference
-  article: https://ropensci.github.io/skimr/articles
+  skimr: skimr.html
+last_built: 2021-03-03T03:01Z
 

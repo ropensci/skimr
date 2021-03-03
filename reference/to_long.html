@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary function for skim_df — summary.skim_df • skimr</title>
+<title>Create "long" skim output — to_long • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Summary function for skim_df — summary.skim_df" />
-<meta property="og:description" content="This is a method of the generic function summary()." />
+<meta property="og:title" content="Create "long" skim output — to_long" />
+<meta property="og:description" content="Skim results returned as a tidy long data frame with four columns:
+variable, type, stat and formatted." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -140,48 +141,84 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Summary function for skim_df</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/summary.R'><code>R/summary.R</code></a></small>
-    <div class="hidden name"><code>summary.skim_df.Rd</code></div>
+    <h1>Create "long" skim output</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/reshape.R'><code>R/reshape.R</code></a></small>
+    <div class="hidden name"><code>to_long.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a method of the generic function <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>.</p>
+    <p>Skim results returned as a tidy long data frame with four columns:
+variable, type, stat and formatted.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for skim_df</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>to_long</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span>, skim_fun <span class='op'>=</span> <span class='va'>skim</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>to_long</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span>, skim_fun <span class='op'>=</span> <span class='va'>skim</span><span class='op'>)</span>
+
+<span class='co'># S3 method for skim_df</span>
+<span class='fu'>to_long</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span>, skim_fun <span class='op'>=</span> <span class='va'>skim</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>a skim dataframe.</p></td>
+      <th>.data</th>
+      <td><p>A data frame or an object that can be coerced into a data frame.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments affecting the summary produced. Not used.</p></td>
+      <td><p>Columns to select for skimming. When none are provided, the
+default is to skim all columns.</p></td>
+    </tr>
+    <tr>
+      <th>skim_fun</th>
+      <td><p>The skim function used.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A summary of the skim data frame.</p>
+    <p>A tibble</p>
+    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
+
+    
+<ul>
+<li><p><code>default</code>: Skim a data frame and convert the results to a
+long data frame.</p></li>
+<li><p><code>skim_df</code>: Transform a skim_df to a long data frame.</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; ── Data Summary ────────────────────────
-#&gt;                            Values
-#&gt; Name                       mtcars
-#&gt; Number of rows             32    
-#&gt; Number of columns          11    
-#&gt; _______________________          
-#&gt; Column type frequency:           
-#&gt;   numeric                  11    
-#&gt; ________________________         
-#&gt; Group variables            None  </div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>to_long</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 45 x 4</span><span>
+#&gt;    skim_type skim_variable stat          formatted
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> factor    Species       n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> numeric   Sepal.Length  n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> numeric   Sepal.Width   n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> numeric   Petal.Length  n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> numeric   Petal.Width   n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> factor    Species       complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> numeric   Sepal.Length  complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> numeric   Sepal.Width   complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> numeric   Petal.Length  complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> numeric   Petal.Width   complete_rate 1        
+#&gt; </span><span style='color: #949494;'># … with 35 more rows</span><span></div><div class='input'><span class='fu'>to_long</span><span class='op'>(</span><span class='fu'><a href='skim.html'>skim</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 45 x 4</span><span>
+#&gt;    skim_type skim_variable stat          formatted
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> factor    Species       n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> numeric   Sepal.Length  n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> numeric   Sepal.Width   n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> numeric   Petal.Length  n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> numeric   Petal.Width   n_missing     0        
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> factor    Species       complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> numeric   Sepal.Length  complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> numeric   Sepal.Width   complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> numeric   Petal.Length  complete_rate 1        
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> numeric   Petal.Width   complete_rate 1        
+#&gt; </span><span style='color: #949494;'># … with 35 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

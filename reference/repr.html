@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • skimr</title>
+<title>Skimr printing within Jupyter notebooks — repr • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,10 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Skimr printing within Jupyter notebooks — repr" />
+<meta property="og:description" content="This reproduces printed results in the console. By default Jupyter kernels
+render the final object in the cell. We want the version printed by
+skimr instead of the data that it contains." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -139,24 +142,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Skimr printing within Jupyter notebooks</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/skim_print.R'><code>R/skim_print.R</code></a></small>
+    <div class="hidden name"><code>repr.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Skimr_defaults.html">Skimr defaults</a></dt>
-        <dd></dt>
-        <dt><a href="Supporting_additional_objects.html">Supporting additional objects</a></dt>
-        <dd></dt>
-        <dt><a href="Using_fonts.html">Using Fonts</a></dt>
-        <dd></dt>
-        <dt><a href="skimr.html">Using Skimr</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>This reproduces printed results in the console. By default Jupyter kernels
+render the final object in the cell. We want the version printed by
+<code>skimr</code> instead of the data that it contains.</p>
     </div>
+
+    <pre class="usage"><span class='co'># S3 method for skim_df</span>
+<span class='fu'>repr_text</span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for skim_list</span>
+<span class='fu'>repr_text</span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for one_skim_df</span>
+<span class='fu'>repr_text</span><span class='op'>(</span><span class='va'>obj</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>obj</th>
+      <td><p>The object to <a href='print.html'>print</a> and then return the output.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>ignored.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>None. <code><a href='https://rdrr.io/r/base/invisible.html'>invisible(NULL)</a></code>.</p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

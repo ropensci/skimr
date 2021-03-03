@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print <code>skim</code> objects — print • skimr</title>
+<title>Print skim objects — print • skimr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -15,51 +15,59 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<!-- ropensci -->
-<link href="../ropensci.css" rel="stylesheet">
-
-<meta property="og:title" content="Print <code>skim</code> objects — print" />
-
-<meta property="og:description" content="Print skim objects" />
-
-<meta property="og:image" content="https://ropensci.github.io/skimr/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-462421-8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta property="og:title" content="Print skim objects — print" />
+<meta property="og:description" content="skimr has custom print methods for all supported objects. Default printing
+methods for knitr/ rmarkdown documents is also provided." />
+<meta property="og:image" content="/logo.png" />
 
-  gtag('config', 'UA-462421-8');
-</script>
+
+
+
+<!-- mathjax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,22 +79,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
-      <div class="navbar-brand-container">
-        <a href="https://ropensci.org"><img src="../hexlogo.png" id="hexlogo" alt="rOpenSci" /></a>
-        <a class="navbar-brand" href="../index.html"><i>skimr <small>v1.0.6</small></i></a>
-      </div>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">skimr</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../articles/skimr.html">Get started</a>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -96,40 +107,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Using_skimr.html">Using skimr</a>
-    </li>
-    <li>
-      <a href="../articles/Using_fonts.html">Using fonts</a>
-    </li>
-    <li>
-      <a href="../articles/Skimr_defaults.html">skimr defaults</a>
+      <a href="../articles/Skimr_defaults.html">Skimr defaults</a>
     </li>
     <li>
       <a href="../articles/Supporting_additional_objects.html">Supporting additional objects</a>
     </li>
+    <li>
+      <a href="../articles/Using_fonts.html">Using Fonts</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Etc
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../CONTRIBUTING.html">Contributing</a>
-    </li>
-    <li>
-      <a href="../CONDUCT.html">Code of Conduct</a>
-    </li>
-  </ul>
-</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/ropensci/skimr">
-    <span class="fa fa-github"></span>
+  <a href="https://github.com/ropensci/skimr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -140,81 +135,191 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Print <code>skim</code> objects</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropenscilabs/skimr/blob/master/R/skim_print.R'><code>R/skim_print.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/skimr/blob/master/R/skim_print.R'><code>R/skim_print.R</code></a></small>
     <div class="hidden name"><code>print.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Print <code>skim</code> objects</p>
-    
+    <p><code>skimr</code> has custom print methods for all supported objects. Default printing
+methods for <code>knitr</code>/ <code>rmarkdown</code> documents is also provided.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for skim_df</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>print</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  include_summary <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  n <span class='op'>=</span> <span class='cn'>Inf</span>,
+  width <span class='op'>=</span> <span class='cn'>Inf</span>,
+  n_extra <span class='op'>=</span> <span class='cn'>NULL</span>,
+  strip_metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"skimr_strip_metadata"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  rule_width <span class='op'>=</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>width</span>,
+  summary_rule_width <span class='op'>=</span> <span class='fl'>40</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='co'># S3 method for skim_vector</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='co'># S3 method for one_skim_df</span>
+<span class='fu'>print</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  n <span class='op'>=</span> <span class='cn'>Inf</span>,
+  .width <span class='op'>=</span> <span class='cn'>Inf</span>,
+  n_extra <span class='op'>=</span> <span class='cn'>NULL</span>,
+  strip_metadata <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"skimr_strip_metadata"</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  .rule_width <span class='op'>=</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>width</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for skim_list</span>
+<span class='fu'>print</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  n <span class='op'>=</span> <span class='cn'>Inf</span>,
+  width <span class='op'>=</span> <span class='cn'>Inf</span>,
+  n_extra <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .rule_width <span class='op'>=</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>width</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for summary_skim_df</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'>print</span><span class='op'>(</span><span class='va'>x</span>, .summary_rule_width <span class='op'>=</span> <span class='fl'>40</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Either a <code>skim_df</code>, <code>skim_vector</code> or <code>skim_summary</code> object.</p></td>
+      <td><p>Object to format or print.</p></td>
+    </tr>
+    <tr>
+      <th>include_summary</th>
+      <td><p>Whether a summary of the data frame should be printed</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
+if less than option <code>tibble.print_max</code>. Otherwise, will print
+<code>tibble.print_min</code> rows.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>Width of text output to generate. This defaults to <code>NULL</code>, which
+means use <code><a href='https://rdrr.io/r/base/options.html'>getOption("tibble.width")</a></code> or (if also <code>NULL</code>)
+<code><a href='https://rdrr.io/r/base/options.html'>getOption("width")</a></code>; the latter displays only the columns that fit on one
+screen. You can also set <code><a href='https://rdrr.io/r/base/options.html'>options(tibble.width = Inf)</a></code> to override this
+default and always print all columns.</p></td>
+    </tr>
+    <tr>
+      <th>n_extra</th>
+      <td><p>Number of extra columns to print abbreviated information for,
+if the width is too small for the entire tibble. If <code>NULL</code>, the default,
+will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></td>
+    </tr>
+    <tr>
+      <th>strip_metadata</th>
+      <td><p>Whether tibble metadata should be removed.</p></td>
+    </tr>
+    <tr>
+      <th>rule_width</th>
+      <td><p>Width of the cli rules in printed skim object. Defaults
+to base::options()$width</p></td>
+    </tr>
+    <tr>
+      <th>summary_rule_width</th>
+      <td><p>Width of Data Summary cli rule, defaults to 40.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments passed to or from other methods.</p></td>
+      <td><p>Other arguments passed on to individual methods.</p></td>
+    </tr>
+    <tr>
+      <th>.width</th>
+      <td><p>Width for the tibble for each type.</p></td>
+    </tr>
+    <tr>
+      <th>.rule_width</th>
+      <td><p>Width for the rule above the skim results for each type.</p></td>
+    </tr>
+    <tr>
+      <th>.summary_rule_width</th>
+      <td><p>the width for the main rule above the summary.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
-    <ul>
-<li><p><code>skim_df</code>: Prints a skimmed data frame (<code>skim_df</code> from <code><a href='skim.html'>skim()</a></code>)</p></li>
-<li><p><code>skim_vector</code>: Manages print for <code>skim_vector</code> objects.</p></li>
+    
+<ul>
+<li><p><code>skim_df</code>: Print a skimmed data frame (<code>skim_df</code> from <code><a href='skim.html'>skim()</a></code>).</p></li>
+<li><p><code>one_skim_df</code>: Print an entry within a partitioned <code>skim_df</code>.</p></li>
+<li><p><code>skim_list</code>: Print a <code>skim_list</code>, a list of <code>skim_df</code> objects.</p></li>
 <li><p><code>summary_skim_df</code>: Print method for a <code>summary_skim_df</code> object.</p></li>
 </ul>
+    <h2 class="hasAnchor" id="printing-options"><a class="anchor" href="#printing-options"></a>Printing options</h2>
+
     
 
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
-          </ul>
+
+<p>For better or for worse, <code>skimr</code> often produces more output than can fit in
+the standard R console. Fortunately, most modern environments like RStudio
+and Jupyter support more than 80 character outputs. Call
+<code><a href='https://rdrr.io/r/base/options.html'>options(width = 90)</a></code> to get a better experience with <code>skimr</code>.</p>
+<p>The print methods in <code>skimr</code> wrap those in the <a href='https://tibble.tidyverse.org/reference/formatting.html'>tibble</a>
+package. You can control printing behavior using the same global options.</p>
+    <h2 class="hasAnchor" id="behavior-in-dplyr-pipelines"><a class="anchor" href="#behavior-in-dplyr-pipelines"></a>Behavior in <code>dplyr</code> pipelines</h2>
+
+    
+
+
+<p>Printing a <code>skim_df</code> requires specific columns that might be dropped when
+using <code><a href='https://dplyr.tidyverse.org/reference/select.html'>dplyr::select()</a></code> or <code><a href='https://dplyr.tidyverse.org/reference/summarise.html'>dplyr::summarize()</a></code> on a <code>skim_df</code>. In those
+cases, this method falls back to <code><a href='https://tibble.tidyverse.org/reference/formatting.html'>tibble::print.tbl()</a></code>.</p>
+    <h2 class="hasAnchor" id="controlling-metadata-behavior"><a class="anchor" href="#controlling-metadata-behavior"></a>Controlling metadata behavior</h2>
+
+    
+
+
+<p>On POSIX systems, <code>skimr</code> removes the tibble metadata when generating output.
+On some platforms, this can lead to all output getting removed. To disable
+that behavior, set either <code>strip_metadata = FALSE</code> when calling print or use
+<code><a href='https://rdrr.io/r/base/options.html'>options(skimr_strip_metadata = FALSE)</a></code>. The <code>crayon</code> package and the color
+support within <code>tibble</code> is also a factor. If your <code>skimr</code> results tables are
+empty you may need to run the following <code><a href='https://rdrr.io/r/base/options.html'>options(crayon.enabled = FALSE)</a></code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://tibble.tidyverse.org/reference/formatting.html'>tibble::trunc_mat()</a></code> For a list of global options for customizing
+print formatting. <code><a href='https://rdrr.io/pkg/crayon/man/has_color.html'>crayon::has_color()</a></code> for the variety of issues that
+affect tibble's color support.</p></div>
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
+  </div>
 </div>
+
 
       <footer>
-      <div style="margin-top:-9px">
-  <p>skimr is a part of <img src='https://github.com/ropensci/logos/raw/master/icon_lettering_color.png' height=40 alt = 'rOpenSci'>. Learn more at <a href="https://ropensci.org">ropensci.org</a>.</p>
+      <div class="copyright">
+  <p>Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.</p>
 </div>
 
-<div class="author">
-  <p>
-    Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a> & <a href="https://docs.ropensci.org/rotemplate/">rotemplate</a>.
-  </p>
+<div class="pkgdown">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
