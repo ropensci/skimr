@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.1.2
+Version: 2.1.3
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
@@ -110,8 +110,8 @@ Description: A simple to use summary function that can be used with pipes
     Instructions for managing these on specific operating systems are
     given in the "Using skimr" vignette and the README.
 License: GPL-3
-URL: https://docs.ropensci.org/skimr (website),
-    https://github.com/ropensci/skimr
+URL: https://docs.ropensci.org/skimr/ (website),
+    https://github.com/ropensci/skimr/
 BugReports: https://github.com/ropensci/skimr/issues
 Depends:
     R (>= 3.1.2)
