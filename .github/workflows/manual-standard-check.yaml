@@ -1,9 +1,6 @@
 # A manually-triggered R CMD check. Runs on all R versions and OS's
 # and should be used when preparing for a release.
-on: 
-  workflow_dispatch:
-    tags:
-      description: "R CMD check for release"
+on: workflow_dispatch
 
 name: R-CMD-check-all-OS
 
