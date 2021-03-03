@@ -1,17 +1,18 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-skimr <a href='https://docs.ropensci.org/skimr'>
-================================================
+
+# skimr <a href='https://docs.ropensci.org/skimr/'>
 
 <img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![R build status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/)
+[![R build
+status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr/)
 [![This is an ROpenSci Peer reviewed
-package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
 [![cran
 checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
@@ -28,8 +29,7 @@ human reader.
 programmatically. Upgraders should review this document, the release
 notes and vignettes carefully.**
 
-Installation
-------------
+## Installation
 
 The current released version of `skimr` can be installed from CRAN. If
 you wish to install the current build of the next release you can do so
@@ -49,8 +49,7 @@ been incorporated in the master branch (and may not be):
 Do not rely on APIs from the develop branch, as they are likely to
 change.
 
-Skim statistics in the console
-------------------------------
+## Skim statistics in the console
 
 `skimr`:
 
@@ -120,10 +119,10 @@ Skim statistics in the console
     ##                            Values         
     ## Name                       dplyr::starwars
     ## Number of rows             87             
-    ## Number of columns          13             
+    ## Number of columns          14             
     ## _______________________                   
     ## Column type frequency:                    
-    ##   character                7              
+    ##   character                8              
     ##   list                     3              
     ##   numeric                  3              
     ## ________________________                  
@@ -135,9 +134,10 @@ Skim statistics in the console
     ## 2 hair_color            5         0.943     4    13     0       12          0
     ## 3 skin_color            0         1         3    19     0       31          0
     ## 4 eye_color             0         1         3    13     0       15          0
-    ## 5 gender                3         0.966     4    13     0        4          0
-    ## 6 homeworld            10         0.885     4    14     0       48          0
-    ## 7 species               5         0.943     3    14     0       37          0
+    ## 5 sex                   4         0.954     4    14     0        4          0
+    ## 6 gender                4         0.954     8     9     0        2          0
+    ## 7 homeworld            10         0.885     4    14     0       48          0
+    ## 8 species               4         0.954     3    14     0       37          0
     ## 
     ## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
@@ -244,8 +244,7 @@ Skim statistics in the console
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
-Knitted results
----------------
+## Knitted results
 
 Simply skimming a data frame will produce the horizontal print layout
 shown above. We provide a `knit_print` method for the types of objects
@@ -293,6 +292,8 @@ chunk.
 </tr>
 </tbody>
 </table>
+
+Data summary
 
 **Variable type: numeric**
 
@@ -342,8 +343,7 @@ chunk.
 </tbody>
 </table>
 
-Customizing skimr
------------------
+## Customizing skimr
 
 Although skimr provides opinionated defaults, it is highly customizable.
 Users can specify their own statistics, change the formatting of
@@ -405,6 +405,8 @@ skimmers.
 </tr>
 </tbody>
 </table>
+
+Data summary
 
 **Variable type: numeric**
 
@@ -490,6 +492,8 @@ uses only those functions that you’ve provided.
 </tbody>
 </table>
 
+Data summary
+
 **Variable type: numeric**
 
 <table>
@@ -556,6 +560,8 @@ And you can default skimmers by setting them to `NULL`.
 </tbody>
 </table>
 
+Data summary
+
 **Variable type: numeric**
 
 <table>
@@ -618,8 +624,7 @@ example.
       )
     }
 
-Limitations of current version
-------------------------------
+## Limitations of current version
 
 We are aware that there are issues with rendering the inline histograms
 and line charts in various contexts, some of which are described below.
@@ -630,7 +635,7 @@ There are known issues with printing the spark-histogram characters when
 printing a data frame. For example, `"▂▅▇"` is printed as
 `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
 the low-level
-code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
+code](https://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
 for printing dataframes. While some cases have been addressed, there
 are, for example, reports of this issue in Emacs ESS.
 
@@ -690,8 +695,7 @@ the following
 
 You need to do this one time per session.
 
-Contributing
-------------
+## Contributing
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we

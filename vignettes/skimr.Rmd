@@ -10,7 +10,8 @@ vignette: >
 
 ## Introduction
 
-`skimr` is designed to provide summary statistics about variables. It is
+`skimr` is designed to provide summary statistics about variables in data frames,
+tibbles, data tables and vectors. It is
 opinionated in its defaults, but easy to modify.
 
 In base R, the most similar functions are `summary()` for vectors and data
