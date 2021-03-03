@@ -1,6 +1,8 @@
 on:
   push:
-    branches: master
+    branches:
+      - main
+      - master
 
 name: pkgdown
 
@@ -12,12 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install XQuartz
-        run: brew cask install xquartz
+      - uses: r-lib/actions/setup-r@v1
 
-      - uses: r-lib/actions/setup-r@master
-
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Query dependencies
         run: |
@@ -27,27 +26,22 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache R packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-2-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install dependencies
         run: |
-          install.packages("remotes")
-          remotes::install_local(dependencies = FALSE, force = TRUE)
-          remotes::install_local("cpp11test", dependencies = TRUE, INSTALL_opts = "--install-tests", force = TRUE)
-          remotes::install_local(dependencies = TRUE, force = TRUE)
-          remotes::install_cran("pkgdown")
+          remotes::install_deps(dependencies = TRUE)
+          install.packages("pkgdown", type = "binary")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
       - name: Deploy package
-        env:
-          CPP11_EVAL: true
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
