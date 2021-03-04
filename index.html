@@ -106,10 +106,10 @@
   <div class="contents col-md-9">
 <div id="skimr-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#skimr-" class="anchor"></a>skimr <a href="https://docs.ropensci.org/skimr"></a>
+<a href="#skimr-" class="anchor"></a>skimr <a href="https://docs.ropensci.org/skimr/"></a>
 </h1></div>
 <p><img src="https://docs.ropensci.org/skimr/reference/figures/logo.png" align="right" height="139"></p>
-<p><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a> <a href="https://github.com/ropensci/skimr/actions?workflow=R-CMD-check"><img src="https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://codecov.io/gh/ropensci/skimr"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://github.com/ropensci/onboarding/issues/175"><img src="https://badges.ropensci.org/175_status.svg" alt="This is an ROpenSci Peer reviewed package"></a> <a href="https://cran.r-project.org/package=skimr"><img src="http://www.r-pkg.org/badges/version/skimr" alt="CRAN_Status_Badge"></a> <a href="https://cranchecks.info/pkgs/skimr"><img src="https://cranchecks.info/badges/summary/skimr" alt="cran checks"></a></p>
+<p><a href="http://www.repostatus.org/"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a> <a href="https://github.com/ropensci/skimr/actions?workflow=R-CMD-check"><img src="https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://codecov.io/gh/ropensci/skimr/"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://github.com/ropensci/software-review/issues/175"><img src="https://badges.ropensci.org/175_status.svg" alt="This is an ROpenSci Peer reviewed package"></a> <a href="https://cran.r-project.org/package=skimr"><img src="http://www.r-pkg.org/badges/version/skimr" alt="CRAN_Status_Badge"></a> <a href="https://cranchecks.info/pkgs/skimr"><img src="https://cranchecks.info/badges/summary/skimr" alt="cran checks"></a></p>
 <p><code>skimr</code> provides a frictionless approach to summary statistics which conforms to the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>, displaying summary statistics the user can skim quickly to understand their data. It handles different data types and returns a <code>skim_df</code> object which can be included in a pipeline or displayed nicely for the human reader.</p>
 <p><strong>Note: <code>skimr</code> version 2 has major changes when skimr is used programmatically. Upgraders should review this document, the release notes and vignettes carefully.</strong></p>
 <div id="installation" class="section level2">
@@ -195,10 +195,10 @@
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">##                            Values         </span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">## Name                       dplyr::starwars</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">## Number of rows             87             </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## Number of columns          13             </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## Number of columns          14             </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">## _______________________                   </span></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="co">## Column type frequency:                    </span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##   character                7              </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##   character                8              </span></span>
 <span id="cb5-11"><a href="#cb5-11"></a><span class="co">##   list                     3              </span></span>
 <span id="cb5-12"><a href="#cb5-12"></a><span class="co">##   numeric                  3              </span></span>
 <span id="cb5-13"><a href="#cb5-13"></a><span class="co">## ________________________                  </span></span>
@@ -210,21 +210,22 @@
 <span id="cb5-19"><a href="#cb5-19"></a><span class="co">## 2 hair_color            5         0.943     4    13     0       12          0</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="co">## 3 skin_color            0         1         3    19     0       31          0</span></span>
 <span id="cb5-21"><a href="#cb5-21"></a><span class="co">## 4 eye_color             0         1         3    13     0       15          0</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="co">## 5 gender                3         0.966     4    13     0        4          0</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## 6 homeworld            10         0.885     4    14     0       48          0</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="co">## 7 species               5         0.943     3    14     0       37          0</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co">## </span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="co">## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="co">##   skim_variable n_missing complete_rate n_unique min_length max_length</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="co">## 1 films                 0             1       24          1          7</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="co">## 2 vehicles              0             1       11          0          2</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="co">## 3 starships             0             1       17          0          5</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="co">## </span></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="co">## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁</span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="co">## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="co">## 3 birth_year           44         0.494  87.6 155.      8  35      52  72     896 ▇▁▁▁▁</span></span></code></pre></div>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">## 5 sex                   4         0.954     4    14     0        4          0</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## 6 gender                4         0.954     8     9     0        2          0</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">## 7 homeworld            10         0.885     4    14     0       48          0</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">## 8 species               4         0.954     3    14     0       37          0</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">## </span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">##   skim_variable n_missing complete_rate n_unique min_length max_length</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">## 1 films                 0             1       24          1          7</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">## 2 vehicles              0             1       11          0          2</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co">## 3 starships             0             1       17          0          5</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">## </span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="co">## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">## 3 birth_year           44         0.494  87.6 155.      8  35      52  72     896 ▇▁▁▁▁</span></span></code></pre></div>
 </div>
 <div id="has-a-useful-summary-function" class="section level3">
 <h3 class="hasAnchor">
@@ -396,6 +397,7 @@ None
 </tr>
 </tbody>
 </table>
+<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -587,6 +589,7 @@ None
 </tr>
 </tbody>
 </table>
+<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -739,6 +742,7 @@ None
 </tr>
 </tbody>
 </table>
+<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -847,6 +851,7 @@ None
 </tr>
 </tbody>
 </table>
+<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -947,7 +952,7 @@ Sepal.Length
 <div id="support-for-spark-histograms" class="section level3">
 <h3 class="hasAnchor">
 <a href="#support-for-spark-histograms" class="anchor"></a>Support for spark histograms</h3>
-<p>There are known issues with printing the spark-histogram characters when printing a data frame. For example, <code>"▂▅▇"</code> is printed as <code>"&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2587&gt;"</code>. This longstanding problem <a href="http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html">originates in the low-level code</a> for printing dataframes. While some cases have been addressed, there are, for example, reports of this issue in Emacs ESS.</p>
+<p>There are known issues with printing the spark-histogram characters when printing a data frame. For example, <code>"▂▅▇"</code> is printed as <code>"&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2587&gt;"</code>. This longstanding problem <a href="https://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html">originates in the low-level code</a> for printing dataframes. While some cases have been addressed, there are, for example, reports of this issue in Emacs ESS.</p>
 <p>This means that while <code>skimr</code> can render the histograms to the console and in RMarkdown documents, it cannot in other circumstances. This includes:</p>
 <ul>
 <li>converting a <code>skimr</code> data frame to a vanilla R data frame, but tibbles render correctly</li>
