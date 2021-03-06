@@ -150,7 +150,7 @@ will automatically generate names from the provided values.
 
 By default, functions in the `sfl` call are appended to the default skimmers.
 
-```{r}
+```{}
 my_skim <- skim_with(numeric = sfl(mad))
 my_skim(iris, Sepal.Length)
 ```
@@ -159,7 +159,7 @@ But you can also use the dummy argument pattern from `dplyr::funs` to set
 particular function arguments. Setting the `append = FALSE` argument uses only
 those functions that you've provided.
 
-```{r}
+```{}
 my_skim <- skim_with(
   numeric = sfl(iqr = IQR, p99 = list(~ quantile(., probs = .99))), append = FALSE
 )
@@ -168,7 +168,7 @@ my_skim(iris, Sepal.Length)
 
 And you can remove default skimmers by setting them to `NULL`.
 
-```{r}
+```{}
 my_skim <- skim_with(numeric = sfl(hist = NULL))
 my_skim(iris, Sepal.Length)
 ```
@@ -260,6 +260,7 @@ So, by default, we disable removing metadata on windows. You can turn this
 feature on with an option. Either set it when calling print or globally.
 
 ```{r, eval = FALSE}
+skimmed <- skim(chickwts)
 print(skimmed, strip_metadata = TRUE)
 options(skimr_strip_metadata = TRUE)
 ```

@@ -44,7 +44,7 @@ the variable.
 ### Skimming data frames
 
 By design, the main focus of `skimr` is on data frames; it is intended to fit
-well within a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
+well within a data [pipeline](https://r4ds.had.co.nz/pipes.html) and relies
 extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 
