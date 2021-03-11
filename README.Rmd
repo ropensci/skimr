@@ -274,6 +274,17 @@ options(crayon.enabled = FALSE)
 
 You need to do this one time per session.
 
+## Inspirations
+
+* [TextPlots](https://github.com/sunetos/TextPlots.jl) for use of Braille
+  characters
+
+* [spark](https://github.com/holman/spark) for use of block characters.
+
+The earliest use of unicode characters to generate sparklines appears to be [from 2009](https://blog.jonudell.net/2009/01/13/fuel-prices-and-pageviews/).
+
+Exercising these ideas to their fullest requires a font with good support for block drawing characters. [PragamataPro](https://fsd.it/shop/fonts/pragmatapro/) is one such font.
+
 ## Contributing
 
 We welcome issue reports and pull requests, including potentially adding
