@@ -373,7 +373,8 @@ set particular function arguments. Setting the `append = FALSE` argument
 uses only those functions that you’ve provided.
 
     my_skim <- skim_with(
-      numeric = sfl(iqr = IQR, p99 = list(~ quantile(., probs = .99))), append = FALSE
+      numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)),
+      append = FALSE
     )
     my_skim(iris, Sepal.Length)
 
