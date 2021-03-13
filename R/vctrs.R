@@ -101,7 +101,7 @@ combine_compatible_objects <- function(x, y, ..., x_arg = "", y_arg = "") {
       details = "Can't combine different sets of skim functions."
     )
   }
-  
+
   if (could_be_skim_df(x) && could_be_skim_df(y)) {
     reassign_skim_attrs(
       vctrs::tib_ptype2(x, y, ...),

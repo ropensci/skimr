@@ -630,11 +630,11 @@ test_that("skim returns expected response for difftime vectors", {
 test_that("skim returns expected response for lubridate Timespan vectors", {
   dt <- tibble::tibble(x = lubridate::duration(1))
   input <- skim(dt)
-  
+
   # dimensions
   expect_n_rows(input, 1)
   expect_n_columns(input, 8)
-  
+
   # classes
   expect_s3_class(input, "skim_df")
   expect_s3_class(input, "tbl_df")
@@ -645,7 +645,7 @@ test_that("skim returns expected response for lubridate Timespan vectors", {
     "Timespan.min", "Timespan.max", "Timespan.median",
     "Timespan.n_unique"
   ))
-  
+
   # attributes
   attrs <- attributes(input)
   expect_equal(attrs$data_rows, 1)
@@ -655,7 +655,7 @@ test_that("skim returns expected response for lubridate Timespan vectors", {
     attrs$skimmers_used,
     list(Timespan = c("min", "max", "median", "n_unique"))
   )
-  
+
   # values
   expect_identical(input$skim_variable, "x")
   expect_identical(input$skim_type, "Timespan")
@@ -848,7 +848,7 @@ test_that("Tidyselect helpers work as expected", {
 
 test_that("Tidyselect predicates work as expected", {
   input <- skim(iris, where(is.numeric))
-  
+
   expect_n_rows(input, 4)
   expect_n_columns(input, 12)
   expect_identical(
@@ -932,12 +932,12 @@ test_that("Skimming succeeds when column names are similar", {
 test_that("Skim inside a function returns the data name", {
   nested_skim <- function(df) {
     skim(df, .data_name = deparse(substitute(df)))
-  }  
+  }
   input <- nested_skim(iris)
   expect_equal(attr(input, "df_name"), "iris")
 })
 
 test_that("The data_name parameter can change the data_name attribute", {
   input <- skim(iris, .data_name = "Anderson")
-  expect_equal(attr(input, "df_name"),  "Anderson")
+  expect_equal(attr(input, "df_name"), "Anderson")
 })

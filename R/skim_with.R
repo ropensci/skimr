@@ -91,11 +91,11 @@ skim_with <- function(...,
       data <- as.data.frame(data)
     }
     stopifnot(inherits(data, "data.frame"))
-    
+
     selected <- names(tidyselect::eval_select(rlang::expr(c(...)), data))
     if (length(selected) == 0) {
       selected <- names(data)
-    } 
+    }
 
     grps <- dplyr::groups(data)
     if (length(grps) > 0) {
@@ -181,14 +181,15 @@ validate_assignment <- function(...) {
 #' @keywords internal
 #' @noRd
 get_dt_key <- function(data) {
-    if (inherits(data, "data.table")) {
-      dt_key <- data.table::key(data)
-      if (is.null(dt_key))
-        dt_key <- "NULL"
-      paste(dt_key, collapse = ", ")
-    } else {
-      NA # Will never be NA if `data` is a data.table
+  if (inherits(data, "data.table")) {
+    dt_key <- data.table::key(data)
+    if (is.null(dt_key)) {
+      dt_key <- "NULL"
     }
+    paste(dt_key, collapse = ", ")
+  } else {
+    NA # Will never be NA if `data` is a data.table
+  }
 }
 
 #' Combine local and default skimmers for each column
