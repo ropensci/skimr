@@ -1,5 +1,5 @@
 test_that("skim returns expected response for numeric vectors", {
-  input <- skim(mtcars$mpg)
+  input <- skim(mtcars, mpg)
 
   # dimensions
   expect_n_rows(input, 1)
@@ -847,7 +847,7 @@ test_that("Tidyselect helpers work as expected", {
 })
 
 test_that("Tidyselect predicates work as expected", {
-  input <- skim(iris, tidyselect::where(is.numeric))
+  input <- skim(iris, where(is.numeric))
   
   expect_n_rows(input, 4)
   expect_n_columns(input, 12)
@@ -910,7 +910,7 @@ test_that("Skimming a grouped df works when selecting exactly one variable", {
 })
 
 test_that("Skimming without charts produces no histograms", {
-  input <- skim_without_charts(iris)
+  input <- skim_without_charts(iris, Sepal.Width)
   expect_null(iris$numeric.hist)
 })
 
@@ -931,13 +931,13 @@ test_that("Skimming succeeds when column names are similar", {
 
 test_that("Skim inside a function returns the data name", {
   nested_skim <- function(df) {
-    skim(df, data_name = deparse(substitute(df)))
+    skim(df, .data_name = deparse(substitute(df)))
   }  
   input <- nested_skim(iris)
   expect_equal(attr(input, "df_name"), "iris")
 })
 
 test_that("The data_name parameter can change the data_name attribute", {
-  input <- skim(iris, data_name = "Anderson")
+  input <- skim(iris, .data_name = "Anderson")
   expect_equal(attr(input, "df_name"),  "Anderson")
 })
