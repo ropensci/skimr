@@ -6,15 +6,11 @@
 \alias{skim_without_charts}
 \title{Skim a data frame, getting useful summary statistics}
 \usage{
-skim(data, ..., .data_name = rlang::expr_label(substitute(data)))
+skim(data, ..., .data_name = NULL)
 
 skim_tee(data, ..., skim_fun = skim)
 
-skim_without_charts(
-  data,
-  ...,
-  .data_name = rlang::expr_label(substitute(data))
-)
+skim_without_charts(data, ..., .data_name = NULL)
 }
 \arguments{
 \item{data}{A tibble, or an object that can be coerced into a tibble.}
