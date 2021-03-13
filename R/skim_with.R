@@ -86,14 +86,7 @@ skim_with <- function(...,
     if (is.null(.data_name)) {
       .data_name <- rlang::expr_label(substitute(data))
     }
-    if (inherits(data, "data.table")) {
-      dt_key <- data.table::key(data)
-      if (is.null(dt_key))
-        dt_key <- "NULL"
-      dt_key <- paste(dt_key, collapse = ", ")
-    } else {
-      dt_key <- NA # Will never be NA if `data` is a data.table
-    }
+    dt_key <- get_dt_key(data)
     if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
@@ -182,6 +175,20 @@ validate_assignment <- function(...) {
     )
   }
   to_assign
+}
+
+#' Sets the appropriate key value when working with `data.table`
+#' @keywords internal
+#' @noRd
+get_dt_key <- function(data) {
+    if (inherits(data, "data.table")) {
+      dt_key <- data.table::key(data)
+      if (is.null(dt_key))
+        dt_key <- "NULL"
+      paste(dt_key, collapse = ", ")
+    } else {
+      NA # Will never be NA if `data` is a data.table
+    }
 }
 
 #' Combine local and default skimmers for each column
