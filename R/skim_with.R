@@ -82,9 +82,21 @@ skim_with <- function(...,
   stopifnot(is.null(base) || inherits(base, "skimr_function_list"))
   local_skimmers <- validate_assignment(...)
 
+<<<<<<< HEAD
   function(data, ..., .data_name = NULL) {
     if (is.null(.data_name)) {
       .data_name <- rlang::expr_label(substitute(data))
+=======
+  function(data, ...) {
+    data_name <- rlang::expr_label(substitute(data))
+    if (inherits(data, "data.table")) {
+      dt_key <- data.table::key(data)
+      if (is.null(dt_key))
+        dt_key <- "NULL"
+      dt_key <- paste(dt_key, collapse = ", ")
+    } else {
+      dt_key <- NA # Will never be NA if `data` is a data.table
+>>>>>>> origin/develop
     }
     if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
@@ -128,7 +140,12 @@ skim_with <- function(...,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
+<<<<<<< HEAD
       df_name = .data_name,
+=======
+      df_name = data_name,
+      dt_key  = dt_key,
+>>>>>>> origin/develop
       groups = dplyr::groups(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
@@ -329,6 +346,16 @@ skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
 
 #' @export
 skim_by_type.data.frame <- function(mangled_skimmers, variable_names, data) {
+  skimmed <- dplyr::summarize(
+    data,
+    dplyr::across(variable_names, mangled_skimmers$funs)
+  )
+  build_results(skimmed, variable_names, NULL)
+}
+
+#' @export
+skim_by_type.data.table <- function(mangled_skimmers, variable_names, data) {
+  data <- tibble::as_tibble(data)
   skimmed <- dplyr::summarize(
     data,
     dplyr::across(variable_names, mangled_skimmers$funs)

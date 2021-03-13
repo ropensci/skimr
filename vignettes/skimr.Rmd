@@ -3,14 +3,15 @@ title: "Using Skimr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{get-started}
+  %\VignetteIndexEntry{Using Skimr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ## Introduction
 
-`skimr` is designed to provide summary statistics about variables. It is
+`skimr` is designed to provide summary statistics about variables in data frames,
+tibbles, data tables and vectors. It is
 opinionated in its defaults, but easy to modify.
 
 In base R, the most similar functions are `summary()` for vectors and data
@@ -43,7 +44,7 @@ the variable.
 ### Skimming data frames
 
 By design, the main focus of `skimr` is on data frames; it is intended to fit
-well within a data [pipeline](http://r4ds.had.co.nz/pipes.html) and relies
+well within a data [pipeline](https://r4ds.had.co.nz/pipes.html) and relies
 extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
 focuses on data frames.
 

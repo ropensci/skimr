@@ -56,6 +56,7 @@ has the following special attributes
 \item \code{data_rows}: n rows in the original data
 \item \code{data_cols}: original number of columns
 \item \code{df_name}: name of the original data frame
+\item \code{dt_key}: name of the key if original is a data.table
 \item \code{groups}: if there were group variables
 \item \code{base_skimmers}: names of functions applied to all skim types
 \item \code{skimmers_used}: names of functions used to skim each type

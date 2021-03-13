@@ -2,7 +2,7 @@
 output: md_document
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-# skimr <a href='https://docs.ropensci.org/skimr'>
+# skimr <a href='https://docs.ropensci.org/skimr/'>
 <img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
 
@@ -14,11 +14,11 @@ options(width = 100)
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![R build status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr/)
 [![This is an ROpenSci Peer reviewed
-package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/onboarding/issues/175)
+package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
 [![cran
 checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
@@ -150,7 +150,7 @@ will automatically generate names from the provided values.
 
 By default, functions in the `sfl` call are appended to the default skimmers.
 
-```{r}
+```{}
 my_skim <- skim_with(numeric = sfl(mad))
 my_skim(iris, Sepal.Length)
 ```
@@ -159,16 +159,16 @@ But you can also use the dummy argument pattern from `dplyr::funs` to set
 particular function arguments. Setting the `append = FALSE` argument uses only
 those functions that you've provided.
 
-```{r}
+```{}
 my_skim <- skim_with(
-  numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)), append = FALSE
+  numeric = sfl(iqr = IQR, p99 = list(~ quantile(., probs = .99))), append = FALSE
 )
 my_skim(iris, Sepal.Length)
 ```
 
-And you can default skimmers by setting them to `NULL`.
+And you can remove default skimmers by setting them to `NULL`.
 
-```{r}
+```{}
 my_skim <- skim_with(numeric = sfl(hist = NULL))
 my_skim(iris, Sepal.Length)
 ```
@@ -213,7 +213,7 @@ There are known issues with printing the spark-histogram characters when
 printing a data frame. For example, `"▂▅▇"` is printed as
 `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
 the low-level
-code](http://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
+code](https://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
 for printing dataframes.
 While some cases have been addressed, there are, for example, reports of this
 issue in Emacs ESS.
@@ -260,6 +260,7 @@ So, by default, we disable removing metadata on windows. You can turn this
 feature on with an option. Either set it when calling print or globally.
 
 ```{r, eval = FALSE}
+skimmed <- skim(chickwts)
 print(skimmed, strip_metadata = TRUE)
 options(skimr_strip_metadata = TRUE)
 ```
@@ -272,6 +273,17 @@ options(crayon.enabled = FALSE)
 ```
 
 You need to do this one time per session.
+
+## Inspirations
+
+* [TextPlots](https://github.com/sunetos/TextPlots.jl) for use of Braille
+  characters
+
+* [spark](https://github.com/holman/spark) for use of block characters.
+
+The earliest use of unicode characters to generate sparklines appears to be [from 2009](https://blog.jonudell.net/2009/01/13/fuel-prices-and-pageviews/).
+
+Exercising these ideas to their fullest requires a font with good support for block drawing characters. [PragamataPro](https://fsd.it/shop/fonts/pragmatapro/) is one such font.
 
 ## Contributing
 
