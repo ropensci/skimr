@@ -86,7 +86,7 @@ skim_with <- function(...,
     if (is.null(.data_name)) {
       .data_name <- rlang::expr_label(substitute(data))
     }
-    dt_key <- get_dt_key(data)
+
     if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
@@ -130,7 +130,7 @@ skim_with <- function(...,
       data_rows = nrow(data),
       data_cols = ncol(data),
       df_name = .data_name,
-      dt_key  = dt_key,
+      dt_key  = get_dt_key(data),
       groups = dplyr::groups(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
