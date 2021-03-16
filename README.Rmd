@@ -15,7 +15,8 @@ options(width = 100)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
-[![R build status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
+[![R build
+status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
 [![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr/)
 [![This is an ROpenSci Peer reviewed
 package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
@@ -145,23 +146,26 @@ can be called on your data. You can use this factory to produce summaries for
 any type of column within your data.
 
 Assignment within a call to `skim_with()` relies on a helper function, `sfl` or
-`skimr` function list. This is a light wrapper around `dplyr::funs()`. It
-will automatically generate names from the provided values.
-
-By default, functions in the `sfl` call are appended to the default skimmers.
+`skimr` function list. By default, functions in the `sfl` call are appended to
+the default skimmers, and names are automatically generated as well.
 
 ```{}
 my_skim <- skim_with(numeric = sfl(mad))
 my_skim(iris, Sepal.Length)
 ```
 
-But you can also use the dummy argument pattern from `dplyr::funs` to set
-particular function arguments. Setting the `append = FALSE` argument uses only
-those functions that you've provided.
+But you can also helpers from the `tidyverse` to create new anonymous functions
+that set particular function arguments. The behavior is the same as in `purrr`
+or `dplyr`, with both `.` and `.x` as acceptable pronouns. Setting the
+`append = FALSE` argument uses only those functions that you've provided.
 
 ```{}
 my_skim <- skim_with(
-  numeric = sfl(iqr = IQR, p99 = ~ quantile(., probs = .99)),
+  numeric = sfl(
+    iqr = IQR,
+    p01 = ~ quantile(.x, probs = .01)
+    p99 = ~ quantile(., probs = .99)
+  ),
   append = FALSE
 )
 my_skim(iris, Sepal.Length)
