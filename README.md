@@ -1,6 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# skimr <a href='https://docs.ropensci.org/skimr/'>
+skimr <a href='https://docs.ropensci.org/skimr/'>
+=================================================
 
 <img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
@@ -29,7 +30,8 @@ human reader.
 programmatically. Upgraders should review this document, the release
 notes and vignettes carefully.**
 
-## Installation
+Installation
+------------
 
 The current released version of `skimr` can be installed from CRAN. If
 you wish to install the current build of the next release you can do so
@@ -49,7 +51,8 @@ been incorporated in the master branch (and may not be):
 Do not rely on APIs from the develop branch, as they are likely to
 change.
 
-## Skim statistics in the console
+Skim statistics in the console
+------------------------------
 
 `skimr`:
 
@@ -244,7 +247,8 @@ change.
     ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
     ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
 
-## Knitted results
+Knitted results
+---------------
 
 Simply skimming a data frame will produce the horizontal print layout
 shown above. We provide a `knit_print` method for the types of objects
@@ -292,8 +296,6 @@ chunk.
 </tr>
 </tbody>
 </table>
-
-Data summary
 
 **Variable type: numeric**
 
@@ -343,7 +345,8 @@ Data summary
 </tbody>
 </table>
 
-## Customizing skimr
+Customizing skimr
+-----------------
 
 Although skimr provides opinionated defaults, it is highly customizable.
 Users can specify their own statistics, change the formatting of
@@ -358,22 +361,26 @@ function that can be called on your data. You can use this factory to
 produce summaries for any type of column within your data.
 
 Assignment within a call to `skim_with()` relies on a helper function,
-`sfl` or `skimr` function list. This is a light wrapper around
-`dplyr::funs()`. It will automatically generate names from the provided
-values.
-
-By default, functions in the `sfl` call are appended to the default
-skimmers.
+`sfl` or `skimr` function list. By default, functions in the `sfl` call
+are appended to the default skimmers, and names are automatically
+generated as well.
 
     my_skim <- skim_with(numeric = sfl(mad))
     my_skim(iris, Sepal.Length)
 
-But you can also use the dummy argument pattern from `dplyr::funs` to
-set particular function arguments. Setting the `append = FALSE` argument
-uses only those functions that you’ve provided.
+But you can also helpers from the `tidyverse` to create new anonymous
+functions that set particular function arguments. The behavior is the
+same as in `purrr` or `dplyr`, with both `.` and `.x` as acceptable
+pronouns. Setting the `append = FALSE` argument uses only those
+functions that you’ve provided.
 
     my_skim <- skim_with(
-      numeric = sfl(iqr = IQR, p99 = list(~ quantile(., probs = .99))), append = FALSE
+      numeric = sfl(
+        iqr = IQR,
+        p01 = ~ quantile(.x, probs = .01)
+        p99 = ~ quantile(., probs = .99)
+      ),
+      append = FALSE
     )
     my_skim(iris, Sepal.Length)
 
@@ -411,7 +418,8 @@ example.
       )
     }
 
-## Limitations of current version
+Limitations of current version
+------------------------------
 
 We are aware that there are issues with rendering the inline histograms
 and line charts in various contexts, some of which are described below.
@@ -483,7 +491,8 @@ the following
 
 You need to do this one time per session.
 
-## Contributing
+Contributing
+------------
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
