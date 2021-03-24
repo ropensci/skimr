@@ -397,7 +397,6 @@ None
 </tr>
 </tbody>
 </table>
-<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -517,15 +516,19 @@ waiting
 <h3 class="hasAnchor">
 <a href="#specify-your-own-statistics-and-classes" class="anchor"></a>Specify your own statistics and classes</h3>
 <p>Users can specify their own statistics using a list combined with the <code><a href="reference/skim_with.html">skim_with()</a></code> function factory. <code><a href="reference/skim_with.html">skim_with()</a></code> returns a new <code>skim</code> function that can be called on your data. You can use this factory to produce summaries for any type of column within your data.</p>
-<p>Assignment within a call to <code><a href="reference/skim_with.html">skim_with()</a></code> relies on a helper function, <code>sfl</code> or <code>skimr</code> function list. This is a light wrapper around <code><a href="https://dplyr.tidyverse.org/reference/funs.html">dplyr::funs()</a></code>. It will automatically generate names from the provided values.</p>
-<p>By default, functions in the <code>sfl</code> call are appended to the default skimmers.</p>
+<p>Assignment within a call to <code><a href="reference/skim_with.html">skim_with()</a></code> relies on a helper function, <code>sfl</code> or <code>skimr</code> function list. By default, functions in the <code>sfl</code> call are appended to the default skimmers, and names are automatically generated as well.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(mad))</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw">my_skim</span>(iris, Sepal.Length)</span></code></pre></div>
-<p>But you can also use the dummy argument pattern from <code><a href="https://dplyr.tidyverse.org/reference/funs.html">dplyr::funs</a></code> to set particular function arguments. Setting the <code>append = FALSE</code> argument uses only those functions that you’ve provided.</p>
+<p>But you can also helpers from the <code>tidyverse</code> to create new anonymous functions that set particular function arguments. The behavior is the same as in <code>purrr</code> or <code>dplyr</code>, with both <code>.</code> and <code>.x</code> as acceptable pronouns. Setting the <code>append = FALSE</code> argument uses only those functions that you’ve provided.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(</span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">iqr =</span> IQR, <span class="dt">p99 =</span> <span class="kw">list</span>(<span class="op">~</span><span class="st"> </span><span class="kw">quantile</span>(., <span class="dt">probs =</span> <span class="fl">.99</span>))), <span class="dt">append =</span> <span class="ot">FALSE</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">my_skim</span>(iris, Sepal.Length)</span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="dt">numeric =</span> <span class="kw">sfl</span>(</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="dt">iqr =</span> IQR,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="dt">p01 =</span> <span class="op">~</span><span class="st"> </span><span class="kw">quantile</span>(.x, <span class="dt">probs =</span> <span class="fl">.01</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="dt">p99 =</span> <span class="op">~</span><span class="st"> </span><span class="kw">quantile</span>(., <span class="dt">probs =</span> <span class="fl">.99</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  ),</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="dt">append =</span> <span class="ot">FALSE</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="kw">my_skim</span>(iris, Sepal.Length)</span></code></pre></div>
 <p>And you can remove default skimmers by setting them to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">hist =</span> <span class="ot">NULL</span>))</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">my_skim</span>(iris, Sepal.Length)</span></code></pre></div>
