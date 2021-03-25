@@ -54,7 +54,7 @@ if less than option \code{tibble.print_max}. Otherwise, will print
 means use \code{getOption("tibble.width")} or (if also \code{NULL})
 \code{getOption("width")}; the latter displays only the columns that fit on one
 screen. You can also set \code{options(tibble.width = Inf)} to override this
-default and always print all columns.}
+default and always print all columns, this may be slow for very wide tibbles.}
 
 \item{n_extra}{Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If \code{NULL}, the default,
@@ -122,7 +122,7 @@ empty you may need to run the following \code{options(crayon.enabled = FALSE)}.
 }
 
 \seealso{
-\code{\link[tibble:formatting]{tibble::trunc_mat()}} For a list of global options for customizing
+\code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
 print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that
 affect tibble's color support.
 }

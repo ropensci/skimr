@@ -8,8 +8,8 @@
 #' `sfl()` will automatically generate callables and names for a variety of
 #' inputs, including functions, formulas and strings. Nonetheless, we recommend
 #' providing names when reasonable to get better [skim()] output.
-#' 
-#' @param ... Inherited from dplyr::data_masking() for dplyr version 1 or later 
+#'
+#' @param ... Inherited from dplyr::data_masking() for dplyr version 1 or later
 #'  or dplyr::funs() for older versions of dplyr.
 #'  A list of functions
 #'   specified by:

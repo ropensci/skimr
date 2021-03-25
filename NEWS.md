@@ -1,3 +1,9 @@
+# skimr 2.2.0
+
+### NEW FEATURES
+
+*   skim() used within a function now prints the data frame name.
+
 # skimr 2.1.3
 
 ### MINOR IMPROVEMENTS

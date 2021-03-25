@@ -6,17 +6,19 @@
 \alias{skim_without_charts}
 \title{Skim a data frame, getting useful summary statistics}
 \usage{
-skim(data, ...)
+skim(data, ..., .data_name = NULL)
 
 skim_tee(data, ..., skim_fun = skim)
 
-skim_without_charts(data, ...)
+skim_without_charts(data, ..., .data_name = NULL)
 }
 \arguments{
 \item{data}{A tibble, or an object that can be coerced into a tibble.}
 
 \item{...}{Columns to select for skimming. When none are provided, the
 default is to skim all columns.}
+
+\item{.data_name}{The name to use for the data. Defaults to the same as data.}
 
 \item{skim_fun}{The skim function used.}
 
