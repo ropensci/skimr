@@ -155,11 +155,11 @@ different set of summary functions based on the types of columns in the data
 frame.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>skim</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>skim</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, .data_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='fu'>skim_tee</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, skim_fun <span class='op'>=</span> <span class='va'>skim</span><span class='op'>)</span>
 
-<span class='fu'>skim_without_charts</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'>skim_without_charts</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>...</span>, .data_name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +172,10 @@ frame.</p>
       <th>...</th>
       <td><p>Columns to select for skimming. When none are provided, the
 default is to skim all columns.</p></td>
+    </tr>
+    <tr>
+      <th>.data_name</th>
+      <td><p>The name to use for the data. Defaults to the same as data.</p></td>
     </tr>
     <tr>
       <th>skim_fun</th>

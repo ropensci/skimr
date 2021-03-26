@@ -211,7 +211,7 @@ if less than option <code>tibble.print_max</code>. Otherwise, will print
 means use <code><a href='https://rdrr.io/r/base/options.html'>getOption("tibble.width")</a></code> or (if also <code>NULL</code>)
 <code><a href='https://rdrr.io/r/base/options.html'>getOption("width")</a></code>; the latter displays only the columns that fit on one
 screen. You can also set <code><a href='https://rdrr.io/r/base/options.html'>options(tibble.width = Inf)</a></code> to override this
-default and always print all columns.</p></td>
+default and always print all columns, this may be slow for very wide tibbles.</p></td>
     </tr>
     <tr>
       <th>n_extra</th>
@@ -291,7 +291,7 @@ support within <code>tibble</code> is also a factor. If your <code>skimr</code> 
 empty you may need to run the following <code><a href='https://rdrr.io/r/base/options.html'>options(crayon.enabled = FALSE)</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://tibble.tidyverse.org/reference/formatting.html'>tibble::trunc_mat()</a></code> For a list of global options for customizing
+    <div class='dont-index'><p><code><a href='https://tibble.tidyverse.org/reference/trunc_mat.html'>tibble::trunc_mat()</a></code> For a list of global options for customizing
 print formatting. <code><a href='https://rdrr.io/pkg/crayon/man/has_color.html'>crayon::has_color()</a></code> for the variety of issues that
 affect tibble's color support.</p></div>
 
