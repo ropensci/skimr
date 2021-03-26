@@ -82,25 +82,20 @@ skim_with <- function(...,
   stopifnot(is.null(base) || inherits(base, "skimr_function_list"))
   local_skimmers <- validate_assignment(...)
 
-  function(data, ...) {
-    data_name <- rlang::expr_label(substitute(data))
-    if (inherits(data, "data.table")) {
-      dt_key <- data.table::key(data)
-      if (is.null(dt_key))
-        dt_key <- "NULL"
-      dt_key <- paste(dt_key, collapse = ", ")
-    } else {
-      dt_key <- NA # Will never be NA if `data` is a data.table
+  function(data, ..., .data_name = NULL) {
+    if (is.null(.data_name)) {
+      .data_name <- rlang::expr_label(substitute(data))
     }
+
     if (!inherits(data, "data.frame")) {
       data <- as.data.frame(data)
     }
     stopifnot(inherits(data, "data.frame"))
-    
+
     selected <- names(tidyselect::eval_select(rlang::expr(c(...)), data))
     if (length(selected) == 0) {
       selected <- names(data)
-    } 
+    }
 
     grps <- dplyr::groups(data)
     if (length(grps) > 0) {
@@ -134,8 +129,8 @@ skim_with <- function(...,
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
-      df_name = data_name,
-      dt_key  = dt_key,
+      df_name = .data_name,
+      dt_key  = get_dt_key(data),
       groups = dplyr::groups(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
@@ -180,6 +175,21 @@ validate_assignment <- function(...) {
     )
   }
   to_assign
+}
+
+#' Sets the appropriate key value when working with `data.table`
+#' @keywords internal
+#' @noRd
+get_dt_key <- function(data) {
+  if (inherits(data, "data.table")) {
+    dt_key <- data.table::key(data)
+    if (is.null(dt_key)) {
+      dt_key <- "NULL"
+    }
+    paste(dt_key, collapse = ", ")
+  } else {
+    NA # Will never be NA if `data` is a data.table
+  }
 }
 
 #' Combine local and default skimmers for each column

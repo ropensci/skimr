@@ -3,7 +3,7 @@ test_that("You can bind skim_df rows", {
   skimmed2 <- skim(mtcars)
   combined <- vctrs::vec_rbind(skimmed1, skimmed2)
   expect_s3_class(combined, "skim_df")
-  
+
   attrs <- attributes(combined)
   expect_equal(attrs$data_rows, 182)
   expect_equal(attrs$data_cols, 16)
