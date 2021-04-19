@@ -499,6 +499,6 @@ support for commonly used variable classes. However, in general, we
 encourage users to take advantage of skimr’s flexibility to add their
 own customized classes. Please see the
 [contributing](https://docs.ropensci.org/skimr/CONTRIBUTING.html) and
-[conduct](https://docs.ropensci.org/skimr/CONDUCT.html) documents.
+[conduct](https://ropensci.org/code-of-conduct/) documents.
 
 [![ropenci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

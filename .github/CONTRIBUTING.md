@@ -70,5 +70,4 @@ The checks will run automatically from there.
 
 ## Code of Conduct
 
-When contributing to `skimr` you must follow the code of conduct defined in
-[CONDUCT.md](CONDUCT.md)
+When contributing to `skimr` you must follow the [code of conduct defined by rOpenSci](https://ropensci.org/code-of-conduct/).
