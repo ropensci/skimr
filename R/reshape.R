@@ -167,8 +167,21 @@ yank <- function(data, skim_type) {
 #' @export
 focus <- function(.data, ...) {
   assert_is_skim_df(.data)
-  reduced <- dplyr::select(.data, "skim_type", "skim_variable", ...)
-  if (could_be_skim_df(reduced)) {
+  selections <- rlang::exprs(...)
+  selections <- purrr::map_chr(selections, as.character)
+  selections <- strsplit(selections, ".", fixed =TRUE)
+  types <- names(attr(.data, "skimmers_used"))
+  df <- t(list2DF(selections))
+  df <- df[df[,1] != df[,2],]
+  newtypes <- unique(df[,1])
+  skimmers_used <- attr(.data, "skimmers_used")
+  for (type in seq_along(newtypes)) {
+    selected <- df[df[,1] == types[type],2 ]
+    skimmers_used[[types[type]]] <- selected
+  }
+ attr(.data,"skimmers_used") <-  skimmers_used
+ reduced <- dplyr::select(.data, "skim_type", "skim_variable", ...)
+ if (could_be_skim_df(reduced)) {
     reassign_skim_attrs(reduced, .data)
   } else {
     stop("Cannot drop 'skim_variable' or 'skim_type' columns")
