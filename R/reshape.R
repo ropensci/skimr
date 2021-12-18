@@ -36,7 +36,18 @@ partition <- function(data) {
   base <- base_skimmers(data)
 
   skimmers <- reconcile_skimmers(data, groups, base)
-  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups, base)
+
+  # Check to see that there are at least one, known used skim function
+  # within the data. This can be reduced after using focus(). This indexing
+  # is used so that the lookup order matches that of `data_as_list`.
+  has_skim_data <- lengths(skimmers)[names(data_as_list)] > 0
+  reduced <- purrr::imap(
+    data_as_list[has_skim_data],
+    simplify_skimdf,
+    skimmers = skimmers,
+    groups = groups,
+    base = base
+  )
 
   reassign_skim_attrs(
     reduced,
