@@ -1,22 +1,8 @@
--- Data Summary ------------------------
-                           Values
-Name                       iris  
-Number of rows             150   
-Number of columns          5     
-_______________________          
-Column type frequency:           
-  factor                   1     
-  numeric                  4     
-________________________         
-Group variables            None  
-
--- Variable type: factor ---------------------------------------------------------------------------
-  skim_variable
-1 Species      
-
--- Variable type: numeric --------------------------------------------------------------------------
-  skim_variable
-1 Sepal.Length 
-2 Sepal.Width  
-3 Petal.Length 
-4 Petal.Width  
+# A tibble: 5 x 2
+  skim_type skim_variable
+  <chr>     <chr>        
+1 factor    Species      
+2 numeric   Sepal.Length 
+3 numeric   Sepal.Width  
+4 numeric   Petal.Length 
+5 numeric   Petal.Width  
