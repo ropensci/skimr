@@ -391,6 +391,7 @@ reshape_skimmed <- function(column, skimmed, groups) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     tibble::as_tibble(skimmed),
 =======
     as_tibble(skimmed),
@@ -401,6 +402,9 @@ reshape_skimmed <- function(column, skimmed, groups) {
 =======
     tibble::as_tibble(skimmed),
 >>>>>>> e27fd8d (fn)
+=======
+    as_tibble(skimmed),
+>>>>>>> ded9895 (relace-as.data.frame)
     !!!groups,
     tidyselect::starts_with(delim_name, ignore.case = FALSE)
   )
