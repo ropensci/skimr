@@ -388,7 +388,7 @@ build_results <- function(skimmed, variable_names, groups) {
 reshape_skimmed <- function(column, skimmed, groups) {
   delim_name <- paste0(column, "_", NAME_DELIMETER)
   out <- dplyr::select(
-    as_tibble(skimmed),
+    tibble::as_tibble(skimmed),
     !!!groups,
     tidyselect::starts_with(delim_name, ignore.case = FALSE)
   )
