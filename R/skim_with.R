@@ -389,10 +389,14 @@ reshape_skimmed <- function(column, skimmed, groups) {
   delim_name <- paste0(column, "_", NAME_DELIMETER)
   out <- dplyr::select(
 <<<<<<< HEAD
+<<<<<<< HEAD
     tibble::as_tibble(skimmed),
 =======
     as_tibble(skimmed),
 >>>>>>> ded9895 (relace-as.data.frame)
+=======
+    as_tibble(skimmed),
+>>>>>>> 406674d (relace-as.data.frame)
     !!!groups,
     tidyselect::starts_with(delim_name, ignore.case = FALSE)
   )
