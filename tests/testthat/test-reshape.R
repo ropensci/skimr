@@ -85,7 +85,7 @@ test_that("focus() matches select(data, skim_type, skim_variable, ...)", {
   expected <- dplyr::select(
     skimmed, skim_type, skim_variable, n_missing
   )
-  expect_identical(focus(skimmed, n_missing), expected)
+  expect_equal(focus(skimmed, n_missing), expected, check.attributes = FALSE)
 })
 
 test_that("focus() does not allow dropping skim metadata columns", {

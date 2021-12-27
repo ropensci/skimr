@@ -39,6 +39,10 @@ expect_print_matches_file <- function(object,
                                         TRUE
                                       ),
                                       width = 100,
+                                      update = getOption(
+                                        "skimr_update_print",
+                                        FALSE
+                                      ),
                                       ...) {
   if (skip_on_windows) testthat::skip_on_os("windows")
   if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
@@ -47,7 +51,7 @@ expect_print_matches_file <- function(object,
     testthat::expect_known_output(
       print(object, ...),
       filename,
-      update = FALSE,
+      update = update,
       width = width
     )
   })
@@ -55,7 +59,10 @@ expect_print_matches_file <- function(object,
 
 expect_matches_file <- function(object,
                                 file,
-                                update = FALSE,
+                                update = getOption(
+                                  "skimr_update_print",
+                                  FALSE
+                                ),
                                 skip_on_windows = getOption(
                                   "skimr_skip_on_windows",
                                   TRUE

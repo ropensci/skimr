@@ -36,7 +36,19 @@ partition <- function(data) {
   base <- base_skimmers(data)
 
   skimmers <- reconcile_skimmers(data, groups, base)
-  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups, base)
+
+  # Check to see that there are at least one, known used skim function
+  # within the data. This can be reduced after using focus(). This indexing
+  # is used so that the lookup order matches that of `data_as_list`.
+  has_skim_data <- lengths(skimmers)[names(data_as_list)] > 0
+  elements_to_keep <- has_skim_data | any(base %in% names(data))
+  reduced <- purrr::imap(
+    data_as_list[elements_to_keep],
+    simplify_skimdf,
+    skimmers = skimmers,
+    groups = groups,
+    base = base
+  )
 
   reassign_skim_attrs(
     reduced,
@@ -52,8 +64,11 @@ partition <- function(data) {
 #' frame that has had columns added after skimming.
 #' @noRd
 reconcile_skimmers <- function(data, groups, base) {
-  all_columns <- names(data)
+  all_columns <- colnames(data)
   skimmers_used <- skimmers_used(data)
+  if (length(skimmers_used) == 0) {
+    return(skimmers_used)
+  }
   skimmers_from_names <- skimmers_from_names(all_columns, skimmers_used)
   with_base_columns <- unlist(c(
     "skim_variable",
