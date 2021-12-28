@@ -84,8 +84,8 @@ Skim statistics in the console
     ## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃
+    ##   skim_variable n_missing complete_rate mean   sd  p0  p25 p50  p75 p100 hist 
+    ## 1 weight                0             1 261. 78.1 108 204. 258 324.  423 ▆▆▇▇▃
 
 ### Presentation is in a compact horizontal format:
 
@@ -108,11 +108,11 @@ Skim statistics in the console
     ## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
-    ## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁
-    ## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
-    ## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃
+    ##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist 
+    ## 1 Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂
+    ## 2 Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁
+    ## 3 Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂
+    ## 4 Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃
 
 ### Built in support for strings, lists and other column classes
 
@@ -132,15 +132,15 @@ Skim statistics in the console
     ## Group variables            None           
     ## 
     ## ── Variable type: character ────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
-    ## 1 name                  0         1         3    21     0       87          0
-    ## 2 hair_color            5         0.943     4    13     0       12          0
-    ## 3 skin_color            0         1         3    19     0       31          0
-    ## 4 eye_color             0         1         3    13     0       15          0
-    ## 5 sex                   4         0.954     4    14     0        4          0
-    ## 6 gender                4         0.954     8     9     0        2          0
-    ## 7 homeworld            10         0.885     4    14     0       48          0
-    ## 8 species               4         0.954     3    14     0       37          0
+    ##   skim_variable n_missing complete_rate min max empty n_unique whitespace
+    ## 1 name                  0         1       3  21     0       87          0
+    ## 2 hair_color            5         0.943   4  13     0       12          0
+    ## 3 skin_color            0         1       3  19     0       31          0
+    ## 4 eye_color             0         1       3  13     0       15          0
+    ## 5 sex                   4         0.954   4  14     0        4          0
+    ## 6 gender                4         0.954   8   9     0        2          0
+    ## 7 homeworld            10         0.885   4  14     0       48          0
+    ## 8 species               4         0.954   3  14     0       37          0
     ## 
     ## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
@@ -149,10 +149,10 @@ Skim statistics in the console
     ## 3 starships             0             1       17          0          5
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁
-    ## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁
-    ## 3 birth_year           44         0.494  87.6 155.      8  35      52  72     896 ▇▁▁▁▁
+    ##   skim_variable n_missing complete_rate  mean    sd p0   p25 p50   p75 p100 hist 
+    ## 1 height                6         0.931 174.   34.8 66 167   180 191    264 ▁▁▇▅▁
+    ## 2 mass                 28         0.678  97.3 169.  15  55.6  79  84.5 1358 ▇▁▁▁▁
+    ## 3 birth_year           44         0.494  87.6 155.   8  35    52  72    896 ▇▁▁▁▁
 
 ### Has a useful summary function
 
@@ -187,9 +187,9 @@ Skim statistics in the console
     ## Group variables            None  
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂
-    ## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist 
+    ## 1 Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂
+    ## 2 Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂
 
 ### Handles grouped data
 
@@ -212,19 +212,19 @@ Skim statistics in the console
     ## Group variables            Species   
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁
-    ##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃
-    ##  3 Sepal.Length  virginica          0             1 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂
-    ##  4 Sepal.Width   setosa             0             1 3.43  0.379   2.3  3.2   3.4   3.68   4.4 ▁▃▇▅▂
-    ##  5 Sepal.Width   versicolor         0             1 2.77  0.314   2    2.52  2.8   3      3.4 ▁▅▆▇▂
-    ##  6 Sepal.Width   virginica          0             1 2.97  0.322   2.2  2.8   3     3.18   3.8 ▂▆▇▅▁
-    ##  7 Petal.Length  setosa             0             1 1.46  0.174   1    1.4   1.5   1.58   1.9 ▁▃▇▃▁
-    ##  8 Petal.Length  versicolor         0             1 4.26  0.470   3    4     4.35  4.6    5.1 ▂▂▇▇▆
-    ##  9 Petal.Length  virginica          0             1 5.55  0.552   4.5  5.1   5.55  5.88   6.9 ▃▇▇▃▂
-    ## 10 Petal.Width   setosa             0             1 0.246 0.105   0.1  0.2   0.2   0.3    0.6 ▇▂▂▁▁
-    ## 11 Petal.Width   versicolor         0             1 1.33  0.198   1    1.2   1.3   1.5    1.8 ▅▇▃▆▁
-    ## 12 Petal.Width   virginica          0             1 2.03  0.275   1.4  1.8   2     2.3    2.5 ▂▇▆▅▇
+    ##    skim_variable Species    n_missing complete_rate  mean    sd  p0  p25  p50  p75 p100 hist 
+    ##  1 Sepal.Length  setosa             0             1 5.01  0.352 4.3 4.8  5    5.2   5.8 ▃▃▇▅▁
+    ##  2 Sepal.Length  versicolor         0             1 5.94  0.516 4.9 5.6  5.9  6.3   7   ▂▇▆▃▃
+    ##  3 Sepal.Length  virginica          0             1 6.59  0.636 4.9 6.22 6.5  6.9   7.9 ▁▃▇▃▂
+    ##  4 Sepal.Width   setosa             0             1 3.43  0.379 2.3 3.2  3.4  3.68  4.4 ▁▃▇▅▂
+    ##  5 Sepal.Width   versicolor         0             1 2.77  0.314 2   2.52 2.8  3     3.4 ▁▅▆▇▂
+    ##  6 Sepal.Width   virginica          0             1 2.97  0.322 2.2 2.8  3    3.18  3.8 ▂▆▇▅▁
+    ##  7 Petal.Length  setosa             0             1 1.46  0.174 1   1.4  1.5  1.58  1.9 ▁▃▇▃▁
+    ##  8 Petal.Length  versicolor         0             1 4.26  0.470 3   4    4.35 4.6   5.1 ▂▂▇▇▆
+    ##  9 Petal.Length  virginica          0             1 5.55  0.552 4.5 5.1  5.55 5.88  6.9 ▃▇▇▃▂
+    ## 10 Petal.Width   setosa             0             1 0.246 0.105 0.1 0.2  0.2  0.3   0.6 ▇▂▂▁▁
+    ## 11 Petal.Width   versicolor         0             1 1.33  0.198 1   1.2  1.3  1.5   1.8 ▅▇▃▆▁
+    ## 12 Petal.Width   virginica          0             1 2.03  0.275 1.4 1.8  2    2.3   2.5 ▂▇▆▅▇
 
 ### Behaves nicely in pipelines
 
@@ -244,8 +244,8 @@ Skim statistics in the console
     ## Group variables            None      
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
-    ##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist 
-    ## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂
+    ##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist 
+    ## 1 Petal.Length          0             1 3.76 1.77  1 1.6 4.35 5.1  6.9 ▇▁▆▇▂
 
 Knitted results
 ---------------
@@ -468,28 +468,22 @@ Displays in documents of different types will vary. For example, one
 user found that the font “Yu Gothic UI Semilight” produced consistent
 results for Microsoft Word and Libre Office Write.
 
-### Stripping metadata and empty results tables
+Inspirations
+------------
 
-In POSIX systems, `skimr` tries to remove the tibble metadata when
-producing the results. A complicating factor is tibble’s color support,
-which depends on environment settings. In particular, not all Windows
-terminals support colors in the way that tibble expects.
+-   [TextPlots](https://github.com/sunetos/TextPlots.jl) for use of
+    Braille characters
 
-So, by default, we disable removing metadata on windows. You can turn
-this feature on with an option. Either set it when calling print or
-globally.
+-   [spark](https://github.com/holman/spark) for use of block
+    characters.
 
-    skimmed <- skim(chickwts)
-    print(skimmed, strip_metadata = TRUE)
-    options(skimr_strip_metadata = TRUE)
+The earliest use of unicode characters to generate sparklines appears to
+be [from
+2009](https://blog.jonudell.net/2009/01/13/fuel-prices-and-pageviews/).
 
-Separately, you might need to check the option `crayon.enabled`.
-Similarly, if your skimr results tables are empty you may need to run
-the following
-
-    options(crayon.enabled = FALSE)
-
-You need to do this one time per session.
+Exercising these ideas to their fullest requires a font with good
+support for block drawing characters.
+[PragamataPro](https://fsd.it/shop/fonts/pragmatapro/) is one such font.
 
 Contributing
 ------------
