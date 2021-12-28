@@ -12,19 +12,11 @@
   include_summary = TRUE,
   n = Inf,
   width = Inf,
-  n_extra = NULL,
   summary_rule_width = 40,
   ...
 )
 
-\method{print}{skim_list}(
-  x,
-  n = Inf,
-  width = Inf,
-  n_extra = NULL,
-  .rule_width = getOption("width", 80),
-  ...
-)
+\method{print}{skim_list}(x, n = Inf, width = Inf, ...)
 
 \method{print}{summary_skim_df}(x, .summary_rule_width = 40, ...)
 }
