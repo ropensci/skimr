@@ -71,10 +71,12 @@ expect_matches_file <- function(object,
                                   "skimr_skip_on_cran",
                                   TRUE
                                 ),
+                                width = 100,
                                 ...) {
   if (skip_on_windows) testthat::skip_on_os("windows")
   if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   if (skip_on_cran) testthat::skip_on_cran()
+  withr::local_options(list(crayon.enabled = FALSE, width = width))
   act <- testthat::quasi_label(rlang::enquo(object), NULL)
 
   if (!file.exists(file)) {

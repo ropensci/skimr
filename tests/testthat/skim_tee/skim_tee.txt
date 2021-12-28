@@ -17,7 +17,5 @@ Group variables            None
 1 soy: 14, cas: 12, lin: 12, sun: 12
 
 ── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75
-1 weight                0             1  261.  78.1   108  204.   258  324.
-   p100 hist 
-1   423 ▆▆▇▇▃
+  skim_variable n_missing complete_rate mean   sd  p0  p25 p50  p75 p100 hist 
+1 weight                0             1 261. 78.1 108 204. 258 324.  423 ▆▆▇▇▃

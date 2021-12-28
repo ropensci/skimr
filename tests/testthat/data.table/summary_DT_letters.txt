@@ -11,5 +11,5 @@ ________________________
 Group variables            None      
 
 -- Variable type: character ------------------------------------------------------------------------
-  skim_variable n_missing complete_rate   min   max empty n_unique whitespace
-1 abc                   0             1     1     1     0       26          0
+  skim_variable n_missing complete_rate min max empty n_unique whitespace
+1 abc                   0             1   1   1     0       26          0

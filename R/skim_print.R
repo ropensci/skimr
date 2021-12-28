@@ -34,7 +34,6 @@ print.skim_df <- function(x,
                           include_summary = TRUE,
                           n = Inf,
                           width = Inf,
-                          n_extra = NULL,
                           summary_rule_width = 40,
                           ...) {
   if (is_skim_df(x) && nrow(x) > 0) {
@@ -91,12 +90,10 @@ ctl_new_pillar.one_skim_df <- function(controller,
 print.skim_list <- function(x,
                             n = Inf,
                             width = Inf,
-                            n_extra = NULL,
-                            .rule_width = getOption("width", 80),
                             ...) {
   nms <- names(x)
   attributes(x) <- NULL
-  print(rlang::set_names(x, nms), rule_width = .rule_width)
+  print(rlang::set_names(x, nms))
 }
 
 
