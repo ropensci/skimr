@@ -3,7 +3,6 @@
 \name{print}
 \alias{print}
 \alias{print.skim_df}
-\alias{print.one_skim_df}
 \alias{print.skim_list}
 \alias{print.summary_skim_df}
 \title{Print \code{skim} objects}
@@ -14,19 +13,7 @@
   n = Inf,
   width = Inf,
   n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", FALSE),
-  rule_width = base::options()$width,
   summary_rule_width = 40,
-  ...
-)
-
-\method{print}{one_skim_df}(
-  x,
-  n = Inf,
-  .width = Inf,
-  n_extra = NULL,
-  strip_metadata = getOption("skimr_strip_metadata", FALSE),
-  .rule_width = base::options()$width,
   ...
 )
 
@@ -35,7 +22,7 @@
   n = Inf,
   width = Inf,
   n_extra = NULL,
-  .rule_width = base::options()$width,
+  .rule_width = getOption("width", 80),
   ...
 )
 
@@ -47,31 +34,16 @@
 \item{include_summary}{Whether a summary of the data frame should be printed}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
-if less than option \code{tibble.print_max}. Otherwise, will print
-\code{tibble.print_min} rows.}
+if less than the \code{print_max} \link[pillar:pillar_options]{option}.
+Otherwise, will print as many rows as specified by the
+\code{print_min} \link[pillar:pillar_options]{option}.}
 
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
-means use \code{getOption("tibble.width")} or (if also \code{NULL})
-\code{getOption("width")}; the latter displays only the columns that fit on one
-screen. You can also set \code{options(tibble.width = Inf)} to override this
-default and always print all columns, this may be slow for very wide tibbles.}
-
-\item{n_extra}{Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If \code{NULL}, the default,
-will print information about at most \code{tibble.max_extra_cols} extra columns.}
-
-\item{strip_metadata}{Whether tibble metadata should be removed.}
-
-\item{rule_width}{Width of the cli rules in printed skim object. Defaults
-to base::options()$width}
+means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{summary_rule_width}{Width of Data Summary cli rule, defaults to 40.}
 
-\item{...}{Other arguments passed on to individual methods.}
-
-\item{.width}{Width for the tibble for each type.}
-
-\item{.rule_width}{Width for the rule above the skim results for each type.}
+\item{...}{Passed on to \code{\link[=tbl_format_setup]{tbl_format_setup()}}.}
 
 \item{.summary_rule_width}{the width for the main rule above the summary.}
 }
@@ -82,8 +54,6 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 \section{Methods (by class)}{
 \itemize{
 \item \code{skim_df}: Print a skimmed data frame (\code{skim_df} from \code{\link[=skim]{skim()}}).
-
-\item \code{one_skim_df}: Print an entry within a partitioned \code{skim_df}.
 
 \item \code{skim_list}: Print a \code{skim_list}, a list of \code{skim_df} objects.
 
@@ -108,17 +78,6 @@ package. You can control printing behavior using the same global options.
 Printing a \code{skim_df} requires specific columns that might be dropped when
 using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarise]{dplyr::summarize()}} on a \code{skim_df}. In those
 cases, this method falls back to \code{\link[tibble:formatting]{tibble::print.tbl()}}.
-}
-
-\section{Controlling metadata behavior}{
-
-
-On POSIX systems, \code{skimr} removes the tibble metadata when generating output.
-On some platforms, this can lead to all output getting removed. To disable
-that behavior, set either \code{strip_metadata = FALSE} when calling print or use
-\code{options(skimr_strip_metadata = FALSE)}. The \code{crayon} package and the color
-support within \code{tibble} is also a factor. If your \code{skimr} results tables are
-empty you may need to run the following \code{options(crayon.enabled = FALSE)}.
 }
 
 \seealso{

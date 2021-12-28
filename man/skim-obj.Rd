@@ -6,6 +6,7 @@
 \alias{has_variable_column}
 \alias{has_skimr_attributes}
 \alias{has_skim_type_attribute}
+\alias{has_skimmers}
 \alias{is_data_frame}
 \alias{is_skim_df}
 \alias{is_one_skim_df}
@@ -23,6 +24,8 @@ has_variable_column(object)
 has_skimr_attributes(object)
 
 has_skim_type_attribute(object)
+
+has_skimmers(object)
 
 is_data_frame(object)
 
@@ -76,6 +79,8 @@ more useful when throwing errors.
 
 \item \code{has_skim_type_attribute}: Does the object have a \code{skim_type} attribute? This makes
 it a \code{one_skim_df}.
+
+\item \code{has_skimmers}: Does the object have skimmers?
 
 \item \code{is_data_frame}: Is the object a data frame?
 
