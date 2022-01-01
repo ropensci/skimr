@@ -3,13 +3,17 @@ test_that("Summary creates the correct summary object", {
   # Test it creates the correct 4 parts
   skim_input <- skim(iris)
   summary_input <- summary(skim_input)
-  expect_equal(rownames(summary_input), c(
-    "Name", "Number of rows ", "Number of columns ",
-    "_______________________ ",
-    "Column type frequency: ", "  factor", "  numeric",
-    "________________________  ",
-    "Group variables"
-  ))
+  expect_named(
+    summary_input,
+    c(
+      "data_name", "counts", "types", "possible_groups",
+      "dt_key", "data_rows", "data_cols"
+    )
+  )
+  expect_identical(summary_input$data_name, "iris")
+  expect_identical(summary_input$types, c("factor", "numeric"))
+  expect_identical(summary_input$data_rows, 150L)
+  expect_identical(summary_input$data_cols, 5L)
 })
 
 test_that("The summary print method prints the correct object", {

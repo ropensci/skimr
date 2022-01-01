@@ -101,11 +101,11 @@ print.skim_list <- function(x,
 #' @param .summary_rule_width the width for the main rule above the summary.
 #' @export
 print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
-  cat(paste0(cli::rule(
-    line = 1, left = "Data Summary",
-    width = .summary_rule_width
-  ), "\n"))
-  print.table(x)
+  with_title <- c(
+    cli::rule(line = 1, left = "Data Summary", width = .summary_rule_width),
+    format(x)
+  )
+  writeLines(with_title)
 }
 
 #' Provide a default printing method for knitr.
@@ -139,14 +139,7 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
   if (is_skim_df(x) && nrow(x) > 0) {
     if (options$skimr_include_summary %||% TRUE) {
       summary_stats <- summary(x)
-
-      kabled <- knitr::kable(
-        summary_stats,
-        table.attr = "style='width: auto;'
-        class='table table-condensed'",
-        col.names = c(" "),
-        caption = "Data summary"
-      )
+      kabled <- knit_print(summary_stats)
     } else {
       kabled <- c()
     }
@@ -193,11 +186,15 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
+  summary_mat <- cbind(
+    get_summary_dnames(x),
+    get_summary_values(x),
+    deparse.level = 0
+  )
   kabled <- knitr::kable(
-    x,
+    summary_mat,
     table.attr = "style='width: auto;'
       class='table table-condensed'",
-    col.names = c(" "),
     caption = "Data summary"
   )
 
