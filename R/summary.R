@@ -43,7 +43,7 @@ process_data_name <- function(object) {
   no_ticks <- gsub("`", "", raw_name)
   if (no_ticks %in% c(".", ".data")) {
     "Piped data"
-  } else if(nchar(no_ticks) > 25) {
+  } else if (nchar(no_ticks) > 25) {
     paste0(substring(no_ticks, 1, 25), "...")
   } else {
     no_ticks
