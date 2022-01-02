@@ -99,8 +99,12 @@ Authors@R:
       person(given = "Rick",
              family = "Saporta",
              role = "ctb",
-             email = "Rick@TheFarmersDog.com")
-             )
+             email = "Rick@TheFarmersDog.com"),
+      person(given = "Henry",
+             family = "Morgan Stewart",
+             role = "ctb",
+             email = "henry.morganstewart@gmail.com")
+       )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
     be modified by the user as can the default formatting.  Support for
