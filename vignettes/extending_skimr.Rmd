@@ -7,37 +7,34 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 ## Introduction
 
-The `skim()` function summarizes data types contained
-within data frames and objects that have as.data.frame()
-methods to coerce them into data frames. It
+The `skim()` function summarizes data types contained within data frames and
+objects that have `as.data.frame()` methods to coerce them into data frames. It
 comes with a set of default summary functions for a wide variety of data types,
 but this is not comprehensive. 
 
-Package authors (and advanced users)
-can add support for skimming
-their specific non-data-frame objects in their packages, and they can provide different
-defaults in their own summary functions. This will
-require including skimr as a dependency.
+Package authors (and advanced users) can add support for skimming their specific
+non-data-frame objects in their packages, and they can provide different
+defaults in their own summary functions. This will require including skimr as a
+dependency.
 
 # Skimming objects that are not coercible to data frames
 
 This example will illustrate this by creating support for the `lm` object
-produced by `lm()`. For any object this
-involves two required elements and one optional element. 
-This is a simple example, but for other types of 
-objects there may be much more complexity
+produced by `lm()`. For any object this involves two required elements and one
+optional element.  This is a simple example, but for other types of objects
+there may be much more complexity
 
-If you are adding skim support to a package you will also need to add `skimr`
-to the list of imports. 
+If you are adding skim support to a package you will also need to add `skimr` to
+the list of imports. 
 
 ```{r}
 library(skimr)
 ```
 
-The lm() function produces a complex object with
-class "lm".
+The `lm()` function produces a complex object with class "lm".
 
 ```{r}
 results <- lm(weight ~ feed, data = chickwts)
@@ -45,62 +42,56 @@ class(results)
 attributes(results)
 ```
 
-There is no as.data.frame method for an lm object.
+There is no as.data.frame method for an `lm` object.
 
-```
+```{r, eval = FALSE}
 as.data.frame(results)
+#> Error in as.data.frame.default(results) :
+#>  cannot coerce class ‘"lm"’ to a data.frame
 ```
-> Error in as.data.frame.default(results) : 
->  cannot coerce class ‘"lm"’ to a data.frame
 
 
-Unlike the example of having a new type of data in a
-column of a simple data frame (for which we would create a sfl)
-frame in the "Using skimr" vignette, this is a different type of 
-challenge: an object that we might wish to skim, but
-that cannot be directly skimmed. Therefore we need
-to make it into an object that is either a data frame
-or coercible to a data frame.
+Unlike the example of having a new type of data in a column of a simple data
+frame (for which we would create a `sfl`) frame in the "Using skimr" vignette,
+this is a different type of challenge: an object that we might wish to skim, but
+that cannot be directly skimmed. Therefore we need to make it into an object
+that is either a data frame or coercible to a data frame.
 
-In the case of the lm object, the `model` attribute
-is already a data frame. So a very simple way to 
-solve the challenge is to skim `results$model` directly.
+In the case of the lm object, the `model` attribute is already a data frame. So
+a very simple way to solve the challenge is to skim `results$model` directly.
 
 ```{r}
 skim(results$model)
 ```
-This is works, but we could go one step further
-and create a new function for doing this directly.
+
+This is works, but we could go one step further and create a new function for
+doing this directly.
 
 ```{r}
-skim_lm <- function(.data){
-   .data <- .data$model
-   skim(.data)
+skim_lm <- function(.data) {
+  .data <- .data$model
+  skimr::skim(.data)
 }
 
 lm(weight ~ feed, data = chickwts) %>% skim_lm()
-
 ```
 
-If desired, a more complex function can be created.
-For example, the lm object also contains fitted values
-and residuals.  We could incorporate these in the
+If desired, a more complex function can be created.  For example, the lm object
+also contains fitted values and residuals.  We could incorporate these in the
 data frame.
 
 ```{r}
-skim_lm <- function(.data, fit = FALSE){
-   .data <- .data$model
-   if (fit == TRUE){
-   .data <- .data %>% 
-            dplyr::bind_cols(
-              fitted =
-                data.frame(results$fitted.values),
-              residuals =
-                data.frame(results$residuals))
-   }
-   skim(.data)
+skim_lm <- function(.data, fit = FALSE) {
+  .data <- .data$model
+  if (fit) {
+    .data <- .data %>%
+      dplyr::bind_cols(
+        fitted = data.frame(results$fitted.values),
+        residuals = data.frame(results$residuals)
+      )
+  }
+  skimr::skim(.data)
 }
-
 ```
 
 
@@ -108,151 +99,122 @@ skim_lm <- function(.data, fit = FALSE){
 skim_lm(results, fit = TRUE)
 ```
 
-A second example of the need for a special function
-is with `dist` objects.  The `UScitiesD` dat set 
-is an example of this.
+A second example of the need for a special function is with `dist` objects. The
+`UScitiesD` dat set is an example of this.
 
 ```{r}
 class(UScitiesD)
 UScitiesD
 ```
-A dist object is most often, as in this case,
-lower triange  
-matrices of distances, which can be measured 
-in various ways. 
-There are many packages that produce dist objects
-and/or take dist objects as
-inputs, including those for cluster analysis and 
-multidimensional scaling. 
 
-A simple solution to this is to follow a similar 
-design to that for lm objects.
+A `dist` object is most often, as in this case, lower triange matrices of
+distances, which can be measured in various ways.  There are many packages that
+produce dist objects and/or take dist objects as inputs, including those for
+cluster analysis and multidimensional scaling. 
+
+A simple solution to this is to follow a similar design to that for `lm`
+objects.
 
 ```{r}
 skim_dist <- function(.data) {
-    .data <- data.frame(as.matrix(.data))
-    skimr::skim(.data)
-    
+  .data <- data.frame(as.matrix(.data))
+  skimr::skim(.data)
 }
 ```
 
-However, this has the limitation of treating
-the dist data as though it is simple numeric data.
+However, this has the limitation of treating the dist data as though it is
+simple numeric data.
 
-What we might want to do instead, is to create
-a new class, for example, "distance" that is 
-specifically for distance data. This will allow
-it to have its own `sfl` or skimr function list.
+What we might want to do instead, is to create a new class, for example,
+"distance" that is specifically for distance data. This will allow it to have
+its own `sfl` or skimr function list.
 
-As handling gets more comples, rather than make a new
-function it can be more powerful to define 
-an `as.data.frame` S3 method for dist objects, which
-will allow it to integrate with skimr more completely
-and uses to use the `skim()` function directly. In 
-a package you will want to export this.
+As handling gets more comples, rather than make a new function it can be more
+powerful to define an `as.data.frame` S3 method for dist objects, which will
+allow it to integrate with skimr more completely and uses to use the `skim()`
+function directly. In a package you will want to export this.
 
 ```{r}
 as.data.frame.dist <- function(.data) {
-    .data <- data.frame(as.matrix(.data))
-     To <- colnames(.data)
+  .data <- data.frame(as.matrix(.data))
 
-    .data <- lapply(.data[,To], 
-                    `class<-`, "distance")
-    .data <- dplyr::bind_rows(.data )
-    .data<- dplyr::bind_cols(.data)
-
-    .data
+  .data[] <- lapply(.data, structure, class = "distance", nms = names(.data))
+  .data
 }
+
 as.data.frame(UScitiesD)
 ```
 
-However, until an sfl is created, skimr will 
-not recognize the class and fall back to treating 
-the data as if it were character data.
+However, until an `sfl` is created, `skimr` will not recognize the class and
+fall back to treating the data as if it were character data.
 
 ```{r}
 skim(UScitiesD)
 ```
 
-The solution to this is to define an sfl (skimr function
-list) specifically for the `distance` class.
+The solution to this is to define an `sfl` (skimr function list) specifically
+for the `distance` class.
 
-## Defining sfls for a package
+## Defining sfl's for a package
 
-`skimr` has an opinionated list of functions for each
-class (e.g. numeric,
-factor)  of data. The core package supports many commonly used classes,
-but there are many others. You can investigate these defaults by calling
+`skimr` has an opinionated list of functions for each class (e.g. numeric,
+factor)  of data. The core package supports many commonly used classes, but
+there are many others. You can investigate these defaults by calling
 `get_default_skimmer_names()`.
 
-What if your data type, like `distance`, isn't covered by defaults? `skimr` usually falls
-back to treating the type as a character, which isn't necessarily helpful. In
-this case, you're best off adding your data type with `skim_with()`.
+What if your data type, like `distance`, isn't covered by defaults? `skimr`
+usually falls back to treating the type as a character, which isn't necessarily
+helpful. In this case, you're best off adding your data type with `skim_with()`.
 
 Before we begin, we'll be using the following custom summary statistics
-throughout. These functions find the nearest
-and furthest other location for each location. 
+throughout. These functions find the nearest and furthest other location for
+each location. 
 
-One thing that is important to be aware of
-when creating statistics functions for skimr is that
-skimr largely uses tibbles rather than base
-data frames. This means that many base operations
-do not work as epected.
+One thing that is important to be aware of when creating statistics functions
+for skimr is that skimr largely uses tibbles rather than base data frames. This
+means that many base operations do not work as epected.
 
 ```{r}
-
 get_nearest <- function(column) {
-  column <- as.numeric(column)
-  closest <- min(column[column != 0])
-  which_rows <- which(column == closest, arr.ind = TRUE)
-  which_rows <- as.vector((which_rows))
-  paste(column[which_rows], collapse = ",")
+  closest <- which.min(column[column != 0])
+  cities <- attr(column, "nms")[column != 0]
+  toString(cities[closest])
 }
 
 get_furthest <- function(column) {
-  column <- as.numeric(column)
-  furthest <- max(column[column != 0])
-  which_rows <- which(column == furthest, arr.ind = TRUE)
-  which_rows <- as.vector(which_rows)
-  paste(column[which_rows], collapse = ",")
-
+  furthest <- which.max(column[column != 0])
+  cities <- attr(column, "nms")[column != 0]
+  toString(cities[furthest])
 }
-
-
 ```
 
 This function, like all summary functions used by `skimr` has two notable
 features.
 
 *  It accepts a vector as its single argument
-*  It returns a scalar, or in R terminology, a vector of length 1.
+*  it returns a scalar, or in R terminology, a vector of length 1.
 
 There are a lot of functions that fulfill these criteria:
 
-* existing functions from base, stats, or other packages,
-* lambda's created using the Tidyverse-style syntax
-* custom functions that have been defined in the `skimr` package
-* custom functions that you have defined.
+*  Existing functions from base, stats, or other packages,
+*  lambda's created using the Tidyverse-style syntax
+*  custom functions that have been defined in the `skimr` package
+*  custom functions that you have defined.
 
 Not fulfilling the two criteria can lead to some very confusing behavior within
 `skimr`. Beware! An example of this issue is the base `quantile()` function in
 default `skimr` percentiles are returned by using `quantile()` five 
-times. In the case of these functions, there could be
-ties which would result in returning vectors that
-have length greater than 1. This is handled by 
-collapsing all of the tied values into a single string. 
+times. In the case of these functions, there could be ties which would result in
+returning vectors that have length greater than 1. This is handled by collapsing
+all of the tied values into a single string. 
 
-Notice, also, that in the case of distance data
-we may wish to exclude distances of 0, which indicate
-the distance from a place to itself. In finding the 
-minimum our function looks only at the distance to 
-other places.
+Notice, also, that in the case of distance data we may wish to exclude distances
+of 0, which indicate the distance from a place to itself. In finding the minimum
+our function looks only at the distance to other places.
 
-
-There are at least two ways that you might want to 
-customize skimr handling of 
-a special data type within a package or your own work.
-The first is to create a custom skimming function.
+There are at least two ways that you might want to customize skimr handling of a
+special data type within a package or your own work.  The first is to create a
+custom skimming function.
 
 ````{r}
 skim_with_dist <- skim_with(
@@ -263,17 +225,18 @@ skim_with_dist <- skim_with(
 )
 
 skim_with_dist(UScitiesD)
-
 ````
 
 The example above creates a new *function*, and you can call that function on
 a specific column with `distance` data to get the appropriate summary 
 statistics. The `skim_with` factory also uses the default skimrs for things 
-like factors, characters, and numerics. Therefore our `skim_with_dist` is like the regular
-`skim` function with the added ability to summarize `distance` columns.
+like factors, characters, and numerics. Therefore our `skim_with_dist` is like
+the regular `skim` function with the added ability to summarize `distance`
+columns.
 
 While this works for any data type and you can also include it within any 
-package (assuming your users load skimr), there is a second, even better, approach. To take full advantage of `skimr`, we'll dig a bit into its API.
+package (assuming your users load skimr), there is a second, even better,
+approach. To take full advantage of `skimr`, we'll dig a bit into its API.
 
 ## Adding new methods
 
@@ -289,8 +252,9 @@ function `get_skimmers`. Each of those methods returns an `sfl` (skimr
 function list) This is the same list-like data structure used in the
 `skim_with()` example above. But note! There is one key difference. When adding
 a generic we also want to identify the `skim_type` in the `sfl`. You will
-probably want to use `skimr::get_skimmers.distance()` but that will not work in a
-vignette.
+probably want to use `skimr::get_skimmers.distance()` but that will not work in
+a vignette.
+
 In a package you will want to export this.
 
 ````{r}
@@ -307,15 +271,13 @@ get_skimmers.distance <- function(column) {
 
 The same strategy follows for other data types.
 
-* Create a method
-* return an `sfl`
-* make sure that the `skim_type` is included.
+*  Create a method
+*  return an `sfl`
+*  make sure that the `skim_type` is included.
 
-Users of your package should load `skimr` to get the `skim()` function 
-(although you could import and reexport it). Once
-loaded, a call to `get_default_skimmer_names()` 
-will return defaults for your
-data types as well! 
+Users of your package should load `skimr` to get the `skim()` function (although
+you could import and reexport it). Once loaded, a call to
+`get_default_skimmer_names()` will return defaults for your data types as well! 
 
 ```{r}
 get_default_skimmer_names()
@@ -324,7 +286,6 @@ get_default_skimmer_names()
 They will then be able to use `skim()` directly.
 
 ```{r}
-
 skim(UScitiesD)
 ```
 
