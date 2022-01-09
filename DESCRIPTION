@@ -138,7 +138,6 @@ Suggests:
     extrafont,
     lubridate,
     rmarkdown,
-    sf,
     testthat (>= 2.0.0)
 VignetteBuilder: 
     knitr
