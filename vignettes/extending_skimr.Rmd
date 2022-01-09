@@ -100,7 +100,7 @@ skim_lm(results, fit = TRUE)
 ```
 
 A second example of the need for a special function is with `dist` objects. The
-`UScitiesD` dat set is an example of this.
+`UScitiesD` data set is an example of this.
 
 ```{r}
 class(UScitiesD)
@@ -125,11 +125,11 @@ skim_dist <- function(.data) {
 However, this has the limitation of treating the dist data as though it is
 simple numeric data.
 
-What we might want to do instead, is to create a new class, for example,
+What we might want to do, instead, is to create a new class, for example,
 "distance" that is specifically for distance data. This will allow it to have
 its own `sfl` or skimr function list.
 
-As handling gets more comples, rather than make a new function it can be more
+As handling gets more complex, rather than make a new function it can be more
 powerful to define an `as.data.frame` S3 method for dist objects, which will
 allow it to integrate with skimr more completely and uses to use the `skim()`
 function directly. In a package you will want to export this.
@@ -172,7 +172,7 @@ each location.
 
 One thing that is important to be aware of when creating statistics functions
 for skimr is that skimr largely uses tibbles rather than base data frames. This
-means that many base operations do not work as epected.
+means that many base operations do not work as expected.
 
 ```{r}
 get_nearest <- function(column) {
