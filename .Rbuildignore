@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^\.github$
 ^\.pre-commit-config\.yaml$
+^\.lintr$
 ^\\inst\\doc\\other_docs\\blog\.html$
 ^\\inst\\doc\\other_docs\\blog\.Rmd$
 ^\\inst\\figures
