@@ -9,6 +9,11 @@
     *  some edge cases relating to empty skim types have been improved
 *   we have improved performance when handling large data with many columns.
 
+### Minor improvements
+
+*   Replace the Suppporting Additional Objects vignette
+with Extending skimr.  Remove sf from Suggests.
+
 # skimr 2.1.3
 
 ### MINOR IMPROVEMENTS
