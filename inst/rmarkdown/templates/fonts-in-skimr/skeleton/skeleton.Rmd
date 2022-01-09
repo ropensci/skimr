@@ -34,7 +34,6 @@ If there are any difficulties please read the extrafont documentation.
 ```{r, message=FALSE}
 library(knitr)
 library(skimr)
-
 ```
 
 Try knitting this document to PDF, HTML, doc or any other format you wish to try. You 
