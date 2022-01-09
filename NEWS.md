@@ -4,6 +4,11 @@
 
 *   skim() used within a function now prints the data frame name.
 
+### Minor improvements
+
+*   Replace the Suppporting Additional Objects vignette
+with Extending skimr.  Remove sf from Suggests.
+
 # skimr 2.1.3
 
 ### MINOR IMPROVEMENTS
