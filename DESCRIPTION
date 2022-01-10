@@ -121,7 +121,7 @@ Imports:
     dplyr (>= 0.8.0),
     knitr (>= 1.2),
     magrittr (>= 1.5),
-    pillar,
+    pillar (>= 1.6.4),
     purrr,
     repr,
     rlang (>= 0.3.1),
