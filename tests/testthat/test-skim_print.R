@@ -107,50 +107,10 @@ test_that("Metadata is stripped from smaller consoles", {
   expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
 })
 
-test_that("Crayon is supported", {
-  skip("Temporary skip due to issues with crayon support on some platforms")
-  withr::local_options(list(cli.unicode = FALSE))
-  withr::with_options(list(crayon.enabled = TRUE), {
-    with_mock(
-      .env = "skimr",
-      render_skim_body = function(...) {
-        paste0(..., sep = "\n", collapse = "\n")
-      },
-      {
-        skimmed <- skim(iris)
-        numeric <- yank(skimmed, "numeric")
-        rendered <- print(numeric)
-      }
-    )
-    expect_match(rendered, "\\\033")
-  })
-})
-
 test_that("skimr creates appropriate output for Jupyter", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
   input <- testthat::capture_output(repr_text(skimmed))
   expect_matches_file(input, "print/repr.txt")
-})
-
-test_that("Metadata can be included: print", {
-  withr::local_options(list(cli.unicode = FALSE))
-  skip_if_not(l10n_info()$`UTF-8`)
-  skimmed <- skim(iris)
-  expect_print_matches_file(
-    skimmed,
-    "print/strip.txt",
-    strip_metadata = FALSE,
-    width = 80
-  )
-})
-
-test_that("Metadata can be included: option", {
-  skip_if_not(l10n_info()$`UTF-8`)
-  withr::local_options(list(cli.unicode = FALSE))
-  skimmed <- skim(iris)
-  withr::with_options(list(skimr_strip_metadata = FALSE), {
-    expect_print_matches_file(skimmed, "print/strip-opt.txt", width = 80)
-  })
 })

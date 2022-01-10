@@ -16,10 +16,6 @@
 #' @docType package
 NULL
 
-.onLoad <- function(libname, pkgname) {
-  options(skimr_strip_metadata = .Platform$OS.type != "windows")
-}
-
 
 # Imports -----------------------------------------------------------------
 
