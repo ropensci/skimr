@@ -141,6 +141,7 @@ Suggests:
     data.table,
     dtplyr,
     extrafont,
+    haven,
     lubridate,
     rmarkdown,
     testthat (>= 2.0.0)
