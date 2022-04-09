@@ -18,6 +18,11 @@
 #' Printing a `skim_df` requires specific columns that might be dropped when
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
 #' cases, this method falls back to [tibble::print.tbl()].
+#' 
+#' @section Options for controlling print behavior
+#' 
+#' You can control the width rule line for the printed subtables with an option:
+#' `skimr_table_header_width`.
 #'
 #' @inheritParams tibble:::print.tbl
 #' @seealso [tibble::trunc_mat()] For a list of global options for customizing
@@ -34,7 +39,10 @@ print.skim_df <- function(x,
                           include_summary = TRUE,
                           n = Inf,
                           width = Inf,
-                          summary_rule_width = 40,
+                          summary_rule_width = getOption(
+                            "skimr_summary_rule_width",
+                            default = 40
+                          ),
                           ...) {
   if (is_skim_df(x) && nrow(x) > 0) {
     if (include_summary) {
@@ -67,7 +75,7 @@ tbl_format_header.one_skim_df <- function(x, setup, ...) {
   rule <- cli::rule(
     line = 1,
     left = variable_type,
-    width = getOption("width", 80)
+    width = getOption("skimr_table_header_width", getOption("width", 80))
   )
   # Add an empty line before the rule
   c("", rule)
