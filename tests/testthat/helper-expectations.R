@@ -49,19 +49,17 @@ expect_print_matches_file <- function(object,
   if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   if (skip_on_cran) testthat::skip_on_cran()
   withr::with_options(list(
-      crayon.enabled = FALSE,
-      width = width,
-      skimr_table_header_width = skimr_table_header_width
-    ),
-    {
-      testthat::expect_known_output(
-        print(object, ...),
-        filename,
-        update = update,
-        width = width
-      )
-    }
-  )
+    crayon.enabled = FALSE,
+    width = width,
+    skimr_table_header_width = skimr_table_header_width
+  ), {
+    testthat::expect_known_output(
+      print(object, ...),
+      filename,
+      update = update,
+      width = width
+    )
+  })
 }
 
 expect_matches_file <- function(object,
