@@ -100,30 +100,22 @@ test_that("Print focused objects appropriately", {
   expect_print_matches_file(input, "print/focus.txt")
 })
 
-test_that("Metadata is stripped from smaller consoles", {
+test_that("Support for smaller consoles can be set with the width option", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
   expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
 })
 
-test_that("Crayon is supported", {
-  skip("Temporary skip due to issues with crayon support on some platforms")
+test_that("Table header width can be controlled by an option", {
   withr::local_options(list(cli.unicode = FALSE))
-  withr::with_options(list(crayon.enabled = TRUE), {
-    with_mock(
-      .env = "skimr",
-      render_skim_body = function(...) {
-        paste0(..., sep = "\n", collapse = "\n")
-      },
-      {
-        skimmed <- skim(iris)
-        numeric <- yank(skimmed, "numeric")
-        rendered <- print(numeric)
-      }
-    )
-    expect_match(rendered, "\\\033")
-  })
+  skip_if_not(l10n_info()$`UTF-8`)
+  skimmed <- skim(iris)
+  expect_print_matches_file(
+    skimmed,
+    "print/narrow-header.txt",
+    skimr_table_header_width = 50
+  )
 })
 
 test_that("skimr creates appropriate output for Jupyter", {
@@ -132,25 +124,4 @@ test_that("skimr creates appropriate output for Jupyter", {
   skimmed <- skim(iris)
   input <- testthat::capture_output(repr_text(skimmed))
   expect_matches_file(input, "print/repr.txt")
-})
-
-test_that("Metadata can be included: print", {
-  withr::local_options(list(cli.unicode = FALSE))
-  skip_if_not(l10n_info()$`UTF-8`)
-  skimmed <- skim(iris)
-  expect_print_matches_file(
-    skimmed,
-    "print/strip.txt",
-    strip_metadata = FALSE,
-    width = 80
-  )
-})
-
-test_that("Metadata can be included: option", {
-  skip_if_not(l10n_info()$`UTF-8`)
-  withr::local_options(list(cli.unicode = FALSE))
-  skimmed <- skim(iris)
-  withr::with_options(list(skimr_strip_metadata = FALSE), {
-    expect_print_matches_file(skimmed, "print/strip-opt.txt", width = 80)
-  })
 })

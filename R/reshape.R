@@ -36,7 +36,19 @@ partition <- function(data) {
   base <- base_skimmers(data)
 
   skimmers <- reconcile_skimmers(data, groups, base)
-  reduced <- purrr::imap(data_as_list, simplify_skimdf, skimmers, groups, base)
+
+  # Check to see that there are at least one, known used skim function
+  # within the data. This can be reduced after using focus(). This indexing
+  # is used so that the lookup order matches that of `data_as_list`.
+  has_skim_data <- lengths(skimmers)[names(data_as_list)] > 0
+  elements_to_keep <- has_skim_data | any(base %in% names(data))
+  reduced <- purrr::imap(
+    data_as_list[elements_to_keep],
+    simplify_skimdf,
+    skimmers = skimmers,
+    groups = groups,
+    base = base
+  )
 
   reassign_skim_attrs(
     reduced,
@@ -52,14 +64,20 @@ partition <- function(data) {
 #' frame that has had columns added after skimming.
 #' @noRd
 reconcile_skimmers <- function(data, groups, base) {
-  all_columns <- names(data)
+  all_columns <- colnames(data)
   skimmers_used <- skimmers_used(data)
-  with_base_columns <- c(
+  if (length(skimmers_used) == 0) {
+    return(skimmers_used)
+  }
+  skimmers_from_names <- skimmers_from_names(all_columns, skimmers_used)
+  with_base_columns <- unlist(c(
     "skim_variable",
     "skim_type",
+    groups,
     base,
     collapse_skimmers(skimmers_used)
-  )
+  ))
+  matched_cols <- dplyr::intersect(all_columns, with_base_columns)
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, .data$skim_type)
@@ -77,10 +95,26 @@ reconcile_skimmers <- function(data, groups, base) {
       complete_cols,
       complete_by_type$skim_type
     )
-    skimmers_used <- purrr::list_merge(skimmers_used, !!!new_cols_by_type)
+    skimmers_from_names <- purrr::list_merge(
+      skimmers_from_names,
+      !!!new_cols_by_type
+    )
   }
 
-  skimmers_used
+  skimmers_from_names
+}
+
+skimmers_from_names <- function(names, skimmers) {
+  matched <- purrr::imap(skimmers, match_skimmers, names)
+  purrr::set_names(matched, names(skimmers))
+}
+
+match_skimmers <- function(fun_names, type, values_to_match) {
+  stripped_values <- stringr::str_remove(
+    values_to_match,
+    paste0("^", type, "\\.")
+  )
+  dplyr::intersect(stripped_values, fun_names)
 }
 
 collapse_skimmers <- function(skimmers_used) {
@@ -169,7 +203,12 @@ focus <- function(.data, ...) {
   assert_is_skim_df(.data)
   reduced <- dplyr::select(.data, "skim_type", "skim_variable", ...)
   if (could_be_skim_df(reduced)) {
-    reassign_skim_attrs(reduced, .data)
+    skimmers <- reconcile_skimmers(
+      reduced,
+      group_names(.data),
+      base_skimmers(.data)
+    )
+    reassign_skim_attrs(reduced, .data, skimmers_used = skimmers)
   } else {
     stop("Cannot drop 'skim_variable' or 'skim_type' columns")
   }

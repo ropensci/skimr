@@ -19,23 +19,16 @@
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
 #' cases, this method falls back to [tibble::print.tbl()].
 #'
-#' @section Controlling metadata behavior:
+#' @section Options for controlling print behavior
 #'
-#' On POSIX systems, `skimr` removes the tibble metadata when generating output.
-#' On some platforms, this can lead to all output getting removed. To disable
-#' that behavior, set either `strip_metadata = FALSE` when calling print or use
-#' `options(skimr_strip_metadata = FALSE)`. The `crayon` package and the color
-#' support within `tibble` is also a factor. If your `skimr` results tables are
-#' empty you may need to run the following `options(crayon.enabled = FALSE)`.
+#' You can control the width rule line for the printed subtables with an option:
+#' `skimr_table_header_width`.
 #'
 #' @inheritParams tibble:::print.tbl
 #' @seealso [tibble::trunc_mat()] For a list of global options for customizing
 #'   print formatting. [crayon::has_color()] for the variety of issues that
 #'   affect tibble's color support.
 #' @param include_summary Whether a summary of the data frame should be printed
-#' @param strip_metadata Whether tibble metadata should be removed.
-#' @param rule_width  Width of the cli rules in printed skim object. Defaults
-#'     to base::options()$width
 #' @param summary_rule_width Width of Data Summary cli rule, defaults to 40.
 #' @name print
 NULL
@@ -46,75 +39,69 @@ print.skim_df <- function(x,
                           include_summary = TRUE,
                           n = Inf,
                           width = Inf,
-                          n_extra = NULL,
-                          strip_metadata = getOption(
-                            "skimr_strip_metadata", FALSE
+                          summary_rule_width = getOption(
+                            "skimr_summary_rule_width",
+                            default = 40
                           ),
-                          rule_width = base::options()$width,
-                          summary_rule_width = 40,
                           ...) {
-  withr::local_options(list(crayon.enabled = FALSE))
   if (is_skim_df(x) && nrow(x) > 0) {
     if (include_summary) {
       print(summary(x), .summary_rule_width = summary_rule_width, ...)
     }
     by_type <- partition(x)
     purrr::map(
-      by_type, print, n, width, n_extra, strip_metadata,
-      .rule_width = rule_width, ...
+      by_type,
+      print,
+      width = width,
+      n = n,
+      ...
     )
-    invisible(NULL)
   } else {
     NextMethod("print")
   }
 }
 
-#' @describeIn print Print an entry within a partitioned `skim_df`.
-#' @param .rule_width Width for the rule above the skim results for each type.
-#' @param .width Width for the tibble for each type.
+
+# Methods for correctly formatting a a `one_skim_df`. We leverage the
+# customiztion options in `pillar` for this. It divides the results into: a
+# header, which we customize; a body, where we strip some values; and a footer,
+# which we drop. For more details, see
+# https://pillar.r-lib.org/articles/extending.html
+
+#' @importFrom pillar tbl_format_header
 #' @export
-print.one_skim_df <- function(x,
-                              n = Inf,
-                              .width = Inf,
-                              n_extra = NULL,
-                              strip_metadata = getOption(
-                                "skimr_strip_metadata", FALSE
-                              ),
-                              .rule_width = base::options()$width,
-                              ...) {
+tbl_format_header.one_skim_df <- function(x, setup, ...) {
   variable_type <- paste("Variable type:", attr(x, "skim_type"))
-  top_line <- cli::rule(line = 1, left = variable_type, width = .rule_width)
-  out <- format(x, ..., n = n, width = .width, n_extra = n_extra)
-  if (is.null(strip_metadata)) {
-    strip_metadata <- TRUE
-  }
-  if (strip_metadata) {
-    metadata <- -1 * grab_tibble_metadata(out)
-  } else {
-    metadata <- seq_along(out)
-  }
-  render_skim_body(top_line, out, metadata)
+  rule <- cli::rule(
+    line = 1,
+    left = variable_type,
+    width = getOption("skimr_table_header_width", getOption("width", 80))
+  )
+  # Add an empty line before the rule
+  c("", rule)
 }
 
-grab_tibble_metadata <- function(x) {
-  if (crayon::has_color()) {
-    grep("^\\s*\\\033\\[38;5;\\d{3}m[#\\*]", x)
-  } else {
-    grep("^\\s*[#\\*]", x)
-  }
-}
-
-render_skim_body <- function(top_line, out, metadata_to_remove) {
-  cat(paste0("\n", top_line), out[metadata_to_remove], sep = "\n")
+#' @importFrom pillar ctl_new_pillar
+#' @export
+ctl_new_pillar.one_skim_df <- function(controller,
+                                       x,
+                                       width,
+                                       ...,
+                                       title = NULL) {
+  out <- NextMethod()
+  out$type <- NULL
+  out
 }
 
 #' @describeIn print Print a `skim_list`, a list of `skim_df` objects.
 #' @export
-print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL,
-                            .rule_width = base::options()$width, ...) {
+print.skim_list <- function(x,
+                            n = Inf,
+                            width = Inf,
+                            ...) {
   nms <- names(x)
   attributes(x) <- NULL
-  print(rlang::set_names(x, nms), rule_width = .rule_width)
+  print(rlang::set_names(x, nms))
 }
 
 
@@ -122,11 +109,11 @@ print.skim_list <- function(x, n = Inf, width = Inf, n_extra = NULL,
 #' @param .summary_rule_width the width for the main rule above the summary.
 #' @export
 print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
-  cat(paste0(cli::rule(
-    line = 1, left = "Data Summary",
-    width = .summary_rule_width
-  ), "\n"))
-  print.table(x)
+  with_title <- c(
+    cli::rule(line = 1, left = "Data Summary", width = .summary_rule_width),
+    format(x)
+  )
+  writeLines(with_title)
 }
 
 #' Provide a default printing method for knitr.
@@ -160,14 +147,7 @@ knit_print.skim_df <- function(x, options = NULL, ...) {
   if (is_skim_df(x) && nrow(x) > 0) {
     if (options$skimr_include_summary %||% TRUE) {
       summary_stats <- summary(x)
-
-      kabled <- knitr::kable(
-        summary_stats,
-        table.attr = "style='width: auto;'
-        class='table table-condensed'",
-        col.names = c(" "),
-        caption = "Data summary"
-      )
+      kabled <- knit_print(summary_stats)
     } else {
       kabled <- c()
     }
@@ -214,11 +194,15 @@ knit_print.one_skim_df <- function(x, options = NULL, ...) {
 #' @describeIn knit_print Default `knitr` print for `skim_df` summaries.
 #' @export
 knit_print.summary_skim_df <- function(x, options = NULL, ...) {
+  summary_mat <- cbind(
+    get_summary_dnames(x),
+    get_summary_values(x),
+    deparse.level = 0
+  )
   kabled <- knitr::kable(
-    x,
+    summary_mat,
     table.attr = "style='width: auto;'
       class='table table-condensed'",
-    col.names = c(" "),
     caption = "Data summary"
   )
 

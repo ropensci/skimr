@@ -39,15 +39,24 @@ expect_print_matches_file <- function(object,
                                         TRUE
                                       ),
                                       width = 100,
+                                      update = getOption(
+                                        "skimr_update_print",
+                                        FALSE
+                                      ),
+                                      skimr_table_header_width = NULL,
                                       ...) {
   if (skip_on_windows) testthat::skip_on_os("windows")
   if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   if (skip_on_cran) testthat::skip_on_cran()
-  withr::with_options(list(crayon.enabled = FALSE, width = width), {
+  withr::with_options(list(
+    crayon.enabled = FALSE,
+    width = width,
+    skimr_table_header_width = skimr_table_header_width
+  ), {
     testthat::expect_known_output(
       print(object, ...),
       filename,
-      update = FALSE,
+      update = update,
       width = width
     )
   })
@@ -55,7 +64,10 @@ expect_print_matches_file <- function(object,
 
 expect_matches_file <- function(object,
                                 file,
-                                update = FALSE,
+                                update = getOption(
+                                  "skimr_update_print",
+                                  FALSE
+                                ),
                                 skip_on_windows = getOption(
                                   "skimr_skip_on_windows",
                                   TRUE
@@ -64,10 +76,12 @@ expect_matches_file <- function(object,
                                   "skimr_skip_on_cran",
                                   TRUE
                                 ),
+                                width = 100,
                                 ...) {
   if (skip_on_windows) testthat::skip_on_os("windows")
   if (skip_on_windows) testthat::skip_if_not(l10n_info()$`UTF-8`)
   if (skip_on_cran) testthat::skip_on_cran()
+  withr::local_options(list(crayon.enabled = FALSE, width = width))
   act <- testthat::quasi_label(rlang::enquo(object), NULL)
 
   if (!file.exists(file)) {

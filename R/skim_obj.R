@@ -128,6 +128,21 @@ has_skim_type_attribute <- function(object) {
   )
 }
 
+#' @describeIn skim-obj Does the object have skimmers?
+#' @export
+has_skimmers <- function(object) {
+  base <- base_skimmers(object)
+  skimmers <- reconcile_skimmers(
+    object,
+    group_names(object),
+    base
+  )
+  make_issue(
+    any(lengths(skimmers) > 0, base %in% names(object)),
+    "does not have defined skimmers."
+  )
+}
+
 #' @describeIn skim-obj Is the object a data frame?
 #' @export
 is_data_frame <- function(object) {
@@ -146,7 +161,8 @@ is_skim_df <- function(object) {
     is_data_frame(object),
     has_type_column(object),
     has_variable_column(object),
-    has_skimr_attributes(object)
+    has_skimr_attributes(object),
+    has_skimmers(object)
   )
 }
 
