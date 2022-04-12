@@ -72,6 +72,13 @@ using \code{\link[dplyr:select]{dplyr::select()}} or \code{\link[dplyr:summarise
 cases, this method falls back to \code{\link[tibble:formatting]{tibble::print.tbl()}}.
 }
 
+\section{Options for controlling print behavior}{
+
+
+You can control the width rule line for the printed subtables with an option:
+\code{skimr_table_header_width}.
+}
+
 \seealso{
 \code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
 print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that

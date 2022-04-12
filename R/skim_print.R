@@ -19,7 +19,7 @@
 #' using [dplyr::select()] or [dplyr::summarize()] on a `skim_df`. In those
 #' cases, this method falls back to [tibble::print.tbl()].
 #'
-#' @section Options for controlling print behavior
+#' @section Options for controlling print behavior:
 #'
 #' You can control the width rule line for the printed subtables with an option:
 #' `skimr_table_header_width`.

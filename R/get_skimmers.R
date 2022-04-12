@@ -212,6 +212,13 @@ get_skimmers.AsIs <- function(column) {
   modify_default_skimmers("list", new_skim_type = "AsIs")
 }
 
+#' @describeIn  get_skimmers Summary functions for `haven_labelled` columns.
+#'  Finds the appropriate skimmers for the underlying data in the vector.
+#' @export
+get_skimmers.haven_labelled <- function(column) {
+  get_skimmers(vctrs::vec_data(column))
+}
+
 #' @rdname get_skimmers
 #' @param new_skim_type The type to assign to the looked up set of skimmers.
 #' @param new_funs Replacement functions for those in
