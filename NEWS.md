@@ -2,11 +2,15 @@
 
 ### NEW FEATURES
 
-*   skim() used within a function now prints the data frame name.
-*   we have improved the interaction between focus() and the print methods.
+*   `skim()` used within a function now prints the data frame name.
+*   we have improved the interaction between `focus()` and the print methods.
 
     *  columns selected in focus() are shown in the correct order
     *  some edge cases relating to empty skim types have been improved
+    *  you can control the width rule line for the printed subtables with an
+       option: `skimr_table_header_width`. The default is to use the
+       console width, i.e. the value of the `width` option.
+
 *   we have improved performance when handling large data with many columns.
 
 ### Minor improvements
