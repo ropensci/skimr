@@ -15,6 +15,7 @@
 \alias{get_skimmers.ts}
 \alias{get_skimmers.list}
 \alias{get_skimmers.AsIs}
+\alias{get_skimmers.haven_labelled}
 \alias{modify_default_skimmers}
 \title{Retrieve the summary functions for a specific data type}
 \usage{
@@ -45,6 +46,8 @@ get_skimmers(column)
 \method{get_skimmers}{list}(column)
 
 \method{get_skimmers}{AsIs}(column)
+
+\method{get_skimmers}{haven_labelled}(column)
 
 modify_default_skimmers(skim_type, new_skim_type = NULL, new_funs = list())
 }
@@ -121,6 +124,9 @@ default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=m
 
 \item \code{AsIs}: Summary functions for \code{AsIs} columns: \code{\link[=n_unique]{n_unique()}},
 \code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.
+
+\item \code{haven_labelled}: Summary functions for \code{haven_labelled} columns.
+Finds the appropriate skimmers for the underlying data in the vector.
 }}
 
 \examples{

@@ -2,9 +2,8 @@
 
 ### NEW FEATURES
 
-*   `skim()` used within a function now prints the data frame name.
-*   we have improved the interaction between `focus()` and the print methods.
-
+*   skim() used within a function now prints the data frame name.
+*   we have improved the interaction between focus() and the print methods.
     *  columns selected in focus() are shown in the correct order
     *  some edge cases relating to empty skim types have been improved
     *  you can control the width rule line for the printed subtables with an
@@ -16,7 +15,10 @@
 ### Minor improvements
 
 *   Replace the Suppporting Additional Objects vignette
-with Extending skimr.  Remove sf from Suggests.
+    with Extending skimr.  Remove sf from Suggests.
+*   Default support for `haven_labelled` columns is now supported. These
+    columns are summarized using skimmers for the underlying data, typically
+    either numeric or character.
 
 # skimr 2.1.3
 
