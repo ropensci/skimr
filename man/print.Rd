@@ -12,7 +12,7 @@
   include_summary = TRUE,
   n = Inf,
   width = Inf,
-  summary_rule_width = 40,
+  summary_rule_width = getOption("skimr_summary_rule_width", default = 40),
   ...
 )
 

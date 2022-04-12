@@ -100,11 +100,22 @@ test_that("Print focused objects appropriately", {
   expect_print_matches_file(input, "print/focus.txt")
 })
 
-test_that("Metadata is stripped from smaller consoles", {
+test_that("Support for smaller consoles can be set with the width option", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
   expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
+})
+
+test_that("Table header width can be controlled by an option", {
+  withr::local_options(list(cli.unicode = FALSE))
+  skip_if_not(l10n_info()$`UTF-8`)
+  skimmed <- skim(iris)
+  expect_print_matches_file(
+    skimmed,
+    "print/narrow-header.txt",
+    skimr_table_header_width = 50
+  )
 })
 
 test_that("skimr creates appropriate output for Jupyter", {
