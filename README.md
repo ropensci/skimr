@@ -424,9 +424,9 @@ and line charts in various contexts, some of which are described below.
 
 There are known issues with printing the spark-histogram characters when
 printing a data frame. For example, `"▂▅▇"` is printed as
-`"<U+2582><U+2585><U+2587>"`. This longstanding problem \[originates in
+`"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
 the low-level
-code\]<https://stat.ethz.ch/pipermail/r-devel/2015-May/071250.html>) for
+code](https://stat.ethz.ch/pipermail/r-devel/2015-May/071250.html) for
 printing dataframes. While some cases have been addressed, there are,
 for example, reports of this issue in Emacs ESS. While this is a deep
 issue, there is [ongoing work to address it in base
