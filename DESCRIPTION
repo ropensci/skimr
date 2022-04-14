@@ -121,7 +121,6 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    crayon,
     dplyr (>= 0.8.0),
     knitr (>= 1.2),
     magrittr (>= 1.5),
@@ -134,17 +133,18 @@ Imports:
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 1.0.0),
-    vctrs,
-    withr
+    vctrs
 Suggests:
     covr,
+    crayon,
     data.table,
     dtplyr,
     extrafont,
     haven,
     lubridate,
     rmarkdown,
-    testthat (>= 2.0.0)
+    testthat (>= 2.0.0),
+    withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
