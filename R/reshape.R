@@ -53,7 +53,7 @@ partition <- function(data) {
   reassign_skim_attrs(
     reduced,
     data,
-    class = "skim_list",
+    class = c("skim_list", "list"),
     skimmers_used = skimmers
   )
 }
