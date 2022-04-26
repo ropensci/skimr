@@ -61,6 +61,27 @@ print.skim_df <- function(x,
   }
 }
 
+#' @export
+print.one_skim_df <- function(x,
+                          include_summary = TRUE,
+                          n = Inf,
+                          width = Inf,
+                          summary_rule_width = getOption(
+                            "skimr_summary_rule_width",
+                            default = 40
+                          ),
+                          ...) {
+  if (is_skim_df(x) && nrow(x) > 0) {
+    if (include_summary) {
+      print(summary(x), .summary_rule_width = summary_rule_width, ...)
+    }
+
+    print(x, width = width, n = n, ...)
+  } else {
+    NextMethod("print")
+  }
+}
+
 
 # Methods for correctly formatting a a `one_skim_df`. We leverage the
 # customiztion options in `pillar` for this. It divides the results into: a

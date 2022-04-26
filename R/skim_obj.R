@@ -257,9 +257,12 @@ strip_skim_attrs <- function(object) {
   attributes(object) <- stripped
   object
 }
-
+#' @param object a skim object
+#' @param skim_df name of new skim object
+#' @param ... additional options
+#' 
 #' Pass attributes from a `skimr` object to a new object.
-#' @noRd
+#' @keywords internal
 reassign_skim_attrs <- function(object, skim_df, ...) {
   defaults <- list(
     class = c("skim_df", "tbl_df", "tbl", "data.frame"),

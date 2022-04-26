@@ -79,7 +79,7 @@ reconcile_skimmers <- function(data, groups, base) {
   ))
   matched_cols <- dplyr::intersect(all_columns, with_base_columns)
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
-  if (length(extra_cols) > 0) {
+  if (length(extra_cols) > 0 && "skim_type" %in% names(data)) {
     grouped <- dplyr::group_by(data, .data$skim_type)
     complete_by_type <- dplyr::summarize_at(
       grouped,
