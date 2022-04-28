@@ -1,7 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-skimr <a href='https://docs.ropensci.org/skimr/'>
-=================================================
+# skimr <a href='https://docs.ropensci.org/skimr/'>
 
 <img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
@@ -11,10 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![R build
 status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/skimr/)
+[![codecov](https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/skimr)
 [![This is an ROpenSci Peer reviewed
 package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
 [![cran
 checks](https://cranchecks.info/badges/summary/skimr)](https://cranchecks.info/pkgs/skimr)
 
@@ -30,8 +29,7 @@ human reader.
 programmatically. Upgraders should review this document, the release
 notes and vignettes carefully.**
 
-Installation
-------------
+## Installation
 
 The current released version of `skimr` can be installed from CRAN. If
 you wish to install the current build of the next release you can do so
@@ -51,8 +49,7 @@ been incorporated in the master branch (and may not be):
 Do not rely on APIs from the develop branch, as they are likely to
 change.
 
-Skim statistics in the console
-------------------------------
+## Skim statistics in the console
 
 `skimr`:
 
@@ -247,8 +244,7 @@ Skim statistics in the console
     ##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist 
     ## 1 Petal.Length          0             1 3.76 1.77  1 1.6 4.35 5.1  6.9 ▇▁▆▇▂
 
-Knitted results
----------------
+## Knitted results
 
 Simply skimming a data frame will produce the horizontal print layout
 shown above. We provide a `knit_print` method for the types of objects
@@ -296,6 +292,8 @@ chunk.
 </tr>
 </tbody>
 </table>
+
+Data summary
 
 **Variable type: numeric**
 
@@ -345,8 +343,7 @@ chunk.
 </tbody>
 </table>
 
-Customizing skimr
------------------
+## Customizing skimr
 
 Although skimr provides opinionated defaults, it is highly customizable.
 Users can specify their own statistics, change the formatting of
@@ -418,8 +415,7 @@ example.
       )
     }
 
-Limitations of current version
-------------------------------
+## Limitations of current version
 
 We are aware that there are issues with rendering the inline histograms
 and line charts in various contexts, some of which are described below.
@@ -430,9 +426,11 @@ There are known issues with printing the spark-histogram characters when
 printing a data frame. For example, `"▂▅▇"` is printed as
 `"<U+2582><U+2585><U+2587>"`. This longstanding problem [originates in
 the low-level
-code](https://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html)
-for printing dataframes. While some cases have been addressed, there
-are, for example, reports of this issue in Emacs ESS.
+code](https://stat.ethz.ch/pipermail/r-devel/2015-May/071250.html) for
+printing dataframes. While some cases have been addressed, there are,
+for example, reports of this issue in Emacs ESS. While this is a deep
+issue, there is [ongoing work to address it in base
+R](https://blog.r-project.org/2020/05/02/utf-8-support-on-windows/).
 
 This means that while `skimr` can render the histograms to the console
 and in RMarkdown documents, it cannot in other circumstances. This
@@ -468,8 +466,7 @@ Displays in documents of different types will vary. For example, one
 user found that the font “Yu Gothic UI Semilight” produced consistent
 results for Microsoft Word and Libre Office Write.
 
-Inspirations
-------------
+## Inspirations
 
 -   [TextPlots](https://github.com/sunetos/TextPlots.jl) for use of
     Braille characters
@@ -485,8 +482,7 @@ Exercising these ideas to their fullest requires a font with good
 support for block drawing characters.
 [PragamataPro](https://fsd.it/shop/fonts/pragmatapro/) is one such font.
 
-Contributing
-------------
+## Contributing
 
 We welcome issue reports and pull requests, including potentially adding
 support for commonly used variable classes. However, in general, we
