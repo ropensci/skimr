@@ -56,11 +56,11 @@ print.skim_df <- function(x,
       n = n,
       ...
     )
+    invisible(x)
   } else {
     NextMethod("print")
   }
 }
-
 
 # Methods for correctly formatting a a `one_skim_df`. We leverage the
 # customiztion options in `pillar` for this. It divides the results into: a
