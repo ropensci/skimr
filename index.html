@@ -33,6 +33,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,18 +47,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">skimr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/skimr.html">Get started</a>
 </li>
@@ -64,7 +60,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,10 +70,10 @@
       <a href="articles/Skimr_defaults.html">Skimr defaults</a>
     </li>
     <li>
-      <a href="articles/Supporting_additional_objects.html">Supporting additional objects</a>
+      <a href="articles/Using_fonts.html">Using Fonts</a>
     </li>
     <li>
-      <a href="articles/Using_fonts.html">Using Fonts</a>
+      <a href="articles/extending_skimr.html">Extending skimr</a>
     </li>
   </ul>
 </li>
@@ -87,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/ropensci/skimr/">
+  <a href="https://github.com/ropensci/skimr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -104,17 +100,17 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="skimr-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#skimr-" class="anchor"></a>skimr <a href="https://docs.ropensci.org/skimr/"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="skimr-">skimr <a href="https://docs.ropensci.org/skimr/" class="external-link"></a>
+<a class="anchor" aria-label="anchor" href="#skimr-"></a>
 </h1></div>
 <p><img src="https://docs.ropensci.org/skimr/reference/figures/logo.png" align="right" height="139"></p>
-<p><a href="https://www.repostatus.org/"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a> <a href="https://github.com/ropensci/skimr/actions?workflow=R-CMD-check"><img src="https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://codecov.io/gh/ropensci/skimr/"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://github.com/ropensci/software-review/issues/175"><img src="https://badges.ropensci.org/175_status.svg" alt="This is an ROpenSci Peer reviewed package"></a> <a href="https://cran.r-project.org/package=skimr"><img src="http://www.r-pkg.org/badges/version/skimr" alt="CRAN_Status_Badge"></a> <a href="https://cranchecks.info/pkgs/skimr"><img src="https://cranchecks.info/badges/summary/skimr" alt="cran checks"></a></p>
-<p><code>skimr</code> provides a frictionless approach to summary statistics which conforms to the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>, displaying summary statistics the user can skim quickly to understand their data. It handles different data types and returns a <code>skim_df</code> object which can be included in a pipeline or displayed nicely for the human reader.</p>
+<p><a href="https://www.repostatus.org/" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a> <a href="https://github.com/ropensci/skimr/actions?workflow=R-CMD-check" class="external-link"><img src="https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/ropensci/skimr" class="external-link"><img src="https://codecov.io/gh/ropensci/skimr/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://github.com/ropensci/software-review/issues/175" class="external-link"><img src="https://badges.ropensci.org/175_status.svg" alt="This is an ROpenSci Peer reviewed package"></a> <a href="https://cran.r-project.org/package=skimr" class="external-link"><img src="https://www.r-pkg.org/badges/version/skimr" alt="CRAN_Status_Badge"></a> <a href="https://cranchecks.info/pkgs/skimr" class="external-link"><img src="https://cranchecks.info/badges/summary/skimr" alt="cran checks"></a></p>
+<p><code>skimr</code> provides a frictionless approach to summary statistics which conforms to the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment" class="external-link">principle of least surprise</a>, displaying summary statistics the user can skim quickly to understand their data. It handles different data types and returns a <code>skim_df</code> object which can be included in a pipeline or displayed nicely for the human reader.</p>
 <p><strong>Note: <code>skimr</code> version 2 has major changes when skimr is used programmatically. Upgraders should review this document, the release notes and vignettes carefully.</strong></p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>The current released version of <code>skimr</code> can be installed from CRAN. If you wish to install the current build of the next release you can do so using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>)</span></code></pre></div>
@@ -123,19 +119,19 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"ropensci/skimr"</span>, <span class="dt">ref =</span> <span class="st">"develop"</span>)</span></code></pre></div>
 <p>Do not rely on APIs from the develop branch, as they are likely to change.</p>
 </div>
-<div id="skim-statistics-in-the-console" class="section level2">
-<h2 class="hasAnchor">
-<a href="#skim-statistics-in-the-console" class="anchor"></a>Skim statistics in the console</h2>
+<div class="section level2">
+<h2 id="skim-statistics-in-the-console">Skim statistics in the console<a class="anchor" aria-label="anchor" href="#skim-statistics-in-the-console"></a>
+</h2>
 <p><code>skimr</code>:</p>
 <ul>
-<li>Provides a larger set of statistics than <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, including missing, complete, n, and sd.</li>
+<li>Provides a larger set of statistics than <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, including missing, complete, n, and sd.</li>
 <li>reports each data types separately</li>
 <li>handles dates, logicals, and a variety of other types</li>
-<li>supports spark-bar and spark-line based on the <a href="https://github.com/r-lib/pillar">pillar package</a>.</li>
+<li>supports spark-bar and spark-line based on the <a href="https://github.com/r-lib/pillar" class="external-link">pillar package</a>.</li>
 </ul>
-<div id="separates-variables-by-class" class="section level3">
-<h3 class="hasAnchor">
-<a href="#separates-variables-by-class" class="anchor"></a>Separates variables by class:</h3>
+<div class="section level3">
+<h3 id="separates-variables-by-class">Separates variables by class:<a class="anchor" aria-label="anchor" href="#separates-variables-by-class"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">skim</span>(chickwts)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co">## ── Data Summary ────────────────────────</span></span>
@@ -155,12 +151,12 @@
 <span id="cb3-17"><a href="#cb3-17"></a><span class="co">## 1 feed                  0             1 FALSE          6 soy: 14, cas: 12, lin: 12, sun: 12</span></span>
 <span id="cb3-18"><a href="#cb3-18"></a><span class="co">## </span></span>
 <span id="cb3-19"><a href="#cb3-19"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">## 1 weight                0             1  261.  78.1   108  204.   258  324.   423 ▆▆▇▇▃</span></span></code></pre></div>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">##   skim_variable n_missing complete_rate mean   sd  p0  p25 p50  p75 p100 hist </span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">## 1 weight                0             1 261. 78.1 108 204. 258 324.  423 ▆▆▇▇▃</span></span></code></pre></div>
 </div>
-<div id="presentation-is-in-a-compact-horizontal-format" class="section level3">
-<h3 class="hasAnchor">
-<a href="#presentation-is-in-a-compact-horizontal-format" class="anchor"></a>Presentation is in a compact horizontal format:</h3>
+<div class="section level3">
+<h3 id="presentation-is-in-a-compact-horizontal-format">Presentation is in a compact horizontal format:<a class="anchor" aria-label="anchor" href="#presentation-is-in-a-compact-horizontal-format"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">skim</span>(iris)</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">## ── Data Summary ────────────────────────</span></span>
@@ -180,15 +176,15 @@
 <span id="cb4-17"><a href="#cb4-17"></a><span class="co">## 1 Species               0             1 FALSE          3 set: 50, ver: 50, vir: 50</span></span>
 <span id="cb4-18"><a href="#cb4-18"></a><span class="co">## </span></span>
 <span id="cb4-19"><a href="#cb4-19"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">## 2 Sepal.Width           0             1  3.06 0.436   2     2.8  3      3.3   4.4 ▁▆▇▂▁</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">## 3 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">## 4 Petal.Width           0             1  1.20 0.762   0.1   0.3  1.3    1.8   2.5 ▇▁▇▅▃</span></span></code></pre></div>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">## 1 Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">## 2 Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">## 3 Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">## 4 Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></span></code></pre></div>
 </div>
-<div id="built-in-support-for-strings-lists-and-other-column-classes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#built-in-support-for-strings-lists-and-other-column-classes" class="anchor"></a>Built in support for strings, lists and other column classes</h3>
+<div class="section level3">
+<h3 id="built-in-support-for-strings-lists-and-other-column-classes">Built in support for strings, lists and other column classes<a class="anchor" aria-label="anchor" href="#built-in-support-for-strings-lists-and-other-column-classes"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">skim</span>(dplyr<span class="op">::</span>starwars)</span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">## ── Data Summary ────────────────────────</span></span>
@@ -205,15 +201,15 @@
 <span id="cb5-14"><a href="#cb5-14"></a><span class="co">## Group variables            None           </span></span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">## </span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="co">## ── Variable type: character ────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">##   skim_variable n_missing complete_rate   min   max empty n_unique whitespace</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## 1 name                  0         1         3    21     0       87          0</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">## 2 hair_color            5         0.943     4    13     0       12          0</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">## 3 skin_color            0         1         3    19     0       31          0</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co">## 4 eye_color             0         1         3    13     0       15          0</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="co">## 5 sex                   4         0.954     4    14     0        4          0</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## 6 gender                4         0.954     8     9     0        2          0</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="co">## 7 homeworld            10         0.885     4    14     0       48          0</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co">## 8 species               4         0.954     3    14     0       37          0</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">##   skim_variable n_missing complete_rate min max empty n_unique whitespace</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## 1 name                  0         1       3  21     0       87          0</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">## 2 hair_color            5         0.943   4  13     0       12          0</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">## 3 skin_color            0         1       3  19     0       31          0</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">## 4 eye_color             0         1       3  13     0       15          0</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">## 5 sex                   4         0.954   4  14     0        4          0</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## 6 gender                4         0.954   8   9     0        2          0</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">## 7 homeworld            10         0.885   4  14     0       48          0</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">## 8 species               4         0.954   3  14     0       37          0</span></span>
 <span id="cb5-26"><a href="#cb5-26"></a><span class="co">## </span></span>
 <span id="cb5-27"><a href="#cb5-27"></a><span class="co">## ── Variable type: list ─────────────────────────────────────────────────────────────────────────────</span></span>
 <span id="cb5-28"><a href="#cb5-28"></a><span class="co">##   skim_variable n_missing complete_rate n_unique min_length max_length</span></span>
@@ -222,14 +218,14 @@
 <span id="cb5-31"><a href="#cb5-31"></a><span class="co">## 3 starships             0             1       17          0          5</span></span>
 <span id="cb5-32"><a href="#cb5-32"></a><span class="co">## </span></span>
 <span id="cb5-33"><a href="#cb5-33"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="co">## 1 height                6         0.931 174.   34.8    66 167     180 191     264 ▁▁▇▅▁</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="co">## 2 mass                 28         0.678  97.3 169.     15  55.6    79  84.5  1358 ▇▁▁▁▁</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a><span class="co">## 3 birth_year           44         0.494  87.6 155.      8  35      52  72     896 ▇▁▁▁▁</span></span></code></pre></div>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd p0   p25 p50   p75 p100 hist </span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="co">## 1 height                6         0.931 174.   34.8 66 167   180 191    264 ▁▁▇▅▁</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">## 2 mass                 28         0.678  97.3 169.  15  55.6  79  84.5 1358 ▇▁▁▁▁</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">## 3 birth_year           44         0.494  87.6 155.   8  35    52  72    896 ▇▁▁▁▁</span></span></code></pre></div>
 </div>
-<div id="has-a-useful-summary-function" class="section level3">
-<h3 class="hasAnchor">
-<a href="#has-a-useful-summary-function" class="anchor"></a>Has a useful summary function</h3>
+<div class="section level3">
+<h3 id="has-a-useful-summary-function">Has a useful summary function<a class="anchor" aria-label="anchor" href="#has-a-useful-summary-function"></a>
+</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">skim</span>(iris) <span class="op">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">summary</span>()</span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
@@ -245,9 +241,9 @@
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co">## ________________________         </span></span>
 <span id="cb6-14"><a href="#cb6-14"></a><span class="co">## Group variables            None</span></span></code></pre></div>
 </div>
-<div id="individual-columns-can-be-selected-using-tidyverse-style-selectors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#individual-columns-can-be-selected-using-tidyverse-style-selectors" class="anchor"></a>Individual columns can be selected using tidyverse-style selectors</h3>
+<div class="section level3">
+<h3 id="individual-columns-can-be-selected-using-tidyverse-style-selectors">Individual columns can be selected using tidyverse-style selectors<a class="anchor" aria-label="anchor" href="#individual-columns-can-be-selected-using-tidyverse-style-selectors"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">skim</span>(iris, Sepal.Length, Petal.Length)</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">## ── Data Summary ────────────────────────</span></span>
@@ -262,14 +258,14 @@
 <span id="cb7-12"><a href="#cb7-12"></a><span class="co">## Group variables            None  </span></span>
 <span id="cb7-13"><a href="#cb7-13"></a><span class="co">## </span></span>
 <span id="cb7-14"><a href="#cb7-14"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">## 1 Sepal.Length          0             1  5.84 0.828   4.3   5.1  5.8    6.4   7.9 ▆▇▇▅▂</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">## 2 Petal.Length          0             1  3.76 1.77    1     1.6  4.35   5.1   6.9 ▇▁▆▇▂</span></span></code></pre></div>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">## 1 Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">## 2 Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span></code></pre></div>
 </div>
-<div id="handles-grouped-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#handles-grouped-data" class="anchor"></a>Handles grouped data</h3>
-<p><code><a href="reference/skim.html">skim()</a></code> can handle data that has been grouped using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">dplyr::group_by()</a></code>.</p>
+<div class="section level3">
+<h3 id="handles-grouped-data">Handles grouped data<a class="anchor" aria-label="anchor" href="#handles-grouped-data"></a>
+</h3>
+<p><code><a href="reference/skim.html">skim()</a></code> can handle data that has been grouped using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>iris <span class="op">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">skim</span>()</span>
@@ -286,23 +282,23 @@
 <span id="cb8-14"><a href="#cb8-14"></a><span class="co">## Group variables            Species   </span></span>
 <span id="cb8-15"><a href="#cb8-15"></a><span class="co">## </span></span>
 <span id="cb8-16"><a href="#cb8-16"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">##    skim_variable Species    n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">##  1 Sepal.Length  setosa             0             1 5.01  0.352   4.3  4.8   5     5.2    5.8 ▃▃▇▅▁</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">##  2 Sepal.Length  versicolor         0             1 5.94  0.516   4.9  5.6   5.9   6.3    7   ▂▇▆▃▃</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="co">##  3 Sepal.Length  virginica          0             1 6.59  0.636   4.9  6.22  6.5   6.9    7.9 ▁▃▇▃▂</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co">##  4 Sepal.Width   setosa             0             1 3.43  0.379   2.3  3.2   3.4   3.68   4.4 ▁▃▇▅▂</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="co">##  5 Sepal.Width   versicolor         0             1 2.77  0.314   2    2.52  2.8   3      3.4 ▁▅▆▇▂</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="co">##  6 Sepal.Width   virginica          0             1 2.97  0.322   2.2  2.8   3     3.18   3.8 ▂▆▇▅▁</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="co">##  7 Petal.Length  setosa             0             1 1.46  0.174   1    1.4   1.5   1.58   1.9 ▁▃▇▃▁</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="co">##  8 Petal.Length  versicolor         0             1 4.26  0.470   3    4     4.35  4.6    5.1 ▂▂▇▇▆</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="co">##  9 Petal.Length  virginica          0             1 5.55  0.552   4.5  5.1   5.55  5.88   6.9 ▃▇▇▃▂</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="co">## 10 Petal.Width   setosa             0             1 0.246 0.105   0.1  0.2   0.2   0.3    0.6 ▇▂▂▁▁</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="co">## 11 Petal.Width   versicolor         0             1 1.33  0.198   1    1.2   1.3   1.5    1.8 ▅▇▃▆▁</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a><span class="co">## 12 Petal.Width   virginica          0             1 2.03  0.275   1.4  1.8   2     2.3    2.5 ▂▇▆▅▇</span></span></code></pre></div>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">##    skim_variable Species    n_missing complete_rate  mean    sd  p0  p25  p50  p75 p100 hist </span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">##  1 Sepal.Length  setosa             0             1 5.01  0.352 4.3 4.8  5    5.2   5.8 ▃▃▇▅▁</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">##  2 Sepal.Length  versicolor         0             1 5.94  0.516 4.9 5.6  5.9  6.3   7   ▂▇▆▃▃</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co">##  3 Sepal.Length  virginica          0             1 6.59  0.636 4.9 6.22 6.5  6.9   7.9 ▁▃▇▃▂</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="co">##  4 Sepal.Width   setosa             0             1 3.43  0.379 2.3 3.2  3.4  3.68  4.4 ▁▃▇▅▂</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co">##  5 Sepal.Width   versicolor         0             1 2.77  0.314 2   2.52 2.8  3     3.4 ▁▅▆▇▂</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co">##  6 Sepal.Width   virginica          0             1 2.97  0.322 2.2 2.8  3    3.18  3.8 ▂▆▇▅▁</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="co">##  7 Petal.Length  setosa             0             1 1.46  0.174 1   1.4  1.5  1.58  1.9 ▁▃▇▃▁</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="co">##  8 Petal.Length  versicolor         0             1 4.26  0.470 3   4    4.35 4.6   5.1 ▂▂▇▇▆</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co">##  9 Petal.Length  virginica          0             1 5.55  0.552 4.5 5.1  5.55 5.88  6.9 ▃▇▇▃▂</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co">## 10 Petal.Width   setosa             0             1 0.246 0.105 0.1 0.2  0.2  0.3   0.6 ▇▂▂▁▁</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="co">## 11 Petal.Width   versicolor         0             1 1.33  0.198 1   1.2  1.3  1.5   1.8 ▅▇▃▆▁</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co">## 12 Petal.Width   virginica          0             1 2.03  0.275 1.4 1.8  2    2.3   2.5 ▂▇▆▅▇</span></span></code></pre></div>
 </div>
-<div id="behaves-nicely-in-pipelines" class="section level3">
-<h3 class="hasAnchor">
-<a href="#behaves-nicely-in-pipelines" class="anchor"></a>Behaves nicely in pipelines</h3>
+<div class="section level3">
+<h3 id="behaves-nicely-in-pipelines">Behaves nicely in pipelines<a class="anchor" aria-label="anchor" href="#behaves-nicely-in-pipelines"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>iris <span class="op">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">skim</span>() <span class="op">%&gt;%</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(numeric.sd <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</span>
@@ -319,202 +315,106 @@
 <span id="cb9-14"><a href="#cb9-14"></a><span class="co">## Group variables            None      </span></span>
 <span id="cb9-15"><a href="#cb9-15"></a><span class="co">## </span></span>
 <span id="cb9-16"><a href="#cb9-16"></a><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">##   skim_variable n_missing complete_rate  mean    sd    p0   p25   p50   p75  p100 hist </span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">## 1 Petal.Length          0             1  3.76  1.77     1   1.6  4.35   5.1   6.9 ▇▁▆▇▂</span></span></code></pre></div>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist </span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">## 1 Petal.Length          0             1 3.76 1.77  1 1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span></code></pre></div>
 </div>
 </div>
-<div id="knitted-results" class="section level2">
-<h2 class="hasAnchor">
-<a href="#knitted-results" class="anchor"></a>Knitted results</h2>
+<div class="section level2">
+<h2 id="knitted-results">Knitted results<a class="anchor" aria-label="anchor" href="#knitted-results"></a>
+</h2>
 <p>Simply skimming a data frame will produce the horizontal print layout shown above. We provide a <code>knit_print</code> method for the types of objects in this package so that similar results are produced in documents. To use this, make sure the <code>skimmed</code> object is the last item in your code chunk.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>faithful <span class="op">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">skim</span>()</span></code></pre></div>
 <table class="table">
-<caption>
-Data summary
-</caption>
+<caption>Data summary</caption>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">
-Name
-</td>
-<td style="text-align: left;">
-Piped data
-</td>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">
-Number of rows
-</td>
-<td style="text-align: left;">
-272
-</td>
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">272</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">
-Number of columns
-</td>
-<td style="text-align: left;">
-2
-</td>
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">
-_______________________
-</td>
-<td style="text-align: left;">
-</td>
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">
-Column type frequency:
-</td>
-<td style="text-align: left;">
-</td>
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">
-numeric
-</td>
-<td style="text-align: left;">
-2
-</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">
-________________________
-</td>
-<td style="text-align: left;">
-</td>
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">
-Group variables
-</td>
-<td style="text-align: left;">
-None
-</td>
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
 </tr>
 </tbody>
 </table>
+<p>Data summary</p>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
-<th style="text-align: left;">
-skim_variable
-</th>
-<th style="text-align: right;">
-n_missing
-</th>
-<th style="text-align: right;">
-complete_rate
-</th>
-<th style="text-align: right;">
-mean
-</th>
-<th style="text-align: right;">
-sd
-</th>
-<th style="text-align: right;">
-p0
-</th>
-<th style="text-align: right;">
-p25
-</th>
-<th style="text-align: right;">
-p50
-</th>
-<th style="text-align: right;">
-p75
-</th>
-<th style="text-align: right;">
-p100
-</th>
-<th style="text-align: left;">
-hist
-</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">
-eruptions
-</td>
-<td style="text-align: right;">
-0
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: right;">
-3.49
-</td>
-<td style="text-align: right;">
-1.14
-</td>
-<td style="text-align: right;">
-1.6
-</td>
-<td style="text-align: right;">
-2.16
-</td>
-<td style="text-align: right;">
-4
-</td>
-<td style="text-align: right;">
-4.45
-</td>
-<td style="text-align: right;">
-5.1
-</td>
-<td style="text-align: left;">
-▇▂▂▇▇
-</td>
+<td style="text-align: left;">eruptions</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">1.6</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4.45</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: left;">▇▂▂▇▇</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">
-waiting
-</td>
-<td style="text-align: right;">
-0
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: right;">
-70.90
-</td>
-<td style="text-align: right;">
-13.59
-</td>
-<td style="text-align: right;">
-43.0
-</td>
-<td style="text-align: right;">
-58.00
-</td>
-<td style="text-align: right;">
-76
-</td>
-<td style="text-align: right;">
-82.00
-</td>
-<td style="text-align: right;">
-96.0
-</td>
-<td style="text-align: left;">
-▃▃▂▇▂
-</td>
+<td style="text-align: left;">waiting</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">70.90</td>
+<td style="text-align: right;">13.59</td>
+<td style="text-align: right;">43.0</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">82.00</td>
+<td style="text-align: right;">96.0</td>
+<td style="text-align: left;">▃▃▂▇▂</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="customizing-skimr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#customizing-skimr" class="anchor"></a>Customizing skimr</h2>
+<div class="section level2">
+<h2 id="customizing-skimr">Customizing skimr<a class="anchor" aria-label="anchor" href="#customizing-skimr"></a>
+</h2>
 <p>Although skimr provides opinionated defaults, it is highly customizable. Users can specify their own statistics, change the formatting of results, create statistics for new classes and develop skimmers for data structures that are not data frames.</p>
-<div id="specify-your-own-statistics-and-classes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#specify-your-own-statistics-and-classes" class="anchor"></a>Specify your own statistics and classes</h3>
+<div class="section level3">
+<h3 id="specify-your-own-statistics-and-classes">Specify your own statistics and classes<a class="anchor" aria-label="anchor" href="#specify-your-own-statistics-and-classes"></a>
+</h3>
 <p>Users can specify their own statistics using a list combined with the <code><a href="reference/skim_with.html">skim_with()</a></code> function factory. <code><a href="reference/skim_with.html">skim_with()</a></code> returns a new <code>skim</code> function that can be called on your data. You can use this factory to produce summaries for any type of column within your data.</p>
 <p>Assignment within a call to <code><a href="reference/skim_with.html">skim_with()</a></code> relies on a helper function, <code>sfl</code> or <code>skimr</code> function list. By default, functions in the <code>sfl</code> call are appended to the default skimmers, and names are automatically generated as well.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(mad))</span>
@@ -533,9 +433,9 @@ waiting
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>my_skim &lt;-<span class="st"> </span><span class="kw">skim_with</span>(<span class="dt">numeric =</span> <span class="kw">sfl</span>(<span class="dt">hist =</span> <span class="ot">NULL</span>))</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">my_skim</span>(iris, Sepal.Length)</span></code></pre></div>
 </div>
-<div id="skimming-other-objects" class="section level3">
-<h3 class="hasAnchor">
-<a href="#skimming-other-objects" class="anchor"></a>Skimming other objects</h3>
+<div class="section level3">
+<h3 id="skimming-other-objects">Skimming other objects<a class="anchor" aria-label="anchor" href="#skimming-other-objects"></a>
+</h3>
 <p><code>skimr</code> has summary functions for the following types of data by default:</p>
 <ul>
 <li>
@@ -558,76 +458,81 @@ waiting
 <span id="cb14-6"><a href="#cb14-6"></a>}</span></code></pre></div>
 </div>
 </div>
-<div id="limitations-of-current-version" class="section level2">
-<h2 class="hasAnchor">
-<a href="#limitations-of-current-version" class="anchor"></a>Limitations of current version</h2>
+<div class="section level2">
+<h2 id="limitations-of-current-version">Limitations of current version<a class="anchor" aria-label="anchor" href="#limitations-of-current-version"></a>
+</h2>
 <p>We are aware that there are issues with rendering the inline histograms and line charts in various contexts, some of which are described below.</p>
-<div id="support-for-spark-histograms" class="section level3">
-<h3 class="hasAnchor">
-<a href="#support-for-spark-histograms" class="anchor"></a>Support for spark histograms</h3>
-<p>There are known issues with printing the spark-histogram characters when printing a data frame. For example, <code>"▂▅▇"</code> is printed as <code>"&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2587&gt;"</code>. This longstanding problem <a href="https://r.789695.n4.nabble.com/Unicode-display-problem-with-data-frames-under-Windows-td4707639.html">originates in the low-level code</a> for printing dataframes. While some cases have been addressed, there are, for example, reports of this issue in Emacs ESS.</p>
+<div class="section level3">
+<h3 id="support-for-spark-histograms">Support for spark histograms<a class="anchor" aria-label="anchor" href="#support-for-spark-histograms"></a>
+</h3>
+<p>There are known issues with printing the spark-histogram characters when printing a data frame. For example, <code>"▂▅▇"</code> is printed as <code>"&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2587&gt;"</code>. This longstanding problem <a href="https://stat.ethz.ch/pipermail/r-devel/2015-May/071250.html" class="external-link">originates in the low-level code</a> for printing dataframes. While some cases have been addressed, there are, for example, reports of this issue in Emacs ESS. While this is a deep issue, there is <a href="https://blog.r-project.org/2020/05/02/utf-8-support-on-windows/" class="external-link">ongoing work to address it in base R</a>.</p>
 <p>This means that while <code>skimr</code> can render the histograms to the console and in RMarkdown documents, it cannot in other circumstances. This includes:</p>
 <ul>
 <li>converting a <code>skimr</code> data frame to a vanilla R data frame, but tibbles render correctly</li>
 <li>in the context of rendering to a pdf using an engine that does not support utf-8.</li>
 </ul>
-<p>One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with <code><a href="https://rdrr.io/r/base/locales.html">Sys.setlocale("LC_CTYPE", "Chinese")</a></code>. The helper function <code><a href="reference/fix_windows_histograms.html">fix_windows_histograms()</a></code> does this for you.</p>
+<p>One workaround for showing these characters in Windows is to set the CTYPE part of your locale to Chinese/Japanese/Korean with <code>Sys.setlocale("LC_CTYPE", "Chinese")</code>. The helper function <code><a href="reference/fix_windows_histograms.html">fix_windows_histograms()</a></code> does this for you.</p>
 <p>And last but not least, we provide <code><a href="reference/skim.html">skim_without_charts()</a></code> as a fallback. This makes it easy to still get summaries of your data, even if unicode issues continue.</p>
 </div>
-<div id="printing-spark-histograms-and-line-graphs-in-knitted-documents" class="section level3">
-<h3 class="hasAnchor">
-<a href="#printing-spark-histograms-and-line-graphs-in-knitted-documents" class="anchor"></a>Printing spark histograms and line graphs in knitted documents</h3>
-<p>Spark-bar and spark-line work in the console, but may not work when you knit them to a specific document format. The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, for example. This issue can generally be addressed by changing fonts to one with good building block (for histograms) and Braille support (for line graphs). For example, the open font “DejaVu Sans” from the <code>extrafont</code> package supports these. You may also want to try wrapping your results in <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code>. Please see the vignette on using fonts for details.</p>
+<div class="section level3">
+<h3 id="printing-spark-histograms-and-line-graphs-in-knitted-documents">Printing spark histograms and line graphs in knitted documents<a class="anchor" aria-label="anchor" href="#printing-spark-histograms-and-line-graphs-in-knitted-documents"></a>
+</h3>
+<p>Spark-bar and spark-line work in the console, but may not work when you knit them to a specific document format. The same session that produces a correctly rendered HTML document may produce an incorrectly rendered PDF, for example. This issue can generally be addressed by changing fonts to one with good building block (for histograms) and Braille support (for line graphs). For example, the open font “DejaVu Sans” from the <code>extrafont</code> package supports these. You may also want to try wrapping your results in <code><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">knitr::kable()</a></code>. Please see the vignette on using fonts for details.</p>
 <p>Displays in documents of different types will vary. For example, one user found that the font “Yu Gothic UI Semilight” produced consistent results for Microsoft Word and Libre Office Write.</p>
 </div>
-<div id="stripping-metadata-and-empty-results-tables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#stripping-metadata-and-empty-results-tables" class="anchor"></a>Stripping metadata and empty results tables</h3>
-<p>In POSIX systems, <code>skimr</code> tries to remove the tibble metadata when producing the results. A complicating factor is tibble’s color support, which depends on environment settings. In particular, not all Windows terminals support colors in the way that tibble expects.</p>
-<p>So, by default, we disable removing metadata on windows. You can turn this feature on with an option. Either set it when calling print or globally.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>skimmed &lt;-<span class="st"> </span><span class="kw">skim</span>(chickwts)</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">print</span>(skimmed, <span class="dt">strip_metadata =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">options</span>(<span class="dt">skimr_strip_metadata =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p>Separately, you might need to check the option <code>crayon.enabled</code>. Similarly, if your skimr results tables are empty you may need to run the following</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">options</span>(<span class="dt">crayon.enabled =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<p>You need to do this one time per session.</p>
 </div>
+<div class="section level2">
+<h2 id="inspirations">Inspirations<a class="anchor" aria-label="anchor" href="#inspirations"></a>
+</h2>
+<ul>
+<li><p><a href="https://github.com/sunetos/TextPlots.jl" class="external-link">TextPlots</a> for use of Braille characters</p></li>
+<li><p><a href="https://github.com/holman/spark" class="external-link">spark</a> for use of block characters.</p></li>
+</ul>
+<p>The earliest use of unicode characters to generate sparklines appears to be <a href="https://blog.jonudell.net/2009/01/13/fuel-prices-and-pageviews/" class="external-link">from 2009</a>.</p>
+<p>Exercising these ideas to their fullest requires a font with good support for block drawing characters. <a href="https://fsd.it/shop/fonts/pragmatapro/" class="external-link">PragamataPro</a> is one such font.</p>
 </div>
-<div id="contributing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>We welcome issue reports and pull requests, including potentially adding support for commonly used variable classes. However, in general, we encourage users to take advantage of skimr’s flexibility to add their own customized classes. Please see the <a href="https://docs.ropensci.org/skimr/CONTRIBUTING.html">contributing</a> and <a href="https://ropensci.org/code-of-conduct/">conduct</a> documents.</p>
-<p><a href="https://ropensci.org"><img src="https://ropensci.org/public_images/ropensci_footer.png" alt="ropenci_footer"></a></p>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>We welcome issue reports and pull requests, including potentially adding support for commonly used variable classes. However, in general, we encourage users to take advantage of skimr’s flexibility to add their own customized classes. Please see the <a href="https://docs.ropensci.org/skimr/CONTRIBUTING.html" class="external-link">contributing</a> and <a href="https://ropensci.org/code-of-conduct/" class="external-link">conduct</a> documents.</p>
+<p><a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/public_images/ropensci_footer.png" alt="ropenci_footer"></a></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=skimr">https://​cloud.r-project.org/​package=skimr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/ropensci/skimr/">https://​github.com/​ropensci/​skimr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ropensci/skimr/issues">https://​github.com/​ropensci/​skimr/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=skimr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ropensci/skimr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ropensci/skimr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing skimr</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Elin Waring <br><small class="roles"> Maintainer, author </small>  </li>
 <li>Michael Quinn <br><small class="roles"> Author </small>  </li>
@@ -635,20 +540,24 @@ waiting
 <li>Eduardo Arino de la Rubia <br><small class="roles"> Author </small>  </li>
 <li>Hao Zhu <br><small class="roles"> Author </small>  </li>
 <li>Shannon Ellis <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.</p>
+  <p></p>
+<p>Developed by Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, Shannon Ellis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -656,6 +565,8 @@ waiting
 
   
 
+
+  
 
   </body>
 </html>

@@ -1,69 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ropensci.github.io/skimr/index.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/arrange.skim_df.html</loc>
+    <loc>/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/filter.skim_df.html</loc>
+    <loc>/articles/Skimr_defaults.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/fix_windows_histograms.html</loc>
+    <loc>/articles/Using_fonts.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/kable.html</loc>
+    <loc>/articles/extending_skimr.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/mutate.skim_df.html</loc>
+    <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/pander.html</loc>
+    <loc>/articles/skimr.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/print.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/reexports.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/select.skim_df.html</loc>
+    <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/skim.html</loc>
+    <loc>/reference/deprecated-v1.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/skim_format.html</loc>
+    <loc>/reference/fix_windows_histograms.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/skim_with.html</loc>
+    <loc>/reference/focus.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/skimr-package.html</loc>
+    <loc>/reference/get_default_skimmers.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/slice.skim_df.html</loc>
+    <loc>/reference/get_skimmers.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/stats.html</loc>
+    <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/summary.skim_df.html</loc>
+    <loc>/reference/knit_print.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/reference/wide.html</loc>
+    <loc>/reference/mutate.skim_df.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/articles/Skimr_defaults.html</loc>
+    <loc>/reference/partition.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/articles/Supporting_additional_objects.html</loc>
+    <loc>/reference/print.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/articles/Using_fonts.html</loc>
+    <loc>/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://ropensci.github.io/skimr/articles/Using_skimr.html</loc>
+    <loc>/reference/repr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sfl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skim-attr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skim-obj.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skim.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skim_with.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skimr-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/skimr-vctrs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summary.skim_df.html</loc>
+  </url>
+  <url>
+    <loc>/reference/to_long.html</loc>
   </url>
 </urlset>
