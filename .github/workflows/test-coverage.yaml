@@ -2,11 +2,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
 
 name: test-coverage
 
@@ -20,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@main
         id: install-r
 
       - name: Install pak and query dependencies
