@@ -36,7 +36,7 @@ and we will try to help.
 
 ## Pull requests
 
-Pull requests should be against the _develop_ branch not the master branch. You
+Pull requests should be against the _develop_ branch not the main branch. You
 can set this when creating your pull request. Please make a separately named
 branch to submit. Keep each branch for a complete specific issue. If you create
 a pull request by editing in the GitHub web editor and you end up with multiple
