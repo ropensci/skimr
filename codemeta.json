@@ -491,8 +491,8 @@
     "SystemRequirements": null
   },
   "fileSize": "2405.306KB",
-  "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
-  "readme": "https://github.com/ropensci/skimr/blob/master/README.md",
+  "releaseNotes": "https://github.com/ropensci/skimr/blob/main/NEWS.md",
+  "readme": "https://github.com/ropensci/skimr/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://codecov.io/gh/ropensci/skimr/"],
   "developmentStatus": "https://www.repostatus.org/",
   "review": {
