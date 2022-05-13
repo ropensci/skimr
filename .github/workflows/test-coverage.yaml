@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@main
+      - uses: r-lib/actions/setup-r@master
         id: install-r
 
       - name: Install pak and query dependencies
