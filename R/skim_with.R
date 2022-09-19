@@ -131,7 +131,7 @@ skim_with <- function(...,
       data_cols = ncol(data),
       df_name = .data_name,
       dt_key  = get_dt_key(data),
-      groups = dplyr::groups(data),
+      groups = dplyr::group_vars(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
     )
