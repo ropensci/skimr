@@ -153,7 +153,7 @@ validate_assignment <- function(...) {
   }
 
   # Need to cope with case where ... is a list already
-  if (class(to_assign[[1]]) != "skimr_function_list") {
+  if (!inherits(to_assign[[1]], "skimr_function_list")) {
     to_assign <- to_assign[[1]]
   }
 
