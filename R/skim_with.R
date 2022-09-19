@@ -339,7 +339,7 @@ skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
   grouped <- dplyr::group_by(data, !!!group_columns)
   skimmed <- dplyr::summarize(
     grouped,
-    dplyr::across(any_of(variable_names), mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, group_columns)
 }
@@ -348,7 +348,7 @@ skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
 skim_by_type.data.frame <- function(mangled_skimmers, variable_names, data) {
   skimmed <- dplyr::summarize(
     data,
-    dplyr::across(any_of(variable_names), mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, NULL)
 }
@@ -358,7 +358,7 @@ skim_by_type.data.table <- function(mangled_skimmers, variable_names, data) {
   data <- tibble::as_tibble(data)
   skimmed <- dplyr::summarize(
     data,
-    dplyr::across(any_of(variable_names), mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, NULL)
 }
