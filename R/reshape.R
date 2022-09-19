@@ -70,20 +70,20 @@ reconcile_skimmers <- function(data, groups, base) {
     return(skimmers_used)
   }
   skimmers_from_names <- skimmers_from_names(all_columns, skimmers_used)
-  with_base_columns <- unlist(c(
+  with_base_columns <- c(
     "skim_variable",
     "skim_type",
     groups,
     base,
     collapse_skimmers(skimmers_used)
-  ))
+  )
   matched_cols <- dplyr::intersect(all_columns, with_base_columns)
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, .data$skim_type)
     complete_by_type <- dplyr::summarize_at(
       grouped,
-      dplyr::vars(extra_cols),
+      extra_cols,
       ~ !all(is.na(.x))
     )
     complete_cols <- purrr::pmap(
@@ -134,8 +134,7 @@ simplify_skimdf <- function(data, skim_type, skimmers, groups, base) {
   stopifnot(has_variable_column(data))
   names(data) <- stringr::str_remove(names(data), paste0(skim_type, "\\."))
   keep <- c("skim_variable", groups, base, skimmers[[skim_type]])
-  cols_in_data <- names(data)
-  out <- dplyr::select(data, !!!dplyr::intersect(keep, cols_in_data))
+  out <- dplyr::select(data, tidyselect::any_of(keep))
 
   structure(
     out,

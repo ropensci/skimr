@@ -83,59 +83,59 @@ a given data type.
 }
 \section{Functions}{
 \itemize{
-\item \code{n_missing}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
+\item \code{n_missing()}: Calculate the sum of \code{NA} and \code{NULL} (i.e. missing) values.
 
-\item \code{n_complete}: Calculate the sum of not \code{NA} and \code{NULL} (i.e. missing)
+\item \code{n_complete()}: Calculate the sum of not \code{NA} and \code{NULL} (i.e. missing)
 values.
 
-\item \code{complete_rate}: Calculate complete values; complete values are not missing.
+\item \code{complete_rate()}: Calculate complete values; complete values are not missing.
 
-\item \code{n_whitespace}: Calculate the number of rows containing only whitespace
+\item \code{n_whitespace()}: Calculate the number of rows containing only whitespace
 values using s+ regex.
 
-\item \code{sorted_count}: Create a contingency table and arrange its levels in
+\item \code{sorted_count()}: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical
 and depends upon the locale. \code{NA} is treated as a ordinary value for
 sorting.
 
-\item \code{top_counts}: Compute and collapse a contingency table into a single
+\item \code{top_counts()}: Compute and collapse a contingency table into a single
 character scalar. Wraps \code{\link[=sorted_count]{sorted_count()}}.
 
-\item \code{inline_hist}: Generate inline histogram for numeric variables. The
+\item \code{inline_hist()}: Generate inline histogram for numeric variables. The
 character length of the histogram is controlled by the formatting options
 for character vectors.
 
-\item \code{n_empty}: Calculate the number of blank values in a character vector.
+\item \code{n_empty()}: Calculate the number of blank values in a character vector.
 A "blank" is equal to "".
 
-\item \code{min_char}: Calculate the minimum number of characters within a
+\item \code{min_char()}: Calculate the minimum number of characters within a
 character vector.
 
-\item \code{max_char}: Calculate the maximum number of characters within a
+\item \code{max_char()}: Calculate the maximum number of characters within a
 character vector.
 
-\item \code{n_unique}: Calculate the number of unique elements but remove \code{NA}.
+\item \code{n_unique()}: Calculate the number of unique elements but remove \code{NA}.
 
-\item \code{ts_start}: Get the start for a time series without the frequency.
+\item \code{ts_start()}: Get the start for a time series without the frequency.
 
-\item \code{ts_end}: Get the finish for a time series without the frequency.
+\item \code{ts_end()}: Get the finish for a time series without the frequency.
 
-\item \code{inline_linegraph}: Generate inline line graph for time series variables. The
+\item \code{inline_linegraph()}: Generate inline line graph for time series variables. The
 character length of the line graph is controlled by the formatting options
 for character vectors.
 Based on the function in the pillar package.
 
-\item \code{list_lengths_min}: Get the length of the shortest list in a vector of lists.
+\item \code{list_lengths_min()}: Get the length of the shortest list in a vector of lists.
 
-\item \code{list_lengths_median}: Get the median length of the lists.
+\item \code{list_lengths_median()}: Get the median length of the lists.
 
-\item \code{list_lengths_max}: Get the maximum length of the lists.
+\item \code{list_lengths_max()}: Get the maximum length of the lists.
 
-\item \code{list_min_length}: Get the length of the shortest list in a vector of lists.
+\item \code{list_min_length()}: Get the length of the shortest list in a vector of lists.
 
-\item \code{list_max_length}: Get the length of the longest list in a vector of lists.
+\item \code{list_max_length()}: Get the length of the longest list in a vector of lists.
+
 }}
-
 \seealso{
 \code{\link[=get_skimmers]{get_skimmers()}} for customizing the functions called by \code{\link[=skim]{skim()}}.
 }
