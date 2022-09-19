@@ -96,7 +96,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Skimr defaults</h1>
             
-            <h4 data-toc-skip class="date">2022-05-13</h4>
+            <h4 data-toc-skip class="date">2022-09-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/skimr/blob/HEAD/vignettes/Skimr_defaults.Rmd" class="external-link"><code>vignettes/Skimr_defaults.Rmd</code></a></small>
       <div class="hidden name"><code>Skimr_defaults.Rmd</code></div>
@@ -126,52 +126,52 @@
 </h2>
 <p>To learn more about the functions used in this package, use the function <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## $AsIs</span>
-<span class="co">## [1] "n_unique"   "min_length" "max_length"</span>
-<span class="co">## </span>
-<span class="co">## $character</span>
-<span class="co">## [1] "min"        "max"        "empty"      "n_unique"   "whitespace"</span>
-<span class="co">## </span>
-<span class="co">## $complex</span>
-<span class="co">## [1] "mean"</span>
-<span class="co">## </span>
-<span class="co">## $Date</span>
-<span class="co">## [1] "min"      "max"      "median"   "n_unique"</span>
-<span class="co">## </span>
-<span class="co">## $difftime</span>
-<span class="co">## [1] "min"      "max"      "median"   "n_unique"</span>
-<span class="co">## </span>
-<span class="co">## $factor</span>
-<span class="co">## [1] "ordered"    "n_unique"   "top_counts"</span>
-<span class="co">## </span>
-<span class="co">## $haven_labelled</span>
-<span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span>
-<span class="co">## </span>
-<span class="co">## $list</span>
-<span class="co">## [1] "n_unique"   "min_length" "max_length"</span>
-<span class="co">## </span>
-<span class="co">## $logical</span>
-<span class="co">## [1] "mean"  "count"</span>
-<span class="co">## </span>
-<span class="co">## $numeric</span>
-<span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span>
-<span class="co">## </span>
-<span class="co">## $POSIXct</span>
-<span class="co">## [1] "min"      "max"      "median"   "n_unique"</span>
-<span class="co">## </span>
-<span class="co">## $Timespan</span>
-<span class="co">## [1] "min"      "max"      "median"   "n_unique"</span>
-<span class="co">## </span>
-<span class="co">## $ts</span>
-<span class="co">##  [1] "start"      "end"        "frequency"  "deltat"     "mean"      </span>
-<span class="co">##  [6] "sd"         "min"        "max"        "median"     "line_graph"</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $AsIs</span></span>
+<span><span class="co">## [1] "n_unique"   "min_length" "max_length"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $character</span></span>
+<span><span class="co">## [1] "min"        "max"        "empty"      "n_unique"   "whitespace"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $complex</span></span>
+<span><span class="co">## [1] "mean"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Date</span></span>
+<span><span class="co">## [1] "min"      "max"      "median"   "n_unique"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $difftime</span></span>
+<span><span class="co">## [1] "min"      "max"      "median"   "n_unique"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $factor</span></span>
+<span><span class="co">## [1] "ordered"    "n_unique"   "top_counts"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $haven_labelled</span></span>
+<span><span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $list</span></span>
+<span><span class="co">## [1] "n_unique"   "min_length" "max_length"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $logical</span></span>
+<span><span class="co">## [1] "mean"  "count"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $numeric</span></span>
+<span><span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $POSIXct</span></span>
+<span><span class="co">## [1] "min"      "max"      "median"   "n_unique"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Timespan</span></span>
+<span><span class="co">## [1] "min"      "max"      "median"   "n_unique"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $ts</span></span>
+<span><span class="co">##  [1] "start"      "end"        "frequency"  "deltat"     "mean"      </span></span>
+<span><span class="co">##  [6] "sd"         "min"        "max"        "median"     "line_graph"</span></span></code></pre>
 <p>The counterpart to this function is <code><a href="../reference/get_default_skimmers.html">get_default_skimmers()</a></code>, which returns the functions themselves. If you are interested in a particular class within <code>skimr</code>, pass it as a string to either function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## $numeric</span>
-<span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $numeric</span></span>
+<span><span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span></span></code></pre>
 <p>The same information is stored in the <code>skimmers_used</code> attribute of the object returned by <code><a href="../reference/skim.html">skim()</a></code>.</p>
 </div>
   </div>
@@ -193,7 +193,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

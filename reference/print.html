@@ -74,50 +74,63 @@ methods for <code>knitr</code>/ <code>rmarkdown</code> documents is also provide
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for skim_df</span>
-<span class="fu">print</span><span class="op">(</span>
-  <span class="va">x</span>,
-  include_summary <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="cn">Inf</span>,
-  width <span class="op">=</span> <span class="cn">Inf</span>,
-  summary_rule_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"skimr_summary_rule_width"</span>, default <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for skim_list</span>
-<span class="fu">print</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">Inf</span>, width <span class="op">=</span> <span class="cn">Inf</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for summary_skim_df</span>
-<span class="fu">print</span><span class="op">(</span><span class="va">x</span>, .summary_rule_width <span class="op">=</span> <span class="fl">40</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for skim_df</span></span>
+<span><span class="fu">print</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  include_summary <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  width <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  summary_rule_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"skimr_summary_rule_width"</span>, default <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for skim_list</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">Inf</span>, width <span class="op">=</span> <span class="cn">Inf</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary_skim_df</span></span>
+<span><span class="fu">print</span><span class="op">(</span><span class="va">x</span>, .summary_rule_width <span class="op">=</span> <span class="fl">40</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Object to format or print.</p></dd>
+
+
 <dt>include_summary</dt>
 <dd><p>Whether a summary of the data frame should be printed</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than the <code>print_max</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.
 Otherwise, will print as many rows as specified by the
 <code>print_min</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use the <code>width</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a>.</p></dd>
+
+
 <dt>summary_rule_width</dt>
 <dd><p>Width of Data Summary cli rule, defaults to 40.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Passed on to <code>tbl_format_setup()</code>.</p></dd>
+
+
 <dt>.summary_rule_width</dt>
 <dd><p>the width for the main rule above the summary.</p></dd>
+
 </dl></div>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>skim_df</code>: Print a skimmed data frame (<code>skim_df</code> from <code><a href="skim.html">skim()</a></code>).</p></li>
-<li><p><code>skim_list</code>: Print a <code>skim_list</code>, a list of <code>skim_df</code> objects.</p></li>
-<li><p><code>summary_skim_df</code>: Print method for a <code>summary_skim_df</code> object.</p></li>
+<ul><li><p><code>print(skim_df)</code>: Print a skimmed data frame (<code>skim_df</code> from <code><a href="skim.html">skim()</a></code>).</p></li>
+<li><p><code>print(skim_list)</code>: Print a <code>skim_list</code>, a list of <code>skim_df</code> objects.</p></li>
+<li><p><code>print(summary_skim_df)</code>: Print method for a <code>summary_skim_df</code> object.</p></li>
 </ul></div>
     <div id="printing-options">
     <h2>Printing options</h2>
@@ -167,7 +180,7 @@ affect tibble's color support.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

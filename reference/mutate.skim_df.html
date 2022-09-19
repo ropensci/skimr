@@ -76,14 +76,16 @@ more information, see <a href="https://github.com/tidyverse/dplyr/issues/3429" c
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for skim_df</span>
-<span class="fu">mutate</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for skim_df</span></span>
+<span><span class="fu">mutate</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.data</dt>
 <dd><p>A <code>skim_df</code>, which behaves like a <code>tbl.</code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>Name-value pairs of expressions, each with length 1 or the same
 length as the number of rows in the group, if using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>, or
@@ -96,10 +98,13 @@ evaluated with <code><a href="https://rlang.r-lib.org/reference/eval_tidy.html" 
 support unquoting <a href="https://rlang.r-lib.org/reference/topic-inject.html" class="external-link">rlang::quasiquotation</a> and splicing. See
 <code><a href="https://dplyr.tidyverse.org/articles/programming.html" class="external-link">vignette("programming", package = "dplyr")</a></code> for an introduction to these
 concepts.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>skim_df</code> object, which also inherits the class(es) of the input
+    
+
+<p>A <code>skim_df</code> object, which also inherits the class(es) of the input
 data. In many ways, the object behaves like a <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>.</p>
     </div>
     <div id="see-also">
@@ -119,7 +124,7 @@ data. In many ways, the object behaves like a <code><a href="https://tibble.tidy
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -80,31 +80,36 @@ data frame. Others have been replaced by functions that do a single thing.
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">skim_to_wide</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">skim_to_list</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">skim_format</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">skim_to_wide</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">skim_to_list</span><span class="op">(</span><span class="va">.data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">skim_format</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>.data</dt>
 <dd><p>A tibble, or an object that can be coerced into a tibble.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Columns to select for skimming. When none are provided, the
 default is to skim all columns.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Either A <code>skim_df</code> or a <code>skim_list</code> object.</p>
+    
+
+<p>Either A <code>skim_df</code> or a <code>skim_list</code> object.</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>skim_to_wide</code>: <code><a href="skim.html">skim()</a></code> always produces a wide data frame.</p></li>
-<li><p><code>skim_to_list</code>: <code><a href="partition.html">partition()</a></code> creates a list.</p></li>
-<li><p><code>skim_format</code>: <code><a href="print.html">print()</a></code> and <code><a href="skim_with.html">skim_with()</a></code> set options.</p></li>
+<ul><li><p><code>skim_to_wide()</code>: <code><a href="skim.html">skim()</a></code> always produces a wide data frame.</p></li>
+<li><p><code>skim_to_list()</code>: <code><a href="partition.html">partition()</a></code> creates a list.</p></li>
+<li><p><code>skim_format()</code>: <code><a href="print.html">print()</a></code> and <code><a href="skim_with.html">skim_with()</a></code> set options.</p></li>
 </ul></div>
 
   </div>
@@ -119,7 +124,7 @@ default is to skim all columns.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

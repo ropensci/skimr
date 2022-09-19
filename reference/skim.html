@@ -78,30 +78,41 @@ frame.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">skim</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, .data_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">skim_tee</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, skim_fun <span class="op">=</span> <span class="va">skim</span><span class="op">)</span>
-
-<span class="fu">skim_without_charts</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, .data_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">skim</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, .data_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">skim_tee</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, skim_fun <span class="op">=</span> <span class="va">skim</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">skim_without_charts</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span>, .data_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>A tibble, or an object that can be coerced into a tibble.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Columns to select for skimming. When none are provided, the
 default is to skim all columns.</p></dd>
+
+
 <dt>.data_name</dt>
 <dd><p>The name to use for the data. Defaults to the same as data.</p></dd>
+
+
 <dt>skim_fun</dt>
 <dd><p>The skim function used.</p></dd>
+
+
 <dt>skim</dt>
 <dd><p>The skimming function to use in <code>skim_tee()</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>skim_df</code> object, which also inherits the class(es) of the input
+    
+
+<p>A <code>skim_df</code> object, which also inherits the class(es) of the input
 data. In many ways, the object behaves like a <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>.</p>
     </div>
     <div id="details">
@@ -153,7 +164,7 @@ spark graphs. These are the source of the unicode dependency.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       iris  </span>
@@ -178,9 +189,9 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use tidyselect</span></span>
-<span class="r-in"><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use tidyselect</span></span></span>
+<span class="r-in"><span><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       iris  </span>
@@ -197,7 +208,7 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   top_counts               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span>
-<span class="r-in"><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       iris  </span>
@@ -213,7 +224,7 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   skim_variable n_missing complete_rate mean    sd  p0 p25 p50 p75 p100 hist </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8 6.4  7.9 ▆▇▇▅▂</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3   3.3  4.4 ▁▆▇▂▁</span>
-<span class="r-in"><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">skim</span><span class="op">(</span><span class="va">iris</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       iris  </span>
@@ -231,11 +242,11 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Skim also works groupwise</span></span>
-<span class="r-in"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Skim also works groupwise</span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       Piped data</span>
@@ -274,13 +285,13 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0.3   0.6 ▇▂▂▁▁</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 1.5   1.8 ▅▇▃▆▁</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 2.3   2.5 ▂▇▆▅▇</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Which five numeric columns have the greatest mean value?</span></span>
-<span class="r-in"><span class="co"># Look in the `numeric.mean` column.</span></span>
-<span class="r-in"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">numeric.mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Which five numeric columns have the greatest mean value?</span></span></span>
+<span class="r-in"><span><span class="co"># Look in the `numeric.mean` column.</span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">numeric.mean</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Selecting by numeric.mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   numeric.mean</span>
@@ -289,23 +300,23 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         3.06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         3.76</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         1.20</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Which of my columns have missing values? Use the base skimmer n_missing.</span></span>
-<span class="r-in"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">n_missing</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Which of my columns have missing values? Use the base skimmer n_missing.</span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">skim</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">n_missing</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 15 variables: skim_type &lt;chr&gt;, skim_variable &lt;chr&gt;, n_missing &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   complete_rate &lt;dbl&gt;, factor.ordered &lt;lgl&gt;, factor.n_unique &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   factor.top_counts &lt;chr&gt;, numeric.mean &lt;dbl&gt;, numeric.sd &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use skim_tee to view the skim results and</span></span>
-<span class="r-in"><span class="co"># continue using the original data.</span></span>
-<span class="r-in"><span class="va">chickwts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">skim_tee</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">feed</span> <span class="op">==</span> <span class="st">"sunflower"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use skim_tee to view the skim results and</span></span></span>
+<span class="r-in"><span><span class="co"># continue using the original data.</span></span></span>
+<span class="r-in"><span><span class="va">chickwts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">skim_tee</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">feed</span> <span class="op">==</span> <span class="st">"sunflower"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       data  </span>
@@ -340,10 +351,10 @@ spark graphs. These are the source of the unicode dependency.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10    322 sunflower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    297 sunflower</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12    318 sunflower</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Produce a summary without spark graphs</span></span>
-<span class="r-in"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">skim_without_charts</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Produce a summary without spark graphs</span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">skim_without_charts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       Piped data</span>
@@ -382,7 +393,7 @@ spark graphs. These are the source of the unicode dependency.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

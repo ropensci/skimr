@@ -151,8 +151,8 @@
 <h5 id="the-skim_df-2-0-0">The <code>skim_df</code>
 <a class="anchor" aria-label="anchor" href="#the-skim_df-2-0-0"></a></h5>
 <p>We’ve changed the way data is represented within <code>skimr</code> to closer match expectations. It is now wide by default. This makes piping statistics much simpler</p>
-<pre><code><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">numeric.sd</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span></code></pre>
+<pre><code><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">numeric.sd</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span></span></code></pre>
 <p>This means that the old reshaping functions <code><a href="../reference/deprecated-v1.html">skim_to_wide()</a></code> and <code><a href="../reference/deprecated-v1.html">skim_to_list()</a></code> are deprecated. The latter is replaced with a reshaping function called <code><a href="../reference/partition.html">partition()</a></code> that breaks a <code>skim_df</code> into a list by data type. Similarly, <code><a href="../reference/partition.html">yank()</a></code> gets a specific data type from the <code>skim_df</code>. <code><a href="../reference/to_long.html">to_long()</a></code> gets you data that is closest to the format in the old API.</p>
 <p>As the above example suggests, columns of summary statistics are prefixed by <code>skim_type</code>. That is, statistics from numeric columns all begin <code>numeric.</code>, those for factors all begin <code>factor.</code>, and so on.</p>
 </div>
@@ -163,7 +163,7 @@
 <div class="section level5">
 <h5 id="customizing-and-extending-2-0-0">Customizing and extending<a class="anchor" aria-label="anchor" href="#customizing-and-extending-2-0-0"></a></h5>
 <p>We’ve deprecated the previous approach customization. We no longer use <code><a href="../reference/deprecated-v1.html">skim_format()</a></code> and <code><a href="../reference/skim_with.html">skim_with()</a></code> no longer depends on a global state. Instead <code><a href="../reference/skim_with.html">skim_with()</a></code> is now a function factory. Customization creates a new skimming function.</p>
-<pre><code><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span><span class="op">)</span></code></pre>
+<pre><code><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 <p>The fundamental tool for customization is the <code>sfl</code> object, a skimmer function list. It is used within <code><a href="../reference/skim_with.html">skim_with()</a></code> and also within our new API for adding default functions for new data types, the generic <code><a href="../reference/get_skimmers.html">get_skimmers()</a></code>.</p>
 <p>Most of the options set in <code>skim_format</code> are now either in function arguments or print arguments. The former can be updated using <code>skim_with</code>, the latter in a call to <code><a href="../reference/print.html">print()</a></code>. In RMarkdown documents, you can change the number of displayed digits by adding the <code>skimr_digits</code> option to your code chunk.</p>
 </div>
@@ -333,7 +333,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -96,7 +96,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Skimr</h1>
             
-            <h4 data-toc-skip class="date">2022-05-13</h4>
+            <h4 data-toc-skip class="date">2022-09-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/skimr/blob/HEAD/vignettes/skimr.Rmd" class="external-link"><code>vignettes/skimr.Rmd</code></a></small>
       <div class="hidden name"><code>skimr.Rmd</code></div>
@@ -111,32 +111,32 @@
 <p><code>skimr</code> is designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. It is opinionated in its defaults, but easy to modify.</p>
 <p>In base R, the most similar functions are <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> for vectors and data frames and <code><a href="https://rdrr.io/r/stats/fivenum.html" class="external-link">fivenum()</a></code> for numeric vectors:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   </span>
-<span class="co">##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  </span>
-<span class="co">##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  </span>
-<span class="co">##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  </span>
-<span class="co">##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  </span>
-<span class="co">##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  </span>
-<span class="co">##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  </span>
-<span class="co">##        Species  </span>
-<span class="co">##  setosa    :50  </span>
-<span class="co">##  versicolor:50  </span>
-<span class="co">##  virginica :50  </span>
-<span class="co">##                 </span>
-<span class="co">##                 </span>
-<span class="co">## </span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   </span></span>
+<span><span class="co">##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  </span></span>
+<span><span class="co">##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  </span></span>
+<span><span class="co">##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  </span></span>
+<span><span class="co">##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  </span></span>
+<span><span class="co">##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  </span></span>
+<span><span class="co">##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  </span></span>
+<span><span class="co">##        Species  </span></span>
+<span><span class="co">##  setosa    :50  </span></span>
+<span><span class="co">##  versicolor:50  </span></span>
+<span><span class="co">##  virginica :50  </span></span>
+<span><span class="co">##                 </span></span>
+<span><span class="co">##                 </span></span>
+<span><span class="co">## </span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span class="co">##   4.300   5.100   5.800   5.843   6.400   7.900</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span><span class="co">##   4.300   5.100   5.800   5.843   6.400   7.900</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/fivenum.html" class="external-link">fivenum</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 4.3 5.1 5.8 6.4 7.9</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/fivenum.html" class="external-link">fivenum</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 4.3 5.1 5.8 6.4 7.9</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     setosa versicolor  virginica </span>
-<span class="co">##         50         50         50</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     setosa versicolor  virginica </span></span>
+<span><span class="co">##         50         50         50</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="the-skim-function">The <code>skim()</code> function<a class="anchor" aria-label="anchor" href="#the-skim-function"></a>
@@ -148,32 +148,32 @@
 <p>By design, the main focus of <code>skimr</code> is on data frames; it is intended to fit well within a data <a href="https://r4ds.had.co.nz/pipes.html" class="external-link">pipeline</a> and relies extensively on <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a> vocabulary, which focuses on data frames.</p>
 <p>Results of <code><a href="../reference/skim.html">skim()</a></code> are <em>printed</em> horizontally, with one section per variable type and one row per variable.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   factor                   1     </span>
-<span class="co">##   numeric                  4     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span>
-<span class="co">##   top_counts               </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   factor                   1     </span></span>
+<span><span class="co">##   numeric                  4     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span></span>
+<span><span class="co">##   top_counts               </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></span></code></pre>
 <p>The format of the results are a single wide data frame combining the results, with some additional attributes and two metadata columns:</p>
 <ul>
 <li>
@@ -183,188 +183,190 @@
 </ul>
 <p>Unlike many other objects within <code>R</code>, these columns are intrinsic to the <code>skim_df</code> class. Dropping these variables will result in a coercion to a <code>tibble</code>. The <code><a href="../reference/skim-obj.html">is_skim_df()</a></code> function is used to assert that an object is a skim_df.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] TRUE</span>
-<span class="co">## attr(,"message")</span>
-<span class="co">## character(0)</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## attr(,"message")</span></span>
+<span><span class="co">## character(0)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">skim_type</span>, <span class="op">-</span><span class="va">skim_variable</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] FALSE</span>
-<span class="co">## attr(,"message")</span>
-<span class="co">## [1] "Object is not a `skim_df`: missing column `skim_type`; missing column `skim_variable`"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">skim_type</span>, <span class="op">-</span><span class="va">skim_variable</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] FALSE</span></span>
+<span><span class="co">## attr(,"message")</span></span>
+<span><span class="co">## [1] "Object is not a `skim_df`: missing column `skim_type`; missing column `skim_variable`"</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">n_missing</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] TRUE</span>
-<span class="co">## attr(,"message")</span>
-<span class="co">## character(0)</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">n_missing</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/skim-obj.html">is_skim_df</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## attr(,"message")</span></span>
+<span><span class="co">## character(0)</span></span></code></pre>
 <p>In order to avoid type coercion, columns for summary statistics for different types are prefixed with the corresponding <code>skim_type</code>. This means that the columns of the <code>skim_df</code> are somewhat sparse, with quite a few missing values. This is because for some statistics the representations for different types of variables is different. For example, the mean of a Date variable and of a numeric variable are represented differently when printing, but this cannot be supported in a single vector. The exception to this are <code>n_missing</code> and <code>complete_rate</code> (missing/number of observations) which are the same for all types of variables.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 5 × 15</span></span>
-<span class="co">##   skim_type skim_variable n_missing complete_rate factor.ordered factor.n_unique</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> factor    Species               0             1 FALSE                        3</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> numeric   Sepal.Length          0             1 <span style="color: #BB0000;">NA</span>                          <span style="color: #BB0000;">NA</span></span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> numeric   Sepal.Width           0             1 <span style="color: #BB0000;">NA</span>                          <span style="color: #BB0000;">NA</span></span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> numeric   Petal.Length          0             1 <span style="color: #BB0000;">NA</span>                          <span style="color: #BB0000;">NA</span></span>
-<span class="co">## <span style="color: #BCBCBC;">5</span> numeric   Petal.Width           0             1 <span style="color: #BB0000;">NA</span>                          <span style="color: #BB0000;">NA</span></span>
-<span class="co">## <span style="color: #949494;"># … with 9 more variables: factor.top_counts &lt;chr&gt;, numeric.mean &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   numeric.sd &lt;dbl&gt;, numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 15</span></span></span>
+<span><span class="co">##   skim_type skim_varia…¹ n_mis…² compl…³ facto…⁴ facto…⁵ facto…⁶ numer…⁷ numer…⁸</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> factor    Species            0       1 FALSE         3 set: 5…   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> numeric   Sepal.Length       0       1 <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         5.84   0.828</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> numeric   Sepal.Width        0       1 <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         3.06   0.436</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> numeric   Petal.Length       0       1 <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         3.76   1.77 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> numeric   Petal.Width        0       1 <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>         1.20   0.762</span></span>
+<span><span class="co">## <span style="color: #949494;"># … with 6 more variables: numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   numeric.p50 &lt;dbl&gt;, numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   numeric.hist &lt;chr&gt;, and abbreviated variable names ¹​skim_variable,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ²​n_missing, ³​complete_rate, ⁴​factor.ordered, ⁵​factor.n_unique,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   ⁶​factor.top_counts, ⁷​numeric.mean, ⁸​numeric.sd</span></span></span></code></pre>
 <p>This is in contrast to <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary.data.frame()</a></code>, which stores statistics in a <code>table</code>. The distinction is important, because the <code>skim_df</code> object is pipeable and easy to use for additional manipulation: for example, the user could select all of the variable means, or all summary statistics for a specific variable.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">skim_variable</span> <span class="op">==</span> <span class="st">"Petal.Length"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   numeric                  1     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Petal.Length          0             1 3.76 1.77  1 1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">skim_variable</span> <span class="op">==</span> <span class="st">"Petal.Length"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   numeric                  1     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Petal.Length          0             1 3.76 1.77  1 1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span></code></pre>
 <p>Most <code>dplyr</code> verbs should work as expected.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">skim_type</span>, <span class="va">skim_variable</span>, <span class="va">n_missing</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   factor                   1     </span>
-<span class="co">##   numeric                  4     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">skim_type</span>, <span class="va">skim_variable</span>, <span class="va">n_missing</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   factor                   1     </span></span>
+<span><span class="co">##   numeric                  4     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0</span></span></code></pre>
 <p>The base skimmers <code>n_missing</code> and <code>complete_rate</code> are computed for all of the columns in the data. But all other type-based skimmers have a namespace. You need to use a <code>skim_type</code> prefix to refer to correct column.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">skim_type</span>, <span class="va">skim_variable</span>, <span class="va">numeric.mean</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   factor                   1     </span>
-<span class="co">##   numeric                  4     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable mean</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length  5.84</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width   3.06</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length  3.76</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width   1.20</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">skim_type</span>, <span class="va">skim_variable</span>, <span class="va">numeric.mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   factor                   1     </span></span>
+<span><span class="co">##   numeric                  4     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable mean</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length  5.84</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width   3.06</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length  3.76</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width   1.20</span></span></code></pre>
 <p><code><a href="../reference/skim.html">skim()</a></code> also supports grouped data created by <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code>. In this case, one additional column for each grouping variable is added to the <code>skim_df</code> object.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values    </span>
-<span class="co">## Name                       Piped data</span>
-<span class="co">## Number of rows             150       </span>
-<span class="co">## Number of columns          5         </span>
-<span class="co">## _______________________              </span>
-<span class="co">## Column type frequency:               </span>
-<span class="co">##   numeric                  4         </span>
-<span class="co">## ________________________             </span>
-<span class="co">## Group variables            Species   </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##    skim_variable Species    n_missing complete_rate  mean    sd  p0  p25  p50</span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> Sepal.Length  setosa             0             1 5.01  0.352 4.3 4.8  5   </span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> Sepal.Length  versicolor         0             1 5.94  0.516 4.9 5.6  5.9 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> Sepal.Length  virginica          0             1 6.59  0.636 4.9 6.22 6.5 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> Sepal.Width   setosa             0             1 3.43  0.379 2.3 3.2  3.4 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> Sepal.Width   versicolor         0             1 2.77  0.314 2   2.52 2.8 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> Sepal.Width   virginica          0             1 2.97  0.322 2.2 2.8  3   </span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> Petal.Length  setosa             0             1 1.46  0.174 1   1.4  1.5 </span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> Petal.Length  versicolor         0             1 4.26  0.470 3   4    4.35</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> Petal.Length  virginica          0             1 5.55  0.552 4.5 5.1  5.55</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> Petal.Width   setosa             0             1 0.246 0.105 0.1 0.2  0.2 </span>
-<span class="co">## <span style="color: #BCBCBC;">11</span> Petal.Width   versicolor         0             1 1.33  0.198 1   1.2  1.3 </span>
-<span class="co">## <span style="color: #BCBCBC;">12</span> Petal.Width   virginica          0             1 2.03  0.275 1.4 1.8  2   </span>
-<span class="co">##     p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> 5.2   5.8 ▃▃▇▅▁</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> 6.3   7   ▂▇▆▃▃</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> 6.9   7.9 ▁▃▇▃▂</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> 3.68  4.4 ▁▃▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> 3     3.4 ▁▅▆▇▂</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> 3.18  3.8 ▂▆▇▅▁</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> 1.58  1.9 ▁▃▇▃▁</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> 4.6   5.1 ▂▂▇▇▆</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> 5.88  6.9 ▃▇▇▃▂</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> 0.3   0.6 ▇▂▂▁▁</span>
-<span class="co">## <span style="color: #BCBCBC;">11</span> 1.5   1.8 ▅▇▃▆▁</span>
-<span class="co">## <span style="color: #BCBCBC;">12</span> 2.3   2.5 ▂▇▆▅▇</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values    </span></span>
+<span><span class="co">## Name                       Piped data</span></span>
+<span><span class="co">## Number of rows             150       </span></span>
+<span><span class="co">## Number of columns          5         </span></span>
+<span><span class="co">## _______________________              </span></span>
+<span><span class="co">## Column type frequency:               </span></span>
+<span><span class="co">##   numeric                  4         </span></span>
+<span><span class="co">## ________________________             </span></span>
+<span><span class="co">## Group variables            Species   </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##    skim_variable Species    n_missing complete_rate  mean    sd  p0  p25  p50</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Sepal.Length  setosa             0             1 5.01  0.352 4.3 4.8  5   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Sepal.Length  versicolor         0             1 5.94  0.516 4.9 5.6  5.9 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Sepal.Length  virginica          0             1 6.59  0.636 4.9 6.22 6.5 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Sepal.Width   setosa             0             1 3.43  0.379 2.3 3.2  3.4 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Sepal.Width   versicolor         0             1 2.77  0.314 2   2.52 2.8 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Sepal.Width   virginica          0             1 2.97  0.322 2.2 2.8  3   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Petal.Length  setosa             0             1 1.46  0.174 1   1.4  1.5 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Petal.Length  versicolor         0             1 4.26  0.470 3   4    4.35</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Petal.Length  virginica          0             1 5.55  0.552 4.5 5.1  5.55</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> Petal.Width   setosa             0             1 0.246 0.105 0.1 0.2  0.2 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">11</span> Petal.Width   versicolor         0             1 1.33  0.198 1   1.2  1.3 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">12</span> Petal.Width   virginica          0             1 2.03  0.275 1.4 1.8  2   </span></span>
+<span><span class="co">##     p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> 5.2   5.8 ▃▃▇▅▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> 6.3   7   ▂▇▆▃▃</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> 6.9   7.9 ▁▃▇▃▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> 3.68  4.4 ▁▃▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> 3     3.4 ▁▅▆▇▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> 3.18  3.8 ▂▆▇▅▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> 1.58  1.9 ▁▃▇▃▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> 4.6   5.1 ▂▂▇▇▆</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> 5.88  6.9 ▃▇▇▃▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> 0.3   0.6 ▇▂▂▁▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">11</span> 1.5   1.8 ▅▇▃▆▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">12</span> 2.3   2.5 ▂▇▆▅▇</span></span></code></pre>
 <p>Individual columns from a data frame may be selected using tidyverse-style selectors.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   factor                   1     </span>
-<span class="co">##   numeric                  1     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span>
-<span class="co">##   top_counts               </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25 p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8 6.4  7.9 ▆▇▇▅▂</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   factor                   1     </span></span>
+<span><span class="co">##   numeric                  1     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span></span>
+<span><span class="co">##   top_counts               </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25 p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8 6.4  7.9 ▆▇▇▅▂</span></span></code></pre>
 <p>Or with common <code>select</code> helpers.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       iris  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   numeric                  2     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25 p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8 6.4  7.9 ▆▇▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3   3.3  4.4 ▁▆▇▂▁</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       iris  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   numeric                  2     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25 p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8 6.4  7.9 ▆▇▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3   3.3  4.4 ▁▆▇▂▁</span></span></code></pre>
 <p>If an individual column is of an unsupported class, it is treated as a character variable with a warning.</p>
 </div>
 </div>
@@ -374,146 +376,146 @@
 <p>In <code>skimr</code> v2, <code><a href="../reference/skim.html">skim()</a></code> will attempt to coerce non-data frames (such as vectors and matrices) to data frames. In most cases with vectors, the object being evaluated should be equivalent to wrapping the object in <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>.</p>
 <p>For example, the <code>lynx</code> data set is class <code>ts</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       lynx  </span>
-<span class="co">## Number of rows             114   </span>
-<span class="co">## Number of columns          1     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   ts                       1     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: ts ───────────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate start  end frequency deltat  mean    sd</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> x                     0             1  <span style="text-decoration: underline;">1</span>821 <span style="text-decoration: underline;">1</span>934         1      1 <span style="text-decoration: underline;">1</span>538. <span style="text-decoration: underline;">1</span>586.</span>
-<span class="co">##   min  max median line_graph</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>  39 <span style="text-decoration: underline;">6</span>991    771 ⡈⢄⡠⢁⣀⠒⣀⠔</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       lynx  </span></span>
+<span><span class="co">## Number of rows             114   </span></span>
+<span><span class="co">## Number of columns          1     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   ts                       1     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: ts ───────────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate start  end frequency deltat  mean    sd</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> x                     0             1  <span style="text-decoration: underline;">1</span>821 <span style="text-decoration: underline;">1</span>934         1      1 <span style="text-decoration: underline;">1</span>538. <span style="text-decoration: underline;">1</span>586.</span></span>
+<span><span class="co">##   min  max median line_graph</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>  39 <span style="text-decoration: underline;">6</span>991    771 ⡈⢄⡠⢁⣀⠒⣀⠔</span></span></code></pre>
 <p>Which is the same as coercing to a data frame.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span>, <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "Attributes: &lt; Component \"df_name\": 1 string mismatch &gt;"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span>, <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "Attributes: &lt; Component \"df_name\": 1 string mismatch &gt;"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="skimming-matrices">Skimming matrices<a class="anchor" aria-label="anchor" href="#skimming-matrices"></a>
 </h2>
 <p><code>skimr</code> does not support skimming matrices directly but coerces them to data frames. Columns in the matrix become variables. This behavior is similar to <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary.matrix()</a></code>). Three possible ways to handle matrices with <code><a href="../reference/skim.html">skim()</a></code> parallel the three variations of the mean function for matrices.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">12</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="va">m</span></code></pre></div>
-<pre><code><span class="co">##      [,1] [,2] [,3]</span>
-<span class="co">## [1,]    1    5    9</span>
-<span class="co">## [2,]    2    6   10</span>
-<span class="co">## [3,]    3    7   11</span>
-<span class="co">## [4,]    4    8   12</span></code></pre>
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">12</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">4</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">m</span></span></code></pre></div>
+<pre><code><span><span class="co">##      [,1] [,2] [,3]</span></span>
+<span><span class="co">## [1,]    1    5    9</span></span>
+<span><span class="co">## [2,]    2    6   10</span></span>
+<span><span class="co">## [3,]    3    7   11</span></span>
+<span><span class="co">## [4,]    4    8   12</span></span></code></pre>
 <p>Skimming the matrix produces similar results to <code><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans()</a></code>.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1]  2.5  6.5 10.5</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1]  2.5  6.5 10.5</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="co"># Similar to summary.matrix and colMeans()</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       m     </span>
-<span class="co">## Number of rows             4     </span>
-<span class="co">## Number of columns          3     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   numeric                  3     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean   sd p0  p25  p50   p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> V1                    0             1  2.5 1.29  1 1.75  2.5  3.25    4 ▇▇▁▇▇</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> V2                    0             1  6.5 1.29  5 5.75  6.5  7.25    8 ▇▇▁▇▇</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> V3                    0             1 10.5 1.29  9 9.75 10.5 11.2    12 ▇▇▁▇▇</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="co"># Similar to summary.matrix and colMeans()</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       m     </span></span>
+<span><span class="co">## Number of rows             4     </span></span>
+<span><span class="co">## Number of columns          3     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   numeric                  3     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean   sd p0  p25  p50   p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> V1                    0             1  2.5 1.29  1 1.75  2.5  3.25    4 ▇▇▁▇▇</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> V2                    0             1  6.5 1.29  5 5.75  6.5  7.25    8 ▇▇▁▇▇</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> V3                    0             1 10.5 1.29  9 9.75 10.5 11.2    12 ▇▇▁▇▇</span></span></code></pre>
 <p>Skimming the transpose of the matrix will give row-wise results.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 5 6 7 8</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 5 6 7 8</span></span></code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       t(m)  </span>
-<span class="co">## Number of rows             3     </span>
-<span class="co">## Number of columns          4     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   numeric                  4     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean sd p0 p25 p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> V1                    0             1    5  4  1   3   5   7    9 ▇▁▇▁▇</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> V2                    0             1    6  4  2   4   6   8   10 ▇▁▇▁▇</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> V3                    0             1    7  4  3   5   7   9   11 ▇▁▇▁▇</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> V4                    0             1    8  4  4   6   8  10   12 ▇▁▇▁▇</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       t(m)  </span></span>
+<span><span class="co">## Number of rows             3     </span></span>
+<span><span class="co">## Number of columns          4     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   numeric                  4     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean sd p0 p25 p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> V1                    0             1    5  4  1   3   5   7    9 ▇▁▇▁▇</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> V2                    0             1    6  4  2   4   6   8   10 ▇▁▇▁▇</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> V3                    0             1    7  4  3   5   7   9   11 ▇▁▇▁▇</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> V4                    0             1    8  4  4   6   8  10   12 ▇▁▇▁▇</span></span></code></pre>
 <p>And call <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> on the matrix to get results across all columns.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       c(m)  </span>
-<span class="co">## Number of rows             12    </span>
-<span class="co">## Number of columns          1     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   numeric                  1     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean   sd p0  p25 p50  p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> data                  0             1  6.5 3.61  1 3.75 6.5 9.25   12 ▇▅▅▅▇</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       c(m)  </span></span>
+<span><span class="co">## Number of rows             12    </span></span>
+<span><span class="co">## Number of columns          1     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   numeric                  1     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean   sd p0  p25 p50  p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> data                  0             1  6.5 3.61  1 3.75 6.5 9.25   12 ▇▅▅▅▇</span></span></code></pre>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 6.5</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 6.5</span></span></code></pre>
 <div class="section level3">
 <h3 id="skimming-without-modification">Skimming without modification<a class="anchor" aria-label="anchor" href="#skimming-without-modification"></a>
 </h3>
 <p><code><a href="../reference/skim.html">skim_tee()</a></code> produces the same printed version as <code><a href="../reference/skim.html">skim()</a></code> but returns the original, unmodified data frame. This allows for continued piping of the original data.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris_setosa</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim_tee</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values</span>
-<span class="co">## Name                       data  </span>
-<span class="co">## Number of rows             150   </span>
-<span class="co">## Number of columns          5     </span>
-<span class="co">## _______________________          </span>
-<span class="co">## Column type frequency:           </span>
-<span class="co">##   factor                   1     </span>
-<span class="co">##   numeric                  4     </span>
-<span class="co">## ________________________         </span>
-<span class="co">## Group variables            None  </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span>
-<span class="co">##   top_counts               </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris_setosa</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim_tee</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values</span></span>
+<span><span class="co">## Name                       data  </span></span>
+<span><span class="co">## Number of rows             150   </span></span>
+<span><span class="co">## Number of columns          5     </span></span>
+<span><span class="co">## _______________________          </span></span>
+<span><span class="co">## Column type frequency:           </span></span>
+<span><span class="co">##   factor                   1     </span></span>
+<span><span class="co">##   numeric                  4     </span></span>
+<span><span class="co">## ________________________         </span></span>
+<span><span class="co">## Group variables            None  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate ordered n_unique</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3</span></span>
+<span><span class="co">##   top_counts               </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> set: 50, ver: 50, vir: 50</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></span></code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris_setosa</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
-<span class="co">## 1          5.1         3.5          1.4         0.2  setosa</span>
-<span class="co">## 2          4.9         3.0          1.4         0.2  setosa</span>
-<span class="co">## 3          4.7         3.2          1.3         0.2  setosa</span>
-<span class="co">## 4          4.6         3.1          1.5         0.2  setosa</span>
-<span class="co">## 5          5.0         3.6          1.4         0.2  setosa</span>
-<span class="co">## 6          5.4         3.9          1.7         0.4  setosa</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris_setosa</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span><span class="co">## 1          5.1         3.5          1.4         0.2  setosa</span></span>
+<span><span class="co">## 2          4.9         3.0          1.4         0.2  setosa</span></span>
+<span><span class="co">## 3          4.7         3.2          1.3         0.2  setosa</span></span>
+<span><span class="co">## 4          4.6         3.1          1.5         0.2  setosa</span></span>
+<span><span class="co">## 5          5.0         3.6          1.4         0.2  setosa</span></span>
+<span><span class="co">## 6          5.4         3.9          1.7         0.4  setosa</span></span></code></pre>
 <p>Note, that <code><a href="../reference/skim.html">skim_tee()</a></code> is customized differently than <code>skim</code> itself. See below for more details.</p>
 </div>
 </div>
@@ -523,77 +525,77 @@
 <p>As noted above, <code><a href="../reference/skim.html">skim()</a></code> returns a wide data frame. This is usually the most sensible format for the majority of operations when investigating data, but the package has some other functions to help with edge cases.</p>
 <p>First, <code><a href="../reference/partition.html">partition()</a></code> returns a named list of the wide data frames for each data type. Unlike the original data the partitioned data only has columns corresponding to the skimming functions used for this data type. These data frames are, therefore, not <code>skim_df</code> objects.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/partition.html">partition</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## $factor</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate ordered n_unique top_counts             </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3 set: 50, ver: 50, vir:…</span>
-<span class="co">## </span>
-<span class="co">## $numeric</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/partition.html">partition</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $factor</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate ordered n_unique top_counts             </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0             1 FALSE          3 set: 50, ver: 50, vir:…</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $numeric</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></span></code></pre>
 <p>Alternatively, <code><a href="../reference/partition.html">yank()</a></code> selects only the subtable for a specific type. Think of it like <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">dplyr::select</a></code> on column types in the original data. Again, unsuitable columns are dropped.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/partition.html">yank</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/partition.html">yank</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing complete_rate mean    sd  p0 p25  p50 p75 p100 hist </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0             1 5.84 0.828 4.3 5.1 5.8  6.4  7.9 ▆▇▇▅▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0             1 3.06 0.436 2   2.8 3    3.3  4.4 ▁▆▇▂▁</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0             1 3.76 1.77  1   1.6 4.35 5.1  6.9 ▇▁▆▇▂</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0             1 1.20 0.762 0.1 0.3 1.3  1.8  2.5 ▇▁▇▅▃</span></span></code></pre>
 <p><code><a href="../reference/to_long.html">to_long()</a></code> returns a single long data frame with columns <code>variable</code>, <code>type</code>, <code>statistic</code> and <code>formatted</code>. This is similar but not identical to the <code>skim_df</code> object in <code>skimr</code> v1.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/to_long.html">to_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="co">##   skim_type skim_variable stat          formatted</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> factor    Species       n_missing     0        </span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> numeric   Sepal.Length  n_missing     0        </span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> numeric   Sepal.Width   n_missing     0        </span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> numeric   Petal.Length  n_missing     0        </span>
-<span class="co">## <span style="color: #BCBCBC;">5</span> numeric   Petal.Width   n_missing     0        </span>
-<span class="co">## <span style="color: #BCBCBC;">6</span> factor    Species       complete_rate 1</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/to_long.html">to_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">##   skim_type skim_variable stat          formatted</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> factor    Species       n_missing     0        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> numeric   Sepal.Length  n_missing     0        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> numeric   Sepal.Width   n_missing     0        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> numeric   Petal.Length  n_missing     0        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> numeric   Petal.Width   n_missing     0        </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> factor    Species       complete_rate 1</span></span></code></pre>
 <p>Since the <code>skim_variable</code> and <code>skim_type</code> columns are a core component of the <code>skim_df</code> class, it’s possible to get unwanted side effects when using <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">dplyr::select()</a></code>. Instead, use <code><a href="../reference/focus.html">focus()</a></code> to select columns of the skimmed results and keep them as a <code>skim_df</code>; it always keeps the metadata column.</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/focus.html">focus</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">numeric.mean</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── Data Summary ────────────────────────</span>
-<span class="co">##                            Values    </span>
-<span class="co">## Name                       Piped data</span>
-<span class="co">## Number of rows             150       </span>
-<span class="co">## Number of columns          5         </span>
-<span class="co">## _______________________              </span>
-<span class="co">## Column type frequency:               </span>
-<span class="co">##   factor                   1         </span>
-<span class="co">##   numeric                  4         </span>
-<span class="co">## ________________________             </span>
-<span class="co">## Group variables            None      </span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Species               0</span>
-<span class="co">## </span>
-<span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span>
-<span class="co">##   skim_variable n_missing mean</span>
-<span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0 5.84</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0 3.06</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0 3.76</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0 1.20</span></code></pre>
+<code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/focus.html">focus</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">numeric.mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ── Data Summary ────────────────────────</span></span>
+<span><span class="co">##                            Values    </span></span>
+<span><span class="co">## Name                       Piped data</span></span>
+<span><span class="co">## Number of rows             150       </span></span>
+<span><span class="co">## Number of columns          5         </span></span>
+<span><span class="co">## _______________________              </span></span>
+<span><span class="co">## Column type frequency:               </span></span>
+<span><span class="co">##   factor                   1         </span></span>
+<span><span class="co">##   numeric                  4         </span></span>
+<span><span class="co">## ________________________             </span></span>
+<span><span class="co">## Group variables            None      </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: factor ───────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Species               0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ── Variable type: numeric ──────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   skim_variable n_missing mean</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Sepal.Length          0 5.84</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Sepal.Width           0 3.06</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Petal.Length          0 3.76</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Petal.Width           0 1.20</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="rendering-the-results-of-skim">Rendering the results of <code>skim()</code><a class="anchor" aria-label="anchor" href="#rendering-the-results-of-skim"></a>
@@ -601,7 +603,7 @@
 <p>The <code>skim_df</code> object is a wide data frame. The display is created by default using <code><a href="../reference/print.html">print.skim_df()</a></code>; users can specify additional options by explicitly calling <code>print([skim_df object], ...)</code>.</p>
 <p>For documents rendered by <code>knitr</code>, the package provides a custom <code>knit_print</code> method. To use it, the final line of your code chunk should have a <code>skim_df</code> object.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -708,8 +710,8 @@
 </table>
 <p>The same type of rendering is available from reshaped <code>skim_df</code> objects, those generated by <code><a href="../reference/partition.html">partition()</a></code> and <code><a href="../reference/partition.html">yank()</a></code> in particular.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/partition.html">yank</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">Orange</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/partition.html">yank</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table class="table">
 <thead><tr class="header">
@@ -768,8 +770,8 @@
 <p><code>skimr</code> is opinionated in its choice of defaults, but users can easily add, replace, or remove the statistics for a class. For interactive use, you can create your own skimming function with the <code><a href="../reference/skim_with.html">skim_with()</a></code> factory. <code>skimr</code> also has an API for extensions in other packages. Working with that is covered later.</p>
 <p>To add a statistic for a data type, create an <code><a href="../reference/sfl.html">sfl()</a></code> (a <code>skimr</code> function list) for each class that you want to change:</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>new_mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>new_mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -856,8 +858,8 @@
 </table>
 <p>As the previous example suggests, the default is to append <em>new</em> summary statistics to the preexisting set. This behavior isn’t always desirable, especially when you want lots of changes. To stop appending, set <code>append = FALSE</code>.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>new_mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>new_mad <span class="op">=</span> <span class="va">mad</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -920,8 +922,8 @@
 </table>
 <p>You can also use <code><a href="../reference/skim_with.html">skim_with()</a></code> to remove specific statistics by setting them to <code>NULL</code>. This is commonly used to disable the inline histograms and spark graphs.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">no_hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>ts <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>line_graph <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">no_hist</span><span class="op">(</span><span class="va">Nile</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">no_hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>ts <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>line_graph <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">no_hist</span><span class="op">(</span><span class="va">Nile</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -1006,13 +1008,13 @@
 </table>
 <p>The same pattern applies to changing skimmers for multiple classes simultaneously. If you want to partially-apply function arguments, use the Tidyverse lambda syntax.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>
-  numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>total <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,
-  factor <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>missing <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-  append <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">my_skim</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span></span>
+<span>  numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>total <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  factor <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>missing <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">my_skim</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -1106,8 +1108,8 @@
 </table>
 <p>To modify the “base” skimmers, refer to them in a similar manner. Since base skimmers are usually a small group, they must return the same type for all data types in R, <code>append</code> doesn’t apply here.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>base <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>length <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>base <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>length <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -1192,21 +1194,21 @@
 </h2>
 <p>Packages may wish to export their own <code><a href="../reference/skim.html">skim()</a></code> functions. Use <code><a href="../reference/skim_with.html">skim_with()</a></code> for this. In fact, this is how <code>skimr</code> generates its version of <code><a href="../reference/skim.html">skim()</a></code>.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @export</span>
-<span class="va">my_package_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#' @export</span></span>
+<span><span class="va">my_package_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, defaults for another data types can be added to <code>skimr</code> with the <code>get_skimmers</code> generic. The method for your data type should return an <code><a href="../reference/sfl.html">sfl()</a></code>. Unlike the <code><a href="../reference/sfl.html">sfl()</a></code> used interactively, you also need to set the <code>skim_type</code> argument. It should match the method type in the function signature.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">get_skimmers.my_type</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>
-    skim_type <span class="op">=</span> <span class="st">"my_type"</span>,
-    total <span class="op">=</span> <span class="va">sum</span>
-  <span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  my_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"my_type"</span>, <span class="st">"integer"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">get_skimmers.my_type</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span></span>
+<span>    skim_type <span class="op">=</span> <span class="st">"my_type"</span>,</span>
+<span>    total <span class="op">=</span> <span class="va">sum</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">my_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  my_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"my_type"</span>, <span class="st">"integer"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">my_data</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <caption>Data summary</caption>
 <tbody>
@@ -1287,7 +1289,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

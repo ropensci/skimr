@@ -76,68 +76,77 @@ type. They are combined with the base skim function list (<code>sfl</code>) in
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for numeric</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for factor</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for character</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for logical</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for complex</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for Date</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for POSIXct</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for difftime</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for Timespan</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for ts</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for list</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for AsIs</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="co"># S3 method for haven_labelled</span>
-<span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span>
-
-<span class="fu">modify_default_skimmers</span><span class="op">(</span><span class="va">skim_type</span>, new_skim_type <span class="op">=</span> <span class="cn">NULL</span>, new_funs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for factor</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for logical</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for complex</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for Date</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for POSIXct</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for difftime</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for Timespan</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ts</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for list</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for AsIs</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for haven_labelled</span></span>
+<span><span class="fu">get_skimmers</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">modify_default_skimmers</span><span class="op">(</span><span class="va">skim_type</span>, new_skim_type <span class="op">=</span> <span class="cn">NULL</span>, new_funs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>column</dt>
 <dd><p>An atomic vector or list. A column from a data frame.</p></dd>
+
+
 <dt>skim_type</dt>
 <dd><p>A character scalar. The class of the object with default
 skimmers.</p></dd>
+
+
 <dt>new_skim_type</dt>
 <dd><p>The type to assign to the looked up set of skimmers.</p></dd>
+
+
 <dt>new_funs</dt>
 <dd><p>Replacement functions for those in</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>skim_function_list</code> object.</p>
+    
+
+<p>A <code>skim_function_list</code> object.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -155,35 +164,35 @@ for creating new default <code>sfl</code>'s.</p>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>default</code>: The default method for skimming data. Only used when
+<ul><li><p><code>get_skimmers(default)</code>: The default method for skimming data. Only used when
 a column's data type doesn't match currently installed types. Call
 <a href="get_default_skimmers.html">get_default_skimmer_names</a> to see these defaults.</p></li>
-<li><p><code>numeric</code>: Summary functions for numeric columns, covering both
+<li><p><code>get_skimmers(numeric)</code>: Summary functions for numeric columns, covering both
 <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code> and <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code> classes: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd()</a></code>, <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> and
 <code><a href="stats.html">inline_hist()</a></code>.</p></li>
-<li><p><code>factor</code>: Summary functions for factor columns:
+<li><p><code>get_skimmers(factor)</code>: Summary functions for factor columns:
 <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered()</a></code>, <code><a href="stats.html">n_unique()</a></code> and <code><a href="stats.html">top_counts()</a></code>.</p></li>
-<li><p><code>character</code>: Summary functions for character columns. Also, the
+<li><p><code>get_skimmers(character)</code>: Summary functions for character columns. Also, the
 default for unknown columns: <code><a href="stats.html">min_char()</a></code>, <code><a href="stats.html">max_char()</a></code>, <code><a href="stats.html">n_empty()</a></code>,
 <code><a href="stats.html">n_unique()</a></code> and <code><a href="stats.html">n_whitespace()</a></code>.</p></li>
-<li><p><code>logical</code>: Summary functions for logical/ boolean columns:
+<li><p><code>get_skimmers(logical)</code>: Summary functions for logical/ boolean columns:
 <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, which produces rates for each value, and <code><a href="stats.html">top_counts()</a></code>.</p></li>
-<li><p><code>complex</code>: Summary functions for complex columns: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>.</p></li>
-<li><p><code>Date</code>: Summary functions for <code>Date</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>get_skimmers(complex)</code>: Summary functions for complex columns: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>.</p></li>
+<li><p><code>get_skimmers(Date)</code>: Summary functions for <code>Date</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>POSIXct</code>: Summary functions for <code>POSIXct</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>get_skimmers(POSIXct)</code>: Summary functions for <code>POSIXct</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>difftime</code>: Summary functions for <code>difftime</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>get_skimmers(difftime)</code>: Summary functions for <code>difftime</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>Timespan</code>: Summary functions for <code>Timespan</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>get_skimmers(Timespan)</code>: Summary functions for <code>Timespan</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>ts</code>: Summary functions for <code>ts</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>get_skimmers(ts)</code>: Summary functions for <code>ts</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>list</code>: Summary functions for <code>list</code> columns: <code><a href="stats.html">n_unique()</a></code>,
+<li><p><code>get_skimmers(list)</code>: Summary functions for <code>list</code> columns: <code><a href="stats.html">n_unique()</a></code>,
 <code><a href="stats.html">list_min_length()</a></code> and <code><a href="stats.html">list_max_length()</a></code>.</p></li>
-<li><p><code>AsIs</code>: Summary functions for <code>AsIs</code> columns: <code><a href="stats.html">n_unique()</a></code>,
+<li><p><code>get_skimmers(AsIs)</code>: Summary functions for <code>AsIs</code> columns: <code><a href="stats.html">n_unique()</a></code>,
 <code><a href="stats.html">list_min_length()</a></code> and <code><a href="stats.html">list_max_length()</a></code>.</p></li>
-<li><p><code>haven_labelled</code>: Summary functions for <code>haven_labelled</code> columns.
+<li><p><code>get_skimmers(haven_labelled)</code>: Summary functions for <code>haven_labelled</code> columns.
 Finds the appropriate skimmers for the underlying data in the vector.</p></li>
 </ul></div>
     <div id="see-also">
@@ -193,30 +202,30 @@ Finds the appropriate skimmers for the underlying data in the vector.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Defining default skimming functions for a new class, `my_class`.</span></span>
-<span class="r-in"><span class="co"># Note that the class argument is required for dynamic reassignment.</span></span>
-<span class="r-in"><span class="va">get_skimmers.my_class</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span>
-<span class="r-in">    skim_type <span class="op">=</span> <span class="st">"my_class"</span>,</span>
-<span class="r-in">    <span class="va">mean</span>,</span>
-<span class="r-in">    <span class="va">sd</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Integer and double columns are both "numeric" and are treated the same</span></span>
-<span class="r-in"><span class="co"># by default. To switch this behavior in another package, add a method.</span></span>
-<span class="r-in"><span class="va">get_skimmers.integer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span>
-<span class="r-in">    skim_type <span class="op">=</span> <span class="st">"integer"</span>,</span>
-<span class="r-in">    p50 <span class="op">=</span> <span class="op">~</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="va">.</span>,</span>
-<span class="r-in">      probs <span class="op">=</span> <span class="fl">.50</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, names <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="fl">1</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gear"</span>, <span class="st">"carb"</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"integer"</span></span>
-<span class="r-in"><span class="fu"><a href="skim.html">skim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Defining default skimming functions for a new class, `my_class`.</span></span></span>
+<span class="r-in"><span><span class="co"># Note that the class argument is required for dynamic reassignment.</span></span></span>
+<span class="r-in"><span><span class="va">get_skimmers.my_class</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    skim_type <span class="op">=</span> <span class="st">"my_class"</span>,</span></span>
+<span class="r-in"><span>    <span class="va">mean</span>,</span></span>
+<span class="r-in"><span>    <span class="va">sd</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Integer and double columns are both "numeric" and are treated the same</span></span></span>
+<span class="r-in"><span><span class="co"># by default. To switch this behavior in another package, add a method.</span></span></span>
+<span class="r-in"><span><span class="va">get_skimmers.integer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    skim_type <span class="op">=</span> <span class="st">"integer"</span>,</span></span>
+<span class="r-in"><span>    p50 <span class="op">=</span> <span class="op">~</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="va">.</span>,</span></span>
+<span class="r-in"><span>      probs <span class="op">=</span> <span class="fl">.50</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, names <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gear"</span>, <span class="st">"carb"</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"integer"</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="skim.html">skim</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       x     </span>
@@ -232,19 +241,19 @@ Finds the appropriate skimmers for the underlying data in the vector.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   skim_variable n_missing complete_rate mean    sd p0 p25 p50 p75 p100 hist </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> gear                  0             1 3.69 0.738  3   3   4   4    5 ▇▁▆▁▂</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> carb                  0             1 2.81 1.62   1   2   2   4    8 ▇▂▅▁▁</span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># In a package, to revert to the V1 behavior of skimming separately with the</span></span>
-<span class="r-in"><span class="co"># same functions, assign the numeric `get_skimmers`.</span></span>
-<span class="r-in"><span class="va">get_skimmers.integer</span> <span class="op">&lt;-</span> <span class="fu">skimr</span><span class="fu">::</span><span class="va">get_skimmers.numeric</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Or, in a local session, use `skim_with` to create a different `skim`.</span></span>
-<span class="r-in"><span class="va">new_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="skim_with.html">skim_with</a></span><span class="op">(</span>integer <span class="op">=</span> <span class="fu">skimr</span><span class="fu">::</span><span class="fu">get_skimmers.numeric</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># To apply a set of skimmers from an old type to a new type</span></span>
-<span class="r-in"><span class="va">get_skimmers.new_type</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">modify_default_skimmers</span><span class="op">(</span><span class="st">"old_type"</span>, new_skim_type <span class="op">=</span> <span class="st">"new_type"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># In a package, to revert to the V1 behavior of skimming separately with the</span></span></span>
+<span class="r-in"><span><span class="co"># same functions, assign the numeric `get_skimmers`.</span></span></span>
+<span class="r-in"><span><span class="va">get_skimmers.integer</span> <span class="op">&lt;-</span> <span class="fu">skimr</span><span class="fu">::</span><span class="va">get_skimmers.numeric</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or, in a local session, use `skim_with` to create a different `skim`.</span></span></span>
+<span class="r-in"><span><span class="va">new_skim</span> <span class="op">&lt;-</span> <span class="fu"><a href="skim_with.html">skim_with</a></span><span class="op">(</span>integer <span class="op">=</span> <span class="fu">skimr</span><span class="fu">::</span><span class="fu">get_skimmers.numeric</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To apply a set of skimmers from an old type to a new type</span></span></span>
+<span class="r-in"><span><span class="va">get_skimmers.new_type</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">modify_default_skimmers</span><span class="op">(</span><span class="st">"old_type"</span>, new_skim_type <span class="op">=</span> <span class="st">"new_type"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -259,7 +268,7 @@ Finds the appropriate skimmers for the underlying data in the vector.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

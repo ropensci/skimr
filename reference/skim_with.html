@@ -74,11 +74,11 @@ can use this function to change the summary statistics that it returns.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">skim_with</span><span class="op">(</span>
-  <span class="va">...</span>,
-  base <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>n_missing <span class="op">=</span> <span class="va">n_missing</span>, complete_rate <span class="op">=</span> <span class="va">complete_rate</span><span class="op">)</span>,
-  append <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">skim_with</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  base <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>n_missing <span class="op">=</span> <span class="va">n_missing</span>, complete_rate <span class="op">=</span> <span class="va">complete_rate</span><span class="op">)</span>,</span>
+<span>  append <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,15 +86,22 @@ can use this function to change the summary statistics that it returns.</p>
     <dl><dt>...</dt>
 <dd><p>One or more (<code>sfl</code>) <code>skimmer_function_list</code> objects, with an
 argument name that matches a particular data type.</p></dd>
+
+
 <dt>base</dt>
 <dd><p>An <code>sfl</code> that sets skimmers for all column types.</p></dd>
+
+
 <dt>append</dt>
 <dd><p>Whether the provided options should be in addition to the
 defaults already in <code>skim</code>. Default is <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A new <code><a href="skim.html">skim()</a></code> function. This is callable. See <code><a href="skim.html">skim()</a></code> for more
+    
+
+<p>A new <code><a href="skim.html">skim()</a></code> function. This is callable. See <code><a href="skim.html">skim()</a></code> for more
 details.</p>
     </div>
     <div id="details">
@@ -122,10 +129,10 @@ See <code><a href="get_default_skimmers.html">get_default_skimmer_names()</a></c
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Use new functions for numeric functions. If you don't provide a name,</span></span>
-<span class="r-in"><span class="co"># one will be automatically generated.</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">median</span>, <span class="va">mad</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Use new functions for numeric functions. If you don't provide a name,</span></span></span>
+<span class="r-in"><span><span class="co"># one will be automatically generated.</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">median</span>, <span class="va">mad</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       faithful</span>
@@ -141,11 +148,11 @@ See <code><a href="get_default_skimmers.html">get_default_skimmer_names()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span>   skim_variable n_missing complete_rate median    mad</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> eruptions             0             1      4  0.951</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> waiting               0             1     76 11.9  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># If you want to remove a particular skimmer, set it to NULL</span></span>
-<span class="r-in"><span class="co"># This removes the inline histogram</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>hist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If you want to remove a particular skimmer, set it to NULL</span></span></span>
+<span class="r-in"><span><span class="co"># This removes the inline histogram</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>hist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       faithful</span>
@@ -161,10 +168,10 @@ See <code><a href="get_default_skimmers.html">get_default_skimmer_names()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span>   skim_variable n_missing complete_rate  mean    sd   p0   p25 p50   p75 p100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> eruptions             0             1  3.49  1.14  1.6  2.16   4  4.45  5.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> waiting               0             1 70.9  13.6  43   58     76 82    96  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># This works with multiple skimmers. Just match names to overwrite</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>iqr <span class="op">=</span> <span class="va">IQR</span>, p25 <span class="op">=</span> <span class="cn">NULL</span>, p75 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This works with multiple skimmers. Just match names to overwrite</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>iqr <span class="op">=</span> <span class="va">IQR</span>, p25 <span class="op">=</span> <span class="cn">NULL</span>, p75 <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">my_skim</span><span class="op">(</span><span class="va">faithful</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── Data Summary ────────────────────────</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            Values  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name                       faithful</span>
@@ -180,30 +187,30 @@ See <code><a href="get_default_skimmers.html">get_default_skimmer_names()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span>   skim_variable n_missing complete_rate  mean    sd   p0 p50 p100 hist    iqr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> eruptions             0             1  3.49  1.14  1.6   4  5.1 ▇▂▂▇▇  2.29</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> waiting               0             1 70.9  13.6  43    76 96   ▃▃▂▇▂ 24   </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Alternatively, set `append = FALSE` to replace the skimmers of a type.</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Skimmers are unary functions. Partially apply arguments during assigment.</span></span>
-<span class="r-in"><span class="co"># For example, you might want to remove NA values.</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>iqr <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/IQR.html" class="external-link">IQR</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Set multiple types of skimmers simultaneously.</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, character <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Or pass the same as a list, unquoting the input.</span></span>
-<span class="r-in"><span class="va">my_skimmers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, character <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">my_skimmers</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use the v1 base skimmers instead.</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>base <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span>
-<span class="r-in">  missing <span class="op">=</span> <span class="va">n_missing</span>,</span>
-<span class="r-in">  complete <span class="op">=</span> <span class="va">n_complete</span>,</span>
-<span class="r-in">  n <span class="op">=</span> <span class="va">length</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Remove the base skimmers entirely</span></span>
-<span class="r-in"><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>base <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Alternatively, set `append = FALSE` to replace the skimmers of a type.</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>, append <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Skimmers are unary functions. Partially apply arguments during assigment.</span></span></span>
+<span class="r-in"><span><span class="co"># For example, you might want to remove NA values.</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span>iqr <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/IQR.html" class="external-link">IQR</a></span><span class="op">(</span><span class="va">.</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Set multiple types of skimmers simultaneously.</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, character <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or pass the same as a list, unquoting the input.</span></span></span>
+<span class="r-in"><span><span class="va">my_skimmers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span>, character <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">my_skimmers</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use the v1 base skimmers instead.</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>base <span class="op">=</span> <span class="fu"><a href="sfl.html">sfl</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  missing <span class="op">=</span> <span class="va">n_missing</span>,</span></span>
+<span class="r-in"><span>  complete <span class="op">=</span> <span class="va">n_complete</span>,</span></span>
+<span class="r-in"><span>  n <span class="op">=</span> <span class="va">length</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Remove the base skimmers entirely</span></span></span>
+<span class="r-in"><span><span class="va">my_skim</span> <span class="op">&lt;-</span> <span class="fu">skim_with</span><span class="op">(</span>base <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -218,7 +225,7 @@ See <code><a href="get_default_skimmers.html">get_default_skimmer_names()</a></c
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

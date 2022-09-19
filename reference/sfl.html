@@ -78,7 +78,7 @@ can be used within <code>sfl</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sfl</span><span class="op">(</span><span class="va">...</span>, skim_type <span class="op">=</span> <span class="st">""</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sfl</span><span class="op">(</span><span class="va">...</span>, skim_type <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,13 +93,18 @@ specified by:</p><ul><li><p>Their name, <code>"mean"</code></p></li>
 <code>mean(., na.rm = TRUE)</code></p></li>
 <li><p>An anonymous function in <span class="pkg">purrr</span> notation, <code>~mean(., na.rm = TRUE)</code></p></li>
 </ul></dd>
+
+
 <dt>skim_type</dt>
 <dd><p>A character scalar. This is used to match locally-provided
 skimmers with defaults. See <code><a href="get_skimmers.html">get_skimmers()</a></code> for more detail.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>skimr_function_list</code>, which contains a list of <code>fun_calls</code>,
+    
+
+<p>A <code>skimr_function_list</code>, which contains a list of <code>fun_calls</code>,
 returned by <code><a href="https://dplyr.tidyverse.org/reference/funs.html" class="external-link">dplyr::funs()</a></code> and a list of skimming functions to drop.</p>
     </div>
     <div id="details">
@@ -115,9 +120,9 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># sfl's can take a variety of input formats and will generate names</span></span>
-<span class="r-in"><span class="co"># if not provided.</span></span>
-<span class="r-in"><span class="fu">sfl</span><span class="op">(</span><span class="va">mad</span>, <span class="st">"var"</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># sfl's can take a variety of input formats and will generate names</span></span></span>
+<span class="r-in"><span><span class="co"># if not provided.</span></span></span>
+<span class="r-in"><span><span class="fu">sfl</span><span class="op">(</span><span class="va">mad</span>, <span class="st">"var"</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$mad</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, center = median(x), constant = 1.4826, na.rm = FALSE, </span>
@@ -134,7 +139,7 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     else median(abs(x - center))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7ffc620408d0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7fe0094019b0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:stats&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$`"var"`</span>
@@ -142,7 +147,7 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$`~length(.)^2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~length(.)^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x7ffc617e9fb8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x7fe008cfa538&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $skim_type</span>
@@ -150,10 +155,10 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "skimr_function_list"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># But these can generate unpredictable names in your output.</span></span>
-<span class="r-in"><span class="co"># Better to set your own names.</span></span>
-<span class="r-in"><span class="fu">sfl</span><span class="op">(</span>mad <span class="op">=</span> <span class="va">mad</span>, variance <span class="op">=</span> <span class="st">"var"</span>, length_sq <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># But these can generate unpredictable names in your output.</span></span></span>
+<span class="r-in"><span><span class="co"># Better to set your own names.</span></span></span>
+<span class="r-in"><span><span class="fu">sfl</span><span class="op">(</span>mad <span class="op">=</span> <span class="va">mad</span>, variance <span class="op">=</span> <span class="st">"var"</span>, length_sq <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$mad</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, center = median(x), constant = 1.4826, na.rm = FALSE, </span>
@@ -170,7 +175,7 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     else median(abs(x - center))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7ffc620408d0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x7fe0094019b0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:stats&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$variance</span>
@@ -178,7 +183,7 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$length_sq</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ~length(.)^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x7ffc617e9fb8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x7fe008cfa538&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $skim_type</span>
@@ -186,9 +191,9 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "skimr_function_list"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># sfl's can remove individual skimmers from defaults by passing NULL.</span></span>
-<span class="r-in"><span class="fu">sfl</span><span class="op">(</span>hist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># sfl's can remove individual skimmers from defaults by passing NULL.</span></span></span>
+<span class="r-in"><span><span class="fu">sfl</span><span class="op">(</span>hist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $funs$hist</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
@@ -199,12 +204,12 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "skimr_function_list"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># When working interactively, you don't need to set a type.</span></span>
-<span class="r-in"><span class="co"># But you should when defining new defaults with `get_skimmers()`.</span></span>
-<span class="r-in"><span class="va">get_skimmers.my_new_class</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">sfl</span><span class="op">(</span><span class="va">n_missing</span>, skim_type <span class="op">=</span> <span class="st">"my_new_class"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># When working interactively, you don't need to set a type.</span></span></span>
+<span class="r-in"><span><span class="co"># But you should when defining new defaults with `get_skimmers()`.</span></span></span>
+<span class="r-in"><span><span class="va">get_skimmers.my_new_class</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">sfl</span><span class="op">(</span><span class="va">n_missing</span>, skim_type <span class="op">=</span> <span class="st">"my_new_class"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -219,7 +224,7 @@ providing names when reasonable to get better <code><a href="skim.html">skim()</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
