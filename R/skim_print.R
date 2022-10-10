@@ -24,7 +24,7 @@
 #' You can control the width rule line for the printed subtables with an option:
 #' `skimr_table_header_width`.
 #'
-#' @inheritParams tibble:::print.tbl
+#' @inheritParams tibble::print.tbl
 #' @seealso [tibble::trunc_mat()] For a list of global options for customizing
 #'   print formatting. [crayon::has_color()] for the variety of issues that
 #'   affect tibble's color support.
@@ -56,6 +56,7 @@ print.skim_df <- function(x,
       n = n,
       ...
     )
+    invisible(x)
   } else {
     NextMethod("print")
   }
@@ -81,7 +82,6 @@ print.one_skim_df <- function(x,
     NextMethod("print")
   }
 }
-
 
 # Methods for correctly formatting a a `one_skim_df`. We leverage the
 # customiztion options in `pillar` for this. It divides the results into: a

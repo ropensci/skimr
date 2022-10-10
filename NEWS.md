@@ -1,4 +1,4 @@
-# skimr 2.2.0
+# skimr 2.1.4
 
 ### NEW FEATURES
 

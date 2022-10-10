@@ -84,51 +84,51 @@ for creating new default \code{sfl}'s.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: The default method for skimming data. Only used when
+\item \code{get_skimmers(default)}: The default method for skimming data. Only used when
 a column's data type doesn't match currently installed types. Call
 \link{get_default_skimmer_names} to see these defaults.
 
-\item \code{numeric}: Summary functions for numeric columns, covering both
+\item \code{get_skimmers(numeric)}: Summary functions for numeric columns, covering both
 \code{\link[=double]{double()}} and \code{\link[=integer]{integer()}} classes: \code{\link[=mean]{mean()}}, \code{\link[=sd]{sd()}}, \code{\link[=quantile]{quantile()}} and
 \code{\link[=inline_hist]{inline_hist()}}.
 
-\item \code{factor}: Summary functions for factor columns:
+\item \code{get_skimmers(factor)}: Summary functions for factor columns:
 \code{\link[=is.ordered]{is.ordered()}}, \code{\link[=n_unique]{n_unique()}} and \code{\link[=top_counts]{top_counts()}}.
 
-\item \code{character}: Summary functions for character columns. Also, the
+\item \code{get_skimmers(character)}: Summary functions for character columns. Also, the
 default for unknown columns: \code{\link[=min_char]{min_char()}}, \code{\link[=max_char]{max_char()}}, \code{\link[=n_empty]{n_empty()}},
 \code{\link[=n_unique]{n_unique()}} and \code{\link[=n_whitespace]{n_whitespace()}}.
 
-\item \code{logical}: Summary functions for logical/ boolean columns:
+\item \code{get_skimmers(logical)}: Summary functions for logical/ boolean columns:
 \code{\link[=mean]{mean()}}, which produces rates for each value, and \code{\link[=top_counts]{top_counts()}}.
 
-\item \code{complex}: Summary functions for complex columns: \code{\link[=mean]{mean()}}.
+\item \code{get_skimmers(complex)}: Summary functions for complex columns: \code{\link[=mean]{mean()}}.
 
-\item \code{Date}: Summary functions for \code{Date} columns: \code{\link[=min]{min()}},
+\item \code{get_skimmers(Date)}: Summary functions for \code{Date} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{POSIXct}: Summary functions for \code{POSIXct} columns: \code{\link[=min]{min()}},
+\item \code{get_skimmers(POSIXct)}: Summary functions for \code{POSIXct} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{difftime}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
+\item \code{get_skimmers(difftime)}: Summary functions for \code{difftime} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{Timespan}: Summary functions for \code{Timespan} columns: \code{\link[=min]{min()}},
+\item \code{get_skimmers(Timespan)}: Summary functions for \code{Timespan} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{ts}: Summary functions for \code{ts} columns: \code{\link[=min]{min()}},
+\item \code{get_skimmers(ts)}: Summary functions for \code{ts} columns: \code{\link[=min]{min()}},
 \code{\link[=max]{max()}}, \code{\link[=median]{median()}} and \code{\link[=n_unique]{n_unique()}}.
 
-\item \code{list}: Summary functions for \code{list} columns: \code{\link[=n_unique]{n_unique()}},
+\item \code{get_skimmers(list)}: Summary functions for \code{list} columns: \code{\link[=n_unique]{n_unique()}},
 \code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.
 
-\item \code{AsIs}: Summary functions for \code{AsIs} columns: \code{\link[=n_unique]{n_unique()}},
+\item \code{get_skimmers(AsIs)}: Summary functions for \code{AsIs} columns: \code{\link[=n_unique]{n_unique()}},
 \code{\link[=list_min_length]{list_min_length()}} and \code{\link[=list_max_length]{list_max_length()}}.
 
-\item \code{haven_labelled}: Summary functions for \code{haven_labelled} columns.
+\item \code{get_skimmers(haven_labelled)}: Summary functions for \code{haven_labelled} columns.
 Finds the appropriate skimmers for the underlying data in the vector.
-}}
 
+}}
 \examples{
 # Defining default skimming functions for a new class, `my_class`.
 # Note that the class argument is required for dynamic reassignment.

@@ -131,7 +131,7 @@ skim_with <- function(...,
       data_cols = ncol(data),
       df_name = .data_name,
       dt_key  = get_dt_key(data),
-      groups = dplyr::groups(data),
+      groups = dplyr::group_vars(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
     )
@@ -153,7 +153,7 @@ validate_assignment <- function(...) {
   }
 
   # Need to cope with case where ... is a list already
-  if (class(to_assign[[1]]) != "skimr_function_list") {
+  if (!inherits(to_assign[[1]], "skimr_function_list")) {
     to_assign <- to_assign[[1]]
   }
 
@@ -339,7 +339,7 @@ skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
   grouped <- dplyr::group_by(data, !!!group_columns)
   skimmed <- dplyr::summarize(
     grouped,
-    dplyr::across(variable_names, mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, group_columns)
 }
@@ -348,7 +348,7 @@ skim_by_type.grouped_df <- function(mangled_skimmers, variable_names, data) {
 skim_by_type.data.frame <- function(mangled_skimmers, variable_names, data) {
   skimmed <- dplyr::summarize(
     data,
-    dplyr::across(variable_names, mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, NULL)
 }
@@ -358,7 +358,7 @@ skim_by_type.data.table <- function(mangled_skimmers, variable_names, data) {
   data <- tibble::as_tibble(data)
   skimmed <- dplyr::summarize(
     data,
-    dplyr::across(variable_names, mangled_skimmers$funs)
+    dplyr::across(tidyselect::any_of(variable_names), mangled_skimmers$funs)
   )
   build_results(skimmed, variable_names, NULL)
 }
