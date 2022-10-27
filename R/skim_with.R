@@ -125,7 +125,7 @@ skim_with <- function(...,
       )
     )
     structure(
-      tidyr::unnest(nested, .data$skimmed),
+      tidyr::unnest(nested, "skimmed"),
       class = c("skim_df", "tbl_df", "tbl", "data.frame"),
       data_rows = nrow(data),
       data_cols = ncol(data),
@@ -371,7 +371,7 @@ build_results <- function(skimmed, variable_names, groups) {
       skim_variable = variable_names,
       by_variable = purrr::map(variable_names, reshape_skimmed, skimmed, groups)
     )
-    tidyr::unnest(out, .data$by_variable)
+    tidyr::unnest(out, "by_variable")
   } else {
     out <- dplyr::select(
       as.data.frame(skimmed),
