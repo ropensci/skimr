@@ -258,21 +258,23 @@ skim_class <- function(column) {
 }
 
 get_local_skimmers <- function(classes, local_skimmers) {
-  all_matches <- local_skimmers[classes]
-  safe_modify <- purrr::possibly(purrr::list_modify, NULL)
-  add_types <- purrr::map2(
-    all_matches,
-    classes,
-    ~ safe_modify(.x, skim_type = .y)
-  )
-  purrr::detect(add_types, ~ !is.null(.x))
+  local_classes <- intersect(classes, names(local_skimmers))
+  if (length(local_classes) == 0) {
+    return(NULL)
+  }
+  
+  first_class <- local_classes[[1]]
+  
+  out <- local_skimmers[[first_class]]
+  out$skim_type <- first_class
+  out
 }
 
 merge_skimmers <- function(locals, defaults, append) {
   if (!append || locals$skim_type != defaults$skim_type) {
     locals
   } else {
-    defaults$funs <- purrr::list_modify(defaults$funs, !!!locals$funs)
+    defaults$funs <- purrr::compact(purrr::list_modify(defaults$funs, !!!locals$funs))
     defaults
   }
 }

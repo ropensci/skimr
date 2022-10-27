@@ -155,29 +155,30 @@ test_that("Sfl's can be passed as an unquoted list", {
 })
 
 test_that("Doubles and integers are both 'numeric'", {
-  df <- dplyr::mutate(faithful, eruptions = as.integer(eruptions))
+  df <- data.frame(int = 1:3, dbl = 1:3 + 0.5)
   my_skim <- skim_with(numeric = sfl(hist = NULL))
   input <- my_skim(df)
-  expect_false("hist" %in% names(input))
-  used <- attr(input, "skimmers_used")
-  expect_identical(
-    used, list(numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100"))
+  
+  expect_false("numeric.hist" %in% names(input))
+  expect_equal(
+    attr(input, "skimmers_used")$numeric,
+    c("mean", "sd", "p0", "p25", "p50", "p75", "p100")
   )
 })
 
 test_that("Defining an integer sfl changes behavior", {
-  df <- dplyr::mutate(faithful, eruptions = as.integer(eruptions))
+  df <- data.frame(int = 1:3, dbl = 1:3 + 0.5)
   my_skim <- expect_message(
     skim_with(
       numeric = sfl(hist = NULL), integer = sfl(int_mean = mean)
     )
   )
   input <- my_skim(df)
-  expect_false("hist" %in% names(input))
+
+  expect_false("numeric.hist" %in% names(input))
   expect_true("integer.int_mean" %in% names(input))
-  used <- attr(input, "skimmers_used")
   expect_identical(
-    used,
+    attr(input, "skimmers_used"),
     list(
       integer = c("int_mean"),
       numeric = c("mean", "sd", "p0", "p25", "p50", "p75", "p100")
