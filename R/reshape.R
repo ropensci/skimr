@@ -247,7 +247,7 @@ to_long.skim_df <- function(.data, ..., skim_fun = skim) {
     key = "stat",
     value = "formatted",
     na.rm = TRUE,
-    -.data$skim_type,
-    -.data$skim_variable
+    -"skim_type",
+    -"skim_variable"
   )
 }
