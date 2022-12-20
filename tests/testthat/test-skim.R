@@ -628,6 +628,7 @@ test_that("skim returns expected response for difftime vectors", {
 })
 
 test_that("skim returns expected response for lubridate Timespan vectors", {
+  skip_if_not_installed("lubridate")
   dt <- tibble::tibble(x = lubridate::duration(1))
   input <- skim(dt)
 
