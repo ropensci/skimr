@@ -108,17 +108,17 @@ over calling base R's attribute functions.</p>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>data_rows</code>: Get the number of rows in the skimmed data frame.</p></li>
-<li><p><code>data_cols</code>: Get the number of columns in the skimmed data frame.</p></li>
-<li><p><code>df_name</code>: Get the name of the skimmed data frame. This is only
+<ul><li><p><code>data_rows()</code>: Get the number of rows in the skimmed data frame.</p></li>
+<li><p><code>data_cols()</code>: Get the number of columns in the skimmed data frame.</p></li>
+<li><p><code>df_name()</code>: Get the name of the skimmed data frame. This is only
 available in contexts where the name can be looked up. This is often not
 the case within a pipeline.</p></li>
-<li><p><code>dt_key</code>: Get the key of the skimmed data.table. This is only
+<li><p><code>dt_key()</code>: Get the key of the skimmed data.table. This is only
 available in contexts where <code>data</code> is of class <code>data.table</code>.</p></li>
-<li><p><code>group_names</code>: Get the names of the groups in the original data frame.
+<li><p><code>group_names()</code>: Get the names of the groups in the original data frame.
 Only available if the data was grouped. Otherwise, <code>NULL</code>.</p></li>
-<li><p><code>base_skimmers</code>: Get the names of the base skimming functions used.</p></li>
-<li><p><code>skimmers_used</code>: Get the names of the skimming functions used, separated
+<li><p><code>base_skimmers()</code>: Get the names of the base skimming functions used.</p></li>
+<li><p><code>skimmers_used()</code>: Get the names of the skimming functions used, separated
 by data type.</p></li>
 </ul></div>
 

@@ -147,39 +147,39 @@ series.</p></dd>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>n_missing</code>: Calculate the sum of <code>NA</code> and <code>NULL</code> (i.e. missing) values.</p></li>
-<li><p><code>n_complete</code>: Calculate the sum of not <code>NA</code> and <code>NULL</code> (i.e. missing)
+<ul><li><p><code>n_missing()</code>: Calculate the sum of <code>NA</code> and <code>NULL</code> (i.e. missing) values.</p></li>
+<li><p><code>n_complete()</code>: Calculate the sum of not <code>NA</code> and <code>NULL</code> (i.e. missing)
 values.</p></li>
-<li><p><code>complete_rate</code>: Calculate complete values; complete values are not missing.</p></li>
-<li><p><code>n_whitespace</code>: Calculate the number of rows containing only whitespace
+<li><p><code>complete_rate()</code>: Calculate complete values; complete values are not missing.</p></li>
+<li><p><code>n_whitespace()</code>: Calculate the number of rows containing only whitespace
 values using s+ regex.</p></li>
-<li><p><code>sorted_count</code>: Create a contingency table and arrange its levels in
+<li><p><code>sorted_count()</code>: Create a contingency table and arrange its levels in
 descending order. In case of ties, the ordering of results is alphabetical
 and depends upon the locale. <code>NA</code> is treated as a ordinary value for
 sorting.</p></li>
-<li><p><code>top_counts</code>: Compute and collapse a contingency table into a single
+<li><p><code>top_counts()</code>: Compute and collapse a contingency table into a single
 character scalar. Wraps <code>sorted_count()</code>.</p></li>
-<li><p><code>inline_hist</code>: Generate inline histogram for numeric variables. The
+<li><p><code>inline_hist()</code>: Generate inline histogram for numeric variables. The
 character length of the histogram is controlled by the formatting options
 for character vectors.</p></li>
-<li><p><code>n_empty</code>: Calculate the number of blank values in a character vector.
+<li><p><code>n_empty()</code>: Calculate the number of blank values in a character vector.
 A "blank" is equal to "".</p></li>
-<li><p><code>min_char</code>: Calculate the minimum number of characters within a
+<li><p><code>min_char()</code>: Calculate the minimum number of characters within a
 character vector.</p></li>
-<li><p><code>max_char</code>: Calculate the maximum number of characters within a
+<li><p><code>max_char()</code>: Calculate the maximum number of characters within a
 character vector.</p></li>
-<li><p><code>n_unique</code>: Calculate the number of unique elements but remove <code>NA</code>.</p></li>
-<li><p><code>ts_start</code>: Get the start for a time series without the frequency.</p></li>
-<li><p><code>ts_end</code>: Get the finish for a time series without the frequency.</p></li>
-<li><p><code>inline_linegraph</code>: Generate inline line graph for time series variables. The
+<li><p><code>n_unique()</code>: Calculate the number of unique elements but remove <code>NA</code>.</p></li>
+<li><p><code>ts_start()</code>: Get the start for a time series without the frequency.</p></li>
+<li><p><code>ts_end()</code>: Get the finish for a time series without the frequency.</p></li>
+<li><p><code>inline_linegraph()</code>: Generate inline line graph for time series variables. The
 character length of the line graph is controlled by the formatting options
 for character vectors.
 Based on the function in the pillar package.</p></li>
-<li><p><code>list_lengths_min</code>: Get the length of the shortest list in a vector of lists.</p></li>
-<li><p><code>list_lengths_median</code>: Get the median length of the lists.</p></li>
-<li><p><code>list_lengths_max</code>: Get the maximum length of the lists.</p></li>
-<li><p><code>list_min_length</code>: Get the length of the shortest list in a vector of lists.</p></li>
-<li><p><code>list_max_length</code>: Get the length of the longest list in a vector of lists.</p></li>
+<li><p><code>list_lengths_min()</code>: Get the length of the shortest list in a vector of lists.</p></li>
+<li><p><code>list_lengths_median()</code>: Get the median length of the lists.</p></li>
+<li><p><code>list_lengths_max()</code>: Get the maximum length of the lists.</p></li>
+<li><p><code>list_min_length()</code>: Get the length of the shortest list in a vector of lists.</p></li>
+<li><p><code>list_max_length()</code>: Get the length of the longest list in a vector of lists.</p></li>
 </ul></div>
     <div id="see-also">
     <h2>See also</h2>
