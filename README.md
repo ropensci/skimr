@@ -14,8 +14,7 @@ status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](http
 [![This is an ROpenSci Peer reviewed
 package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
-[![cran
-checks](https://badges.cranchecks.info/worst/skimr.svg)](https://badges.cranchecks.info/worst/skimr.svg)
+[![cran checks](https://badges.cranchecks.info/worst/skimr.svg)](https://cran.r-project.org/web/checks/check_results_skimr.html)
 
 `skimr` provides a frictionless approach to summary statistics which
 conforms to the [principle of least
