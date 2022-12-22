@@ -669,6 +669,7 @@ test_that("skim returns expected response for lubridate Timespan vectors", {
 })
 
 test_that("skim handles objects containing haven_labelled vectors: double", {
+  skip_if_not_installed("haven")
   dt <- tibble::tibble(x = haven::labelled(c(1, 2, 3), c(A = 1, B = 2, C = 3)))
   input <- skimr::skim(dt)
 
@@ -714,6 +715,7 @@ test_that("skim handles objects containing haven_labelled vectors: double", {
 })
 
 test_that("skim handles objects containing haven_labelled vectors: character", {
+  skip_if_not_installed("haven")
   dt <- tibble::tibble(x = haven::labelled(
     c("a", "b", "c"),
     c(A = "a", B = "b", C = "c")
