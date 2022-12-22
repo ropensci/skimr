@@ -36,13 +36,13 @@ in the list is a data type from the original \code{skim_df}. The inverse of
 }
 \section{Functions}{
 \itemize{
-\item \code{bind()}: The inverse of a \code{partition()}. Rebuild the original
+\item \code{bind}: The inverse of a \code{partition()}. Rebuild the original
 \code{skim_df}.
 
-\item \code{yank()}: Extract a subtable from a \code{skim_df} with a particular
+\item \code{yank}: Extract a subtable from a \code{skim_df} with a particular
 type.
-
 }}
+
 \examples{
 # Create a wide skimmed data frame (a skim_df)
 skimmed <- skim(iris)

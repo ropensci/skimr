@@ -29,12 +29,12 @@ variable, type, stat and formatted.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{to_long(default)}: Skim a data frame and convert the results to a
+\item \code{default}: Skim a data frame and convert the results to a
 long data frame.
 
-\item \code{to_long(skim_df)}: Transform a skim_df to a long data frame.
-
+\item \code{skim_df}: Transform a skim_df to a long data frame.
 }}
+
 \examples{
 to_long(iris)
 to_long(skim(iris))
