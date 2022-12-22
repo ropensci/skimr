@@ -39,23 +39,23 @@ over calling base R's attribute functions.
 }
 \section{Functions}{
 \itemize{
-\item \code{data_rows()}: Get the number of rows in the skimmed data frame.
+\item \code{data_rows}: Get the number of rows in the skimmed data frame.
 
-\item \code{data_cols()}: Get the number of columns in the skimmed data frame.
+\item \code{data_cols}: Get the number of columns in the skimmed data frame.
 
-\item \code{df_name()}: Get the name of the skimmed data frame. This is only
+\item \code{df_name}: Get the name of the skimmed data frame. This is only
 available in contexts where the name can be looked up. This is often not
 the case within a pipeline.
 
-\item \code{dt_key()}: Get the key of the skimmed data.table. This is only
+\item \code{dt_key}: Get the key of the skimmed data.table. This is only
 available in contexts where \code{data} is of class \code{data.table}.
 
-\item \code{group_names()}: Get the names of the groups in the original data frame.
+\item \code{group_names}: Get the names of the groups in the original data frame.
 Only available if the data was grouped. Otherwise, \code{NULL}.
 
-\item \code{base_skimmers()}: Get the names of the base skimming functions used.
+\item \code{base_skimmers}: Get the names of the base skimming functions used.
 
-\item \code{skimmers_used()}: Get the names of the skimming functions used, separated
+\item \code{skimmers_used}: Get the names of the skimming functions used, separated
 by data type.
-
 }}
+
