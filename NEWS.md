@@ -1,3 +1,7 @@
+# skimr 2.1.5
+
+* Updated to work with newer version of purrr
+
 # skimr 2.1.4
 
 ### NEW FEATURES

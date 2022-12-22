@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.1.4
+Version: 2.1.5
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
@@ -149,7 +149,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Collate:
     'deprecated.R'
     'dplyr.R'

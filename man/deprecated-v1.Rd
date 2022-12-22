@@ -31,10 +31,10 @@ data frame. Others have been replaced by functions that do a single thing.
 }
 \section{Functions}{
 \itemize{
-\item \code{skim_to_wide()}: \code{\link[=skim]{skim()}} always produces a wide data frame.
+\item \code{skim_to_wide}: \code{\link[=skim]{skim()}} always produces a wide data frame.
 
-\item \code{skim_to_list()}: \code{\link[=partition]{partition()}} creates a list.
+\item \code{skim_to_list}: \code{\link[=partition]{partition()}} creates a list.
 
-\item \code{skim_format()}: \code{\link[=print]{print()}} and \code{\link[=skim_with]{skim_with()}} set options.
-
+\item \code{skim_format}: \code{\link[=print]{print()}} and \code{\link[=skim_with]{skim_with()}} set options.
 }}
+

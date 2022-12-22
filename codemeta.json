@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/skimr/",
   "issueTracker": "https://github.com/ropensci/skimr/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.2 (2021-11-01)",
+  "runtimePlatform": "R version 4.2.0 (2022-04-22)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -203,6 +203,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "crayon",
+      "name": "crayon",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=crayon"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "data.table",
       "name": "data.table",
       "provider": {
@@ -285,6 +297,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "withr",
+      "name": "withr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
   "softwareRequirements": {
@@ -308,18 +332,6 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "crayon",
-      "name": "crayon",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=crayon"
-    },
-    "4": {
-      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "version": ">= 0.8.0",
@@ -331,7 +343,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
-    "5": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
@@ -344,7 +356,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
     },
-    "6": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
@@ -357,7 +369,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=magrittr"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "pillar",
       "name": "pillar",
@@ -370,7 +382,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=pillar"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -382,7 +394,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "repr",
       "name": "repr",
@@ -394,7 +406,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=repr"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
@@ -407,12 +419,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
@@ -425,7 +437,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -438,7 +450,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
@@ -451,7 +463,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     },
-    "15": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "tidyselect",
       "name": "tidyselect",
@@ -464,7 +476,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyselect"
     },
-    "16": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "vctrs",
       "name": "vctrs",
@@ -476,24 +488,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=vctrs"
     },
-    "17": {
-      "@type": "SoftwareApplication",
-      "identifier": "withr",
-      "name": "withr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=withr"
-    },
     "SystemRequirements": null
   },
-  "fileSize": "2405.306KB",
-  "releaseNotes": "https://github.com/ropensci/skimr/blob/main/NEWS.md",
+  "fileSize": "2405.754KB",
+  "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/main/README.md",
-  "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://codecov.io/gh/ropensci/skimr/"],
+  "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://app.codecov.io/gh/ropensci/skimr"],
   "developmentStatus": "https://www.repostatus.org/",
   "review": {
     "@type": "Review",

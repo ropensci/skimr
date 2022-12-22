@@ -43,15 +43,15 @@ a list of functions and a \code{skim_type}.
 }
 \section{Functions}{
 \itemize{
-\item \code{get_one_default_skimmer()}: Get the functions associated with one
+\item \code{get_one_default_skimmer}: Get the functions associated with one
 \code{skim_type}.
 
-\item \code{get_default_skimmer_names()}: Get the names of the functions used in one
+\item \code{get_default_skimmer_names}: Get the names of the functions used in one
 or more \code{skim_type}'s.
 
-\item \code{get_one_default_skimmer_names()}: Get the names of the functions used in one
+\item \code{get_one_default_skimmer_names}: Get the names of the functions used in one
 \code{skim_type}.
 
-\item \code{get_sfl()}: Get the \code{sfl} for a \code{skim_type}.
-
+\item \code{get_sfl}: Get the \code{sfl} for a \code{skim_type}.
 }}
+
