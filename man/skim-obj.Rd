@@ -71,34 +71,34 @@ more useful when throwing errors.
 }
 \section{Functions}{
 \itemize{
-\item \code{has_type_column}: Does the object have the \code{skim_type} column?
+\item \code{has_type_column()}: Does the object have the \code{skim_type} column?
 
-\item \code{has_variable_column}: Does the object have the \code{skim_variable} column?
+\item \code{has_variable_column()}: Does the object have the \code{skim_variable} column?
 
-\item \code{has_skimr_attributes}: Does the object have the appropriate \code{skimr} attributes?
+\item \code{has_skimr_attributes()}: Does the object have the appropriate \code{skimr} attributes?
 
-\item \code{has_skim_type_attribute}: Does the object have a \code{skim_type} attribute? This makes
+\item \code{has_skim_type_attribute()}: Does the object have a \code{skim_type} attribute? This makes
 it a \code{one_skim_df}.
 
-\item \code{has_skimmers}: Does the object have skimmers?
+\item \code{has_skimmers()}: Does the object have skimmers?
 
-\item \code{is_data_frame}: Is the object a data frame?
+\item \code{is_data_frame()}: Is the object a data frame?
 
-\item \code{is_skim_df}: Is the object a \code{skim_df}?
+\item \code{is_skim_df()}: Is the object a \code{skim_df}?
 
-\item \code{is_one_skim_df}: Is the object a \code{one_skim_df}? This is similar to a
+\item \code{is_one_skim_df()}: Is the object a \code{one_skim_df}? This is similar to a
 \code{skim_df}, but does not have the \code{type} column. That is stored as an
 attribute instead.
 
-\item \code{is_skim_list}: Is the object a \code{skim_list}?
+\item \code{is_skim_list()}: Is the object a \code{skim_list}?
 
-\item \code{could_be_skim_df}: Is this a data frame with \code{skim_variable} and
+\item \code{could_be_skim_df()}: Is this a data frame with \code{skim_variable} and
 \code{skim_type} columns?
 
-\item \code{assert_is_skim_df}: Stop if the object is not a \code{skim_df}.
+\item \code{assert_is_skim_df()}: Stop if the object is not a \code{skim_df}.
 
-\item \code{assert_is_skim_list}: Stop if the object is not a \code{skim_list}.
+\item \code{assert_is_skim_list()}: Stop if the object is not a \code{skim_list}.
 
-\item \code{assert_is_one_skim_df}: Stop if the object is not a \code{one_skim_df}.
+\item \code{assert_is_one_skim_df()}: Stop if the object is not a \code{one_skim_df}.
+
 }}
-

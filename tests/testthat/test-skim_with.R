@@ -158,7 +158,7 @@ test_that("Doubles and integers are both 'numeric'", {
   df <- data.frame(int = 1:3, dbl = 1:3 + 0.5)
   my_skim <- skim_with(numeric = sfl(hist = NULL))
   input <- my_skim(df)
-  
+
   expect_false("numeric.hist" %in% names(input))
   expect_equal(
     attr(input, "skimmers_used")$numeric,

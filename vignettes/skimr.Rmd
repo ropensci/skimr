@@ -69,17 +69,18 @@ a skim_df.
 
 ```{r}
 skim(iris) %>% is_skim_df()
-
 ```
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
-  dplyr::select(-skim_type, -skim_variable) %>% is_skim_df()
+  dplyr::select(-skim_type, -skim_variable) %>%
+  is_skim_df()
 ```
 
 ```{r, render = knitr::normal_print}
 skim(iris) %>%
-  dplyr::select(-n_missing) %>% is_skim_df()
+  dplyr::select(-n_missing) %>%
+  is_skim_df()
 ```
 
 In order to avoid type coercion, columns for summary statistics for different
@@ -250,7 +251,7 @@ object in `skimr` v1.
 ```{r, render = knitr::normal_print}
 iris %>%
   skim() %>%
-  to_long() %>% 
+  to_long() %>%
   head()
 ```
 
