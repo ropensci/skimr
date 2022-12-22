@@ -19,7 +19,7 @@ skim_with(), to create the summary tibble for each type."><meta property="og:ima
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">skimr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.5</span>
       </span>
     </div>
 
@@ -164,35 +164,35 @@ for creating new default <code>sfl</code>'s.</p>
     <div id="methods-by-class-">
     <h2>Methods (by class)</h2>
     
-<ul><li><p><code>get_skimmers(default)</code>: The default method for skimming data. Only used when
+<ul><li><p><code>default</code>: The default method for skimming data. Only used when
 a column's data type doesn't match currently installed types. Call
 <a href="get_default_skimmers.html">get_default_skimmer_names</a> to see these defaults.</p></li>
-<li><p><code>get_skimmers(numeric)</code>: Summary functions for numeric columns, covering both
+<li><p><code>numeric</code>: Summary functions for numeric columns, covering both
 <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code> and <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer()</a></code> classes: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd()</a></code>, <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> and
 <code><a href="stats.html">inline_hist()</a></code>.</p></li>
-<li><p><code>get_skimmers(factor)</code>: Summary functions for factor columns:
+<li><p><code>factor</code>: Summary functions for factor columns:
 <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">is.ordered()</a></code>, <code><a href="stats.html">n_unique()</a></code> and <code><a href="stats.html">top_counts()</a></code>.</p></li>
-<li><p><code>get_skimmers(character)</code>: Summary functions for character columns. Also, the
+<li><p><code>character</code>: Summary functions for character columns. Also, the
 default for unknown columns: <code><a href="stats.html">min_char()</a></code>, <code><a href="stats.html">max_char()</a></code>, <code><a href="stats.html">n_empty()</a></code>,
 <code><a href="stats.html">n_unique()</a></code> and <code><a href="stats.html">n_whitespace()</a></code>.</p></li>
-<li><p><code>get_skimmers(logical)</code>: Summary functions for logical/ boolean columns:
+<li><p><code>logical</code>: Summary functions for logical/ boolean columns:
 <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, which produces rates for each value, and <code><a href="stats.html">top_counts()</a></code>.</p></li>
-<li><p><code>get_skimmers(complex)</code>: Summary functions for complex columns: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>.</p></li>
-<li><p><code>get_skimmers(Date)</code>: Summary functions for <code>Date</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>complex</code>: Summary functions for complex columns: <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>.</p></li>
+<li><p><code>Date</code>: Summary functions for <code>Date</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>get_skimmers(POSIXct)</code>: Summary functions for <code>POSIXct</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>POSIXct</code>: Summary functions for <code>POSIXct</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>get_skimmers(difftime)</code>: Summary functions for <code>difftime</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>difftime</code>: Summary functions for <code>difftime</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>get_skimmers(Timespan)</code>: Summary functions for <code>Timespan</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>Timespan</code>: Summary functions for <code>Timespan</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>get_skimmers(ts)</code>: Summary functions for <code>ts</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
+<li><p><code>ts</code>: Summary functions for <code>ts</code> columns: <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>,
 <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> and <code><a href="stats.html">n_unique()</a></code>.</p></li>
-<li><p><code>get_skimmers(list)</code>: Summary functions for <code>list</code> columns: <code><a href="stats.html">n_unique()</a></code>,
+<li><p><code>list</code>: Summary functions for <code>list</code> columns: <code><a href="stats.html">n_unique()</a></code>,
 <code><a href="stats.html">list_min_length()</a></code> and <code><a href="stats.html">list_max_length()</a></code>.</p></li>
-<li><p><code>get_skimmers(AsIs)</code>: Summary functions for <code>AsIs</code> columns: <code><a href="stats.html">n_unique()</a></code>,
+<li><p><code>AsIs</code>: Summary functions for <code>AsIs</code> columns: <code><a href="stats.html">n_unique()</a></code>,
 <code><a href="stats.html">list_min_length()</a></code> and <code><a href="stats.html">list_max_length()</a></code>.</p></li>
-<li><p><code>get_skimmers(haven_labelled)</code>: Summary functions for <code>haven_labelled</code> columns.
+<li><p><code>haven_labelled</code>: Summary functions for <code>haven_labelled</code> columns.
 Finds the appropriate skimmers for the underlying data in the vector.</p></li>
 </ul></div>
     <div id="see-also">
