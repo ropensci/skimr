@@ -5,9 +5,7 @@ test_that("Skim prints a header for the entire output and each type", {
   expect_print_matches_file(input, "print/default.txt")
 
   input$numeric.hist <- NULL
-  expect_print_matches_file(input, "print/no-hist.txt",
-    skip_on_windows = FALSE
-  )
+  expect_print_matches_file(input, "print/no-hist.txt")
 })
 
 test_that("Skim prints a special header for grouped data frames", {
@@ -76,13 +74,6 @@ test_that("You can yank a type from a skim_df and call knit_print", {
   skim_one <- yank(skimmed, "factor")
   input <- knit_print(skim_one)
   expect_matches_file(input, "print/knit_print-yank.txt")
-})
-
-test_that("make_utf8 produces the correct result ", {
-  withr::local_options(list(cli.unicode = FALSE))
-  input <- make_utf8(c("<U+2585><U+2587>"))
-  correct <- "▅"
-  expect_identical(input, correct)
 })
 
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
