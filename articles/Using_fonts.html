@@ -91,7 +91,7 @@
 
       
 
-      </header><script src="Using_fonts_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Fonts</h1>
@@ -104,10 +104,22 @@
 
     
     
-<p>One of the features of skim is the production of spark graphs for numeric data. However these graphs may not render properly because of lack of font support or for other reasons, such as an operating system that does not support UTF-8. In your specific environment this may depend on the fonts installed and the operating system and may occur for only specific types of documents such as PDF documents. Skimr supports kable() formatted tables, which is used in conjunction with fonts to render the spark graphs.</p>
-<p>To produce spark histograms a font that supports block elements must be used. To support the spark line graphs a font with Braille support must be used.</p>
-<p>Well-known fonts that support block elements include <em>DejaVu Sans</em> and <em>Arial</em>. Their availability depends on your operating system.</p>
-<p>The yaml at the beginning of a document using custom fonts will generally be similar to that shown below.</p>
+<p>One of the features of skim is the production of spark graphs for
+numeric data. However these graphs may not render properly because of
+lack of font support or for other reasons, such as an operating system
+that does not support UTF-8. In your specific environment this may
+depend on the fonts installed and the operating system and may occur for
+only specific types of documents such as PDF documents. Skimr supports
+kable() formatted tables, which is used in conjunction with fonts to
+render the spark graphs.</p>
+<p>To produce spark histograms a font that supports block elements must
+be used. To support the spark line graphs a font with Braille support
+must be used.</p>
+<p>Well-known fonts that support block elements include <em>DejaVu
+Sans</em> and <em>Arial</em>. Their availability depends on your
+operating system.</p>
+<p>The yaml at the beginning of a document using custom fonts will
+generally be similar to that shown below.</p>
 <pre><code>---
 title: "Untitled"
 mainfont: DejaVu Sans
@@ -118,8 +130,14 @@ output:
   word_document: default
 font-family: Times New Roman
 ---</code></pre>
-<p>A further discussion of this (with examples) is available in the “Using fonts” template for skimr. If you are using RStudio you can open that template by opening a new markdown file and selecting “From template” and then choosing it. Alternatively this file is available inside the skimr folder or repository at inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd.</p>
-<p>If you are having difficulties making the spark graphs work, you can opt to turn them off using the code below.</p>
+<p>A further discussion of this (with examples) is available in the
+“Using fonts” template for skimr. If you are using RStudio you can open
+that template by opening a new markdown file and selecting “From
+template” and then choosing it. Alternatively this file is available
+inside the skimr folder or repository at
+inst/markdown/templates/fonts_in_skimr/skeleton/skeleton.Rmd.</p>
+<p>If you are having difficulties making the spark graphs work, you can
+opt to turn them off using the code below.</p>
 <pre><code><span><span class="va">no_sparks</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span>numeric <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>hist <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>, ts <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span>line_graph <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></code></pre>
   </div>
 

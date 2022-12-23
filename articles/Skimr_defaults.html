@@ -91,12 +91,12 @@
 
       
 
-      </header><script src="Skimr_defaults_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Skimr defaults</h1>
             
-            <h4 data-toc-skip class="date">2022-12-22</h4>
+            <h4 data-toc-skip class="date">2022-12-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/skimr/blob/HEAD/vignettes/Skimr_defaults.Rmd" class="external-link"><code>vignettes/Skimr_defaults.Rmd</code></a></small>
       <div class="hidden name"><code>Skimr_defaults.Rmd</code></div>
@@ -108,23 +108,29 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This vignette simply displays the default data types and summary functions for <code>skimr</code>. Customizing <code>skimr</code> is explained in the <strong>Using Skimr</strong> vignette.</p>
+<p>This vignette simply displays the default data types and summary
+functions for <code>skimr</code>. Customizing <code>skimr</code> is
+explained in the <strong>Using Skimr</strong> vignette.</p>
 </div>
 <div class="section level2">
 <h2 id="the-base-skimmers">The base skimmers<a class="anchor" aria-label="anchor" href="#the-base-skimmers"></a>
 </h2>
-<p><code>skimr</code> has a group of functions that it applies to all data types. We call these the “base”" skimmers:</p>
+<p><code>skimr</code> has a group of functions that it applies to all
+data types. We call these the “base”” skimmers:</p>
 <ul>
 <li>
-<code>n_missing</code>: The number of missing values in the column.</li>
+<code>n_missing</code>: The number of missing values in the
+column.</li>
 <li>
-<code>complete_rate</code>: The ratio of non-missing values to the total values in the column.</li>
+<code>complete_rate</code>: The ratio of non-missing values to the
+total values in the column.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="default-skimmers">Default skimmers<a class="anchor" aria-label="anchor" href="#default-skimmers"></a>
 </h2>
-<p>To learn more about the functions used in this package, use the function <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>.</p>
+<p>To learn more about the functions used in this package, use the
+function <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -167,12 +173,16 @@
 <span><span class="co">## $ts</span></span>
 <span><span class="co">##  [1] "start"      "end"        "frequency"  "deltat"     "mean"      </span></span>
 <span><span class="co">##  [6] "sd"         "min"        "max"        "median"     "line_graph"</span></span></code></pre>
-<p>The counterpart to this function is <code><a href="../reference/get_default_skimmers.html">get_default_skimmers()</a></code>, which returns the functions themselves. If you are interested in a particular class within <code>skimr</code>, pass it as a string to either function.</p>
+<p>The counterpart to this function is
+<code><a href="../reference/get_default_skimmers.html">get_default_skimmers()</a></code>, which returns the functions
+themselves. If you are interested in a particular class within
+<code>skimr</code>, pass it as a string to either function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $numeric</span></span>
 <span><span class="co">## [1] "mean" "sd"   "p0"   "p25"  "p50"  "p75"  "p100" "hist"</span></span></code></pre>
-<p>The same information is stored in the <code>skimmers_used</code> attribute of the object returned by <code><a href="../reference/skim.html">skim()</a></code>.</p>
+<p>The same information is stored in the <code>skimmers_used</code>
+attribute of the object returned by <code><a href="../reference/skim.html">skim()</a></code>.</p>
 </div>
   </div>
 

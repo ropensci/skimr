@@ -91,12 +91,12 @@
 
       
 
-      </header><script src="extending_skimr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Extending skimr</h1>
             
-            <h4 data-toc-skip class="date">2022-12-22</h4>
+            <h4 data-toc-skip class="date">2022-12-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/skimr/blob/HEAD/vignettes/extending_skimr.Rmd" class="external-link"><code>vignettes/extending_skimr.Rmd</code></a></small>
       <div class="hidden name"><code>extending_skimr.Rmd</code></div>
@@ -108,17 +108,30 @@
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>The <code><a href="../reference/skim.html">skim()</a></code> function summarizes data types contained within data frames and objects that have <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> methods to coerce them into data frames. It comes with a set of default summary functions for a wide variety of data types, but this is not comprehensive.</p>
-<p>Package authors (and advanced users) can add support for skimming their specific non-data-frame objects in their packages, and they can provide different defaults in their own summary functions. This will require including skimr as a dependency.</p>
+<p>The <code><a href="../reference/skim.html">skim()</a></code> function summarizes data types contained
+within data frames and objects that have <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>
+methods to coerce them into data frames. It comes with a set of default
+summary functions for a wide variety of data types, but this is not
+comprehensive.</p>
+<p>Package authors (and advanced users) can add support for skimming
+their specific non-data-frame objects in their packages, and they can
+provide different defaults in their own summary functions. This will
+require including skimr as a dependency.</p>
 </div>
 <div class="section level2">
 <h2 id="skimming-objects-that-are-not-coercible-to-data-frames">Skimming objects that are not coercible to data frames<a class="anchor" aria-label="anchor" href="#skimming-objects-that-are-not-coercible-to-data-frames"></a>
 </h2>
-<p>This example will illustrate this by creating support for the <code>lm</code> object produced by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>. For any object this involves two required elements and one optional element. This is a simple example, but for other types of objects there may be much more complexity</p>
-<p>If you are adding skim support to a package you will also need to add <code>skimr</code> to the list of imports.</p>
+<p>This example will illustrate this by creating support for the
+<code>lm</code> object produced by <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>. For any object
+this involves two required elements and one optional element. This is a
+simple example, but for other types of objects there may be much more
+complexity</p>
+<p>If you are adding skim support to a package you will also need to add
+<code>skimr</code> to the list of imports.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/" class="external-link">skimr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> function produces a complex object with class “lm”.</p>
+<p>The <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> function produces a complex object with class
+“lm”.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">feed</span>, data <span class="op">=</span> <span class="va">chickwts</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
@@ -138,8 +151,15 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in as.data.frame.default(results) :</span></span>
 <span><span class="co">#&gt;  cannot coerce class ‘"lm"’ to a data.frame</span></span></code></pre></div>
-<p>Unlike the example of having a new type of data in a column of a simple data frame (for which we would create a <code>sfl</code>) frame in the “Using skimr” vignette, this is a different type of challenge: an object that we might wish to skim, but that cannot be directly skimmed. Therefore we need to make it into an object that is either a data frame or coercible to a data frame.</p>
-<p>In the case of the lm object, the <code>model</code> attribute is already a data frame. So a very simple way to solve the challenge is to skim <code>results$model</code> directly.</p>
+<p>Unlike the example of having a new type of data in a column of a
+simple data frame (for which we would create a <code>sfl</code>) frame
+in the “Using skimr” vignette, this is a different type of challenge: an
+object that we might wish to skim, but that cannot be directly skimmed.
+Therefore we need to make it into an object that is either a data frame
+or coercible to a data frame.</p>
+<p>In the case of the lm object, the <code>model</code> attribute is
+already a data frame. So a very simple way to solve the challenge is to
+skim <code>results$model</code> directly.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -185,6 +205,14 @@
 </table>
 <p><strong>Variable type: factor</strong></p>
 <table class="table">
+<colgroup>
+<col width="15%">
+<col width="11%">
+<col width="15%">
+<col width="8%">
+<col width="10%">
+<col width="38%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -203,7 +231,20 @@
 </tr></tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="17%">
+<col width="12%">
+<col width="17%">
+<col width="8%">
+<col width="7%">
+<col width="4%">
+<col width="7%">
+<col width="4%">
+<col width="7%">
+<col width="6%">
+<col width="7%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -231,7 +272,8 @@
 <td align="left">▆▆▇▇▃</td>
 </tr></tbody>
 </table>
-<p>This is works, but we could go one step further and create a new function for doing this directly.</p>
+<p>This is works, but we could go one step further and create a new
+function for doing this directly.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">skim_lm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">.data</span> <span class="op">&lt;-</span> <span class="va">.data</span><span class="op">$</span><span class="va">model</span></span>
@@ -282,6 +324,14 @@
 </table>
 <p><strong>Variable type: factor</strong></p>
 <table class="table">
+<colgroup>
+<col width="15%">
+<col width="11%">
+<col width="15%">
+<col width="8%">
+<col width="10%">
+<col width="38%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -300,7 +350,20 @@
 </tr></tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="17%">
+<col width="12%">
+<col width="17%">
+<col width="8%">
+<col width="7%">
+<col width="4%">
+<col width="7%">
+<col width="4%">
+<col width="7%">
+<col width="6%">
+<col width="7%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -328,7 +391,9 @@
 <td align="left">▆▆▇▇▃</td>
 </tr></tbody>
 </table>
-<p>If desired, a more complex function can be created. For example, the lm object also contains fitted values and residuals. We could incorporate these in the data frame.</p>
+<p>If desired, a more complex function can be created. For example, the
+lm object also contains fitted values and residuals. We could
+incorporate these in the data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">skim_lm</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.data</span>, <span class="va">fit</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">.data</span> <span class="op">&lt;-</span> <span class="va">.data</span><span class="op">$</span><span class="va">model</span></span>
@@ -386,6 +451,14 @@
 </table>
 <p><strong>Variable type: factor</strong></p>
 <table class="table">
+<colgroup>
+<col width="15%">
+<col width="11%">
+<col width="15%">
+<col width="8%">
+<col width="10%">
+<col width="38%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -404,7 +477,20 @@
 </tr></tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="21%">
+<col width="9%">
+<col width="13%">
+<col width="6%">
+<col width="5%">
+<col width="7%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="5%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -460,7 +546,9 @@
 </tr>
 </tbody>
 </table>
-<p>A second example of the need for a special function is with <code>dist</code> objects. The <code>UScitiesD</code> data set is an example of this.</p>
+<p>A second example of the need for a special function is with
+<code>dist</code> objects. The <code>UScitiesD</code> data set is an
+example of this.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "dist"</span></span></code></pre>
@@ -486,16 +574,28 @@
 <span><span class="co">## SanFrancisco                      </span></span>
 <span><span class="co">## Seattle                678        </span></span>
 <span><span class="co">## Washington.DC         2442    2329</span></span></code></pre>
-<p>A <code>dist</code> object is most often, as in this case, lower triange matrices of distances, which can be measured in various ways. There are many packages that produce dist objects and/or take dist objects as inputs, including those for cluster analysis and multidimensional scaling.</p>
-<p>A simple solution to this is to follow a similar design to that for <code>lm</code> objects.</p>
+<p>A <code>dist</code> object is most often, as in this case, lower
+triange matrices of distances, which can be measured in various ways.
+There are many packages that produce dist objects and/or take dist
+objects as inputs, including those for cluster analysis and
+multidimensional scaling.</p>
+<p>A simple solution to this is to follow a similar design to that for
+<code>lm</code> objects.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">skim_dist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">.data</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">.data</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>However, this has the limitation of treating the dist data as though it is simple numeric data.</p>
-<p>What we might want to do, instead, is to create a new class, for example, “distance” that is specifically for distance data. This will allow it to have its own <code>sfl</code> or skimr function list.</p>
-<p>As handling gets more complex, rather than make a new function it can be more powerful to define an <code>as.data.frame</code> S3 method for dist objects, which will allow it to integrate with skimr more completely and uses to use the <code><a href="../reference/skim.html">skim()</a></code> function directly. In a package you will want to export this.</p>
+<p>However, this has the limitation of treating the dist data as though
+it is simple numeric data.</p>
+<p>What we might want to do, instead, is to create a new class, for
+example, “distance” that is specifically for distance data. This will
+allow it to have its own <code>sfl</code> or skimr function list.</p>
+<p>As handling gets more complex, rather than make a new function it can
+be more powerful to define an <code>as.data.frame</code> S3 method for
+dist objects, which will allow it to integrate with skimr more
+completely and uses to use the <code><a href="../reference/skim.html">skim()</a></code> function directly. In
+a package you will want to export this.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">as.data.frame.dist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">.data</span><span class="op">)</span><span class="op">)</span></span>
@@ -527,7 +627,9 @@
 <span><span class="co">## SanFrancisco             0     678          2442</span></span>
 <span><span class="co">## Seattle                678       0          2329</span></span>
 <span><span class="co">## Washington.DC         2442    2329             0</span></span></code></pre>
-<p>However, until an <code>sfl</code> is created, <code>skimr</code> will not recognize the class and fall back to treating the data as if it were character data.</p>
+<p>However, until an <code>sfl</code> is created, <code>skimr</code>
+will not recognize the class and fall back to treating the data as if it
+were character data.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/skim.html">skim</a></span><span class="op">(</span><span class="va">UScitiesD</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Couldn't find skimmers for class: distance; No user-defined `sfl`</span></span>
@@ -598,6 +700,16 @@
 </table>
 <p><strong>Variable type: character</strong></p>
 <table class="table">
+<colgroup>
+<col width="19%">
+<col width="13%">
+<col width="19%">
+<col width="5%">
+<col width="5%">
+<col width="8%">
+<col width="12%">
+<col width="15%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
 <th align="right">n_missing</th>
@@ -711,14 +823,26 @@
 </tr>
 </tbody>
 </table>
-<p>The solution to this is to define an <code>sfl</code> (skimr function list) specifically for the <code>distance</code> class.</p>
+<p>The solution to this is to define an <code>sfl</code> (skimr function
+list) specifically for the <code>distance</code> class.</p>
 <div class="section level3">
 <h3 id="defining-sfls-for-a-package">Defining sfl’s for a package<a class="anchor" aria-label="anchor" href="#defining-sfls-for-a-package"></a>
 </h3>
-<p><code>skimr</code> has an opinionated list of functions for each class (e.g. numeric, factor) of data. The core package supports many commonly used classes, but there are many others. You can investigate these defaults by calling <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>.</p>
-<p>What if your data type, like <code>distance</code>, isn’t covered by defaults? <code>skimr</code> usually falls back to treating the type as a character, which isn’t necessarily helpful. In this case, you’re best off adding your data type with <code><a href="../reference/skim_with.html">skim_with()</a></code>.</p>
-<p>Before we begin, we’ll be using the following custom summary statistics throughout. These functions find the nearest and furthest other location for each location.</p>
-<p>One thing that is important to be aware of when creating statistics functions for skimr is that skimr largely uses tibbles rather than base data frames. This means that many base operations do not work as expected.</p>
+<p><code>skimr</code> has an opinionated list of functions for each
+class (e.g. numeric, factor) of data. The core package supports many
+commonly used classes, but there are many others. You can investigate
+these defaults by calling <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>.</p>
+<p>What if your data type, like <code>distance</code>, isn’t covered by
+defaults? <code>skimr</code> usually falls back to treating the type as
+a character, which isn’t necessarily helpful. In this case, you’re best
+off adding your data type with <code><a href="../reference/skim_with.html">skim_with()</a></code>.</p>
+<p>Before we begin, we’ll be using the following custom summary
+statistics throughout. These functions find the nearest and furthest
+other location for each location.</p>
+<p>One thing that is important to be aware of when creating statistics
+functions for skimr is that skimr largely uses tibbles rather than base
+data frames. This means that many base operations do not work as
+expected.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_nearest</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">column</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">closest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html" class="external-link">which.min</a></span><span class="op">(</span><span class="va">column</span><span class="op">[</span><span class="va">column</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span></span>
@@ -731,7 +855,8 @@
 <span>  <span class="va">cities</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">column</span>, <span class="st">"nms"</span><span class="op">)</span><span class="op">[</span><span class="va">column</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">]</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString</a></span><span class="op">(</span><span class="va">cities</span><span class="op">[</span><span class="va">furthest</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>This function, like all summary functions used by <code>skimr</code> has two notable features.</p>
+<p>This function, like all summary functions used by <code>skimr</code>
+has two notable features.</p>
 <ul>
 <li>It accepts a vector as its single argument</li>
 <li>it returns a scalar, or in R terminology, a vector of length 1.</li>
@@ -740,12 +865,24 @@
 <ul>
 <li>Existing functions from base, stats, or other packages,</li>
 <li>lambda’s created using the Tidyverse-style syntax</li>
-<li>custom functions that have been defined in the <code>skimr</code> package</li>
+<li>custom functions that have been defined in the <code>skimr</code>
+package</li>
 <li>custom functions that you have defined.</li>
 </ul>
-<p>Not fulfilling the two criteria can lead to some very confusing behavior within <code>skimr</code>. Beware! An example of this issue is the base <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> function in default <code>skimr</code> percentiles are returned by using <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> five times. In the case of these functions, there could be ties which would result in returning vectors that have length greater than 1. This is handled by collapsing all of the tied values into a single string.</p>
-<p>Notice, also, that in the case of distance data we may wish to exclude distances of 0, which indicate the distance from a place to itself. In finding the minimum our function looks only at the distance to other places.</p>
-<p>There are at least two ways that you might want to customize skimr handling of a special data type within a package or your own work. The first is to create a custom skimming function.</p>
+<p>Not fulfilling the two criteria can lead to some very confusing
+behavior within <code>skimr</code>. Beware! An example of this issue is
+the base <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> function in default <code>skimr</code>
+percentiles are returned by using <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code> five times. In
+the case of these functions, there could be ties which would result in
+returning vectors that have length greater than 1. This is handled by
+collapsing all of the tied values into a single string.</p>
+<p>Notice, also, that in the case of distance data we may wish to
+exclude distances of 0, which indicate the distance from a place to
+itself. In finding the minimum our function looks only at the distance
+to other places.</p>
+<p>There are at least two ways that you might want to customize skimr
+handling of a special data type within a package or your own work. The
+first is to create a custom skimming function.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">skim_with_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/skim_with.html">skim_with</a></span><span class="op">(</span></span>
 <span>  distance <span class="op">=</span> <span class="fu"><a href="../reference/sfl.html">sfl</a></span><span class="op">(</span></span>
@@ -876,15 +1013,37 @@
 </tr>
 </tbody>
 </table>
-<p>The example above creates a new <em>function</em>, and you can call that function on a specific column with <code>distance</code> data to get the appropriate summary statistics. The <code>skim_with</code> factory also uses the default skimrs for things like factors, characters, and numerics. Therefore our <code>skim_with_dist</code> is like the regular <code>skim</code> function with the added ability to summarize <code>distance</code> columns.</p>
-<p>While this works for any data type and you can also include it within any package (assuming your users load skimr), there is a second, even better, approach. To take full advantage of <code>skimr</code>, we’ll dig a bit into its API.</p>
+<p>The example above creates a new <em>function</em>, and you can call
+that function on a specific column with <code>distance</code> data to
+get the appropriate summary statistics. The <code>skim_with</code>
+factory also uses the default skimrs for things like factors,
+characters, and numerics. Therefore our <code>skim_with_dist</code> is
+like the regular <code>skim</code> function with the added ability to
+summarize <code>distance</code> columns.</p>
+<p>While this works for any data type and you can also include it within
+any package (assuming your users load skimr), there is a second, even
+better, approach. To take full advantage of <code>skimr</code>, we’ll
+dig a bit into its API.</p>
 </div>
 <div class="section level3">
 <h3 id="adding-new-methods">Adding new methods<a class="anchor" aria-label="anchor" href="#adding-new-methods"></a>
 </h3>
-<p><code>skimr</code> has a lookup mechanism, based on the function <code><a href="../reference/get_skimmers.html">get_skimmers()</a></code>, to find default summary functions for each class. This is based on the S3 class system. You can learn more about it in <a href="https://adv-r.hadley.nz/s3.html" class="external-link"><em>Advanced R</em></a>.</p>
-<p>This requires that you add <code>skimr</code> to your list of dependencies.</p>
-<p>To export a new set of defaults for a data type, create a method for the generic function <code>get_skimmers</code>. Each of those methods returns an <code>sfl</code> (skimr function list) This is the same list-like data structure used in the <code><a href="../reference/skim_with.html">skim_with()</a></code> example above. But note! There is one key difference. When adding a generic we also want to identify the <code>skim_type</code> in the <code>sfl</code>. You will probably want to use <code>skimr::get_skimmers.distance()</code> but that will not work in a vignette.</p>
+<p><code>skimr</code> has a lookup mechanism, based on the function
+<code><a href="../reference/get_skimmers.html">get_skimmers()</a></code>, to find default summary functions for each
+class. This is based on the S3 class system. You can learn more about it
+in <a href="https://adv-r.hadley.nz/s3.html" class="external-link"><em>Advanced
+R</em></a>.</p>
+<p>This requires that you add <code>skimr</code> to your list of
+dependencies.</p>
+<p>To export a new set of defaults for a data type, create a method for
+the generic function <code>get_skimmers</code>. Each of those methods
+returns an <code>sfl</code> (skimr function list) This is the same
+list-like data structure used in the <code><a href="../reference/skim_with.html">skim_with()</a></code> example
+above. But note! There is one key difference. When adding a generic we
+also want to identify the <code>skim_type</code> in the
+<code>sfl</code>. You will probably want to use
+<code>skimr::get_skimmers.distance()</code> but that will not work in a
+vignette.</p>
 <p>In a package you will want to export this.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @importFrom skimr get_skimmers</span></span>
@@ -903,7 +1062,10 @@
 </li>
 <li>make sure that the <code>skim_type</code> is included.</li>
 </ul>
-<p>Users of your package should load <code>skimr</code> to get the <code><a href="../reference/skim.html">skim()</a></code> function (although you could import and reexport it). Once loaded, a call to <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code> will return defaults for your data types as well!</p>
+<p>Users of your package should load <code>skimr</code> to get the
+<code><a href="../reference/skim.html">skim()</a></code> function (although you could import and reexport
+it). Once loaded, a call to <code><a href="../reference/get_default_skimmers.html">get_default_skimmer_names()</a></code>
+will return defaults for your data types as well!</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_default_skimmers.html">get_default_skimmer_names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## $AsIs</span></span>
@@ -1074,8 +1236,12 @@
 <div class="section level3">
 <h3 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h3>
-<p>This is a very simple example. For some packages the custom statistics will likely be much more complex. The flexibility of <code>skimr</code> allows you to manage that.</p>
-<p>Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma, Michael Sumner, and Kyle Butts for inspiring and helping with the development of this code.</p>
+<p>This is a very simple example. For some packages the custom
+statistics will likely be much more complex. The flexibility of
+<code>skimr</code> allows you to manage that.</p>
+<p>Thanks to Jakub Nowosad, Tiernan Martin, Edzer Pebesma, Michael
+Sumner, and Kyle Butts for inspiring and helping with the development of
+this code.</p>
 </div>
 </div>
   </div>
