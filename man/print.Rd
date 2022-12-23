@@ -45,13 +45,13 @@ methods for \code{knitr}/ \code{rmarkdown} documents is also provided.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{skim_df}: Print a skimmed data frame (\code{skim_df} from \code{\link[=skim]{skim()}}).
+\item \code{print(skim_df)}: Print a skimmed data frame (\code{skim_df} from \code{\link[=skim]{skim()}}).
 
-\item \code{skim_list}: Print a \code{skim_list}, a list of \code{skim_df} objects.
+\item \code{print(skim_list)}: Print a \code{skim_list}, a list of \code{skim_df} objects.
 
-\item \code{summary_skim_df}: Print method for a \code{summary_skim_df} object.
+\item \code{print(summary_skim_df)}: Print method for a \code{summary_skim_df} object.
+
 }}
-
 \section{Printing options}{
 
 
