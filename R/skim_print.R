@@ -170,9 +170,6 @@ knit_print_one <- function(by_type, type, options) {
     by_type,
     digits = options$skimr_digits %||% 2
   )
-  if (is_windows()) {
-    kabled[] <- fix_unicode(kabled)
-  }
   caption <- sprintf("**Variable type: %s**", type)
   c(caption, "", kabled, "", "")
 }
