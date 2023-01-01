@@ -47,15 +47,15 @@ Windows users most commonly. Call \code{vignette("Using_fonts")} for more detail
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{skim_df}: Default \code{knitr} print for \code{skim_df} objects.
+\item \code{knit_print(skim_df)}: Default \code{knitr} print for \code{skim_df} objects.
 
-\item \code{skim_list}: Default \code{knitr} print for a \code{skim_list}.
+\item \code{knit_print(skim_list)}: Default \code{knitr} print for a \code{skim_list}.
 
-\item \code{one_skim_df}: Default \code{knitr} print within a partitioned \code{skim_df}.
+\item \code{knit_print(one_skim_df)}: Default \code{knitr} print within a partitioned \code{skim_df}.
 
-\item \code{summary_skim_df}: Default \code{knitr} print for \code{skim_df} summaries.
+\item \code{knit_print(summary_skim_df)}: Default \code{knitr} print for \code{skim_df} summaries.
+
 }}
-
 \seealso{
 \code{\link[knitr:kable]{knitr::kable()}}
 }
