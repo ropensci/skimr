@@ -1,0 +1,4 @@
+Name: Create custom skimmer
+Description: Skeleton code for creating a custom skimmer.
+Binding: create_skimmer
+Interactive: false

@@ -287,6 +287,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "rstudioapi",
+      "name": "rstudioapi",
+      "version": ">= 0.5",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rstudioapi"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
       "version": ">= 2.0.0",
@@ -490,7 +503,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2405.754KB",
+  "fileSize": "2406.603KB",
   "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/skimr/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://app.codecov.io/gh/ropensci/skimr"],
