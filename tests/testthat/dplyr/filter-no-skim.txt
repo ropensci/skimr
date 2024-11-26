@@ -1,5 +1,5 @@
 # A tibble: 0 x 15
-# ... with 15 variables: skim_type <chr>, skim_variable <chr>, n_missing <int>,
-#   complete_rate <dbl>, factor.ordered <lgl>, factor.n_unique <int>, factor.top_counts <chr>,
-#   numeric.mean <dbl>, numeric.sd <dbl>, numeric.p0 <dbl>, numeric.p25 <dbl>, numeric.p50 <dbl>,
-#   numeric.p75 <dbl>, numeric.p100 <dbl>, numeric.hist <chr>
+# i 15 variables: skim_type <chr>, skim_variable <chr>, n_missing <int>, complete_rate <dbl>,
+#   factor.ordered <lgl>, factor.n_unique <int>, factor.top_counts <chr>, numeric.mean <dbl>,
+#   numeric.sd <dbl>, numeric.p0 <dbl>, numeric.p25 <dbl>, numeric.p50 <dbl>, numeric.p75 <dbl>,
+#   numeric.p100 <dbl>, numeric.hist <chr>
