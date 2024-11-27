@@ -1,26 +1,25 @@
 test_that("Skim prints a header for the entire output and each type", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
-  input <- skim(iris)
-  expect_print_matches_file(input, "print/default.txt")
-
-  input$numeric.hist <- NULL
-  expect_print_matches_file(input, "print/no-hist.txt")
+  expect_snapshot({
+    input <- skim(iris)
+    input
+    input$numeric.hist <- NULL
+    input
+  })
 })
 
 test_that("Skim prints a special header for grouped data frames", {
   skip_if_not(l10n_info()$`UTF-8`)
   withr::local_options(list(cli.unicode = FALSE))
-  input <- skim(dplyr::group_by(iris, Species))
-  expect_print_matches_file(input, "print/groups.txt")
+  expect_snapshot( skim(dplyr::group_by(iris, Species)))
 })
 
 test_that("Skim lists print as expected", {
   skip_if_not(l10n_info()$`UTF-8`)
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
-  input <- partition(skimmed)
-  expect_print_matches_file(input, "print/list.txt")
+  expect_snapshot(partition(skimmed))
 })
 
 test_that("knit_print produces expected results", {
@@ -30,23 +29,23 @@ test_that("knit_print produces expected results", {
   input <- knit_print(skimmed)
   expect_s3_class(input, "knit_asis")
   expect_length(input, 1)
-  expect_matches_file(input, "print/knit_print.txt")
+  expect_snapshot(cat(input))
 })
 
 test_that("knit_print works with skim summaries", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   summarized <- summary(skimmed)
-  input <- knitr::knit_print(summarized)
-  expect_matches_file(input, "print/knit_print-summary.txt")
+  expect_snapshot(cat(knitr::knit_print(summarized)))
 })
 
 test_that("knit_print appropriately falls back to tibble printing", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   reduced <- dplyr::select(skimmed, skim_variable, numeric.mean)
-  printed <- testthat::capture_output(input <- knitr::knit_print(reduced))
-  expect_matches_file(printed, "print/knit_print-fallback.txt")
+  expect_snapshot({
+    input <- knitr::knit_print(reduced)
+  })
   expect_s3_class(input, "data.frame")
 })
 
@@ -55,8 +54,7 @@ test_that("Summaries can be suppressed within knitr", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   options <- list(skimr_include_summary = FALSE)
-  input <- knitr::knit_print(skimmed, options = options)
-  expect_matches_file(input, "print/knit_print-suppressed.txt")
+  expect_snapshot(cat(knitr::knit_print(skimmed, options = options)))
 })
 
 test_that("Skim lists have a separate knit_print method", {
@@ -64,55 +62,48 @@ test_that("Skim lists have a separate knit_print method", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   skim_list <- partition(skimmed)
-  input <- knit_print(skim_list)
-  expect_matches_file(input, "print/knit_print-skim_list.txt")
+  expect_snapshot(cat(knit_print(skim_list)))
 })
 
 test_that("You can yank a type from a skim_df and call knit_print", {
   withr::local_options(list(cli.unicode = FALSE))
   skimmed <- skim(iris)
   skim_one <- yank(skimmed, "factor")
-  input <- knit_print(skim_one)
-  expect_matches_file(input, "print/knit_print-yank.txt")
+  expect_snapshot(cat(knit_print(skim_one)))
 })
 
 test_that("Skim falls back to tibble::print.tbl() appropriately", {
   withr::local_options(list(cli.unicode = FALSE))
-  input <- skim(iris)
-  mean_only <- dplyr::select(input, numeric.mean)
-  expect_print_matches_file(mean_only, "print/fallback.txt")
+  
+  expect_snapshot({
+    input <- skim(iris)
+    dplyr::select(input, numeric.mean)
+  })
 })
 
 test_that("Print focused objects appropriately", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
-  input <- focus(skimmed, n_missing)
-  expect_print_matches_file(input, "print/focus.txt")
+  expect_snapshot(focus(skimmed, n_missing))
 })
 
 test_that("Support for smaller consoles can be set with the width option", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
-  skimmed <- skim(iris)
-  expect_print_matches_file(skimmed, "print/smaller.txt", width = 50)
+  expect_snapshot(skim(iris))
 })
 
 test_that("Table header width can be controlled by an option", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
-  expect_print_matches_file(
-    skimmed,
-    "print/narrow-header.txt",
-    skimr_table_header_width = 50
-  )
+  expect_snapshot(skimmed)
 })
 
 test_that("skimr creates appropriate output for Jupyter", {
   withr::local_options(list(cli.unicode = FALSE))
   skip_if_not(l10n_info()$`UTF-8`)
   skimmed <- skim(iris)
-  input <- testthat::capture_output(repr_text(skimmed))
-  expect_matches_file(input, "print/repr.txt")
+  expect_snapshot(skimmed)
 })
