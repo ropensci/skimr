@@ -100,7 +100,7 @@ iris \%>\%
 iris \%>\%
   skim() \%>\%
   dplyr::select(numeric.mean) \%>\%
-  dplyr::top_n(5)
+  dplyr::slice_head(n = 5)
 
 # Which of my columns have missing values? Use the base skimmer n_missing.
 iris \%>\%

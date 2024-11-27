@@ -121,7 +121,7 @@ Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.8.0),
+    dplyr (>= 1.0.0),
     knitr (>= 1.2),
     magrittr (>= 1.5),
     pillar (>= 1.6.4),

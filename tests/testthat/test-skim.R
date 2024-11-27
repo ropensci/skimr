@@ -305,7 +305,7 @@ test_that("skim returns expected response for complex vectors", {
 })
 
 test_that("skim returns expected response for Date vectors", {
-  dat <- seq(as.Date("2011-07-01"), by = 1, len = 9)
+  dat <- seq(as.Date("2011-07-01"), by = 1, length.out = 9)
   x <- tibble::tibble(dat)
   input <- skim(x)
 
@@ -387,7 +387,7 @@ test_that("skim returns expected response for ts vectors", {
 })
 
 test_that("skim returns expected response for POSIXct vectors", {
-  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by = 1, len = 10)
+  dat <- seq(as.POSIXct("2011-07-01 00:00:00", tz = "UTC"), by = 1, length.out = 10)
   dat[2] <- NA
   posix <- tibble::tibble(dat)
   input <- skim(posix)
@@ -713,7 +713,7 @@ test_that("skim handles objects containing haven_labelled vectors: character", {
 })
 
 test_that("skim handles objects with multiple classes", {
-  dat <- seq(as.Date("2011-07-01"), by = 1, len = 10)
+  dat <- seq(as.Date("2011-07-01"), by = 1, length.out = 10)
   dat[2] <- NA
   class(dat) <- c("strange_type", "Date")
   x <- tibble::tibble(dat)
@@ -826,7 +826,7 @@ test_that("Skimming a complete data frame works as expected", {
 
 test_that("successfully skim mixed data types with common skimmers", {
   df <- data.frame(
-    Date = seq(as.Date("2011-07-01"), by = 1, len = 10),
+    Date = seq(as.Date("2011-07-01"), by = 1, length.out = 10),
     POSIXct = as.POSIXct("2011-07-01 00:00:00", tz = "UTC")
   )
   input <- skim(df)
