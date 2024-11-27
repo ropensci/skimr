@@ -10,7 +10,6 @@ test_that("skim_tee prints only selected columns, but returns full object", {
   skip_if_not(l10n_info()$`UTF-8`)
   expect_snapshot({
     obj <- skim_tee(iris, Species)
-    obj
   })
   expect_identical(obj, iris)
 })
