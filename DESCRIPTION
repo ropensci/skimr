@@ -135,8 +135,6 @@ Imports:
     tidyselect (>= 1.0.0),
     vctrs
 Suggests:
-    covr,
-    crayon,
     data.table,
     dtplyr,
     extrafont,

@@ -81,6 +81,6 @@ You can control the width rule line for the printed subtables with an option:
 
 \seealso{
 \code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
-print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that
+print formatting. \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}} for the variety of issues that
 affect tibble's color support.
 }

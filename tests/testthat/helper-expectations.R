@@ -43,7 +43,6 @@ expect_print_matches_file <- function(object,
                                       ...) {
   if (skip_on_cran) testthat::skip_on_cran()
   withr::with_options(list(
-    crayon.enabled = FALSE,
     width = width,
     skimr_table_header_width = skimr_table_header_width
   ), {
@@ -69,7 +68,7 @@ expect_matches_file <- function(object,
                                 width = 100,
                                 ...) {
   if (skip_on_cran) testthat::skip_on_cran()
-  withr::local_options(list(crayon.enabled = FALSE, width = width))
+  withr::local_options(list(width = width))
   act <- testthat::quasi_label(rlang::enquo(object), NULL)
 
   if (!file.exists(file)) {
