@@ -11,10 +11,7 @@
 #' dispatched and the way the results are formatted.
 #'
 #' @importFrom rlang .data
-#' @name skimr-package
-#' @aliases skimr
-#' @docType package
-NULL
+"_PACKAGE"
 
 
 # Imports -----------------------------------------------------------------
