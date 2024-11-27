@@ -8,7 +8,7 @@ align="right" height="139" /></a>
 
 ```{r set-options, echo=FALSE, message=FALSE}
 library(skimr)
-options(tibble.width = Inf)
+options(pillar.width = Inf)
 options(width = 100)
 ```
 
