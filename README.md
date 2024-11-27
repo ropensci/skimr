@@ -5,16 +5,20 @@
 <img src='https://docs.ropensci.org/skimr/reference/figures/logo.png'
 align="right" height="139" /></a>
 
+<!-- badges: start -->
+
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
-[![R build
-status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/skimr)
+[![R-CMD-check](https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/ropensci/skimr/graph/badge.svg)](https://app.codecov.io/gh/ropensci/skimr)
 [![This is an ROpenSci Peer reviewed
 package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
-[![cran checks](https://badges.cranchecks.info/worst/skimr.svg)](https://cran.r-project.org/web/checks/check_results_skimr.html)
+[![cran
+checks](https://badges.cranchecks.info/worst/skimr.svg)](https://badges.cranchecks.info/worst/skimr.svg)
+<!-- badges: end -->
 
 `skimr` provides a frictionless approach to summary statistics which
 conforms to the [principle of least
@@ -130,7 +134,7 @@ change.
     ## ── Variable type: character ────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate min max empty n_unique whitespace
     ## 1 name                  0         1       3  21     0       87          0
-    ## 2 hair_color            5         0.943   4  13     0       12          0
+    ## 2 hair_color            5         0.943   4  13     0       11          0
     ## 3 skin_color            0         1       3  19     0       31          0
     ## 4 eye_color             0         1       3  13     0       15          0
     ## 5 sex                   4         0.954   4  14     0        4          0
@@ -142,11 +146,11 @@ change.
     ##   skim_variable n_missing complete_rate n_unique min_length max_length
     ## 1 films                 0             1       24          1          7
     ## 2 vehicles              0             1       11          0          2
-    ## 3 starships             0             1       17          0          5
+    ## 3 starships             0             1       16          0          5
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate  mean    sd p0   p25 p50   p75 p100 hist 
-    ## 1 height                6         0.931 174.   34.8 66 167   180 191    264 ▁▁▇▅▁
+    ## 1 height                6         0.931 175.   34.8 66 167   180 191    264 ▂▁▇▅▁
     ## 2 mass                 28         0.678  97.3 169.  15  55.6  79  84.5 1358 ▇▁▁▁▁
     ## 3 birth_year           44         0.494  87.6 155.   8  35    52  72    896 ▇▁▁▁▁
 
