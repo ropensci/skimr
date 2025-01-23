@@ -1,99 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Skimr_defaults.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Using_fonts.html</loc>
-  </url>
-  <url>
-    <loc>/articles/extending_skimr.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/skimr.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/deprecated-v1.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fix_windows_histograms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/focus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_default_skimmers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_skimmers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/knit_print.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mutate.skim_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/partition.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/repr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sfl.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skim-attr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skim-obj.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skim_with.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skimr-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/skimr-vctrs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.skim_df.html</loc>
-  </url>
-  <url>
-    <loc>/reference/to_long.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/articles/Skimr_defaults.html</loc></url>
+<url><loc>/articles/Using_fonts.html</loc></url>
+<url><loc>/articles/extending_skimr.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/skimr.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/deprecated-v1.html</loc></url>
+<url><loc>/reference/fix_windows_histograms.html</loc></url>
+<url><loc>/reference/focus.html</loc></url>
+<url><loc>/reference/get_default_skimmers.html</loc></url>
+<url><loc>/reference/get_skimmers.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/knit_print.html</loc></url>
+<url><loc>/reference/mutate.skim_df.html</loc></url>
+<url><loc>/reference/partition.html</loc></url>
+<url><loc>/reference/print.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/repr.html</loc></url>
+<url><loc>/reference/sfl.html</loc></url>
+<url><loc>/reference/skim-attr.html</loc></url>
+<url><loc>/reference/skim-obj.html</loc></url>
+<url><loc>/reference/skim.html</loc></url>
+<url><loc>/reference/skim_with.html</loc></url>
+<url><loc>/reference/skimr-package.html</loc></url>
+<url><loc>/reference/skimr-vctrs.html</loc></url>
+<url><loc>/reference/stats.html</loc></url>
+<url><loc>/reference/summary.skim_df.html</loc></url>
+<url><loc>/reference/to_long.html</loc></url>
 </urlset>
+
