@@ -22,7 +22,7 @@ test_that("The interface for sfl's separates keep and drop functions", {
 test_that("sfl's support dummy names", {
   input <- sfl(mean = ~ mean(., na.rm = TRUE), skim_type = "test")
   funs <- input$funs
-  expect_equal(funs$mean, rlang::quo(mean(., na.rm = TRUE)))
+  expect_equal(funs$mean, rlang::quo(mean(., na.rm = TRUE)), ignore_attr = "class")
 })
 
 test_that("sfl's automatically generate function names", {

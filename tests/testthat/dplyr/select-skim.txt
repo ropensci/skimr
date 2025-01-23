@@ -1,8 +1,0 @@
-# A tibble: 5 x 2
-  skim_type skim_variable
-  <chr>     <chr>        
-1 factor    Species      
-2 numeric   Sepal.Length 
-3 numeric   Sepal.Width  
-4 numeric   Petal.Length 
-5 numeric   Petal.Width  

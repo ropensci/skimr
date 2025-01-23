@@ -3,7 +3,7 @@ test_that("skim of a simple data.table produces no warnings", {
   skip_if_not_installed("data.table")
   withr::local_options(list(width = 91))
   DT_letters <- data.table::data.table(abc = letters)
-  expect_warning(skim(DT_letters), NA)
+  expect_no_warning(skim(DT_letters))
 })
 
 test_that("skim of a simple data.table produces no warnings even with dtplyr", {
@@ -11,7 +11,7 @@ test_that("skim of a simple data.table produces no warnings even with dtplyr", {
   skip_if_not_installed("dtplyr")
   withr::local_options(list(width = 91))
   DT_letters <- data.table::data.table(abc = letters)
-  expect_warning(skim(DT_letters), NA)
+  expect_no_warning(skim(DT_letters))
 })
 
 test_that("skim of a simple data.table produces output as expected", {
@@ -20,10 +20,7 @@ test_that("skim of a simple data.table produces output as expected", {
 
   skimmed_DT_letters <- skim(DT_letters)
   withr::local_options(list(cli.unicode = FALSE, width = 91))
-  expect_print_matches_file(
-    skimmed_DT_letters,
-    "data.table/summary_DT_letters.txt"
-  )
+  expect_snapshot(skimmed_DT_letters)
 })
 
 
@@ -38,27 +35,14 @@ test_that("skim of data.table produces output as expected", {
   )
 
   withr::local_options(list(cli.unicode = FALSE, width = 91))
-
-  expect_print_matches_file(
-    skim(DT_factors),
-    "data.table/summary_DT_factors_no_key.txt"
-  )
+  expect_snapshot(skim(DT_factors))
 
   data.table::setkeyv(DT_factors, c("abc", "grps"))
-  expect_print_matches_file(
-    skim(DT_factors),
-    "data.table/summary_DT_factors.txt"
-  )
+  expect_snapshot(skim(DT_factors))
 
   DF_factors <- as.data.frame(DT_factors)
-  expect_print_matches_file(
-    skim(DF_factors),
-    "data.table/summary_DF_factors.txt"
-  )
+  expect_snapshot(skim(DF_factors))
 
   tibble_factors <- tibble::as_tibble(DT_factors)
-  expect_print_matches_file(
-    skim(tibble_factors),
-    "data.table/summary_tibble_factors.txt"
-  )
+  expect_snapshot(skim(tibble_factors))
 })

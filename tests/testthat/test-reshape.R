@@ -85,7 +85,7 @@ test_that("focus() matches select(data, skim_type, skim_variable, ...)", {
   expected <- dplyr::select(
     skimmed, skim_type, skim_variable, n_missing
   )
-  expect_equal(focus(skimmed, n_missing), expected, check.attributes = FALSE)
+  expect_equal(focus(skimmed, n_missing), expected, ignore_attr = "skimmers_used")
 })
 
 test_that("focus() does not allow dropping skim metadata columns", {
@@ -110,22 +110,22 @@ test_that("to_long() returns a long tidy data frame with 4 columns", {
     names(skimmed_long),
     c("skim_type", "skim_variable", "stat", "formatted")
   )
-  expect_equal(length(unique(skimmed_long$stat)), 13)
-  expect_equal(length(unique(skimmed_long$skim_type)), 2)
-  expect_equal(length(unique(skimmed_long$skim_variable)), 5)
+  expect_length(unique(skimmed_long$stat), 13)
+  expect_length(unique(skimmed_long$skim_type), 2)
+  expect_length(unique(skimmed_long$skim_variable), 5)
 })
 
 test_that("to_long() on a skim_df returns a long tidy df with 4 columns", {
   skimmed_long <- to_long(skim(iris))
   # Statistics from the skim_df  with values of NA are not included
   expect_n_rows(skimmed_long, 45)
-  expect_equal(
-    names(skimmed_long),
+  expect_named(
+  skimmed_long,
     c("skim_type", "skim_variable", "stat", "formatted")
   )
-  expect_equal(length(unique(skimmed_long$stat)), 13)
-  expect_equal(length(unique(skimmed_long$skim_type)), 2)
-  expect_equal(length(unique(skimmed_long$skim_variable)), 5)
+  expect_length(unique(skimmed_long$stat), 13)
+  expect_length(unique(skimmed_long$skim_type), 2)
+  expect_length(unique(skimmed_long$skim_variable), 5)
 })
 
 test_that("to_long() on a df and a skim_df from same df are identical", {
