@@ -26,7 +26,7 @@
 #'
 #' @inheritParams tibble::print.tbl
 #' @seealso [tibble::trunc_mat()] For a list of global options for customizing
-#'   print formatting. [crayon::has_color()] for the variety of issues that
+#'   print formatting. [cli::num_ansi_colors()] for the variety of issues that
 #'   affect tibble's color support.
 #' @param include_summary Whether a summary of the data frame should be printed
 #' @param summary_rule_width Width of Data Summary cli rule, defaults to 40.

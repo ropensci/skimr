@@ -31,7 +31,7 @@ why this is important and how these functions work, see:
 \details{
 \verb{vec_ptype2.*} handles finding common prototypes between \code{skim_df} and
 similar objects. \verb{vec_cast.*} handles casting between objects. Note that
-as of \verb{dplyr 1.0.2}, \code{\link[dplyr:bind]{dplyr::bind_rows()}} does not full support combining
+as of \verb{dplyr 1.0.2}, \code{\link[dplyr:bind_rows]{dplyr::bind_rows()}} does not full support combining
 attributes and \code{\link[vctrs:vec_bind]{vctrs::vec_rbind()}} is preferred instead.
 }
 \keyword{internal}

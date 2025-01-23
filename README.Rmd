@@ -8,21 +8,22 @@ align="right" height="139" /></a>
 
 ```{r set-options, echo=FALSE, message=FALSE}
 library(skimr)
-options(tibble.width = Inf)
+options(pillar.width = Inf)
 options(width = 100)
 ```
 
+<!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
-[![R build
-status](https://github.com/ropensci/skimr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/skimr/actions?workflow=R-CMD-check)
-[![codecov](https://codecov.io/gh/ropensci/skimr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/skimr)
+[![R-CMD-check](https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/ropensci/skimr/graph/badge.svg)](https://app.codecov.io/gh/ropensci/skimr)
 [![This is an ROpenSci Peer reviewed
 package](https://badges.ropensci.org/175_status.svg)](https://github.com/ropensci/software-review/issues/175)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/skimr)](https://cran.r-project.org/package=skimr)
 [![cran
 checks](https://badges.cranchecks.info/worst/skimr.svg)](https://badges.cranchecks.info/worst/skimr.svg)
+<!-- badges: end -->
 
 
 `skimr` provides a frictionless approach to summary statistics which conforms
