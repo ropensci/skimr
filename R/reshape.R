@@ -81,10 +81,9 @@ reconcile_skimmers <- function(data, groups, base) {
   extra_cols <- dplyr::setdiff(all_columns, with_base_columns)
   if (length(extra_cols) > 0) {
     grouped <- dplyr::group_by(data, .data$skim_type)
-    complete_by_type <- dplyr::summarize_at(
+    complete_by_type <- dplyr::summarise(
       grouped,
-      extra_cols,
-      ~ !all(is.na(.x))
+      dplyr::across(tidyselect::all_of(extra_cols),  ~ !all(is.na(.x)))
     )
     complete_cols <- purrr::pmap(
       complete_by_type,
@@ -242,12 +241,12 @@ to_long.default <- function(.data, ..., skim_fun = skim) {
 #' @describeIn  to_long Transform a skim_df to a long data frame.
 #' @export
 to_long.skim_df <- function(.data, ..., skim_fun = skim) {
-  tidyr::gather(
+  .data <- dplyr::mutate(.data, dplyr::across(dplyr::everything(), as.character))
+  tidyr::pivot_longer(
     .data,
-    key = "stat",
-    value = "formatted",
-    na.rm = TRUE,
-    -"skim_type",
-    -"skim_variable"
+    cols = c(-"skim_type", -"skim_variable"),
+    names_to = "stat",
+    values_to = "formatted",
+    values_drop_na = TRUE
   )
 }

@@ -35,7 +35,7 @@ means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{summary_rule_width}{Width of Data Summary cli rule, defaults to 40.}
 
-\item{...}{Passed on to \code{\link[=tbl_format_setup]{tbl_format_setup()}}.}
+\item{...}{Passed on to \code{\link[pillar:tbl_format_setup]{pillar::tbl_format_setup()}}.}
 
 \item{.summary_rule_width}{the width for the main rule above the summary.}
 }
@@ -81,6 +81,6 @@ You can control the width rule line for the printed subtables with an option:
 
 \seealso{
 \code{\link[tibble:trunc_mat]{tibble::trunc_mat()}} For a list of global options for customizing
-print formatting. \code{\link[crayon:has_color]{crayon::has_color()}} for the variety of issues that
+print formatting. \code{\link[cli:num_ansi_colors]{cli::num_ansi_colors()}} for the variety of issues that
 affect tibble's color support.
 }

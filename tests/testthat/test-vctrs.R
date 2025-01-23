@@ -19,7 +19,7 @@ test_that("You can bind skim_df rows", {
 
 test_that("When binding columns, fall back to tbl_df", {
   skimmed <- skim(iris)
-  combined <- vctrs::vec_cbind(skimmed, skimmed)
+  combined <- vctrs::vec_cbind(skimmed, skimmed, .name_repair = "universal_quiet")
   expect_s3_class(combined, "tbl")
   expect_false("skim_df" %in% class(combined))
 })

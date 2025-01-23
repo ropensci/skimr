@@ -2,8 +2,8 @@
 % Please edit documentation in R/skimr-package.R
 \docType{package}
 \name{skimr-package}
-\alias{skimr-package}
 \alias{skimr}
+\alias{skimr-package}
 \title{Skim a data frame}
 \description{
 This package provides an alternative to the default summary functions
@@ -16,4 +16,50 @@ object is subsettable and offers a human readable output.
 that are generated for a variety of different data types. It is also
 provides an API for customization. Users can change both the functions
 dispatched and the way the results are formatted.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/skimr/ (website)}
+  \item \url{https://github.com/ropensci/skimr/}
+  \item Report bugs at \url{https://github.com/ropensci/skimr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Elin Waring \email{elin.waring@gmail.com}
+
+Authors:
+\itemize{
+  \item Michael Quinn \email{msquinn@google.com}
+  \item Amelia McNamara \email{amcnamara@smith.edu}
+  \item Eduardo Arino de la Rubia \email{earino@gmail.com}
+  \item Hao Zhu \email{haozhu233@gmail.com}
+  \item Shannon Ellis \email{sellis18@jhmi.edu}
+}
+
+Other contributors:
+\itemize{
+  \item Julia Lowndes \email{lowndes@nceas.ucsb.edu} [contributor]
+  \item Hope McLeod \email{hmgit2@gmail.com} [contributor]
+  \item Hadley Wickham \email{hadley@rstudio.com} [contributor]
+  \item Kirill Müller \email{krlmlr+r@mailbox.org} [contributor]
+  \item  RStudio, Inc. (Spark functions) [copyright holder]
+  \item Connor Kirkpatrick \email{hello@connorkirkpatrick.com} [contributor]
+  \item Scott Brenstuhl \email{brenstsr@miamioh.edu} [contributor]
+  \item Patrick Schratz \email{patrick.schratz@gmail.com} [contributor]
+  \item lbusett \email{lbusett@gmail.com} [contributor]
+  \item Mikko Korpela \email{mvkorpel@iki.fi} [contributor]
+  \item Jennifer Thompson \email{thompson.jennifer@gmail.com} [contributor]
+  \item Harris McGehee \email{mcgehee.harris@gmail.com} [contributor]
+  \item Mark Roepke \email{mroepke5@gmail.com} [contributor]
+  \item Patrick Kennedy \email{pkqstr@protonmail.com} [contributor]
+  \item Daniel Possenriede \email{possenriede@gmail.com} [contributor]
+  \item David Zimmermann \email{david_j_zimmermann@hotmail.com} [contributor]
+  \item Kyle Butts \email{buttskyle96@gmail.com} [contributor]
+  \item Bastian Torges \email{bastian.torges@gmail.com} [contributor]
+  \item Rick Saporta \email{Rick@TheFarmersDog.com} [contributor]
+  \item Henry Morgan Stewart \email{henry.morganstewart@gmail.com} [contributor]
+}
+
 }
