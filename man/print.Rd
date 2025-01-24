@@ -35,7 +35,7 @@ means use the \code{width} \link[pillar:pillar_options]{option}.}
 
 \item{summary_rule_width}{Width of Data Summary cli rule, defaults to 40.}
 
-\item{...}{Passed on to \code{\link[pillar:tbl_format_setup]{pillar::tbl_format_setup()}}.}
+\item{...}{Passed on to \code{\link[=tbl_format_setup]{tbl_format_setup()}}.}
 
 \item{.summary_rule_width}{the width for the main rule above the summary.}
 }
