@@ -20,7 +20,7 @@ dispatched and the way the results are formatted.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/skimr/ (website)}
+  \item \url{https://docs.ropensci.org/skimr/}
   \item \url{https://github.com/ropensci/skimr/}
   \item Report bugs at \url{https://github.com/ropensci/skimr/issues}
 }
@@ -60,6 +60,7 @@ Other contributors:
   \item Bastian Torges \email{bastian.torges@gmail.com} [contributor]
   \item Rick Saporta \email{Rick@TheFarmersDog.com} [contributor]
   \item Henry Morgan Stewart \email{henry.morganstewart@gmail.com} [contributor]
+  \item Olivier Roy [contributor]
 }
 
 }
