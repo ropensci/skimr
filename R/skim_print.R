@@ -127,7 +127,7 @@ print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
 #' [knitr::opts_chunk] for more information. You can change the number of digits
 #' shown in the printed table with the `skimr_digits` chunk option.
 #'
-#' Alternatively, you can call [collapse()] or [yank()] to get the particular
+#' Alternatively, you can call [yank()] to get the particular
 #' `skim_df` objects and format them however you like. One warning though.
 #' Because histograms contain unicode characters, they can have unexpected
 #' print results, as R as varying levels of unicode support. This affects
