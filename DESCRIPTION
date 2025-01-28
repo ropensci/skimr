@@ -103,7 +103,10 @@ Authors@R:
       person(given = "Henry",
              family = "Morgan Stewart",
              role = "ctb",
-             email = "henry.morganstewart@gmail.com")
+             email = "henry.morganstewart@gmail.com"),
+      person(given = "Olivier",
+             family = "Roy",
+             role = "ctb")
        )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
@@ -114,7 +117,7 @@ Description: A simple to use summary function that can be used with pipes
     Instructions for managing these on specific operating systems are
     given in the "Using skimr" vignette and the README.
 License: GPL-3
-URL: https://docs.ropensci.org/skimr/ (website),
+URL: https://docs.ropensci.org/skimr/,
     https://github.com/ropensci/skimr/
 BugReports: https://github.com/ropensci/skimr/issues
 Depends:
