@@ -43,7 +43,7 @@
 #' If the rendered examples show unencoded values such as `<U+2587>` you will
 #' need to change your locale to allow proper rendering. Please review the
 #' *Using Skimr* vignette for more information
-#' (`vignette("Using_skimr", package = "skimr")`).
+#' (`vignette("skimr", package = "skimr")`).
 #'
 #' Otherwise, we export `skim_without_charts()` to produce summaries without the
 #' spark graphs. These are the source of the unicode dependency.
