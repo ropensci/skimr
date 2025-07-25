@@ -129,7 +129,7 @@ Imports:
     pillar (>= 1.6.4),
     purrr,
     repr,
-    rlang (>= 0.3.1),
+    rlang,
     stats,
     stringr (>= 1.1),
     tibble (>= 2.0.0),

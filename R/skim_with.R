@@ -72,6 +72,7 @@
 #'
 #' # Remove the base skimmers entirely
 #' my_skim <- skim_with(base = NULL)
+#' @importFrom rlang .data
 #' @export
 skim_with <- function(...,
                       base = sfl(
@@ -117,11 +118,12 @@ skim_with <- function(...,
       skimmers = purrr::map(combined_skimmers, mangle_names, names(base$funs)),
       skim_variable = split(selected, types)[unique(types)]
     )
+    
     grouped <- dplyr::group_by(ready_to_skim, .data$skim_type)
     nested <- dplyr::summarize(
       grouped,
       skimmed = purrr::map2(
-        .data$skimmers, .data$skim_variable, skim_by_type, data
+      .data$skimmers, .data$skim_variable, skim_by_type, data
       )
     )
     structure(
