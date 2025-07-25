@@ -135,7 +135,7 @@ test_that("An empty call to skim_with() returns the default skim()", {
 })
 
 test_that("User-defined defaults require sfl's with class names", {
-  with_mock(
+  with_mocked_bindings(
     get_skimmers = function(column) sfl(length),
     expect_error(skim(data.frame(1)), "Default skimming functions")
   )
