@@ -13,7 +13,6 @@
 #' @importFrom rlang .data
 #' @name skimr-package
 #' @aliases skimr
-#' @docType package
 NULL
 
 

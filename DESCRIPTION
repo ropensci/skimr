@@ -112,7 +112,7 @@ Description: A simple to use summary function that can be used with pipes
     skim methods for specific object types as described in a vignette.
     Default summaries include support for inline spark graphs.
     Instructions for managing these on specific operating systems are
-    given in the "Using skimr" vignette and the README.
+    given in the "skimr" vignette and the README.
 License: GPL-3
 URL: https://docs.ropensci.org/skimr/ (website),
     https://github.com/ropensci/skimr/
@@ -149,13 +149,14 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Collate:
     'deprecated.R'
     'dplyr.R'
     'stats.R'
     'skim_with.R'
     'get_skimmers.R'
+    'package.R'
     'reshape.R'
     'sfl.R'
     'skim.R'
