@@ -1,3 +1,8 @@
+# skimr 2.2.0
+
+* Update handling of spark graphs for Windows when UTF-8 is supported.
+* Test modernization, thanks to @olivroy
+
 # skimr 2.1.5
 
 * Updated to work with newer version of purrr

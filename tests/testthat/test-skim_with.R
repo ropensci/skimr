@@ -135,10 +135,8 @@ test_that("An empty call to skim_with() returns the default skim()", {
 })
 
 test_that("User-defined defaults require sfl's with class names", {
-  with_mocked_bindings(
-    get_skimmers = function(column) sfl(length),
-    expect_error(skim(data.frame(1)), "Default skimming functions")
-  )
+  local_mocked_bindings(get_skimmers = function(column) sfl(length))
+  expect_error(skim(data.frame(1)), "Default skimming functions")
 })
 
 test_that("Sfl's can be passed as an unquoted list", {
@@ -158,7 +156,7 @@ test_that("Doubles and integers are both 'numeric'", {
   df <- data.frame(int = 1:3, dbl = 1:3 + 0.5)
   my_skim <- skim_with(numeric = sfl(hist = NULL))
   input <- my_skim(df)
-  
+
   expect_false("numeric.hist" %in% names(input))
   expect_equal(
     attr(input, "skimmers_used")$numeric,
@@ -168,8 +166,8 @@ test_that("Doubles and integers are both 'numeric'", {
 
 test_that("Defining an integer sfl changes behavior", {
   df <- data.frame(int = 1:3, dbl = 1:3 + 0.5)
-  my_skim <- expect_message(
-    skim_with(
+  expect_message(
+    my_skim <- skim_with(
       numeric = sfl(hist = NULL), integer = sfl(int_mean = mean)
     )
   )

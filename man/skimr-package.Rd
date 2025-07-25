@@ -3,28 +3,28 @@
 \docType{package}
 \name{skimr-package}
 \alias{skimr-package}
-\alias{skimr}
 \title{skimr: Compact and Flexible Summaries of Data}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the "skimr" vignette and the README.
+A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the "Using skimr" vignette and the README.
 
-This package provides an alternative to the default summary functions
-within R. The package's API is tidy, functions take data frames, return
-data frames and can work as part of a pipeline. The returned \code{skimr}
-object is subsettable and offers a human readable output.
-}
-\details{
-\code{skimr} is opinionated, providing a strong set of summary statistics
-that are generated for a variety of different data types. It is also
-provides an API for customization. Users can change both the functions
-dispatched and the way the results are formatted.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the "Using skimr" vignette and the README.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/skimr/ (website)}
+  \item \url{https://docs.ropensci.org/skimr/}
+  \item \url{https://github.com/ropensci/skimr/}
+  \item Report bugs at \url{https://github.com/ropensci/skimr/issues}
+}
+
+
+Useful links:
+\itemize{
+  \item \url{https://docs.ropensci.org/skimr/}
   \item \url{https://github.com/ropensci/skimr/}
   \item Report bugs at \url{https://github.com/ropensci/skimr/issues}
 }
@@ -64,6 +64,7 @@ Other contributors:
   \item Bastian Torges \email{bastian.torges@gmail.com} [contributor]
   \item Rick Saporta \email{Rick@TheFarmersDog.com} [contributor]
   \item Henry Morgan Stewart \email{henry.morganstewart@gmail.com} [contributor]
+  \item Olivier Roy [contributor]
 }
 
 }

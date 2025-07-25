@@ -20,11 +20,7 @@ test_that("The summary print method prints the correct object", {
   skip_if_not(l10n_info()$`UTF-8`)
   withr::local_options(list(cli.unicode = FALSE))
   skim_summary_input <- summary(skim(iris))
-  expect_known_output(
-    skim_summary_input, "summary/summary_iris.txt",
-    update = FALSE,
-    print = TRUE
-  )
+  expect_snapshot(skim_summary_input)
 })
 
 test_that("The summary print method prints the correct object when piped", {
@@ -34,9 +30,7 @@ test_that("The summary print method prints the correct object when piped", {
   summary_input <- iris %>%
     skim() %>%
     summary()
-  expect_known_output(summary_input, "summary/summary_iris_piped.txt",
-    update = FALSE, print = TRUE
-  )
+  expect_snapshot(summary_input)
 })
 
 test_that("null object gets expected message", {

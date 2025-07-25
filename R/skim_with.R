@@ -130,7 +130,7 @@ skim_with <- function(...,
       data_rows = nrow(data),
       data_cols = ncol(data),
       df_name = .data_name,
-      dt_key  = get_dt_key(data),
+      dt_key = get_dt_key(data),
       groups = dplyr::group_vars(data),
       base_skimmers = names(base$funs),
       skimmers_used = get_skimmers_used(unique_skimmers)
@@ -166,7 +166,7 @@ validate_assignment <- function(...) {
   defaults <- get_default_skimmers()
   existing <- proposed_names %in% names(defaults)
 
-  if (!all(existing) & length(defaults) > 0) {
+  if (!all(existing) && length(defaults) > 0) {
     collapsed <- paste(proposed_names[!existing], collapse = ", ")
     message(
       "Creating new skimming functions for the following classes: ",
@@ -262,9 +262,8 @@ get_local_skimmers <- function(classes, local_skimmers) {
   if (length(local_classes) == 0) {
     return(NULL)
   }
-  
+
   first_class <- local_classes[[1]]
-  
   out <- local_skimmers[[first_class]]
   out$skim_type <- first_class
   out
@@ -274,7 +273,9 @@ merge_skimmers <- function(locals, defaults, append) {
   if (!append || locals$skim_type != defaults$skim_type) {
     locals
   } else {
-    defaults$funs <- purrr::compact(purrr::list_modify(defaults$funs, !!!locals$funs))
+    defaults$funs <- purrr::compact(purrr::list_modify(
+      defaults$funs, !!!locals$funs
+    ))
     defaults
   }
 }

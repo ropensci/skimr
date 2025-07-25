@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.1.5
+Version: 2.2.0
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
@@ -103,7 +103,10 @@ Authors@R:
       person(given = "Henry",
              family = "Morgan Stewart",
              role = "ctb",
-             email = "henry.morganstewart@gmail.com")
+             email = "henry.morganstewart@gmail.com"),
+      person(given = "Olivier",
+             family = "Roy",
+             role = "ctb")
        )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
@@ -114,14 +117,14 @@ Description: A simple to use summary function that can be used with pipes
     Instructions for managing these on specific operating systems are
     given in the "Using skimr" vignette and the README.
 License: GPL-3
-URL: https://docs.ropensci.org/skimr/ (website),
+URL: https://docs.ropensci.org/skimr/,
     https://github.com/ropensci/skimr/
 BugReports: https://github.com/ropensci/skimr/issues
 Depends:
     R (>= 3.1.2)
 Imports:
     cli,
-    dplyr (>= 0.8.0),
+    dplyr (>= 1.0.0),
     knitr (>= 1.2),
     magrittr (>= 1.5),
     pillar (>= 1.6.4),
@@ -133,17 +136,15 @@ Imports:
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 1.0.0),
-    vctrs
+    vctrs (>= 0.5.0)
 Suggests:
-    covr,
-    crayon,
     data.table,
     dtplyr,
     extrafont,
     haven,
     lubridate,
     rmarkdown,
-    testthat (>= 2.0.0),
+    testthat (>= 3.0.0),
     withr
 VignetteBuilder: 
     knitr
@@ -166,3 +167,4 @@ Collate:
     'summary.R'
     'utils.R'
     'vctrs.R'
+Config/testthat/edition: 3
