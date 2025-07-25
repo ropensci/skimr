@@ -112,7 +112,7 @@ Description: A simple to use summary function that can be used with pipes
     skim methods for specific object types as described in a vignette.
     Default summaries include support for inline spark graphs.
     Instructions for managing these on specific operating systems are
-    given in the "skimr" vignette and the README.
+    given in the "Using skimr" vignette and the README.
 License: GPL-3
 URL: https://docs.ropensci.org/skimr/ (website),
     https://github.com/ropensci/skimr/
