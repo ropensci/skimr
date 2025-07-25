@@ -156,7 +156,7 @@ change.
 
 ### Has a useful summary function
 
-    skim(iris) %>%
+    skim(iris) |>
       summary()
 
     ## ── Data Summary ────────────────────────
@@ -196,20 +196,20 @@ change.
 `skim()` can handle data that has been grouped using
 `dplyr::group_by()`.
 
-    iris %>%
-      dplyr::group_by(Species) %>%
+    iris |>
+      dplyr::group_by(Species) |>
       skim()
 
     ## ── Data Summary ────────────────────────
-    ##                            Values    
-    ## Name                       Piped data
-    ## Number of rows             150       
-    ## Number of columns          5         
-    ## _______________________              
-    ## Column type frequency:               
-    ##   numeric                  4         
-    ## ________________________             
-    ## Group variables            Species   
+    ##                            Values                      
+    ## Name                       dplyr::group_by(iris, Spe...
+    ## Number of rows             150                         
+    ## Number of columns          5                           
+    ## _______________________                                
+    ## Column type frequency:                                 
+    ##   numeric                  4                           
+    ## ________________________                               
+    ## Group variables            Species                     
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##    skim_variable Species    n_missing complete_rate  mean    sd  p0  p25  p50  p75 p100 hist 
@@ -228,20 +228,20 @@ change.
 
 ### Behaves nicely in pipelines
 
-    iris %>%
-      skim() %>%
+    iris |>
+      skim() |>
       dplyr::filter(numeric.sd > 1)
 
     ## ── Data Summary ────────────────────────
-    ##                            Values    
-    ## Name                       Piped data
-    ## Number of rows             150       
-    ## Number of columns          5         
-    ## _______________________              
-    ## Column type frequency:               
-    ##   numeric                  1         
-    ## ________________________             
-    ## Group variables            None      
+    ##                            Values
+    ## Name                       iris  
+    ## Number of rows             150   
+    ## Number of columns          5     
+    ## _______________________          
+    ## Column type frequency:           
+    ##   numeric                  1     
+    ## ________________________         
+    ## Group variables            None  
     ## 
     ## ── Variable type: numeric ──────────────────────────────────────────────────────────────────────────
     ##   skim_variable n_missing complete_rate mean   sd p0 p25  p50 p75 p100 hist 
@@ -255,7 +255,7 @@ in this package so that similar results are produced in documents. To
 use this, make sure the `skimmed` object is the last item in your code
 chunk.
 
-    faithful %>%
+    faithful |>
       skim()
 
 <table>
@@ -263,7 +263,7 @@ chunk.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Name</td>
-<td style="text-align: left;">Piped data</td>
+<td style="text-align: left;">faithful</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
