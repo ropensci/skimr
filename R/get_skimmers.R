@@ -216,7 +216,9 @@ get_skimmers.AsIs <- function(column) {
 #'  Finds the appropriate skimmers for the underlying data in the vector.
 #' @export
 get_skimmers.haven_labelled <- function(column) {
-  stopifnot(requireNamespace("haven", quietly = TRUE))
+  if (!requireNamespace("haven", quietly = TRUE)){
+    return()
+  }
   get_skimmers(vctrs::vec_data(column))
 }
 
@@ -281,6 +283,10 @@ get_one_default_skimmer <- function(skim_type) {
 #'   or more `skim_type`'s.
 #' @export
 get_default_skimmer_names <- function(skim_type = NULL) {
+   if (!is.null(skim_type) && "haven_labelled" %in% skim_type && 
+       !requireNamespace("haven", quietly = TRUE)) {
+     return()
+   }
   skimmers <- get_default_skimmers(skim_type)
   purrr::map(skimmers, names)
 }
@@ -297,6 +303,10 @@ get_one_default_skimmer_names <- function(skim_type) {
 #' @export
 get_sfl <- function(skim_type) {
   skimmers <- get_skimmers(structure(integer(), class = skim_type))
+  if (!is.null(skim_type)  & skim_type == "haven_labelled" & 
+      !requireNamespace("haven", quietly = TRUE)) {
+    return()
+  }
   if (skimmers$skim_type == "default") {
     warning("There are no default skimmers for type: ", skim_type)
     sfl(NA, skim_type = NA_character_)
