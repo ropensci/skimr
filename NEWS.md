@@ -1,8 +1,12 @@
 # skimr 2.2.0
 
-* Update handling of spark graphs for Windows when UTF-8 is supported.
+* Updated handling of spark graphs for Windows when UTF-8 is supported.
 * Test modernization, thanks to @olivroy
-* Updated documentation to use base pipe and no longer import magrittr
+* Updated documentation to use base pipe
+* Updated to no longer import magrittr and import rlang .data
+
+### MINOR IMPROVEMENTS
+* Fixed documentation links
 
 # skimr 2.1.5
 
