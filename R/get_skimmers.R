@@ -146,8 +146,8 @@ get_skimmers.complex <- function(column) {
 get_skimmers.Date <- function(column) {
   sfl(
     skim_type = "Date",
-    min = ~ min(., na.rm = TRUE),
-    max = ~ max(., na.rm = TRUE),
+    min = min_date,
+    max = max_date,
     median = ~ stats::median(., na.rm = TRUE),
     n_unique = n_unique
   )
