@@ -21,6 +21,8 @@
 \alias{list_lengths_max}
 \alias{list_min_length}
 \alias{list_max_length}
+\alias{min_date}
+\alias{max_date}
 \title{Summary statistic functions}
 \usage{
 n_missing(x)
@@ -60,6 +62,10 @@ list_lengths_max(x)
 list_min_length(x)
 
 list_max_length(x)
+
+min_date(x)
+
+max_date(x)
 }
 \arguments{
 \item{x}{A vector}
@@ -134,6 +140,12 @@ Based on the function in the pillar package.
 \item \code{list_min_length()}: Get the length of the shortest list in a vector of lists.
 
 \item \code{list_max_length()}: Get the length of the longest list in a vector of lists.
+
+\item \code{min_date()}: Calculate the minimum within a
+Date vector.
+
+\item \code{max_date()}: Calculate the maximum of
+Date vector.
 
 }}
 \seealso{
