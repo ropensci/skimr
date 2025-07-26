@@ -27,8 +27,8 @@ test_that("The summary print method prints the correct object when piped", {
   skip_if_not(l10n_info()$`UTF-8`)
   withr::local_options(list(cli.unicode = FALSE))
   # Test that the correct lines are output, no name should be output.
-  summary_input <- iris %>%
-    skim() %>%
+  summary_input <- iris |>
+    skim() |>
     summary()
   expect_snapshot(summary_input)
 })

@@ -184,17 +184,17 @@ yank <- function(data, skim_type) {
 #'   expressions like x:y can be used to select a range of variables.
 #' @examples
 #' # Compare
-#' iris %>%
-#'   skim() %>%
+#' iris |>
+#'   skim() |>
 #'   dplyr::select(n_missing)
 #'
-#' iris %>%
-#'   skim() %>%
+#' iris |>
+#'   skim() |>
 #'   focus(n_missing)
 #'
 #' # This is equivalent to
-#' iris %>%
-#'   skim() %>%
+#' iris |>
+#'   skim() |>
 #'   dplyr::select(skim_variable, skim_type, n_missing)
 #' @export
 focus <- function(.data, ...) {
