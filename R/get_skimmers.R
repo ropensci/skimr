@@ -216,7 +216,6 @@ get_skimmers.AsIs <- function(column) {
 #'  Finds the appropriate skimmers for the underlying data in the vector.
 #' @export
 get_skimmers.haven_labelled <- function(column) {
-  stopifnot(requireNamespace("haven", quietly = TRUE))
   get_skimmers(vctrs::vec_data(column))
 }
 
