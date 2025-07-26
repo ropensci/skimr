@@ -121,7 +121,7 @@ URL: https://docs.ropensci.org/skimr/,
     https://github.com/ropensci/skimr/
 BugReports: https://github.com/ropensci/skimr/issues
 Depends:
-    R (>= 3.1.2)
+    R (>= 4.1.0)
 Imports:
     cli,
     dplyr (>= 1.0.0),

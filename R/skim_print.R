@@ -62,7 +62,7 @@ print.skim_df <- function(x,
   }
 }
 
-# Methods for correctly formatting a a `one_skim_df`. We leverage the
+# Methods for correctly formatting a `one_skim_df`. We leverage the
 # customiztion options in `pillar` for this. It divides the results into: a
 # header, which we customize; a body, where we strip some values; and a footer,
 # which we drop. For more details, see
@@ -107,6 +107,7 @@ print.skim_list <- function(x,
 
 #' @describeIn print Print method for a `summary_skim_df` object.
 #' @param .summary_rule_width the width for the main rule above the summary.
+#' @param  ...  Passed on to \link[pillar:tbl_format_setup]{pillar::tbl_format_setup()}
 #' @export
 print.summary_skim_df <- function(x, .summary_rule_width = 40, ...) {
   with_title <- c(
