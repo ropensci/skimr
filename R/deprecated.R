@@ -24,7 +24,7 @@ skim_to_wide <- function(.data, ...) {
 #' @export
 skim_to_list <- function(.data, ...) {
   .Deprecated("partition(skim())")
-  skim(.data, ...) %>% partition()
+  skim(.data, ...) |> partition()
 }
 
 #' @describeIn deprecated-v1 [print()] and [skim_with()] set options.

@@ -126,11 +126,10 @@ Imports:
     cli,
     dplyr (>= 1.0.0),
     knitr (>= 1.2),
-    magrittr (>= 1.5),
     pillar (>= 1.6.4),
     purrr,
     repr,
-    rlang (>= 0.3.1),
+    rlang,
     stats,
     stringr (>= 1.1),
     tibble (>= 2.0.0),
@@ -157,6 +156,7 @@ Collate:
     'stats.R'
     'skim_with.R'
     'get_skimmers.R'
+    'package.R'
     'reshape.R'
     'sfl.R'
     'skim.R'
