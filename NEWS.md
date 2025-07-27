@@ -1,3 +1,5 @@
+# skimr (development version)
+
 # skimr 2.2.0
 
 * Updated handling of spark graphs for Windows when UTF-8 is supported.
