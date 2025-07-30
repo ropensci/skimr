@@ -86,13 +86,10 @@ inline_hist <- function(x, n_bins = 8) {
   # (before the test for all NA)
   if (any(is.infinite(x))) {
     x[is.infinite(x)] <- NA
-    warning(
-      "Variable contains Inf or -Inf value(s) that were converted to NA."
-    )
   }
 
   # Handle empty and NA vectors (is.na is TRUE for NaN)
-  if (length(x) < 1 || all(is.na(x))) {
+  if (length(x) < 1 || all(is.nan(x))) {
     return(" ")
   }
 
