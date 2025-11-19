@@ -72,7 +72,6 @@
 #'
 #' # Remove the base skimmers entirely
 #' my_skim <- skim_with(base = NULL)
-#' @importFrom rlang .data
 #' @export
 skim_with <- function(...,
                       base = sfl(
