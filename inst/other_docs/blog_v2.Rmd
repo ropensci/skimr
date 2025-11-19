@@ -97,7 +97,7 @@ you'd try do something with the results of a `skim()` call. It looked something
 like this:
 
 ```{r eval = FALSE}
-skim(mtcars) %>% dplyr::filter(stat=="hist")
+skim(mtcars) |> dplyr::filter(stat=="hist")
 ```
 ```
 # A tibble: 11 x 6
@@ -123,8 +123,8 @@ of your near-telepathic abilities.
 Now, working with `skimr` is a bit more sane.
 
 ```{r render = knitr::normal_print}
-skimmed <- iris %>%
-  skim() %>%
+skimmed <- iris |>
+  skim() |>
   dplyr::filter(numeric.sd > 1)
 
 skimmed

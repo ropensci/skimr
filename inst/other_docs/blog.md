@@ -1,4 +1,4 @@
-Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci \#unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropenscilabs/skimr#skimr).
+Like every R user who uses summary statistics (so, everyone), our team has to rely on some combination of summary functions beyond `summary()` and `str()`. But we found them all lacking in some way because they can be generic, they don't always provide easy-to-operate-on data structures, and they are not pipeable. What we wanted was a frictionless approach for quickly skimming useful and tidy summary statistics as part of a pipeline. And so at [rOpenSci \#unconf17](http://unconf17.ropensci.org/), we developed [`skimr`](https://github.com/ropensci/skimr#skimr).
 
 In a nutshell, `skimr` will create a `skim_df` object that can be further operated upon or that provides a human-readable printout in the console. It presents reasonable default summary statistics for numerics, factors, etc, and lists counts, and missing and unique values. And the momentum is still going, thanks to our awesome team (see below)!
 
@@ -68,15 +68,15 @@ Here are examples of `skimr` in action:
 
 **Nicely separates numeric and factor variables:**
 
-![](https://github.com/ropenscilabs/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png) <br>
+![](https://github.com/ropensci/skimr/blob/24c733d7e4752c37e46e4c36693da107f42f3f55/man/figures/skim_iris.png) <br>
 
 **Clearly displays many numeric variables:**
 
-![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png) <br>
+![](https://github.com/ropensci/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_mtcars.png) <br>
 
 **Also works with strings:**
 
-![](https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_babynames.png) <br>
+![](https://github.com/ropensci/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_babynames.png) <br>
 
 ### Exploring a skim\_df object
 
@@ -89,14 +89,14 @@ dim(a)
 View(a)
 ```
 
-<img src="https://github.com/ropenscilabs/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_chickwts_df.png" width="450px">
+<img src="https://github.com/ropensci/skimr/blob/ecb90e22047d4a1b228bcf471650eb79b733e52e/man/figures/skim_chickwts_df.png" width="450px">
 
 ### Computing with the skim\_df object
 
 Maybe you just want to skim a specific portion of your data frame. Use skimr with a pipe!
 
 ``` r
-> skim(mtcars) %>% filter(stat=="hist")
+> skim(mtcars) |> filter(stat=="hist")
 # A tibble: 11 × 5
      var    type  stat      level value
    <chr>   <chr> <chr>      <chr> <dbl>
@@ -133,11 +133,11 @@ Another possibility is specifying your own statistics to display with `skimr`:
 Our awesome team
 ----------------
 
-We had a really fantastic team with diverse backgrounds, and it was really cool how organically everyone found a role for themselves during the development of `skimr`. Between brainstorming sessions, experienced coders began to iteratively develop the code while others worked on documentation and tests, and got more involved. Everyone asked questions and brainstormed together; it was a really welcoming environment. We knew that by the end of the second day of the unconf, we would present our work using only the repo's [README](https://github.com/ropenscilabs/skimr#skimr) file. So we focused on communication throughout the entire development process.
+We had a really fantastic team with diverse backgrounds, and it was really cool how organically everyone found a role for themselves during the development of `skimr`. Between brainstorming sessions, experienced coders began to iteratively develop the code while others worked on documentation and tests, and got more involved. Everyone asked questions and brainstormed together; it was a really welcoming environment. We knew that by the end of the second day of the unconf, we would present our work using only the repo's [README](https://github.com/ropensci/skimr#skimr) file. So we focused on communication throughout the entire development process.
 
 A lot of the heavy lifting at the unconf was done by Michael, Elin, and Eduardo, and Elin has continued leading development in the month since!
 
-This was the original team in alphabetical order. We have also had many virtual contributors as well: see the full list of contributors [here](https://github.com/ropenscilabs/skimr/graphs/contributors).
+This was the original team in alphabetical order. We have also had many virtual contributors as well: see the full list of contributors [here](https://github.com/ropensci/skimr/graphs/contributors).
 
 **Eduardo Arino de la Rubia**
 Job Title: Chief Data Scientist at Domino Data Lab
@@ -176,4 +176,4 @@ In summary (ha...)
 
 The work we did together was only possible because of rOpenSci's incredible community and culture. For us to be able to dream up something we wanted to build and have the time and space to actually do it together was really exciting. So thank you rOpenSci and everyone in the greater community!
 
-There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropenscilabs/skimr) repo for the latest features and improvements!
+There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropensci/skimr) repo for the latest features and improvements!

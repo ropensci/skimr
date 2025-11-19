@@ -106,7 +106,7 @@ Although hidden from the user by its print methods, this format would
 appear any time you’d try do something with the results of a `skim()`
 call. It looked something like this:
 
-    skim(mtcars) %>% dplyr::filter(stat=="hist")
+    skim(mtcars) |> dplyr::filter(stat=="hist")
 
     # A tibble: 11 x 6
        variable type    stat  level value formatted
@@ -129,8 +129,8 @@ better applications of your near-telepathic abilities.
 
 Now, working with `skimr` is a bit more sane.
 
-    skimmed <- iris %>%
-      skim() %>%
+    skimmed <- iris |>
+      skim() |>
       dplyr::filter(numeric.sd > 1)
 
     skimmed
