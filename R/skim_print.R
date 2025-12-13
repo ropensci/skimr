@@ -223,7 +223,7 @@ knit_print.summary_skim_df <- function(x, options = NULL, ...) {
 #' @rdname repr
 #' @export
 repr_text.skim_df <- function(obj, ...) {
-  print(obj)
+  paste(capture.output(print(obj)), collapse = "\n")
 }
 
 #' @rdname repr
