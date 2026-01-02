@@ -76,7 +76,7 @@ that are called to produce summary statistics with \code{\link[=skim_with]{skim_
 If the rendered examples show unencoded values such as \verb{<U+2587>} you will
 need to change your locale to allow proper rendering. Please review the
 \emph{Using Skimr} vignette for more information
-(\code{vignette("Using_skimr", package = "skimr")}).
+(\code{vignette("skimr", package = "skimr")}).
 
 Otherwise, we export \code{skim_without_charts()} to produce summaries without the
 spark graphs. These are the source of the unicode dependency.
@@ -91,29 +91,29 @@ skim(iris, starts_with("Sepal"))
 skim(iris, where(is.numeric))
 
 # Skim also works groupwise
-iris \%>\%
-  dplyr::group_by(Species) \%>\%
+iris |>
+  dplyr::group_by(Species) |>
   skim()
 
 # Which five numeric columns have the greatest mean value?
 # Look in the `numeric.mean` column.
-iris \%>\%
-  skim() \%>\%
-  dplyr::select(numeric.mean) \%>\%
+iris |>
+  skim() |>
+  dplyr::select(numeric.mean) |>
   dplyr::slice_head(n = 5)
 
 # Which of my columns have missing values? Use the base skimmer n_missing.
-iris \%>\%
-  skim() \%>\%
+iris |>
+  skim() |>
   dplyr::filter(n_missing > 0)
 
 # Use skim_tee to view the skim results and
 # continue using the original data.
-chickwts \%>\%
-  skim_tee() \%>\%
+chickwts |>
+  skim_tee() |>
   dplyr::filter(feed == "sunflower")
 
 # Produce a summary without spark graphs
-iris \%>\%
+iris |>
   skim_without_charts()
 }

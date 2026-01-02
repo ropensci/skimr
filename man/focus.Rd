@@ -21,16 +21,16 @@ behavior is identical to \code{\link[dplyr:select]{dplyr::select()}}.
 }
 \examples{
 # Compare
-iris \%>\%
-  skim() \%>\%
+iris |>
+  skim() |>
   dplyr::select(n_missing)
 
-iris \%>\%
-  skim() \%>\%
+iris |>
+  skim() |>
   focus(n_missing)
 
 # This is equivalent to
-iris \%>\%
-  skim() \%>\%
+iris |>
+  skim() |>
   dplyr::select(skim_variable, skim_type, n_missing)
 }

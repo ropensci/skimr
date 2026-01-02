@@ -296,3 +296,23 @@ list_max_length <- function(x) {
   l <- lengths(x)
   max(l)
 }
+
+#' @describeIn stats Calculate the minimum within a
+#'   Date vector.
+#' @export
+min_date <- function(x) {
+  if (all(is.na(x))) {
+    return(NA)
+  }
+  min(x, na.rm = TRUE)
+}
+
+#' @describeIn stats Calculate the maximum of
+#'   Date vector.
+#' @export
+max_date <- function(x) {
+  if (all(is.na(x))) {
+    return(NA)
+  }
+  max(x, na.rm = TRUE)
+}

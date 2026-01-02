@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.devcontainer$
 ^\.github$
 ^\.pre-commit-config\.yaml$
 ^\.lintr$

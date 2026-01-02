@@ -1,6 +1,19 @@
+# skimr (development version)
+
 # skimr 2.2.0
 
-* Update handling of spark graphs for Windows when UTF-8 is supported.
+* Updated handling of spark graphs for Windows when UTF-8 is supported.
+* Test modernization, thanks to @olivroy
+* Updated documentation to use base pipe
+* Updated to no longer import magrittr and import rlang .data
+* Change minimum R version to 4.1.0
+
+### MINOR IMPROVEMENTS
+* Fixed documentation links
+
+### BUG FIXES
+* Skimmer functions for date when all data are missing no longer generates
+  an error.
 
 # skimr 2.1.5
 
@@ -107,7 +120,7 @@ expectations. It is now wide by default. This makes piping statistics much
 simpler
 
 ```
-skim(iris) %>%
+skim(iris) |>
   dplyr::filter(numeric.sd > 1)
 ```
 

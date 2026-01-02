@@ -73,7 +73,7 @@ skim_lm <- function(.data) {
   skimr::skim(.data)
 }
 
-lm(weight ~ feed, data = chickwts) %>% skim_lm()
+lm(weight ~ feed, data = chickwts) |> skim_lm()
 ```
 
 If desired, a more complex function can be created.  For example, the lm object
@@ -84,7 +84,7 @@ data frame.
 skim_lm <- function(.data, fit = FALSE) {
   .data <- .data$model
   if (fit) {
-    .data <- .data %>%
+    .data <- .data |>
       dplyr::bind_cols(
         fitted = data.frame(results$fitted.values),
         residuals = data.frame(results$residuals)

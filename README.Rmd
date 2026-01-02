@@ -92,7 +92,7 @@ skim(dplyr::starwars)
 ### Has a useful summary function
 
 ```{r, render = knitr::normal_print}
-skim(iris) %>%
+skim(iris) |>
   summary()
 ```
 
@@ -107,16 +107,16 @@ skim(iris, Sepal.Length, Petal.Length)
 `skim()` can handle data that has been grouped using `dplyr::group_by()`.
 
 ```{r, render = knitr::normal_print}
-iris %>%
-  dplyr::group_by(Species) %>%
+iris |>
+  dplyr::group_by(Species) |>
   skim()
 ```
 
 ### Behaves nicely in pipelines
 
 ```{r, render = knitr::normal_print}
-iris %>%
-  skim() %>%
+iris |>
+  skim() |>
   dplyr::filter(numeric.sd > 1)
 ```
 
@@ -128,7 +128,7 @@ in this package so that similar results are produced in documents. To use this,
 make sure the `skimmed` object is the last item in your code chunk.
 
 ```{r}
-faithful %>%
+faithful |>
   skim()
 ```
 
