@@ -126,7 +126,9 @@ test_that("numeric skim is calculated correctly when x is all zeores or NAs.", {
 test_that("Skimming with non-finite values works", {
   inf_vals <- c(Inf, 0, -Inf)
   x <- tibble::tibble(inf_vals)
-  expect_warning(input <- skim(x))
+  # Warning removed because it interferes with other elements of skim.
+  #expect_warning(input <- skim(x))
+  input <- skim(x)
 
   expect_identical(input$skim_variable, "inf_vals")
   expect_identical(input$skim_type, "numeric")

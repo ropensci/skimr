@@ -82,6 +82,16 @@ test_that("inline histogram is returns empty string when x is all NaN.", {
   expect_identical(input, " ")
 })
 
+test_that("inline histogram is returns empty string when x is all Infinite.", {
+  input <- inline_hist(rep(Inf, 10))
+  expect_identical(input, " ")
+})
+
+test_that("inline histogram is returns empty string when x is all NaN, NA or Inf.", {
+  input <- inline_hist(c(NaN, NA, Inf, -Inf))
+  expect_identical(input, " ")
+})
+
 test_that("inline histogram is correct when x is evenly distributed.", {
   input <- inline_hist(c(1, 2, 3, 4, 5, 6, 7, 8))
   expect_identical(input, "▇▇▇▇▇▇▇▇")
@@ -98,9 +108,17 @@ test_that("inline histogram is calculated correctly with NA.", {
 })
 
 test_that("inline histogram is calculated correctly with Inf.", {
-  expect_warning(input <-
-    inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf)))
+  # Warning removed because it interfered with other elements of skim
+  input <-
+    inline_hist(c(1, 2, 3, 3, 6, 6, 6, 8, Inf, -Inf))
   expect_identical(input, "▂▂▅▁▁▇▁▂")
+})
+
+test_that("inline histogram is calculated correctly with all Inf and NA.", {
+  # Warning removed because it interfered with other elements of skim
+  input <-
+    inline_hist(c(NA, NaN,  Inf, -Inf))
+  expect_identical(input, " ")
 })
 
 test_that("n_empty is calculated correctly.", {
@@ -140,7 +158,7 @@ test_that("max_char with a multibyte character does not throw an error.", {
   # correct <- as.integer(3)
   # input <- max_char(data)
   # expect_identical(input, correct)
-  expect_error(max_char(data, NA))
+  expect_error(max_char(data))
 })
 
 test_that("max_char returns NA when there are only NA values.", {
