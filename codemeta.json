@@ -191,30 +191,6 @@
   "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "crayon",
-      "name": "crayon",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=crayon"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "data.table",
       "name": "data.table",
       "provider": {
@@ -289,7 +265,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 2.0.0",
+      "version": ">= 3.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -334,7 +310,7 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 0.8.0",
+      "version": ">= 1.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -478,8 +454,14 @@
     },
     "15": {
       "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    "16": {
+      "@type": "SoftwareApplication",
       "identifier": "vctrs",
       "name": "vctrs",
+      "version": ">= 0.5.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -490,9 +472,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "3070.479KB",
-  "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
-  "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://app.codecov.io/gh/ropensci/skimr"],
+  "fileSize": "3045.826KB",
+  "releaseNotes": "https://github.com/ropensci/skimr/blob/main/NEWS.md",
+  "readme": "https://github.com/ropensci/skimr/blob/main/README.md",
+  "contIntegration": ["https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/skimr"],
   "developmentStatus": "https://www.repostatus.org/",
   "review": {
     "@type": "Review",
