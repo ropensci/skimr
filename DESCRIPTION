@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.2.1.9000
+Version: 2.2.2
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
