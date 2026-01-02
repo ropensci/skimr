@@ -1,3 +1,8 @@
+# skimr 2.2.1
+
+* Return a string when printingfor repr.
+* Restore Tidy Select imports for compatability with older versions of R.
+
 # skimr 2.2.0
 
 * Update handling of spark graphs for Windows when UTF-8 is supported.

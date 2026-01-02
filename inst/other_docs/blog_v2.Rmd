@@ -1,27 +1,27 @@
 ---
-slug: skimrv2
 title: "(Re)introducing `skimr` v2"
-subtitle: "A year in the life of an open source R project"
-package_version: 2.0
-authors:
-  - name: Michael Quinn
-    url: https://github.com/michaelquinn32
-  - name: Elin Waring
-    url: https://github.com/elinw
+slug: skimrv2
 date: "10/09/2019"
+package_version: 2
+authors:
+- name: Michael Quinn
+  url: https://github.com/michaelquinn32
+- name: Elin Waring
+  url: https://github.com/elinw
+subtitle: A year in the life of an open source R project
 categories: blog
 tags:
-  - software peer review
-  - R
-  - packages
-  - community
-  - skimr
+- software peer review
+- R
+- packages
+- community
+- skimr
 ---
 
 [Theme song: *PSA* by Jay-Z](https://www.youtube.com/watch?v=-LzdKH1naok)
 
 We announced the testing version of `skimr` v2 on
-[June 19, 2018](https://github.com/ropensci/skimr/issues/341). After more than
+[June 19, 2018](https://github.com/ropenscilabs/skimr/issues/341). After more than
 a year of (admittedly intermittent) work, we're thrilled to be able to say that
 the package is ready to go to CRAN. So, what happened over the last year? And
 why are we so excited for V2?
@@ -46,9 +46,9 @@ that were generated during the unconf (like handling grouped data frames) and
 fixing all the bugs we discovered along the way.
 
 Getting the package on CRAN opened the gates for bug reports and feature
-requests on [GitHub](https://github.com/ropensci/skimr/issues). About the same
+requests on [GitHub](https://github.com/ropenscilabs/skimr/issues). About the same
 time we pushed our first version to CRAN, Elin got `skimr`'s rOpenSci's package
-[peer review](https://github.com/ropensci/software-review/issues/175) started
+[peer review](https://github.com/ropenscilabs/software-review/issues/175) started
 (thank you Jennifer and Jim!), opening another incredibly useful channel for
 collecting feedback on the package. All of these new ideas and suggestions gave
 us the opportunity to really push `skimr` to the next level, but doing that
@@ -58,7 +58,7 @@ A month after finishing the peer review (and six months after the process
 began), we announced v2. Over the first phase of `skimr`'s life, we accumulated
 700 commits, two release, 400 GitHub stars, 95 percent code coverage and a
 lifetime's worth of [unicode rendering
-bugs](https://github.com/ropensci/skimr#support-for-spark-histograms)!
+bugs](https://github.com/ropenscilabs/skimr#support-for-spark-histograms)!
 
 Just kidding! We love our little histograms, even when they don't love us back!
 For those of you that might have never seen `skimr`, using the package typically
@@ -97,7 +97,7 @@ you'd try do something with the results of a `skim()` call. It looked something
 like this:
 
 ```{r eval = FALSE}
-skim(mtcars) %>% dplyr::filter(stat=="hist")
+skim(mtcars) |> dplyr::filter(stat=="hist")
 ```
 ```
 # A tibble: 11 x 6
@@ -123,8 +123,8 @@ of your near-telepathic abilities.
 Now, working with `skimr` is a bit more sane.
 
 ```{r render = knitr::normal_print}
-skimmed <- iris %>%
-  skim() %>%
+skimmed <- iris |>
+  skim() |>
   dplyr::filter(numeric.sd > 1)
 
 skimmed
@@ -314,7 +314,7 @@ can also still use `Pander` and other nice rendering packages on an ad hoc basis
 as you would for other data frames or tibbles.
 
 We also have a similarly-nice rendered output in
-[Jupyter](https://github.com/ropensci/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
+[Jupyter](https://github.com/ropenscilabs/skimr/blob/8c2263c4fd4796af0e5e8f32aafc4980bd58d43a/inst/other_docs/skimr_in_jupyter.ipynb)
 and RMarkdown notebooks. In the latter, the summary is separated from the rest
 of the output when working interactively. We like it that way, but we'd be happy
 to hear what the rest of you think!
@@ -340,3 +340,5 @@ We're really excited about this next step in the `skimr` journey. We've put a
 huge amount of work into this new version. Hopefully it shows. And hopefully
 it inspires some of you to send more feedback and help us find even more ways
 to improve!
+
+Updated to use base pipe and update URLS.

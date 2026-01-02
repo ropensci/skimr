@@ -138,7 +138,7 @@ View(a)
 Maybe you just want to skim a specific portion of your data frame. Use skimr with a pipe!
 
 ```{r, eval = FALSE}
-skim(mtcars) %>% filter(stat == "hist")
+skim(mtcars) |> filter(stat == "hist")
 # A tibble: 11 × 5
 # var    type  stat      level value
 #    <chr>   <chr> <chr>      <chr> <dbl>
@@ -222,3 +222,4 @@ The work we did together was only possible because of rOpenSci's incredible comm
 
 There is more work to be done on `skimr`, so please check out the [`skimr`](https://github.com/ropenscilabs/skimr) repo for the latest features and improvements!
 
+Updated to use the base pipe.
