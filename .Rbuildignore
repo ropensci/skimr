@@ -16,3 +16,4 @@
 ^doc$
 ^Meta$
 ^pkgdown$
+^cran-comments.md

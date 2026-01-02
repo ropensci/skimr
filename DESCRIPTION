@@ -135,6 +135,7 @@ Imports:
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 1.0.0),
+    utils,
     vctrs (>= 0.5.0)
 Suggests:
     data.table,
