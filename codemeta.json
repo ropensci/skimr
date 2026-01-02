@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "skimr",
-  "description": "A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the \"Using skimr\" vignette and the README.",
+  "description": "A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the \"skimr\" vignette and the README.",
   "name": "skimr: Compact and Flexible Summaries of Data",
   "relatedLink": ["https://docs.ropensci.org/skimr/", "https://CRAN.R-project.org/package=skimr"],
   "codeRepository": "https://github.com/ropensci/skimr/",
@@ -472,15 +472,13 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "3045.782KB",
-  "releaseNotes": "https://github.com/ropensci/skimr/blob/main/NEWS.md",
-  "readme": "https://github.com/ropensci/skimr/blob/main/README.md",
-  "contIntegration": ["https://github.com/ropensci/skimr/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/skimr"],
+  "fileSize": "3070.479KB",
+  "releaseNotes": "https://github.com/ropensci/skimr/blob/master/NEWS.md",
+  "contIntegration": ["https://github.com/ropensci/skimr/actions?workflow=R-CMD-check", "https://app.codecov.io/gh/ropensci/skimr"],
   "developmentStatus": "https://www.repostatus.org/",
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/software-review/issues/175",
     "provider": "https://ropensci.org"
-  },
-  "keywords": ["unconf17", "r", "summary-statistics", "ropensci", "unconf", "r-package", "rstats", "peer-reviewed"]
+  }
 }

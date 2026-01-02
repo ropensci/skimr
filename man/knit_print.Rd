@@ -39,7 +39,7 @@ the \code{knitr} chunk option \code{skimr_include_summary = FALSE}. See
 \link[knitr:opts_chunk]{knitr::opts_chunk} for more information. You can change the number of digits
 shown in the printed table with the \code{skimr_digits} chunk option.
 
-Alternatively, you can call \code{\link[=collapse]{collapse()}} or \code{\link[=yank]{yank()}} to get the particular
+Alternatively, you can call \code{\link[=yank]{yank()}} to get the particular
 \code{skim_df} objects and format them however you like. One warning though.
 Because histograms contain unicode characters, they can have unexpected
 print results, as R as varying levels of unicode support. This affects
