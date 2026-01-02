@@ -86,13 +86,9 @@ inline_hist <- function(x, n_bins = 8) {
   # (before the test for all NA)
   if (any(is.infinite(x))) {
     x[is.infinite(x)] <- NA
-    warning(
-      "Variable contains Inf or -Inf value(s) that were converted to NA."
-    )
   }
-
   # Handle empty and NA vectors (is.na is TRUE for NaN)
-  if (length(x) < 1 || all(is.na(x))) {
+  if (length(x) < 1 || all(is.na(x) |is.nan(x) | is.infinite(x))) {
     return(" ")
   }
 
@@ -129,7 +125,14 @@ inline_hist <- function(x, n_bins = 8) {
 #' @noRd
 spark_bar <- function(x, safe = TRUE) {
   stopifnot(is.numeric(x))
-
+  if (any(is.infinite(x))) {
+    x[is.infinite(x)] <- NA
+  }
+  
+  # Handle empty and NA vectors (is.na is TRUE for NaN)
+  if (length(x) < 1 || all(is.nan(x))) {
+    return(" ")
+  }
   bars <- vapply(0x2581:0x2588, intToUtf8, character(1))
   if (safe) {
     bars <- bars[-c(4, 8)]
@@ -169,7 +172,7 @@ min_char <- function(x) {
 #'   character vector.
 #' @export
 max_char <- function(x) {
-  if (all(is.na(x))) {
+  if (all(is.na(x) |is.nan(x) | is.infinite(x))) {
     return(NA)
   }
   characters <- nchar(x, allowNA = TRUE)
@@ -301,7 +304,7 @@ list_max_length <- function(x) {
 #'   Date vector.
 #' @export
 min_date <- function(x) {
-  if (all(is.na(x))) {
+  if (all(is.na(x) |is.nan(x) | is.infinite(x))) {
     return(NA)
   }
   min(x, na.rm = TRUE)
@@ -311,7 +314,7 @@ min_date <- function(x) {
 #'   Date vector.
 #' @export
 max_date <- function(x) {
-  if (all(is.na(x))) {
+  if (all(is.na(x) |is.nan(x) | is.infinite(x))) {
     return(NA)
   }
   max(x, na.rm = TRUE)
