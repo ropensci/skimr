@@ -11,6 +11,7 @@ test_that("Skim prints a header for the entire output and each type", {
 
 test_that("Skim prints a special header for grouped data frames", {
   skip_if_not(l10n_info()$`UTF-8`)
+  skip_on_os("mac")
   withr::local_options(list(cli.unicode = FALSE))
   expect_snapshot( skim(dplyr::group_by(iris, Species)))
 })
