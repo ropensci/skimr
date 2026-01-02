@@ -21,14 +21,14 @@
       summary_input
     Output
       -- Data Summary ------------------------
-                                 Values    
-      Name                       Piped data
-      Number of rows             150       
-      Number of columns          5         
-      _______________________              
-      Column type frequency:               
-        factor                   1         
-        numeric                  4         
-      ________________________             
-      Group variables            None      
+                                 Values
+      Name                       iris  
+      Number of rows             150   
+      Number of columns          5     
+      _______________________          
+      Column type frequency:           
+        factor                   1     
+        numeric                  4     
+      ________________________         
+      Group variables            None  
 

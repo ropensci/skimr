@@ -1,6 +1,6 @@
 Package: skimr
 Title: Compact and Flexible Summaries of Data
-Version: 2.1.5
+Version: 2.2.1.9000
 Authors@R: 
     c(person(given = "Elin",
              family = "Waring",
@@ -103,7 +103,10 @@ Authors@R:
       person(given = "Henry",
              family = "Morgan Stewart",
              role = "ctb",
-             email = "henry.morganstewart@gmail.com")
+             email = "henry.morganstewart@gmail.com"),
+      person(given = "Olivier",
+             family = "Roy",
+             role = "ctb")
        )
 Description: A simple to use summary function that can be used with pipes
     and displays nicely in the console. The default summary statistics may
@@ -114,25 +117,25 @@ Description: A simple to use summary function that can be used with pipes
     Instructions for managing these on specific operating systems are
     given in the "Using skimr" vignette and the README.
 License: GPL-3
-URL: https://docs.ropensci.org/skimr/ (website),
+URL: https://docs.ropensci.org/skimr/,
     https://github.com/ropensci/skimr/
 BugReports: https://github.com/ropensci/skimr/issues
 Depends:
-    R (>= 3.1.2)
+    R (>= 4.1.0)
 Imports:
     cli,
     dplyr (>= 1.0.0),
     knitr (>= 1.2),
-    magrittr (>= 1.5),
     pillar (>= 1.6.4),
     purrr,
     repr,
-    rlang (>= 0.3.1),
+    rlang,
     stats,
     stringr (>= 1.1),
     tibble (>= 2.0.0),
     tidyr (>= 1.0),
     tidyselect (>= 1.0.0),
+    utils,
     vctrs (>= 0.5.0)
 Suggests:
     data.table,
@@ -154,6 +157,7 @@ Collate:
     'stats.R'
     'skim_with.R'
     'get_skimmers.R'
+    'package.R'
     'reshape.R'
     'sfl.R'
     'skim.R'
