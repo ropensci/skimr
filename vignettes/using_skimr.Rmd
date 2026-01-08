@@ -45,7 +45,7 @@ the variable.
 
 By design, the main focus of `skimr` is on data frames; it is intended to fit
 well within a data [pipeline](https://r4ds.had.co.nz/pipes.html) and relies
-extensively on [tidyverse](https://www.tidyverse.org/) vocabulary, which
+extensively on [tidyverse](https://tidyverse.org/) vocabulary, which
 focuses on data frames.
 
 Results of `skim()` are *printed* horizontally, with one section per variable
